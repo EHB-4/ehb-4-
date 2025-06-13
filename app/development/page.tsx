@@ -1,6 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { FaMap, FaRobot, FaCogs, FaFolderOpen } from 'react-icons/fa';
+import DevelopmentTracker from '@/components/EHB-Dashboard/DevelopmentTracker';
 
 const companyInfo = {
   name: 'EHB Technologies',
@@ -56,6 +57,11 @@ export default function DevelopmentPortal() {
         </div>
       </div>
 
+      {/* Development Tracker Section */}
+      <div className="max-w-5xl mx-auto mb-10">
+        <DevelopmentTracker />
+      </div>
+
       {/* EHB AI Agent Section */}
       <div className="max-w-5xl mx-auto bg-gray-800 rounded-xl shadow-lg p-8 mb-10">
         <div className="flex items-center mb-6">
@@ -92,6 +98,36 @@ export default function DevelopmentPortal() {
               </div>
             </Link>
           ))}
+        </div>
+      </div>
+
+      {/* Development Guidelines Section */}
+      <div className="max-w-5xl mx-auto bg-white rounded-lg shadow-sm p-6 mb-10">
+        <h2 className="text-xl font-semibold text-gray-900 mb-4">Development Guidelines</h2>
+        <div className="prose max-w-none">
+          <h3>Code Standards</h3>
+          <ul>
+            <li>Follow TypeScript best practices and type safety</li>
+            <li>Use TailwindCSS for styling</li>
+            <li>Implement responsive design for all components</li>
+            <li>Write clean, documented code with proper comments</li>
+          </ul>
+
+          <h3>Testing Requirements</h3>
+          <ul>
+            <li>Write unit tests for all components</li>
+            <li>Implement integration tests for critical flows</li>
+            <li>Perform cross-browser testing</li>
+            <li>Test responsive design on multiple devices</li>
+          </ul>
+
+          <h3>Documentation</h3>
+          <ul>
+            <li>Maintain up-to-date README files</li>
+            <li>Document all API endpoints</li>
+            <li>Keep component documentation current</li>
+            <li>Update roadmap and progress regularly</li>
+          </ul>
         </div>
       </div>
     </div>
