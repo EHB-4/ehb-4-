@@ -58,11 +58,11 @@ const RoadmapPage = () => {
                   ))}
                 </ul>
               </div>
-              {roadmapAgentMap[module.name] && (
+              {roadmapAgentMap[module.name as keyof typeof roadmapAgentMap] && (
                 <div className="mt-2">
                   <span className="font-semibold text-gray-700">Agents:</span>
                   <ul className="list-disc ml-6 text-blue-700">
-                    {roadmapAgentMap[module.name].map((agent: string) => (
+                    {(roadmapAgentMap[module.name as keyof typeof roadmapAgentMap] || []).map((agent: string) => (
                       <li key={agent}>{agent}</li>
                     ))}
                   </ul>
