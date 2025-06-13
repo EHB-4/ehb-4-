@@ -6,3 +6,6 @@ Official SuperApp for Education, Health & Business (700+ services). Built with:
 - ✅ Tailwind CSS
 - ✅ Modular architecture (EDR, EMO, JPS, GoSellr, PSS, Franchise, AI Assistant)
 - ✅ SQL + AI logic + Blockchain-ready (Moonbeam + BEP20)
+
+# EHB-PVT-LTD-4
+ehb 4th
