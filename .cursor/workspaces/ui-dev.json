@@ -1,0 +1,5 @@
+{
+  "name": "ui-dev",
+  "include": ["components/**/*"],
+  "exclude": [".next/**/*", "node_modules/**/*", ".git/**/*"]
+} 
