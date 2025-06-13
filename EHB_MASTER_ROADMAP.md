@@ -107,9 +107,9 @@
 |--------------|----------------|
 | UI/Frontend | UI Agent |
 | API/Backend | API Agent |
-| Wallet/Finance | Wallet Agent |
+| Wallet/Finance | Wallet Agent, Reward Agent |
 | Franchise | Franchise Agent |
-| Validator | Validator Agent |
+| Validator | Validator Agent, Reward Agent |
 | PSS/EDR/EMO | PSS/EDR/EMO Agent |
 | Complaint System | Complaint Agent |
 | Monitoring/Sync | Monitoring Agent |
@@ -159,6 +159,18 @@
 - `MonitoringAgent.ts` (logs, metrics, sync)
 - `DevOpsAgent.ts` (deployment, CI/CD)
 - `SpeedOptimizationAgent.ts` (performance, bottleneck detection)
+
+---
+
+## 11. Reward Agent
+| Field | Description |
+|-------|-------------|
+| **Agent Name** | Reward Agent |
+| **Role/Responsibilities** | Loyalty rewards, bonus payouts, validator incentives, affiliate income auto-calculate aur distribute karega. |
+| **Connected Modules** | Wallet, Validator, Affiliate, Franchise, Loyalty System |
+| **Special Features** | Monthly/weekly auto-payout, bonus alerts, affiliate tree tracking, reward dashboard card |
+
+- `RewardAgent.ts` (loyalty, bonus, affiliate, validator rewards)
 
 ---
 
