@@ -3,55 +3,25 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { FaRocket, FaCode, FaUsers, FaChartLine } from 'react-icons/fa';
+import { roadmapData } from './data/roadmapData';
+import { roadmapAgentMap } from './roadmapAgentMap';
+
+const statusColors: Record<string, string> = {
+  completed: 'bg-green-100 text-green-800',
+  'in-progress': 'bg-yellow-100 text-yellow-800',
+  planned: 'bg-blue-100 text-blue-800',
+  error: 'bg-red-100 text-red-800',
+};
+
+const statusLabels: Record<string, string> = {
+  completed: 'Completed',
+  'in-progress': 'In Progress',
+  planned: 'Planned',
+  error: 'Error',
+};
 
 const RoadmapPage = () => {
-  const phases = [
-    {
-      title: 'Phase 1: Foundation',
-      icon: <FaRocket className="w-8 h-8 text-blue-500" />,
-      items: [
-        'Project Setup & Architecture',
-        'Core Features Implementation',
-        'Basic UI/UX Design',
-        'Initial Testing & QA'
-      ],
-      status: 'completed'
-    },
-    {
-      title: 'Phase 2: Development',
-      icon: <FaCode className="w-8 h-8 text-green-500" />,
-      items: [
-        'Advanced Features Development',
-        'API Integration',
-        'Performance Optimization',
-        'Security Implementation'
-      ],
-      status: 'in-progress'
-    },
-    {
-      title: 'Phase 3: Growth',
-      icon: <FaUsers className="w-8 h-8 text-purple-500" />,
-      items: [
-        'User Acquisition Strategy',
-        'Community Building',
-        'Feedback Collection',
-        'Feature Refinement'
-      ],
-      status: 'upcoming'
-    },
-    {
-      title: 'Phase 4: Scale',
-      icon: <FaChartLine className="w-8 h-8 text-orange-500" />,
-      items: [
-        'Market Expansion',
-        'Advanced Analytics',
-        'Enterprise Features',
-        'Global Deployment'
-      ],
-      status: 'upcoming'
-    }
-  ];
-
+  const modules = roadmapData.modules;
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
@@ -60,52 +30,46 @@ const RoadmapPage = () => {
           <p className="text-xl text-gray-300">Our journey to build something amazing</p>
         </div>
 
-        <div className="space-y-12">
-          {phases.map((phase, index) => (
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {modules.map((module, index) => (
             <motion.div
-              key={phase.title}
+              key={module.id}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.2 }}
-              className="relative"
+              transition={{ delay: index * 0.15 }}
+              className="relative bg-white rounded-lg shadow-lg p-6"
             >
-              <div className="flex items-start">
-                <div className="flex-shrink-0">
-                  <div className="flex items-center justify-center h-12 w-12 rounded-full bg-gray-800 border-2 border-gray-700">
-                    {phase.icon}
-                  </div>
+              <div className="flex items-center justify-between mb-4">
+                <div>
+                  <h2 className="text-2xl font-semibold text-gray-900">{module.name}</h2>
+                  <p className="text-gray-600">{module.description}</p>
                 </div>
-                <div className="ml-6">
-                  <h3 className="text-2xl font-bold text-white mb-4">{phase.title}</h3>
-                  <div className="bg-gray-800 rounded-lg p-6 shadow-lg">
-                    <ul className="space-y-4">
-                      {phase.items.map((item, itemIndex) => (
-                        <motion.li
-                          key={item}
-                          initial={{ opacity: 0, x: -20 }}
-                          animate={{ opacity: 1, x: 0 }}
-                          transition={{ delay: (index * 0.2) + (itemIndex * 0.1) }}
-                          className="flex items-center text-gray-300"
-                        >
-                          <span className="h-2 w-2 bg-blue-500 rounded-full mr-3"></span>
-                          {item}
-                        </motion.li>
-                      ))}
-                    </ul>
-                    <div className="mt-4">
-                      <span className={`inline-flex items-center px-3 py-1 rounded-full text-sm font-medium ${
-                        phase.status === 'completed' ? 'bg-green-100 text-green-800' :
-                        phase.status === 'in-progress' ? 'bg-blue-100 text-blue-800' :
-                        'bg-gray-100 text-gray-800'
-                      }`}>
-                        {phase.status.charAt(0).toUpperCase() + phase.status.slice(1)}
-                      </span>
-                    </div>
-                  </div>
-                </div>
+                <div className={`px-3 py-1 rounded-full text-sm font-medium capitalize flex items-center ${statusColors[module.status]}`}>{statusLabels[module.status]}</div>
               </div>
-              {index < phases.length - 1 && (
-                <div className="absolute left-6 top-12 bottom-0 w-0.5 bg-gray-700"></div>
+              <div className="mb-2 text-xs text-gray-500">Progress: {module.progress}%</div>
+              <div className="mb-2">
+                <span className="font-semibold text-gray-700">Team:</span> {module.team.join(', ')}
+              </div>
+              <div className="mb-2">
+                <span className="font-semibold text-gray-700">Features:</span>
+                <ul className="list-disc ml-6 text-gray-700">
+                  {module.features.map((feature, idx) => (
+                    <li key={idx}>{typeof feature === 'string' ? feature : feature.name}</li>
+                  ))}
+                </ul>
+              </div>
+              {roadmapAgentMap[module.name] && (
+                <div className="mt-2">
+                  <span className="font-semibold text-gray-700">Agents:</span>
+                  <ul className="list-disc ml-6 text-blue-700">
+                    {roadmapAgentMap[module.name].map((agent: string) => (
+                      <li key={agent}>{agent}</li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+              {module.status === 'error' && module.error && (
+                <div className="mt-2 text-red-600 text-sm">Error: {module.error}</div>
               )}
             </motion.div>
           ))}
