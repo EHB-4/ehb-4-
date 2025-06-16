@@ -1,4 +1,60 @@
-import { User, Wallet, Transaction, SQLProfile, CoinLock } from '@prisma/client';
+import { PrismaClient } from '@prisma/client';
+
+export type User = {
+  id: string;
+  email: string;
+  name: string;
+  role: string;
+  sqlLevel?: string;
+  createdAt: Date;
+  updatedAt: Date;
+};
+
+export type Wallet = {
+  id: string;
+  userId: string;
+  balance: number;
+  currency: string;
+  createdAt: Date;
+  updatedAt: Date;
+};
+
+export type Transaction = {
+  id: string;
+  walletId: string;
+  type: 'DEPOSIT' | 'WITHDRAWAL' | 'TRANSFER';
+  amount: number;
+  status: 'PENDING' | 'COMPLETED' | 'FAILED';
+  createdAt: Date;
+  updatedAt: Date;
+};
+
+export type SQLProfile = {
+  id: string;
+  userId: string;
+  level: string;
+  points: number;
+  createdAt: Date;
+  updatedAt: Date;
+};
+
+export type CoinLock = {
+  id: string;
+  userId: string;
+  amount: number;
+  type: 'LOYALTY' | 'REWARD' | 'BONUS';
+  expiresAt: Date;
+  createdAt: Date;
+  updatedAt: Date;
+};
+
+export type PrismaModels = {
+  User: User;
+  Wallet: Wallet;
+  Transaction: Transaction;
+  SQLProfile: SQLProfile;
+  CoinLock: CoinLock;
+};
 
 // API Response Types
 export interface ApiResponse<T = any> {

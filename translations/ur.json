@@ -1,0 +1,13 @@
+{
+  "welcome": "ہماری ای کامرس اسٹور میں خوش آمدید!",
+  "login": "لاگ ان",
+  "signup": "سائن اپ",
+  "checkout": "چیک آؤٹ",
+  "payment": "ادائیگی",
+  "language": "زبان",
+  "english": "انگریزی",
+  "urdu": "اردو"
+}
+
+// AI Guidance: This file contains Urdu translations for common UI elements.
+// You can add more translations here as needed. 

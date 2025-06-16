@@ -2,45 +2,99 @@ import { ApiPromise, WsProvider } from '@polkadot/api';
 import { Keyring } from '@polkadot/keyring';
 import { cryptoWaitReady } from '@polkadot/util-crypto';
 import { BN } from '@polkadot/util';
+import type { EraIndex } from '@polkadot/types/interfaces/staking';
 
-// Network endpoints
-const POLKADOT_RPC =
-  'https://polkadot.api.onfinality.io/rpc?apikey=598bada2-1e1b-41ae-acbe-0f8f610f1fa1';
-const POLKADOT_WSS =
-  'wss://polkadot.api.onfinality.io/ws?apikey=598bada2-1e1b-41ae-acbe-0f8f610f1fa1';
+const POLKADOT_WS = process.env.POLKADOT_WS || 'wss://rpc.polkadot.io';
+
+let api: ApiPromise | null = null;
 
 // Initialize Polkadot API
-export async function initPolkadotAPI() {
-  await cryptoWaitReady();
-
-  const wsProvider = new WsProvider(POLKADOT_WSS);
-  const api = await ApiPromise.create({ provider: wsProvider });
-
+export async function initPolkadotAPI(): Promise<ApiPromise> {
+  if (!api) {
+    const provider = new WsProvider(POLKADOT_WS);
+    api = await ApiPromise.create({ provider });
+  }
   return api;
 }
 
 // Staking functions
-export async function getStakingInfo(api: ApiPromise, address: string) {
-  const [stashInfo, controllerInfo] = await Promise.all([
+interface StakingLedger {
+  active: { unwrap: () => BN };
+  unlocking: Array<{ value: BN }>;
+  nominators: Array<{ address: string; amount: BN }>;
+}
+
+interface ValidatorPrefs {
+  commission: { toNumber: () => number };
+}
+
+interface StakingExposure {
+  total: BN;
+  others: Array<{ who: string; value: BN }>;
+}
+
+interface ActiveEra {
+  index: EraIndex;
+}
+
+export async function getStakingInfo(address: string): Promise<{
+  totalStaked: BN;
+  unlocking: BN;
+  nominators: { address: string; amount: BN }[];
+}> {
+  const api = await initPolkadotAPI();
+  const [activeEraResult, ledger] = await Promise.all([
+    api.query.staking.activeEra(),
     api.query.staking.ledger(address),
-    api.query.staking.bonded(address),
-  ]);
+  ]) as [unknown, unknown];
+
+  const activeEra = (activeEraResult as unknown as ActiveEra).index;
+  const stakingLedger = ledger as StakingLedger;
+
+  const totalStaked = stakingLedger.active.unwrap();
+  const unlocking = stakingLedger.unlocking.reduce(
+    (acc: BN, { value }: { value: BN }) => acc.add(value),
+    new BN(0)
+  );
+
+  const nominators = stakingLedger.nominators.map((nominator) => ({
+    address: nominator.address,
+    amount: nominator.amount,
+  }));
 
   return {
-    stashInfo,
-    controllerInfo,
+    totalStaked,
+    unlocking,
+    nominators,
   };
 }
 
-export async function getValidatorInfo(api: ApiPromise, address: string) {
-  const [validatorPrefs, validatorExposure] = await Promise.all([
+export async function getValidatorInfo(address: string): Promise<{
+  commission: number;
+  stake: BN;
+  nominators: { address: string; amount: BN }[];
+}> {
+  const api = await initPolkadotAPI();
+  const activeEraResult = await api.query.staking.activeEra() as unknown;
+  const [validatorPrefs, stakers] = await Promise.all([
     api.query.staking.validators(address),
-    api.query.staking.erasStakers.active(api.consts.staking.activeEra, address),
-  ]);
+    api.query.staking.erasStakers((activeEraResult as ActiveEra).index, address),
+  ]) as [unknown, unknown];
+
+  const prefs = validatorPrefs as ValidatorPrefs;
+  const exposure = stakers as StakingExposure;
+
+  const commission = prefs.commission.toNumber() / 1000000;
+  const stake = exposure.total;
+  const nominators = exposure.others.map(({ who, value }) => ({
+    address: who,
+    amount: value,
+  }));
 
   return {
-    validatorPrefs,
-    validatorExposure,
+    commission,
+    stake,
+    nominators,
   };
 }
 
@@ -88,15 +142,35 @@ export function createKeyring() {
   return new Keyring({ type: 'sr25519' });
 }
 
-export async function getBalance(api: ApiPromise, address: string) {
-  const { data: balance } = await api.query.system.account(address);
-  return balance;
+export async function getBalance(address: string): Promise<BN> {
+  const api = await initPolkadotAPI();
+  const accountInfo = await api.query.system.account(address);
+  return (accountInfo as unknown as { data: { free: BN } }).data.free;
+}
+
+export async function getNetworkInfo(): Promise<{
+  chain: string;
+  nodeName: string;
+  nodeVersion: string;
+}> {
+  const api = await initPolkadotAPI();
+  const [chain, nodeName, nodeVersion] = await Promise.all([
+    api.rpc.system.chain(),
+    api.rpc.system.name(),
+    api.rpc.system.version(),
+  ]);
+
+  return {
+    chain: chain.toString(),
+    nodeName: nodeName.toString(),
+    nodeVersion: nodeVersion.toString(),
+  };
 }
 
 // Export constants
 export const POLKADOT_CONFIG = {
-  rpc: POLKADOT_RPC,
-  wss: POLKADOT_WSS,
+  rpc: POLKADOT_WS,
+  wss: POLKADOT_WS,
   types: {
     // Add custom types if needed
   },

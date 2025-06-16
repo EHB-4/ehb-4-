@@ -1,11 +1,13 @@
 import { NextAuthOptions } from 'next-auth';
 import { MongoDBAdapter } from '@auth/mongodb-adapter';
-import clientPromise from './mongodb';
+import { clientPromise } from './mongodb';
 import GoogleProvider from 'next-auth/providers/google';
 import CredentialsProvider from 'next-auth/providers/credentials';
+import { compare } from 'bcryptjs';
+import { prisma } from './prisma';
 
 export const authOptions: NextAuthOptions = {
-  adapter: MongoDBAdapter(clientPromise),
+  adapter: MongoDBAdapter(clientPromise) as any,
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID || '',
@@ -19,28 +21,31 @@ export const authOptions: NextAuthOptions = {
       },
       async authorize(credentials) {
         if (!credentials?.email || !credentials?.password) {
-          throw new Error('Please enter an email and password');
+          return null;
         }
 
-        const client = await clientPromise;
-        const db = client.db();
-        const user = await db.collection('users').findOne({ email: credentials.email });
+        const user = await prisma.user.findUnique({
+          where: {
+            email: credentials.email,
+          },
+        });
 
         if (!user) {
-          throw new Error('No user found with this email');
+          return null;
         }
 
-        // In a real app, you would verify the password hash here
-        // For now, we'll just check if the password matches
-        if (user.password !== credentials.password) {
-          throw new Error('Invalid password');
+        const isPasswordValid = await compare(credentials.password, user.password);
+
+        if (!isPasswordValid) {
+          return null;
         }
 
         return {
-          id: user._id.toString(),
+          id: user.id,
           email: user.email,
           name: user.name,
           image: user.image,
+          role: user.role,
         };
       },
     }),
@@ -54,14 +59,16 @@ export const authOptions: NextAuthOptions = {
   },
   callbacks: {
     async session({ session, token }) {
-      if (session.user) {
-        session.user.id = token.sub;
+      if (token) {
+        session.user.id = token.id as string;
+        session.user.role = token.role as string;
       }
       return session;
     },
     async jwt({ token, user }) {
       if (user) {
         token.id = user.id;
+        token.role = user.role;
       }
       return token;
     },

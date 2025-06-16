@@ -3,6 +3,9 @@ import type { NextRequest } from 'next/server';
 import { Ratelimit } from '@upstash/ratelimit';
 import { Redis } from '@upstash/redis';
 import { getToken } from 'next-auth/jwt';
+import { NextApiRequest, NextApiResponse } from 'next';
+import { getSession } from 'next-auth/react';
+import { Session } from 'next-auth';
 
 // Initialize rate limiter
 const ratelimit = new Ratelimit({
@@ -28,6 +31,18 @@ const sqlLevelRequirements: Record<string, number> = {
   '/api/wallet/transfer': 2,
   '/api/sql/upgrade': 1,
 };
+
+interface CustomUser {
+  id: string;
+  email: string;
+  name: string;
+  role: string;
+  level: number;
+}
+
+interface CustomSession extends Session {
+  user: CustomUser;
+}
 
 export async function middleware(request: NextRequest) {
   const response = NextResponse.next();
@@ -87,3 +102,23 @@ export const config = {
     '/((?!_next/static|_next/image|favicon.ico|public/).*)',
   ],
 };
+
+export default async function security(
+  req: NextApiRequest,
+  res: NextApiResponse,
+  next: () => void
+) {
+  const session = await getSession({ req }) as CustomSession | null;
+
+  if (!session) {
+    return res.status(401).json({ error: 'Unauthorized' });
+  }
+
+  const requiredLevel = 1; // Minimum required level
+
+  if (session.user.level < requiredLevel) {
+    return res.status(403).json({ error: 'Insufficient permissions' });
+  }
+
+  next();
+}

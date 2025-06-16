@@ -4,7 +4,7 @@ import {
   getBalance,
   getStakingInfo,
   getValidatorInfo,
-} from '../../../lib/polkadot/config';
+} from '@/lib/polkadot/config';
 
 export async function GET(req: NextRequest) {
   try {
@@ -16,19 +16,17 @@ export async function GET(req: NextRequest) {
       return NextResponse.json({ error: 'Address is required' }, { status: 400 });
     }
 
-    const api = await initPolkadotAPI();
-
     switch (action) {
       case 'balance':
-        const balance = await getBalance(api, address);
+        const balance = await getBalance(address);
         return NextResponse.json({ balance: balance.toString() });
 
       case 'staking':
-        const stakingInfo = await getStakingInfo(api, address);
+        const stakingInfo = await getStakingInfo(address);
         return NextResponse.json({ stakingInfo });
 
       case 'validator':
-        const validatorInfo = await getValidatorInfo(api, address);
+        const validatorInfo = await getValidatorInfo(address);
         return NextResponse.json({ validatorInfo });
 
       default:
@@ -36,6 +34,9 @@ export async function GET(req: NextRequest) {
     }
   } catch (error) {
     console.error('Polkadot API Error:', error);
-    return NextResponse.json({ error: (error as Error).message }, { status: 500 });
+    return NextResponse.json(
+      { error: error instanceof Error ? error.message : 'Unknown error' },
+      { status: 500 }
+    );
   }
 }

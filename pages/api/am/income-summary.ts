@@ -1,192 +1,138 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { getSession } from 'next-auth/react';
-import { prisma } from '../../../lib/prisma';
+import { prisma } from '@/lib/prisma';
+
+interface Earning {
+  timestamp: Date;
+  amount: number;
+  type: string;
+}
 
 interface IncomeSummary {
-  totalEarnings: number;
-  sources: {
-    direct: {
+  currentMonth: {
+    total: number;
+    breakdown: {
+      type: string;
       amount: number;
-      trend: number;
-      period: string;
-    };
-    indirect: {
+    }[];
+  };
+  lastMonth: {
+    total: number;
+    breakdown: {
+      type: string;
       amount: number;
-      trend: number;
-      period: string;
-    };
-    team: {
-      amount: number;
-      trend: number;
-      period: string;
-    };
+    }[];
   };
   monthlyBreakdown: {
     month: string;
-    direct: number;
-    indirect: number;
-    team: number;
     total: number;
   }[];
   recentTransactions: {
-    id: string;
-    type: string;
+    timestamp: Date;
     amount: number;
-    timestamp: string;
-    details: string;
+    type: string;
   }[];
 }
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse<IncomeSummary>) {
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
   if (req.method !== 'GET') {
-    return res.status(405).json({
-      totalEarnings: 0,
-      sources: {
-        direct: { amount: 0, trend: 0, period: 'month' },
-        indirect: { amount: 0, trend: 0, period: 'month' },
-        team: { amount: 0, trend: 0, period: 'month' },
-      },
-      monthlyBreakdown: [],
-      recentTransactions: [],
-    });
+    return res.status(405).json({ error: 'Method not allowed' });
+  }
+
+  const session = await getSession({ req });
+
+  if (!session) {
+    return res.status(401).json({ error: 'Unauthorized' });
   }
 
   try {
-    const session = await getSession({ req });
-    if (!session?.user) {
-      return res.status(401).json({
-        totalEarnings: 0,
-        sources: {
-          direct: { amount: 0, trend: 0, period: 'month' },
-          indirect: { amount: 0, trend: 0, period: 'month' },
-          team: { amount: 0, trend: 0, period: 'month' },
-        },
-        monthlyBreakdown: [],
-        recentTransactions: [],
-      });
-    }
+    const now = new Date();
+    const startOfCurrentMonth = new Date(now.getFullYear(), now.getMonth(), 1);
+    const startOfLastMonth = new Date(now.getFullYear(), now.getMonth() - 1, 1);
+    const endOfLastMonth = new Date(now.getFullYear(), now.getMonth(), 0);
 
-    // Fetch user's earnings data
-    const user = await prisma.user.findUnique({
-      where: { id: session.user.id },
-      include: {
-        earnings: {
-          orderBy: { timestamp: 'desc' },
-          take: 50,
+    const earnings = await prisma.earning.findMany({
+      where: {
+        userId: session.user.id,
+        timestamp: {
+          gte: startOfLastMonth,
         },
+      },
+      orderBy: {
+        timestamp: 'desc',
       },
     });
 
-    if (!user) {
-      return res.status(404).json({
-        totalEarnings: 0,
-        sources: {
-          direct: { amount: 0, trend: 0, period: 'month' },
-          indirect: { amount: 0, trend: 0, period: 'month' },
-          team: { amount: 0, trend: 0, period: 'month' },
-        },
-        monthlyBreakdown: [],
-        recentTransactions: [],
-      });
-    }
-
-    // Calculate current month's earnings
-    const now = new Date();
-    const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1);
-    const startOfLastMonth = new Date(now.getFullYear(), now.getMonth() - 1, 1);
-
-    const currentMonthEarnings = user.earnings.filter(e => e.timestamp >= startOfMonth);
-    const lastMonthEarnings = user.earnings.filter(
-      e => e.timestamp >= startOfLastMonth && e.timestamp < startOfMonth
+    const currentMonthEarnings = earnings.filter(
+      (earning: Earning) => earning.timestamp >= startOfCurrentMonth
     );
 
-    // Calculate earnings by source
-    const calculateSourceEarnings = (earnings: any[]) => {
-      const direct = earnings
-        .filter(e => e.type === 'direct')
-        .reduce((sum, e) => sum + e.amount, 0);
-      const indirect = earnings
-        .filter(e => e.type === 'indirect')
-        .reduce((sum, e) => sum + e.amount, 0);
-      const team = earnings.filter(e => e.type === 'team').reduce((sum, e) => sum + e.amount, 0);
+    const lastMonthEarnings = earnings.filter(
+      (earning: Earning) =>
+        earning.timestamp >= startOfLastMonth &&
+        earning.timestamp <= endOfLastMonth
+    );
 
-      return { direct, indirect, team };
-    };
+    const currentMonthTotal = currentMonthEarnings.reduce(
+      (sum: number, earning: Earning) => sum + earning.amount,
+      0
+    );
 
-    const currentMonth = calculateSourceEarnings(currentMonthEarnings);
-    const lastMonth = calculateSourceEarnings(lastMonthEarnings);
+    const lastMonthTotal = lastMonthEarnings.reduce(
+      (sum: number, earning: Earning) => sum + earning.amount,
+      0
+    );
 
-    // Calculate trends
-    const calculateTrend = (current: number, last: number) => {
-      if (last === 0) return 100;
-      return ((current - last) / last) * 100;
-    };
+    const currentMonthBreakdown = Object.entries(
+      currentMonthEarnings.reduce((acc: Record<string, number>, earning: Earning) => {
+        acc[earning.type] = (acc[earning.type] || 0) + earning.amount;
+        return acc;
+      }, {})
+    ).map(([type, amount]) => ({ type, amount: amount as number }));
 
-    const sources = {
-      direct: {
-        amount: currentMonth.direct,
-        trend: calculateTrend(currentMonth.direct, lastMonth.direct),
-        period: 'month',
-      },
-      indirect: {
-        amount: currentMonth.indirect,
-        trend: calculateTrend(currentMonth.indirect, lastMonth.indirect),
-        period: 'month',
-      },
-      team: {
-        amount: currentMonth.team,
-        trend: calculateTrend(currentMonth.team, lastMonth.team),
-        period: 'month',
-      },
-    };
+    const lastMonthBreakdown = Object.entries(
+      lastMonthEarnings.reduce((acc: Record<string, number>, earning: Earning) => {
+        acc[earning.type] = (acc[earning.type] || 0) + earning.amount;
+        return acc;
+      }, {})
+    ).map(([type, amount]) => ({ type, amount: amount as number }));
 
-    // Calculate monthly breakdown for the last 6 months
     const monthlyBreakdown = Array.from({ length: 6 }, (_, i) => {
-      const monthStart = new Date(now.getFullYear(), now.getMonth() - i, 1);
-      const monthEnd = new Date(now.getFullYear(), now.getMonth() - i + 1, 0);
-
-      const monthEarnings = user.earnings.filter(
-        e => e.timestamp >= monthStart && e.timestamp <= monthEnd
+      const month = new Date(now.getFullYear(), now.getMonth() - i, 1);
+      const monthEarnings = earnings.filter(
+        (earning: Earning) =>
+          earning.timestamp.getMonth() === month.getMonth() &&
+          earning.timestamp.getFullYear() === month.getFullYear()
       );
-
-      const { direct, indirect, team } = calculateSourceEarnings(monthEarnings);
-      const total = direct + indirect + team;
-
       return {
-        month: monthStart.toLocaleString('default', { month: 'short', year: 'numeric' }),
-        direct,
-        indirect,
-        team,
-        total,
+        month: month.toLocaleString('default', { month: 'short', year: 'numeric' }),
+        total: monthEarnings.reduce((sum: number, earning: Earning) => sum + earning.amount, 0),
       };
     }).reverse();
 
-    // Format recent transactions
-    const recentTransactions = user.earnings.slice(0, 10).map(earning => ({
-      id: earning.id,
-      type: earning.type,
-      amount: earning.amount,
-      timestamp: earning.timestamp.toISOString(),
-      details: earning.details,
-    }));
-
-    return res.status(200).json({
-      totalEarnings: currentMonth.direct + currentMonth.indirect + currentMonth.team,
-      sources,
-      monthlyBreakdown,
-      recentTransactions,
-    });
-  } catch (error) {
-    console.error('Income summary error:', error);
-    return res.status(500).json({
-      totalEarnings: 0,
-      sources: {
-        direct: { amount: 0, trend: 0, period: 'month' },
-        indirect: { amount: 0, trend: 0, period: 'month' },
-        team: { amount: 0, trend: 0, period: 'month' },
+    const summary: IncomeSummary = {
+      currentMonth: {
+        total: currentMonthTotal,
+        breakdown: currentMonthBreakdown,
       },
-      monthlyBreakdown: [],
-      recentTransactions: [],
-    });
+      lastMonth: {
+        total: lastMonthTotal,
+        breakdown: lastMonthBreakdown,
+      },
+      monthlyBreakdown,
+      recentTransactions: earnings.slice(0, 10).map((earning: Earning) => ({
+        timestamp: earning.timestamp,
+        amount: earning.amount,
+        type: earning.type,
+      })),
+    };
+
+    return res.status(200).json(summary);
+  } catch (error) {
+    console.error('Error fetching income summary:', error);
+    return res.status(500).json({ error: 'Internal server error' });
   }
 }

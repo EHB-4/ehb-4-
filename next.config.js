@@ -1,8 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
+  swcMinify: true,
   images: {
-    domains: ['images.unsplash.com', 'via.placeholder.com'],
+    domains: ['localhost'],
   },
   env: {
     APP_NAME: 'EHB Technologies',
@@ -14,27 +15,70 @@ const nextConfig = {
   eslint: {
     ignoreDuringBuilds: process.env.NODE_ENV === 'development',
   },
+  async headers() {
+    return [
+      {
+        source: '/:path*',
+        headers: [
+          {
+            key: 'X-DNS-Prefetch-Control',
+            value: 'on'
+          },
+          {
+            key: 'Strict-Transport-Security',
+            value: 'max-age=31536000; includeSubDomains'
+          },
+          {
+            key: 'X-Frame-Options',
+            value: 'SAMEORIGIN'
+          },
+          {
+            key: 'X-Content-Type-Options',
+            value: 'nosniff'
+          },
+          {
+            key: 'X-XSS-Protection',
+            value: '1; mode=block'
+          },
+          {
+            key: 'Referrer-Policy',
+            value: 'strict-origin-when-cross-origin'
+          }
+        ]
+      }
+    ];
+  },
+  async redirects() {
+    return [
+      {
+        source: '/pages/:path*',
+        destination: '/:path*',
+        permanent: true,
+      },
+    ];
+  },
   webpack: (config, { dev, isServer }) => {
     config.externals = [...(config.externals || []), { canvas: 'canvas' }];
     
-    // Performance optimizations
+    // Optimize bundle size
     if (!dev && !isServer) {
-      config.optimization = {
-        ...config.optimization,
-        runtimeChunk: 'single',
-        splitChunks: {
-          chunks: 'all',
-          maxInitialRequests: Infinity,
-          minSize: 20000,
-          cacheGroups: {
-            vendor: {
-              test: /[\\/]node_modules[\\/]/,
-              name(module) {
-                const match = module.context && module.context.match(/[\\/]node_modules[\\/](.*?)([\\/]|$)/);
-                const packageName = match ? match[1] : 'vendor';
-                return `npm.${packageName.replace('@', '')}`;
-              },
-            },
+      config.optimization.splitChunks = {
+        chunks: 'all',
+        minSize: 20000,
+        maxSize: 244000,
+        minChunks: 1,
+        maxAsyncRequests: 30,
+        maxInitialRequests: 30,
+        cacheGroups: {
+          defaultVendors: {
+            test: /[\\/]node_modules[\\/]/,
+            priority: -10,
+            reuseExistingChunk: true,
+          },
+          default: {
+            minChunks: 2,
+            priority: -20,
+            reuseExistingChunk: true,
           },
         },
       };
@@ -49,17 +93,21 @@ const nextConfig = {
   compiler: {
     removeConsole: process.env.NODE_ENV === 'production' ? { exclude: ['error', 'warn'] } : false,
   },
-  experimental: {
-    optimizeCss: true,
-    scrollRestoration: true,
-    forceSwcTransforms: true,
-  },
+  // Remove experimental features
   onDemandEntries: {
     maxInactiveAge: 25 * 1000,
     pagesBufferLength: 2,
   },
-  // Use a different output directory
-  distDir: 'build',
+  // Use default .next directory instead of build
+  distDir: '.next',
+  experimental: {
+    // serverActions: true, // Removed as per Next.js 14+ docs
+  },
+  // Enable both app and pages directories
+  pageExtensions: ['js', 'jsx', 'ts', 'tsx'],
+  // server: {
+  //   port: 3001,
+  // },
 };
 
 module.exports = nextConfig;

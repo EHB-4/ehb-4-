@@ -1,24 +1,27 @@
+"use client";
+
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
-// import { AuthProvider } from '@/components/auth/AuthProvider';
-import AIChatProvider from '@/components/layout/AIChatProvider';
+import { Providers } from './providers';
 
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'EHB - Everything Hub Business',
-  description: 'Your one-stop platform for education, health, and shopping services.',
+  title: 'EHB Next.js',
+  description: 'EHB Next.js Application',
+  icons: {
+    icon: '/favicon.ico',
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
-        {/* <AuthProvider> */}
+        <Providers>
           {children}
-          <AIChatProvider />
-        {/* </AuthProvider> */}
+        </Providers>
       </body>
     </html>
   );

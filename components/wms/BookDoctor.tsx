@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useState } from 'react';
 import { FiSearch, FiMapPin, FiStar, FiCalendar, FiClock } from 'react-icons/fi';
 
@@ -113,6 +115,7 @@ export default function BookDoctor() {
             value={selectedSpecialization}
             onChange={e => setSelectedSpecialization(e.target.value)}
             className="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            title="Select specialization"
           >
             <option value="">All Specializations</option>
             {specializations.map(spec => (

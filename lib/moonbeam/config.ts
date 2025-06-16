@@ -4,12 +4,12 @@ import { Keyring } from '@polkadot/keyring';
 import { cryptoWaitReady } from '@polkadot/util-crypto';
 
 // Moonbase Alpha Testnet endpoints
-const MOONBASE_RPC = 'https://rpc.api.moonbase.moonbeam.network';
+const MOONBASE_RPC = process.env.NEXT_PUBLIC_MOONBASE_RPC || '';
 const MOONBASE_WSS = 'wss://wss.api.moonbase.moonbeam.network';
 
 // Initialize Moonbeam API (Ethereum compatible)
 export function initMoonbeamProvider() {
-  return new ethers.providers.JsonRpcProvider(MOONBASE_RPC);
+  return new ethers.JsonRpcProvider(MOONBASE_RPC);
 }
 
 // Initialize Polkadot API for Moonbeam
@@ -23,66 +23,51 @@ export async function initMoonbeamPolkadotAPI() {
 }
 
 // Get account balance
-export async function getBalance(provider: ethers.providers.JsonRpcProvider, address: string) {
+export async function getBalance(provider: ethers.Provider, address: string) {
   return await provider.getBalance(address);
 }
 
 // Get gas price
-export async function getGasPrice(provider: ethers.providers.JsonRpcProvider) {
-  return await provider.getGasPrice();
+export async function getGasPrice(provider: ethers.Provider) {
+  return await provider.getFeeData();
 }
 
 // Get network info
-export async function getNetworkInfo(provider: ethers.providers.JsonRpcProvider) {
-  const [blockNumber, gasPrice] = await Promise.all([
-    provider.getBlockNumber(),
-    provider.getGasPrice(),
-  ]);
-
+export async function getNetworkInfo(provider: ethers.Provider) {
+  const network = await provider.getNetwork();
   return {
-    blockNumber,
-    gasPrice: gasPrice.toString(),
-    chainId: (await provider.getNetwork()).chainId,
+    chainId: network.chainId,
+    name: network.name,
   };
 }
 
 // Send transaction
 export async function sendTransaction(
-  provider: ethers.providers.JsonRpcProvider,
+  provider: ethers.Provider,
   signer: ethers.Signer,
   to: string,
-  value: ethers.BigNumber,
-  data: string = '0x'
+  value: bigint
 ) {
-  const gasPrice = await provider.getGasPrice();
-  const gasLimit = await provider.estimateGas({
+  const tx = {
     to,
     value,
-    data,
-  });
+  };
 
-  const tx = await signer.sendTransaction({
-    to,
-    value,
-    data,
-    gasPrice,
-    gasLimit,
-  });
-
-  return await tx.wait();
+  const response = await signer.sendTransaction(tx);
+  return response;
 }
 
 // Get transaction receipt
-export async function getTransactionReceipt(
-  provider: ethers.providers.JsonRpcProvider,
+export async function getTransaction(
+  provider: ethers.Provider,
   txHash: string
 ) {
-  return await provider.getTransactionReceipt(txHash);
+  return await provider.getTransaction(txHash);
 }
 
 // Get block info
-export async function getBlockInfo(
-  provider: ethers.providers.JsonRpcProvider,
+export async function getBlock(
+  provider: ethers.Provider,
   blockNumber: number
 ) {
   return await provider.getBlock(blockNumber);

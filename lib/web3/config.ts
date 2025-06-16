@@ -6,16 +6,14 @@ import { publicProvider } from 'wagmi/providers/public';
 import { WalletConnectConnector } from 'wagmi/connectors/walletConnect';
 
 // Network RPC URLs
-const MOONBEAM_RPC = 'https://moonbeam.blastapi.io/e163baac-c3e2-4068-bb55-a905a3b6bb81';
-const BSC_RPC = 'https://bsc-mainnet.core.chainstack.com/5b9b0b5336cd42ee064790fdc05efc04';
-const POLKADOT_RPC =
-  'https://polkadot.api.onfinality.io/rpc?apikey=598bada2-1e1b-41ae-acbe-0f8f610f1fa1';
+const MOONBEAM_RPC = process.env.NEXT_PUBLIC_MOONBEAM_RPC || '';
+const BSC_RPC = process.env.NEXT_PUBLIC_BSC_RPC || '';
+const POLKADOT_RPC = process.env.NEXT_PUBLIC_POLKADOT_RPC || '';
 
 // WebSocket URLs
-const MOONBEAM_WSS = 'wss://moonbeam.blastapi.io/e163baac-c3e2-4068-bb55-a905a3b6bb81';
-const BSC_WSS = 'wss://bsc-mainnet.core.chainstack.com/5b9b0b5336cd42ee064790fdc05efc04';
-const POLKADOT_WSS =
-  'wss://polkadot.api.onfinality.io/ws?apikey=598bada2-1e1b-41ae-acbe-0f8f610f1fa1';
+const MOONBEAM_WSS = process.env.NEXT_PUBLIC_MOONBEAM_WSS || '';
+const BSC_WSS = process.env.NEXT_PUBLIC_BSC_WSS || '';
+const POLKADOT_WSS = process.env.NEXT_PUBLIC_POLKADOT_WSS || '';
 
 // Configure chains
 const { chains, publicClient, webSocketPublicClient } = configureChains(
@@ -62,13 +60,25 @@ export const config = createConfig({
 });
 
 // Create ethers providers
-export const moonbeamProvider = new ethers.providers.JsonRpcProvider(MOONBEAM_RPC);
-export const bscProvider = new ethers.providers.JsonRpcProvider(BSC_RPC);
-export const polkadotProvider = new ethers.providers.JsonRpcProvider(POLKADOT_RPC);
+export const moonbeamProvider = new ethers.JsonRpcProvider(MOONBEAM_RPC);
+export const bscProvider = new ethers.JsonRpcProvider(BSC_RPC);
+export const polkadotProvider = new ethers.JsonRpcProvider(POLKADOT_RPC);
 
 // WebSocket providers
-export const moonbeamWsProvider = new ethers.providers.WebSocketProvider(MOONBEAM_WSS);
-export const bscWsProvider = new ethers.providers.WebSocketProvider(BSC_WSS);
-export const polkadotWsProvider = new ethers.providers.WebSocketProvider(POLKADOT_WSS);
+export const moonbeamWsProvider = new ethers.WebSocketProvider(MOONBEAM_WSS);
+export const bscWsProvider = new ethers.WebSocketProvider(BSC_WSS);
+export const polkadotWsProvider = new ethers.WebSocketProvider(POLKADOT_WSS);
+
+export const providers = {
+  moonbeam: moonbeamProvider,
+  bsc: bscProvider,
+  polkadot: polkadotProvider,
+};
+
+export const wsProviders = {
+  moonbeam: moonbeamWsProvider,
+  bsc: bscWsProvider,
+  polkadot: polkadotWsProvider,
+};
 
 export { chains };

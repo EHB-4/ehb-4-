@@ -3,112 +3,98 @@ import { initMoonbeamProvider } from './config';
 
 // ERC20 ABI
 const ERC20_ABI = [
-  'function balanceOf(address owner) view returns (uint256)',
-  'function decimals() view returns (uint8)',
+  'function name() view returns (string)',
   'function symbol() view returns (string)',
+  'function decimals() view returns (uint8)',
+  'function totalSupply() view returns (uint256)',
+  'function balanceOf(address) view returns (uint256)',
   'function transfer(address to, uint256 amount) returns (bool)',
   'function allowance(address owner, address spender) view returns (uint256)',
   'function approve(address spender, uint256 amount) returns (bool)',
   'function transferFrom(address from, address to, uint256 amount) returns (bool)',
   'event Transfer(address indexed from, address indexed to, uint256 amount)',
   'event Approval(address indexed owner, address indexed spender, uint256 amount)',
-];
+] as const;
+
+type ERC20Contract = ethers.Contract & {
+  name(): Promise<string>;
+  symbol(): Promise<string>;
+  decimals(): Promise<number>;
+  totalSupply(): Promise<bigint>;
+  balanceOf(address: string): Promise<bigint>;
+  transfer(to: string, amount: bigint): Promise<ethers.ContractTransactionResponse>;
+  allowance(owner: string, spender: string): Promise<bigint>;
+  approve(spender: string, amount: bigint): Promise<ethers.ContractTransactionResponse>;
+  transferFrom(from: string, to: string, amount: bigint): Promise<ethers.ContractTransactionResponse>;
+};
 
 export class MoonbeamToken {
-  private contract: ethers.Contract;
+  private contract: ERC20Contract;
+  private provider: ethers.Provider;
 
-  constructor(
-    tokenAddress: string,
-    provider: ethers.providers.JsonRpcProvider = initMoonbeamProvider()
-  ) {
-    this.contract = new ethers.Contract(tokenAddress, ERC20_ABI, provider);
+  constructor(address: string) {
+    this.provider = initMoonbeamProvider();
+    this.contract = new ethers.Contract(
+      address,
+      ERC20_ABI,
+      this.provider
+    ) as ERC20Contract;
   }
 
-  // Get token balance
-  async getBalance(address: string): Promise<ethers.BigNumber> {
-    return await this.contract.balanceOf(address);
+  async name(): Promise<string> {
+    return this.contract.name();
   }
 
-  // Get token decimals
-  async getDecimals(): Promise<number> {
-    return await this.contract.decimals();
+  async symbol(): Promise<string> {
+    return this.contract.symbol();
   }
 
-  // Get token symbol
-  async getSymbol(): Promise<string> {
-    return await this.contract.symbol();
+  async decimals(): Promise<number> {
+    return this.contract.decimals();
   }
 
-  // Transfer tokens
-  async transfer(
-    signer: ethers.Signer,
-    to: string,
-    amount: ethers.BigNumber
-  ): Promise<ethers.ContractTransaction> {
-    const contract = this.contract.connect(signer);
-    return await contract.transfer(to, amount);
+  async totalSupply(): Promise<bigint> {
+    return this.contract.totalSupply();
   }
 
-  // Approve tokens
-  async approve(
-    signer: ethers.Signer,
-    spender: string,
-    amount: ethers.BigNumber
-  ): Promise<ethers.ContractTransaction> {
-    const contract = this.contract.connect(signer);
-    return await contract.approve(spender, amount);
+  async balanceOf(address: string): Promise<bigint> {
+    return this.contract.balanceOf(address);
   }
 
-  // Get allowance
-  async getAllowance(owner: string, spender: string): Promise<ethers.BigNumber> {
-    return await this.contract.allowance(owner, spender);
+  async transfer(to: string, amount: bigint): Promise<ethers.ContractTransactionResponse> {
+    return this.contract.transfer(to, amount);
   }
 
-  // Transfer from (requires approval)
+  async allowance(owner: string, spender: string): Promise<bigint> {
+    return this.contract.allowance(owner, spender);
+  }
+
+  async approve(spender: string, amount: bigint): Promise<ethers.ContractTransactionResponse> {
+    return this.contract.approve(spender, amount);
+  }
+
   async transferFrom(
-    signer: ethers.Signer,
     from: string,
     to: string,
-    amount: ethers.BigNumber
-  ): Promise<ethers.ContractTransaction> {
-    const contract = this.contract.connect(signer);
-    return await contract.transferFrom(from, to, amount);
+    amount: bigint
+  ): Promise<ethers.ContractTransactionResponse> {
+    return this.contract.transferFrom(from, to, amount);
   }
 
-  // Get token info
-  async getTokenInfo(): Promise<{
-    address: string;
-    symbol: string;
-    decimals: number;
-  }> {
-    const [symbol, decimals] = await Promise.all([
-      this.contract.symbol(),
-      this.contract.decimals(),
-    ]);
-
-    return {
-      address: this.contract.address,
-      symbol,
-      decimals,
-    };
+  onTransfer(
+    callback: (from: string, to: string, amount: bigint) => void
+  ): void {
+    this.contract.on('Transfer', (from, to, amount) => {
+      callback(from, to, amount);
+    });
   }
 
-  // Get transfer events
-  async getTransferEvents(
-    fromBlock: number,
-    toBlock: number | string = 'latest'
-  ): Promise<ethers.Event[]> {
-    const filter = this.contract.filters.Transfer();
-    return await this.contract.queryFilter(filter, fromBlock, toBlock);
-  }
-
-  // Get approval events
-  async getApprovalEvents(
-    fromBlock: number,
-    toBlock: number | string = 'latest'
-  ): Promise<ethers.Event[]> {
-    const filter = this.contract.filters.Approval();
-    return await this.contract.queryFilter(filter, fromBlock, toBlock);
+  onApproval(
+    callback: (owner: string, spender: string, amount: bigint) => void
+  ): void {
+    this.contract.on('Approval', (owner, spender, amount) => {
+      callback(owner, spender, amount);
+    });
   }
 }
 

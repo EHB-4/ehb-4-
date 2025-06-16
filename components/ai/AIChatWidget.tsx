@@ -1,59 +1,60 @@
-import { useState, useEffect } from 'react';
+"use client";
+
+import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FaRobot, FaTimes, FaMinus, FaExpand } from 'react-icons/fa';
-import AIChat from './AIChat';
+import { useAIChat } from '@/components/layout/AIChatProvider';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { ScrollArea } from '@/components/ui/scroll-area';
+import { cn } from '@/lib/utils';
+
+interface Message {
+  id: string;
+  content: string;
+  role: 'user' | 'assistant';
+  timestamp: Date;
+}
 
 interface AIChatWidgetProps {
-  context?: {
-    module?: 'edr' | 'emo' | 'gosellr' | 'wallet' | 'franchise';
-    page?: string;
-    filters?: Record<string, any>;
-  };
+  context?: string;
 }
 
 export default function AIChatWidget({ context }: AIChatWidgetProps) {
+  const { messages, isLoading, sendMessage, clearMessages } = useAIChat();
+  const [input, setInput] = useState('');
   const [isOpen, setIsOpen] = useState(false);
   const [isMinimized, setIsMinimized] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
+    }
+  }, [messages]);
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (!input.trim() || isLoading) return;
+
+    const message = input.trim();
+    setInput('');
+    await sendMessage(message);
+  };
 
   // Get context-aware title
   const getTitle = () => {
-    if (!context?.module) return 'EHB Assistant';
+    if (!context) return 'EHB Assistant';
 
-    switch (context.module) {
-      case 'edr':
-        return 'Education Assistant';
-      case 'emo':
-        return 'Health Assistant';
-      case 'gosellr':
-        return 'Shopping Assistant';
-      case 'wallet':
-        return 'Wallet Assistant';
-      case 'franchise':
-        return 'Franchise Assistant';
-      default:
-        return 'EHB Assistant';
-    }
+    return 'EHB Assistant';
   };
 
   // Get context-aware welcome message
   const getWelcomeMessage = () => {
-    if (!context?.module) return 'How can I help you today?';
+    if (!context) return 'How can I help you today?';
 
-    switch (context.module) {
-      case 'edr':
-        return 'Need help finding a tutor or course?';
-      case 'emo':
-        return 'Looking for a doctor or health service?';
-      case 'gosellr':
-        return 'What would you like to shop for?';
-      case 'wallet':
-        return 'Need help with your wallet or coins?';
-      case 'franchise':
-        return 'Interested in becoming a franchise partner?';
-      default:
-        return 'How can I help you today?';
-    }
+    return 'How can I help you today?';
   };
 
   return (
@@ -76,18 +77,21 @@ export default function AIChatWidget({ context }: AIChatWidgetProps) {
                 <button
                   onClick={() => setIsMinimized(!isMinimized)}
                   className="p-1 hover:bg-gray-100 rounded-full"
+                  title="Minimize chat"
                 >
                   <FaMinus className="w-4 h-4 text-gray-500" />
                 </button>
                 <button
                   onClick={() => setIsExpanded(!isExpanded)}
                   className="p-1 hover:bg-gray-100 rounded-full"
+                  title="Expand chat"
                 >
                   <FaExpand className="w-4 h-4 text-gray-500" />
                 </button>
                 <button
                   onClick={() => setIsOpen(false)}
                   className="p-1 hover:bg-gray-100 rounded-full"
+                  title="Close chat"
                 >
                   <FaTimes className="w-4 h-4 text-gray-500" />
                 </button>
@@ -97,7 +101,55 @@ export default function AIChatWidget({ context }: AIChatWidgetProps) {
             {/* Chat Interface */}
             {!isMinimized && (
               <div className={`${isExpanded ? 'h-[600px]' : 'h-[400px]'}`}>
-                <AIChat initialMessage={getWelcomeMessage()} context={context} />
+                <ScrollArea ref={scrollRef} className="flex-1 p-4">
+                  <div className="space-y-4">
+                    {messages.map((message: Message) => (
+                      <div
+                        key={message.id}
+                        className={cn(
+                          'flex flex-col space-y-2',
+                          message.role === 'user' ? 'items-end' : 'items-start'
+                        )}
+                      >
+                        <div
+                          className={cn(
+                            'rounded-lg px-4 py-2 max-w-[80%]',
+                            message.role === 'user'
+                              ? 'bg-primary text-primary-foreground'
+                              : 'bg-muted'
+                          )}
+                        >
+                          {message.content}
+                        </div>
+                        <span className="text-xs text-muted-foreground">
+                          {new Date(message.timestamp).toLocaleTimeString()}
+                        </span>
+                      </div>
+                    ))}
+                    {isLoading && (
+                      <div className="flex items-center space-x-2 text-muted-foreground">
+                        <div className="w-2 h-2 bg-current rounded-full animate-bounce" />
+                        <div className="w-2 h-2 bg-current rounded-full animate-bounce delay-100" />
+                        <div className="w-2 h-2 bg-current rounded-full animate-bounce delay-200" />
+                      </div>
+                    )}
+                  </div>
+                </ScrollArea>
+
+                <form onSubmit={handleSubmit} className="p-4 border-t">
+                  <div className="flex space-x-2">
+                    <Input
+                      value={input}
+                      onChange={(e) => setInput(e.target.value)}
+                      placeholder="Type your message..."
+                      disabled={isLoading}
+                      className="flex-1"
+                    />
+                    <Button type="submit" disabled={isLoading || !input.trim()}>
+                      Send
+                    </Button>
+                  </div>
+                </form>
               </div>
             )}
           </motion.div>

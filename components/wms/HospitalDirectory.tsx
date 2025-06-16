@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useState } from 'react';
 import { FiSearch, FiMapPin, FiStar, FiCheckCircle, FiPhone, FiGlobe } from 'react-icons/fi';
 
@@ -80,6 +82,7 @@ export default function HospitalDirectory() {
             value={selectedType}
             onChange={e => setSelectedType(e.target.value)}
             className="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            title="Select hospital type"
           >
             {hospitalTypes.map(type => (
               <option key={type} value={type}>

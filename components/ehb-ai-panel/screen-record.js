@@ -1,3 +1,32 @@
+🔹 **Component #2 – EHB Aid**
+(Verified ad platform under EHB ecosystem — now structuring it for Cursor Agent)
+
+---
+
+### 🟦 EHB Aid (Ad Posting & Verification System)
+
+| Field                                                        | Description                                                                                                                                          |
+| ------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 🔹 **Service/Module Name**                                   | EHB Aid                                                                                                                                              |
+| 🔹 **Description**                                           | Ek ad posting platform jahan sirf verified ads allow hain — har ad ko pehle document proof ke sath verify kiya jata hai (no scam, no fake listings). |
+| 🔹 **Target Users**                                          | Businesses, service providers, buyers, sellers, agencies                                                                                             |
+| 🔹 **Key Features**                                          |                                                                                                                                                      |
+| • SQL-based ad visibility                                    |                                                                                                                                                      |
+| • Verified documents before ad goes live                     |                                                                                                                                                      |
+| • Franchise-level ad management and moderation               |                                                                                                                                                      |
+| • Auto-expiry of ads                                         |                                                                                                                                                      |
+| • Complaint integration                                      |                                                                                                                                                      |
+| • Ad categories: jobs, products, services, real estate, etc. |                                                                                                                                                      |
+| • AI-tagging for smart visibility                            |                                                                                                                                                      |
+| • Referral bonus on ad spend (EHBGC)                         |                                                                                                                                                      |
+|                                                              |                                                                                                                                                      |
+| 🔹 **Dependencies**                                          | PSS (KYC), JPS (Job Ads), GoSellr (Product Ads), Franchise Model, Wallet, Complaint System                                                           |
+| 🔹 **Current Status**                                        | Planned                                                                                                                                              |
+
+---
+
+✅ Confirm or update any field above
+Aap “Next” likh dein to main **Education/HPS System** ka structure deta hoon.
 import React, { useState } from 'react';
 
 const ScreenRecord = () => {
