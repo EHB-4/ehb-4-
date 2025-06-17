@@ -7,60 +7,72 @@ import { toast } from 'react-hot-toast';
 import {
   LineChart,
   Line,
-  BarChart,
-  Bar,
-  PieChart,
-  Pie,
-  Cell,
   XAxis,
   YAxis,
   CartesianGrid,
   Tooltip,
   Legend,
   ResponsiveContainer,
+  BarChart,
+  Bar,
+  PieChart,
+  Pie,
+  Cell,
 } from 'recharts';
 
 interface AnalyticsData {
   totalLocks: number;
   totalUnlocks: number;
-  totalRewards: number;
+  totalClaims: number;
   totalReferrals: number;
-  totalVolume: bigint;
-  averageLockAmount: bigint;
-  averageLockDuration: number;
-  successRate: number;
-  timeSeriesData: {
+  totalBonuses: number;
+  totalLockedAmount: bigint;
+  totalUnlockedAmount: bigint;
+  totalClaimedAmount: bigint;
+  totalReferralAmount: bigint;
+  totalBonusAmount: bigint;
+  lockHistory: {
     date: string;
-    locks: number;
-    unlocks: number;
-    rewards: number;
-    volume: number;
+    amount: number;
   }[];
-  distributionData: {
+  unlockHistory: {
+    date: string;
+    amount: number;
+  }[];
+  claimHistory: {
+    date: string;
+    amount: number;
+  }[];
+  referralHistory: {
+    date: string;
+    amount: number;
+  }[];
+  bonusHistory: {
+    date: string;
+    amount: number;
+  }[];
+  lockDistribution: {
     name: string;
     value: number;
   }[];
-  topReferrals: {
-    address: string;
-    amount: bigint;
-    rewards: bigint;
+  referralDistribution: {
+    name: string;
+    value: number;
   }[];
-  recentActivity: {
-    type: string;
-    amount: bigint;
-    timestamp: number;
-    status: string;
+  bonusDistribution: {
+    name: string;
+    value: number;
   }[];
 }
 
-const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
+const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#8884D8'];
 
 export default function TokenAnalytics() {
   const { data: session, status } = useSession();
   const router = useRouter();
   const [loading, setLoading] = useState(true);
   const [timeRange, setTimeRange] = useState<'7d' | '30d' | '90d' | '1y'>('30d');
-  const [data, setData] = useState<AnalyticsData | null>(null);
+  const [analyticsData, setAnalyticsData] = useState<AnalyticsData | null>(null);
 
   useEffect(() => {
     if (status === 'unauthenticated') {
@@ -69,83 +81,74 @@ export default function TokenAnalytics() {
   }, [status, router]);
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchAnalytics = async () => {
       try {
         setLoading(true);
         const contract = await getContract();
 
-        // TODO: Fetch data from contract
+        // TODO: Fetch analytics from contract
         // For now using mock data
         const mockData: AnalyticsData = {
-          totalLocks: 25,
-          totalUnlocks: 15,
-          totalRewards: 100,
-          totalReferrals: 10,
-          totalVolume: ethers.parseEther('50000'),
-          averageLockAmount: ethers.parseEther('2000'),
-          averageLockDuration: 45,
-          successRate: 95.5,
-          timeSeriesData: [
-            {
-              date: '2024-01-01',
-              locks: 5,
-              unlocks: 2,
-              rewards: 10,
-              volume: 1000,
-            },
-            {
-              date: '2024-01-02',
-              locks: 3,
-              unlocks: 1,
-              rewards: 8,
-              volume: 800,
-            },
-            // Add more mock data points...
+          totalLocks: 150,
+          totalUnlocks: 45,
+          totalClaims: 300,
+          totalReferrals: 25,
+          totalBonuses: 50,
+          totalLockedAmount: ethers.parseEther('1000000'),
+          totalUnlockedAmount: ethers.parseEther('300000'),
+          totalClaimedAmount: ethers.parseEther('50000'),
+          totalReferralAmount: ethers.parseEther('25000'),
+          totalBonusAmount: ethers.parseEther('75000'),
+          lockHistory: Array.from({ length: 30 }, (_, i) => ({
+            date: new Date(Date.now() - (29 - i) * 86400000).toISOString().split('T')[0],
+            amount: Math.random() * 1000,
+          })),
+          unlockHistory: Array.from({ length: 30 }, (_, i) => ({
+            date: new Date(Date.now() - (29 - i) * 86400000).toISOString().split('T')[0],
+            amount: Math.random() * 500,
+          })),
+          claimHistory: Array.from({ length: 30 }, (_, i) => ({
+            date: new Date(Date.now() - (29 - i) * 86400000).toISOString().split('T')[0],
+            amount: Math.random() * 100,
+          })),
+          referralHistory: Array.from({ length: 30 }, (_, i) => ({
+            date: new Date(Date.now() - (29 - i) * 86400000).toISOString().split('T')[0],
+            amount: Math.random() * 50,
+          })),
+          bonusHistory: Array.from({ length: 30 }, (_, i) => ({
+            date: new Date(Date.now() - (29 - i) * 86400000).toISOString().split('T')[0],
+            amount: Math.random() * 75,
+          })),
+          lockDistribution: [
+            { name: '30 Days', value: 40 },
+            { name: '60 Days', value: 30 },
+            { name: '90 Days', value: 20 },
+            { name: '180 Days', value: 7 },
+            { name: '365 Days', value: 3 },
           ],
-          distributionData: [
-            { name: 'Locks', value: 25 },
-            { name: 'Unlocks', value: 15 },
-            { name: 'Rewards', value: 100 },
-            { name: 'Referrals', value: 10 },
+          referralDistribution: [
+            { name: 'Level 1', value: 60 },
+            { name: 'Level 2', value: 25 },
+            { name: 'Level 3', value: 15 },
           ],
-          topReferrals: [
-            {
-              address: '0x123...abc',
-              amount: ethers.parseEther('5000'),
-              rewards: ethers.parseEther('250'),
-            },
-            {
-              address: '0x456...def',
-              amount: ethers.parseEther('3000'),
-              rewards: ethers.parseEther('150'),
-            },
-          ],
-          recentActivity: [
-            {
-              type: 'lock',
-              amount: ethers.parseEther('1000'),
-              timestamp: Date.now() - 3600000,
-              status: 'completed',
-            },
-            {
-              type: 'unlock',
-              amount: ethers.parseEther('500'),
-              timestamp: Date.now() - 7200000,
-              status: 'completed',
-            },
+          bonusDistribution: [
+            { name: 'Early Adopter', value: 40 },
+            { name: 'Long Term', value: 30 },
+            { name: 'Volume', value: 20 },
+            { name: 'Referral', value: 10 },
           ],
         };
 
-        setData(mockData);
+        setAnalyticsData(mockData);
       } catch (err) {
-        console.error('Failed to fetch data:', err);
-        toast.error('Failed to load analytics');
+        console.error('Failed to fetch analytics:', err);
+        toast.error('Failed to load analytics data');
       } finally {
         setLoading(false);
       }
     };
 
-    fetchData();
+    fetchAnalytics();
   }, [timeRange]);
 
   if (loading) {
@@ -154,8 +157,13 @@ export default function TokenAnalytics() {
         <div className="max-w-7xl mx-auto">
           <div className="animate-pulse">
             <div className="h-8 bg-gray-200 rounded w-1/4 mb-8"></div>
-            <div className="space-y-6">
-              {[...Array(4)].map((_, i) => (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+              {[...Array(6)].map((_, i) => (
+                <div key={i} className="h-32 bg-gray-200 rounded"></div>
+              ))}
+            </div>
+            <div className="space-y-8">
+              {[...Array(3)].map((_, i) => (
                 <div key={i} className="h-96 bg-gray-200 rounded"></div>
               ))}
             </div>
@@ -165,191 +173,216 @@ export default function TokenAnalytics() {
     );
   }
 
-  if (!data) return null;
+  if (!analyticsData) return null;
 
   return (
     <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         <div className="flex justify-between items-center mb-8">
-          <h1 className="text-3xl font-bold text-gray-900">Analytics</h1>
+          <h1 className="text-3xl font-bold text-gray-900">Token Analytics</h1>
+          <select
+            value={timeRange}
+            onChange={e => setTimeRange(e.target.value as '7d' | '30d' | '90d' | '1y')}
+            className="rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
+          >
+            <option value="7d">Last 7 Days</option>
+            <option value="30d">Last 30 Days</option>
+            <option value="90d">Last 90 Days</option>
+            <option value="1y">Last Year</option>
+          </select>
+        </div>
 
-          <div className="flex items-center space-x-2">
-            <label className="text-sm font-medium text-gray-700">Time Range:</label>
-            <select
-              value={timeRange}
-              onChange={e => setTimeRange(e.target.value as typeof timeRange)}
-              className="rounded-md border-gray-300 text-sm focus:border-blue-500 focus:ring-blue-500"
-              title="Select Time Range"
-              aria-label="Select Time Range"
-            >
-              <option value="7d">Last 7 Days</option>
-              <option value="30d">Last 30 Days</option>
-              <option value="90d">Last 90 Days</option>
-              <option value="1y">Last Year</option>
-            </select>
+        {/* Summary Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+          <div className="bg-white rounded-lg shadow p-6">
+            <h3 className="text-lg font-medium text-gray-900 mb-2">Total Locked</h3>
+            <p className="text-3xl font-bold text-blue-600">
+              {ethers.formatEther(analyticsData.totalLockedAmount)} EHBGC
+            </p>
+            <p className="text-sm text-gray-500 mt-2">{analyticsData.totalLocks} locks</p>
+          </div>
+
+          <div className="bg-white rounded-lg shadow p-6">
+            <h3 className="text-lg font-medium text-gray-900 mb-2">Total Rewards</h3>
+            <p className="text-3xl font-bold text-green-600">
+              {ethers.formatEther(analyticsData.totalClaimedAmount)} EHBGC
+            </p>
+            <p className="text-sm text-gray-500 mt-2">{analyticsData.totalClaims} claims</p>
+          </div>
+
+          <div className="bg-white rounded-lg shadow p-6">
+            <h3 className="text-lg font-medium text-gray-900 mb-2">Total Referrals</h3>
+            <p className="text-3xl font-bold text-purple-600">
+              {ethers.formatEther(analyticsData.totalReferralAmount)} EHBGC
+            </p>
+            <p className="text-sm text-gray-500 mt-2">{analyticsData.totalReferrals} referrals</p>
+          </div>
+
+          <div className="bg-white rounded-lg shadow p-6">
+            <h3 className="text-lg font-medium text-gray-900 mb-2">Total Bonuses</h3>
+            <p className="text-3xl font-bold text-yellow-600">
+              {ethers.formatEther(analyticsData.totalBonusAmount)} EHBGC
+            </p>
+            <p className="text-sm text-gray-500 mt-2">{analyticsData.totalBonuses} bonuses</p>
+          </div>
+
+          <div className="bg-white rounded-lg shadow p-6">
+            <h3 className="text-lg font-medium text-gray-900 mb-2">Total Unlocked</h3>
+            <p className="text-3xl font-bold text-red-600">
+              {ethers.formatEther(analyticsData.totalUnlockedAmount)} EHBGC
+            </p>
+            <p className="text-sm text-gray-500 mt-2">{analyticsData.totalUnlocks} unlocks</p>
+          </div>
+
+          <div className="bg-white rounded-lg shadow p-6">
+            <h3 className="text-lg font-medium text-gray-900 mb-2">Net Position</h3>
+            <p className="text-3xl font-bold text-indigo-600">
+              {ethers.formatEther(
+                analyticsData.totalLockedAmount -
+                  analyticsData.totalUnlockedAmount +
+                  analyticsData.totalClaimedAmount +
+                  analyticsData.totalReferralAmount +
+                  analyticsData.totalBonusAmount
+              )}{' '}
+              EHBGC
+            </p>
+            <p className="text-sm text-gray-500 mt-2">Current balance</p>
           </div>
         </div>
 
-        {/* Overview Stats */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+        {/* Charts */}
+        <div className="space-y-8">
+          {/* Lock/Unlock History */}
           <div className="bg-white rounded-lg shadow p-6">
-            <h3 className="text-sm font-medium text-gray-500">Total Volume</h3>
-            <p className="mt-2 text-3xl font-semibold text-gray-900">
-              {ethers.formatEther(data.totalVolume)} EHBGC
-            </p>
-          </div>
-
-          <div className="bg-white rounded-lg shadow p-6">
-            <h3 className="text-sm font-medium text-gray-500">Average Lock Amount</h3>
-            <p className="mt-2 text-3xl font-semibold text-gray-900">
-              {ethers.formatEther(data.averageLockAmount)} EHBGC
-            </p>
-          </div>
-
-          <div className="bg-white rounded-lg shadow p-6">
-            <h3 className="text-sm font-medium text-gray-500">Average Lock Duration</h3>
-            <p className="mt-2 text-3xl font-semibold text-gray-900">
-              {data.averageLockDuration} days
-            </p>
-          </div>
-
-          <div className="bg-white rounded-lg shadow p-6">
-            <h3 className="text-sm font-medium text-gray-500">Success Rate</h3>
-            <p className="mt-2 text-3xl font-semibold text-gray-900">{data.successRate}%</p>
-          </div>
-        </div>
-
-        {/* Activity Charts */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
-          {/* Time Series Chart */}
-          <div className="bg-white rounded-lg shadow p-6">
-            <h3 className="text-lg font-medium text-gray-900 mb-4">Activity Over Time</h3>
-            <div className="h-80">
+            <h3 className="text-lg font-medium text-gray-900 mb-4">Lock/Unlock History</h3>
+            <div className="h-96">
               <ResponsiveContainer width="100%" height="100%">
-                <LineChart data={data.timeSeriesData}>
+                <LineChart
+                  data={analyticsData.lockHistory.map((lock, i) => ({
+                    date: lock.date,
+                    locks: lock.amount,
+                    unlocks: analyticsData.unlockHistory[i].amount,
+                  }))}
+                  margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
+                >
                   <CartesianGrid strokeDasharray="3 3" />
                   <XAxis dataKey="date" />
                   <YAxis />
                   <Tooltip />
                   <Legend />
-                  <Line type="monotone" dataKey="locks" stroke="#0088FE" />
-                  <Line type="monotone" dataKey="unlocks" stroke="#00C49F" />
-                  <Line type="monotone" dataKey="rewards" stroke="#FFBB28" />
-                  <Line type="monotone" dataKey="volume" stroke="#FF8042" />
+                  <Line type="monotone" dataKey="locks" stroke="#0088FE" name="Locks" />
+                  <Line type="monotone" dataKey="unlocks" stroke="#FF8042" name="Unlocks" />
                 </LineChart>
               </ResponsiveContainer>
             </div>
           </div>
 
-          {/* Distribution Chart */}
+          {/* Rewards History */}
           <div className="bg-white rounded-lg shadow p-6">
-            <h3 className="text-lg font-medium text-gray-900 mb-4">Activity Distribution</h3>
-            <div className="h-80">
+            <h3 className="text-lg font-medium text-gray-900 mb-4">Rewards History</h3>
+            <div className="h-96">
               <ResponsiveContainer width="100%" height="100%">
-                <PieChart>
-                  <Pie
-                    data={data.distributionData}
-                    cx="50%"
-                    cy="50%"
-                    labelLine={false}
-                    outerRadius={80}
-                    fill="#8884d8"
-                    dataKey="value"
-                    label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
-                  >
-                    {data.distributionData.map((entry, index) => (
-                      <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-                    ))}
-                  </Pie>
+                <BarChart
+                  data={analyticsData.claimHistory.map((claim, i) => ({
+                    date: claim.date,
+                    claims: claim.amount,
+                    referrals: analyticsData.referralHistory[i].amount,
+                    bonuses: analyticsData.bonusHistory[i].amount,
+                  }))}
+                  margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
+                >
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis dataKey="date" />
+                  <YAxis />
                   <Tooltip />
                   <Legend />
-                </PieChart>
+                  <Bar dataKey="claims" fill="#00C49F" name="Claims" />
+                  <Bar dataKey="referrals" fill="#8884D8" name="Referrals" />
+                  <Bar dataKey="bonuses" fill="#FFBB28" name="Bonuses" />
+                </BarChart>
               </ResponsiveContainer>
             </div>
           </div>
-        </div>
 
-        {/* Top Referrals */}
-        <div className="bg-white rounded-lg shadow p-6 mb-8">
-          <h3 className="text-lg font-medium text-gray-900 mb-4">Top Referrals</h3>
-          <div className="overflow-x-auto">
-            <table className="min-w-full divide-y divide-gray-200">
-              <thead>
-                <tr>
-                  <th className="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Address
-                  </th>
-                  <th className="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Lock Amount
-                  </th>
-                  <th className="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Rewards
-                  </th>
-                </tr>
-              </thead>
-              <tbody className="bg-white divide-y divide-gray-200">
-                {data.topReferrals.map((referral, index) => (
-                  <tr key={index}>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                      {referral.address}
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                      {ethers.formatEther(referral.amount)} EHBGC
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                      {ethers.formatEther(referral.rewards)} EHBGC
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </div>
-
-        {/* Recent Activity */}
-        <div className="bg-white rounded-lg shadow p-6">
-          <h3 className="text-lg font-medium text-gray-900 mb-4">Recent Activity</h3>
-          <div className="space-y-4">
-            {data.recentActivity.map((activity, index) => (
-              <div
-                key={index}
-                className="flex items-center justify-between p-4 bg-gray-50 rounded-lg"
-              >
-                <div className="flex items-center space-x-4">
-                  <div
-                    className={`h-10 w-10 rounded-full flex items-center justify-center ${
-                      activity.type === 'lock'
-                        ? 'bg-blue-100 text-blue-600'
-                        : 'bg-green-100 text-green-600'
-                    }`}
-                  >
-                    {activity.type === 'lock' ? '🔒' : '🔓'}
-                  </div>
-                  <div>
-                    <p className="text-sm font-medium text-gray-900">
-                      {activity.type.charAt(0).toUpperCase() + activity.type.slice(1)}
-                    </p>
-                    <p className="text-sm text-gray-500">
-                      {ethers.formatEther(activity.amount)} EHBGC
-                    </p>
-                  </div>
-                </div>
-                <div className="text-right">
-                  <p className="text-sm text-gray-500">
-                    {new Date(activity.timestamp).toLocaleString()}
-                  </p>
-                  <span
-                    className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
-                      activity.status === 'completed'
-                        ? 'bg-green-100 text-green-800'
-                        : 'bg-yellow-100 text-yellow-800'
-                    }`}
-                  >
-                    {activity.status.charAt(0).toUpperCase() + activity.status.slice(1)}
-                  </span>
-                </div>
+          {/* Distribution Charts */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {/* Lock Duration Distribution */}
+            <div className="bg-white rounded-lg shadow p-6">
+              <h3 className="text-lg font-medium text-gray-900 mb-4">Lock Duration Distribution</h3>
+              <div className="h-64">
+                <ResponsiveContainer width="100%" height="100%">
+                  <PieChart>
+                    <Pie
+                      data={analyticsData.lockDistribution}
+                      dataKey="value"
+                      nameKey="name"
+                      cx="50%"
+                      cy="50%"
+                      outerRadius={80}
+                      label
+                    >
+                      {analyticsData.lockDistribution.map((entry, index) => (
+                        <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                      ))}
+                    </Pie>
+                    <Tooltip />
+                    <Legend />
+                  </PieChart>
+                </ResponsiveContainer>
               </div>
-            ))}
+            </div>
+
+            {/* Referral Distribution */}
+            <div className="bg-white rounded-lg shadow p-6">
+              <h3 className="text-lg font-medium text-gray-900 mb-4">Referral Distribution</h3>
+              <div className="h-64">
+                <ResponsiveContainer width="100%" height="100%">
+                  <PieChart>
+                    <Pie
+                      data={analyticsData.referralDistribution}
+                      dataKey="value"
+                      nameKey="name"
+                      cx="50%"
+                      cy="50%"
+                      outerRadius={80}
+                      label
+                    >
+                      {analyticsData.referralDistribution.map((entry, index) => (
+                        <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                      ))}
+                    </Pie>
+                    <Tooltip />
+                    <Legend />
+                  </PieChart>
+                </ResponsiveContainer>
+              </div>
+            </div>
+
+            {/* Bonus Distribution */}
+            <div className="bg-white rounded-lg shadow p-6">
+              <h3 className="text-lg font-medium text-gray-900 mb-4">Bonus Distribution</h3>
+              <div className="h-64">
+                <ResponsiveContainer width="100%" height="100%">
+                  <PieChart>
+                    <Pie
+                      data={analyticsData.bonusDistribution}
+                      dataKey="value"
+                      nameKey="name"
+                      cx="50%"
+                      cy="50%"
+                      outerRadius={80}
+                      label
+                    >
+                      {analyticsData.bonusDistribution.map((entry, index) => (
+                        <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                      ))}
+                    </Pie>
+                    <Tooltip />
+                    <Legend />
+                  </PieChart>
+                </ResponsiveContainer>
+              </div>
+            </div>
           </div>
         </div>
       </div>
