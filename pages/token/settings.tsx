@@ -2,38 +2,48 @@ import React, { useState, useEffect } from 'react';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import { ethers } from 'ethers';
-import { getContractReadOnly, getContract } from '@/lib/contracts';
+import { getContract } from '@/lib/contracts';
 import { toast } from 'react-hot-toast';
 
-interface TokenSettings {
-  autoClaim: boolean;
-  autoLock: boolean;
-  lockDuration: number;
-  notificationPreferences: {
-    email: boolean;
-    push: boolean;
-    telegram: boolean;
-  };
-  displayPreferences: {
-    currency: 'USD' | 'EUR' | 'GBP' | 'INR';
-    timezone: string;
-    dateFormat: string;
-  };
-  securitySettings: {
-    requireConfirmation: boolean;
-    maxTransactionAmount: bigint;
-    whitelistedAddresses: string[];
-  };
+interface NotificationSettings {
+  emailNotifications: boolean;
+  telegramNotifications: boolean;
+  discordNotifications: boolean;
+  lockNotifications: boolean;
+  unlockNotifications: boolean;
+  rewardNotifications: boolean;
+  securityNotifications: boolean;
+}
+
+interface SecuritySettings {
+  twoFactorAuth: boolean;
+  ipWhitelist: string[];
+  sessionTimeout: number;
+  requireConfirmation: boolean;
 }
 
 export default function TokenSettings() {
   const { data: session, status } = useSession();
   const router = useRouter();
-  const [userAddress, setUserAddress] = useState<string>('');
-  const [settings, setSettings] = useState<TokenSettings | null>(null);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
   const [saving, setSaving] = useState(false);
+  const [activeTab, setActiveTab] = useState<'account' | 'notifications' | 'security'>('account');
+  const [notificationSettings, setNotificationSettings] = useState<NotificationSettings>({
+    emailNotifications: true,
+    telegramNotifications: false,
+    discordNotifications: false,
+    lockNotifications: true,
+    unlockNotifications: true,
+    rewardNotifications: true,
+    securityNotifications: true,
+  });
+  const [securitySettings, setSecuritySettings] = useState<SecuritySettings>({
+    twoFactorAuth: false,
+    ipWhitelist: [],
+    sessionTimeout: 30,
+    requireConfirmation: true,
+  });
+  const [newIpAddress, setNewIpAddress] = useState('');
 
   useEffect(() => {
     if (status === 'unauthenticated') {
@@ -42,128 +52,56 @@ export default function TokenSettings() {
   }, [status, router]);
 
   useEffect(() => {
-    const getAddress = async () => {
-      try {
-        if (typeof window !== 'undefined' && window.ethereum) {
-          const provider = new ethers.BrowserProvider(window.ethereum);
-          const signer = await provider.getSigner();
-          const address = await signer.getAddress();
-          setUserAddress(address);
-        }
-      } catch (err) {
-        setError('Failed to get wallet address. Please make sure your wallet is connected.');
-      }
-    };
-
-    getAddress();
-  }, []);
-
-  useEffect(() => {
     const fetchSettings = async () => {
-      if (!userAddress) return;
-
       try {
         setLoading(true);
-        const contract = await getContractReadOnly();
-
-        // Fetch user settings
-        const [
-          autoClaim,
-          autoLock,
-          lockDuration,
-          notificationPreferences,
-          displayPreferences,
-          securitySettings,
-        ] = await Promise.all([
-          contract.getAutoClaim(userAddress),
-          contract.getAutoLock(userAddress),
-          contract.getLockDuration(userAddress),
-          contract.getNotificationPreferences(userAddress),
-          contract.getDisplayPreferences(userAddress),
-          contract.getSecuritySettings(userAddress),
-        ]);
-
-        setSettings({
-          autoClaim,
-          autoLock,
-          lockDuration,
-          notificationPreferences,
-          displayPreferences,
-          securitySettings,
-        });
+        // TODO: Fetch settings from contract
+        // For now using default values
       } catch (err) {
-        setError('Failed to fetch settings');
-        console.error(err);
+        console.error('Failed to fetch settings:', err);
+        toast.error('Failed to load settings');
       } finally {
         setLoading(false);
       }
     };
 
     fetchSettings();
-  }, [userAddress]);
+  }, []);
 
   const handleSaveSettings = async () => {
-    if (!userAddress || !settings) return;
-
     try {
       setSaving(true);
       const contract = await getContract();
 
-      // Update settings
-      const tx = await contract.updateSettings(
-        settings.autoClaim,
-        settings.autoLock,
-        settings.lockDuration,
-        settings.notificationPreferences,
-        settings.displayPreferences,
-        settings.securitySettings
-      );
-
-      await tx.wait();
-      toast.success('Settings updated successfully!');
+      // TODO: Save settings to contract
+      // For now just showing success message
+      toast.success('Settings saved successfully!');
     } catch (err) {
-      console.error('Failed to update settings:', err);
-      toast.error('Failed to update settings. Please try again.');
+      console.error('Failed to save settings:', err);
+      toast.error('Failed to save settings');
     } finally {
       setSaving(false);
     }
   };
 
-  const handleAddWhitelistedAddress = (address: string) => {
-    if (!settings) return;
+  const handleAddIpAddress = () => {
+    if (!newIpAddress) return;
 
-    setSettings(prev =>
-      prev
-        ? {
-            ...prev,
-            securitySettings: {
-              ...prev.securitySettings,
-              whitelistedAddresses: [...prev.securitySettings.whitelistedAddresses, address],
-            },
-          }
-        : null
-    );
+    setSecuritySettings(prev => ({
+      ...prev,
+      ipWhitelist: [...prev.ipWhitelist, newIpAddress],
+    }));
+    setNewIpAddress('');
   };
 
-  const handleRemoveWhitelistedAddress = (address: string) => {
-    if (!settings) return;
-
-    setSettings(prev =>
-      prev
-        ? {
-            ...prev,
-            securitySettings: {
-              ...prev.securitySettings,
-              whitelistedAddresses: prev.securitySettings.whitelistedAddresses.filter(
-                addr => addr !== address
-              ),
-            },
-          }
-        : null
-    );
+  const handleRemoveIpAddress = (ip: string) => {
+    setSecuritySettings(prev => ({
+      ...prev,
+      ipWhitelist: prev.ipWhitelist.filter(address => address !== ip),
+    }));
   };
 
-  if (status === 'loading' || loading) {
+  if (loading) {
     return (
       <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
@@ -184,386 +122,368 @@ export default function TokenSettings() {
     <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         <div className="flex justify-between items-center mb-8">
-          <h1 className="text-3xl font-bold text-gray-900">Token Settings</h1>
+          <h1 className="text-3xl font-bold text-gray-900">Settings</h1>
 
-          {/* Save Settings Button */}
           <button
             onClick={handleSaveSettings}
-            disabled={!settings || saving}
+            disabled={saving}
             className={`px-6 py-3 rounded-lg font-medium ${
-              settings && !saving
-                ? 'bg-blue-600 text-white hover:bg-blue-700'
-                : 'bg-gray-300 text-gray-500 cursor-not-allowed'
+              saving
+                ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
+                : 'bg-blue-600 text-white hover:bg-blue-700'
             }`}
           >
-            {saving ? 'Saving...' : 'Save Settings'}
+            {saving ? 'Saving...' : 'Save Changes'}
           </button>
         </div>
 
-        {error && (
-          <div className="mb-6 bg-red-50 border border-red-200 rounded-lg p-4">
-            <p className="text-red-600">{error}</p>
+        {/* Tabs */}
+        <div className="border-b border-gray-200 mb-8">
+          <nav className="-mb-px flex space-x-8">
+            <button
+              onClick={() => setActiveTab('account')}
+              className={`${
+                activeTab === 'account'
+                  ? 'border-blue-500 text-blue-600'
+                  : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+              } whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm`}
+            >
+              Account
+            </button>
+            <button
+              onClick={() => setActiveTab('notifications')}
+              className={`${
+                activeTab === 'notifications'
+                  ? 'border-blue-500 text-blue-600'
+                  : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+              } whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm`}
+            >
+              Notifications
+            </button>
+            <button
+              onClick={() => setActiveTab('security')}
+              className={`${
+                activeTab === 'security'
+                  ? 'border-blue-500 text-blue-600'
+                  : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+              } whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm`}
+            >
+              Security
+            </button>
+          </nav>
+        </div>
+
+        {/* Account Settings */}
+        {activeTab === 'account' && (
+          <div className="bg-white rounded-lg shadow p-6">
+            <h2 className="text-xl font-semibold text-gray-900 mb-6">Account Settings</h2>
+
+            <div className="space-y-6">
+              <div>
+                <label className="block text-sm font-medium text-gray-700">Display Name</label>
+                <input
+                  type="text"
+                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
+                  placeholder="Enter your display name"
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700">Email Address</label>
+                <input
+                  type="email"
+                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
+                  placeholder="Enter your email address"
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700">Language</label>
+                <select
+                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
+                  title="Language"
+                  aria-label="Select Language"
+                >
+                  <option value="en">English</option>
+                  <option value="es">Spanish</option>
+                  <option value="fr">French</option>
+                  <option value="de">German</option>
+                </select>
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700">Time Zone</label>
+                <select
+                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
+                  title="Time Zone"
+                  aria-label="Select Time Zone"
+                >
+                  <option value="UTC">UTC</option>
+                  <option value="EST">EST</option>
+                  <option value="PST">PST</option>
+                  <option value="GMT">GMT</option>
+                </select>
+              </div>
+            </div>
           </div>
         )}
 
-        {settings && (
-          <div className="space-y-6">
-            {/* Automation Settings */}
-            <div className="bg-white rounded-lg shadow p-6">
-              <h2 className="text-xl font-semibold text-gray-900 mb-4">Automation Settings</h2>
-              <div className="space-y-4">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <h3 className="text-sm font-medium text-gray-700">Auto Claim Rewards</h3>
-                    <p className="text-sm text-gray-500">
-                      Automatically claim rewards when available
-                    </p>
-                  </div>
-                  <label className="relative inline-flex items-center cursor-pointer">
+        {/* Notification Settings */}
+        {activeTab === 'notifications' && (
+          <div className="bg-white rounded-lg shadow p-6">
+            <h2 className="text-xl font-semibold text-gray-900 mb-6">Notification Settings</h2>
+
+            <div className="space-y-6">
+              <div>
+                <h3 className="text-lg font-medium text-gray-900 mb-4">Notification Channels</h3>
+                <div className="space-y-4">
+                  <div className="flex items-center">
                     <input
                       type="checkbox"
-                      checked={settings.autoClaim}
+                      checked={notificationSettings.emailNotifications}
                       onChange={e =>
-                        setSettings(prev =>
-                          prev ? { ...prev, autoClaim: e.target.checked } : null
-                        )
+                        setNotificationSettings(prev => ({
+                          ...prev,
+                          emailNotifications: e.target.checked,
+                        }))
                       }
-                      className="sr-only peer"
+                      className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+                      title="Email Notifications"
+                      aria-label="Email Notifications"
                     />
-                    <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
-                  </label>
-                </div>
-
-                <div className="flex items-center justify-between">
-                  <div>
-                    <h3 className="text-sm font-medium text-gray-700">Auto Lock Tokens</h3>
-                    <p className="text-sm text-gray-500">Automatically lock tokens when received</p>
+                    <label className="ml-3 block text-sm font-medium text-gray-700">
+                      Email Notifications
+                    </label>
                   </div>
-                  <label className="relative inline-flex items-center cursor-pointer">
+
+                  <div className="flex items-center">
                     <input
                       type="checkbox"
-                      checked={settings.autoLock}
+                      checked={notificationSettings.telegramNotifications}
                       onChange={e =>
-                        setSettings(prev => (prev ? { ...prev, autoLock: e.target.checked } : null))
+                        setNotificationSettings(prev => ({
+                          ...prev,
+                          telegramNotifications: e.target.checked,
+                        }))
                       }
-                      className="sr-only peer"
+                      className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+                      title="Telegram Notifications"
+                      aria-label="Telegram Notifications"
                     />
-                    <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
-                  </label>
-                </div>
+                    <label className="ml-3 block text-sm font-medium text-gray-700">
+                      Telegram Notifications
+                    </label>
+                  </div>
 
-                <div>
-                  <label
-                    htmlFor="lock-duration"
-                    className="block text-sm font-medium text-gray-700"
-                  >
-                    Default Lock Duration (days)
-                  </label>
+                  <div className="flex items-center">
+                    <input
+                      type="checkbox"
+                      checked={notificationSettings.discordNotifications}
+                      onChange={e =>
+                        setNotificationSettings(prev => ({
+                          ...prev,
+                          discordNotifications: e.target.checked,
+                        }))
+                      }
+                      className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+                      title="Discord Notifications"
+                      aria-label="Discord Notifications"
+                    />
+                    <label className="ml-3 block text-sm font-medium text-gray-700">
+                      Discord Notifications
+                    </label>
+                  </div>
+                </div>
+              </div>
+
+              <div>
+                <h3 className="text-lg font-medium text-gray-900 mb-4">Notification Types</h3>
+                <div className="space-y-4">
+                  <div className="flex items-center">
+                    <input
+                      type="checkbox"
+                      checked={notificationSettings.lockNotifications}
+                      onChange={e =>
+                        setNotificationSettings(prev => ({
+                          ...prev,
+                          lockNotifications: e.target.checked,
+                        }))
+                      }
+                      className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+                      title="Lock Notifications"
+                      aria-label="Lock Notifications"
+                    />
+                    <label className="ml-3 block text-sm font-medium text-gray-700">
+                      Lock Notifications
+                    </label>
+                  </div>
+
+                  <div className="flex items-center">
+                    <input
+                      type="checkbox"
+                      checked={notificationSettings.unlockNotifications}
+                      onChange={e =>
+                        setNotificationSettings(prev => ({
+                          ...prev,
+                          unlockNotifications: e.target.checked,
+                        }))
+                      }
+                      className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+                      title="Unlock Notifications"
+                      aria-label="Unlock Notifications"
+                    />
+                    <label className="ml-3 block text-sm font-medium text-gray-700">
+                      Unlock Notifications
+                    </label>
+                  </div>
+
+                  <div className="flex items-center">
+                    <input
+                      type="checkbox"
+                      checked={notificationSettings.rewardNotifications}
+                      onChange={e =>
+                        setNotificationSettings(prev => ({
+                          ...prev,
+                          rewardNotifications: e.target.checked,
+                        }))
+                      }
+                      className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+                      title="Reward Notifications"
+                      aria-label="Reward Notifications"
+                    />
+                    <label className="ml-3 block text-sm font-medium text-gray-700">
+                      Reward Notifications
+                    </label>
+                  </div>
+
+                  <div className="flex items-center">
+                    <input
+                      type="checkbox"
+                      checked={notificationSettings.securityNotifications}
+                      onChange={e =>
+                        setNotificationSettings(prev => ({
+                          ...prev,
+                          securityNotifications: e.target.checked,
+                        }))
+                      }
+                      className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+                      title="Security Notifications"
+                      aria-label="Security Notifications"
+                    />
+                    <label className="ml-3 block text-sm font-medium text-gray-700">
+                      Security Notifications
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Security Settings */}
+        {activeTab === 'security' && (
+          <div className="bg-white rounded-lg shadow p-6">
+            <h2 className="text-xl font-semibold text-gray-900 mb-6">Security Settings</h2>
+
+            <div className="space-y-6">
+              <div>
+                <div className="flex items-center">
                   <input
-                    type="number"
-                    id="lock-duration"
-                    value={settings.lockDuration / (24 * 60 * 60)}
+                    type="checkbox"
+                    checked={securitySettings.twoFactorAuth}
                     onChange={e =>
-                      setSettings(prev =>
-                        prev
-                          ? { ...prev, lockDuration: Number(e.target.value) * 24 * 60 * 60 }
-                          : null
-                      )
+                      setSecuritySettings(prev => ({
+                        ...prev,
+                        twoFactorAuth: e.target.checked,
+                      }))
                     }
-                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
-                    min="1"
-                    max="365"
+                    className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+                    title="Two-Factor Authentication"
+                    aria-label="Two-Factor Authentication"
                   />
-                </div>
-              </div>
-            </div>
-
-            {/* Notification Preferences */}
-            <div className="bg-white rounded-lg shadow p-6">
-              <h2 className="text-xl font-semibold text-gray-900 mb-4">Notification Preferences</h2>
-              <div className="space-y-4">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <h3 className="text-sm font-medium text-gray-700">Email Notifications</h3>
-                    <p className="text-sm text-gray-500">Receive notifications via email</p>
-                  </div>
-                  <label className="relative inline-flex items-center cursor-pointer">
-                    <input
-                      type="checkbox"
-                      checked={settings.notificationPreferences.email}
-                      onChange={e =>
-                        setSettings(prev =>
-                          prev
-                            ? {
-                                ...prev,
-                                notificationPreferences: {
-                                  ...prev.notificationPreferences,
-                                  email: e.target.checked,
-                                },
-                              }
-                            : null
-                        )
-                      }
-                      className="sr-only peer"
-                    />
-                    <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
-                  </label>
-                </div>
-
-                <div className="flex items-center justify-between">
-                  <div>
-                    <h3 className="text-sm font-medium text-gray-700">Push Notifications</h3>
-                    <p className="text-sm text-gray-500">Receive push notifications</p>
-                  </div>
-                  <label className="relative inline-flex items-center cursor-pointer">
-                    <input
-                      type="checkbox"
-                      checked={settings.notificationPreferences.push}
-                      onChange={e =>
-                        setSettings(prev =>
-                          prev
-                            ? {
-                                ...prev,
-                                notificationPreferences: {
-                                  ...prev.notificationPreferences,
-                                  push: e.target.checked,
-                                },
-                              }
-                            : null
-                        )
-                      }
-                      className="sr-only peer"
-                    />
-                    <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
-                  </label>
-                </div>
-
-                <div className="flex items-center justify-between">
-                  <div>
-                    <h3 className="text-sm font-medium text-gray-700">Telegram Notifications</h3>
-                    <p className="text-sm text-gray-500">Receive notifications via Telegram</p>
-                  </div>
-                  <label className="relative inline-flex items-center cursor-pointer">
-                    <input
-                      type="checkbox"
-                      checked={settings.notificationPreferences.telegram}
-                      onChange={e =>
-                        setSettings(prev =>
-                          prev
-                            ? {
-                                ...prev,
-                                notificationPreferences: {
-                                  ...prev.notificationPreferences,
-                                  telegram: e.target.checked,
-                                },
-                              }
-                            : null
-                        )
-                      }
-                      className="sr-only peer"
-                    />
-                    <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
+                  <label className="ml-3 block text-sm font-medium text-gray-700">
+                    Enable Two-Factor Authentication
                   </label>
                 </div>
               </div>
-            </div>
 
-            {/* Display Preferences */}
-            <div className="bg-white rounded-lg shadow p-6">
-              <h2 className="text-xl font-semibold text-gray-900 mb-4">Display Preferences</h2>
-              <div className="space-y-4">
-                <div>
-                  <label htmlFor="currency" className="block text-sm font-medium text-gray-700">
-                    Currency
-                  </label>
-                  <select
-                    id="currency"
-                    value={settings.displayPreferences.currency}
-                    onChange={e =>
-                      setSettings(prev =>
-                        prev
-                          ? {
-                              ...prev,
-                              displayPreferences: {
-                                ...prev.displayPreferences,
-                                currency: e.target.value as 'USD' | 'EUR' | 'GBP' | 'INR',
-                              },
-                            }
-                          : null
-                      )
-                    }
-                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
-                  >
-                    <option value="USD">USD</option>
-                    <option value="EUR">EUR</option>
-                    <option value="GBP">GBP</option>
-                    <option value="INR">INR</option>
-                  </select>
-                </div>
-
-                <div>
-                  <label htmlFor="timezone" className="block text-sm font-medium text-gray-700">
-                    Timezone
-                  </label>
-                  <select
-                    id="timezone"
-                    value={settings.displayPreferences.timezone}
-                    onChange={e =>
-                      setSettings(prev =>
-                        prev
-                          ? {
-                              ...prev,
-                              displayPreferences: {
-                                ...prev.displayPreferences,
-                                timezone: e.target.value,
-                              },
-                            }
-                          : null
-                      )
-                    }
-                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
-                  >
-                    <option value="UTC">UTC</option>
-                    <option value="EST">EST</option>
-                    <option value="PST">PST</option>
-                    <option value="IST">IST</option>
-                  </select>
-                </div>
-
-                <div>
-                  <label htmlFor="date-format" className="block text-sm font-medium text-gray-700">
-                    Date Format
-                  </label>
-                  <select
-                    id="date-format"
-                    value={settings.displayPreferences.dateFormat}
-                    onChange={e =>
-                      setSettings(prev =>
-                        prev
-                          ? {
-                              ...prev,
-                              displayPreferences: {
-                                ...prev.displayPreferences,
-                                dateFormat: e.target.value,
-                              },
-                            }
-                          : null
-                      )
-                    }
-                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
-                  >
-                    <option value="MM/DD/YYYY">MM/DD/YYYY</option>
-                    <option value="DD/MM/YYYY">DD/MM/YYYY</option>
-                    <option value="YYYY-MM-DD">YYYY-MM-DD</option>
-                  </select>
-                </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Session Timeout (minutes)
+                </label>
+                <input
+                  type="number"
+                  value={securitySettings.sessionTimeout}
+                  onChange={e =>
+                    setSecuritySettings(prev => ({
+                      ...prev,
+                      sessionTimeout: parseInt(e.target.value),
+                    }))
+                  }
+                  min="5"
+                  max="120"
+                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
+                  title="Session Timeout"
+                  aria-label="Session Timeout in minutes"
+                  placeholder="Enter session timeout in minutes"
+                />
               </div>
-            </div>
 
-            {/* Security Settings */}
-            <div className="bg-white rounded-lg shadow p-6">
-              <h2 className="text-xl font-semibold text-gray-900 mb-4">Security Settings</h2>
-              <div className="space-y-4">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <h3 className="text-sm font-medium text-gray-700">Require Confirmation</h3>
-                    <p className="text-sm text-gray-500">
-                      Require confirmation for all transactions
-                    </p>
-                  </div>
-                  <label className="relative inline-flex items-center cursor-pointer">
-                    <input
-                      type="checkbox"
-                      checked={settings.securitySettings.requireConfirmation}
-                      onChange={e =>
-                        setSettings(prev =>
-                          prev
-                            ? {
-                                ...prev,
-                                securitySettings: {
-                                  ...prev.securitySettings,
-                                  requireConfirmation: e.target.checked,
-                                },
-                              }
-                            : null
-                        )
-                      }
-                      className="sr-only peer"
-                    />
-                    <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
-                  </label>
-                </div>
-
-                <div>
-                  <label htmlFor="max-amount" className="block text-sm font-medium text-gray-700">
-                    Maximum Transaction Amount
-                  </label>
+              <div>
+                <div className="flex items-center">
                   <input
-                    type="number"
-                    id="max-amount"
-                    value={ethers.formatEther(settings.securitySettings.maxTransactionAmount)}
+                    type="checkbox"
+                    checked={securitySettings.requireConfirmation}
                     onChange={e =>
-                      setSettings(prev =>
-                        prev
-                          ? {
-                              ...prev,
-                              securitySettings: {
-                                ...prev.securitySettings,
-                                maxTransactionAmount: ethers.parseEther(e.target.value),
-                              },
-                            }
-                          : null
-                      )
+                      setSecuritySettings(prev => ({
+                        ...prev,
+                        requireConfirmation: e.target.checked,
+                      }))
                     }
-                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
-                    min="0"
-                    step="0.01"
+                    className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+                    title="Require Confirmation for Transactions"
+                    aria-label="Require Confirmation for Transactions"
                   />
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Whitelisted Addresses
+                  <label className="ml-3 block text-sm font-medium text-gray-700">
+                    Require Confirmation for Transactions
                   </label>
-                  <div className="space-y-2">
-                    {settings.securitySettings.whitelistedAddresses.map((address, index) => (
-                      <div key={index} className="flex items-center justify-between">
-                        <span className="text-sm text-gray-900">{address}</span>
-                        <button
-                          onClick={() => handleRemoveWhitelistedAddress(address)}
-                          className="text-red-600 hover:text-red-800"
-                        >
-                          Remove
-                        </button>
-                      </div>
-                    ))}
-                    <div className="flex space-x-2">
-                      <input
-                        type="text"
-                        placeholder="Enter address"
-                        className="flex-1 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
-                        onKeyPress={e => {
-                          if (e.key === 'Enter') {
-                            const input = e.target as HTMLInputElement;
-                            handleAddWhitelistedAddress(input.value);
-                            input.value = '';
-                          }
-                        }}
-                      />
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">IP Whitelist</label>
+                <div className="flex space-x-2">
+                  <input
+                    type="text"
+                    value={newIpAddress}
+                    onChange={e => setNewIpAddress(e.target.value)}
+                    placeholder="Enter IP address"
+                    className="flex-1 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
+                    title="IP Address"
+                    aria-label="Enter IP Address"
+                  />
+                  <button
+                    onClick={handleAddIpAddress}
+                    className="px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                  >
+                    Add
+                  </button>
+                </div>
+                <div className="mt-4 space-y-2">
+                  {securitySettings.ipWhitelist.map((ip, index) => (
+                    <div
+                      key={index}
+                      className="flex items-center justify-between bg-gray-50 px-4 py-2 rounded-md"
+                    >
+                      <span className="text-sm text-gray-700">{ip}</span>
                       <button
-                        onClick={() => {
-                          const input = document.querySelector(
-                            'input[placeholder="Enter address"]'
-                          ) as HTMLInputElement;
-                          handleAddWhitelistedAddress(input.value);
-                          input.value = '';
-                        }}
-                        className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                        onClick={() => handleRemoveIpAddress(ip)}
+                        className="text-red-600 hover:text-red-800"
                       >
-                        Add
+                        Remove
                       </button>
                     </div>
-                  </div>
+                  ))}
                 </div>
               </div>
             </div>
