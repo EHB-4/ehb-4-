@@ -5,25 +5,42 @@ import { ethers } from 'ethers';
 import { getContract } from '@/lib/contracts';
 import { toast } from 'react-hot-toast';
 import { formatDistanceToNow } from 'date-fns';
+import {
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  Legend,
+  ResponsiveContainer,
+} from 'recharts';
 
-interface Reward {
-  id: string;
-  amount: bigint;
-  timestamp: number;
-  type: 'lock' | 'referral' | 'bonus';
-  status: 'pending' | 'claimed' | 'expired';
-  lockId?: string;
-  referralId?: string;
-}
-
-interface RewardStats {
-  totalEarned: bigint;
-  totalClaimed: bigint;
-  pendingRewards: bigint;
-  nextReward: number;
-  lastClaim: number;
-  referralEarnings: bigint;
-  bonusEarnings: bigint;
+interface RewardsData {
+  totalRewards: bigint;
+  availableRewards: bigint;
+  claimedRewards: bigint;
+  lastClaimDate: number | null;
+  nextClaimDate: number | null;
+  claimCooldown: number;
+  rewardsHistory: {
+    date: number;
+    amount: bigint;
+    type: 'earned' | 'claimed';
+    source: 'lock' | 'referral' | 'bonus';
+  }[];
+  timeSeriesData: {
+    date: string;
+    earned: number;
+    claimed: number;
+  }[];
+  bonusRewards: {
+    name: string;
+    description: string;
+    amount: bigint;
+    status: 'available' | 'claimed' | 'expired';
+    expiryDate: number;
+  }[];
 }
 
 export default function TokenRewards() {
@@ -31,12 +48,8 @@ export default function TokenRewards() {
   const router = useRouter();
   const [loading, setLoading] = useState(true);
   const [claiming, setClaiming] = useState(false);
-  const [rewards, setRewards] = useState<Reward[]>([]);
-  const [stats, setStats] = useState<RewardStats | null>(null);
-  const [selectedRewards, setSelectedRewards] = useState<string[]>([]);
-  const [filter, setFilter] = useState<'all' | 'pending' | 'claimed' | 'expired'>('all');
-  const [sortBy, setSortBy] = useState<'date' | 'amount'>('date');
-  const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('desc');
+  const [data, setData] = useState<RewardsData | null>(null);
+  const [activeTab, setActiveTab] = useState<'overview' | 'history' | 'bonus'>('overview');
 
   useEffect(() => {
     if (status === 'unauthenticated') {
@@ -45,73 +58,86 @@ export default function TokenRewards() {
   }, [status, router]);
 
   useEffect(() => {
-    const fetchRewards = async () => {
+    const fetchData = async () => {
       try {
         setLoading(true);
         const contract = await getContract();
 
-        // TODO: Fetch rewards from contract
+        // TODO: Fetch data from contract
         // For now using mock data
-        const mockRewards: Reward[] = [
-          {
-            id: '1',
-            amount: ethers.parseEther('100'),
-            timestamp: Date.now() - 86400000, // 1 day ago
-            type: 'lock',
-            status: 'pending',
-            lockId: 'lock1',
-          },
-          {
-            id: '2',
-            amount: ethers.parseEther('50'),
-            timestamp: Date.now() - 172800000, // 2 days ago
-            type: 'referral',
-            status: 'claimed',
-            referralId: 'ref1',
-          },
-          {
-            id: '3',
-            amount: ethers.parseEther('25'),
-            timestamp: Date.now() - 259200000, // 3 days ago
-            type: 'bonus',
-            status: 'expired',
-          },
-        ];
-
-        const mockStats: RewardStats = {
-          totalEarned: ethers.parseEther('1000'),
-          totalClaimed: ethers.parseEther('750'),
-          pendingRewards: ethers.parseEther('250'),
-          nextReward: Date.now() + 3600000, // 1 hour from now
-          lastClaim: Date.now() - 86400000, // 1 day ago
-          referralEarnings: ethers.parseEther('150'),
-          bonusEarnings: ethers.parseEther('100'),
+        const mockData: RewardsData = {
+          totalRewards: ethers.parseEther('5000'),
+          availableRewards: ethers.parseEther('2000'),
+          claimedRewards: ethers.parseEther('3000'),
+          lastClaimDate: Date.now() - 86400000, // 1 day ago
+          nextClaimDate: Date.now() + 86400000, // 1 day from now
+          claimCooldown: 24, // hours
+          rewardsHistory: [
+            {
+              date: Date.now() - 3600000, // 1 hour ago
+              amount: ethers.parseEther('100'),
+              type: 'earned',
+              source: 'lock',
+            },
+            {
+              date: Date.now() - 7200000, // 2 hours ago
+              amount: ethers.parseEther('50'),
+              type: 'claimed',
+              source: 'referral',
+            },
+          ],
+          timeSeriesData: [
+            {
+              date: '2024-01-01',
+              earned: 1000,
+              claimed: 500,
+            },
+            {
+              date: '2024-01-02',
+              earned: 800,
+              claimed: 300,
+            },
+          ],
+          bonusRewards: [
+            {
+              name: 'Early Adopter Bonus',
+              description: 'Reward for being an early user',
+              amount: ethers.parseEther('500'),
+              status: 'available',
+              expiryDate: Date.now() + 604800000, // 7 days from now
+            },
+            {
+              name: 'Referral Milestone',
+              description: 'Achieved 10 referrals',
+              amount: ethers.parseEther('1000'),
+              status: 'claimed',
+              expiryDate: Date.now() - 86400000, // 1 day ago
+            },
+          ],
         };
 
-        setRewards(mockRewards);
-        setStats(mockStats);
+        setData(mockData);
       } catch (err) {
-        console.error('Failed to fetch rewards:', err);
-        toast.error('Failed to load rewards');
+        console.error('Failed to fetch data:', err);
+        toast.error('Failed to load rewards data');
       } finally {
         setLoading(false);
       }
     };
 
-    fetchRewards();
+    fetchData();
   }, []);
 
-  const handleClaimRewards = async () => {
-    if (selectedRewards.length === 0) return;
+  const handleClaim = async () => {
+    if (!data) return;
 
     try {
       setClaiming(true);
       const contract = await getContract();
 
-      // TODO: Claim rewards through contract
+      // TODO: Call contract to claim rewards
       // For now just showing success message
       toast.success('Rewards claimed successfully!');
-      setSelectedRewards([]);
     } catch (err) {
       console.error('Failed to claim rewards:', err);
       toast.error('Failed to claim rewards');
@@ -119,27 +145,6 @@ export default function TokenRewards() {
       setClaiming(false);
     }
   };
-
-  const handleSelectReward = (rewardId: string) => {
-    setSelectedRewards(prev =>
-      prev.includes(rewardId) ? prev.filter(id => id !== rewardId) : [...prev, rewardId]
-    );
-  };
-
-  const handleSelectAll = () => {
-    const pendingRewards = rewards.filter(r => r.status === 'pending').map(r => r.id);
-    setSelectedRewards(prev => (prev.length === pendingRewards.length ? [] : pendingRewards));
-  };
-
-  const filteredRewards = rewards
-    .filter(reward => filter === 'all' || reward.status === filter)
-    .sort((a, b) => {
-      if (sortBy === 'date') {
-        return sortOrder === 'asc' ? a.timestamp - b.timestamp : b.timestamp - a.timestamp;
-      } else {
-        return sortOrder === 'asc' ? Number(a.amount - b.amount) : Number(b.amount - a.amount);
-      }
-    });
 
   if (loading) {
     return (
@@ -158,162 +163,232 @@ export default function TokenRewards() {
     );
   }
 
+  if (!data) return null;
+
   return (
     <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
-        <div className="flex justify-between items-center mb-8">
-          <h1 className="text-3xl font-bold text-gray-900">Rewards</h1>
+        <h1 className="text-3xl font-bold text-gray-900 mb-8">Rewards</h1>
 
-          <button
-            onClick={handleClaimRewards}
-            disabled={claiming || selectedRewards.length === 0}
-            className={`px-6 py-3 rounded-lg font-medium ${
-              claiming || selectedRewards.length === 0
-                ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
-                : 'bg-blue-600 text-white hover:bg-blue-700'
-            }`}
-          >
-            {claiming ? 'Claiming...' : `Claim Selected (${selectedRewards.length})`}
-          </button>
+        {/* Rewards Overview */}
+        <div className="bg-white rounded-lg shadow p-6 mb-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div>
+              <h3 className="text-sm font-medium text-gray-500">Total Rewards</h3>
+              <p className="mt-2 text-3xl font-semibold text-gray-900">
+                {ethers.formatEther(data.totalRewards)} EHBGC
+              </p>
+            </div>
+            <div>
+              <h3 className="text-sm font-medium text-gray-500">Available Rewards</h3>
+              <p className="mt-2 text-3xl font-semibold text-gray-900">
+                {ethers.formatEther(data.availableRewards)} EHBGC
+              </p>
+            </div>
+            <div>
+              <h3 className="text-sm font-medium text-gray-500">Claimed Rewards</h3>
+              <p className="mt-2 text-3xl font-semibold text-gray-900">
+                {ethers.formatEther(data.claimedRewards)} EHBGC
+              </p>
+            </div>
+          </div>
+
+          <div className="mt-6">
+            <button
+              onClick={handleClaim}
+              disabled={claiming || data.availableRewards === BigInt(0)}
+              className={`w-full px-6 py-3 rounded-lg font-medium ${
+                claiming || data.availableRewards === BigInt(0)
+                  ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
+                  : 'bg-blue-600 text-white hover:bg-blue-700'
+              }`}
+            >
+              {claiming
+                ? 'Claiming...'
+                : data.availableRewards === BigInt(0)
+                  ? 'No Rewards Available'
+                  : 'Claim Rewards'}
+            </button>
+          </div>
+
+          {data.lastClaimDate && (
+            <div className="mt-4 text-sm text-gray-500">
+              Last claim: {formatDistanceToNow(data.lastClaimDate, { addSuffix: true })}
+            </div>
+          )}
+          {data.nextClaimDate && (
+            <div className="text-sm text-gray-500">
+              Next claim available: {formatDistanceToNow(data.nextClaimDate, { addSuffix: true })}
+            </div>
+          )}
         </div>
 
-        {/* Stats Overview */}
-        {stats && (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-            <div className="bg-white rounded-lg shadow p-6">
-              <h3 className="text-sm font-medium text-gray-500">Total Earned</h3>
-              <p className="mt-2 text-3xl font-semibold text-gray-900">
-                {ethers.formatEther(stats.totalEarned)} EHBGC
-              </p>
-            </div>
-
-            <div className="bg-white rounded-lg shadow p-6">
-              <h3 className="text-sm font-medium text-gray-500">Pending Rewards</h3>
-              <p className="mt-2 text-3xl font-semibold text-gray-900">
-                {ethers.formatEther(stats.pendingRewards)} EHBGC
-              </p>
-            </div>
-
-            <div className="bg-white rounded-lg shadow p-6">
-              <h3 className="text-sm font-medium text-gray-500">Referral Earnings</h3>
-              <p className="mt-2 text-3xl font-semibold text-gray-900">
-                {ethers.formatEther(stats.referralEarnings)} EHBGC
-              </p>
-            </div>
-
-            <div className="bg-white rounded-lg shadow p-6">
-              <h3 className="text-sm font-medium text-gray-500">Bonus Earnings</h3>
-              <p className="mt-2 text-3xl font-semibold text-gray-900">
-                {ethers.formatEther(stats.bonusEarnings)} EHBGC
-              </p>
-            </div>
-          </div>
-        )}
-
-        {/* Rewards List */}
+        {/* Tabs */}
         <div className="bg-white rounded-lg shadow">
-          <div className="px-6 py-4 border-b border-gray-200">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center space-x-4">
+          <div className="border-b border-gray-200">
+            <nav className="flex -mb-px">
+              {(['overview', 'history', 'bonus'] as const).map(tab => (
                 <button
-                  onClick={handleSelectAll}
-                  className="text-sm font-medium text-blue-600 hover:text-blue-700"
+                  key={tab}
+                  onClick={() => setActiveTab(tab)}
+                  className={`py-4 px-6 text-sm font-medium ${
+                    activeTab === tab
+                      ? 'border-b-2 border-blue-500 text-blue-600'
+                      : 'text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                  }`}
                 >
-                  {selectedRewards.length === rewards.filter(r => r.status === 'pending').length
-                    ? 'Deselect All'
-                    : 'Select All'}
+                  {tab.charAt(0).toUpperCase() + tab.slice(1)}
                 </button>
+              ))}
+            </nav>
+          </div>
 
-                <div className="flex items-center space-x-2">
-                  <label className="text-sm font-medium text-gray-700">Filter:</label>
-                  <select
-                    value={filter}
-                    onChange={e => setFilter(e.target.value as typeof filter)}
-                    className="rounded-md border-gray-300 text-sm focus:border-blue-500 focus:ring-blue-500"
-                    title="Filter Rewards"
-                    aria-label="Filter Rewards"
-                  >
-                    <option value="all">All</option>
-                    <option value="pending">Pending</option>
-                    <option value="claimed">Claimed</option>
-                    <option value="expired">Expired</option>
-                  </select>
+          <div className="p-6">
+            {/* Overview Tab */}
+            {activeTab === 'overview' && (
+              <div className="space-y-6">
+                <div>
+                  <h3 className="text-lg font-medium text-gray-900 mb-4">Rewards Overview</h3>
+                  <div className="h-80">
+                    <ResponsiveContainer width="100%" height="100%">
+                      <LineChart data={data.timeSeriesData}>
+                        <CartesianGrid strokeDasharray="3 3" />
+                        <XAxis dataKey="date" />
+                        <YAxis />
+                        <Tooltip />
+                        <Legend />
+                        <Line type="monotone" dataKey="earned" stroke="#0088FE" name="Earned" />
+                        <Line type="monotone" dataKey="claimed" stroke="#00C49F" name="Claimed" />
+                      </LineChart>
+                    </ResponsiveContainer>
+                  </div>
+                </div>
+
+                <div>
+                  <h3 className="text-lg font-medium text-gray-900 mb-4">How Rewards Work</h3>
+                  <div className="prose max-w-none">
+                    <ul className="list-disc list-inside space-y-2">
+                      <li>Earn rewards for locking your tokens</li>
+                      <li>Additional rewards for referring new users</li>
+                      <li>Claim your rewards every {data.claimCooldown} hours</li>
+                      <li>Special bonus rewards for achieving milestones</li>
+                    </ul>
+                  </div>
                 </div>
               </div>
+            )}
 
-              <div className="flex items-center space-x-2">
-                <label className="text-sm font-medium text-gray-700">Sort by:</label>
-                <select
-                  value={sortBy}
-                  onChange={e => setSortBy(e.target.value as typeof sortBy)}
-                  className="rounded-md border-gray-300 text-sm focus:border-blue-500 focus:ring-blue-500"
-                  title="Sort Rewards"
-                  aria-label="Sort Rewards"
-                >
-                  <option value="date">Date</option>
-                  <option value="amount">Amount</option>
-                </select>
-
-                <button
-                  onClick={() => setSortOrder(prev => (prev === 'asc' ? 'desc' : 'asc'))}
-                  className="text-gray-400 hover:text-gray-500"
-                  title={sortOrder === 'asc' ? 'Sort Descending' : 'Sort Ascending'}
-                  aria-label={sortOrder === 'asc' ? 'Sort Descending' : 'Sort Ascending'}
-                >
-                  {sortOrder === 'asc' ? '↑' : '↓'}
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <div className="divide-y divide-gray-200">
-            {filteredRewards.map(reward => (
-              <div key={reward.id} className="px-6 py-4">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center space-x-4">
-                    {reward.status === 'pending' && (
-                      <input
-                        type="checkbox"
-                        checked={selectedRewards.includes(reward.id)}
-                        onChange={() => handleSelectReward(reward.id)}
-                        className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
-                        title={`Select reward ${reward.id}`}
-                        aria-label={`Select reward ${reward.id}`}
-                      />
-                    )}
-
-                    <div>
-                      <div className="flex items-center space-x-2">
-                        <span className="text-sm font-medium text-gray-900">
+            {/* History Tab */}
+            {activeTab === 'history' && (
+              <div className="overflow-x-auto">
+                <table className="min-w-full divide-y divide-gray-200">
+                  <thead>
+                    <tr>
+                      <th className="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        Date
+                      </th>
+                      <th className="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        Amount
+                      </th>
+                      <th className="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        Type
+                      </th>
+                      <th className="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        Source
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody className="bg-white divide-y divide-gray-200">
+                    {data.rewardsHistory.map((reward, index) => (
+                      <tr key={index}>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                          {formatDistanceToNow(reward.date, { addSuffix: true })}
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                           {ethers.formatEther(reward.amount)} EHBGC
-                        </span>
-                        <span
-                          className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
-                            reward.status === 'pending'
-                              ? 'bg-yellow-100 text-yellow-800'
-                              : reward.status === 'claimed'
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap">
+                          <span
+                            className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
+                              reward.type === 'earned'
                                 ? 'bg-green-100 text-green-800'
-                                : 'bg-red-100 text-red-800'
-                          }`}
-                        >
-                          {reward.status.charAt(0).toUpperCase() + reward.status.slice(1)}
-                        </span>
+                                : 'bg-blue-100 text-blue-800'
+                            }`}
+                          >
+                            {reward.type.charAt(0).toUpperCase() + reward.type.slice(1)}
+                          </span>
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap">
+                          <span
+                            className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
+                              reward.source === 'lock'
+                                ? 'bg-purple-100 text-purple-800'
+                                : reward.source === 'referral'
+                                  ? 'bg-yellow-100 text-yellow-800'
+                                  : 'bg-pink-100 text-pink-800'
+                            }`}
+                          >
+                            {reward.source.charAt(0).toUpperCase() + reward.source.slice(1)}
+                          </span>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            )}
+
+            {/* Bonus Tab */}
+            {activeTab === 'bonus' && (
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {data.bonusRewards.map((bonus, index) => (
+                  <div
+                    key={index}
+                    className={`rounded-lg p-6 ${
+                      bonus.status === 'available'
+                        ? 'bg-green-50 border border-green-200'
+                        : bonus.status === 'claimed'
+                          ? 'bg-blue-50 border border-blue-200'
+                          : 'bg-gray-50 border border-gray-200'
+                    }`}
+                  >
+                    <div className="flex justify-between items-start">
+                      <div>
+                        <h3 className="text-lg font-medium text-gray-900">{bonus.name}</h3>
+                        <p className="mt-1 text-sm text-gray-500">{bonus.description}</p>
                       </div>
-                      <p className="text-sm text-gray-500">
-                        {reward.type.charAt(0).toUpperCase() + reward.type.slice(1)} Reward
+                      <span
+                        className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
+                          bonus.status === 'available'
+                            ? 'bg-green-100 text-green-800'
+                            : bonus.status === 'claimed'
+                              ? 'bg-blue-100 text-blue-800'
+                              : 'bg-gray-100 text-gray-800'
+                        }`}
+                      >
+                        {bonus.status.charAt(0).toUpperCase() + bonus.status.slice(1)}
+                      </span>
+                    </div>
+                    <div className="mt-4">
+                      <p className="text-2xl font-semibold text-gray-900">
+                        {ethers.formatEther(bonus.amount)} EHBGC
+                      </p>
+                      <p className="mt-1 text-sm text-gray-500">
+                        Expires: {formatDistanceToNow(bonus.expiryDate, { addSuffix: true })}
                       </p>
                     </div>
+                    {bonus.status === 'available' && (
+                      <button
+                        onClick={handleClaim}
+                        disabled={claiming}
+                        className="mt-4 w-full px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2"
+                      >
+                        Claim Bonus
+                      </button>
+                    )}
                   </div>
-
-                  <div className="text-sm text-gray-500">
-                    {formatDistanceToNow(reward.timestamp, { addSuffix: true })}
-                  </div>
-                </div>
+                ))}
               </div>
-            ))}
-
-            {filteredRewards.length === 0 && (
-              <div className="px-6 py-4 text-center text-gray-500">No rewards found</div>
             )}
           </div>
         </div>

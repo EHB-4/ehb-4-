@@ -5,21 +5,33 @@ import { ethers } from 'ethers';
 import { getContract } from '@/lib/contracts';
 import { toast } from 'react-hot-toast';
 
-interface NotificationSettings {
-  emailNotifications: boolean;
-  telegramNotifications: boolean;
-  discordNotifications: boolean;
-  lockNotifications: boolean;
-  unlockNotifications: boolean;
-  rewardNotifications: boolean;
-  securityNotifications: boolean;
-}
-
-interface SecuritySettings {
-  twoFactorAuth: boolean;
-  ipWhitelist: string[];
-  sessionTimeout: number;
-  requireConfirmation: boolean;
+interface TokenSettings {
+  autoCompound: boolean;
+  compoundInterval: number;
+  minLockAmount: bigint;
+  maxLockAmount: bigint;
+  defaultLockDuration: number;
+  maxLockDuration: number;
+  minLockDuration: number;
+  rewardsRate: number;
+  referralRate: number;
+  bonusRates: {
+    earlyAdopter: number;
+    longTerm: number;
+    volume: number;
+  };
+  security: {
+    requireConfirmation: boolean;
+    maxDailyLocks: number;
+    maxDailyUnlocks: number;
+    cooldownPeriod: number;
+  };
+  notifications: {
+    lockExpiry: boolean;
+    rewardsAvailable: boolean;
+    referralBonus: boolean;
+    securityAlerts: boolean;
+  };
 }
 
 export default function TokenSettings() {
@@ -27,23 +39,10 @@ export default function TokenSettings() {
   const router = useRouter();
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
-  const [activeTab, setActiveTab] = useState<'account' | 'notifications' | 'security'>('account');
-  const [notificationSettings, setNotificationSettings] = useState<NotificationSettings>({
-    emailNotifications: true,
-    telegramNotifications: false,
-    discordNotifications: false,
-    lockNotifications: true,
-    unlockNotifications: true,
-    rewardNotifications: true,
-    securityNotifications: true,
-  });
-  const [securitySettings, setSecuritySettings] = useState<SecuritySettings>({
-    twoFactorAuth: false,
-    ipWhitelist: [],
-    sessionTimeout: 30,
-    requireConfirmation: true,
-  });
-  const [newIpAddress, setNewIpAddress] = useState('');
+  const [settings, setSettings] = useState<TokenSettings | null>(null);
+  const [activeTab, setActiveTab] = useState<'general' | 'security' | 'rewards' | 'notifications'>(
+    'general'
+  );
 
   useEffect(() => {
     if (status === 'unauthenticated') {
@@ -55,8 +54,40 @@ export default function TokenSettings() {
     const fetchSettings = async () => {
       try {
         setLoading(true);
+        const contract = await getContract();
+
         // TODO: Fetch settings from contract
-        // For now using default values
+        // For now using mock data
+        const mockSettings: TokenSettings = {
+          autoCompound: true,
+          compoundInterval: 24, // hours
+          minLockAmount: ethers.parseEther('100'),
+          maxLockAmount: ethers.parseEther('1000000'),
+          defaultLockDuration: 30, // days
+          maxLockDuration: 365, // days
+          minLockDuration: 7, // days
+          rewardsRate: 5, // percentage
+          referralRate: 2.5, // percentage
+          bonusRates: {
+            earlyAdopter: 10,
+            longTerm: 5,
+            volume: 3,
+          },
+          security: {
+            requireConfirmation: true,
+            maxDailyLocks: 5,
+            maxDailyUnlocks: 3,
+            cooldownPeriod: 24, // hours
+          },
+          notifications: {
+            lockExpiry: true,
+            rewardsAvailable: true,
+            referralBonus: true,
+            securityAlerts: true,
+          },
+        };
+
+        setSettings(mockSettings);
       } catch (err) {
         console.error('Failed to fetch settings:', err);
         toast.error('Failed to load settings');
@@ -68,37 +99,22 @@ export default function TokenSettings() {
     fetchSettings();
   }, []);
 
-  const handleSaveSettings = async () => {
+  const handleSave = async () => {
+    if (!settings) return;
+
     try {
       setSaving(true);
       const contract = await getContract();
 
       // TODO: Save settings to contract
       // For now just showing success message
-      toast.success('Settings saved successfully!');
+      toast.success('Settings updated successfully!');
     } catch (err) {
       console.error('Failed to save settings:', err);
-      toast.error('Failed to save settings');
+      toast.error('Failed to update settings');
     } finally {
       setSaving(false);
     }
-  };
-
-  const handleAddIpAddress = () => {
-    if (!newIpAddress) return;
-
-    setSecuritySettings(prev => ({
-      ...prev,
-      ipWhitelist: [...prev.ipWhitelist, newIpAddress],
-    }));
-    setNewIpAddress('');
-  };
-
-  const handleRemoveIpAddress = (ip: string) => {
-    setSecuritySettings(prev => ({
-      ...prev,
-      ipWhitelist: prev.ipWhitelist.filter(address => address !== ip),
-    }));
   };
 
   if (loading) {
@@ -118,377 +134,612 @@ export default function TokenSettings() {
     );
   }
 
+  if (!settings) return null;
+
   return (
     <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
-        <div className="flex justify-between items-center mb-8">
-          <h1 className="text-3xl font-bold text-gray-900">Settings</h1>
+        <h1 className="text-3xl font-bold text-gray-900 mb-8">Token Settings</h1>
 
-          <button
-            onClick={handleSaveSettings}
-            disabled={saving}
-            className={`px-6 py-3 rounded-lg font-medium ${
-              saving
-                ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
-                : 'bg-blue-600 text-white hover:bg-blue-700'
-            }`}
-          >
-            {saving ? 'Saving...' : 'Save Changes'}
-          </button>
-        </div>
-
-        {/* Tabs */}
-        <div className="border-b border-gray-200 mb-8">
-          <nav className="-mb-px flex space-x-8">
-            <button
-              onClick={() => setActiveTab('account')}
-              className={`${
-                activeTab === 'account'
-                  ? 'border-blue-500 text-blue-600'
-                  : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
-              } whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm`}
-            >
-              Account
-            </button>
-            <button
-              onClick={() => setActiveTab('notifications')}
-              className={`${
-                activeTab === 'notifications'
-                  ? 'border-blue-500 text-blue-600'
-                  : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
-              } whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm`}
-            >
-              Notifications
-            </button>
-            <button
-              onClick={() => setActiveTab('security')}
-              className={`${
-                activeTab === 'security'
-                  ? 'border-blue-500 text-blue-600'
-                  : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
-              } whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm`}
-            >
-              Security
-            </button>
-          </nav>
-        </div>
-
-        {/* Account Settings */}
-        {activeTab === 'account' && (
-          <div className="bg-white rounded-lg shadow p-6">
-            <h2 className="text-xl font-semibold text-gray-900 mb-6">Account Settings</h2>
-
-            <div className="space-y-6">
-              <div>
-                <label className="block text-sm font-medium text-gray-700">Display Name</label>
-                <input
-                  type="text"
-                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
-                  placeholder="Enter your display name"
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700">Email Address</label>
-                <input
-                  type="email"
-                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
-                  placeholder="Enter your email address"
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700">Language</label>
-                <select
-                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
-                  title="Language"
-                  aria-label="Select Language"
+        {/* Settings Tabs */}
+        <div className="bg-white rounded-lg shadow">
+          <div className="border-b border-gray-200">
+            <nav className="flex -mb-px">
+              {(['general', 'security', 'rewards', 'notifications'] as const).map(tab => (
+                <button
+                  key={tab}
+                  onClick={() => setActiveTab(tab)}
+                  className={`py-4 px-6 text-sm font-medium ${
+                    activeTab === tab
+                      ? 'border-b-2 border-blue-500 text-blue-600'
+                      : 'text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                  }`}
                 >
-                  <option value="en">English</option>
-                  <option value="es">Spanish</option>
-                  <option value="fr">French</option>
-                  <option value="de">German</option>
-                </select>
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700">Time Zone</label>
-                <select
-                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
-                  title="Time Zone"
-                  aria-label="Select Time Zone"
-                >
-                  <option value="UTC">UTC</option>
-                  <option value="EST">EST</option>
-                  <option value="PST">PST</option>
-                  <option value="GMT">GMT</option>
-                </select>
-              </div>
-            </div>
+                  {tab.charAt(0).toUpperCase() + tab.slice(1)}
+                </button>
+              ))}
+            </nav>
           </div>
-        )}
 
-        {/* Notification Settings */}
-        {activeTab === 'notifications' && (
-          <div className="bg-white rounded-lg shadow p-6">
-            <h2 className="text-xl font-semibold text-gray-900 mb-6">Notification Settings</h2>
-
-            <div className="space-y-6">
-              <div>
-                <h3 className="text-lg font-medium text-gray-900 mb-4">Notification Channels</h3>
-                <div className="space-y-4">
-                  <div className="flex items-center">
-                    <input
-                      type="checkbox"
-                      checked={notificationSettings.emailNotifications}
-                      onChange={e =>
-                        setNotificationSettings(prev => ({
-                          ...prev,
-                          emailNotifications: e.target.checked,
-                        }))
-                      }
-                      className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
-                      title="Email Notifications"
-                      aria-label="Email Notifications"
-                    />
-                    <label className="ml-3 block text-sm font-medium text-gray-700">
-                      Email Notifications
-                    </label>
+          <div className="p-6">
+            {/* General Settings */}
+            {activeTab === 'general' && (
+              <div className="space-y-6">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <h3 className="text-sm font-medium text-gray-900">Auto-Compound</h3>
+                    <p className="text-sm text-gray-500">Automatically compound your rewards</p>
                   </div>
-
-                  <div className="flex items-center">
-                    <input
-                      type="checkbox"
-                      checked={notificationSettings.telegramNotifications}
-                      onChange={e =>
-                        setNotificationSettings(prev => ({
-                          ...prev,
-                          telegramNotifications: e.target.checked,
-                        }))
-                      }
-                      className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
-                      title="Telegram Notifications"
-                      aria-label="Telegram Notifications"
-                    />
-                    <label className="ml-3 block text-sm font-medium text-gray-700">
-                      Telegram Notifications
-                    </label>
-                  </div>
-
-                  <div className="flex items-center">
-                    <input
-                      type="checkbox"
-                      checked={notificationSettings.discordNotifications}
-                      onChange={e =>
-                        setNotificationSettings(prev => ({
-                          ...prev,
-                          discordNotifications: e.target.checked,
-                        }))
-                      }
-                      className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
-                      title="Discord Notifications"
-                      aria-label="Discord Notifications"
-                    />
-                    <label className="ml-3 block text-sm font-medium text-gray-700">
-                      Discord Notifications
-                    </label>
-                  </div>
-                </div>
-              </div>
-
-              <div>
-                <h3 className="text-lg font-medium text-gray-900 mb-4">Notification Types</h3>
-                <div className="space-y-4">
-                  <div className="flex items-center">
-                    <input
-                      type="checkbox"
-                      checked={notificationSettings.lockNotifications}
-                      onChange={e =>
-                        setNotificationSettings(prev => ({
-                          ...prev,
-                          lockNotifications: e.target.checked,
-                        }))
-                      }
-                      className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
-                      title="Lock Notifications"
-                      aria-label="Lock Notifications"
-                    />
-                    <label className="ml-3 block text-sm font-medium text-gray-700">
-                      Lock Notifications
-                    </label>
-                  </div>
-
-                  <div className="flex items-center">
-                    <input
-                      type="checkbox"
-                      checked={notificationSettings.unlockNotifications}
-                      onChange={e =>
-                        setNotificationSettings(prev => ({
-                          ...prev,
-                          unlockNotifications: e.target.checked,
-                        }))
-                      }
-                      className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
-                      title="Unlock Notifications"
-                      aria-label="Unlock Notifications"
-                    />
-                    <label className="ml-3 block text-sm font-medium text-gray-700">
-                      Unlock Notifications
-                    </label>
-                  </div>
-
-                  <div className="flex items-center">
-                    <input
-                      type="checkbox"
-                      checked={notificationSettings.rewardNotifications}
-                      onChange={e =>
-                        setNotificationSettings(prev => ({
-                          ...prev,
-                          rewardNotifications: e.target.checked,
-                        }))
-                      }
-                      className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
-                      title="Reward Notifications"
-                      aria-label="Reward Notifications"
-                    />
-                    <label className="ml-3 block text-sm font-medium text-gray-700">
-                      Reward Notifications
-                    </label>
-                  </div>
-
-                  <div className="flex items-center">
-                    <input
-                      type="checkbox"
-                      checked={notificationSettings.securityNotifications}
-                      onChange={e =>
-                        setNotificationSettings(prev => ({
-                          ...prev,
-                          securityNotifications: e.target.checked,
-                        }))
-                      }
-                      className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
-                      title="Security Notifications"
-                      aria-label="Security Notifications"
-                    />
-                    <label className="ml-3 block text-sm font-medium text-gray-700">
-                      Security Notifications
-                    </label>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
-
-        {/* Security Settings */}
-        {activeTab === 'security' && (
-          <div className="bg-white rounded-lg shadow p-6">
-            <h2 className="text-xl font-semibold text-gray-900 mb-6">Security Settings</h2>
-
-            <div className="space-y-6">
-              <div>
-                <div className="flex items-center">
-                  <input
-                    type="checkbox"
-                    checked={securitySettings.twoFactorAuth}
-                    onChange={e =>
-                      setSecuritySettings(prev => ({
-                        ...prev,
-                        twoFactorAuth: e.target.checked,
-                      }))
-                    }
-                    className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
-                    title="Two-Factor Authentication"
-                    aria-label="Two-Factor Authentication"
-                  />
-                  <label className="ml-3 block text-sm font-medium text-gray-700">
-                    Enable Two-Factor Authentication
-                  </label>
-                </div>
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Session Timeout (minutes)
-                </label>
-                <input
-                  type="number"
-                  value={securitySettings.sessionTimeout}
-                  onChange={e =>
-                    setSecuritySettings(prev => ({
-                      ...prev,
-                      sessionTimeout: parseInt(e.target.value),
-                    }))
-                  }
-                  min="5"
-                  max="120"
-                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
-                  title="Session Timeout"
-                  aria-label="Session Timeout in minutes"
-                  placeholder="Enter session timeout in minutes"
-                />
-              </div>
-
-              <div>
-                <div className="flex items-center">
-                  <input
-                    type="checkbox"
-                    checked={securitySettings.requireConfirmation}
-                    onChange={e =>
-                      setSecuritySettings(prev => ({
-                        ...prev,
-                        requireConfirmation: e.target.checked,
-                      }))
-                    }
-                    className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
-                    title="Require Confirmation for Transactions"
-                    aria-label="Require Confirmation for Transactions"
-                  />
-                  <label className="ml-3 block text-sm font-medium text-gray-700">
-                    Require Confirmation for Transactions
-                  </label>
-                </div>
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">IP Whitelist</label>
-                <div className="flex space-x-2">
-                  <input
-                    type="text"
-                    value={newIpAddress}
-                    onChange={e => setNewIpAddress(e.target.value)}
-                    placeholder="Enter IP address"
-                    className="flex-1 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
-                    title="IP Address"
-                    aria-label="Enter IP Address"
-                  />
                   <button
-                    onClick={handleAddIpAddress}
-                    className="px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                    type="button"
+                    onClick={() =>
+                      setSettings(prev =>
+                        prev ? { ...prev, autoCompound: !prev.autoCompound } : null
+                      )
+                    }
+                    className={`relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 ${
+                      settings.autoCompound ? 'bg-blue-600' : 'bg-gray-200'
+                    }`}
+                    title={settings.autoCompound ? 'Disable Auto-Compound' : 'Enable Auto-Compound'}
                   >
-                    Add
+                    <span
+                      className={`pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out ${
+                        settings.autoCompound ? 'translate-x-5' : 'translate-x-0'
+                      }`}
+                    />
                   </button>
                 </div>
-                <div className="mt-4 space-y-2">
-                  {securitySettings.ipWhitelist.map((ip, index) => (
-                    <div
-                      key={index}
-                      className="flex items-center justify-between bg-gray-50 px-4 py-2 rounded-md"
-                    >
-                      <span className="text-sm text-gray-700">{ip}</span>
-                      <button
-                        onClick={() => handleRemoveIpAddress(ip)}
-                        className="text-red-600 hover:text-red-800"
-                      >
-                        Remove
-                      </button>
-                    </div>
-                  ))}
+
+                <div>
+                  <label
+                    htmlFor="compound-interval"
+                    className="block text-sm font-medium text-gray-700"
+                  >
+                    Compound Interval (hours)
+                  </label>
+                  <input
+                    type="number"
+                    id="compound-interval"
+                    value={settings.compoundInterval}
+                    onChange={e =>
+                      setSettings(prev =>
+                        prev ? { ...prev, compoundInterval: parseInt(e.target.value) } : null
+                      )
+                    }
+                    min="1"
+                    max="168"
+                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
+                  />
+                </div>
+
+                <div>
+                  <label
+                    htmlFor="min-lock-amount"
+                    className="block text-sm font-medium text-gray-700"
+                  >
+                    Minimum Lock Amount (EHBGC)
+                  </label>
+                  <input
+                    type="number"
+                    id="min-lock-amount"
+                    value={ethers.formatEther(settings.minLockAmount)}
+                    onChange={e =>
+                      setSettings(prev =>
+                        prev ? { ...prev, minLockAmount: ethers.parseEther(e.target.value) } : null
+                      )
+                    }
+                    min="0"
+                    step="0.01"
+                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
+                  />
+                </div>
+
+                <div>
+                  <label
+                    htmlFor="max-lock-amount"
+                    className="block text-sm font-medium text-gray-700"
+                  >
+                    Maximum Lock Amount (EHBGC)
+                  </label>
+                  <input
+                    type="number"
+                    id="max-lock-amount"
+                    value={ethers.formatEther(settings.maxLockAmount)}
+                    onChange={e =>
+                      setSettings(prev =>
+                        prev ? { ...prev, maxLockAmount: ethers.parseEther(e.target.value) } : null
+                      )
+                    }
+                    min="0"
+                    step="0.01"
+                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
+                  />
+                </div>
+
+                <div>
+                  <label
+                    htmlFor="default-lock-duration"
+                    className="block text-sm font-medium text-gray-700"
+                  >
+                    Default Lock Duration (days)
+                  </label>
+                  <input
+                    type="number"
+                    id="default-lock-duration"
+                    value={settings.defaultLockDuration}
+                    onChange={e =>
+                      setSettings(prev =>
+                        prev ? { ...prev, defaultLockDuration: parseInt(e.target.value) } : null
+                      )
+                    }
+                    min={settings.minLockDuration}
+                    max={settings.maxLockDuration}
+                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
+                  />
                 </div>
               </div>
+            )}
+
+            {/* Security Settings */}
+            {activeTab === 'security' && (
+              <div className="space-y-6">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <h3 className="text-sm font-medium text-gray-900">Require Confirmation</h3>
+                    <p className="text-sm text-gray-500">
+                      Require confirmation for all transactions
+                    </p>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() =>
+                      setSettings(prev =>
+                        prev
+                          ? {
+                              ...prev,
+                              security: {
+                                ...prev.security,
+                                requireConfirmation: !prev.security.requireConfirmation,
+                              },
+                            }
+                          : null
+                      )
+                    }
+                    className={`relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 ${
+                      settings.security.requireConfirmation ? 'bg-blue-600' : 'bg-gray-200'
+                    }`}
+                    title={
+                      settings.security.requireConfirmation
+                        ? 'Disable Confirmation'
+                        : 'Enable Confirmation'
+                    }
+                  >
+                    <span
+                      className={`pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out ${
+                        settings.security.requireConfirmation ? 'translate-x-5' : 'translate-x-0'
+                      }`}
+                    />
+                  </button>
+                </div>
+
+                <div>
+                  <label
+                    htmlFor="max-daily-locks"
+                    className="block text-sm font-medium text-gray-700"
+                  >
+                    Maximum Daily Locks
+                  </label>
+                  <input
+                    type="number"
+                    id="max-daily-locks"
+                    value={settings.security.maxDailyLocks}
+                    onChange={e =>
+                      setSettings(prev =>
+                        prev
+                          ? {
+                              ...prev,
+                              security: {
+                                ...prev.security,
+                                maxDailyLocks: parseInt(e.target.value),
+                              },
+                            }
+                          : null
+                      )
+                    }
+                    min="1"
+                    max="100"
+                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
+                  />
+                </div>
+
+                <div>
+                  <label
+                    htmlFor="max-daily-unlocks"
+                    className="block text-sm font-medium text-gray-700"
+                  >
+                    Maximum Daily Unlocks
+                  </label>
+                  <input
+                    type="number"
+                    id="max-daily-unlocks"
+                    value={settings.security.maxDailyUnlocks}
+                    onChange={e =>
+                      setSettings(prev =>
+                        prev
+                          ? {
+                              ...prev,
+                              security: {
+                                ...prev.security,
+                                maxDailyUnlocks: parseInt(e.target.value),
+                              },
+                            }
+                          : null
+                      )
+                    }
+                    min="1"
+                    max="50"
+                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
+                  />
+                </div>
+
+                <div>
+                  <label
+                    htmlFor="cooldown-period"
+                    className="block text-sm font-medium text-gray-700"
+                  >
+                    Cooldown Period (hours)
+                  </label>
+                  <input
+                    type="number"
+                    id="cooldown-period"
+                    value={settings.security.cooldownPeriod}
+                    onChange={e =>
+                      setSettings(prev =>
+                        prev
+                          ? {
+                              ...prev,
+                              security: {
+                                ...prev.security,
+                                cooldownPeriod: parseInt(e.target.value),
+                              },
+                            }
+                          : null
+                      )
+                    }
+                    min="0"
+                    max="168"
+                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
+                  />
+                </div>
+              </div>
+            )}
+
+            {/* Rewards Settings */}
+            {activeTab === 'rewards' && (
+              <div className="space-y-6">
+                <div>
+                  <label htmlFor="rewards-rate" className="block text-sm font-medium text-gray-700">
+                    Base Rewards Rate (%)
+                  </label>
+                  <input
+                    type="number"
+                    id="rewards-rate"
+                    value={settings.rewardsRate}
+                    onChange={e =>
+                      setSettings(prev =>
+                        prev ? { ...prev, rewardsRate: parseFloat(e.target.value) } : null
+                      )
+                    }
+                    min="0"
+                    max="100"
+                    step="0.1"
+                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
+                  />
+                </div>
+
+                <div>
+                  <label
+                    htmlFor="referral-rate"
+                    className="block text-sm font-medium text-gray-700"
+                  >
+                    Referral Rate (%)
+                  </label>
+                  <input
+                    type="number"
+                    id="referral-rate"
+                    value={settings.referralRate}
+                    onChange={e =>
+                      setSettings(prev =>
+                        prev ? { ...prev, referralRate: parseFloat(e.target.value) } : null
+                      )
+                    }
+                    min="0"
+                    max="100"
+                    step="0.1"
+                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
+                  />
+                </div>
+
+                <div>
+                  <h3 className="text-sm font-medium text-gray-900 mb-4">Bonus Rates</h3>
+                  <div className="space-y-4">
+                    <div>
+                      <label
+                        htmlFor="early-adopter-bonus"
+                        className="block text-sm font-medium text-gray-700"
+                      >
+                        Early Adopter Bonus (%)
+                      </label>
+                      <input
+                        type="number"
+                        id="early-adopter-bonus"
+                        value={settings.bonusRates.earlyAdopter}
+                        onChange={e =>
+                          setSettings(prev =>
+                            prev
+                              ? {
+                                  ...prev,
+                                  bonusRates: {
+                                    ...prev.bonusRates,
+                                    earlyAdopter: parseFloat(e.target.value),
+                                  },
+                                }
+                              : null
+                          )
+                        }
+                        min="0"
+                        max="100"
+                        step="0.1"
+                        className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
+                      />
+                    </div>
+
+                    <div>
+                      <label
+                        htmlFor="long-term-bonus"
+                        className="block text-sm font-medium text-gray-700"
+                      >
+                        Long Term Bonus (%)
+                      </label>
+                      <input
+                        type="number"
+                        id="long-term-bonus"
+                        value={settings.bonusRates.longTerm}
+                        onChange={e =>
+                          setSettings(prev =>
+                            prev
+                              ? {
+                                  ...prev,
+                                  bonusRates: {
+                                    ...prev.bonusRates,
+                                    longTerm: parseFloat(e.target.value),
+                                  },
+                                }
+                              : null
+                          )
+                        }
+                        min="0"
+                        max="100"
+                        step="0.1"
+                        className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
+                      />
+                    </div>
+
+                    <div>
+                      <label
+                        htmlFor="volume-bonus"
+                        className="block text-sm font-medium text-gray-700"
+                      >
+                        Volume Bonus (%)
+                      </label>
+                      <input
+                        type="number"
+                        id="volume-bonus"
+                        value={settings.bonusRates.volume}
+                        onChange={e =>
+                          setSettings(prev =>
+                            prev
+                              ? {
+                                  ...prev,
+                                  bonusRates: {
+                                    ...prev.bonusRates,
+                                    volume: parseFloat(e.target.value),
+                                  },
+                                }
+                              : null
+                          )
+                        }
+                        min="0"
+                        max="100"
+                        step="0.1"
+                        className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* Notification Settings */}
+            {activeTab === 'notifications' && (
+              <div className="space-y-6">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <h3 className="text-sm font-medium text-gray-900">Lock Expiry Notifications</h3>
+                    <p className="text-sm text-gray-500">
+                      Get notified when your locks are about to expire
+                    </p>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() =>
+                      setSettings(prev =>
+                        prev
+                          ? {
+                              ...prev,
+                              notifications: {
+                                ...prev.notifications,
+                                lockExpiry: !prev.notifications.lockExpiry,
+                              },
+                            }
+                          : null
+                      )
+                    }
+                    className={`relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 ${
+                      settings.notifications.lockExpiry ? 'bg-blue-600' : 'bg-gray-200'
+                    }`}
+                    title={
+                      settings.notifications.lockExpiry
+                        ? 'Disable Lock Expiry Notifications'
+                        : 'Enable Lock Expiry Notifications'
+                    }
+                  >
+                    <span
+                      className={`pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out ${
+                        settings.notifications.lockExpiry ? 'translate-x-5' : 'translate-x-0'
+                      }`}
+                    />
+                  </button>
+                </div>
+
+                <div className="flex items-center justify-between">
+                  <div>
+                    <h3 className="text-sm font-medium text-gray-900">
+                      Rewards Available Notifications
+                    </h3>
+                    <p className="text-sm text-gray-500">
+                      Get notified when rewards are available to claim
+                    </p>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() =>
+                      setSettings(prev =>
+                        prev
+                          ? {
+                              ...prev,
+                              notifications: {
+                                ...prev.notifications,
+                                rewardsAvailable: !prev.notifications.rewardsAvailable,
+                              },
+                            }
+                          : null
+                      )
+                    }
+                    className={`relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 ${
+                      settings.notifications.rewardsAvailable ? 'bg-blue-600' : 'bg-gray-200'
+                    }`}
+                    title={
+                      settings.notifications.rewardsAvailable
+                        ? 'Disable Rewards Notifications'
+                        : 'Enable Rewards Notifications'
+                    }
+                  >
+                    <span
+                      className={`pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out ${
+                        settings.notifications.rewardsAvailable ? 'translate-x-5' : 'translate-x-0'
+                      }`}
+                    />
+                  </button>
+                </div>
+
+                <div className="flex items-center justify-between">
+                  <div>
+                    <h3 className="text-sm font-medium text-gray-900">
+                      Referral Bonus Notifications
+                    </h3>
+                    <p className="text-sm text-gray-500">
+                      Get notified when you earn referral bonuses
+                    </p>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() =>
+                      setSettings(prev =>
+                        prev
+                          ? {
+                              ...prev,
+                              notifications: {
+                                ...prev.notifications,
+                                referralBonus: !prev.notifications.referralBonus,
+                              },
+                            }
+                          : null
+                      )
+                    }
+                    className={`relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 ${
+                      settings.notifications.referralBonus ? 'bg-blue-600' : 'bg-gray-200'
+                    }`}
+                    title={
+                      settings.notifications.referralBonus
+                        ? 'Disable Referral Notifications'
+                        : 'Enable Referral Notifications'
+                    }
+                  >
+                    <span
+                      className={`pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out ${
+                        settings.notifications.referralBonus ? 'translate-x-5' : 'translate-x-0'
+                      }`}
+                    />
+                  </button>
+                </div>
+
+                <div className="flex items-center justify-between">
+                  <div>
+                    <h3 className="text-sm font-medium text-gray-900">Security Alerts</h3>
+                    <p className="text-sm text-gray-500">
+                      Get notified about security-related events
+                    </p>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() =>
+                      setSettings(prev =>
+                        prev
+                          ? {
+                              ...prev,
+                              notifications: {
+                                ...prev.notifications,
+                                securityAlerts: !prev.notifications.securityAlerts,
+                              },
+                            }
+                          : null
+                      )
+                    }
+                    className={`relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 ${
+                      settings.notifications.securityAlerts ? 'bg-blue-600' : 'bg-gray-200'
+                    }`}
+                    title={
+                      settings.notifications.securityAlerts
+                        ? 'Disable Security Alerts'
+                        : 'Enable Security Alerts'
+                    }
+                  >
+                    <span
+                      className={`pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out ${
+                        settings.notifications.securityAlerts ? 'translate-x-5' : 'translate-x-0'
+                      }`}
+                    />
+                  </button>
+                </div>
+              </div>
+            )}
+
+            <div className="mt-6">
+              <button
+                onClick={handleSave}
+                disabled={saving}
+                className={`w-full px-6 py-3 rounded-lg font-medium ${
+                  saving
+                    ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
+                    : 'bg-blue-600 text-white hover:bg-blue-700'
+                }`}
+              >
+                {saving ? 'Saving...' : 'Save Changes'}
+              </button>
             </div>
           </div>
-        )}
+        </div>
       </div>
     </div>
   );
