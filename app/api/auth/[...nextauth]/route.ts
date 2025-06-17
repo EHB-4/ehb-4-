@@ -1,17 +1,12 @@
-import NextAuth, { AuthOptions } from 'next-auth';
-import GoogleProvider from 'next-auth/providers/google';
+import NextAuth from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
-import { MongoDBAdapter } from '@auth/mongodb-adapter';
-import clientPromise from '@/lib/mongodb';
+import { PrismaAdapter } from '@auth/prisma-adapter';
+import { prisma } from '@/lib/prisma';
 import { compare } from 'bcryptjs';
 
-export const authOptions: AuthOptions = {
-  adapter: MongoDBAdapter(clientPromise),
+export const authOptions = {
+  adapter: PrismaAdapter(prisma),
   providers: [
-    GoogleProvider({
-      clientId: process.env.GOOGLE_CLIENT_ID!,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
-    }),
     CredentialsProvider({
       name: 'Credentials',
       credentials: {
@@ -20,25 +15,25 @@ export const authOptions: AuthOptions = {
       },
       async authorize(credentials) {
         if (!credentials?.email || !credentials?.password) {
-          throw new Error('Please enter an email and password');
+          throw new Error('Invalid credentials');
         }
 
-        const client = await clientPromise;
-        const db = client.db();
-        const user = await db.collection('users').findOne({ email: credentials.email });
+        const user = await prisma.user.findUnique({
+          where: { email: credentials.email },
+        });
 
-        if (!user || !user.password) {
-          throw new Error('No user found with this email');
+        if (!user) {
+          throw new Error('User not found');
         }
 
-        const isValid = await compare(credentials.password, user.password);
+        const isPasswordValid = await compare(credentials.password, user.password);
 
-        if (!isValid) {
+        if (!isPasswordValid) {
           throw new Error('Invalid password');
         }
 
         return {
-          id: user._id.toString(),
+          id: user.id.toString(),
           email: user.email,
           name: user.name,
           role: user.role,
@@ -46,53 +41,29 @@ export const authOptions: AuthOptions = {
       },
     }),
   ],
-  session: {
-    strategy: 'jwt',
-    maxAge: 30 * 24 * 60 * 60, // 30 days
-  },
-  pages: {
-    signIn: '/auth/login',
-    error: '/auth/error',
-    signOut: '/auth/logout',
-  },
   callbacks: {
-    async jwt({ token, user, account }) {
+    async jwt({ token, user }) {
       if (user) {
-        token.id = user.id;
         token.role = user.role;
-      }
-      if (account) {
-        token.provider = account.provider;
       }
       return token;
     },
     async session({ session, token }) {
-      if (session.user) {
-        session.user.id = token.id as string;
-        session.user.role = token.role as string;
-        session.user.provider = token.provider as string;
+      if (session?.user) {
+        session.user.role = token.role;
       }
       return session;
     },
   },
-  events: {
-    async signIn({ user, account }) {
-      const client = await clientPromise;
-      const db = client.db();
-      await db.collection('users').updateOne(
-        { email: user.email },
-        {
-          $set: {
-            lastLogin: new Date(),
-            provider: account?.provider,
-          },
-          $inc: { loginCount: 1 },
-        }
-      );
-    },
+  pages: {
+    signIn: '/login',
+    error: '/login',
   },
-  debug: process.env.NODE_ENV === 'development',
+  session: {
+    strategy: 'jwt',
+  },
 };
 
 const handler = NextAuth(authOptions);
+
 export { handler as GET, handler as POST };

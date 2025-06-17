@@ -1,144 +1,86 @@
-import React, { useState } from 'react';
+import React from 'react';
+import PaymentForm from '../../../components/PaymentForm';
 
-// Placeholder cart/order data
-const cart = [
-  { id: 1, name: 'Sample Physical Product', price: 100, quantity: 1 },
-  { id: 2, name: 'Sample Digital Product', price: 50, quantity: 2 },
-];
-
-const paymentMethods = [
-  'Stripe',
-  'PayPal',
-  'Crypto',
-  'Bank Transfer',
-  'Cash on Delivery',
-];
+// Placeholder data (in a real app, fetch from backend)
+const orderData = {
+  items: [
+    {
+      id: 1,
+      name: 'Premium Headphones',
+      price: 199.99,
+      quantity: 1,
+    },
+    {
+      id: 2,
+      name: 'Wireless Mouse',
+      price: 49.99,
+      quantity: 2,
+    },
+  ],
+  shipping: 10,
+  tax: 25,
+};
 
 export default function CheckoutPage() {
-  const [shipping, setShipping] = useState({ name: '', address: '', phone: '' });
-  const [payment, setPayment] = useState(paymentMethods[0]);
-  const [orderPlaced, setOrderPlaced] = useState(false);
-  const [success, setSuccess] = useState('');
-  const [error, setError] = useState('');
-
-  const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
-
-  const handlePlaceOrder = (e: React.FormEvent) => {
-    e.preventDefault();
-    // In a real app, send order to backend here
-    setOrderPlaced(true);
+  const handlePayment = async (paymentData: any) => {
+    // In a real app, this would process the payment through a payment gateway
+    console.log('Processing payment:', paymentData);
   };
 
-  const handlePayment = async () => {
-    if (!payment) {
-      setError('Please select a payment method');
-      return;
-    }
-
-    try {
-      const response = await fetch(`/api/payments/${payment.toLowerCase()}`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          amount: total,
-          currency: 'USD',
-          payment_method: payment,
-        }),
-      });
-
-      const data = await response.json();
-      if (data.success) {
-        setSuccess(data.message);
-        setError('');
-        setOrderPlaced(true);
-      } else {
-        setError(data.message);
-      }
-    } catch (error) {
-      setError('Payment failed. Please try again.');
-    }
-  };
-
-  if (orderPlaced) {
-    return (
-      <div className="max-w-xl mx-auto py-8 px-4 text-center">
-        <h1 className="text-2xl font-bold mb-4">Thank you for your order!</h1>
-        <p className="mb-4">Your order has been placed successfully.</p>
-        {/* AI Guidance: In a real app, show order summary and next steps here. */}
-        <a href="/products" className="text-blue-600 underline">Continue Shopping</a>
-      </div>
-    );
-  }
+  const subtotal = orderData.items.reduce(
+    (sum, item) => sum + item.price * item.quantity,
+    0
+  );
+  const total = subtotal + orderData.shipping + orderData.tax;
 
   return (
-    <div className="max-w-xl mx-auto py-8 px-4">
-      <h1 className="text-3xl font-bold mb-6">Checkout</h1>
-      {success && <div className="mb-4 p-3 bg-green-50 text-green-700 rounded-md">{success}</div>}
-      {error && <div className="mb-4 p-3 bg-red-50 text-red-600 rounded-md">{error}</div>}
-      <form onSubmit={handlePlaceOrder} className="space-y-6">
+    <div className="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
+      <h1 className="text-3xl font-bold text-gray-900 mb-8">Checkout</h1>
+      
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         <div>
-          <h2 className="text-xl font-semibold mb-2">Shipping Information</h2>
-          <input
-            type="text"
-            placeholder="Full Name"
-            className="w-full border rounded px-3 py-2 mb-2"
-            value={shipping.name}
-            onChange={e => setShipping({ ...shipping, name: e.target.value })}
-            required
-          />
-          <input
-            type="text"
-            placeholder="Address"
-            className="w-full border rounded px-3 py-2 mb-2"
-            value={shipping.address}
-            onChange={e => setShipping({ ...shipping, address: e.target.value })}
-            required
-          />
-          <input
-            type="tel"
-            placeholder="Phone Number"
-            className="w-full border rounded px-3 py-2"
-            value={shipping.phone}
-            onChange={e => setShipping({ ...shipping, phone: e.target.value })}
-            required
-          />
-        </div>
-        <div>
-          <h2 className="text-xl font-semibold mb-2">Payment Method</h2>
-          <select
-            value={payment}
-            onChange={e => setPayment(e.target.value)}
-            className="w-full border rounded px-3 py-2"
-            aria-label="Select a payment method"
-          >
-            {paymentMethods.map((method) => (
-              <option key={method} value={method}>{method}</option>
+          <h2 className="text-xl font-semibold mb-4">Order Summary</h2>
+          <div className="bg-white rounded-lg shadow p-6">
+            {orderData.items.map((item) => (
+              <div key={item.id} className="flex justify-between py-2">
+                <span>
+                  {item.name} x {item.quantity}
+                </span>
+                <span>${(item.price * item.quantity).toFixed(2)}</span>
+              </div>
             ))}
-          </select>
+            <div className="border-t mt-4 pt-4">
+              <div className="flex justify-between py-2">
+                <span>Subtotal</span>
+                <span>${subtotal.toFixed(2)}</span>
+              </div>
+              <div className="flex justify-between py-2">
+                <span>Shipping</span>
+                <span>${orderData.shipping.toFixed(2)}</span>
+              </div>
+              <div className="flex justify-between py-2">
+                <span>Tax</span>
+                <span>${orderData.tax.toFixed(2)}</span>
+              </div>
+              <div className="flex justify-between py-2 font-semibold">
+                <span>Total</span>
+                <span>${total.toFixed(2)}</span>
+              </div>
+            </div>
+          </div>
         </div>
+
         <div>
-          <h2 className="text-xl font-semibold mb-2">Order Summary</h2>
-          <ul className="mb-2">
-            {cart.map((item) => (
-              <li key={item.id} className="flex justify-between">
-                <span>{item.name} x {item.quantity}</span>
-                <span>${item.price * item.quantity}</span>
-              </li>
-            ))}
-          </ul>
-          <div className="font-bold text-lg">Total: ${total}</div>
+          <h2 className="text-xl font-semibold mb-4">Payment Information</h2>
+          <PaymentForm
+            amount={total}
+            onPayment={handlePayment}
+          />
         </div>
-        <button
-          type="submit"
-          onClick={handlePayment}
-          className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition"
-        >
-          Pay
-        </button>
-      </form>
-      {/* AI Guidance: In a real app, validate input, process payment, and save order to backend. */}
+      </div>
     </div>
   );
-} 
+}
+
+// AI Guidance: This page handles the checkout process and payment processing.
+// In a real app, it would integrate with a payment gateway and handle order creation. 

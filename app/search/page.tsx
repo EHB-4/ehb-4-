@@ -1,22 +1,47 @@
 import React from 'react';
-import { useSearchParams } from 'next/navigation';
 import SearchResults from '../../../components/SearchResults';
 
-// Placeholder search results data (in a real app, fetch from backend)
-const searchResultsData = [
-  { id: 1, name: 'Sample Physical Product', price: 100, image: 'https://via.placeholder.com/300' },
-  { id: 2, name: 'Sample Digital Product', price: 50, image: 'https://via.placeholder.com/300' },
+// Placeholder data (in a real app, fetch from backend)
+const searchResults = [
+  {
+    id: 1,
+    name: 'Premium Headphones',
+    price: 199.99,
+    image: 'https://via.placeholder.com/150',
+    category: 'Electronics',
+    rating: 4.5,
+  },
+  {
+    id: 2,
+    name: 'Wireless Mouse',
+    price: 49.99,
+    image: 'https://via.placeholder.com/150',
+    category: 'Electronics',
+    rating: 4.2,
+  },
+  {
+    id: 3,
+    name: 'Mechanical Keyboard',
+    price: 129.99,
+    image: 'https://via.placeholder.com/150',
+    category: 'Electronics',
+    rating: 4.8,
+  },
 ];
 
-export default function SearchPage() {
-  const searchParams = useSearchParams();
-  const query = searchParams.get('q') || '';
+export default function SearchPage({
+  searchParams,
+}: {
+  searchParams: { q?: string };
+}) {
+  const query = searchParams.q || '';
 
   return (
-    <div className="max-w-4xl mx-auto py-8 px-4">
-      <h1 className="text-3xl font-bold mb-6">Search Results for "{query}"</h1>
-      <SearchResults results={searchResultsData} />
-      {/* AI Guidance: In a real app, this page fetches search results from the backend based on the query. */}
+    <div className="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
+      <SearchResults results={searchResults} query={query} />
     </div>
   );
-} 
+}
+
+// AI Guidance: This page displays search results based on the query parameter.
+// In a real app, search results would be fetched from the backend based on the query. 

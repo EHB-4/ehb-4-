@@ -1,53 +1,52 @@
 import { NextResponse } from 'next/server';
 import { hash } from 'bcryptjs';
-import clientPromise from '@/lib/mongodb';
-import { ObjectId } from 'mongodb';
+import { prisma } from '@/lib/prisma';
 
-export async function POST(req: Request) {
+export async function POST(request: Request) {
   try {
-    const { name, email, password } = await req.json();
+    const { email, password, name } = await request.json();
 
     // Validate input
-    if (!name || !email || !password) {
-      return NextResponse.json({ message: 'Missing required fields' }, { status: 400 });
+    if (!email || !password) {
+      return NextResponse.json(
+        { error: 'Email and password are required' },
+        { status: 400 }
+      );
     }
 
-    // Connect to MongoDB
-    const client = await clientPromise;
-    const db = client.db();
-
     // Check if user already exists
-    const existingUser = await db.collection('users').findOne({ email });
+    const existingUser = await prisma.user.findUnique({
+      where: { email },
+    });
+
     if (existingUser) {
-      return NextResponse.json({ message: 'User already exists' }, { status: 400 });
+      return NextResponse.json(
+        { error: 'User already exists' },
+        { status: 400 }
+      );
     }
 
     // Hash password
     const hashedPassword = await hash(password, 12);
 
     // Create user
-    const result = await db.collection('users').insertOne({
-      _id: new ObjectId(),
-      name,
-      email,
-      password: hashedPassword,
-      role: 'user',
-      createdAt: new Date(),
-      updatedAt: new Date(),
+    const user = await prisma.user.create({
+      data: {
+        email,
+        name,
+        password: hashedPassword,
+      },
     });
 
-    // Create wallet for user
-    await db.collection('wallets').insertOne({
-      userId: result.insertedId,
-      balance: 0,
-      currency: 'USD',
-      createdAt: new Date(),
-      updatedAt: new Date(),
-    });
+    // Remove password from response
+    const { password: _, ...userWithoutPassword } = user;
 
-    return NextResponse.json({ message: 'User created successfully' }, { status: 201 });
+    return NextResponse.json(userWithoutPassword);
   } catch (error) {
     console.error('Registration error:', error);
-    return NextResponse.json({ message: 'Internal server error' }, { status: 500 });
+    return NextResponse.json(
+      { error: 'Failed to register user' },
+      { status: 500 }
+    );
   }
 }

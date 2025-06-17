@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
+import type { NextRequest } from 'next/server';
 import { getToken } from 'next-auth/jwt';
-import { NextRequest } from 'next/server';
 
 // Define protected routes that require authentication
 const protectedRoutes = ['/dashboard', '/profile', '/wallet', '/admin', '/franchise', '/verify'];
@@ -13,8 +13,29 @@ const allowedOrigins = ['http://localhost:3000', 'https://your-production-domain
 
 export async function middleware(request: NextRequest) {
   const token = await getToken({ req: request });
-  const isAuth = !!token;
-  const userRole = token?.role as string;
+  const isAuthPage =
+    request.nextUrl.pathname.startsWith('/login') ||
+    request.nextUrl.pathname.startsWith('/register');
+
+  if (isAuthPage) {
+    if (token) {
+      return NextResponse.redirect(new URL('/dashboard', request.url));
+    }
+    return NextResponse.next();
+  }
+
+  if (!token) {
+    const loginUrl = new URL('/login', request.url);
+    loginUrl.searchParams.set('callbackUrl', request.url);
+    return NextResponse.redirect(loginUrl);
+  }
+
+  // Check for admin routes
+  if (request.nextUrl.pathname.startsWith('/admin')) {
+    if (token.role !== 'admin') {
+      return NextResponse.redirect(new URL('/dashboard', request.url));
+    }
+  }
 
   // Check if the route is protected
   const isProtectedRoute = protectedRoutes.some(route =>
@@ -24,7 +45,7 @@ export async function middleware(request: NextRequest) {
   // Check if the route is admin-only
   const isAdminRoute = adminRoutes.some(route => request.nextUrl.pathname.startsWith(route));
 
-  if (isProtectedRoute && !isAuth) {
+  if (isProtectedRoute && !token) {
     // Redirect to login if trying to access protected route while not authenticated
     const loginUrl = new URL('/auth/login', request.url);
     loginUrl.searchParams.set('callbackUrl', request.nextUrl.pathname);
@@ -32,7 +53,7 @@ export async function middleware(request: NextRequest) {
   }
 
   // If it's an admin route, check for admin role
-  if (isAdminRoute && (!token || userRole !== 'admin')) {
+  if (isAdminRoute && (!token || token.role !== 'admin')) {
     return NextResponse.redirect(new URL('/auth/login', request.url));
   }
 
@@ -65,10 +86,9 @@ export async function middleware(request: NextRequest) {
 export const config = {
   matcher: [
     '/dashboard/:path*',
-    '/profile/:path*',
-    '/wallet/:path*',
     '/admin/:path*',
-    '/franchise/:path*',
-    '/verify/:path*',
+    '/login',
+    '/register',
+    '/profile/:path*',
   ],
 };

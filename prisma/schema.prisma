@@ -6,107 +6,121 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "mongodb"
   url      = env("DATABASE_URL")
 }
 
+model Product {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  name        String
+  description String
+  price       Float
+  category    String
+  stock       Int
+  images      String[]
+  isActive    Boolean  @default(true)
+  rating      Float    @default(0)
+  reviews     Review[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Review {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  productId String   @db.ObjectId
+  product   Product  @relation(fields: [productId], references: [id])
+  userId    String   @db.ObjectId
+  rating    Int
+  comment   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
 model User {
-  id            String    @id @default(cuid())
+  id            String    @id @default(auto()) @map("_id") @db.ObjectId
   name          String?
-  email         String    @unique
+  email         String?   @unique
   emailVerified DateTime?
   image         String?
-  password      String?
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
-  wallet        Wallet?
-  sqlProfile    SQLProfile?
-  coinLocks     CoinLock[]
-  transactions  Transaction[]
-
-  // SQL Level related fields
-  sqlLevel      Int       @default(1)
-  sqlVerified   Boolean   @default(false)
-  sqlRequested  Int?
-  sqlStatus     String    @default("pending") // pending, verified, rejected
-
-  // KYC related fields
-  kycStatus     String    @default("pending") // pending, approved, rejected
-  kycDocuments  Json?     // Array of document URLs
-  kycRejectedAt DateTime?
-  kycRejectReason String?
-
-  // Account related fields
   accounts      Account[]
   sessions      Session[]
+  wallets       Wallet[]
+  transactions  Transaction[]
+  sqlProfiles   SQLProfile[]
+  coinLocks     CoinLock[]
+  notifications Notification[]
+  certificates  Certificate[]
+}
+
+model Order {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId    String   @db.ObjectId
+  status    String
+  total     Float
+  items     Json
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model Wallet {
-  id            String        @id @default(cuid())
-  userId        String        @unique
-  user          User          @relation(fields: [userId], references: [id], onDelete: Cascade)
-  balance       Decimal       @default(0)
-  currency      String        @default("USD")
-  transactions  Transaction[]
-  createdAt     DateTime      @default(now())
-  updatedAt     DateTime      @updatedAt
-  coinLocks     CoinLock[]
+  id        String     @id @default(auto()) @map("_id") @db.ObjectId
+  userId    String     @db.ObjectId
+  address   String     @unique
+  balance   Float      @default(0)
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  user      User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  coinLocks CoinLock[]
 }
 
 model Transaction {
-  id          String   @id @default(cuid())
-  walletId    String
-  wallet      Wallet   @relation(fields: [walletId], references: [id], onDelete: Cascade)
-  userId      String
-  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  amount      Decimal
-  type        String   // "DEPOSIT" | "WITHDRAWAL" | "TRANSFER" | "BONUS"
-  status      String   // "PENDING" | "COMPLETED" | "FAILED"
-  reference   String?  @unique
-  description String?
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId    String   @db.ObjectId
+  type      String   // deposit, withdrawal, transfer
+  amount    Float
+  status    String   // pending, completed, failed
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model SQLProfile {
-  id            String   @id @default(cuid())
-  userId        String   @unique
-  user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  level         Int      @default(1)
-  isActive      Boolean  @default(true)
-  lastUpgraded  DateTime?
-  totalIncome   Decimal  @default(0)
-  activeMembers Int      @default(0)
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId    String   @db.ObjectId
+  username  String   @unique
+  password  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model CoinLock {
-  id          String   @id @default(cuid())
-  userId      String
-  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  amount      Float
-  duration    Int      // in days
-  startDate   DateTime @default(now())
-  endDate     DateTime
-  status      String   // "ACTIVE" | "COMPLETED" | "CANCELLED"
-  bonusRate   Float
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId    String   @db.ObjectId
+  walletId  String   @db.ObjectId
+  amount    Float
+  duration  Int      // in days
+  startDate DateTime @default(now())
+  endDate   DateTime
+  status    String   // active, completed, cancelled
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  wallet    Wallet   @relation(fields: [walletId], references: [id], onDelete: Cascade)
 }
 
 model Account {
-  id                String  @id @default(cuid())
-  userId            String
+  id                String  @id @default(auto()) @map("_id") @db.ObjectId
+  userId            String  @db.ObjectId
   type              String
   provider          String
   providerAccountId String
-  refresh_token     String? @db.Text
-  access_token      String? @db.Text
+  refresh_token     String? @db.String
+  access_token      String? @db.String
   expires_at        Int?
   token_type        String?
   scope             String?
-  id_token          String? @db.Text
+  id_token          String? @db.String
   session_state     String?
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
@@ -115,17 +129,58 @@ model Account {
 }
 
 model Session {
-  id           String   @id @default(cuid())
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
   sessionToken String   @unique
-  userId       String
+  userId       String   @db.ObjectId
   expires      DateTime
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model VerificationToken {
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
   identifier String
   token      String   @unique
   expires    DateTime
 
   @@unique([identifier, token])
+}
+
+model Notification {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  title     String
+  message   String
+  type      String   // success, warning, error, info, destructive, default
+  read      Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  userId    String   @db.ObjectId
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([read])
+  @@index([createdAt])
+}
+
+model Certificate {
+  id             String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId         String   @db.ObjectId
+  title          String
+  subject        String
+  date           DateTime
+  score          Int?
+  status         String   // passed, failed, in-progress
+  certificateUrl String?
+  createdAt      DateTime @default(now())
+  user           User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model StudyResource {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  title       String
+  type        String   // exercises, guides, etc.
+  provider    String
+  sqlLevel    String
+  downloadUrl String
+  tags        String[]
+  createdAt   DateTime @default(now())
 } 

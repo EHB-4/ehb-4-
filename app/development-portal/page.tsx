@@ -82,6 +82,11 @@ const services = [
     description: 'AI Assistant Panel',
     url: '/assistant',
   },
+  {
+    name: 'Google Maps Demo',
+    description: 'Demo of Google Maps API integration',
+    url: '/maps-demo',
+  },
   // Add more modules/services as needed
 ];
 

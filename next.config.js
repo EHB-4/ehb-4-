@@ -4,6 +4,12 @@ const nextConfig = {
   swcMinify: true,
   images: {
     domains: ['localhost'],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: '**',
+      },
+    ],
   },
   env: {
     APP_NAME: 'EHB Technologies',
@@ -22,30 +28,30 @@ const nextConfig = {
         headers: [
           {
             key: 'X-DNS-Prefetch-Control',
-            value: 'on'
+            value: 'on',
           },
           {
             key: 'Strict-Transport-Security',
-            value: 'max-age=31536000; includeSubDomains'
+            value: 'max-age=31536000; includeSubDomains',
           },
           {
             key: 'X-Frame-Options',
-            value: 'SAMEORIGIN'
+            value: 'DENY',
           },
           {
             key: 'X-Content-Type-Options',
-            value: 'nosniff'
+            value: 'nosniff',
           },
           {
             key: 'X-XSS-Protection',
-            value: '1; mode=block'
+            value: '1; mode=block',
           },
           {
             key: 'Referrer-Policy',
-            value: 'strict-origin-when-cross-origin'
-          }
-        ]
-      }
+            value: 'strict-origin-when-cross-origin',
+          },
+        ],
+      },
     ];
   },
   async redirects() {
@@ -55,35 +61,26 @@ const nextConfig = {
         destination: '/:path*',
         permanent: true,
       },
+      {
+        source: '/dashboard',
+        destination: '/dashboard/overview',
+        permanent: true,
+      },
     ];
   },
-  webpack: (config, { dev, isServer }) => {
-    config.externals = [...(config.externals || []), { canvas: 'canvas' }];
-    
-    // Optimize bundle size
-    if (!dev && !isServer) {
-      config.optimization.splitChunks = {
-        chunks: 'all',
-        minSize: 20000,
-        maxSize: 244000,
-        minChunks: 1,
-        maxAsyncRequests: 30,
-        maxInitialRequests: 30,
-        cacheGroups: {
-          defaultVendors: {
-            test: /[\\/]node_modules[\\/]/,
-            priority: -10,
-            reuseExistingChunk: true,
-          },
-          default: {
-            minChunks: 2,
-            priority: -20,
-            reuseExistingChunk: true,
-          },
-        },
-      };
-    }
-    
+  async rewrites() {
+    return [
+      {
+        source: '/api/:path*',
+        destination: '/api/:path*',
+      },
+    ];
+  },
+  webpack: config => {
+    config.experiments = {
+      ...config.experiments,
+      topLevelAwait: true,
+    };
     return config;
   },
   // Performance optimizations
@@ -101,7 +98,7 @@ const nextConfig = {
   // Use default .next directory instead of build
   distDir: '.next',
   experimental: {
-    // serverActions: true, // Removed as per Next.js 14+ docs
+    serverComponentsExternalPackages: ['mongoose'],
   },
   // Enable both app and pages directories
   pageExtensions: ['js', 'jsx', 'ts', 'tsx'],
