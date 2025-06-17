@@ -6,23 +6,23 @@ interface TokenLockFormProps {
   onError?: (error: string) => void;
 }
 
-const SQL_LEVELS = [
-  { value: 'BEGINNER', label: 'Beginner (0%)' },
-  { value: 'INTERMEDIATE', label: 'Intermediate (25%)' },
-  { value: 'ADVANCED', label: 'Advanced (50%)' },
-  { value: 'EXPERT', label: 'Expert (75%)' },
-  { value: 'MASTER', label: 'Master (100%)' },
+const LOCK_DURATIONS = [
+  { value: 30, label: '30 Days' },
+  { value: 60, label: '60 Days' },
+  { value: 90, label: '90 Days' },
+  { value: 180, label: '180 Days' },
+  { value: 365, label: '365 Days' },
 ];
 
 export default function TokenLockForm({ onSuccess, onError }: TokenLockFormProps) {
   const [amount, setAmount] = useState('');
-  const [sqlLevel, setSqlLevel] = useState('');
+  const [lockDuration, setLockDuration] = useState('');
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!amount || !sqlLevel) {
+    if (!amount || !lockDuration) {
       onError?.('Please fill in all fields');
       return;
     }
@@ -40,7 +40,7 @@ export default function TokenLockForm({ onSuccess, onError }: TokenLockFormProps
         },
         body: JSON.stringify({
           amount: amountInWei.toString(),
-          sqlLevel,
+          lockDuration: parseInt(lockDuration),
         }),
       });
 
@@ -52,7 +52,7 @@ export default function TokenLockForm({ onSuccess, onError }: TokenLockFormProps
 
       onSuccess?.();
       setAmount('');
-      setSqlLevel('');
+      setLockDuration('');
     } catch (error) {
       onError?.(error instanceof Error ? error.message : 'Failed to lock tokens');
     } finally {
@@ -83,28 +83,29 @@ export default function TokenLockForm({ onSuccess, onError }: TokenLockFormProps
       </div>
 
       <div>
-        <label htmlFor="sqlLevel" className="block text-sm font-medium text-gray-700">
-          SQL Level
+        <label htmlFor="lockDuration" className="block text-sm font-medium text-gray-700">
+          Lock Duration
         </label>
         <div className="mt-1">
           <select
-            id="sqlLevel"
-            name="sqlLevel"
-            value={sqlLevel}
-            onChange={e => setSqlLevel(e.target.value)}
+            id="lockDuration"
+            name="lockDuration"
+            value={lockDuration}
+            onChange={e => setLockDuration(e.target.value)}
             className="block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
             required
           >
-            <option value="">Select SQL Level</option>
-            {SQL_LEVELS.map(level => (
-              <option key={level.value} value={level.value}>
-                {level.label}
+            <option value="">Select Lock Duration</option>
+            {LOCK_DURATIONS.map(duration => (
+              <option key={duration.value} value={duration.value}>
+                {duration.label}
               </option>
             ))}
           </select>
         </div>
         <p className="mt-2 text-sm text-gray-500">
-          Your SQL level determines your reward multiplier (0% to 100% of base 5% reward)
+          Choose how long you want to lock your tokens. Longer lock periods may offer higher
+          rewards.
         </p>
       </div>
 
