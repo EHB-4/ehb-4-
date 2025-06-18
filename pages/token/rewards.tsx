@@ -5,6 +5,15 @@ import { ethers } from 'ethers';
 import { getContract } from '@/lib/contracts';
 import { toast } from 'react-hot-toast';
 import { formatDistanceToNow } from 'date-fns';
+import { Tab } from '@headlessui/react';
+import {
+  TrophyIcon,
+  StarIcon,
+  GiftIcon,
+  ChartBarIcon,
+  ArrowTrendingUpIcon,
+  UserGroupIcon,
+} from '@heroicons/react/24/outline';
 import {
   LineChart,
   Line,
@@ -14,42 +23,178 @@ import {
   Tooltip,
   Legend,
   ResponsiveContainer,
+  BarChart,
+  Bar,
 } from 'recharts';
 
-interface RewardsData {
+interface RewardData {
   totalRewards: bigint;
-  availableRewards: bigint;
+  pendingRewards: bigint;
   claimedRewards: bigint;
   lastClaimDate: number | null;
-  nextClaimDate: number | null;
-  claimCooldown: number;
-  rewardsHistory: {
+  rewardHistory: {
     date: number;
     amount: bigint;
-    type: 'earned' | 'claimed';
-    source: 'lock' | 'referral' | 'bonus';
+    type: 'lock' | 'referral' | 'bonus';
+    status: 'pending' | 'claimed';
   }[];
-  timeSeriesData: {
-    date: string;
-    earned: number;
-    claimed: number;
-  }[];
-  bonusRewards: {
-    name: string;
-    description: string;
-    amount: bigint;
-    status: 'available' | 'claimed' | 'expired';
-    expiryDate: number;
-  }[];
+  rewardStats: {
+    daily: {
+      date: string;
+      amount: bigint;
+    }[];
+    monthly: {
+      month: string;
+      amount: bigint;
+    }[];
+    byType: {
+      type: string;
+      amount: bigint;
+    }[];
+  };
 }
 
-export default function TokenRewards() {
+interface Reward {
+  id: string;
+  type: 'lock' | 'referral' | 'bonus' | 'achievement';
+  amount: number;
+  timestamp: string;
+  status: 'pending' | 'claimed' | 'expired';
+  details: string;
+  multiplier?: number;
+}
+
+interface BonusPoint {
+  id: string;
+  type: 'daily' | 'weekly' | 'monthly' | 'special';
+  points: number;
+  timestamp: string;
+  expiresAt: string;
+  details: string;
+}
+
+interface ReferralEarning {
+  id: string;
+  referrer: string;
+  amount: number;
+  timestamp: string;
+  status: 'pending' | 'claimed';
+  level: number;
+  details: string;
+}
+
+const rewards: Reward[] = [
+  {
+    id: '1',
+    type: 'lock',
+    amount: 50,
+    timestamp: '2024-03-15T10:30:00Z',
+    status: 'claimed',
+    details: 'Monthly lock rewards',
+    multiplier: 1.2,
+  },
+  {
+    id: '2',
+    type: 'referral',
+    amount: 100,
+    timestamp: '2024-03-14T15:45:00Z',
+    status: 'pending',
+    details: 'Referral bonus from user123',
+  },
+  {
+    id: '3',
+    type: 'bonus',
+    amount: 25,
+    timestamp: '2024-03-13T09:15:00Z',
+    status: 'claimed',
+    details: 'Early adopter bonus',
+  },
+  {
+    id: '4',
+    type: 'achievement',
+    amount: 200,
+    timestamp: '2024-03-12T14:20:00Z',
+    status: 'claimed',
+    details: 'Security champion achievement',
+  },
+];
+
+const bonusPoints: BonusPoint[] = [
+  {
+    id: '1',
+    type: 'daily',
+    points: 10,
+    timestamp: '2024-03-15T00:00:00Z',
+    expiresAt: '2024-03-16T00:00:00Z',
+    details: 'Daily login bonus',
+  },
+  {
+    id: '2',
+    type: 'weekly',
+    points: 50,
+    timestamp: '2024-03-14T00:00:00Z',
+    expiresAt: '2024-03-21T00:00:00Z',
+    details: 'Weekly activity bonus',
+  },
+  {
+    id: '3',
+    type: 'monthly',
+    points: 200,
+    timestamp: '2024-03-01T00:00:00Z',
+    expiresAt: '2024-04-01T00:00:00Z',
+    details: 'Monthly loyalty bonus',
+  },
+  {
+    id: '4',
+    type: 'special',
+    points: 100,
+    timestamp: '2024-03-10T00:00:00Z',
+    expiresAt: '2024-03-17T00:00:00Z',
+    details: 'Platform launch celebration',
+  },
+];
+
+const referralEarnings: ReferralEarning[] = [
+  {
+    id: '1',
+    referrer: 'user123',
+    amount: 50,
+    timestamp: '2024-03-15T10:30:00Z',
+    status: 'claimed',
+    level: 1,
+    details: 'First level referral',
+  },
+  {
+    id: '2',
+    referrer: 'user456',
+    amount: 25,
+    timestamp: '2024-03-14T15:45:00Z',
+    status: 'pending',
+    level: 2,
+    details: 'Second level referral',
+  },
+  {
+    id: '3',
+    referrer: 'user789',
+    amount: 10,
+    timestamp: '2024-03-13T09:15:00Z',
+    status: 'claimed',
+    level: 3,
+    details: 'Third level referral',
+  },
+];
+
+function classNames(...classes: string[]) {
+  return classes.filter(Boolean).join(' ');
+}
+
+export default function RewardsPage() {
   const { data: session, status } = useSession();
   const router = useRouter();
   const [loading, setLoading] = useState(true);
-  const [claiming, setClaiming] = useState(false);
-  const [data, setData] = useState<RewardsData | null>(null);
-  const [activeTab, setActiveTab] = useState<'overview' | 'history' | 'bonus'>('overview');
+  const [rewardData, setRewardData] = useState<RewardData | null>(null);
+  const [timeRange, setTimeRange] = useState<'7d' | '30d' | '90d' | '1y'>('30d');
+  const [selectedTab, setSelectedTab] = useState(0);
 
   useEffect(() => {
     if (status === 'unauthenticated') {
@@ -58,93 +203,100 @@ export default function TokenRewards() {
   }, [status, router]);
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchRewardData = async () => {
       try {
         setLoading(true);
         const contract = await getContract();
 
-        // TODO: Fetch data from contract
+        // TODO: Fetch reward data from contract
         // For now using mock data
-        const mockData: RewardsData = {
-          totalRewards: ethers.parseEther('5000'),
-          availableRewards: ethers.parseEther('2000'),
-          claimedRewards: ethers.parseEther('3000'),
+        const mockData: RewardData = {
+          totalRewards: ethers.parseEther('50000'),
+          pendingRewards: ethers.parseEther('5000'),
+          claimedRewards: ethers.parseEther('45000'),
           lastClaimDate: Date.now() - 86400000, // 1 day ago
-          nextClaimDate: Date.now() + 86400000, // 1 day from now
-          claimCooldown: 24, // hours
-          rewardsHistory: [
+          rewardHistory: [
             {
               date: Date.now() - 3600000, // 1 hour ago
-              amount: ethers.parseEther('100'),
-              type: 'earned',
-              source: 'lock',
-            },
-            {
-              date: Date.now() - 7200000, // 2 hours ago
-              amount: ethers.parseEther('50'),
-              type: 'claimed',
-              source: 'referral',
-            },
-          ],
-          timeSeriesData: [
-            {
-              date: '2024-01-01',
-              earned: 1000,
-              claimed: 500,
-            },
-            {
-              date: '2024-01-02',
-              earned: 800,
-              claimed: 300,
-            },
-          ],
-          bonusRewards: [
-            {
-              name: 'Early Adopter Bonus',
-              description: 'Reward for being an early user',
-              amount: ethers.parseEther('500'),
-              status: 'available',
-              expiryDate: Date.now() + 604800000, // 7 days from now
-            },
-            {
-              name: 'Referral Milestone',
-              description: 'Achieved 10 referrals',
               amount: ethers.parseEther('1000'),
+              type: 'lock',
+              status: 'pending',
+            },
+            {
+              date: Date.now() - 86400000, // 1 day ago
+              amount: ethers.parseEther('2000'),
+              type: 'referral',
               status: 'claimed',
-              expiryDate: Date.now() - 86400000, // 1 day ago
+            },
+            {
+              date: Date.now() - 172800000, // 2 days ago
+              amount: ethers.parseEther('1500'),
+              type: 'bonus',
+              status: 'claimed',
             },
           ],
+          rewardStats: {
+            daily: Array.from({ length: 30 }, (_, i) => ({
+              date: new Date(Date.now() - (29 - i) * 86400000).toLocaleDateString(),
+              amount: ethers.parseEther((Math.random() * 1000).toFixed(2)),
+            })),
+            monthly: Array.from({ length: 12 }, (_, i) => ({
+              month: new Date(2024, i, 1).toLocaleString('default', { month: 'short' }),
+              amount: ethers.parseEther((Math.random() * 10000).toFixed(2)),
+            })),
+            byType: [
+              {
+                type: 'Lock Rewards',
+                amount: ethers.parseEther('25000'),
+              },
+              {
+                type: 'Referral Rewards',
+                amount: ethers.parseEther('15000'),
+              },
+              {
+                type: 'Bonus Rewards',
+                amount: ethers.parseEther('10000'),
+              },
+            ],
+          },
         };
 
-        setData(mockData);
+        setRewardData(mockData);
       } catch (err) {
-        console.error('Failed to fetch data:', err);
-        toast.error('Failed to load rewards data');
+        console.error('Failed to fetch reward data:', err);
+        toast.error('Failed to load reward data');
       } finally {
         setLoading(false);
       }
     };
 
-    fetchData();
+    fetchRewardData();
   }, []);
 
-  const handleClaim = async () => {
-    if (!data) return;
-
+  const handleClaimRewards = async () => {
+    if (!rewardData) return;
     try {
-      setClaiming(true);
       const contract = await getContract();
-
       // TODO: Call contract to claim rewards
-      // For now just showing success message
       toast.success('Rewards claimed successfully!');
     } catch (err) {
       console.error('Failed to claim rewards:', err);
       toast.error('Failed to claim rewards');
-    } finally {
-      setClaiming(false);
     }
   };
+
+  const totalRewards = rewards.reduce((sum, reward) => sum + reward.amount, 0);
+  const totalBonusPoints = bonusPoints.reduce((sum, point) => sum + point.points, 0);
+  const totalReferralEarnings = referralEarnings.reduce((sum, earning) => sum + earning.amount, 0);
+
+  const chartData = [
+    { name: 'Jan', rewards: 4000, bonus: 2400, referrals: 1800 },
+    { name: 'Feb', rewards: 3000, bonus: 1398, referrals: 2210 },
+    { name: 'Mar', rewards: 2000, bonus: 9800, referrals: 2290 },
+    { name: 'Apr', rewards: 2780, bonus: 3908, referrals: 2000 },
+    { name: 'May', rewards: 1890, bonus: 4800, referrals: 2181 },
+    { name: 'Jun', rewards: 2390, bonus: 3800, referrals: 2500 },
+  ];
 
   if (loading) {
     return (
@@ -152,9 +304,14 @@ export default function TokenRewards() {
         <div className="max-w-7xl mx-auto">
           <div className="animate-pulse">
             <div className="h-8 bg-gray-200 rounded w-1/4 mb-8"></div>
-            <div className="space-y-6">
-              {[...Array(4)].map((_, i) => (
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+              {[...Array(3)].map((_, i) => (
                 <div key={i} className="h-32 bg-gray-200 rounded"></div>
+              ))}
+            </div>
+            <div className="space-y-4">
+              {[...Array(3)].map((_, i) => (
+                <div key={i} className="h-64 bg-gray-200 rounded"></div>
               ))}
             </div>
           </div>
@@ -163,235 +320,266 @@ export default function TokenRewards() {
     );
   }
 
-  if (!data) return null;
+  if (!rewardData) return null;
 
   return (
     <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
-        <h1 className="text-3xl font-bold text-gray-900 mb-8">Rewards</h1>
+        <h1 className="text-3xl font-bold text-gray-900 mb-8">Rewards Center</h1>
 
-        {/* Rewards Overview */}
-        <div className="bg-white rounded-lg shadow p-6 mb-8">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div>
-              <h3 className="text-sm font-medium text-gray-500">Total Rewards</h3>
-              <p className="mt-2 text-3xl font-semibold text-gray-900">
-                {ethers.formatEther(data.totalRewards)} EHBGC
-              </p>
-            </div>
-            <div>
-              <h3 className="text-sm font-medium text-gray-500">Available Rewards</h3>
-              <p className="mt-2 text-3xl font-semibold text-gray-900">
-                {ethers.formatEther(data.availableRewards)} EHBGC
-              </p>
-            </div>
-            <div>
-              <h3 className="text-sm font-medium text-gray-500">Claimed Rewards</h3>
-              <p className="mt-2 text-3xl font-semibold text-gray-900">
-                {ethers.formatEther(data.claimedRewards)} EHBGC
-              </p>
+        {/* Stats Overview */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+          <div className="bg-white rounded-lg shadow p-6">
+            <div className="flex items-center">
+              <div className="flex-shrink-0">
+                <TrophyIcon className="h-8 w-8 text-yellow-500" />
+              </div>
+              <div className="ml-4">
+                <h3 className="text-lg font-medium text-gray-900">Total Rewards</h3>
+                <p className="text-2xl font-semibold text-gray-900">
+                  {ethers.formatEther(rewardData.totalRewards)} EHBGC
+                </p>
+              </div>
             </div>
           </div>
 
-          <div className="mt-6">
-            <button
-              onClick={handleClaim}
-              disabled={claiming || data.availableRewards === BigInt(0)}
-              className={`w-full px-6 py-3 rounded-lg font-medium ${
-                claiming || data.availableRewards === BigInt(0)
-                  ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
-                  : 'bg-blue-600 text-white hover:bg-blue-700'
-              }`}
-            >
-              {claiming
-                ? 'Claiming...'
-                : data.availableRewards === BigInt(0)
-                  ? 'No Rewards Available'
-                  : 'Claim Rewards'}
-            </button>
+          <div className="bg-white rounded-lg shadow p-6">
+            <div className="flex items-center">
+              <div className="flex-shrink-0">
+                <GiftIcon className="h-8 w-8 text-purple-500" />
+              </div>
+              <div className="ml-4">
+                <h3 className="text-lg font-medium text-gray-900">Bonus Points</h3>
+                <p className="text-2xl font-semibold text-gray-900">{totalBonusPoints} Points</p>
+              </div>
+            </div>
           </div>
 
-          {data.lastClaimDate && (
-            <div className="mt-4 text-sm text-gray-500">
-              Last claim: {formatDistanceToNow(data.lastClaimDate, { addSuffix: true })}
+          <div className="bg-white rounded-lg shadow p-6">
+            <div className="flex items-center">
+              <div className="flex-shrink-0">
+                <UserGroupIcon className="h-8 w-8 text-blue-500" />
+              </div>
+              <div className="ml-4">
+                <h3 className="text-lg font-medium text-gray-900">Referral Earnings</h3>
+                <p className="text-2xl font-semibold text-gray-900">
+                  {ethers.formatEther(ethers.parseEther(totalReferralEarnings.toString()))} EHBGC
+                </p>
+              </div>
             </div>
-          )}
-          {data.nextClaimDate && (
-            <div className="text-sm text-gray-500">
-              Next claim available: {formatDistanceToNow(data.nextClaimDate, { addSuffix: true })}
-            </div>
-          )}
+          </div>
+        </div>
+
+        <div className="mt-8">
+          <h3 className="text-lg font-medium text-gray-900 mb-4">Rewards Trend</h3>
+          <div className="h-80">
+            <ResponsiveContainer width="100%" height="100%">
+              <LineChart
+                data={chartData}
+                margin={{
+                  top: 5,
+                  right: 30,
+                  left: 20,
+                  bottom: 5,
+                }}
+              >
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis dataKey="name" />
+                <YAxis />
+                <Tooltip />
+                <Legend />
+                <Line type="monotone" dataKey="rewards" stroke="#8884d8" />
+                <Line type="monotone" dataKey="bonus" stroke="#82ca9d" />
+                <Line type="monotone" dataKey="referrals" stroke="#ffc658" />
+              </LineChart>
+            </ResponsiveContainer>
+          </div>
         </div>
 
         {/* Tabs */}
-        <div className="bg-white rounded-lg shadow">
-          <div className="border-b border-gray-200">
-            <nav className="flex -mb-px">
-              {(['overview', 'history', 'bonus'] as const).map(tab => (
-                <button
-                  key={tab}
-                  onClick={() => setActiveTab(tab)}
-                  className={`py-4 px-6 text-sm font-medium ${
-                    activeTab === tab
-                      ? 'border-b-2 border-blue-500 text-blue-600'
-                      : 'text-gray-500 hover:text-gray-700 hover:border-gray-300'
-                  }`}
-                >
-                  {tab.charAt(0).toUpperCase() + tab.slice(1)}
-                </button>
-              ))}
-            </nav>
-          </div>
-
-          <div className="p-6">
-            {/* Overview Tab */}
-            {activeTab === 'overview' && (
-              <div className="space-y-6">
-                <div>
-                  <h3 className="text-lg font-medium text-gray-900 mb-4">Rewards Overview</h3>
-                  <div className="h-80">
-                    <ResponsiveContainer width="100%" height="100%">
-                      <LineChart data={data.timeSeriesData}>
-                        <CartesianGrid strokeDasharray="3 3" />
-                        <XAxis dataKey="date" />
-                        <YAxis />
-                        <Tooltip />
-                        <Legend />
-                        <Line type="monotone" dataKey="earned" stroke="#0088FE" name="Earned" />
-                        <Line type="monotone" dataKey="claimed" stroke="#00C49F" name="Claimed" />
-                      </LineChart>
-                    </ResponsiveContainer>
-                  </div>
+        <Tab.Group onChange={setSelectedTab}>
+          <Tab.List className="flex space-x-1 rounded-xl bg-blue-900/20 p-1 mb-8">
+            <Tab
+              className={({ selected }) =>
+                classNames(
+                  'w-full rounded-lg py-2.5 text-sm font-medium leading-5',
+                  'ring-white ring-opacity-60 ring-offset-2 ring-offset-blue-400 focus:outline-none focus:ring-2',
+                  selected
+                    ? 'bg-white text-blue-700 shadow'
+                    : 'text-blue-100 hover:bg-white/[0.12] hover:text-white'
+                )
+              }
+            >
+              Rewards History
+            </Tab>
+            <Tab
+              className={({ selected }) =>
+                classNames(
+                  'w-full rounded-lg py-2.5 text-sm font-medium leading-5',
+                  'ring-white ring-opacity-60 ring-offset-2 ring-offset-blue-400 focus:outline-none focus:ring-2',
+                  selected
+                    ? 'bg-white text-blue-700 shadow'
+                    : 'text-blue-100 hover:bg-white/[0.12] hover:text-white'
+                )
+              }
+            >
+              Bonus Points
+            </Tab>
+            <Tab
+              className={({ selected }) =>
+                classNames(
+                  'w-full rounded-lg py-2.5 text-sm font-medium leading-5',
+                  'ring-white ring-opacity-60 ring-offset-2 ring-offset-blue-400 focus:outline-none focus:ring-2',
+                  selected
+                    ? 'bg-white text-blue-700 shadow'
+                    : 'text-blue-100 hover:bg-white/[0.12] hover:text-white'
+                )
+              }
+            >
+              Referral Earnings
+            </Tab>
+          </Tab.List>
+          <Tab.Panels>
+            {/* Rewards History Panel */}
+            <Tab.Panel>
+              <div className="bg-white rounded-lg shadow">
+                <div className="px-6 py-4 border-b border-gray-200">
+                  <h2 className="text-lg font-medium text-gray-900">Rewards History</h2>
                 </div>
-
-                <div>
-                  <h3 className="text-lg font-medium text-gray-900 mb-4">How Rewards Work</h3>
-                  <div className="prose max-w-none">
-                    <ul className="list-disc list-inside space-y-2">
-                      <li>Earn rewards for locking your tokens</li>
-                      <li>Additional rewards for referring new users</li>
-                      <li>Claim your rewards every {data.claimCooldown} hours</li>
-                      <li>Special bonus rewards for achieving milestones</li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            )}
-
-            {/* History Tab */}
-            {activeTab === 'history' && (
-              <div className="overflow-x-auto">
-                <table className="min-w-full divide-y divide-gray-200">
-                  <thead>
-                    <tr>
-                      <th className="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        Date
-                      </th>
-                      <th className="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        Amount
-                      </th>
-                      <th className="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        Type
-                      </th>
-                      <th className="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        Source
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody className="bg-white divide-y divide-gray-200">
-                    {data.rewardsHistory.map((reward, index) => (
-                      <tr key={index}>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                          {formatDistanceToNow(reward.date, { addSuffix: true })}
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                          {ethers.formatEther(reward.amount)} EHBGC
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap">
+                <div className="divide-y divide-gray-200">
+                  {rewards.map(reward => (
+                    <div key={reward.id} className="px-6 py-4">
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center">
+                          <div className="flex-shrink-0">
+                            {reward.type === 'lock' && (
+                              <ChartBarIcon className="h-6 w-6 text-blue-500" />
+                            )}
+                            {reward.type === 'referral' && (
+                              <UserGroupIcon className="h-6 w-6 text-purple-500" />
+                            )}
+                            {reward.type === 'bonus' && (
+                              <GiftIcon className="h-6 w-6 text-yellow-500" />
+                            )}
+                            {reward.type === 'achievement' && (
+                              <TrophyIcon className="h-6 w-6 text-green-500" />
+                            )}
+                          </div>
+                          <div className="ml-4">
+                            <p className="text-sm font-medium text-gray-900">{reward.details}</p>
+                            <p className="text-sm text-gray-500">
+                              {new Date(reward.timestamp).toLocaleString()}
+                            </p>
+                          </div>
+                        </div>
+                        <div className="flex items-center">
                           <span
                             className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
-                              reward.type === 'earned'
+                              reward.status === 'claimed'
                                 ? 'bg-green-100 text-green-800'
-                                : 'bg-blue-100 text-blue-800'
+                                : reward.status === 'pending'
+                                  ? 'bg-yellow-100 text-yellow-800'
+                                  : 'bg-red-100 text-red-800'
                             }`}
                           >
-                            {reward.type.charAt(0).toUpperCase() + reward.type.slice(1)}
+                            {reward.status}
                           </span>
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap">
+                          <div className="ml-4 text-right">
+                            <p className="text-sm font-medium text-gray-900">
+                              {reward.amount} EHBGC
+                            </p>
+                            {reward.multiplier && (
+                              <p className="text-xs text-gray-500">
+                                {reward.multiplier}x multiplier
+                              </p>
+                            )}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </Tab.Panel>
+
+            {/* Bonus Points Panel */}
+            <Tab.Panel>
+              <div className="bg-white rounded-lg shadow">
+                <div className="px-6 py-4 border-b border-gray-200">
+                  <h2 className="text-lg font-medium text-gray-900">Bonus Points</h2>
+                </div>
+                <div className="divide-y divide-gray-200">
+                  {bonusPoints.map(point => (
+                    <div key={point.id} className="px-6 py-4">
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center">
+                          <div className="flex-shrink-0">
+                            <GiftIcon className="h-6 w-6 text-purple-500" />
+                          </div>
+                          <div className="ml-4">
+                            <p className="text-sm font-medium text-gray-900">{point.details}</p>
+                            <p className="text-sm text-gray-500">
+                              Expires: {new Date(point.expiresAt).toLocaleString()}
+                            </p>
+                          </div>
+                        </div>
+                        <div className="text-right">
+                          <p className="text-sm font-medium text-gray-900">{point.points} Points</p>
+                          <p className="text-xs text-gray-500">
+                            {point.type.charAt(0).toUpperCase() + point.type.slice(1)} Bonus
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </Tab.Panel>
+
+            {/* Referral Earnings Panel */}
+            <Tab.Panel>
+              <div className="bg-white rounded-lg shadow">
+                <div className="px-6 py-4 border-b border-gray-200">
+                  <h2 className="text-lg font-medium text-gray-900">Referral Earnings</h2>
+                </div>
+                <div className="divide-y divide-gray-200">
+                  {referralEarnings.map(earning => (
+                    <div key={earning.id} className="px-6 py-4">
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center">
+                          <div className="flex-shrink-0">
+                            <UserGroupIcon className="h-6 w-6 text-blue-500" />
+                          </div>
+                          <div className="ml-4">
+                            <p className="text-sm font-medium text-gray-900">{earning.details}</p>
+                            <p className="text-sm text-gray-500">From: {earning.referrer}</p>
+                          </div>
+                        </div>
+                        <div className="flex items-center">
                           <span
                             className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
-                              reward.source === 'lock'
-                                ? 'bg-purple-100 text-purple-800'
-                                : reward.source === 'referral'
-                                  ? 'bg-yellow-100 text-yellow-800'
-                                  : 'bg-pink-100 text-pink-800'
+                              earning.status === 'claimed'
+                                ? 'bg-green-100 text-green-800'
+                                : 'bg-yellow-100 text-yellow-800'
                             }`}
                           >
-                            {reward.source.charAt(0).toUpperCase() + reward.source.slice(1)}
+                            {earning.status}
                           </span>
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            )}
-
-            {/* Bonus Tab */}
-            {activeTab === 'bonus' && (
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {data.bonusRewards.map((bonus, index) => (
-                  <div
-                    key={index}
-                    className={`rounded-lg p-6 ${
-                      bonus.status === 'available'
-                        ? 'bg-green-50 border border-green-200'
-                        : bonus.status === 'claimed'
-                          ? 'bg-blue-50 border border-blue-200'
-                          : 'bg-gray-50 border border-gray-200'
-                    }`}
-                  >
-                    <div className="flex justify-between items-start">
-                      <div>
-                        <h3 className="text-lg font-medium text-gray-900">{bonus.name}</h3>
-                        <p className="mt-1 text-sm text-gray-500">{bonus.description}</p>
+                          <div className="ml-4 text-right">
+                            <p className="text-sm font-medium text-gray-900">
+                              {earning.amount} EHBGC
+                            </p>
+                            <p className="text-xs text-gray-500">Level {earning.level} Referral</p>
+                          </div>
+                        </div>
                       </div>
-                      <span
-                        className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
-                          bonus.status === 'available'
-                            ? 'bg-green-100 text-green-800'
-                            : bonus.status === 'claimed'
-                              ? 'bg-blue-100 text-blue-800'
-                              : 'bg-gray-100 text-gray-800'
-                        }`}
-                      >
-                        {bonus.status.charAt(0).toUpperCase() + bonus.status.slice(1)}
-                      </span>
                     </div>
-                    <div className="mt-4">
-                      <p className="text-2xl font-semibold text-gray-900">
-                        {ethers.formatEther(bonus.amount)} EHBGC
-                      </p>
-                      <p className="mt-1 text-sm text-gray-500">
-                        Expires: {formatDistanceToNow(bonus.expiryDate, { addSuffix: true })}
-                      </p>
-                    </div>
-                    {bonus.status === 'available' && (
-                      <button
-                        onClick={handleClaim}
-                        disabled={claiming}
-                        className="mt-4 w-full px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2"
-                      >
-                        Claim Bonus
-                      </button>
-                    )}
-                  </div>
-                ))}
+                  ))}
+                </div>
               </div>
-            )}
-          </div>
-        </div>
+            </Tab.Panel>
+          </Tab.Panels>
+        </Tab.Group>
       </div>
     </div>
   );

@@ -4,38 +4,44 @@ import { useRouter } from 'next/router';
 import { ethers } from 'ethers';
 import { getContract } from '@/lib/contracts';
 import { toast } from 'react-hot-toast';
-import { formatDistanceToNow } from 'date-fns';
 import { QRCodeSVG } from 'qrcode.react';
 
 interface ReferralData {
   referralCode: string;
-  referredBy: string | null;
   totalReferrals: number;
+  activeReferrals: number;
   totalEarnings: bigint;
+  pendingEarnings: bigint;
   referralLevel: number;
   referralRate: number;
-  referrals: {
+  referralHistory: {
     address: string;
-    joinDate: number;
-    totalLocks: number;
-    totalVolume: bigint;
-    rewards: bigint;
-    status: 'active' | 'inactive';
-  }[];
-  rewardsHistory: {
-    date: number;
     amount: bigint;
-    referral: string;
-    type: 'lock' | 'unlock';
+    reward: bigint;
+    timestamp: number;
+    status: 'pending' | 'completed' | 'failed';
   }[];
+  referralStats: {
+    level1: {
+      count: number;
+      earnings: bigint;
+    };
+    level2: {
+      count: number;
+      earnings: bigint;
+    };
+    level3: {
+      count: number;
+      earnings: bigint;
+    };
+  };
 }
 
-export default function TokenReferral() {
+export default function ReferralPage() {
   const { data: session, status } = useSession();
   const router = useRouter();
   const [loading, setLoading] = useState(true);
-  const [data, setData] = useState<ReferralData | null>(null);
-  const [activeTab, setActiveTab] = useState<'overview' | 'referrals' | 'rewards'>('overview');
+  const [referralData, setReferralData] = useState<ReferralData | null>(null);
   const [copied, setCopied] = useState(false);
 
   useEffect(() => {
@@ -45,100 +51,90 @@ export default function TokenReferral() {
   }, [status, router]);
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchReferralData = async () => {
       try {
         setLoading(true);
         const contract = await getContract();
 
-        // TODO: Fetch data from contract
+        // TODO: Fetch referral data from contract
         // For now using mock data
         const mockData: ReferralData = {
-          referralCode: 'REF123456',
-          referredBy: '0x789...def',
-          totalReferrals: 5,
-          totalEarnings: ethers.parseEther('1000'),
+          referralCode: 'REF123',
+          totalReferrals: 25,
+          activeReferrals: 18,
+          totalEarnings: ethers.parseEther('25000'),
+          pendingEarnings: ethers.parseEther('5000'),
           referralLevel: 2,
-          referralRate: 5,
-          referrals: [
+          referralRate: 2.5,
+          referralHistory: [
             {
               address: '0x123...abc',
-              joinDate: Date.now() - 2592000000, // 30 days ago
-              totalLocks: 3,
-              totalVolume: ethers.parseEther('5000'),
-              rewards: ethers.parseEther('250'),
-              status: 'active',
+              amount: ethers.parseEther('5000'),
+              reward: ethers.parseEther('250'),
+              timestamp: Date.now() - 86400000,
+              status: 'completed',
             },
             {
               address: '0x456...def',
-              joinDate: Date.now() - 1728000000, // 20 days ago
-              totalLocks: 2,
-              totalVolume: ethers.parseEther('3000'),
-              rewards: ethers.parseEther('150'),
-              status: 'active',
+              amount: ethers.parseEther('3000'),
+              reward: ethers.parseEther('150'),
+              timestamp: Date.now() - 172800000,
+              status: 'pending',
             },
             {
               address: '0x789...ghi',
-              joinDate: Date.now() - 864000000, // 10 days ago
-              totalLocks: 1,
-              totalVolume: ethers.parseEther('1000'),
-              rewards: ethers.parseEther('50'),
-              status: 'inactive',
+              amount: ethers.parseEther('2000'),
+              reward: ethers.parseEther('100'),
+              timestamp: Date.now() - 259200000,
+              status: 'completed',
             },
           ],
-          rewardsHistory: [
-            {
-              date: Date.now() - 3600000, // 1 hour ago
-              amount: ethers.parseEther('100'),
-              referral: '0x123...abc',
-              type: 'lock',
+          referralStats: {
+            level1: {
+              count: 15,
+              earnings: ethers.parseEther('15000'),
             },
-            {
-              date: Date.now() - 7200000, // 2 hours ago
-              amount: ethers.parseEther('50'),
-              referral: '0x456...def',
-              type: 'unlock',
+            level2: {
+              count: 8,
+              earnings: ethers.parseEther('8000'),
             },
-          ],
+            level3: {
+              count: 2,
+              earnings: ethers.parseEther('2000'),
+            },
+          },
         };
 
-        setData(mockData);
+        setReferralData(mockData);
       } catch (err) {
-        console.error('Failed to fetch data:', err);
+        console.error('Failed to fetch referral data:', err);
         toast.error('Failed to load referral data');
       } finally {
         setLoading(false);
       }
     };
 
-    fetchData();
+    fetchReferralData();
   }, []);
 
-  const handleCopyCode = () => {
-    if (!data) return;
-    navigator.clipboard.writeText(data.referralCode);
+  const handleCopyReferralLink = () => {
+    if (!referralData) return;
+    const referralLink = `${window.location.origin}/token?ref=${referralData.referralCode}`;
+    navigator.clipboard.writeText(referralLink);
     setCopied(true);
-    toast.success('Referral code copied to clipboard!');
     setTimeout(() => setCopied(false), 2000);
+    toast.success('Referral link copied to clipboard!');
   };
 
-  const handleShare = async () => {
-    if (!data) return;
-    const shareText = `Join me on EHBGC! Use my referral code: ${data.referralCode}`;
-
-    if (navigator.share) {
-      try {
-        await navigator.share({
-          title: 'EHBGC Referral',
-          text: shareText,
-          url: window.location.origin,
-        });
-      } catch (err) {
-        console.error('Failed to share:', err);
-        toast.error('Failed to share referral code');
-      }
-    } else {
-      navigator.clipboard.writeText(shareText);
-      toast.success('Referral link copied to clipboard!');
+  const handleClaimRewards = async () => {
+    if (!referralData) return;
+    try {
+      const contract = await getContract();
+      // TODO: Call contract to claim rewards
+      toast.success('Rewards claimed successfully!');
+    } catch (err) {
+      console.error('Failed to claim rewards:', err);
+      toast.error('Failed to claim rewards');
     }
   };
 
@@ -148,9 +144,14 @@ export default function TokenReferral() {
         <div className="max-w-7xl mx-auto">
           <div className="animate-pulse">
             <div className="h-8 bg-gray-200 rounded w-1/4 mb-8"></div>
-            <div className="space-y-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
               {[...Array(4)].map((_, i) => (
                 <div key={i} className="h-32 bg-gray-200 rounded"></div>
+              ))}
+            </div>
+            <div className="space-y-4">
+              {[...Array(3)].map((_, i) => (
+                <div key={i} className="h-20 bg-gray-200 rounded"></div>
               ))}
             </div>
           </div>
@@ -159,7 +160,7 @@ export default function TokenReferral() {
     );
   }
 
-  if (!data) return null;
+  if (!referralData) return null;
 
   return (
     <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
@@ -167,257 +168,181 @@ export default function TokenReferral() {
         <h1 className="text-3xl font-bold text-gray-900 mb-8">Referral Program</h1>
 
         {/* Referral Overview */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+          <div className="bg-white rounded-lg shadow p-6">
+            <h3 className="text-lg font-medium text-gray-900 mb-2">Total Referrals</h3>
+            <p className="text-3xl font-bold text-blue-600">{referralData.totalReferrals}</p>
+            <p className="text-sm text-gray-500 mt-2">{referralData.activeReferrals} active</p>
+          </div>
+
+          <div className="bg-white rounded-lg shadow p-6">
+            <h3 className="text-lg font-medium text-gray-900 mb-2">Total Earnings</h3>
+            <p className="text-3xl font-bold text-green-600">
+              {ethers.formatEther(referralData.totalEarnings)} EHBGC
+            </p>
+            <p className="text-sm text-gray-500 mt-2">
+              {ethers.formatEther(referralData.pendingEarnings)} pending
+            </p>
+          </div>
+
+          <div className="bg-white rounded-lg shadow p-6">
+            <h3 className="text-lg font-medium text-gray-900 mb-2">Referral Level</h3>
+            <p className="text-3xl font-bold text-purple-600">Level {referralData.referralLevel}</p>
+            <p className="text-sm text-gray-500 mt-2">{referralData.referralRate}% commission</p>
+          </div>
+
+          <div className="bg-white rounded-lg shadow p-6">
+            <h3 className="text-lg font-medium text-gray-900 mb-2">Referral Code</h3>
+            <p className="text-3xl font-bold text-indigo-600">{referralData.referralCode}</p>
+            <button
+              onClick={handleCopyReferralLink}
+              className="mt-2 text-sm text-blue-600 hover:text-blue-800"
+            >
+              {copied ? 'Copied!' : 'Copy Referral Link'}
+            </button>
+          </div>
+        </div>
+
+        {/* Referral Link and QR Code */}
         <div className="bg-white rounded-lg shadow p-6 mb-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {/* Left Column - Stats */}
-            <div>
-              <div className="space-y-6">
-                <div>
-                  <h3 className="text-sm font-medium text-gray-500">Your Referral Code</h3>
-                  <div className="mt-2 flex items-center space-x-4">
-                    <div className="flex-1 bg-gray-50 rounded-lg p-3 font-mono text-lg">
-                      {data.referralCode}
-                    </div>
-                    <button
-                      onClick={handleCopyCode}
-                      className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-                      title="Copy Referral Code"
-                    >
-                      {copied ? 'Copied!' : 'Copy'}
-                    </button>
-                    <button
-                      onClick={handleShare}
-                      className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2"
-                      title="Share Referral Code"
-                    >
-                      Share
-                    </button>
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-2 gap-4">
-                  <div>
-                    <h3 className="text-sm font-medium text-gray-500">Total Referrals</h3>
-                    <p className="mt-2 text-3xl font-semibold text-gray-900">
-                      {data.totalReferrals}
-                    </p>
-                  </div>
-                  <div>
-                    <h3 className="text-sm font-medium text-gray-500">Total Earnings</h3>
-                    <p className="mt-2 text-3xl font-semibold text-gray-900">
-                      {ethers.formatEther(data.totalEarnings)} EHBGC
-                    </p>
-                  </div>
-                  <div>
-                    <h3 className="text-sm font-medium text-gray-500">Referral Level</h3>
-                    <p className="mt-2 text-3xl font-semibold text-gray-900">
-                      Level {data.referralLevel}
-                    </p>
-                  </div>
-                  <div>
-                    <h3 className="text-sm font-medium text-gray-500">Referral Rate</h3>
-                    <p className="mt-2 text-3xl font-semibold text-gray-900">
-                      {data.referralRate}%
-                    </p>
-                  </div>
-                </div>
-
-                {data.referredBy && (
-                  <div>
-                    <h3 className="text-sm font-medium text-gray-500">Referred By</h3>
-                    <p className="mt-2 text-lg text-gray-900">{data.referredBy}</p>
-                  </div>
-                )}
-              </div>
-            </div>
-
-            {/* Right Column - QR Code */}
-            <div className="flex flex-col items-center justify-center">
-              <div className="bg-white p-4 rounded-lg shadow-lg">
-                <QRCodeSVG
-                  value={`${window.location.origin}?ref=${data.referralCode}`}
-                  size={200}
-                  level="H"
-                  includeMargin
+          <div className="flex flex-col md:flex-row items-center justify-between">
+            <div className="flex-1">
+              <h3 className="text-lg font-medium text-gray-900 mb-4">Your Referral Link</h3>
+              <div className="flex items-center space-x-2">
+                <input
+                  type="text"
+                  readOnly
+                  value={`${window.location.origin}/token?ref=${referralData.referralCode}`}
+                  className="flex-1 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
                 />
+                <button
+                  onClick={handleCopyReferralLink}
+                  className="px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                >
+                  {copied ? 'Copied!' : 'Copy'}
+                </button>
               </div>
-              <p className="mt-4 text-sm text-gray-500">Scan to share your referral code</p>
+              <p className="mt-2 text-sm text-gray-500">
+                Share this link with your friends and earn {referralData.referralRate}% commission
+                on their locks!
+              </p>
+            </div>
+            <div className="mt-4 md:mt-0 md:ml-8">
+              <QRCodeSVG
+                value={`${window.location.origin}/token?ref=${referralData.referralCode}`}
+                size={128}
+                level="H"
+                includeMargin
+              />
             </div>
           </div>
         </div>
 
-        {/* Tabs */}
-        <div className="bg-white rounded-lg shadow">
-          <div className="border-b border-gray-200">
-            <nav className="flex -mb-px">
-              {(['overview', 'referrals', 'rewards'] as const).map(tab => (
-                <button
-                  key={tab}
-                  onClick={() => setActiveTab(tab)}
-                  className={`py-4 px-6 text-sm font-medium ${
-                    activeTab === tab
-                      ? 'border-b-2 border-blue-500 text-blue-600'
-                      : 'text-gray-500 hover:text-gray-700 hover:border-gray-300'
-                  }`}
-                >
-                  {tab.charAt(0).toUpperCase() + tab.slice(1)}
-                </button>
-              ))}
-            </nav>
+        {/* Referral Stats */}
+        <div className="bg-white rounded-lg shadow p-6 mb-8">
+          <h3 className="text-lg font-medium text-gray-900 mb-4">Referral Statistics</h3>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="p-4 bg-gray-50 rounded-lg">
+              <h4 className="text-sm font-medium text-gray-500">Level 1</h4>
+              <p className="mt-2 text-2xl font-bold text-gray-900">
+                {referralData.referralStats.level1.count}
+              </p>
+              <p className="text-sm text-gray-500">
+                {ethers.formatEther(referralData.referralStats.level1.earnings)} EHBGC
+              </p>
+            </div>
+            <div className="p-4 bg-gray-50 rounded-lg">
+              <h4 className="text-sm font-medium text-gray-500">Level 2</h4>
+              <p className="mt-2 text-2xl font-bold text-gray-900">
+                {referralData.referralStats.level2.count}
+              </p>
+              <p className="text-sm text-gray-500">
+                {ethers.formatEther(referralData.referralStats.level2.earnings)} EHBGC
+              </p>
+            </div>
+            <div className="p-4 bg-gray-50 rounded-lg">
+              <h4 className="text-sm font-medium text-gray-500">Level 3</h4>
+              <p className="mt-2 text-2xl font-bold text-gray-900">
+                {referralData.referralStats.level3.count}
+              </p>
+              <p className="text-sm text-gray-500">
+                {ethers.formatEther(referralData.referralStats.level3.earnings)} EHBGC
+              </p>
+            </div>
           </div>
+        </div>
 
-          <div className="p-6">
-            {/* Overview Tab */}
-            {activeTab === 'overview' && (
-              <div className="space-y-6">
-                <div>
-                  <h3 className="text-lg font-medium text-gray-900 mb-4">How It Works</h3>
-                  <div className="prose max-w-none">
-                    <ol className="list-decimal list-inside space-y-4">
-                      <li>Share your unique referral code with friends and community members</li>
-                      <li>When they join using your code, they become your referral</li>
-                      <li>Earn {data.referralRate}% of their lock amounts as rewards</li>
-                      <li>Level up by referring more users and increase your earnings</li>
-                    </ol>
-                  </div>
-                </div>
-
-                <div>
-                  <h3 className="text-lg font-medium text-gray-900 mb-4">Level Benefits</h3>
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <div className="bg-gray-50 rounded-lg p-4">
-                      <h4 className="font-medium text-gray-900">Level 1</h4>
-                      <p className="text-sm text-gray-500 mt-1">5% referral rate</p>
-                      <p className="text-sm text-gray-500">0-5 referrals</p>
-                    </div>
-                    <div className="bg-gray-50 rounded-lg p-4">
-                      <h4 className="font-medium text-gray-900">Level 2</h4>
-                      <p className="text-sm text-gray-500 mt-1">7.5% referral rate</p>
-                      <p className="text-sm text-gray-500">6-20 referrals</p>
-                    </div>
-                    <div className="bg-gray-50 rounded-lg p-4">
-                      <h4 className="font-medium text-gray-900">Level 3</h4>
-                      <p className="text-sm text-gray-500 mt-1">10% referral rate</p>
-                      <p className="text-sm text-gray-500">21+ referrals</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            )}
-
-            {/* Referrals Tab */}
-            {activeTab === 'referrals' && (
-              <div className="overflow-x-auto">
-                <table className="min-w-full divide-y divide-gray-200">
-                  <thead>
-                    <tr>
-                      <th className="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        Address
-                      </th>
-                      <th className="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        Join Date
-                      </th>
-                      <th className="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        Total Locks
-                      </th>
-                      <th className="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        Total Volume
-                      </th>
-                      <th className="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        Rewards
-                      </th>
-                      <th className="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        Status
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody className="bg-white divide-y divide-gray-200">
-                    {data.referrals.map((referral, index) => (
-                      <tr key={index}>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                          {referral.address}
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                          {formatDistanceToNow(referral.joinDate, { addSuffix: true })}
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                          {referral.totalLocks}
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                          {ethers.formatEther(referral.totalVolume)} EHBGC
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                          {ethers.formatEther(referral.rewards)} EHBGC
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap">
-                          <span
-                            className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
-                              referral.status === 'active'
-                                ? 'bg-green-100 text-green-800'
-                                : 'bg-gray-100 text-gray-800'
-                            }`}
-                          >
-                            {referral.status.charAt(0).toUpperCase() + referral.status.slice(1)}
-                          </span>
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            )}
-
-            {/* Rewards Tab */}
-            {activeTab === 'rewards' && (
-              <div className="space-y-6">
-                <div className="overflow-x-auto">
-                  <table className="min-w-full divide-y divide-gray-200">
-                    <thead>
-                      <tr>
-                        <th className="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                          Date
-                        </th>
-                        <th className="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                          Amount
-                        </th>
-                        <th className="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                          Referral
-                        </th>
-                        <th className="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                          Type
-                        </th>
-                      </tr>
-                    </thead>
-                    <tbody className="bg-white divide-y divide-gray-200">
-                      {data.rewardsHistory.map((reward, index) => (
-                        <tr key={index}>
-                          <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                            {formatDistanceToNow(reward.date, { addSuffix: true })}
-                          </td>
-                          <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                            {ethers.formatEther(reward.amount)} EHBGC
-                          </td>
-                          <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                            {reward.referral}
-                          </td>
-                          <td className="px-6 py-4 whitespace-nowrap">
-                            <span
-                              className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
-                                reward.type === 'lock'
-                                  ? 'bg-blue-100 text-blue-800'
-                                  : 'bg-yellow-100 text-yellow-800'
-                              }`}
-                            >
-                              {reward.type.charAt(0).toUpperCase() + reward.type.slice(1)}
-                            </span>
-                          </td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            )}
+        {/* Referral History */}
+        <div className="bg-white rounded-lg shadow overflow-hidden">
+          <div className="px-6 py-4 border-b border-gray-200">
+            <div className="flex items-center justify-between">
+              <h3 className="text-lg font-medium text-gray-900">Referral History</h3>
+              <button
+                onClick={handleClaimRewards}
+                disabled={referralData.pendingEarnings === BigInt(0)}
+                className={`px-4 py-2 rounded-md text-sm font-medium ${
+                  referralData.pendingEarnings === BigInt(0)
+                    ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
+                    : 'bg-blue-600 text-white hover:bg-blue-700'
+                }`}
+              >
+                Claim Rewards
+              </button>
+            </div>
+          </div>
+          <div className="overflow-x-auto">
+            <table className="min-w-full divide-y divide-gray-200">
+              <thead>
+                <tr>
+                  <th className="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Address
+                  </th>
+                  <th className="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Amount
+                  </th>
+                  <th className="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Reward
+                  </th>
+                  <th className="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Date
+                  </th>
+                  <th className="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Status
+                  </th>
+                </tr>
+              </thead>
+              <tbody className="bg-white divide-y divide-gray-200">
+                {referralData.referralHistory.map((referral, index) => (
+                  <tr key={index}>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                      {referral.address}
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                      {ethers.formatEther(referral.amount)} EHBGC
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                      {ethers.formatEther(referral.reward)} EHBGC
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                      {new Date(referral.timestamp).toLocaleDateString()}
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      <span
+                        className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
+                          referral.status === 'completed'
+                            ? 'bg-green-100 text-green-800'
+                            : referral.status === 'pending'
+                              ? 'bg-yellow-100 text-yellow-800'
+                              : 'bg-red-100 text-red-800'
+                        }`}
+                      >
+                        {referral.status.charAt(0).toUpperCase() + referral.status.slice(1)}
+                      </span>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
         </div>
       </div>

@@ -1,63 +1,134 @@
 import React, { useState, useEffect } from 'react';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
-import { ethers } from 'ethers';
-import { getContract } from '@/lib/contracts';
-import { toast } from 'react-hot-toast';
-import { formatDistanceToNow } from 'date-fns';
+import { Tab } from '@headlessui/react';
+import {
+  UserCircleIcon,
+  ClockIcon,
+  TrophyIcon,
+  ChartBarIcon,
+  StarIcon,
+} from '@heroicons/react/24/outline';
 
-interface UserProfile {
-  address: string;
-  displayName: string;
-  email: string;
-  joinDate: number;
-  totalLocks: number;
-  totalUnlocks: number;
-  totalRewards: bigint;
-  totalReferrals: number;
-  referralEarnings: bigint;
-  lastActivity: number;
-  preferences: {
-    notifications: {
-      email: boolean;
-      telegram: boolean;
-      discord: boolean;
-    };
-    security: {
-      twoFactor: boolean;
-      sessionTimeout: number;
-      ipWhitelist: string[];
-    };
-    display: {
-      language: string;
-      timezone: string;
-      theme: 'light' | 'dark' | 'system';
-    };
-  };
+interface Activity {
+  id: string;
+  type: 'lock' | 'unlock' | 'reward' | 'referral';
+  amount: number;
+  timestamp: string;
+  status: 'completed' | 'pending' | 'failed';
+  details: string;
 }
 
-export default function TokenProfile() {
+interface Achievement {
+  id: string;
+  title: string;
+  description: string;
+  icon: string;
+  progress: number;
+  completed: boolean;
+  reward: string;
+}
+
+interface Stats {
+  totalLocked: number;
+  totalRewards: number;
+  referralCount: number;
+  activeLocks: number;
+  averageLockDuration: number;
+  securityScore: number;
+}
+
+const activities: Activity[] = [
+  {
+    id: '1',
+    type: 'lock',
+    amount: 1000,
+    timestamp: '2024-03-15T10:30:00Z',
+    status: 'completed',
+    details: 'Locked 1000 EHBGC for 12 months',
+  },
+  {
+    id: '2',
+    type: 'reward',
+    amount: 50,
+    timestamp: '2024-03-14T15:45:00Z',
+    status: 'completed',
+    details: 'Received monthly rewards',
+  },
+  {
+    id: '3',
+    type: 'referral',
+    amount: 100,
+    timestamp: '2024-03-13T09:15:00Z',
+    status: 'completed',
+    details: 'Referral bonus from user123',
+  },
+  {
+    id: '4',
+    type: 'unlock',
+    amount: 500,
+    timestamp: '2024-03-12T14:20:00Z',
+    status: 'completed',
+    details: 'Unlocked 500 EHBGC',
+  },
+];
+
+const achievements: Achievement[] = [
+  {
+    id: '1',
+    title: 'Early Adopter',
+    description: 'Join the platform within the first month',
+    icon: '🌟',
+    progress: 100,
+    completed: true,
+    reward: '100 EHBGC',
+  },
+  {
+    id: '2',
+    title: 'Loyal Holder',
+    description: 'Lock tokens for 12 consecutive months',
+    icon: '💎',
+    progress: 75,
+    completed: false,
+    reward: '500 EHBGC',
+  },
+  {
+    id: '3',
+    title: 'Referral Master',
+    description: 'Refer 10 active users',
+    icon: '👥',
+    progress: 40,
+    completed: false,
+    reward: '1000 EHBGC',
+  },
+  {
+    id: '4',
+    title: 'Security Champion',
+    description: 'Enable all security features',
+    icon: '🔒',
+    progress: 100,
+    completed: true,
+    reward: '200 EHBGC',
+  },
+];
+
+const stats: Stats = {
+  totalLocked: 5000,
+  totalRewards: 250,
+  referralCount: 4,
+  activeLocks: 2,
+  averageLockDuration: 8,
+  securityScore: 95,
+};
+
+function classNames(...classes: string[]) {
+  return classes.filter(Boolean).join(' ');
+}
+
+export default function ProfilePage() {
   const { data: session, status } = useSession();
   const router = useRouter();
-  const [loading, setLoading] = useState(true);
-  const [saving, setSaving] = useState(false);
-  const [profile, setProfile] = useState<UserProfile | null>(null);
-  const [activeTab, setActiveTab] = useState<
-    'general' | 'security' | 'notifications' | 'preferences'
-  >('general');
-  const [formData, setFormData] = useState({
-    displayName: '',
-    email: '',
-    language: '',
-    timezone: '',
-    theme: 'system' as const,
-    emailNotifications: false,
-    telegramNotifications: false,
-    discordNotifications: false,
-    twoFactor: false,
-    sessionTimeout: 30,
-    ipWhitelist: '',
-  });
+  const [selectedTab, setSelectedTab] = useState(0);
 
   useEffect(() => {
     if (status === 'unauthenticated') {
@@ -65,416 +136,211 @@ export default function TokenProfile() {
     }
   }, [status, router]);
 
-  useEffect(() => {
-    const fetchProfile = async () => {
-      try {
-        setLoading(true);
-        const contract = await getContract();
-
-        // TODO: Fetch profile from contract
-        // For now using mock data
-        const mockProfile: UserProfile = {
-          address: '0x123...abc',
-          displayName: 'John Doe',
-          email: 'john@example.com',
-          joinDate: Date.now() - 2592000000, // 30 days ago
-          totalLocks: 10,
-          totalUnlocks: 5,
-          totalRewards: ethers.parseEther('1000'),
-          totalReferrals: 3,
-          referralEarnings: ethers.parseEther('500'),
-          lastActivity: Date.now() - 3600000, // 1 hour ago
-          preferences: {
-            notifications: {
-              email: true,
-              telegram: false,
-              discord: true,
-            },
-            security: {
-              twoFactor: true,
-              sessionTimeout: 30,
-              ipWhitelist: ['192.168.1.1', '10.0.0.1'],
-            },
-            display: {
-              language: 'en',
-              timezone: 'UTC',
-              theme: 'system',
-            },
-          },
-        };
-
-        setProfile(mockProfile);
-        setFormData({
-          displayName: mockProfile.displayName,
-          email: mockProfile.email,
-          language: mockProfile.preferences.display.language,
-          timezone: mockProfile.preferences.display.timezone,
-          theme: mockProfile.preferences.display.theme,
-          emailNotifications: mockProfile.preferences.notifications.email,
-          telegramNotifications: mockProfile.preferences.notifications.telegram,
-          discordNotifications: mockProfile.preferences.notifications.discord,
-          twoFactor: mockProfile.preferences.security.twoFactor,
-          sessionTimeout: mockProfile.preferences.security.sessionTimeout,
-          ipWhitelist: mockProfile.preferences.security.ipWhitelist.join('\n'),
-        });
-      } catch (err) {
-        console.error('Failed to fetch profile:', err);
-        toast.error('Failed to load profile');
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchProfile();
-  }, []);
-
-  const handleSave = async () => {
-    try {
-      setSaving(true);
-      const contract = await getContract();
-
-      // TODO: Save profile to contract
-      // For now just showing success message
-      toast.success('Profile updated successfully!');
-    } catch (err) {
-      console.error('Failed to save profile:', err);
-      toast.error('Failed to update profile');
-    } finally {
-      setSaving(false);
-    }
-  };
-
-  if (loading) {
-    return (
-      <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto">
-          <div className="animate-pulse">
-            <div className="h-8 bg-gray-200 rounded w-1/4 mb-8"></div>
-            <div className="space-y-6">
-              {[...Array(4)].map((_, i) => (
-                <div key={i} className="h-32 bg-gray-200 rounded"></div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-  }
-
-  if (!profile) return null;
-
   return (
     <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
-        <h1 className="text-3xl font-bold text-gray-900 mb-8">Profile</h1>
-
-        {/* Profile Overview */}
-        <div className="bg-white rounded-lg shadow p-6 mb-8">
-          <div className="flex items-center space-x-6">
-            <div className="h-24 w-24 rounded-full bg-blue-100 flex items-center justify-center">
-              <span className="text-3xl">👤</span>
-            </div>
-            <div>
-              <h2 className="text-2xl font-semibold text-gray-900">{profile.displayName}</h2>
-              <p className="text-gray-500">{profile.email}</p>
-              <p className="text-sm text-gray-500 mt-1">
-                Member since {formatDistanceToNow(profile.joinDate, { addSuffix: true })}
-              </p>
-            </div>
-          </div>
-
-          <div className="mt-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <div>
-              <h3 className="text-sm font-medium text-gray-500">Total Locks</h3>
-              <p className="mt-2 text-3xl font-semibold text-gray-900">{profile.totalLocks}</p>
-            </div>
-            <div>
-              <h3 className="text-sm font-medium text-gray-500">Total Rewards</h3>
-              <p className="mt-2 text-3xl font-semibold text-gray-900">
-                {ethers.formatEther(profile.totalRewards)} EHBGC
-              </p>
-            </div>
-            <div>
-              <h3 className="text-sm font-medium text-gray-500">Total Referrals</h3>
-              <p className="mt-2 text-3xl font-semibold text-gray-900">{profile.totalReferrals}</p>
-            </div>
-            <div>
-              <h3 className="text-sm font-medium text-gray-500">Referral Earnings</h3>
-              <p className="mt-2 text-3xl font-semibold text-gray-900">
-                {ethers.formatEther(profile.referralEarnings)} EHBGC
-              </p>
+        {/* Profile Header */}
+        <div className="bg-white rounded-lg shadow mb-8">
+          <div className="px-6 py-8">
+            <div className="flex items-center">
+              <div className="flex-shrink-0">
+                <UserCircleIcon className="h-20 w-20 text-gray-400" />
+              </div>
+              <div className="ml-6">
+                <h1 className="text-2xl font-bold text-gray-900">
+                  {session?.user?.name || 'User'}
+                </h1>
+                <p className="text-sm text-gray-500">
+                  {session?.user?.email || 'user@example.com'}
+                </p>
+                <div className="mt-2 flex items-center">
+                  <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                    Active Member
+                  </span>
+                  <span className="ml-2 text-sm text-gray-500">Joined March 2024</span>
+                </div>
+              </div>
             </div>
           </div>
         </div>
 
-        {/* Settings Tabs */}
-        <div className="bg-white rounded-lg shadow">
-          <div className="border-b border-gray-200">
-            <nav className="flex -mb-px">
-              {(['general', 'security', 'notifications', 'preferences'] as const).map(tab => (
-                <button
-                  key={tab}
-                  onClick={() => setActiveTab(tab)}
-                  className={`py-4 px-6 text-sm font-medium ${
-                    activeTab === tab
-                      ? 'border-b-2 border-blue-500 text-blue-600'
-                      : 'text-gray-500 hover:text-gray-700 hover:border-gray-300'
-                  }`}
-                >
-                  {tab.charAt(0).toUpperCase() + tab.slice(1)}
-                </button>
-              ))}
-            </nav>
+        {/* Stats Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+          <div className="bg-white rounded-lg shadow p-6">
+            <div className="flex items-center">
+              <div className="flex-shrink-0">
+                <ChartBarIcon className="h-8 w-8 text-blue-500" />
+              </div>
+              <div className="ml-4">
+                <h3 className="text-lg font-medium text-gray-900">Total Locked</h3>
+                <p className="text-2xl font-semibold text-gray-900">{stats.totalLocked} EHBGC</p>
+              </div>
+            </div>
           </div>
 
-          <div className="p-6">
-            {/* General Settings */}
-            {activeTab === 'general' && (
-              <div className="space-y-6">
-                <div>
-                  <label htmlFor="display-name" className="block text-sm font-medium text-gray-700">
-                    Display Name
-                  </label>
-                  <input
-                    type="text"
-                    id="display-name"
-                    value={formData.displayName}
-                    onChange={e => setFormData(prev => ({ ...prev, displayName: e.target.value }))}
-                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
-                  />
-                </div>
-
-                <div>
-                  <label htmlFor="email" className="block text-sm font-medium text-gray-700">
-                    Email Address
-                  </label>
-                  <input
-                    type="email"
-                    id="email"
-                    value={formData.email}
-                    onChange={e => setFormData(prev => ({ ...prev, email: e.target.value }))}
-                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
-                  />
-                </div>
-
-                <div>
-                  <label htmlFor="language" className="block text-sm font-medium text-gray-700">
-                    Language
-                  </label>
-                  <select
-                    id="language"
-                    value={formData.language}
-                    onChange={e => setFormData(prev => ({ ...prev, language: e.target.value }))}
-                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
-                  >
-                    <option value="en">English</option>
-                    <option value="es">Spanish</option>
-                    <option value="fr">French</option>
-                    <option value="de">German</option>
-                  </select>
-                </div>
-
-                <div>
-                  <label htmlFor="timezone" className="block text-sm font-medium text-gray-700">
-                    Time Zone
-                  </label>
-                  <select
-                    id="timezone"
-                    value={formData.timezone}
-                    onChange={e => setFormData(prev => ({ ...prev, timezone: e.target.value }))}
-                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
-                  >
-                    <option value="UTC">UTC</option>
-                    <option value="EST">EST</option>
-                    <option value="PST">PST</option>
-                    <option value="GMT">GMT</option>
-                  </select>
-                </div>
+          <div className="bg-white rounded-lg shadow p-6">
+            <div className="flex items-center">
+              <div className="flex-shrink-0">
+                <TrophyIcon className="h-8 w-8 text-yellow-500" />
               </div>
-            )}
-
-            {/* Security Settings */}
-            {activeTab === 'security' && (
-              <div className="space-y-6">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <h3 className="text-sm font-medium text-gray-900">Two-Factor Authentication</h3>
-                    <p className="text-sm text-gray-500">
-                      Add an extra layer of security to your account
-                    </p>
-                  </div>
-                  <button
-                    type="button"
-                    onClick={() => setFormData(prev => ({ ...prev, twoFactor: !prev.twoFactor }))}
-                    className={`relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 ${
-                      formData.twoFactor ? 'bg-blue-600' : 'bg-gray-200'
-                    }`}
-                  >
-                    <span
-                      className={`pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out ${
-                        formData.twoFactor ? 'translate-x-5' : 'translate-x-0'
-                      }`}
-                    />
-                  </button>
-                </div>
-
-                <div>
-                  <label
-                    htmlFor="session-timeout"
-                    className="block text-sm font-medium text-gray-700"
-                  >
-                    Session Timeout (minutes)
-                  </label>
-                  <input
-                    type="number"
-                    id="session-timeout"
-                    value={formData.sessionTimeout}
-                    onChange={e =>
-                      setFormData(prev => ({ ...prev, sessionTimeout: parseInt(e.target.value) }))
-                    }
-                    min="5"
-                    max="120"
-                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
-                  />
-                </div>
-
-                <div>
-                  <label htmlFor="ip-whitelist" className="block text-sm font-medium text-gray-700">
-                    IP Whitelist
-                  </label>
-                  <textarea
-                    id="ip-whitelist"
-                    value={formData.ipWhitelist}
-                    onChange={e => setFormData(prev => ({ ...prev, ipWhitelist: e.target.value }))}
-                    rows={4}
-                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
-                    placeholder="Enter IP addresses (one per line)"
-                  />
-                </div>
+              <div className="ml-4">
+                <h3 className="text-lg font-medium text-gray-900">Total Rewards</h3>
+                <p className="text-2xl font-semibold text-gray-900">{stats.totalRewards} EHBGC</p>
               </div>
-            )}
+            </div>
+          </div>
 
-            {/* Notification Settings */}
-            {activeTab === 'notifications' && (
-              <div className="space-y-6">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <h3 className="text-sm font-medium text-gray-900">Email Notifications</h3>
-                    <p className="text-sm text-gray-500">Receive notifications via email</p>
-                  </div>
-                  <button
-                    type="button"
-                    onClick={() =>
-                      setFormData(prev => ({
-                        ...prev,
-                        emailNotifications: !prev.emailNotifications,
-                      }))
-                    }
-                    className={`relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 ${
-                      formData.emailNotifications ? 'bg-blue-600' : 'bg-gray-200'
-                    }`}
-                  >
-                    <span
-                      className={`pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out ${
-                        formData.emailNotifications ? 'translate-x-5' : 'translate-x-0'
-                      }`}
-                    />
-                  </button>
-                </div>
-
-                <div className="flex items-center justify-between">
-                  <div>
-                    <h3 className="text-sm font-medium text-gray-900">Telegram Notifications</h3>
-                    <p className="text-sm text-gray-500">Receive notifications via Telegram</p>
-                  </div>
-                  <button
-                    type="button"
-                    onClick={() =>
-                      setFormData(prev => ({
-                        ...prev,
-                        telegramNotifications: !prev.telegramNotifications,
-                      }))
-                    }
-                    className={`relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 ${
-                      formData.telegramNotifications ? 'bg-blue-600' : 'bg-gray-200'
-                    }`}
-                  >
-                    <span
-                      className={`pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out ${
-                        formData.telegramNotifications ? 'translate-x-5' : 'translate-x-0'
-                      }`}
-                    />
-                  </button>
-                </div>
-
-                <div className="flex items-center justify-between">
-                  <div>
-                    <h3 className="text-sm font-medium text-gray-900">Discord Notifications</h3>
-                    <p className="text-sm text-gray-500">Receive notifications via Discord</p>
-                  </div>
-                  <button
-                    type="button"
-                    onClick={() =>
-                      setFormData(prev => ({
-                        ...prev,
-                        discordNotifications: !prev.discordNotifications,
-                      }))
-                    }
-                    className={`relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 ${
-                      formData.discordNotifications ? 'bg-blue-600' : 'bg-gray-200'
-                    }`}
-                  >
-                    <span
-                      className={`pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out ${
-                        formData.discordNotifications ? 'translate-x-5' : 'translate-x-0'
-                      }`}
-                    />
-                  </button>
-                </div>
+          <div className="bg-white rounded-lg shadow p-6">
+            <div className="flex items-center">
+              <div className="flex-shrink-0">
+                <StarIcon className="h-8 w-8 text-purple-500" />
               </div>
-            )}
-
-            {/* Display Preferences */}
-            {activeTab === 'preferences' && (
-              <div className="space-y-6">
-                <div>
-                  <label htmlFor="theme" className="block text-sm font-medium text-gray-700">
-                    Theme
-                  </label>
-                  <select
-                    id="theme"
-                    value={formData.theme}
-                    onChange={e =>
-                      setFormData(prev => ({
-                        ...prev,
-                        theme: e.target.value as 'light' | 'dark' | 'system',
-                      }))
-                    }
-                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
-                  >
-                    <option value="light">Light</option>
-                    <option value="dark">Dark</option>
-                    <option value="system">System</option>
-                  </select>
-                </div>
+              <div className="ml-4">
+                <h3 className="text-lg font-medium text-gray-900">Referrals</h3>
+                <p className="text-2xl font-semibold text-gray-900">{stats.referralCount} Users</p>
               </div>
-            )}
-
-            <div className="mt-6">
-              <button
-                onClick={handleSave}
-                disabled={saving}
-                className={`w-full px-6 py-3 rounded-lg font-medium ${
-                  saving
-                    ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
-                    : 'bg-blue-600 text-white hover:bg-blue-700'
-                }`}
-              >
-                {saving ? 'Saving...' : 'Save Changes'}
-              </button>
             </div>
           </div>
         </div>
+
+        {/* Tabs */}
+        <Tab.Group onChange={setSelectedTab}>
+          <Tab.List className="flex space-x-1 rounded-xl bg-blue-900/20 p-1 mb-8">
+            <Tab
+              className={({ selected }) =>
+                classNames(
+                  'w-full rounded-lg py-2.5 text-sm font-medium leading-5',
+                  'ring-white ring-opacity-60 ring-offset-2 ring-offset-blue-400 focus:outline-none focus:ring-2',
+                  selected
+                    ? 'bg-white text-blue-700 shadow'
+                    : 'text-blue-100 hover:bg-white/[0.12] hover:text-white'
+                )
+              }
+            >
+              Activity History
+            </Tab>
+            <Tab
+              className={({ selected }) =>
+                classNames(
+                  'w-full rounded-lg py-2.5 text-sm font-medium leading-5',
+                  'ring-white ring-opacity-60 ring-offset-2 ring-offset-blue-400 focus:outline-none focus:ring-2',
+                  selected
+                    ? 'bg-white text-blue-700 shadow'
+                    : 'text-blue-100 hover:bg-white/[0.12] hover:text-white'
+                )
+              }
+            >
+              Achievements
+            </Tab>
+          </Tab.List>
+          <Tab.Panels>
+            {/* Activity History Panel */}
+            <Tab.Panel>
+              <div className="bg-white rounded-lg shadow">
+                <div className="px-6 py-4 border-b border-gray-200">
+                  <h2 className="text-lg font-medium text-gray-900">Recent Activity</h2>
+                </div>
+                <div className="divide-y divide-gray-200">
+                  {activities.map(activity => (
+                    <div key={activity.id} className="px-6 py-4">
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center">
+                          <div className="flex-shrink-0">
+                            {activity.type === 'lock' && (
+                              <ClockIcon className="h-6 w-6 text-blue-500" />
+                            )}
+                            {activity.type === 'unlock' && (
+                              <ClockIcon className="h-6 w-6 text-green-500" />
+                            )}
+                            {activity.type === 'reward' && (
+                              <TrophyIcon className="h-6 w-6 text-yellow-500" />
+                            )}
+                            {activity.type === 'referral' && (
+                              <StarIcon className="h-6 w-6 text-purple-500" />
+                            )}
+                          </div>
+                          <div className="ml-4">
+                            <p className="text-sm font-medium text-gray-900">{activity.details}</p>
+                            <p className="text-sm text-gray-500">
+                              {new Date(activity.timestamp).toLocaleString()}
+                            </p>
+                          </div>
+                        </div>
+                        <div className="flex items-center">
+                          <span
+                            className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
+                              activity.status === 'completed'
+                                ? 'bg-green-100 text-green-800'
+                                : activity.status === 'pending'
+                                  ? 'bg-yellow-100 text-yellow-800'
+                                  : 'bg-red-100 text-red-800'
+                            }`}
+                          >
+                            {activity.status}
+                          </span>
+                          <span className="ml-4 text-sm font-medium text-gray-900">
+                            {activity.amount} EHBGC
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </Tab.Panel>
+
+            {/* Achievements Panel */}
+            <Tab.Panel>
+              <div className="bg-white rounded-lg shadow">
+                <div className="px-6 py-4 border-b border-gray-200">
+                  <h2 className="text-lg font-medium text-gray-900">Achievements</h2>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 p-6">
+                  {achievements.map(achievement => (
+                    <div
+                      key={achievement.id}
+                      className={`border rounded-lg p-6 ${
+                        achievement.completed ? 'border-green-500 bg-green-50' : 'border-gray-200'
+                      }`}
+                    >
+                      <div className="flex items-center">
+                        <div className="flex-shrink-0 text-3xl">{achievement.icon}</div>
+                        <div className="ml-4">
+                          <h3 className="text-lg font-medium text-gray-900">{achievement.title}</h3>
+                          <p className="text-sm text-gray-500">{achievement.description}</p>
+                        </div>
+                      </div>
+                      <div className="mt-4">
+                        <div className="flex items-center justify-between">
+                          <span className="text-sm font-medium text-gray-900">Progress</span>
+                          <span className="text-sm font-medium text-gray-900">
+                            {achievement.progress}%
+                          </span>
+                        </div>
+                        <div className="mt-2">
+                          <div className="relative">
+                            <div className="overflow-hidden h-2 text-xs flex rounded bg-gray-200">
+                              <div
+                                style={{ width: `${achievement.progress}%` }}
+                                className={`shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center ${
+                                  achievement.completed ? 'bg-green-500' : 'bg-blue-500'
+                                }`}
+                              ></div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="mt-4">
+                        <span className="text-sm font-medium text-gray-900">Reward: </span>
+                        <span className="text-sm text-gray-500">{achievement.reward}</span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </Tab.Panel>
+          </Tab.Panels>
+        </Tab.Group>
       </div>
     </div>
   );

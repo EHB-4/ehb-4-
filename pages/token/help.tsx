@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import { ChevronDownIcon, ChevronUpIcon } from '@heroicons/react/24/outline';
+import { Disclosure } from '@headlessui/react';
 
 interface FAQ {
   question: string;
@@ -9,62 +10,131 @@ interface FAQ {
   category: 'general' | 'technical' | 'rewards' | 'security';
 }
 
+interface Documentation {
+  title: string;
+  description: string;
+  link: string;
+  category: 'getting-started' | 'advanced' | 'api' | 'security';
+}
+
+interface SupportChannel {
+  name: string;
+  description: string;
+  link: string;
+  icon: string;
+}
+
 const faqs: FAQ[] = [
   {
     question: 'What is EHBGC Token?',
     answer:
-      "EHBGC Token is a utility token that allows users to participate in the platform's ecosystem. It can be used for locking, unlocking, and earning rewards.",
+      "EHBGC is a utility token that allows users to participate in the platform's ecosystem. Users can lock their tokens to earn rewards, participate in governance, and access premium features.",
     category: 'general',
   },
   {
-    question: 'How do I lock my tokens?',
+    question: 'How do I start earning rewards?',
     answer:
-      'To lock your tokens, navigate to the Token Operations page, enter the amount you want to lock, select the duration, and confirm the transaction.',
+      'To start earning rewards, you need to lock your EHBGC tokens for a specific duration. The longer you lock your tokens, the higher your rewards rate will be. You can also earn additional rewards through referrals and bonuses.',
+    category: 'rewards',
+  },
+  {
+    question: 'What is the minimum lock amount?',
+    answer:
+      'The minimum lock amount is 100 EHBGC tokens. This ensures that the platform remains efficient and rewards are distributed fairly among participants.',
     category: 'technical',
+  },
+  {
+    question: 'How secure is the platform?',
+    answer:
+      'The platform implements multiple security measures including two-factor authentication, encrypted data storage, and regular security audits. All smart contracts are thoroughly tested and audited by leading security firms.',
+    category: 'security',
+  },
+  {
+    question: 'How do referral rewards work?',
+    answer:
+      'When you refer someone to the platform, you earn a percentage of their lock amounts as rewards. The referral rate depends on your referral level, which increases as you refer more users.',
+    category: 'rewards',
+  },
+  {
+    question: 'Can I unlock my tokens early?',
+    answer:
+      'Yes, you can unlock your tokens before the lock period ends, but this will result in a penalty fee. The penalty fee is calculated based on the remaining lock duration.',
+    category: 'technical',
+  },
+  {
+    question: 'What happens if I lose my 2FA device?',
+    answer:
+      'If you lose your 2FA device, you can recover your account through a secure recovery process. This involves verifying your identity and waiting for a security cooldown period.',
+    category: 'security',
   },
   {
     question: 'How are rewards calculated?',
     answer:
-      'Rewards are calculated based on the amount of tokens locked, the lock duration, and the current reward rate. The longer you lock your tokens, the higher your rewards.',
+      'Rewards are calculated based on your lock amount, lock duration, and any applicable bonuses. The base reward rate is 5% APY, which can be increased through various bonus mechanisms.',
     category: 'rewards',
   },
-  {
-    question: 'Is my wallet secure?',
-    answer:
-      "Yes, we use industry-standard security measures to protect your wallet. However, it's important to keep your private keys safe and never share them with anyone.",
-    category: 'security',
-  },
-  // Add more FAQs as needed
 ];
 
-const guides = [
+const documentation: Documentation[] = [
   {
-    title: 'Getting Started',
-    description: 'Learn how to set up your account and start using the platform.',
-    link: '/guides/getting-started',
+    title: 'Getting Started Guide',
+    description:
+      'Learn the basics of the EHBGC platform and how to get started with token locking.',
+    link: '/docs/getting-started',
+    category: 'getting-started',
   },
   {
-    title: 'Token Operations',
-    description: 'Detailed guide on how to lock, unlock, and manage your tokens.',
-    link: '/guides/token-operations',
+    title: 'Advanced Features',
+    description:
+      'Explore advanced features like auto-compounding, referral programs, and bonus rewards.',
+    link: '/docs/advanced',
+    category: 'advanced',
   },
   {
-    title: 'Rewards System',
-    description: 'Understand how the rewards system works and maximize your earnings.',
-    link: '/guides/rewards-system',
+    title: 'API Documentation',
+    description: 'Integrate with our platform using our comprehensive API documentation.',
+    link: '/docs/api',
+    category: 'api',
   },
   {
     title: 'Security Best Practices',
-    description: 'Learn how to keep your account and tokens secure.',
-    link: '/guides/security',
+    description: 'Learn about security features and best practices to protect your account.',
+    link: '/docs/security',
+    category: 'security',
   },
 ];
 
-export default function TokenHelp() {
+const supportChannels: SupportChannel[] = [
+  {
+    name: 'Discord',
+    description: 'Join our Discord community for real-time support and discussions.',
+    link: 'https://discord.gg/ehbgc',
+    icon: '💬',
+  },
+  {
+    name: 'Telegram',
+    description: 'Connect with us on Telegram for quick support and updates.',
+    link: 'https://t.me/ehbgc',
+    icon: '📱',
+  },
+  {
+    name: 'Email',
+    description: 'Contact our support team via email for detailed assistance.',
+    link: 'mailto:support@ehbgc.com',
+    icon: '📧',
+  },
+  {
+    name: 'Twitter',
+    description: 'Follow us on Twitter for the latest news and announcements.',
+    link: 'https://twitter.com/ehbgc',
+    icon: '🐦',
+  },
+];
+
+export default function HelpPage() {
   const { data: session, status } = useSession();
   const router = useRouter();
-  const [selectedCategory, setSelectedCategory] = useState<FAQ['category'] | 'all'>('all');
-  const [expandedFaqs, setExpandedFaqs] = useState<number[]>([]);
+  const [activeCategory, setActiveCategory] = useState<string>('all');
 
   useEffect(() => {
     if (status === 'unauthenticated') {
@@ -72,14 +142,8 @@ export default function TokenHelp() {
     }
   }, [status, router]);
 
-  const toggleFaq = (index: number) => {
-    setExpandedFaqs(prev =>
-      prev.includes(index) ? prev.filter(i => i !== index) : [...prev, index]
-    );
-  };
-
   const filteredFaqs =
-    selectedCategory === 'all' ? faqs : faqs.filter(faq => faq.category === selectedCategory);
+    activeCategory === 'all' ? faqs : faqs.filter(faq => faq.category === activeCategory);
 
   return (
     <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
@@ -93,18 +157,13 @@ export default function TokenHelp() {
               <input
                 type="text"
                 placeholder="Search for help..."
-                className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
               />
               <button
-                className="absolute right-3 top-1/2 transform -translate-y-1/2"
+                className="absolute right-3 top-3 text-gray-400 hover:text-gray-600"
                 title="Search"
               >
-                <svg
-                  className="h-5 w-5 text-gray-400"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
+                <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -118,158 +177,114 @@ export default function TokenHelp() {
         </div>
 
         {/* Quick Links */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
-          <button
-            onClick={() => router.push('/token/operations')}
-            className="bg-white rounded-lg shadow p-6 hover:shadow-md transition-shadow"
-          >
-            <h3 className="text-lg font-medium text-gray-900 mb-2">Token Operations</h3>
-            <p className="text-sm text-gray-500">Learn how to lock and unlock your tokens</p>
-          </button>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+          {supportChannels.map((channel, index) => (
+            <a
+              key={index}
+              href={channel.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-white rounded-lg shadow p-6 hover:shadow-lg transition-shadow"
+            >
+              <div className="text-3xl mb-2">{channel.icon}</div>
+              <h3 className="text-lg font-medium text-gray-900">{channel.name}</h3>
+              <p className="mt-1 text-sm text-gray-500">{channel.description}</p>
+            </a>
+          ))}
+        </div>
 
-          <button
-            onClick={() => router.push('/token/rewards')}
-            className="bg-white rounded-lg shadow p-6 hover:shadow-md transition-shadow"
-          >
-            <h3 className="text-lg font-medium text-gray-900 mb-2">Rewards</h3>
-            <p className="text-sm text-gray-500">Understand the rewards system</p>
-          </button>
-
-          <button
-            onClick={() => router.push('/token/settings')}
-            className="bg-white rounded-lg shadow p-6 hover:shadow-md transition-shadow"
-          >
-            <h3 className="text-lg font-medium text-gray-900 mb-2">Settings</h3>
-            <p className="text-sm text-gray-500">Manage your account settings</p>
-          </button>
-
-          <button
-            onClick={() => router.push('/token/profile')}
-            className="bg-white rounded-lg shadow p-6 hover:shadow-md transition-shadow"
-          >
-            <h3 className="text-lg font-medium text-gray-900 mb-2">Profile</h3>
-            <p className="text-sm text-gray-500">Update your profile information</p>
-          </button>
+        {/* Documentation */}
+        <div className="bg-white rounded-lg shadow p-6 mb-8">
+          <h2 className="text-lg font-medium text-gray-900 mb-4">Documentation</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {documentation.map((doc, index) => (
+              <a
+                key={index}
+                href={doc.link}
+                className="block p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors"
+              >
+                <h3 className="text-lg font-medium text-gray-900">{doc.title}</h3>
+                <p className="mt-1 text-sm text-gray-500">{doc.description}</p>
+              </a>
+            ))}
+          </div>
         </div>
 
         {/* FAQs */}
-        <div className="bg-white rounded-lg shadow mb-12">
-          <div className="px-6 py-4 border-b border-gray-200">
-            <h2 className="text-xl font-semibold text-gray-900">Frequently Asked Questions</h2>
-          </div>
-
-          {/* Category Filter */}
-          <div className="px-6 py-4 border-b border-gray-200">
-            <div className="flex space-x-4">
+        <div className="bg-white rounded-lg shadow p-6">
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="text-lg font-medium text-gray-900">Frequently Asked Questions</h2>
+            <div className="flex space-x-2">
               <button
-                onClick={() => setSelectedCategory('all')}
-                className={`px-4 py-2 rounded-md text-sm font-medium ${
-                  selectedCategory === 'all'
-                    ? 'bg-blue-100 text-blue-700'
-                    : 'text-gray-500 hover:text-gray-700'
+                onClick={() => setActiveCategory('all')}
+                className={`px-3 py-1 rounded-full text-sm font-medium ${
+                  activeCategory === 'all'
+                    ? 'bg-blue-100 text-blue-800'
+                    : 'bg-gray-100 text-gray-800 hover:bg-gray-200'
                 }`}
               >
                 All
               </button>
               <button
-                onClick={() => setSelectedCategory('general')}
-                className={`px-4 py-2 rounded-md text-sm font-medium ${
-                  selectedCategory === 'general'
-                    ? 'bg-blue-100 text-blue-700'
-                    : 'text-gray-500 hover:text-gray-700'
+                onClick={() => setActiveCategory('general')}
+                className={`px-3 py-1 rounded-full text-sm font-medium ${
+                  activeCategory === 'general'
+                    ? 'bg-blue-100 text-blue-800'
+                    : 'bg-gray-100 text-gray-800 hover:bg-gray-200'
                 }`}
               >
                 General
               </button>
               <button
-                onClick={() => setSelectedCategory('technical')}
-                className={`px-4 py-2 rounded-md text-sm font-medium ${
-                  selectedCategory === 'technical'
-                    ? 'bg-blue-100 text-blue-700'
-                    : 'text-gray-500 hover:text-gray-700'
+                onClick={() => setActiveCategory('technical')}
+                className={`px-3 py-1 rounded-full text-sm font-medium ${
+                  activeCategory === 'technical'
+                    ? 'bg-blue-100 text-blue-800'
+                    : 'bg-gray-100 text-gray-800 hover:bg-gray-200'
                 }`}
               >
                 Technical
               </button>
               <button
-                onClick={() => setSelectedCategory('rewards')}
-                className={`px-4 py-2 rounded-md text-sm font-medium ${
-                  selectedCategory === 'rewards'
-                    ? 'bg-blue-100 text-blue-700'
-                    : 'text-gray-500 hover:text-gray-700'
-                }`}
-              >
-                Rewards
-              </button>
-              <button
-                onClick={() => setSelectedCategory('security')}
-                className={`px-4 py-2 rounded-md text-sm font-medium ${
-                  selectedCategory === 'security'
-                    ? 'bg-blue-100 text-blue-700'
-                    : 'text-gray-500 hover:text-gray-700'
+                onClick={() => setActiveCategory('security')}
+                className={`px-3 py-1 rounded-full text-sm font-medium ${
+                  activeCategory === 'security'
+                    ? 'bg-blue-100 text-blue-800'
+                    : 'bg-gray-100 text-gray-800 hover:bg-gray-200'
                 }`}
               >
                 Security
               </button>
-            </div>
-          </div>
-
-          {/* FAQ List */}
-          <div className="divide-y divide-gray-200">
-            {filteredFaqs.map((faq, index) => (
-              <div key={index} className="px-6 py-4">
-                <button
-                  onClick={() => toggleFaq(index)}
-                  className="w-full flex justify-between items-center text-left"
-                >
-                  <h3 className="text-lg font-medium text-gray-900">{faq.question}</h3>
-                  {expandedFaqs.includes(index) ? (
-                    <ChevronUpIcon className="h-5 w-5 text-gray-500" />
-                  ) : (
-                    <ChevronDownIcon className="h-5 w-5 text-gray-500" />
-                  )}
-                </button>
-                {expandedFaqs.includes(index) && <p className="mt-2 text-gray-600">{faq.answer}</p>}
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Guides */}
-        <div className="bg-white rounded-lg shadow mb-12">
-          <div className="px-6 py-4 border-b border-gray-200">
-            <h2 className="text-xl font-semibold text-gray-900">Guides & Tutorials</h2>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 p-6">
-            {guides.map((guide, index) => (
-              <div
-                key={index}
-                className="border border-gray-200 rounded-lg p-6 hover:border-blue-500 transition-colors cursor-pointer"
-                onClick={() => router.push(guide.link)}
+              <button
+                onClick={() => setActiveCategory('rewards')}
+                className={`px-3 py-1 rounded-full text-sm font-medium ${
+                  activeCategory === 'rewards'
+                    ? 'bg-blue-100 text-blue-800'
+                    : 'bg-gray-100 text-gray-800 hover:bg-gray-200'
+                }`}
               >
-                <h3 className="text-lg font-medium text-gray-900 mb-2">{guide.title}</h3>
-                <p className="text-sm text-gray-500">{guide.description}</p>
-              </div>
-            ))}
+                Rewards
+              </button>
+            </div>
           </div>
-        </div>
-
-        {/* Contact Support */}
-        <div className="bg-white rounded-lg shadow p-6">
-          <h2 className="text-xl font-semibold text-gray-900 mb-4">Need More Help?</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div>
-              <h3 className="text-sm font-medium text-gray-700 mb-2">Email Support</h3>
-              <p className="text-sm text-gray-500">support@ehbgc.com</p>
-            </div>
-            <div>
-              <h3 className="text-sm font-medium text-gray-700 mb-2">Telegram Support</h3>
-              <p className="text-sm text-gray-500">@EHBGC_Support</p>
-            </div>
-            <div>
-              <h3 className="text-sm font-medium text-gray-700 mb-2">Discord Community</h3>
-              <p className="text-sm text-gray-500">Join our Discord server</p>
-            </div>
+          <div className="space-y-4">
+            {filteredFaqs.map((faq, index) => (
+              <Disclosure key={index}>
+                {({ open }) => (
+                  <div className="border border-gray-200 rounded-lg">
+                    <Disclosure.Button className="flex justify-between w-full px-4 py-4 text-left text-sm font-medium text-gray-900 hover:bg-gray-50 focus:outline-none focus-visible:ring focus-visible:ring-blue-500 focus-visible:ring-opacity-75">
+                      <span>{faq.question}</span>
+                      <ChevronUpIcon
+                        className={`${open ? 'transform rotate-180' : ''} w-5 h-5 text-gray-500`}
+                      />
+                    </Disclosure.Button>
+                    <Disclosure.Panel className="px-4 pb-4 text-sm text-gray-500">
+                      {faq.answer}
+                    </Disclosure.Panel>
+                  </div>
+                )}
+              </Disclosure>
+            ))}
           </div>
         </div>
       </div>
