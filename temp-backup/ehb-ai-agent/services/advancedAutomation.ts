@@ -1,6 +1,6 @@
+import { AgentService } from './agentService';
 import { GitService } from './gitService';
 import { MetricsService } from './metricsService';
-import { AgentService } from './agentService';
 
 interface AutomationTask {
   id: string;

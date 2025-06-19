@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+
 import { UltraFastAgentService } from '@/app/ehb-ai-agent/services/ultraFastAgentService';
 
 const agent = UltraFastAgentService.getInstance();

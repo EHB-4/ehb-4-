@@ -6,13 +6,13 @@ class CacheService {
 
   constructor() {
     this.redis = new Redis(process.env.REDIS_URL || 'redis://localhost:6379');
-    
+
     this.redis.on('connect', () => {
       this.isConnected = true;
       console.log('✅ Redis connected');
     });
 
-    this.redis.on('error', (error) => {
+    this.redis.on('error', error => {
       this.isConnected = false;
       console.error('❌ Redis error:', error);
     });
@@ -20,7 +20,7 @@ class CacheService {
 
   async get(key: string): Promise<any> {
     if (!this.isConnected) return null;
-    
+
     try {
       const value = await this.redis.get(key);
       return value ? JSON.parse(value) : null;
@@ -32,7 +32,7 @@ class CacheService {
 
   async set(key: string, value: any, ttl: number = 3600): Promise<void> {
     if (!this.isConnected) return;
-    
+
     try {
       await this.redis.setex(key, ttl, JSON.stringify(value));
     } catch (error) {
@@ -42,7 +42,7 @@ class CacheService {
 
   async delete(key: string): Promise<void> {
     if (!this.isConnected) return;
-    
+
     try {
       await this.redis.del(key);
     } catch (error) {
@@ -52,7 +52,7 @@ class CacheService {
 
   async clear(): Promise<void> {
     if (!this.isConnected) return;
-    
+
     try {
       await this.redis.flushall();
     } catch (error) {

@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth/next';
+
 import { authOptions } from '@/lib/auth';
+
 import { AuthenticationError, AuthorizationError } from './errorHandler';
 
 // User roles and permissions

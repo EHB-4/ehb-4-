@@ -28,9 +28,7 @@ export const PSS: React.FC<PSSProps> = () => {
       <h2 className="text-xl font-semibold mb-4">PSS</h2>
       <div className="space-y-4">
         {/* Add your component content here */}
-        <p className="text-gray-600">
-          PSS component is ready for development.
-        </p>
+        <p className="text-gray-600">PSS component is ready for development.</p>
       </div>
     </div>
   );

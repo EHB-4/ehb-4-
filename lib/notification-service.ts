@@ -1,5 +1,6 @@
-import { Server as SocketIOServer } from 'socket.io';
 import { Server as NetServer } from 'http';
+
+import { Server as SocketIOServer } from 'socket.io';
 
 export class NotificationService {
   private io: SocketIOServer;
@@ -16,15 +17,15 @@ export class NotificationService {
   }
 
   private setupEventHandlers() {
-    this.io.on('connection', (socket) => {
+    this.io.on('connection', socket => {
       console.log('Client connected:', socket.id);
 
-      socket.on('join-room', (room) => {
+      socket.on('join-room', room => {
         socket.join(room);
         console.log(`Client ${socket.id} joined room: ${room}`);
       });
 
-      socket.on('leave-room', (room) => {
+      socket.on('leave-room', room => {
         socket.leave(room);
         console.log(`Client ${socket.id} left room: ${room}`);
       });
