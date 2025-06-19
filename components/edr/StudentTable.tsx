@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
-import { Enrollment } from '@/lib/models/Enrollment';
 import { FaUser, FaEnvelope, FaGraduationCap, FaStar, FaCheck, FaTimes } from 'react-icons/fa';
+
+import { Enrollment } from '@/lib/models/Enrollment';
 
 interface StudentTableProps {
   enrollments: (Enrollment & {

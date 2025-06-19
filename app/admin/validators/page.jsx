@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { ethers } from 'ethers';
+import { formatEther } from 'ethers';
 
 export default function ValidatorAdmin() {
   const [validators, setValidators] = useState([]);
@@ -10,7 +10,7 @@ export default function ValidatorAdmin() {
     country: '',
     sqlLevel: '',
     minReward: '',
-    status: ''
+    status: '',
   });
 
   useEffect(() => {
@@ -30,11 +30,11 @@ export default function ValidatorAdmin() {
     }
   };
 
-  const handleFilterChange = (e) => {
+  const handleFilterChange = e => {
     const { name, value } = e.target;
     setFilters(prev => ({
       ...prev,
-      [name]: value
+      [name]: value,
     }));
   };
 
@@ -47,10 +47,10 @@ export default function ValidatorAdmin() {
         },
         body: JSON.stringify({
           validatorAddress,
-          action
+          action,
         }),
       });
-      
+
       if (response.ok) {
         fetchValidators(); // Refresh the list
       }
@@ -149,7 +149,7 @@ export default function ValidatorAdmin() {
             </tr>
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
-            {validators.map((validator) => (
+            {validators.map(validator => (
               <tr key={validator.address}>
                 <td className="px-6 py-4 whitespace-nowrap">
                   <div className="text-sm font-medium text-gray-900">
@@ -158,7 +158,7 @@ export default function ValidatorAdmin() {
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">
                   <div className="text-sm text-gray-900">
-                    {ethers.utils.formatEther(validator.stakedAmount)} EHBGC
+                    {formatEther(validator.stakedAmount)} EHBGC
                   </div>
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">
@@ -168,9 +168,11 @@ export default function ValidatorAdmin() {
                   <div className="text-sm text-gray-900">{validator.loyaltyYears} years</div>
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">
-                  <span className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${
-                    validator.isActive ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'
-                  }`}>
+                  <span
+                    className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${
+                      validator.isActive ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'
+                    }`}
+                  >
                     {validator.isActive ? 'Active' : 'Inactive'}
                   </span>
                 </td>
@@ -195,4 +197,4 @@ export default function ValidatorAdmin() {
       </div>
     </div>
   );
-} 
+}

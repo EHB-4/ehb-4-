@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useState, useEffect } from 'react';
 import { FiVideo, FiDollarSign, FiAward, FiStar, FiEye } from 'react-icons/fi';
 

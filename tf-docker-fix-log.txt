@@ -1,0 +1,18 @@
+EHB TensorFlow GPU & Docker Fix Log
+================
+[6/18/2025, 3:48:36 PM] EHB TensorFlow GPU (cuDNN) & Docker Desktop Fix Tool (Windows)
+
+[6/18/2025, 3:48:36 PM] 
+[1] TensorFlow GPU (cuDNN DLLs) Check:
+[6/18/2025, 3:48:36 PM] ⚠️  cuDNN DLLs missing hain. TensorFlow GPU kaam nahi karega. Manual install zaroori hai.
+[6/18/2025, 3:48:36 PM] --- Urdu/Hindi Manual Steps ---
+[6/18/2025, 3:48:36 PM] 1. NVIDIA GPU driver install karein: https://www.nvidia.com/Download/index.aspx
+[6/18/2025, 3:48:36 PM] 2. CUDA Toolkit (TensorFlow compatible version) install karein: https://developer.nvidia.com/cuda-toolkit-archive
+[6/18/2025, 3:48:36 PM] 3. cuDNN download karein: https://developer.nvidia.com/cudnn (NVIDIA account required)
+[6/18/2025, 3:48:36 PM] 4. cuDNN zip ko extract karein, aur uske bin/include/lib files ko apne CUDA install folder me copy karein (e.g., C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.x\)
+[6/18/2025, 3:48:36 PM] 5. System restart karein.
+[6/18/2025, 3:48:36 PM] 6. Phir TensorFlow GPU dobara try karein.
+[6/18/2025, 3:48:36 PM] 
+[2] Docker Desktop Check:
+[6/18/2025, 3:48:36 PM] ✅ Docker Desktop installed hai.
+[6/18/2025, 3:48:36 PM] ✅ Docker service chal rahi hai.

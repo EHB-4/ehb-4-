@@ -1,6 +1,7 @@
+import type { CoinLock, Transaction } from '@prisma/client';
+
 import { prisma } from '@/lib/prisma';
 import type { CreateTransactionRequest, TransactionResponse, WalletBalance } from '@/types/api';
-import type { CoinLock, Transaction } from '@prisma/client';
 
 export class WalletService {
   static async getBalance(userId: string): Promise<WalletBalance> {

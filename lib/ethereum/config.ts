@@ -26,17 +26,11 @@ export async function getBalance(
 }
 
 // Get transaction info
-export async function getTransaction(
-  provider: ethers.JsonRpcProvider,
-  txHash: string
-) {
+export async function getTransaction(provider: ethers.JsonRpcProvider, txHash: string) {
   return await provider.getTransaction(txHash);
 }
 
 // Get block info
-export async function getBlock(
-  provider: ethers.JsonRpcProvider,
-  blockNumber: number
-) {
+export async function getBlock(provider: ethers.JsonRpcProvider, blockNumber: number) {
   return await provider.getBlock(blockNumber);
 }

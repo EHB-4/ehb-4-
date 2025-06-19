@@ -2,9 +2,14 @@
 
 const fs = require('fs');
 const path = require('path');
+
 const axios = require('axios');
 let chalk;
-try { chalk = require('chalk'); } catch { chalk = { green: x=>x, red: x=>x, yellow: x=>x, blue: x=>x, bold: x=>x }; }
+try {
+  chalk = require('chalk');
+} catch {
+  chalk = { green: x => x, red: x => x, yellow: x => x, blue: x => x, bold: x => x };
+}
 
 const API_BASE = 'http://localhost:3000'; // Change if your dev server runs elsewhere
 
@@ -14,8 +19,16 @@ function findApiRoutes(dir, baseRoute = '') {
   const entries = fs.readdirSync(dir, { withFileTypes: true });
   for (const entry of entries) {
     if (entry.isDirectory()) {
-      routes = routes.concat(findApiRoutes(path.join(dir, entry.name), baseRoute + '/' + entry.name));
-    } else if (entry.isFile() && (entry.name === 'route.ts' || entry.name === 'route.js' || entry.name.endsWith('.ts') || entry.name.endsWith('.js'))) {
+      routes = routes.concat(
+        findApiRoutes(path.join(dir, entry.name), baseRoute + '/' + entry.name)
+      );
+    } else if (
+      entry.isFile() &&
+      (entry.name === 'route.ts' ||
+        entry.name === 'route.js' ||
+        entry.name.endsWith('.ts') ||
+        entry.name.endsWith('.js'))
+    ) {
       // Remove .ts/.js for pages/api, keep for app/api
       let route = baseRoute;
       if (entry.name !== 'route.ts' && entry.name !== 'route.js') {
@@ -98,7 +111,7 @@ function suggestFix(status, data) {
     const results = await testEndpoint(endpoint);
     for (const { method, status, data } of results) {
       let statusStr = status === 200 ? chalk.green(status) : chalk.red(status);
-      let msg = data && data.error ? data.error : (typeof data === 'string' ? data : 'OK');
+      let msg = data && data.error ? data.error : typeof data === 'string' ? data : 'OK';
       let fix = suggestFix(status, data);
       summary.push({ endpoint, method, status, msg, fix });
       console.log(`  [${method}] Status: ${statusStr} | ${msg}`);
@@ -117,4 +130,4 @@ function suggestFix(status, data) {
     }
   }
   console.log(chalk.blue.bold('\n--- End of Report ---\n'));
-})(); 
+})();

@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { FaRobot } from 'react-icons/fa';
+
 import AIChat from '@/components/ai/AIChat';
 
 export default function AIPage() {

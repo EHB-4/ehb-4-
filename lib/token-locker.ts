@@ -1,4 +1,5 @@
 import { ethers } from 'ethers';
+
 import { initMoonbeamProvider } from './moonbeam/config';
 
 // TokenLocker ABI

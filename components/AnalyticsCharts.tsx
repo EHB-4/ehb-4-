@@ -17,16 +17,22 @@ export default function AnalyticsCharts({ data }: AnalyticsChartsProps) {
       <div className="flex justify-between items-center mb-6">
         <h3 className="text-lg font-medium text-gray-900">Sales Over Time</h3>
         <div className="flex space-x-4">
-          <button className="px-3 py-1 text-sm bg-blue-100 text-blue-600 rounded-full">Daily</button>
-          <button className="px-3 py-1 text-sm text-gray-600 hover:bg-gray-100 rounded-full">Weekly</button>
-          <button className="px-3 py-1 text-sm text-gray-600 hover:bg-gray-100 rounded-full">Monthly</button>
+          <button className="px-3 py-1 text-sm bg-blue-100 text-blue-600 rounded-full">
+            Daily
+          </button>
+          <button className="px-3 py-1 text-sm text-gray-600 hover:bg-gray-100 rounded-full">
+            Weekly
+          </button>
+          <button className="px-3 py-1 text-sm text-gray-600 hover:bg-gray-100 rounded-full">
+            Monthly
+          </button>
         </div>
       </div>
-      
+
       <div className="h-64 flex items-end space-x-2">
         {data.map((item, index) => (
           <div key={index} className="flex-1 flex flex-col items-center">
-            <div 
+            <div
               className="w-full bg-blue-500 rounded-t-lg transition-all duration-300 hover:bg-blue-600"
               style={{ height: `${(item.sales / maxSales) * 100}%` }}
             />
@@ -54,4 +60,4 @@ export default function AnalyticsCharts({ data }: AnalyticsChartsProps) {
 }
 
 // AI Guidance: This component displays sales data in a modern chart layout.
-// In a real app, this would use a charting library like Chart.js or D3.js for more advanced visualizations. 
+// In a real app, this would use a charting library like Chart.js or D3.js for more advanced visualizations.

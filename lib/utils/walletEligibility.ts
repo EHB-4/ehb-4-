@@ -1,6 +1,5 @@
-import { Wallet } from '@/lib/models/Wallet';
+import Wallet, { Wallet } from '@/lib/models/Wallet';
 import dbConnect from '@/lib/mongodb';
-import Wallet from '@/lib/models/Wallet';
 
 export interface EligibilityCheck {
   isEligible: boolean;

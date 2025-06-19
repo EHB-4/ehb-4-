@@ -1,5 +1,5 @@
-import React from 'react';
 import Link from 'next/link';
+import React from 'react';
 
 export default function QuickActions() {
   return (
@@ -19,4 +19,4 @@ export default function QuickActions() {
 }
 
 // AI Guidance: This component displays quick action buttons for the admin dashboard.
-// In a real app, these buttons link to the respective pages for adding products or viewing orders. 
+// In a real app, these buttons link to the respective pages for adding products or viewing orders.

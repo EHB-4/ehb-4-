@@ -1,6 +1,6 @@
+import { motion } from 'framer-motion';
 import React from 'react';
 import { FiDollarSign, FiTrendingUp, FiCalendar, FiStar } from 'react-icons/fi';
-import { motion } from 'framer-motion';
 
 interface QuickStatsProps {
   coins: number;

@@ -11,7 +11,7 @@ export default function AddToCartButton({ productId }: AddToCartButtonProps) {
   const handleAddToCart = async () => {
     setLoading(true);
     // In a real app, call backend API to add product to cart
-    await new Promise((resolve) => setTimeout(resolve, 1000)); // Simulate API call
+    await new Promise(resolve => setTimeout(resolve, 1000)); // Simulate API call
     setSuccess(true);
     setLoading(false);
   };
@@ -28,4 +28,4 @@ export default function AddToCartButton({ productId }: AddToCartButtonProps) {
 }
 
 // AI Guidance: This component handles adding a product to the cart.
-// In a real app, it calls the backend API and updates the cart state. 
+// In a real app, it calls the backend API and updates the cart state.

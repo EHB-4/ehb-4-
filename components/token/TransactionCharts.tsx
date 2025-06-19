@@ -1,4 +1,3 @@
-import React, { useState, useRef } from 'react';
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -20,12 +19,14 @@ import {
   Plugin,
   ScriptableContext,
 } from 'chart.js';
-import { Line, Bar, Doughnut } from 'react-chartjs-2';
 import { ethers } from 'ethers';
+import React, { useState, useRef } from 'react';
+import { Line, Bar, Doughnut } from 'react-chartjs-2';
+
+import ChartAnnotations from './ChartAnnotations';
 import ChartControls from './ChartControls';
 import ChartSettings from './ChartSettings';
 import TechnicalIndicators from './TechnicalIndicators';
-import ChartAnnotations from './ChartAnnotations';
 
 ChartJS.register(
   CategoryScale,

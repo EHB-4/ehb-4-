@@ -1,24 +1,18 @@
+import { formatEther } from 'ethers';
 import { NextResponse } from 'next/server';
-import { ethers } from 'ethers';
 
 export async function GET() {
   try {
     // Fetch data from various sources
-    const [
-      walletData,
-      validatorData,
-      sqlData,
-      loyaltyData,
-      franchiseData,
-      unpaidData
-    ] = await Promise.all([
-      fetchWalletData(),
-      fetchValidatorData(),
-      fetchSQLData(),
-      fetchLoyaltyData(),
-      fetchFranchiseData(),
-      fetchUnpaidData()
-    ]);
+    const [walletData, validatorData, sqlData, loyaltyData, franchiseData, unpaidData] =
+      await Promise.all([
+        fetchWalletData(),
+        fetchValidatorData(),
+        fetchSQLData(),
+        fetchLoyaltyData(),
+        fetchFranchiseData(),
+        fetchUnpaidData(),
+      ]);
 
     // Calculate total earnings
     const totalEarnings = {
@@ -27,7 +21,7 @@ export async function GET() {
       sql: calculateTotalSQLEarnings(sqlData),
       loyalty: calculateTotalLoyaltyBonuses(loyaltyData),
       franchise: calculateTotalFranchiseProfit(franchiseData),
-      unpaid: calculateTotalUnpaid(unpaidData)
+      unpaid: calculateTotalUnpaid(unpaidData),
     };
 
     // Generate summary statistics
@@ -38,20 +32,16 @@ export async function GET() {
       totalFranchises: franchiseData.length,
       totalUnpaidUsers: unpaidData.length,
       earnings: totalEarnings,
-      lastSync: new Date().toISOString()
+      lastSync: new Date().toISOString(),
     };
 
     return NextResponse.json({
       success: true,
-      data: summary
+      data: summary,
     });
-
   } catch (error) {
     console.error('Error generating global summary:', error);
-    return NextResponse.json(
-      { error: 'Failed to generate global summary' },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: 'Failed to generate global summary' }, { status: 500 });
   }
 }
 
@@ -89,36 +79,36 @@ async function fetchUnpaidData() {
 // Helper functions to calculate totals
 function calculateTotalWalletEarnings(walletData) {
   return walletData.reduce((total, wallet) => {
-    return total + Number(ethers.utils.formatEther(wallet.balance));
+    return total + Number(formatEther(wallet.balance));
   }, 0);
 }
 
 function calculateTotalValidatorEarnings(validatorData) {
   return validatorData.reduce((total, validator) => {
-    return total + Number(ethers.utils.formatEther(validator.rewards));
+    return total + Number(formatEther(validator.rewards));
   }, 0);
 }
 
 function calculateTotalSQLEarnings(sqlData) {
   return sqlData.reduce((total, sql) => {
-    return total + Number(ethers.utils.formatEther(sql.earnings));
+    return total + Number(formatEther(sql.earnings));
   }, 0);
 }
 
 function calculateTotalLoyaltyBonuses(loyaltyData) {
   return loyaltyData.reduce((total, loyalty) => {
-    return total + Number(ethers.utils.formatEther(loyalty.bonus));
+    return total + Number(formatEther(loyalty.bonus));
   }, 0);
 }
 
 function calculateTotalFranchiseProfit(franchiseData) {
   return franchiseData.reduce((total, franchise) => {
-    return total + Number(ethers.utils.formatEther(franchise.profit));
+    return total + Number(formatEther(franchise.profit));
   }, 0);
 }
 
 function calculateTotalUnpaid(unpaidData) {
   return unpaidData.reduce((total, unpaid) => {
-    return total + Number(ethers.utils.formatEther(unpaid.amount));
+    return total + Number(formatEther(unpaid.amount));
   }, 0);
-} 
+}

@@ -42,7 +42,7 @@ export async function POST(request: Request) {
 export async function PUT(request: Request) {
   const { id, ...updates } = await request.json();
   const index = inventory.findIndex(item => item.id === id);
-  
+
   if (index === -1) {
     return NextResponse.json({ error: 'Product not found' }, { status: 404 });
   }
@@ -58,4 +58,4 @@ export async function DELETE(request: Request) {
 }
 
 // AI Guidance: This API route handles inventory management.
-// In a real app, it would interact with a database and include proper error handling. 
+// In a real app, it would interact with a database and include proper error handling.

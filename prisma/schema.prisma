@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -10,177 +7,241 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Product {
-  id          String   @id @default(auto()) @map("_id") @db.ObjectId
-  name        String
-  description String
-  price       Float
-  category    String
-  stock       Int
-  images      String[]
-  isActive    Boolean  @default(true)
-  rating      Float    @default(0)
-  reviews     Review[]
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-}
-
-model Review {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
-  productId String   @db.ObjectId
-  product   Product  @relation(fields: [productId], references: [id])
-  userId    String   @db.ObjectId
-  rating    Int
-  comment   String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-}
-
 model User {
   id            String    @id @default(auto()) @map("_id") @db.ObjectId
-  name          String?
-  email         String?   @unique
-  emailVerified DateTime?
-  image         String?
-  accounts      Account[]
-  sessions      Session[]
-  wallets       Wallet[]
-  transactions  Transaction[]
-  sqlProfiles   SQLProfile[]
-  coinLocks     CoinLock[]
-  notifications Notification[]
-  certificates  Certificate[]
+  name          String
+  email         String    @unique
+  password      String?
+  role          String    @default("user")
+  sqlLevel      Int       @default(0)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  
+  // Affiliate relation
+  affiliateProfile AffiliateUser?
 }
 
-model Order {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
-  userId    String   @db.ObjectId
-  status    String
-  total     Float
-  items     Json
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+// Affiliate Program Models
+model AffiliateUser {
+  id            String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId        String   @unique @db.ObjectId
+  user          User     @relation(fields: [userId], references: [id])
+  
+  // Referral System
+  referralCode  String   @unique
+  referrerId    String?  @db.ObjectId
+  referrer      AffiliateUser? @relation("ReferralTree", fields: [referrerId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  referrals     AffiliateUser[] @relation("ReferralTree")
+  
+  // SQL Level & Rank
+  sqlLevel      SQLLevel @default(FREE)
+  affiliateRank AffiliateRank @default(BRONZE)
+  isActive      Boolean  @default(true)
+  
+  // Financial
+  totalEarnings Float    @default(0)
+  totalWithdrawn Float   @default(0)
+  currentBalance Float   @default(0)
+  lockedBalance  Float   @default(0)
+  
+  // Settings
+  autoWithdraw  Boolean  @default(false)
+  bep20Address  String?
+  withdrawalMethod WithdrawalMethod @default(EHB_WALLET)
+  
+  // Timestamps
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  
+  // Relations
+  commissions   AffiliateCommission[]
+  withdrawals   AffiliateWithdrawal[]
+  bonuses       AffiliateBonus[]
+  storeLinks    AffiliateStoreLink[]
+  
+  @@map("affiliateUsers")
 }
 
-model Wallet {
-  id        String     @id @default(auto()) @map("_id") @db.ObjectId
-  userId    String     @db.ObjectId
-  address   String     @unique
-  balance   Float      @default(0)
-  createdAt DateTime   @default(now())
-  updatedAt DateTime   @updatedAt
-  user      User       @relation(fields: [userId], references: [id], onDelete: Cascade)
-  coinLocks CoinLock[]
+model AffiliateCommission {
+  id            String   @id @default(auto()) @map("_id") @db.ObjectId
+  affiliateId   String   @db.ObjectId
+  affiliate     AffiliateUser @relation(fields: [affiliateId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  
+  // Commission Details
+  amount        Float
+  level         Int      // L1=1, L2=2, etc.
+  commissionType CommissionType
+  sourceUserId  String   @db.ObjectId
+  sourceOrderId String?  @db.ObjectId
+  
+  // Status
+  status        CommissionStatus @default(PENDING)
+  isWithdrawn   Boolean  @default(false)
+  
+  // Metadata
+  description   String?
+  createdAt     DateTime @default(now())
+  
+  @@map("affiliateCommissions")
 }
 
-model Transaction {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
-  userId    String   @db.ObjectId
-  type      String   // deposit, withdrawal, transfer
-  amount    Float
-  status    String   // pending, completed, failed
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-}
-
-model SQLProfile {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
-  userId    String   @db.ObjectId
-  username  String   @unique
-  password  String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-}
-
-model CoinLock {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
-  userId    String   @db.ObjectId
-  walletId  String   @db.ObjectId
-  amount    Float
-  duration  Int      // in days
-  startDate DateTime @default(now())
-  endDate   DateTime
-  status    String   // active, completed, cancelled
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  wallet    Wallet   @relation(fields: [walletId], references: [id], onDelete: Cascade)
-}
-
-model Account {
-  id                String  @id @default(auto()) @map("_id") @db.ObjectId
-  userId            String  @db.ObjectId
-  type              String
-  provider          String
-  providerAccountId String
-  refresh_token     String? @db.String
-  access_token      String? @db.String
-  expires_at        Int?
-  token_type        String?
-  scope             String?
-  id_token          String? @db.String
-  session_state     String?
-
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  @@unique([provider, providerAccountId])
-}
-
-model Session {
-  id           String   @id @default(auto()) @map("_id") @db.ObjectId
-  sessionToken String   @unique
-  userId       String   @db.ObjectId
-  expires      DateTime
-  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-}
-
-model VerificationToken {
-  id         String   @id @default(auto()) @map("_id") @db.ObjectId
-  identifier String
-  token      String   @unique
-  expires    DateTime
-
-  @@unique([identifier, token])
-}
-
-model Notification {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
-  title     String
-  message   String
-  type      String   // success, warning, error, info, destructive, default
-  read      Boolean  @default(false)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  userId    String   @db.ObjectId
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  @@index([userId])
-  @@index([read])
-  @@index([createdAt])
-}
-
-model Certificate {
-  id             String   @id @default(auto()) @map("_id") @db.ObjectId
-  userId         String   @db.ObjectId
-  title          String
-  subject        String
-  date           DateTime
-  score          Int?
-  status         String   // passed, failed, in-progress
-  certificateUrl String?
+model AffiliateWithdrawal {
+  id            String   @id @default(auto()) @map("_id") @db.ObjectId
+  affiliateId   String   @db.ObjectId
+  affiliate     AffiliateUser @relation(fields: [affiliateId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  
+  // Withdrawal Details
+  amount        Float
+  method        WithdrawalMethod
+  status        WithdrawalStatus @default(PENDING)
+  
+  // Transaction Details
+  transactionHash String?
+  bep20Address    String?
+  bankDetails     Json?
+  
+  // Admin
+  approvedBy     String?  @db.ObjectId
+  approvedAt     DateTime?
+  notes          String?
+  
   createdAt      DateTime @default(now())
-  user           User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  updatedAt      DateTime @updatedAt
+  
+  @@map("affiliateWithdrawals")
 }
 
-model StudyResource {
-  id          String   @id @default(auto()) @map("_id") @db.ObjectId
-  title       String
-  type        String   // exercises, guides, etc.
-  provider    String
-  sqlLevel    String
-  downloadUrl String
-  tags        String[]
-  createdAt   DateTime @default(now())
-} 
+model AffiliateBonus {
+  id            String   @id @default(auto()) @map("_id") @db.ObjectId
+  affiliateId   String   @db.ObjectId
+  affiliate     AffiliateUser @relation(fields: [affiliateId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  
+  // Bonus Details
+  bonusType     BonusType
+  amount        Float
+  criteria      String   // e.g., "5 Franchise Sales in 1 Month"
+  status        BonusStatus @default(PENDING)
+  
+  // Lock Details
+  lockDuration  Int?     // in months
+  unlockDate    DateTime?
+  
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  
+  @@map("affiliateBonuses")
+}
+
+model AffiliateStoreLink {
+  id            String   @id @default(auto()) @map("_id") @db.ObjectId
+  affiliateId   String   @db.ObjectId
+  affiliate     AffiliateUser @relation(fields: [affiliateId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  
+  // Store Details
+  storeType     StoreType
+  storeUrl      String   @unique
+  storeName     String?
+  layout        StoreLayout @default(AMAZON_STYLE)
+  
+  // Content
+  bannerUrl     String?
+  videoUrl      String?
+  description   String?
+  
+  // Stats
+  views         Int      @default(0)
+  clicks        Int      @default(0)
+  conversions   Int      @default(0)
+  
+  isActive      Boolean  @default(true)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  
+  @@map("affiliateStoreLinks")
+}
+
+// Enums
+enum SQLLevel {
+  FREE
+  BASIC
+  NORMAL
+  HIGH
+  VIP
+}
+
+enum AffiliateRank {
+  BRONZE
+  SILVER
+  GOLD
+  PLATINUM
+  DIAMOND
+}
+
+enum CommissionType {
+  DIRECT_L1
+  INDIRECT_L2
+  INDIRECT_L3
+  INDIRECT_L4
+  INDIRECT_L5
+  BINARY_MATCH
+  QUICK_BONUS
+  RANK_BONUS
+  COIN_LOCK_BONUS
+  FRANCHISE_REWARD
+}
+
+enum CommissionStatus {
+  PENDING
+  APPROVED
+  REJECTED
+  WITHDRAWN
+}
+
+enum WithdrawalMethod {
+  EHB_WALLET
+  BEP20_USDT
+  BANK_TRANSFER
+  STRIPE
+  EASYPAISA
+  JAZZCASH
+}
+
+enum WithdrawalStatus {
+  PENDING
+  APPROVED
+  REJECTED
+  PROCESSING
+  COMPLETED
+  FAILED
+}
+
+enum BonusType {
+  QUICK_BONUS
+  WEEKLY_RANK_BONUS
+  LOYALTY_COIN_LOCK
+  MILESTONE_BONUS
+  FRANCHISE_REWARD
+  VALIDATOR_MONTHLY
+}
+
+enum BonusStatus {
+  PENDING
+  ACTIVE
+  LOCKED
+  UNLOCKED
+  WITHDRAWN
+}
+
+enum StoreType {
+  GOSELLR
+  BOOKSTORE
+  VIDEO_CONTENT
+  CUSTOM
+}
+
+enum StoreLayout {
+  AMAZON_STYLE
+  CAROUSEL_SLIDER
+  BOOKSTORE_FRONT
+  VIDEO_BANNER
+}

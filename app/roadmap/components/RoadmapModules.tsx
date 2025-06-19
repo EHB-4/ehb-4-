@@ -20,29 +20,32 @@ export default function RoadmapModules({ modules, status }: RoadmapModulesProps)
   };
 
   const getProgressPercentage = (module: Module) => {
-    const totalItems = module.features.length + module.apiEndpoints.length + module.businessRules.length;
+    const totalItems =
+      module.features.length + module.apiEndpoints.length + module.businessRules.length;
     const completedItems = [
       ...module.features,
       ...module.apiEndpoints,
-      ...module.businessRules
+      ...module.businessRules,
     ].filter(item => item.status === 'completed').length;
-    
+
     return Math.round((completedItems / totalItems) * 100);
   };
 
   return (
     <div className="bg-white rounded-lg shadow p-6">
       <h2 className="text-2xl font-bold text-gray-900 mb-6">Project Modules</h2>
-      
+
       <div className="space-y-6">
-        {modules.map((module) => (
+        {modules.map(module => (
           <div key={module.id} className="bg-gray-50 rounded-lg p-4">
             <div className="flex items-start justify-between">
               <div>
                 <h3 className="text-lg font-semibold text-gray-900">{module.name}</h3>
                 <p className="mt-1 text-sm text-gray-600">{module.description}</p>
               </div>
-              <span className={`px-3 py-1 text-sm font-medium rounded-full ${getStatusColor(module.status)}`}>
+              <span
+                className={`px-3 py-1 text-sm font-medium rounded-full ${getStatusColor(module.status)}`}
+              >
                 {module.status}
               </span>
             </div>
@@ -63,21 +66,15 @@ export default function RoadmapModules({ modules, status }: RoadmapModulesProps)
             <div className="mt-4 grid grid-cols-3 gap-4 text-sm">
               <div>
                 <span className="text-gray-500">Features</span>
-                <div className="mt-1 font-medium text-gray-900">
-                  {module.features.length}
-                </div>
+                <div className="mt-1 font-medium text-gray-900">{module.features.length}</div>
               </div>
               <div>
                 <span className="text-gray-500">APIs</span>
-                <div className="mt-1 font-medium text-gray-900">
-                  {module.apiEndpoints.length}
-                </div>
+                <div className="mt-1 font-medium text-gray-900">{module.apiEndpoints.length}</div>
               </div>
               <div>
                 <span className="text-gray-500">Rules</span>
-                <div className="mt-1 font-medium text-gray-900">
-                  {module.businessRules.length}
-                </div>
+                <div className="mt-1 font-medium text-gray-900">{module.businessRules.length}</div>
               </div>
             </div>
 
@@ -85,13 +82,11 @@ export default function RoadmapModules({ modules, status }: RoadmapModulesProps)
               <div className="text-gray-500">
                 {module.startDate} - {module.endDate}
               </div>
-              <button className="text-blue-600 hover:text-blue-800">
-                View Details
-              </button>
+              <button className="text-blue-600 hover:text-blue-800">View Details</button>
             </div>
           </div>
         ))}
       </div>
     </div>
   );
-} 
+}

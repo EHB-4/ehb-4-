@@ -1,6 +1,6 @@
+import { motion } from 'framer-motion';
 import React from 'react';
 import { FiArrowUpRight, FiArrowDownLeft, FiGift, FiLock } from 'react-icons/fi';
-import { motion } from 'framer-motion';
 
 interface Activity {
   id: string;

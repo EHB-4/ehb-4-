@@ -1,0 +1,129 @@
+{
+  "autoActivate": true,
+  "autoRun": true,
+  "autoAccept": true,
+  "projectId": "ehb-next-js-04",
+  "projectName": "EHB Technologies",
+  "version": "1.0.0",
+  "agents": {
+    "frontend": true,
+    "backend": true,
+    "admin": true,
+    "testing": true,
+    "security": true,
+    "deployment": true,
+    "monitoring": true,
+    "postman": true,
+    "ports": true
+  },
+  "ports": {
+    "frontend": 3000,
+    "backend": 3001,
+    "admin": 3002,
+    "api": 3003,
+    "database": 27017,
+    "redis": 6379
+  },
+  "monitoring": {
+    "enabled": true,
+    "interval": 5000,
+    "errorCheck": true,
+    "performanceCheck": true,
+    "securityCheck": true
+  },
+  "roadmap": {
+    "modules": [
+      "GoSellr",
+      "EDR",
+      "EMO",
+      "JPS",
+      "PSS",
+      "Franchise",
+      "AI-Marketplace",
+      "Wallet",
+      "Admin-Panel",
+      "Analytics"
+    ],
+    "phases": ["Foundation", "MVP", "Launch", "Growth", "Scale"]
+  },
+  "blockchain": {
+    "moonbeam": {
+      "enabled": true,
+      "network": "testnet",
+      "contracts": ["wallet", "affiliate", "franchise"]
+    },
+    "polkadot": {
+      "enabled": true,
+      "network": "testnet"
+    }
+  },
+  "testing": {
+    "unit": true,
+    "integration": true,
+    "e2e": true,
+    "coverage": 80
+  },
+  "security": {
+    "audit": true,
+    "vulnerabilityScan": true,
+    "dependencyCheck": true
+  },
+  "deployment": {
+    "auto": true,
+    "platform": "vercel",
+    "environment": "production"
+  },
+  "cursor": {
+    "integration": true,
+    "autoSuggest": true,
+    "codeCompletion": true,
+    "refactoring": true,
+    "autoActivate": true
+  },
+  "extensions": {
+    "required": [
+      "cursor.cursor",
+      "prisma.prisma",
+      "bradlc.vscode-tailwindcss",
+      "ms-vscode.vscode-typescript-next",
+      "esbenp.prettier-vscode",
+      "ms-vscode.vscode-eslint"
+    ],
+    "recommended": [
+      "ms-vscode.vscode-json",
+      "formulahendry.auto-rename-tag",
+      "christian-kohler.path-intellisense"
+    ]
+  },
+  "sdk": {
+    "required": [
+      "@prisma/client",
+      "@polkadot/api",
+      "@ethersproject/providers",
+      "wagmi",
+      "web3",
+      "openai",
+      "next-auth"
+    ],
+    "blockchain": [
+      "@moonbeam-network/api",
+      "@polkadot/keyring",
+      "@polkadot/util",
+      "@polkadot/util-crypto"
+    ]
+  },
+  "apis": {
+    "required": ["openai", "google-analytics", "firebase", "aws-s3"]
+  },
+  "commands": {
+    "nonDeveloper": [
+      "npm run auto-start",
+      "npm run auto-status",
+      "npm run auto-fix-all",
+      "npm run auto-deploy",
+      "npm run auto-test",
+      "npm run auto-security"
+    ],
+    "development": ["npm run dev", "npm run build", "npm run test", "npm run lint"]
+  }
+}

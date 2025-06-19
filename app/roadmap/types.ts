@@ -91,4 +91,4 @@ export interface RoadmapData {
   modules: Module[];
   timeline: TimelineEvent[];
   status: RoadmapStatus;
-} 
+}

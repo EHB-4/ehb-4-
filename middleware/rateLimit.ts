@@ -1,5 +1,5 @@
-import { NextApiRequest, NextApiResponse } from 'next';
 import Redis from 'ioredis';
+import { NextApiRequest, NextApiResponse } from 'next';
 
 const redis = new Redis(process.env.REDIS_URL || '');
 

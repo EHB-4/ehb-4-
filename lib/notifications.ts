@@ -1,4 +1,5 @@
 import { toast } from 'react-hot-toast';
+
 import { prisma } from '@/lib/prisma';
 
 export type NotificationType = 'success' | 'warning' | 'error' | 'info' | 'destructive' | 'default';
@@ -103,4 +104,4 @@ export const markAllAsRead = async (userId: string) => {
     console.error('Error marking all notifications as read:', error);
     return false;
   }
-}; 
+};

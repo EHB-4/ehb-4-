@@ -1,11 +1,12 @@
+import { ObjectId } from 'mongodb';
 import { NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth';
+
 import { authOptions } from '@/lib/auth';
-import clientPromise from '@/lib/mongodb';
-import { ObjectId } from 'mongodb';
-import { Tutor } from '@/lib/models/Tutor';
 import { Course } from '@/lib/models/Course';
+import { Tutor } from '@/lib/models/Tutor';
 import { Wallet } from '@/lib/models/Wallet';
+import clientPromise from '@/lib/mongodb';
 
 // GET /api/tutors - Get all verified tutors (SQL level 3+)
 export async function GET() {

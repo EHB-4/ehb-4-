@@ -152,4 +152,4 @@ export default function UserProfile({ user, onUpdate }: UserProfileProps) {
 }
 
 // AI Guidance: This component displays and allows editing of user profile information.
-// In a real app, profile updates would be sent to the backend and validated. 
+// In a real app, profile updates would be sent to the backend and validated.

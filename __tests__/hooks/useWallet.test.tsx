@@ -1,5 +1,6 @@
-import { renderHook, act } from '@testing-library/react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { renderHook, act } from '@testing-library/react';
+
 import { useWallet } from '@/hooks/useWallet';
 import { api } from '@/lib/api';
 import { prisma } from '@/lib/prisma';

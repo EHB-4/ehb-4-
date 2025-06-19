@@ -1,0 +1,60 @@
+{
+  "autoActivate": true,
+  "autoRun": true,
+  "autoAccept": true,
+  "projectId": "ehb-next-js-04",
+  "agents": {
+    "frontend": {
+      "enabled": true,
+      "priority": 1,
+      "autoAccept": true
+    },
+    "backend": {
+      "enabled": true,
+      "priority": 2,
+      "autoAccept": true
+    },
+    "admin": {
+      "enabled": true,
+      "priority": 3,
+      "autoAccept": true
+    },
+    "testing": {
+      "enabled": true,
+      "priority": 4,
+      "autoAccept": true
+    },
+    "security": {
+      "enabled": true,
+      "priority": 5,
+      "autoAccept": true
+    },
+    "deployment": {
+      "enabled": true,
+      "priority": 6,
+      "autoAccept": true
+    }
+  },
+  "automation": {
+    "autoStart": true,
+    "autoAccept": true,
+    "autoRun": true,
+    "autoDeploy": true,
+    "autoTest": true,
+    "autoFix": true,
+    "continuousDevelopment": true
+  },
+  "startupScripts": [
+    {
+      "name": "Auto Fix Script",
+      "path": "../scripts/auto-startup.ts",
+      "runOnStartup": true
+    }
+  ],
+  "watchPatterns": ["app/**/*.{ts,tsx}", "components/**/*.{ts,tsx}"],
+  "excludePatterns": ["node_modules", ".next", "dist"],
+  "notifications": {
+    "onSuccess": true,
+    "onError": true
+  }
+}

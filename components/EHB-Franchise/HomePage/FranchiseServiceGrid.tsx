@@ -1,7 +1,8 @@
-import React from 'react';
 import Link from 'next/link';
-import { ServiceCategory } from '../FranchiseUtils/FranchiseTypes';
+import React from 'react';
+
 import { FRANCHISE_CONSTANTS } from '../FranchiseUtils/Constants';
+import { ServiceCategory } from '../FranchiseUtils/FranchiseTypes';
 
 interface ServiceCard {
   category: ServiceCategory;

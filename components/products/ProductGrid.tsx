@@ -1,8 +1,9 @@
-import React from 'react';
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
 import { Heart, ShoppingCart, Star, Edit, Trash } from 'lucide-react';
+import React from 'react';
+
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 
 interface Product {
   id: number;
@@ -41,7 +42,7 @@ export function ProductGrid({
 }: ProductGridProps) {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      {products.map((product) => (
+      {products.map(product => (
         <Card key={product.id} className="flex flex-col">
           <CardHeader>
             <CardTitle>{product.name}</CardTitle>
@@ -54,42 +55,24 @@ export function ProductGrid({
                 className="object-cover w-full h-full rounded-md"
               />
             </div>
-            <p className="text-sm text-muted-foreground mb-2">
-              {product.description}
-            </p>
+            <p className="text-sm text-muted-foreground mb-2">{product.description}</p>
             <p className="text-lg font-bold">${product.price.toFixed(2)}</p>
           </CardContent>
           <CardFooter className="flex justify-between">
             <div className="flex gap-2">
-              <Button
-                variant="outline"
-                size="icon"
-                onClick={() => onAddToWishlist(product)}
-              >
+              <Button variant="outline" size="icon" onClick={() => onAddToWishlist(product)}>
                 <Heart className="h-4 w-4" />
               </Button>
-              <Button
-                variant="outline"
-                size="icon"
-                onClick={() => onAddToCart(product)}
-              >
+              <Button variant="outline" size="icon" onClick={() => onAddToCart(product)}>
                 <ShoppingCart className="h-4 w-4" />
               </Button>
             </div>
             {isAdmin && (
               <div className="flex gap-2">
-                <Button
-                  variant="outline"
-                  size="icon"
-                  onClick={() => onEdit?.(product)}
-                >
+                <Button variant="outline" size="icon" onClick={() => onEdit?.(product)}>
                   <Edit className="h-4 w-4" />
                 </Button>
-                <Button
-                  variant="outline"
-                  size="icon"
-                  onClick={() => onDelete?.(product.id)}
-                >
+                <Button variant="outline" size="icon" onClick={() => onDelete?.(product.id)}>
                   <Trash className="h-4 w-4" />
                 </Button>
               </div>
@@ -99,4 +82,4 @@ export function ProductGrid({
       ))}
     </div>
   );
-} 
+}

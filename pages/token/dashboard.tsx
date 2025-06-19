@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import { useSession } from 'next-auth/react';
-import { useRouter } from 'next/router';
 import { ethers } from 'ethers';
-import { getContractReadOnly } from '@/lib/contracts';
+import { useRouter } from 'next/router';
+import { useSession } from 'next-auth/react';
+import React, { useState, useEffect } from 'react';
+
 import TokenLockCard from '@/components/token/TokenLockCard';
 import TransactionCharts from '@/components/token/TransactionCharts';
+import { getContractReadOnly } from '@/lib/contracts';
 
 interface TokenStats {
   totalLocked: bigint;

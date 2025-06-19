@@ -1,6 +1,6 @@
+import { motion } from 'framer-motion';
 import React from 'react';
 import { FiCreditCard, FiLock, FiUnlock, FiArrowUpRight } from 'react-icons/fi';
-import { motion } from 'framer-motion';
 
 interface WalletOverviewProps {
   balance: number;

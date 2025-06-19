@@ -1,6 +1,3 @@
-import React, { useState, useEffect } from 'react';
-import { useSession } from 'next-auth/react';
-import { useRouter } from 'next/router';
 import { Tab } from '@headlessui/react';
 import {
   UserCircleIcon,
@@ -9,6 +6,9 @@ import {
   ChartBarIcon,
   StarIcon,
 } from '@heroicons/react/24/outline';
+import { useRouter } from 'next/router';
+import { useSession } from 'next-auth/react';
+import React, { useState, useEffect } from 'react';
 
 interface Activity {
   id: string;

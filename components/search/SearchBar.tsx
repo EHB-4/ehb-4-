@@ -1,7 +1,9 @@
-import React from 'react';
-import { Input } from '@/components/ui/input';
-import { Button } from '@/components/ui/button';
 import { Search, Filter } from 'lucide-react';
+import React from 'react';
+
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+
 import {
   Select,
   SelectContent,
@@ -31,7 +33,7 @@ export function SearchBar({ onSearch }: SearchBarProps) {
           <Input
             placeholder="Search products..."
             value={query}
-            onChange={(e) => setQuery(e.target.value)}
+            onChange={e => setQuery(e.target.value)}
             className="pl-9"
           />
         </div>
@@ -64,4 +66,4 @@ export function SearchBar({ onSearch }: SearchBarProps) {
       </Button>
     </div>
   );
-} 
+}

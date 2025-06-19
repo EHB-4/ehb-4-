@@ -1,5 +1,6 @@
-import { FaGraduationCap, FaCoins, FaUsers, FaStar, FaLock } from 'react-icons/fa';
 import { motion } from 'framer-motion';
+import { FaGraduationCap, FaCoins, FaUsers, FaStar, FaLock } from 'react-icons/fa';
+
 import { Tutor } from '@/lib/models/Tutor';
 import { Wallet } from '@/lib/models/Wallet';
 

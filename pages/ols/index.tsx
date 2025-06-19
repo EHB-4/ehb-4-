@@ -1,8 +1,9 @@
 import React from 'react';
 import { FiUser, FiFileText, FiUpload, FiMessageSquare } from 'react-icons/fi';
-import OLSDashboard from '../../components/OLS/OLSDashboard';
+
 import LawyerDirectory from '../../components/OLS/LawyerDirectory';
 import LegalBooking from '../../components/OLS/LegalBooking';
+import OLSDashboard from '../../components/OLS/OLSDashboard';
 
 interface ServiceCard {
   title: string;

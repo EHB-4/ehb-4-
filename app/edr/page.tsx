@@ -1,14 +1,15 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import { useSession } from 'next-auth/react';
 import { motion } from 'framer-motion';
+import { useSession } from 'next-auth/react';
+import { useState, useEffect } from 'react';
+import { toast } from 'react-hot-toast';
+
+import Modal from '@/components/Modal';
 import { Course } from '@/lib/models/Course';
 import { Tutor } from '@/lib/models/Tutor';
 import { Wallet } from '@/lib/models/Wallet';
 import { calculateLoyaltyDiscount } from '@/lib/utils/franchiseUtils';
-import { toast } from 'react-hot-toast';
-import Modal from '@/components/Modal';
 
 export default function CourseListing() {
   const { data: session } = useSession();

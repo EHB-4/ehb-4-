@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import { useSession } from 'next-auth/react';
-import { useRouter } from 'next/router';
 import { ethers } from 'ethers';
-import { getContract } from '@/lib/contracts';
+import { useRouter } from 'next/router';
+import { useSession } from 'next-auth/react';
+import React, { useState, useEffect } from 'react';
 import { toast } from 'react-hot-toast';
 import {
   LineChart,
@@ -19,6 +18,8 @@ import {
   Pie,
   Cell,
 } from 'recharts';
+
+import { getContract } from '@/lib/contracts';
 
 interface AnalyticsData {
   totalLocks: number;

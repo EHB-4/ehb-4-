@@ -1,8 +1,9 @@
+import { useSession } from 'next-auth/react';
 import React, { useState } from 'react';
 import { FiCheck, FiAlertCircle, FiArrowRight } from 'react-icons/fi';
+
 import FranchiseTypeCard from '@/components/franchise/FranchiseTypeCard';
 import JPSCheckModal from '@/components/franchise/JPSCheckModal';
-import { useSession } from 'next-auth/react';
 
 type FranchiseType = 'sub' | 'master' | 'corporate';
 

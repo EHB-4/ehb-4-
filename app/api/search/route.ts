@@ -37,25 +37,19 @@ export async function GET(request: Request) {
   let results = products;
 
   if (query) {
-    results = results.filter(product =>
-      product.name.toLowerCase().includes(query)
-    );
+    results = results.filter(product => product.name.toLowerCase().includes(query));
   }
 
   if (category) {
-    results = results.filter(product =>
-      product.category.toLowerCase() === category.toLowerCase()
-    );
+    results = results.filter(product => product.category.toLowerCase() === category.toLowerCase());
   }
 
   if (minRating) {
-    results = results.filter(product =>
-      product.rating >= parseFloat(minRating)
-    );
+    results = results.filter(product => product.rating >= parseFloat(minRating));
   }
 
   return NextResponse.json(results);
 }
 
 // AI Guidance: This API route handles product search.
-// In a real app, it would use a search engine or database query and include proper error handling. 
+// In a real app, it would use a search engine or database query and include proper error handling.

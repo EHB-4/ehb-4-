@@ -1,6 +1,6 @@
+import { motion } from 'framer-motion';
 import React from 'react';
 import { FiAward, FiArrowUp, FiCheck } from 'react-icons/fi';
-import { motion } from 'framer-motion';
 
 interface SQLTier {
   level: number;

@@ -35,7 +35,7 @@ export default function NotificationIcon() {
         <div className="absolute right-0 mt-2 w-64 bg-white shadow-lg rounded-lg p-4">
           <h3 className="text-lg font-medium mb-2">Notifications</h3>
           <ul className="space-y-2">
-            {notifications.map((notification) => (
+            {notifications.map(notification => (
               <li key={notification.id} className="text-sm">
                 <p>{notification.message}</p>
                 <p className="text-gray-500">{notification.time}</p>
@@ -49,4 +49,4 @@ export default function NotificationIcon() {
 }
 
 // AI Guidance: This component displays a notification icon with a dropdown.
-// In a real app, notifications are fetched from the backend. 
+// In a real app, notifications are fetched from the backend.

@@ -1,5 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { getSession } from 'next-auth/react';
+
 import { prisma } from '@/lib/prisma';
 
 declare module 'next' {
@@ -27,7 +28,7 @@ export default async function checkSQLLevel(
 ) {
   try {
     const session = await getSession({ req });
-    
+
     if (!session) {
       return res.status(401).json({ error: 'Unauthorized' });
     }

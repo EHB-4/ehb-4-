@@ -1,7 +1,8 @@
 import React from 'react';
 import { FiLock } from 'react-icons/fi';
-import { SQLLevel } from '@/types/marketplace';
+
 import { matchUserLevel } from '@/lib/ai-marketplace/matchUserLevel';
+import { SQLLevel } from '@/types/marketplace';
 
 interface SearchResult {
   id: string;

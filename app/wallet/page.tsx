@@ -1,9 +1,9 @@
 'use client';
 
-import React from 'react';
-import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useSession } from 'next-auth/react';
+import React, { useState, useEffect } from 'react';
+
 import { Wallet, Transaction } from '@/lib/models/Wallet';
 
 export default function WalletPage() {

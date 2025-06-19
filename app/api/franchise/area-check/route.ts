@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+
 import { ServiceCategory } from '@/components/EHB-Franchise/FranchiseUtils/FranchiseTypes';
 
 interface AreaAvailabilityResponse {

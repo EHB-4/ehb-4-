@@ -1,95 +1,90 @@
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth';
+
 import { authOptions } from '@/lib/auth';
-import clientPromise from '@/lib/mongodb';
-import { ObjectId } from 'mongodb';
-import { Shop } from '@/lib/models/Product';
-import { checkModuleEligibility } from '@/lib/utils/walletEligibility';
+import { prisma } from '@/lib/prisma';
+import { z } from 'zod';
 
-export async function GET(request: Request) {
+// Validation schemas
+const shopSchema = z.object({
+  name: z.string().min(1, 'Shop name is required'),
+  description: z.string().optional(),
+  city: z.string().min(1, 'City is required'),
+  address: z.string().min(1, 'Address is required'),
+  phone: z.string().optional(),
+  email: z.string().email('Valid email is required').optional(),
+});
+
+export async function GET(request: NextRequest) {
   try {
-    const session = await getServerSession(authOptions);
-    if (!session) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
-    }
-
     const { searchParams } = new URL(request.url);
-    const category = searchParams.get('category');
-    const city = searchParams.get('city');
-    const search = searchParams.get('search');
+    const page = parseInt(searchParams.get('page') || '1');
+    const limit = parseInt(searchParams.get('limit') || '10');
+    const city = searchParams.get('city') || '';
 
-    const client = await clientPromise;
-    const db = client.db();
-
-    // Build query
-    const query: any = { status: 'active' };
-
-    if (category) {
-      query.category = category;
-    }
+    // Build filter conditions
+    const where: any = {
+      isActive: true,
+    };
 
     if (city) {
-      query.city = { $regex: city, $options: 'i' };
-    }
-
-    if (search) {
-      query.$or = [
-        { name: { $regex: search, $options: 'i' } },
-        { description: { $regex: search, $options: 'i' } },
-      ];
+      where.city = { contains: city, mode: 'insensitive' };
     }
 
     // Get shops with pagination
-    const page = parseInt(searchParams.get('page') || '1');
-    const limit = parseInt(searchParams.get('limit') || '10');
-    const skip = (page - 1) * limit;
-
     const [shops, total] = await Promise.all([
-      db.collection('shops').find(query).sort({ createdAt: -1 }).skip(skip).limit(limit).toArray(),
-      db.collection('shops').countDocuments(query),
+      prisma.shop.findMany({
+        where,
+        include: {
+          user: {
+            select: {
+              id: true,
+              name: true,
+              email: true,
+            },
+          },
+          _count: {
+            select: {
+              products: true,
+            },
+          },
+        },
+        skip: (page - 1) * limit,
+        take: limit,
+        orderBy: { createdAt: 'desc' },
+      }),
+      prisma.shop.count({ where }),
     ]);
 
     return NextResponse.json({
       shops,
       pagination: {
-        total,
         page,
         limit,
+        total,
         pages: Math.ceil(total / limit),
       },
     });
   } catch (error) {
-    console.error('Error fetching shops:', error);
+    console.error('Shops fetch error:', error);
     return NextResponse.json({ error: 'Failed to fetch shops' }, { status: 500 });
   }
 }
 
-export async function POST(request: Request) {
+export async function POST(request: NextRequest) {
   try {
     const session = await getServerSession(authOptions);
-    if (!session) {
+
+    if (!session?.user?.id) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
-    // Check wallet eligibility
-    const eligibility = await checkModuleEligibility(session.user.id, 'gosellr');
-    if (!eligibility.isEligible) {
-      return NextResponse.json({ error: eligibility.message }, { status: 403 });
-    }
-
     const body = await request.json();
-    const { name, description, city, category, contact } = body;
-
-    if (!name || !description || !city || !category || !contact) {
-      return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
-    }
-
-    const client = await clientPromise;
-    const db = client.db();
+    const validatedData = shopSchema.parse(body);
 
     // Check if user already has a shop
-    const existingShop = await db.collection('shops').findOne({
-      ownerId: session.user.id,
+    const existingShop = await prisma.shop.findFirst({
+      where: { userId: session.user.id },
     });
 
     if (existingShop) {
@@ -97,30 +92,85 @@ export async function POST(request: Request) {
     }
 
     // Create shop
-    const shop: Shop = {
-      _id: new ObjectId().toString(),
-      name,
-      description,
-      ownerId: session.user.id,
-      city,
-      category,
-      contact,
-      status: 'active',
-      rating: 0,
-      reviewCount: 0,
-      createdAt: new Date(),
-      updatedAt: new Date(),
-    };
-
-    // Insert shop
-    await db.collection('shops').insertOne(shop);
-
-    return NextResponse.json({
-      message: 'Shop created successfully',
-      shop,
+    const shop = await prisma.shop.create({
+      data: {
+        ...validatedData,
+        userId: session.user.id,
+      },
+      include: {
+        user: {
+          select: {
+            id: true,
+            name: true,
+            email: true,
+          },
+        },
+      },
     });
+
+    return NextResponse.json(shop, { status: 201 });
   } catch (error) {
-    console.error('Error creating shop:', error);
+    if (error instanceof z.ZodError) {
+      return NextResponse.json(
+        { error: 'Validation error', details: error.errors },
+        { status: 400 }
+      );
+    }
+
+    console.error('Shop creation error:', error);
     return NextResponse.json({ error: 'Failed to create shop' }, { status: 500 });
+  }
+}
+
+export async function PUT(request: NextRequest) {
+  try {
+    const session = await getServerSession(authOptions);
+
+    if (!session?.user?.id) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    }
+
+    const body = await request.json();
+    const { id, ...updates } = body;
+    const validatedData = shopSchema.partial().parse(updates);
+
+    // Check if shop exists and belongs to user
+    const existingShop = await prisma.shop.findFirst({
+      where: {
+        id,
+        userId: session.user.id,
+      },
+    });
+
+    if (!existingShop) {
+      return NextResponse.json({ error: 'Shop not found or unauthorized' }, { status: 404 });
+    }
+
+    // Update shop
+    const shop = await prisma.shop.update({
+      where: { id },
+      data: validatedData,
+      include: {
+        user: {
+          select: {
+            id: true,
+            name: true,
+            email: true,
+          },
+        },
+      },
+    });
+
+    return NextResponse.json(shop);
+  } catch (error) {
+    if (error instanceof z.ZodError) {
+      return NextResponse.json(
+        { error: 'Validation error', details: error.errors },
+        { status: 400 }
+      );
+    }
+
+    console.error('Shop update error:', error);
+    return NextResponse.json({ error: 'Failed to update shop' }, { status: 500 });
   }
 }

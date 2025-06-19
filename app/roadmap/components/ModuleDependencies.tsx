@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { Module } from '../types';
 
 interface ModuleDependenciesProps {
@@ -30,29 +31,34 @@ export const ModuleDependencies: React.FC<ModuleDependenciesProps> = ({ module, 
     return 'bg-blue-500';
   };
 
-  const dependencies = module.dependencies.map(depId => 
-    allModules.find(m => m.id === depId)
-  ).filter(Boolean) as Module[];
+  const dependencies = module.dependencies
+    .map(depId => allModules.find(m => m.id === depId))
+    .filter(Boolean) as Module[];
 
   const dependents = getDependentModules(module.id);
 
   return (
     <div className="bg-white rounded-lg shadow p-6">
       <h3 className="text-lg font-semibold mb-4">Module Dependencies</h3>
-      
+
       {/* Dependencies */}
       <div className="mb-6">
         <h4 className="text-sm font-medium text-gray-700 mb-2">Depends On</h4>
         {dependencies.length > 0 ? (
           <div className="space-y-3">
             {dependencies.map(dep => (
-              <div key={dep.id} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+              <div
+                key={dep.id}
+                className="flex items-center justify-between p-3 bg-gray-50 rounded-lg"
+              >
                 <div>
                   <h5 className="font-medium">{dep.name}</h5>
                   <p className="text-sm text-gray-600">{dep.description}</p>
                 </div>
                 <div className="flex items-center space-x-3">
-                  <span className={`px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(dep.status)}`}>
+                  <span
+                    className={`px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(dep.status)}`}
+                  >
                     {dep.status}
                   </span>
                   <div className="w-24">
@@ -79,13 +85,18 @@ export const ModuleDependencies: React.FC<ModuleDependenciesProps> = ({ module, 
         {dependents.length > 0 ? (
           <div className="space-y-3">
             {dependents.map(dep => (
-              <div key={dep.id} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+              <div
+                key={dep.id}
+                className="flex items-center justify-between p-3 bg-gray-50 rounded-lg"
+              >
                 <div>
                   <h5 className="font-medium">{dep.name}</h5>
                   <p className="text-sm text-gray-600">{dep.description}</p>
                 </div>
                 <div className="flex items-center space-x-3">
-                  <span className={`px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(dep.status)}`}>
+                  <span
+                    className={`px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(dep.status)}`}
+                  >
                     {dep.status}
                   </span>
                   <div className="w-24">
@@ -126,4 +137,4 @@ export const ModuleDependencies: React.FC<ModuleDependenciesProps> = ({ module, 
       </div>
     </div>
   );
-}; 
+};

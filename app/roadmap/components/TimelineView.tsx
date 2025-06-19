@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { TimelineEvent } from '../types';
 
 interface TimelineViewProps {
@@ -6,8 +7,8 @@ interface TimelineViewProps {
 }
 
 export const TimelineView: React.FC<TimelineViewProps> = ({ events }) => {
-  const sortedEvents = [...events].sort((a, b) => 
-    new Date(a.date).getTime() - new Date(b.date).getTime()
+  const sortedEvents = [...events].sort(
+    (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()
   );
 
   const getStatusColor = (status: string) => {
@@ -28,7 +29,12 @@ export const TimelineView: React.FC<TimelineViewProps> = ({ events }) => {
       case 'milestone':
         return (
           <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+            />
           </svg>
         );
       case 'release':
@@ -40,7 +46,12 @@ export const TimelineView: React.FC<TimelineViewProps> = ({ events }) => {
       case 'deadline':
         return (
           <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+            />
           </svg>
         );
       default:
@@ -57,18 +68,26 @@ export const TimelineView: React.FC<TimelineViewProps> = ({ events }) => {
         {sortedEvents.map((event, index) => (
           <div key={event.id} className="relative pl-16">
             {/* Timeline dot */}
-            <div className={`absolute left-6 w-4 h-4 rounded-full border-2 ${
-              event.status === 'completed' ? 'bg-green-500 border-green-600' :
-              event.status === 'in-progress' ? 'bg-yellow-500 border-yellow-600' :
-              'bg-gray-500 border-gray-600'
-            }`} />
+            <div
+              className={`absolute left-6 w-4 h-4 rounded-full border-2 ${
+                event.status === 'completed'
+                  ? 'bg-green-500 border-green-600'
+                  : event.status === 'in-progress'
+                    ? 'bg-yellow-500 border-yellow-600'
+                    : 'bg-gray-500 border-gray-600'
+              }`}
+            />
 
             {/* Event card */}
-            <div className={`p-4 rounded-lg border ${
-              event.status === 'completed' ? 'bg-green-50' :
-              event.status === 'in-progress' ? 'bg-yellow-50' :
-              'bg-white'
-            }`}>
+            <div
+              className={`p-4 rounded-lg border ${
+                event.status === 'completed'
+                  ? 'bg-green-50'
+                  : event.status === 'in-progress'
+                    ? 'bg-yellow-50'
+                    : 'bg-white'
+              }`}
+            >
               <div className="flex items-start justify-between">
                 <div className="flex items-center space-x-3">
                   <div className={`p-2 rounded-full ${getStatusColor(event.status)}`}>
@@ -83,7 +102,9 @@ export const TimelineView: React.FC<TimelineViewProps> = ({ events }) => {
                   <span className="text-sm font-medium text-gray-900">
                     {new Date(event.date).toLocaleDateString()}
                   </span>
-                  <span className={`px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(event.status)}`}>
+                  <span
+                    className={`px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(event.status)}`}
+                  >
                     {event.status}
                   </span>
                 </div>
@@ -114,4 +135,4 @@ export const TimelineView: React.FC<TimelineViewProps> = ({ events }) => {
       </div>
     </div>
   );
-}; 
+};

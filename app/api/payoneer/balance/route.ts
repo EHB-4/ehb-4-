@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+
 import { getAccountBalance } from '../../../../lib/api/payoneer';
 
 export async function GET() {

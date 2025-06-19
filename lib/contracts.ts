@@ -1,5 +1,6 @@
 import { ethers } from 'ethers';
 import { getSession } from 'next-auth/react';
+
 import config from '@/config/env';
 
 // Add type declaration for window.ethereum

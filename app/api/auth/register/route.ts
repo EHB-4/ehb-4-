@@ -1,5 +1,6 @@
-import { NextResponse } from 'next/server';
 import { hash } from 'bcryptjs';
+import { NextResponse } from 'next/server';
+
 import { prisma } from '@/lib/prisma';
 
 export async function POST(request: Request) {
@@ -8,10 +9,7 @@ export async function POST(request: Request) {
 
     // Validate input
     if (!email || !password) {
-      return NextResponse.json(
-        { error: 'Email and password are required' },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: 'Email and password are required' }, { status: 400 });
     }
 
     // Check if user already exists
@@ -20,10 +18,7 @@ export async function POST(request: Request) {
     });
 
     if (existingUser) {
-      return NextResponse.json(
-        { error: 'User already exists' },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: 'User already exists' }, { status: 400 });
     }
 
     // Hash password
@@ -44,9 +39,6 @@ export async function POST(request: Request) {
     return NextResponse.json(userWithoutPassword);
   } catch (error) {
     console.error('Registration error:', error);
-    return NextResponse.json(
-      { error: 'Failed to register user' },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: 'Failed to register user' }, { status: 500 });
   }
 }

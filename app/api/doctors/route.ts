@@ -1,9 +1,10 @@
+import { ObjectId } from 'mongodb';
 import { NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth';
+
 import { authOptions } from '@/lib/authOptions';
-import clientPromise from '@/lib/mongodb';
-import { ObjectId } from 'mongodb';
 import { Doctor } from '@/lib/models/Doctor';
+import clientPromise from '@/lib/mongodb';
 
 // GET /api/doctors?city=xxx&specialty=yyy&hospital=zzz&minSqlLevel=3
 export async function GET(request: Request) {

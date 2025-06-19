@@ -11,7 +11,7 @@ export const roadmapData: RoadmapData = {
       { name: 'Product', size: 20 },
       { name: 'Design', size: 15 },
       { name: 'Marketing', size: 10 },
-      { name: 'Sales', size: 25 }
+      { name: 'Sales', size: 25 },
     ],
     techStack: [
       { name: 'Next.js', version: '14.1.0' },
@@ -21,8 +21,8 @@ export const roadmapData: RoadmapData = {
       { name: 'PostgreSQL', version: '15.0' },
       { name: 'Redis', version: '7.0' },
       { name: 'Docker', version: '24.0' },
-      { name: 'AWS', version: 'Latest' }
-    ]
+      { name: 'AWS', version: 'Latest' },
+    ],
   },
   modules: [
     {
@@ -49,23 +49,23 @@ export const roadmapData: RoadmapData = {
               path: '/api/auth/login',
               method: 'POST',
               description: 'User login endpoint',
-              status: 'completed'
+              status: 'completed',
             },
             {
               path: '/api/auth/register',
               method: 'POST',
               description: 'User registration endpoint',
-              status: 'completed'
-            }
+              status: 'completed',
+            },
           ],
           businessRules: [
             {
               name: 'Password Policy',
               description: 'Enforce strong password requirements',
               category: 'Security',
-              status: 'completed'
-            }
-          ]
+              status: 'completed',
+            },
+          ],
         },
         {
           id: 'user-management',
@@ -81,17 +81,17 @@ export const roadmapData: RoadmapData = {
               path: '/api/users/profile',
               method: 'GET',
               description: 'Get user profile',
-              status: 'completed'
+              status: 'completed',
             },
             {
               path: '/api/users/settings',
               method: 'PUT',
               description: 'Update user settings',
-              status: 'in-progress'
-            }
-          ]
-        }
-      ]
+              status: 'in-progress',
+            },
+          ],
+        },
+      ],
     },
     {
       id: 'ehb-wallet',
@@ -117,19 +117,19 @@ export const roadmapData: RoadmapData = {
               path: '/api/payments/process',
               method: 'POST',
               description: 'Process payment transaction',
-              status: 'planned'
-            }
+              status: 'planned',
+            },
           ],
           businessRules: [
             {
               name: 'Transaction Limits',
               description: 'Define transaction limits and restrictions',
               category: 'Compliance',
-              status: 'planned'
-            }
-          ]
-        }
-      ]
+              status: 'planned',
+            },
+          ],
+        },
+      ],
     },
     {
       id: 'ehb-ai-marketplace',
@@ -149,10 +149,10 @@ export const roadmapData: RoadmapData = {
           priority: 'medium',
           progress: 0,
           team: ['AI Team'],
-          dependencies: []
-        }
-      ]
-    }
+          dependencies: [],
+        },
+      ],
+    },
   ],
   timeline: [
     {
@@ -162,7 +162,7 @@ export const roadmapData: RoadmapData = {
       date: '2024-01-01',
       type: 'milestone',
       status: 'completed',
-      dependencies: []
+      dependencies: [],
     },
     {
       id: 'phase2',
@@ -171,7 +171,7 @@ export const roadmapData: RoadmapData = {
       date: '2024-04-01',
       type: 'milestone',
       status: 'in-progress',
-      dependencies: ['phase1']
+      dependencies: ['phase1'],
     },
     {
       id: 'phase3',
@@ -180,25 +180,25 @@ export const roadmapData: RoadmapData = {
       date: '2024-07-01',
       type: 'milestone',
       status: 'planned',
-      dependencies: ['phase2']
-    }
+      dependencies: ['phase2'],
+    },
   ],
   status: {
     overall: 'in-progress',
     modules: {
       completed: 1,
       inProgress: 1,
-      planned: 1
+      planned: 1,
     },
     features: {
       completed: 1,
       inProgress: 2,
-      planned: 2
+      planned: 2,
     },
     timeline: {
       completed: 1,
       inProgress: 1,
-      planned: 1
-    }
-  }
-}; 
+      planned: 1,
+    },
+  },
+};

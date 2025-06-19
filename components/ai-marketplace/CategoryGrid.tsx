@@ -1,5 +1,7 @@
 import React from 'react';
+
 import { Service, SQLLevel } from '@/types/marketplace';
+
 import ServiceCard from './ServiceCard';
 
 interface CategoryGridProps {

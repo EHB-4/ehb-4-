@@ -1,6 +1,6 @@
+import { motion } from 'framer-motion';
 import React from 'react';
 import { FiTrendingUp, FiTrendingDown, FiTarget, FiBarChart2 } from 'react-icons/fi';
-import { motion } from 'framer-motion';
 
 interface Metric {
   id: string;

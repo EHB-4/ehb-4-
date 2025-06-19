@@ -1,5 +1,5 @@
-import { FiTrendingUp, FiPackage, FiDollarSign, FiAlertCircle } from 'react-icons/fi';
 import { motion } from 'framer-motion';
+import { FiTrendingUp, FiPackage, FiDollarSign, FiAlertCircle } from 'react-icons/fi';
 
 interface BusinessData {
   name: string;

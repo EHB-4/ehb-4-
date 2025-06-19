@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
 import { motion } from 'framer-motion';
+import React, { useState } from 'react';
 import { FiCheck, FiX, FiAlertCircle, FiUser, FiFileText, FiAward } from 'react-icons/fi';
-import { SQLLevel } from './SQLLevelBadge';
-import SQLLevelBadge from './SQLLevelBadge';
+
+import SQLLevelBadge, { SQLLevel } from './SQLLevelBadge';
 
 interface VerificationRequest {
   id: string;

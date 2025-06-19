@@ -1,8 +1,8 @@
-import React from 'react';
 import { motion } from 'framer-motion';
+import React from 'react';
 import { FiCalendar, FiUser, FiShield, FiInfo } from 'react-icons/fi';
-import { SQLLevel } from './SQLLevelBadge';
-import SQLLevelBadge from './SQLLevelBadge';
+
+import SQLLevelBadge, { SQLLevel } from './SQLLevelBadge';
 
 interface SQLUserInfoProps {
   currentLevel: SQLLevel;

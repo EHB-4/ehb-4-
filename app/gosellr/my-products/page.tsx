@@ -1,10 +1,11 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
-import { useSession } from 'next-auth/react';
 import { motion } from 'framer-motion';
-import { Product } from '@/lib/models/Product';
+import { useSession } from 'next-auth/react';
+import React, { useState, useEffect } from 'react';
+
 import { Modal } from '@/components/ui/Modal';
+import { Product } from '@/lib/models/Product';
 import { checkModuleEligibility } from '@/lib/utils/walletEligibility';
 
 export default function MyProductsPage() {

@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import { useSession } from 'next-auth/react';
+'use client';
+
 import { useRouter } from 'next/navigation';
-import UserProfile from '../../../components/UserProfile';
+import { useSession } from 'next-auth/react';
+import React, { useEffect, useState } from 'react';
 
 export default function ProfilePage() {
   const { data: session, status } = useSession();
@@ -48,10 +49,32 @@ export default function ProfilePage() {
   return (
     <div className="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
       <h1 className="text-3xl font-bold text-gray-900 mb-8">My Profile</h1>
-      <UserProfile user={userData || { name: session?.user?.name, email: session?.user?.email }} onUpdate={handleUpdateProfile} />
+      <div className="bg-white rounded-lg shadow p-6">
+        <div className="space-y-4">
+          <div>
+            <label className="block text-sm font-medium text-gray-700">Name</label>
+            <input
+              type="text"
+              defaultValue={userData?.name || session?.user?.name || ''}
+              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700">Email</label>
+            <input
+              type="email"
+              defaultValue={userData?.email || session?.user?.email || ''}
+              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+            />
+          </div>
+          <button
+            onClick={() => handleUpdateProfile(userData)}
+            className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+          >
+            Update Profile
+          </button>
+        </div>
+      </div>
     </div>
   );
 }
-
-// AI Guidance: This page displays the user's profile and allows them to update it.
-// In a real app, profile data would be fetched from the backend and updated in real-time. 

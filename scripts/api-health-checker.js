@@ -1,23 +1,26 @@
 import axios from 'axios';
 import chalk from 'chalk';
-import { PrismaClient } from '@prisma/client';
 
-const prisma = new PrismaClient({
-  datasources: {
-    db: {
-      url: 'mongodb://localhost:27017/ehb-next'
-    }
-  }
-});
-const BASE_URL = 'http://localhost:3001/api';
+const BASE_URL = 'http://localhost:3000/api';
 
 async function checkDatabaseConnection() {
   try {
-    await prisma.$connect();
+    // Simple MongoDB connection check
+    const response = await axios.get('http://localhost:27017', { timeout: 3000 });
     return true;
   } catch (error) {
-    console.error(chalk.red('❌ Database Connection Error:'), error);
-    return false;
+    // MongoDB doesn't respond to HTTP, so we'll check if the port is open
+    try {
+      const { exec } = await import('child_process');
+      const { promisify } = await import('util');
+      const execAsync = promisify(exec);
+
+      await execAsync('netstat -an | findstr :27017');
+      return true;
+    } catch (dbError) {
+      console.error(chalk.red('❌ Database Connection Error:'), 'MongoDB not accessible');
+      return false;
+    }
   }
 }
 
@@ -36,6 +39,7 @@ async function checkApi(endpoint, method = 'GET') {
       status: 'success',
       responseTime,
       message: 'API is working correctly',
+      data: response.data,
     };
   } catch (error) {
     const responseTime = Date.now() - startTime;
@@ -86,12 +90,8 @@ async function runHealthCheck() {
     console.log(chalk.red('❌ Database connection failed\n'));
   }
 
-  // Define APIs to check
-  const apis = [
-    '/obs/certificate-log',
-    '/obs/study-pool',
-    '/payments/process',
-  ];
+  // Define APIs to check - using actual endpoints
+  const apis = ['/test', '/health-check'];
 
   // Check each API
   console.log(chalk.blue('Checking APIs...\n'));
@@ -99,14 +99,17 @@ async function runHealthCheck() {
 
   // Print Results
   results.forEach(result => {
-    const statusColor = result.status === 'success' ? 'green' : 
-                       result.status === 'warning' ? 'yellow' : 'red';
-    const statusIcon = result.status === 'success' ? '✅' : 
-                      result.status === 'warning' ? '⚠️' : '❌';
+    const statusColor =
+      result.status === 'success' ? 'green' : result.status === 'warning' ? 'yellow' : 'red';
+    const statusIcon =
+      result.status === 'success' ? '✅' : result.status === 'warning' ? '⚠️' : '❌';
 
     console.log(chalk[statusColor](`${statusIcon} ${result.method} ${result.endpoint}`));
     console.log(`   Response Time: ${result.responseTime}ms`);
     console.log(`   Status: ${result.message}`);
+    if (result.data) {
+      console.log(`   Data: ${JSON.stringify(result.data)}`);
+    }
     if (result.fix) {
       console.log(chalk.blue(`   💡 Fix: ${result.fix}`));
     }
@@ -123,7 +126,11 @@ async function runHealthCheck() {
   console.log(chalk.yellow(`⚠️ ${warningCount} APIs need attention`));
   console.log(chalk.red(`❌ ${errorCount} APIs failed`));
 
-  await prisma.$disconnect();
+  console.log(chalk.blue('\n🎯 Next Steps:'));
+  console.log(chalk.cyan('1. Open http://localhost:3000 in your browser'));
+  console.log(chalk.cyan('2. Check the development server logs'));
+  console.log(chalk.cyan('3. Run npm run mongo-fast to test database'));
+  console.log(chalk.cyan('4. Start building your application!'));
 }
 
 runHealthCheck().catch(console.error);

@@ -1,9 +1,10 @@
+import axios from 'axios';
 import { NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth/next';
+import { z } from 'zod';
+
 import { authOptions } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
-import { z } from 'zod';
-import axios from 'axios';
 
 // Validation schemas
 const shopifyRequestSchema = z.object({
@@ -215,10 +216,7 @@ export async function POST(req: Request) {
       );
     }
     console.error('Shopify request error:', error);
-    return NextResponse.json(
-      { error: 'Failed to process Shopify request' },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: 'Failed to process Shopify request' }, { status: 500 });
   }
 }
 
@@ -269,9 +267,6 @@ export async function GET(req: Request) {
     });
   } catch (error) {
     console.error('Shopify requests fetch error:', error);
-    return NextResponse.json(
-      { error: 'Failed to fetch Shopify requests' },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: 'Failed to fetch Shopify requests' }, { status: 500 });
   }
-} 
+}

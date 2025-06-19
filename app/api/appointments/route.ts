@@ -1,11 +1,12 @@
+import { ObjectId } from 'mongodb';
 import { NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth';
+
 import { authOptions } from '@/lib/authOptions';
-import clientPromise from '@/lib/mongodb';
-import { ObjectId } from 'mongodb';
 import { Appointment } from '@/lib/models/Appointment';
 import { Doctor } from '@/lib/models/Doctor';
 import { Wallet } from '@/lib/models/Wallet';
+import clientPromise from '@/lib/mongodb';
 
 // GET /api/appointments/my-appointments
 export async function GET(request: Request) {

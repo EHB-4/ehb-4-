@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import { useSession } from 'next-auth/react';
-import { useRouter } from 'next/router';
-import { ChevronDownIcon, ChevronUpIcon } from '@heroicons/react/24/outline';
 import { Disclosure } from '@headlessui/react';
+import { ChevronDownIcon, ChevronUpIcon } from '@heroicons/react/24/outline';
+import { useRouter } from 'next/router';
+import { useSession } from 'next-auth/react';
+import React, { useState, useEffect } from 'react';
 
 interface FAQ {
   question: string;

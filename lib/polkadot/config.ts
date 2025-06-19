@@ -1,8 +1,8 @@
 import { ApiPromise, WsProvider } from '@polkadot/api';
 import { Keyring } from '@polkadot/keyring';
-import { cryptoWaitReady } from '@polkadot/util-crypto';
-import { BN } from '@polkadot/util';
 import type { EraIndex } from '@polkadot/types/interfaces/staking';
+import { BN } from '@polkadot/util';
+import { cryptoWaitReady } from '@polkadot/util-crypto';
 
 const POLKADOT_WS = process.env.POLKADOT_WS || 'wss://rpc.polkadot.io';
 
@@ -43,10 +43,10 @@ export async function getStakingInfo(address: string): Promise<{
   nominators: { address: string; amount: BN }[];
 }> {
   const api = await initPolkadotAPI();
-  const [activeEraResult, ledger] = await Promise.all([
+  const [activeEraResult, ledger] = (await Promise.all([
     api.query.staking.activeEra(),
     api.query.staking.ledger(address),
-  ]) as [unknown, unknown];
+  ])) as [unknown, unknown];
 
   const activeEra = (activeEraResult as unknown as ActiveEra).index;
   const stakingLedger = ledger as StakingLedger;
@@ -57,7 +57,7 @@ export async function getStakingInfo(address: string): Promise<{
     new BN(0)
   );
 
-  const nominators = stakingLedger.nominators.map((nominator) => ({
+  const nominators = stakingLedger.nominators.map(nominator => ({
     address: nominator.address,
     amount: nominator.amount,
   }));
@@ -75,11 +75,11 @@ export async function getValidatorInfo(address: string): Promise<{
   nominators: { address: string; amount: BN }[];
 }> {
   const api = await initPolkadotAPI();
-  const activeEraResult = await api.query.staking.activeEra() as unknown;
-  const [validatorPrefs, stakers] = await Promise.all([
+  const activeEraResult = (await api.query.staking.activeEra()) as unknown;
+  const [validatorPrefs, stakers] = (await Promise.all([
     api.query.staking.validators(address),
     api.query.staking.erasStakers((activeEraResult as ActiveEra).index, address),
-  ]) as [unknown, unknown];
+  ])) as [unknown, unknown];
 
   const prefs = validatorPrefs as ValidatorPrefs;
   const exposure = stakers as StakingExposure;

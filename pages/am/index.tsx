@@ -1,9 +1,10 @@
 import React from 'react';
 import { FiUsers, FiTrendingUp, FiDollarSign, FiLock, FiAward } from 'react-icons/fi';
+
 import AffiliateDashboard from '../../components/am/AffiliateDashboard';
-import ReferralTree from '../../components/am/ReferralTree';
-import IncomeSummary from '../../components/am/IncomeSummary';
 import CoinLockBonus from '../../components/am/CoinLockBonus';
+import IncomeSummary from '../../components/am/IncomeSummary';
+import ReferralTree from '../../components/am/ReferralTree';
 import SQLCommissionBreakdown from '../../components/am/SQLCommissionBreakdown';
 
 interface ServiceCard {

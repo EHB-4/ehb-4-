@@ -1,14 +1,16 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { getServerSession } from 'next-auth/next';
+import { z } from 'zod';
+
+import { authOptions } from '@/lib/auth';
+import { MoonbeamToken } from '@/lib/moonbeam/tokens';
+
 import {
   getTransaction,
   getBlock,
   getBalance,
   initMoonbeamProvider,
 } from '../../../lib/moonbeam/config';
-import { getServerSession } from 'next-auth/next';
-import { authOptions } from '@/lib/auth';
-import { z } from 'zod';
-import { MoonbeamToken } from '@/lib/moonbeam/tokens';
 
 // Validation schemas
 const moonbeamRequestSchema = z.object({
@@ -64,10 +66,7 @@ export async function POST(req: Request) {
     const session = await getServerSession(authOptions);
 
     if (!session) {
-      return NextResponse.json(
-        { error: 'Unauthorized' },
-        { status: 401 }
-      );
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
     const body = await req.json();
@@ -77,10 +76,7 @@ export async function POST(req: Request) {
     switch (validatedData.action) {
       case 'get_balance':
         if (!validatedData.tokenAddress) {
-          return NextResponse.json(
-            { error: 'Token address is required' },
-            { status: 400 }
-          );
+          return NextResponse.json({ error: 'Token address is required' }, { status: 400 });
         }
         const token = new MoonbeamToken(validatedData.tokenAddress);
         response = await token.balanceOf(session.user.id);
@@ -108,10 +104,7 @@ export async function POST(req: Request) {
           );
         }
         const approveToken = new MoonbeamToken(validatedData.tokenAddress);
-        response = await approveToken.approve(
-          validatedData.spender,
-          BigInt(validatedData.amount)
-        );
+        response = await approveToken.approve(validatedData.spender, BigInt(validatedData.amount));
         break;
 
       case 'get_allowance':
@@ -122,17 +115,11 @@ export async function POST(req: Request) {
           );
         }
         const allowanceToken = new MoonbeamToken(validatedData.tokenAddress);
-        response = await allowanceToken.allowance(
-          session.user.id,
-          validatedData.spender
-        );
+        response = await allowanceToken.allowance(session.user.id, validatedData.spender);
         break;
 
       default:
-        return NextResponse.json(
-          { error: 'Invalid action' },
-          { status: 400 }
-        );
+        return NextResponse.json({ error: 'Invalid action' }, { status: 400 });
     }
 
     const validatedResponse = moonbeamResponseSchema.parse({

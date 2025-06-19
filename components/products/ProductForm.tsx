@@ -1,10 +1,11 @@
 import React from 'react';
+
+import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Button } from '@/components/ui/button';
-import { Textarea } from '@/components/ui/textarea';
 import { Switch } from '@/components/ui/switch';
+import { Textarea } from '@/components/ui/textarea';
 
 interface ProductFormProps {
   initialData?: {
@@ -60,7 +61,7 @@ export function ProductForm({ initialData, onSubmit, isEditing = false }: Produc
             <Input
               id="name"
               value={formData.name}
-              onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+              onChange={e => setFormData({ ...formData, name: e.target.value })}
               required
             />
           </div>
@@ -70,7 +71,7 @@ export function ProductForm({ initialData, onSubmit, isEditing = false }: Produc
             <Textarea
               id="description"
               value={formData.description}
-              onChange={(e) => setFormData({ ...formData, description: e.target.value })}
+              onChange={e => setFormData({ ...formData, description: e.target.value })}
               required
             />
           </div>
@@ -81,7 +82,7 @@ export function ProductForm({ initialData, onSubmit, isEditing = false }: Produc
               id="price"
               type="number"
               value={formData.price}
-              onChange={(e) => setFormData({ ...formData, price: Number(e.target.value) })}
+              onChange={e => setFormData({ ...formData, price: Number(e.target.value) })}
               required
             />
           </div>
@@ -91,7 +92,7 @@ export function ProductForm({ initialData, onSubmit, isEditing = false }: Produc
             <Input
               id="category"
               value={formData.category}
-              onChange={(e) => setFormData({ ...formData, category: e.target.value })}
+              onChange={e => setFormData({ ...formData, category: e.target.value })}
               required
             />
           </div>
@@ -102,7 +103,7 @@ export function ProductForm({ initialData, onSubmit, isEditing = false }: Produc
               id="stock"
               type="number"
               value={formData.stock}
-              onChange={(e) => setFormData({ ...formData, stock: Number(e.target.value) })}
+              onChange={e => setFormData({ ...formData, stock: Number(e.target.value) })}
               required
             />
           </div>
@@ -113,7 +114,7 @@ export function ProductForm({ initialData, onSubmit, isEditing = false }: Produc
               id="image"
               type="url"
               value={formData.image}
-              onChange={(e) => setFormData({ ...formData, image: e.target.value })}
+              onChange={e => setFormData({ ...formData, image: e.target.value })}
               required
             />
           </div>
@@ -124,7 +125,7 @@ export function ProductForm({ initialData, onSubmit, isEditing = false }: Produc
               <div key={index} className="flex gap-2">
                 <Input
                   value={image}
-                  onChange={(e) => handleImageChange(index, e.target.value)}
+                  onChange={e => handleImageChange(index, e.target.value)}
                   placeholder={`Image URL ${index + 1}`}
                 />
               </div>
@@ -138,7 +139,7 @@ export function ProductForm({ initialData, onSubmit, isEditing = false }: Produc
             <Switch
               id="isActive"
               checked={formData.isActive}
-              onCheckedChange={(checked) => setFormData({ ...formData, isActive: checked })}
+              onCheckedChange={checked => setFormData({ ...formData, isActive: checked })}
             />
             <Label htmlFor="isActive">Active</Label>
           </div>
@@ -150,4 +151,4 @@ export function ProductForm({ initialData, onSubmit, isEditing = false }: Produc
       </CardContent>
     </Card>
   );
-} 
+}

@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
-import MarketplaceHeader from '@/components/ai-marketplace/MarketplaceHeader';
+import React, { useState, useEffect } from 'react';
+import { FiAlertCircle } from 'react-icons/fi';
+
 import CategoryGrid from '@/components/ai-marketplace/CategoryGrid';
+import MarketplaceHeader from '@/components/ai-marketplace/MarketplaceHeader';
 import { fetchServices } from '@/lib/ai-marketplace/fetchServices';
 import { Service, SQLLevel } from '@/types/marketplace';
-import { FiAlertCircle } from 'react-icons/fi';
 
 export default function EHBMarketplace() {
   const router = useRouter();

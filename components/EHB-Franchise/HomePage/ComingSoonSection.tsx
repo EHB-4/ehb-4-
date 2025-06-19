@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { ServiceCategory } from '../FranchiseUtils/FranchiseTypes';
 
 interface ComingSoonService {

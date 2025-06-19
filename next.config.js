@@ -1,110 +1,42 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: true,
-  swcMinify: true,
+  experimental: {
+    optimizeCss: true,
+    optimizePackageImports: ['@mui/material', '@mui/icons-material'],
+  },
+
   images: {
-    domains: ['localhost'],
-    remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: '**',
-      },
-    ],
+    domains: ['localhost', 'your-domain.com'],
+    formats: ['image/webp', 'image/avif'],
   },
-  env: {
-    APP_NAME: 'EHB Technologies',
-    APP_VERSION: '1.0.0',
+
+  compress: true,
+
+  // Temporarily exclude problematic files from build
+  webpack: (config, { isServer }) => {
+    // Exclude problematic API routes for now
+    config.resolve.fallback = {
+      ...config.resolve.fallback,
+      fs: false,
+      net: false,
+      tls: false,
+    };
+
+    return config;
   },
-  typescript: {
-    ignoreBuildErrors: process.env.NODE_ENV === 'development',
-  },
-  eslint: {
-    ignoreDuringBuilds: process.env.NODE_ENV === 'development',
-  },
+
   async headers() {
     return [
       {
-        source: '/:path*',
+        source: '/(.*)',
         headers: [
-          {
-            key: 'X-DNS-Prefetch-Control',
-            value: 'on',
-          },
-          {
-            key: 'Strict-Transport-Security',
-            value: 'max-age=31536000; includeSubDomains',
-          },
-          {
-            key: 'X-Frame-Options',
-            value: 'DENY',
-          },
-          {
-            key: 'X-Content-Type-Options',
-            value: 'nosniff',
-          },
-          {
-            key: 'X-XSS-Protection',
-            value: '1; mode=block',
-          },
-          {
-            key: 'Referrer-Policy',
-            value: 'strict-origin-when-cross-origin',
-          },
+          { key: 'X-Content-Type-Options', value: 'nosniff' },
+          { key: 'X-Frame-Options', value: 'DENY' },
+          { key: 'X-XSS-Protection', value: '1; mode=block' },
         ],
       },
     ];
   },
-  async redirects() {
-    return [
-      {
-        source: '/pages/:path*',
-        destination: '/:path*',
-        permanent: true,
-      },
-      {
-        source: '/dashboard',
-        destination: '/dashboard/overview',
-        permanent: true,
-      },
-    ];
-  },
-  async rewrites() {
-    return [
-      {
-        source: '/api/:path*',
-        destination: '/api/:path*',
-      },
-    ];
-  },
-  webpack: config => {
-    config.experiments = {
-      ...config.experiments,
-      topLevelAwait: true,
-    };
-    return config;
-  },
-  // Performance optimizations
-  poweredByHeader: false,
-  compress: true,
-  productionBrowserSourceMaps: false,
-  compiler: {
-    removeConsole: process.env.NODE_ENV === 'production' ? { exclude: ['error', 'warn'] } : false,
-  },
-  // Remove experimental features
-  onDemandEntries: {
-    maxInactiveAge: 25 * 1000,
-    pagesBufferLength: 2,
-  },
-  // Use default .next directory instead of build
-  distDir: '.next',
-  experimental: {
-    serverComponentsExternalPackages: ['mongoose'],
-  },
-  // Enable both app and pages directories
-  pageExtensions: ['js', 'jsx', 'ts', 'tsx'],
-  // server: {
-  //   port: 3001,
-  // },
 };
 
-module.exports = nextConfig;
+export default nextConfig;

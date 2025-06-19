@@ -1,11 +1,12 @@
 import React from 'react';
-import OverviewHeader from './OverviewHeader';
+
+import AIAnalysisPanel from './AIAnalysisPanel';
+import Legend from './Legend';
 import ModuleCardGrid from './ModuleCardGrid';
+import OverviewHeader from './OverviewHeader';
+import ReportGenerator from './ReportGenerator';
 import RoadmapCard from './RoadmapCard';
 import StatusTracker from './StatusTracker';
-import AIAnalysisPanel from './AIAnalysisPanel';
-import ReportGenerator from './ReportGenerator';
-import Legend from './Legend';
 
 interface ModuleStatus {
   name: string;

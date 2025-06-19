@@ -1,7 +1,6 @@
+import { motion } from 'framer-motion';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { motion } from 'framer-motion';
-import { Course } from '@/lib/models/Course';
 import {
   FaCalendarAlt,
   FaClock,
@@ -9,6 +8,8 @@ import {
   FaVideo,
   FaChalkboardTeacher,
 } from 'react-icons/fa';
+
+import { Course } from '@/lib/models/Course';
 
 interface CourseEditorProps {
   course?: Course;

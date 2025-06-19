@@ -1,6 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import Link from 'next/link';
+'use client';
+
 import { motion, AnimatePresence } from 'framer-motion';
+import Link from 'next/link';
+import React, { useState, useEffect } from 'react';
 import { FiChevronLeft, FiChevronRight, FiStar } from 'react-icons/fi';
 
 interface Brand {
@@ -12,46 +14,46 @@ interface Brand {
   url: string;
 }
 
-const brands: Brand[] = [
+const mockBrands: Brand[] = [
   {
     id: '1',
-    name: 'TechGadgets Pro',
-    logo: '/brands/tech-gadgets.png',
-    rating: 4.9,
-    category: 'Electronics',
-    url: '/brands/tech-gadgets-pro',
+    name: 'TechCorp',
+    logo: 'https://via.placeholder.com/80x40/3B82F6/FFFFFF?text=Tech',
+    rating: 4.8,
+    category: 'Technology',
+    url: '/brands/techcorp',
   },
   {
     id: '2',
-    name: 'Fashion Forward',
-    logo: '/brands/fashion-forward.png',
-    rating: 4.8,
+    name: 'FashionHub',
+    logo: 'https://via.placeholder.com/80x40/EC4899/FFFFFF?text=Fashion',
+    rating: 4.6,
     category: 'Fashion',
-    url: '/brands/fashion-forward',
+    url: '/brands/fashionhub',
   },
   {
     id: '3',
-    name: 'Home Essentials',
-    logo: '/brands/home-essentials.png',
+    name: 'HomeStyle',
+    logo: 'https://via.placeholder.com/80x40/10B981/FFFFFF?text=Home',
     rating: 4.7,
-    category: 'Home & Living',
-    url: '/brands/home-essentials',
+    category: 'Home & Garden',
+    url: '/brands/homestyle',
   },
   {
     id: '4',
-    name: 'Beauty Box',
-    logo: '/brands/beauty-box.png',
+    name: 'SportsPro',
+    logo: 'https://via.placeholder.com/80x40/F59E0B/FFFFFF?text=Sports',
     rating: 4.9,
-    category: 'Beauty',
-    url: '/brands/beauty-box',
+    category: 'Sports',
+    url: '/brands/sportspro',
   },
   {
     id: '5',
-    name: 'Sports Elite',
-    logo: '/brands/sports-elite.png',
-    rating: 4.8,
-    category: 'Sports',
-    url: '/brands/sports-elite',
+    name: 'BeautyGlow',
+    logo: 'https://via.placeholder.com/80x40/8B5CF6/FFFFFF?text=Beauty',
+    rating: 4.5,
+    category: 'Beauty',
+    url: '/brands/beautyglow',
   },
 ];
 
@@ -63,101 +65,104 @@ export default function TopBrandsSlider() {
     if (!isAutoPlaying) return;
 
     const interval = setInterval(() => {
-      setCurrentIndex(prev => (prev + 1) % brands.length);
-    }, 5000);
+      setCurrentIndex(prev => (prev + 1) % Math.ceil(mockBrands.length / 3));
+    }, 4000);
 
     return () => clearInterval(interval);
   }, [isAutoPlaying]);
 
-  const handlePrevious = () => {
-    setIsAutoPlaying(false);
-    setCurrentIndex(prev => (prev - 1 + brands.length) % brands.length);
+  const nextSlide = () => {
+    setCurrentIndex(prev => (prev + 1) % Math.ceil(mockBrands.length / 3));
   };
 
-  const handleNext = () => {
-    setIsAutoPlaying(false);
-    setCurrentIndex(prev => (prev + 1) % brands.length);
+  const prevSlide = () => {
+    setCurrentIndex(
+      prev => (prev - 1 + Math.ceil(mockBrands.length / 3)) % Math.ceil(mockBrands.length / 3)
+    );
+  };
+
+  const getVisibleBrands = () => {
+    const startIndex = currentIndex * 3;
+    return mockBrands.slice(startIndex, startIndex + 3);
   };
 
   return (
-    <div className="py-16 bg-white">
-      <div className="container mx-auto px-4">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold text-gray-900 mb-4">Top Verified Sellers</h2>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Discover our most trusted and highest-rated sellers on the platform.
-          </p>
+    <div className="bg-white py-12">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-8">
+          <h2 className="text-3xl font-bold text-gray-900 mb-4">Top Brands</h2>
+          <p className="text-gray-600">Discover trusted brands and quality products</p>
         </div>
 
-        <div className="relative max-w-4xl mx-auto">
-          <div className="relative h-[400px] overflow-hidden rounded-xl bg-gray-50">
+        <div className="relative">
+          <div className="flex items-center justify-between mb-6">
+            <button
+              onClick={prevSlide}
+              className="p-2 rounded-full bg-gray-100 hover:bg-gray-200 transition-colors"
+              aria-label="Previous brands"
+            >
+              <FiChevronLeft className="w-5 h-5" />
+            </button>
+
+            <div className="flex space-x-2">
+              {Array.from({ length: Math.ceil(mockBrands.length / 3) }).map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => setCurrentIndex(index)}
+                  className={`w-2 h-2 rounded-full transition-colors ${
+                    index === currentIndex ? 'bg-blue-600' : 'bg-gray-300'
+                  }`}
+                  aria-label={`Go to slide ${index + 1}`}
+                />
+              ))}
+            </div>
+
+            <button
+              onClick={nextSlide}
+              className="p-2 rounded-full bg-gray-100 hover:bg-gray-200 transition-colors"
+              aria-label="Next brands"
+            >
+              <FiChevronRight className="w-5 h-5" />
+            </button>
+          </div>
+
+          <div
+            className="relative overflow-hidden"
+            onMouseEnter={() => setIsAutoPlaying(false)}
+            onMouseLeave={() => setIsAutoPlaying(true)}
+          >
             <AnimatePresence mode="wait">
               <motion.div
                 key={currentIndex}
-                initial={{ opacity: 0, x: 100 }}
+                initial={{ opacity: 0, x: 50 }}
                 animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -100 }}
-                transition={{ duration: 0.5 }}
-                className="absolute inset-0 p-8"
+                exit={{ opacity: 0, x: -50 }}
+                transition={{ duration: 0.3 }}
+                className="grid grid-cols-1 md:grid-cols-3 gap-6"
               >
-                <Link href={brands[currentIndex].url}>
-                  <div className="h-full flex flex-col items-center justify-center text-center">
-                    <div className="w-32 h-32 mb-6 bg-white rounded-full shadow-lg flex items-center justify-center">
-                      <div className="w-24 h-24 bg-gray-200 rounded-full" />
-                    </div>
-                    <h3 className="text-2xl font-bold text-gray-900 mb-2">
-                      {brands[currentIndex].name}
-                    </h3>
-                    <div className="flex items-center mb-4">
-                      <div className="flex items-center text-yellow-400">
-                        {[...Array(5)].map((_, i) => (
-                          <FiStar
-                            key={i}
-                            className={`w-5 h-5 ${
-                              i < Math.floor(brands[currentIndex].rating) ? 'fill-current' : ''
-                            }`}
-                          />
-                        ))}
+                {getVisibleBrands().map(brand => (
+                  <Link
+                    key={brand.id}
+                    href={brand.url}
+                    className="group block bg-gray-50 rounded-lg p-6 hover:bg-gray-100 transition-colors"
+                  >
+                    <div className="text-center">
+                      <img
+                        src={brand.logo}
+                        alt={brand.name}
+                        className="mx-auto mb-4 h-10 object-contain"
+                      />
+                      <h3 className="text-lg font-semibold text-gray-900 mb-2">{brand.name}</h3>
+                      <p className="text-sm text-gray-600 mb-3">{brand.category}</p>
+                      <div className="flex items-center justify-center space-x-1">
+                        <FiStar className="w-4 h-4 text-yellow-400 fill-current" />
+                        <span className="text-sm font-medium text-gray-900">{brand.rating}</span>
                       </div>
-                      <span className="ml-2 text-gray-600">{brands[currentIndex].rating}</span>
                     </div>
-                    <span className="px-4 py-2 bg-blue-100 text-blue-600 rounded-full text-sm font-medium">
-                      {brands[currentIndex].category}
-                    </span>
-                  </div>
-                </Link>
+                  </Link>
+                ))}
               </motion.div>
             </AnimatePresence>
-          </div>
-
-          {/* Navigation Buttons */}
-          <button
-            onClick={handlePrevious}
-            className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center text-gray-600 hover:text-blue-600 transition-colors"
-          >
-            <FiChevronLeft className="w-6 h-6" />
-          </button>
-          <button
-            onClick={handleNext}
-            className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center text-gray-600 hover:text-blue-600 transition-colors"
-          >
-            <FiChevronRight className="w-6 h-6" />
-          </button>
-
-          {/* Pagination Dots */}
-          <div className="flex justify-center mt-6 space-x-2">
-            {brands.map((_, index) => (
-              <button
-                key={index}
-                onClick={() => {
-                  setIsAutoPlaying(false);
-                  setCurrentIndex(index);
-                }}
-                className={`w-2.5 h-2.5 rounded-full transition-colors ${
-                  index === currentIndex ? 'bg-blue-600' : 'bg-gray-300 hover:bg-gray-400'
-                }`}
-              />
-            ))}
           </div>
         </div>
       </div>

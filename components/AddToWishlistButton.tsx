@@ -21,4 +21,4 @@ export default function AddToWishlistButton({ productId }: AddToWishlistButtonPr
 }
 
 // AI Guidance: This component allows users to add a product to their wishlist.
-// In a real app, this would update the backend to save the product in the user's wishlist. 
+// In a real app, this would update the backend to save the product in the user's wishlist.

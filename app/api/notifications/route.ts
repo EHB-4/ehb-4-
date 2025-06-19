@@ -1,8 +1,9 @@
+import type { Notification as PrismaNotification } from '@prisma/client';
 import { NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth';
+
 import { authOptions } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
-import type { Notification as PrismaNotification } from '@prisma/client';
 
 // GET /api/notifications
 export async function GET() {
@@ -35,10 +36,7 @@ export async function GET() {
     return NextResponse.json(formattedNotifications);
   } catch (error) {
     console.error('Error fetching notifications:', error);
-    return NextResponse.json(
-      { error: 'Internal Server Error' },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
   }
 }
 
@@ -88,17 +86,11 @@ export async function PATCH(request: Request) {
         return NextResponse.json({ success: true });
 
       default:
-        return NextResponse.json(
-          { error: 'Invalid action' },
-          { status: 400 }
-        );
+        return NextResponse.json({ error: 'Invalid action' }, { status: 400 });
     }
   } catch (error) {
     console.error('Error handling notification action:', error);
-    return NextResponse.json(
-      { error: 'Internal Server Error' },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
   }
 }
 
@@ -136,4 +128,4 @@ function formatTimeAgo(date: Date): string {
 }
 
 // AI Guidance: This API route handles notifications.
-// In a real app, it would interact with a database and include proper error handling. 
+// In a real app, it would interact with a database and include proper error handling.

@@ -1,7 +1,8 @@
 import { NextRequest } from 'next/server';
 import { getServerSession } from 'next-auth';
-import { prisma } from '@/lib/prisma';
+
 import { GET, POST } from '@/app/api/wallet/transactions/route';
+import { prisma } from '@/lib/prisma';
 
 jest.mock('next-auth', () => ({
   getServerSession: jest.fn(),

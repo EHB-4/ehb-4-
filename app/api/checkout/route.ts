@@ -26,12 +26,9 @@ export async function POST(request: Request) {
 
     return NextResponse.json(order);
   } catch (error) {
-    return NextResponse.json(
-      { error: 'Payment processing failed' },
-      { status: 400 }
-    );
+    return NextResponse.json({ error: 'Payment processing failed' }, { status: 400 });
   }
 }
 
 // AI Guidance: This API route handles checkout and payment processing.
-// In a real app, it would integrate with a payment gateway and include proper error handling. 
+// In a real app, it would integrate with a payment gateway and include proper error handling.

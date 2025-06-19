@@ -1,7 +1,8 @@
 import React from 'react';
+
 import AdminOverview from '@/components/AdminOverview';
-import RecentOrders from '@/components/RecentOrders';
 import QuickActions from '@/components/QuickActions';
+import RecentOrders from '@/components/RecentOrders';
 
 // Placeholder data (in a real app, fetch from backend)
 const adminData = {

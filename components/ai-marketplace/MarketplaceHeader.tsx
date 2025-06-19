@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { FiSearch, FiMic, FiFilter } from 'react-icons/fi';
+
 import { SQLLevel } from '@/types/marketplace';
 
 interface MarketplaceHeaderProps {

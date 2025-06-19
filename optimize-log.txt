@@ -1,0 +1,52 @@
+EHB Optimize Log
+================
+[6/19/2025, 3:05:06 PM] EHB Project/PC Optimization Tool (Windows)
+
+[6/19/2025, 3:05:06 PM] 
+[1] Background/Heavy Processes:
+[6/19/2025, 3:05:06 PM] ⚠️  Ye processes bohat RAM use kar rahe hain (band kar dein agar zaroori na ho):
+[6/19/2025, 3:05:06 PM]   Memory Compression (1541.9 MB)
+[6/19/2025, 3:05:06 PM]   MsMpEng.exe (355.2 MB)
+[6/19/2025, 3:05:06 PM]   explorer.exe (290.4 MB)
+[6/19/2025, 3:05:06 PM]   MSI.CentralServer.exe (297.5 MB)
+[6/19/2025, 3:05:06 PM]   msedge.exe (403.0 MB)
+[6/19/2025, 3:05:06 PM]   msedge.exe (239.6 MB)
+[6/19/2025, 3:05:06 PM]   WhatsApp.exe (466.7 MB)
+[6/19/2025, 3:05:06 PM]   WhatsApp.exe (244.6 MB)
+[6/19/2025, 3:05:06 PM]   chrome.exe (409.7 MB)
+[6/19/2025, 3:05:06 PM]   chrome.exe (242.8 MB)
+[6/19/2025, 3:05:06 PM]   chrome.exe (204.2 MB)
+[6/19/2025, 3:05:06 PM]   chrome.exe (400.4 MB)
+[6/19/2025, 3:05:06 PM]   chrome.exe (203.2 MB)
+[6/19/2025, 3:05:06 PM]   Cursor.exe (240.1 MB)
+[6/19/2025, 3:05:06 PM]   Cursor.exe (792.6 MB)
+[6/19/2025, 3:05:06 PM]   vmmemWSL (2386.0 MB)
+[6/19/2025, 3:05:06 PM]   Postman.exe (218.7 MB)
+[6/19/2025, 3:05:06 PM]   Cursor.exe (965.5 MB)
+[6/19/2025, 3:05:06 PM]   Cursor.exe (298.6 MB)
+[6/19/2025, 3:05:06 PM]   Cursor.exe (274.5 MB)
+[6/19/2025, 3:05:06 PM]   Cursor.exe (200.8 MB)
+[6/19/2025, 3:05:06 PM] 
+[2] Project Folder Heavy Files:
+[6/19/2025, 3:05:09 PM] ⚠️  Ye files bohat heavy hain (delete ya move kar dein):
+[6/19/2025, 3:05:09 PM]   .next\cache\webpack\client-development-fallback\0.pack.gz (11.1 MB)
+[6/19/2025, 3:05:09 PM]   node_modules\.next-4p4RFKP0\node_modules\@next\swc-win32-x64-msvc\next-swc.win32-x64-msvc.node (129.6 MB)
+[6/19/2025, 3:05:09 PM]   node_modules\@next\swc-win32-x64-msvc\next-swc.win32-x64-msvc.node (129.6 MB)
+[6/19/2025, 3:05:09 PM] 
+[3] Defender/Antivirus Exclusion:
+[6/19/2025, 3:05:09 PM] ⚠️  Folder "node_modules" mil gaya. Isay Windows Defender/Antivirus ki scanning se exclude kar dein.
+[6/19/2025, 3:05:09 PM] ⚠️  Folder ".next" mil gaya. Isay Windows Defender/Antivirus ki scanning se exclude kar dein.
+[6/19/2025, 3:05:09 PM] ⚠️  Folder ".git" mil gaya. Isay Windows Defender/Antivirus ki scanning se exclude kar dein.
+[6/19/2025, 3:05:09 PM] 
+[4] Node.js version: v24.2.0
+[6/19/2025, 3:05:09 PM] ⚠️  Node.js v18 ya v20 use karein. Dusri version pe issues aa sakte hain.
+[6/19/2025, 3:05:09 PM] 
+[5] Internet Speed Check:
+[6/19/2025, 3:05:10 PM] ✅ Internet speed theek hai.
+[6/19/2025, 3:05:10 PM] 
+[6] Cursor/AI Agent Update:
+[6/19/2025, 3:05:10 PM] ⚠️  Cursor/AI agent ko latest version par update rakhein. (Aksar updates se speed improve hoti hai)
+[6/19/2025, 3:05:10 PM] 
+--- Optimization Complete ---
+[6/19/2025, 3:05:10 PM] Agar koi ⚠️ warning hai, us par amal karein. Baaki sab sahi hai to project fast chalega.
+[6/19/2025, 3:05:10 PM] Tafseeli report optimize-log.txt me hai.

@@ -1,0 +1,17 @@
+Test Failed ❌
+
+Error: Command failed: mongosh --eval "use test; db.cursorCheck.insertOne({"name":"Cursor AI Test","createdAt":"2025-06-19T13:01:56.145Z","testId":"jgl3v"}); print('Test data inserted successfully');"
+Error: ENOENT: no such file or directory, open 'F:\ehb next.js 04\Test,createdAt:2025-06-19T13:01:56.145Z,testId:jgl3v}); print('Test data inserted successfully');'
+
+Timestamp: 6/19/2025, 6:01:56 PM
+
+Stack Trace:
+Error: Command failed: mongosh --eval "use test; db.cursorCheck.insertOne({"name":"Cursor AI Test","createdAt":"2025-06-19T13:01:56.145Z","testId":"jgl3v"}); print('Test data inserted successfully');"
+Error: ENOENT: no such file or directory, open 'F:\ehb next.js 04\Test,createdAt:2025-06-19T13:01:56.145Z,testId:jgl3v}); print('Test data inserted successfully');'
+
+    at genericNodeError (node:internal/errors:983:15)
+    at wrappedFn (node:internal/errors:537:14)
+    at ChildProcess.exithandler (node:child_process:415:12)
+    at ChildProcess.emit (node:events:507:28)
+    at maybeClose (node:internal/child_process:1101:16)
+    at ChildProcess._handle.onexit (node:internal/child_process:305:5)

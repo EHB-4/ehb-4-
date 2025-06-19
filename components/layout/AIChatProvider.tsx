@@ -1,8 +1,9 @@
 'use client';
 
-import React, { createContext, useContext, useState, useCallback, ReactNode } from 'react';
-import { useSession } from 'next-auth/react';
 import { usePathname } from 'next/navigation';
+import { useSession } from 'next-auth/react';
+import React, { createContext, useContext, useState, useCallback, ReactNode } from 'react';
+
 import AIChatWidget from '@/components/ai/AIChatWidget';
 
 interface Message {
@@ -109,7 +110,7 @@ export function useAIChat() {
   return context;
 }
 
-export default function AIChatProvider() {
+export default function AIChatWidgetProvider() {
   const pathname = usePathname();
 
   // Get context based on current path

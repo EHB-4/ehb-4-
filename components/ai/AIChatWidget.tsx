@@ -1,8 +1,9 @@
-"use client";
+'use client';
 
-import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import React, { useState, useRef, useEffect } from 'react';
 import { FaRobot, FaTimes, FaMinus, FaExpand } from 'react-icons/fa';
+
 import { useAIChat } from '@/components/layout/AIChatProvider';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -140,7 +141,7 @@ export default function AIChatWidget({ context }: AIChatWidgetProps) {
                   <div className="flex space-x-2">
                     <Input
                       value={input}
-                      onChange={(e) => setInput(e.target.value)}
+                      onChange={e => setInput(e.target.value)}
                       placeholder="Type your message..."
                       disabled={isLoading}
                       className="flex-1"

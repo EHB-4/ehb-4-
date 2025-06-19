@@ -48,4 +48,4 @@ export async function POST(request: Request) {
 }
 
 // AI Guidance: This API route handles admin operations.
-// In a real app, it would interact with a database and include proper error handling. 
+// In a real app, it would interact with a database and include proper error handling.

@@ -1,5 +1,6 @@
 import React from 'react';
 import { FiShoppingCart, FiLock } from 'react-icons/fi';
+
 import SQLBadge from './SQLBadge';
 
 interface Product {

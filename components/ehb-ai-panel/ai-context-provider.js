@@ -13,11 +13,7 @@ const AIContextProvider = ({ children }) => {
     // Future agents auto-register here
   ]);
 
-  return (
-    <AIContext.Provider value={{ agents, setAgents }}>
-      {children}
-    </AIContext.Provider>
-  );
+  return <AIContext.Provider value={{ agents, setAgents }}>{children}</AIContext.Provider>;
 };
 
-export default AIContextProvider; 
+export default AIContextProvider;

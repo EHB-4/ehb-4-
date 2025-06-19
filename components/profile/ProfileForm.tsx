@@ -1,6 +1,7 @@
 import React from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+
 import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Switch } from '@/components/ui/switch';
@@ -39,9 +40,7 @@ export function ProfileForm({ initialData, onSubmit }: ProfileFormProps) {
             <Input
               id="name"
               value={formData.name}
-              onChange={(e) =>
-                setFormData({ ...formData, name: e.target.value })
-              }
+              onChange={e => setFormData({ ...formData, name: e.target.value })}
             />
           </div>
           <div className="space-y-2">
@@ -50,9 +49,7 @@ export function ProfileForm({ initialData, onSubmit }: ProfileFormProps) {
               id="email"
               type="email"
               value={formData.email}
-              onChange={(e) =>
-                setFormData({ ...formData, email: e.target.value })
-              }
+              onChange={e => setFormData({ ...formData, email: e.target.value })}
             />
           </div>
           <div className="space-y-2">
@@ -61,9 +58,7 @@ export function ProfileForm({ initialData, onSubmit }: ProfileFormProps) {
               id="phone"
               type="tel"
               value={formData.phone}
-              onChange={(e) =>
-                setFormData({ ...formData, phone: e.target.value })
-              }
+              onChange={e => setFormData({ ...formData, phone: e.target.value })}
             />
           </div>
           <div className="space-y-2">
@@ -71,9 +66,7 @@ export function ProfileForm({ initialData, onSubmit }: ProfileFormProps) {
             <Input
               id="address"
               value={formData.address}
-              onChange={(e) =>
-                setFormData({ ...formData, address: e.target.value })
-              }
+              onChange={e => setFormData({ ...formData, address: e.target.value })}
             />
           </div>
           <div className="space-y-4">
@@ -82,7 +75,7 @@ export function ProfileForm({ initialData, onSubmit }: ProfileFormProps) {
               <Switch
                 id="newsletter"
                 checked={formData.preferences.newsletter}
-                onCheckedChange={(checked) =>
+                onCheckedChange={checked =>
                   setFormData({
                     ...formData,
                     preferences: {
@@ -98,7 +91,7 @@ export function ProfileForm({ initialData, onSubmit }: ProfileFormProps) {
               <Switch
                 id="notifications"
                 checked={formData.preferences.notifications}
-                onCheckedChange={(checked) =>
+                onCheckedChange={checked =>
                   setFormData({
                     ...formData,
                     preferences: {
@@ -117,4 +110,4 @@ export function ProfileForm({ initialData, onSubmit }: ProfileFormProps) {
       </CardContent>
     </Card>
   );
-} 
+}

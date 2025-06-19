@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { FranchiseType } from '../FranchiseUtils/FranchiseTypes';
 
 interface FranchiseTypeCardProps {

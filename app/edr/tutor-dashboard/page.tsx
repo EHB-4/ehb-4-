@@ -1,18 +1,19 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import { useSession } from 'next-auth/react';
 import { motion } from 'framer-motion';
-import { Course } from '@/lib/models/Course';
-import { Enrollment } from '@/lib/models/Enrollment';
-import { Wallet } from '@/lib/models/Wallet';
-import { Tutor } from '@/lib/models/Tutor';
+import { useSession } from 'next-auth/react';
+import { useState, useEffect } from 'react';
 import { toast } from 'react-hot-toast';
+import { FaPlus, FaTrash } from 'react-icons/fa';
+
 import Modal from '@/components/Modal';
-import TutorOverview from '@/components/edr/TutorOverview';
 import CourseEditor from '@/components/edr/CourseEditor';
 import StudentTable from '@/components/edr/StudentTable';
-import { FaPlus, FaTrash } from 'react-icons/fa';
+import TutorOverview from '@/components/edr/TutorOverview';
+import { Course } from '@/lib/models/Course';
+import { Enrollment } from '@/lib/models/Enrollment';
+import { Tutor } from '@/lib/models/Tutor';
+import { Wallet } from '@/lib/models/Wallet';
 
 type EnrollmentWithDetails = Enrollment & {
   student: {

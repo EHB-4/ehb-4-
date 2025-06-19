@@ -1,6 +1,6 @@
+import { motion } from 'framer-motion';
 import React from 'react';
 import { FiCheck, FiClock, FiAlertCircle, FiPlus } from 'react-icons/fi';
-import { motion } from 'framer-motion';
 
 interface Task {
   id: string;

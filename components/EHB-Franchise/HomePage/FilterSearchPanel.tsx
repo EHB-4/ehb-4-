@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { ServiceCategory, FranchiseType } from '../FranchiseUtils/FranchiseTypes';
+
 import { AI_SEARCH_CONSTANTS } from '../FranchiseUtils/Constants';
+import { ServiceCategory, FranchiseType } from '../FranchiseUtils/FranchiseTypes';
 
 interface FilterSearchPanelProps {
   onSearch: (query: string, filters: SearchFilters) => void;

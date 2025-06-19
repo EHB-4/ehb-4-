@@ -35,16 +35,16 @@ export default function RoadmapTimeline({ timeline, status }: RoadmapTimelinePro
   return (
     <div className="bg-white rounded-lg shadow p-6">
       <h2 className="text-2xl font-bold text-gray-900 mb-6">Project Timeline</h2>
-      
+
       <div className="space-y-8">
-        {timeline.map((event) => (
+        {timeline.map(event => (
           <div key={event.id} className="relative pl-8">
             {/* Timeline line */}
             <div className="absolute left-0 top-0 bottom-0 w-0.5 bg-gray-200" />
-            
+
             {/* Timeline dot */}
             <div className="absolute left-0 top-2 w-4 h-4 rounded-full bg-blue-500" />
-            
+
             <div className="bg-gray-50 rounded-lg p-4">
               <div className="flex items-start justify-between">
                 <div>
@@ -54,11 +54,13 @@ export default function RoadmapTimeline({ timeline, status }: RoadmapTimelinePro
                   </div>
                   <p className="mt-1 text-gray-600">{event.description}</p>
                 </div>
-                <span className={`px-3 py-1 text-sm font-medium rounded-full ${getStatusColor(event.status)}`}>
+                <span
+                  className={`px-3 py-1 text-sm font-medium rounded-full ${getStatusColor(event.status)}`}
+                >
                   {event.status}
                 </span>
               </div>
-              
+
               <div className="mt-4 flex items-center justify-between text-sm text-gray-500">
                 <span>{event.date}</span>
                 <span className="text-blue-600 hover:text-blue-800 cursor-pointer">
@@ -71,4 +73,4 @@ export default function RoadmapTimeline({ timeline, status }: RoadmapTimelinePro
       </div>
     </div>
   );
-} 
+}

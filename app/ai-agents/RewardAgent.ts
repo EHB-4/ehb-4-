@@ -36,4 +36,4 @@ export class RewardAgent {
   async getRewardDashboardCard(userId: string): Promise<any> {
     // TODO: Return summary of rewards, bonuses, and affiliate income
   }
-} 
+}

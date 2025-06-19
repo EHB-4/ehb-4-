@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FiPlane, FiBus, FiMap, FiHome, FiTrendingUp } from 'react-icons/fi';
+import { FiNavigation, FiTruck, FiMap, FiHome, FiTrendingUp } from 'react-icons/fi';
 
 interface TravelService {
   id: string;
@@ -37,8 +37,8 @@ const mockServices: TravelService[] = [
 ];
 
 const typeIcons: Record<TravelService['type'], React.ReactNode> = {
-  flight: <FiPlane className="w-5 h-5 text-blue-500" />,
-  bus: <FiBus className="w-5 h-5 text-green-500" />,
+  flight: <FiNavigation className="w-5 h-5 text-blue-500" />,
+  bus: <FiTruck className="w-5 h-5 text-green-500" />,
   tour: <FiMap className="w-5 h-5 text-purple-500" />,
   hotel: <FiHome className="w-5 h-5 text-yellow-500" />,
 };

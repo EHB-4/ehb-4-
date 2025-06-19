@@ -2,7 +2,8 @@ import React from 'react';
 
 const companyInfo = {
   name: 'EHB Technologies',
-  description: 'Empowering businesses with innovative technology solutions. 700+ Services in One Super-App.',
+  description:
+    'Empowering businesses with innovative technology solutions. 700+ Services in One Super-App.',
   version: '1.0.0',
   contact: {
     email: 'contact@ehb.tech',
@@ -12,7 +13,8 @@ const companyInfo = {
     twitter: 'https://twitter.com/ehbtech',
     github: 'https://github.com/ehbtech',
   },
-  mission: 'To provide 100% verified, AI-powered, blockchain-backed global services and products through a decentralized ecosystem accessible to every individual.',
+  mission:
+    'To provide 100% verified, AI-powered, blockchain-backed global services and products through a decentralized ecosystem accessible to every individual.',
   vision: `To become the world's leading unified service platform where users can trust, earn, learn, and transact securely, across all industries and countries, with full transparency and automation.`,
   coreValues: [
     'Verification Before Profit',
@@ -124,7 +126,7 @@ export default function EHBCompanyInfoPage() {
       <section className="mb-6">
         <h2 className="text-xl font-semibold mb-1">Core Values</h2>
         <ul className="list-disc ml-6">
-          {companyInfo.coreValues.map((v) => (
+          {companyInfo.coreValues.map(v => (
             <li key={v}>{v}</li>
           ))}
         </ul>
@@ -132,7 +134,7 @@ export default function EHBCompanyInfoPage() {
       <section className="mb-6">
         <h2 className="text-xl font-semibold mb-1">Primary Goals</h2>
         <ul className="list-disc ml-6">
-          {companyInfo.goals.map((g) => (
+          {companyInfo.goals.map(g => (
             <li key={g}>{g}</li>
           ))}
         </ul>
@@ -140,18 +142,39 @@ export default function EHBCompanyInfoPage() {
       <section className="mb-6">
         <h2 className="text-xl font-semibold mb-1">Contact Information</h2>
         <ul className="ml-6">
-          <li><b>Email:</b> {companyInfo.contact.email}</li>
-          <li><b>Phone:</b> {companyInfo.contact.phone}</li>
-          <li><b>Address:</b> {companyInfo.contact.address}</li>
-          <li><b>Website:</b> <a href={companyInfo.contact.url} className="text-blue-600 underline">{companyInfo.contact.url}</a></li>
-          <li><b>Twitter:</b> <a href={companyInfo.contact.twitter} className="text-blue-600 underline">{companyInfo.contact.twitter}</a></li>
-          <li><b>GitHub:</b> <a href={companyInfo.contact.github} className="text-blue-600 underline">{companyInfo.contact.github}</a></li>
+          <li>
+            <b>Email:</b> {companyInfo.contact.email}
+          </li>
+          <li>
+            <b>Phone:</b> {companyInfo.contact.phone}
+          </li>
+          <li>
+            <b>Address:</b> {companyInfo.contact.address}
+          </li>
+          <li>
+            <b>Website:</b>{' '}
+            <a href={companyInfo.contact.url} className="text-blue-600 underline">
+              {companyInfo.contact.url}
+            </a>
+          </li>
+          <li>
+            <b>Twitter:</b>{' '}
+            <a href={companyInfo.contact.twitter} className="text-blue-600 underline">
+              {companyInfo.contact.twitter}
+            </a>
+          </li>
+          <li>
+            <b>GitHub:</b>{' '}
+            <a href={companyInfo.contact.github} className="text-blue-600 underline">
+              {companyInfo.contact.github}
+            </a>
+          </li>
         </ul>
       </section>
       <section className="mb-6">
         <h2 className="text-xl font-semibold mb-1">Services & Modules</h2>
         <ul className="list-disc ml-6">
-          {companyInfo.services.map((s) => (
+          {companyInfo.services.map(s => (
             <li key={s}>{s}</li>
           ))}
         </ul>
@@ -159,23 +182,29 @@ export default function EHBCompanyInfoPage() {
       <section className="mb-6">
         <h2 className="text-xl font-semibold mb-1">Technology Stack</h2>
         <ul className="list-disc ml-6">
-          {companyInfo.techStack.map((t) => (
-            <li key={t.name}>{t.name} {t.version && <span className="text-gray-500">({t.version})</span>}</li>
+          {companyInfo.techStack.map(t => (
+            <li key={t.name}>
+              {t.name} {t.version && <span className="text-gray-500">({t.version})</span>}
+            </li>
           ))}
         </ul>
       </section>
       <section className="mb-6">
         <h2 className="text-xl font-semibold mb-1">Departments</h2>
         <ul className="list-disc ml-6">
-          {companyInfo.departments.map((d) => (
-            <li key={d.name}>{d.name}{d.size ? ` (Team size: ${d.size})` : ''}{d.desc ? ` — ${d.desc}` : ''}</li>
+          {companyInfo.departments.map(d => (
+            <li key={d.name}>
+              {d.name}
+              {d.size ? ` (Team size: ${d.size})` : ''}
+              {d.desc ? ` — ${d.desc}` : ''}
+            </li>
           ))}
         </ul>
       </section>
       <section className="mb-6">
         <h2 className="text-xl font-semibold mb-1">Target Markets</h2>
         <ul className="list-disc ml-6">
-          {companyInfo.targetMarkets.map((m) => (
+          {companyInfo.targetMarkets.map(m => (
             <li key={m}>{m}</li>
           ))}
         </ul>
@@ -183,11 +212,11 @@ export default function EHBCompanyInfoPage() {
       <section className="mb-6">
         <h2 className="text-xl font-semibold mb-1">Future Goals</h2>
         <ul className="list-disc ml-6">
-          {companyInfo.futureGoals.map((f) => (
+          {companyInfo.futureGoals.map(f => (
             <li key={f}>{f}</li>
           ))}
         </ul>
       </section>
     </div>
   );
-} 
+}

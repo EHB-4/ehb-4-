@@ -1,8 +1,9 @@
 import { NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth/next';
+import { z } from 'zod';
+
 import { authOptions } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
-import { z } from 'zod';
 
 const assignmentSchema = z.object({
   courseId: z.string(),
@@ -31,10 +32,7 @@ export async function GET(req: Request) {
 
     const assignments = await prisma.assignment.findMany({
       where: {
-        OR: [
-          { courseId: courseId || undefined },
-          { tutorId: tutorId || undefined },
-        ],
+        OR: [{ courseId: courseId || undefined }, { tutorId: tutorId || undefined }],
       },
       include: {
         course: true,
@@ -133,4 +131,4 @@ export async function PUT(req: Request) {
     console.error('Assignment update error:', error);
     return NextResponse.json({ error: 'Failed to update assignment' }, { status: 500 });
   }
-} 
+}

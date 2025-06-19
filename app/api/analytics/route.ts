@@ -21,4 +21,4 @@ export async function GET() {
 }
 
 // AI Guidance: This API route provides analytics data.
-// In a real app, it would fetch data from a database and include proper error handling. 
+// In a real app, it would fetch data from a database and include proper error handling.

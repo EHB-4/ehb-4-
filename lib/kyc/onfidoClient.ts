@@ -5,4 +5,4 @@ const onfido = new Onfido({
   region: 'EU', // or 'US', 'CA' depending on your Onfido account
 });
 
-export default onfido; 
+export default onfido;

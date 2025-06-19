@@ -1,8 +1,9 @@
-import { NextResponse } from 'next/server';
 import { ethers } from 'ethers';
-import { getContract } from '@/lib/contracts';
+import { NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth';
+
 import { authOptions } from '@/lib/auth';
+import { getContract } from '@/lib/contracts';
 
 export async function POST(request: Request) {
   try {

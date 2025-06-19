@@ -1,0 +1,17 @@
+EHB CUDA/cuDNN/NVIDIA Auto-Guide Log
+================
+[6/18/2025, 4:38:30 PM] EHB CUDA, cuDNN, NVIDIA Driver Auto-Detect & Guide (Windows)
+
+[6/18/2025, 4:38:30 PM] 
+[1] NVIDIA GPU Driver Check:
+[6/18/2025, 4:38:30 PM] ✅ NVIDIA GPU driver installed hai.
+[6/18/2025, 4:38:30 PM] 
+[2] CUDA Toolkit Check:
+[6/18/2025, 4:38:30 PM] ✅ CUDA Toolkit installed hai.
+[6/18/2025, 4:38:30 PM] 
+[3] cuDNN DLLs Check:
+[6/18/2025, 4:38:30 PM] ✅ cuDNN DLLs mil gayi (CUDA version: v12.2).
+[6/18/2025, 4:38:30 PM] ✅ cuDNN DLLs mil gayi (CUDA version: v12.9).
+[6/18/2025, 4:38:30 PM] 
+Agar koi ⚠️ warning hai, us par amal karein. Har install ke baad system restart karna na bhoolen.
+Tafseeli report cuda-cudnn-auto-guide-log.txt me hai.

@@ -1,13 +1,14 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
-import { useSession } from 'next-auth/react';
 import { motion } from 'framer-motion';
-import { Shop } from '@/lib/models/Shop';
+import { useSession } from 'next-auth/react';
+import React, { useEffect, useState } from 'react';
+
+import Modal from '@/components/ui/Modal';
 import { Order } from '@/lib/models/Order';
+import { Shop } from '@/lib/models/Shop';
 import { Wallet } from '@/lib/models/Wallet';
 import { checkModuleEligibility } from '@/lib/utils/walletEligibility';
-import Modal from '@/components/ui/Modal';
 
 interface ShopStats {
   totalProducts: number;

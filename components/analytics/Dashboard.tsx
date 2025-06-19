@@ -1,6 +1,15 @@
 import React from 'react';
+import {
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  ResponsiveContainer,
+} from 'recharts';
+
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 
 const data = [
   { date: '2024-01', sales: 1000 },
@@ -72,4 +81,4 @@ export function AnalyticsDashboard() {
       </Card>
     </div>
   );
-} 
+}

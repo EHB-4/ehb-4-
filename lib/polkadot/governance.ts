@@ -1,6 +1,6 @@
 import { ApiPromise } from '@polkadot/api';
-import { BN } from '@polkadot/util';
 import { KeyringPair } from '@polkadot/keyring/types';
+import { BN } from '@polkadot/util';
 
 export interface ProposalInfo {
   proposer: string;

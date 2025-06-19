@@ -1,18 +1,22 @@
-import 'next-auth';
 import { DefaultSession } from 'next-auth';
 import { JWT } from 'next-auth/jwt';
 
 declare module 'next-auth' {
-  interface User {
+  interface CustomUser {
     id: string;
     email: string;
     name: string;
     role: string;
-    address: string;
+    address?: string;
+    sqlLevel?: number;
+    wallet?: {
+      balance: number;
+      lockedCoins: number;
+    };
   }
 
   interface Session {
-    user: User;
+    user: CustomUser;
   }
 }
 
@@ -20,5 +24,6 @@ declare module 'next-auth/jwt' {
   interface JWT {
     id: string;
     role: string;
+    sqlLevel?: number;
   }
 }

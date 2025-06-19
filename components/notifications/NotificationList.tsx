@@ -1,8 +1,9 @@
-import React from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
 import { Bell, Trash2 } from 'lucide-react';
+import React from 'react';
+
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
 interface Notification {
   id: number;
@@ -20,7 +21,7 @@ interface NotificationListProps {
 }
 
 export function NotificationList({ notifications, onMarkAsRead, onDelete }: NotificationListProps) {
-  const unreadCount = notifications.filter((n) => !n.read).length;
+  const unreadCount = notifications.filter(n => !n.read).length;
 
   return (
     <Card>
@@ -28,14 +29,12 @@ export function NotificationList({ notifications, onMarkAsRead, onDelete }: Noti
         <div className="flex items-center gap-2">
           <Bell className="h-5 w-5" />
           <CardTitle>Notifications</CardTitle>
-          {unreadCount > 0 && (
-            <Badge variant="secondary">{unreadCount} unread</Badge>
-          )}
+          {unreadCount > 0 && <Badge variant="secondary">{unreadCount} unread</Badge>}
         </div>
       </CardHeader>
       <CardContent>
         <div className="space-y-4">
-          {notifications.map((notification) => (
+          {notifications.map(notification => (
             <div
               key={notification.id}
               className={`flex items-start justify-between rounded-lg border p-4 ${
@@ -49,28 +48,22 @@ export function NotificationList({ notifications, onMarkAsRead, onDelete }: Noti
                       notification.type === 'order'
                         ? 'default'
                         : notification.type === 'promotion'
-                        ? 'secondary'
-                        : 'outline'
+                          ? 'secondary'
+                          : 'outline'
                     }
                   >
                     {notification.type}
                   </Badge>
                   <p className="font-semibold">{notification.title}</p>
                 </div>
-                <p className="text-sm text-muted-foreground">
-                  {notification.message}
-                </p>
+                <p className="text-sm text-muted-foreground">{notification.message}</p>
                 <p className="text-xs text-muted-foreground">
                   {new Date(notification.timestamp).toLocaleString()}
                 </p>
               </div>
               <div className="flex items-center gap-2">
                 {!notification.read && (
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={() => onMarkAsRead(notification.id)}
-                  >
+                  <Button variant="outline" size="sm" onClick={() => onMarkAsRead(notification.id)}>
                     Mark as read
                   </Button>
                 )}
@@ -86,12 +79,10 @@ export function NotificationList({ notifications, onMarkAsRead, onDelete }: Noti
             </div>
           ))}
           {notifications.length === 0 && (
-            <div className="text-center text-muted-foreground">
-              No notifications
-            </div>
+            <div className="text-center text-muted-foreground">No notifications</div>
           )}
         </div>
       </CardContent>
     </Card>
   );
-} 
+}

@@ -1,5 +1,6 @@
 import React from 'react';
 import { FiCheck, FiClock, FiAlertCircle, FiXCircle } from 'react-icons/fi';
+
 import { roadmapData } from '@/app/roadmap/data/roadmapData';
 import { Module } from '@/app/roadmap/types';
 
@@ -66,4 +67,3 @@ export default function RoadmapPage() {
     </div>
   );
 }
-

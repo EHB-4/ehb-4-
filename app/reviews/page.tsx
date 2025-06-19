@@ -1,5 +1,4 @@
 import React from 'react';
-import ProductReviews from '../../../components/ProductReviews';
 
 // Placeholder data (in a real app, fetch from backend)
 const reviewsData = {
@@ -31,7 +30,7 @@ const reviewsData = {
       id: 3,
       user: 'Bob Johnson',
       rating: 5,
-      comment: 'Best headphones I've ever owned!',
+      comment: "Best headphones I've ever owned!",
       date: '2024-03-13',
       verified: true,
     },
@@ -47,15 +46,58 @@ export default function ReviewsPage() {
   return (
     <div className="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
       <h1 className="text-3xl font-bold text-gray-900 mb-8">Product Reviews</h1>
-      
-      <ProductReviews
-        product={reviewsData.product}
-        reviews={reviewsData.reviews}
-        onAddReview={handleAddReview}
-      />
+
+      <div className="bg-white rounded-lg shadow p-6">
+        <div className="mb-6">
+          <h2 className="text-xl font-semibold">{reviewsData.product.name}</h2>
+          <div className="flex items-center mt-2">
+            <div className="flex text-yellow-400">
+              {[...Array(5)].map((_, i) => (
+                <span
+                  key={i}
+                  className={
+                    i < Math.floor(reviewsData.product.averageRating)
+                      ? 'text-yellow-400'
+                      : 'text-gray-300'
+                  }
+                >
+                  ★
+                </span>
+              ))}
+            </div>
+            <span className="ml-2 text-gray-600">
+              {reviewsData.product.averageRating} ({reviewsData.product.totalReviews} reviews)
+            </span>
+          </div>
+        </div>
+
+        <div className="space-y-4">
+          {reviewsData.reviews.map(review => (
+            <div key={review.id} className="border-b pb-4">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center">
+                  <span className="font-semibold">{review.user}</span>
+                  {review.verified && (
+                    <span className="ml-2 text-blue-600 text-sm">✓ Verified</span>
+                  )}
+                </div>
+                <div className="flex text-yellow-400">
+                  {[...Array(5)].map((_, i) => (
+                    <span
+                      key={i}
+                      className={i < review.rating ? 'text-yellow-400' : 'text-gray-300'}
+                    >
+                      ★
+                    </span>
+                  ))}
+                </div>
+              </div>
+              <p className="text-gray-700 mt-2">{review.comment}</p>
+              <p className="text-gray-500 text-sm mt-1">{review.date}</p>
+            </div>
+          ))}
+        </div>
+      </div>
     </div>
   );
 }
-
-// AI Guidance: This page displays product reviews and allows users to add new reviews.
-// In a real app, reviews would be fetched from the backend and updated in real-time. 

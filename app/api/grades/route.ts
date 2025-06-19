@@ -1,8 +1,9 @@
 import { NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth/next';
+import { z } from 'zod';
+
 import { authOptions } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
-import { z } from 'zod';
 
 const gradeSchema = z.object({
   studentId: z.string(),
@@ -154,4 +155,4 @@ export async function PUT(req: Request) {
     console.error('Grade update error:', error);
     return NextResponse.json({ error: 'Failed to update grade' }, { status: 500 });
   }
-} 
+}

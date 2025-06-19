@@ -1,6 +1,6 @@
+import { motion } from 'framer-motion';
 import React from 'react';
 import { FiShoppingBag, FiUsers, FiBriefcase, FiBook, FiMap } from 'react-icons/fi';
-import { motion } from 'framer-motion';
 
 type UserRole = 'visitor' | 'user' | 'seller' | 'franchise' | 'jps' | 'admin';
 

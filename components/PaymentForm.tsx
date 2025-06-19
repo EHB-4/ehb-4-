@@ -33,7 +33,7 @@ export default function PaymentForm({ amount, onSuccess, onError }: PaymentFormP
 
       // Simulate API call
       await new Promise(resolve => setTimeout(resolve, 1000));
-      
+
       onSuccess?.('payment_123');
     } catch (error) {
       onError?.(error as Error);
@@ -50,7 +50,7 @@ export default function PaymentForm({ amount, onSuccess, onError }: PaymentFormP
   return (
     <div className="max-w-md mx-auto bg-white rounded-lg shadow p-6">
       <h2 className="text-2xl font-bold text-gray-900 mb-6">Payment Details</h2>
-      
+
       <div className="mb-6">
         <p className="text-lg font-medium text-gray-900">Total Amount</p>
         <p className="text-3xl font-bold text-blue-600">${amount.toFixed(2)}</p>
@@ -147,4 +147,4 @@ export default function PaymentForm({ amount, onSuccess, onError }: PaymentFormP
 // 1. Install and configure Stripe.js
 // 2. Set up a backend endpoint to handle payment processing
 // 3. Implement proper error handling and validation
-// 4. Add loading states and success/error messages 
+// 4. Add loading states and success/error messages

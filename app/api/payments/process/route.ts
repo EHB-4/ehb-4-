@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth';
+
 import { authOptions } from '@/lib/auth';
 
 // TODO: Replace with real payment gateway integration
@@ -30,4 +31,4 @@ export async function POST(request: Request) {
     console.error('Error processing payment:', error);
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
   }
-} 
+}

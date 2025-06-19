@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import React, { useState } from 'react';
 import { FiX, FiUpload, FiCheck, FiAlertCircle } from 'react-icons/fi';
-import { SQLLevel } from './SQLLevelBadge';
-import SQLLevelBadge from './SQLLevelBadge';
+
+import SQLLevelBadge, { SQLLevel } from './SQLLevelBadge';
 
 interface SQLApplyDialogProps {
   isOpen: boolean;

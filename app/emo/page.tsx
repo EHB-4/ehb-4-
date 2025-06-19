@@ -1,10 +1,11 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
-import { useSession } from 'next-auth/react';
 import { motion } from 'framer-motion';
-import { Doctor } from '@/lib/models/Doctor';
+import { useSession } from 'next-auth/react';
+import React, { useEffect, useState } from 'react';
+
 import Modal from '@/components/ui/Modal';
+import { Doctor } from '@/lib/models/Doctor';
 
 interface BookingModalProps {
   doctor: Doctor;

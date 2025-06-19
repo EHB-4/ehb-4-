@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import React, { useState } from 'react';
 
 export default function SearchBar() {
   const [query, setQuery] = useState('');
@@ -17,7 +17,7 @@ export default function SearchBar() {
       <input
         type="text"
         value={query}
-        onChange={(e) => setQuery(e.target.value)}
+        onChange={e => setQuery(e.target.value)}
         placeholder="Search products..."
         className="w-full px-4 py-2 border border-gray-300 rounded-l-md focus:outline-none focus:ring-2 focus:ring-blue-500"
         aria-label="Search products"
@@ -33,4 +33,4 @@ export default function SearchBar() {
 }
 
 // AI Guidance: This component allows users to search for products.
-// In a real app, it redirects to a search results page with the query. 
+// In a real app, it redirects to a search results page with the query.

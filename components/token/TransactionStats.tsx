@@ -1,5 +1,5 @@
-import React from 'react';
 import { ethers } from 'ethers';
+import React from 'react';
 
 interface Transaction {
   type: 'lock' | 'unlock' | 'reward';

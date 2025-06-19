@@ -1,9 +1,10 @@
+import axios from 'axios';
 import { NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth/next';
+import { z } from 'zod';
+
 import { authOptions } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
-import { z } from 'zod';
-import axios from 'axios';
 
 // Validation schemas
 const payoneerRequestSchema = z.object({
@@ -31,7 +32,7 @@ const payoneerConfig = {
 const payoneerClient = axios.create({
   baseURL: payoneerConfig.baseUrl,
   headers: {
-    'Authorization': `Bearer ${payoneerConfig.apiKey}`,
+    Authorization: `Bearer ${payoneerConfig.apiKey}`,
     'Content-Type': 'application/json',
   },
 });
@@ -41,10 +42,7 @@ export async function POST(req: Request) {
     const session = await getServerSession(authOptions);
 
     if (!session) {
-      return NextResponse.json(
-        { error: 'Unauthorized' },
-        { status: 401 }
-      );
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
     const body = await req.json();
@@ -84,10 +82,7 @@ export async function POST(req: Request) {
         break;
 
       default:
-        return NextResponse.json(
-          { error: 'Invalid action' },
-          { status: 400 }
-        );
+        return NextResponse.json({ error: 'Invalid action' }, { status: 400 });
     }
 
     const validatedResponse = payoneerResponseSchema.parse({
@@ -159,9 +154,6 @@ export async function GET(req: Request) {
     });
   } catch (error) {
     console.error('Payoneer requests fetch error:', error);
-    return NextResponse.json(
-      { error: 'Failed to fetch Payoneer requests' },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: 'Failed to fetch Payoneer requests' }, { status: 500 });
   }
-} 
+}

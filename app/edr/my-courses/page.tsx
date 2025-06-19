@@ -1,14 +1,15 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import { useSession } from 'next-auth/react';
 import { motion } from 'framer-motion';
-import { Enrollment } from '@/lib/models/Enrollment';
-import { Course } from '@/lib/models/Course';
-import { Wallet } from '@/lib/models/Wallet';
+import { useSession } from 'next-auth/react';
+import { useState, useEffect } from 'react';
 import { toast } from 'react-hot-toast';
-import Modal from '@/components/Modal';
 import { FaGraduationCap, FaCoins, FaMedal } from 'react-icons/fa';
+
+import Modal from '@/components/Modal';
+import { Course } from '@/lib/models/Course';
+import { Enrollment } from '@/lib/models/Enrollment';
+import { Wallet } from '@/lib/models/Wallet';
 import { calculateLoyaltyDiscount } from '@/lib/utils/franchiseUtils';
 
 type EnrollmentWithDetails = Enrollment & {

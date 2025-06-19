@@ -1,9 +1,9 @@
-import { ethers } from 'ethers';
 import { Web3Provider } from '@ethersproject/providers';
+import { ethers } from 'ethers';
 import { configureChains, createConfig } from 'wagmi';
 import { moonbeam, bsc, polkadot } from 'wagmi/chains';
-import { publicProvider } from 'wagmi/providers/public';
 import { WalletConnectConnector } from 'wagmi/connectors/walletConnect';
+import { publicProvider } from 'wagmi/providers/public';
 
 // Network RPC URLs
 const MOONBEAM_RPC = process.env.NEXT_PUBLIC_MOONBEAM_RPC || '';

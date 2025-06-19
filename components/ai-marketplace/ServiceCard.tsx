@@ -1,8 +1,10 @@
+import { useRouter } from 'next/navigation';
 import React from 'react';
+
 import { Service } from '@/types/marketplace';
+
 import ComingSoonTag from './ComingSoonTag';
 import SQLLevelTag from './SQLLevelTag';
-import { useRouter } from 'next/router';
 
 interface ServiceCardProps {
   service: Service;

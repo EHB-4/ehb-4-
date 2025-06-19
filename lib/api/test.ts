@@ -1,6 +1,6 @@
 import { generateText } from './openai';
-import { getProducts } from './shopify';
 import { getAccountBalance } from './payoneer';
+import { getProducts } from './shopify';
 
 async function testAPIs() {
   try {

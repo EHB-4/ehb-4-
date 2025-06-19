@@ -1,8 +1,9 @@
 import { NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth/next';
+import { z } from 'zod';
+
 import { authOptions } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
-import { z } from 'zod';
 
 const cartItemSchema = z.object({
   productId: z.string(),
@@ -230,4 +231,4 @@ export async function DELETE(req: Request) {
     console.error('Cart item deletion error:', error);
     return NextResponse.json({ error: 'Failed to remove item from cart' }, { status: 500 });
   }
-} 
+}

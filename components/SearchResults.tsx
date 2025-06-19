@@ -1,5 +1,5 @@
-import React from 'react';
 import Link from 'next/link';
+import React from 'react';
 
 interface SearchResult {
   id: number;
@@ -19,12 +19,8 @@ export default function SearchResults({ results, query }: SearchResultsProps) {
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div className="mb-6">
-        <h1 className="text-2xl font-bold text-gray-900">
-          Search Results for "{query}"
-        </h1>
-        <p className="mt-2 text-sm text-gray-500">
-          Found {results.length} results
-        </p>
+        <h1 className="text-2xl font-bold text-gray-900">Search Results for "{query}"</h1>
+        <p className="mt-2 text-sm text-gray-500">Found {results.length} results</p>
       </div>
 
       {results.length === 0 ? (
@@ -36,12 +32,8 @@ export default function SearchResults({ results, query }: SearchResultsProps) {
         </div>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-          {results.map((result) => (
-            <Link 
-              key={result.id} 
-              href={`/products/${result.id}`}
-              className="group"
-            >
+          {results.map(result => (
+            <Link key={result.id} href={`/products/${result.id}`} className="group">
               <div className="bg-white rounded-lg shadow-sm overflow-hidden hover:shadow-md transition-shadow">
                 <div className="aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-t-lg bg-gray-200">
                   <img
@@ -79,4 +71,4 @@ export default function SearchResults({ results, query }: SearchResultsProps) {
 }
 
 // AI Guidance: This component displays search results in a modern grid layout.
-// In a real app, search results would be fetched from the backend based on the query. 
+// In a real app, search results would be fetched from the backend based on the query.

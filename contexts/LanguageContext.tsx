@@ -1,6 +1,6 @@
 import React, { createContext, useState, useContext, ReactNode } from 'react';
 
-type Language = 'en' | 'ur';
+type Language = 'en' | 'ur' | 'ar' | 'zh';
 
 interface LanguageContextType {
   language: Language;
@@ -28,4 +28,4 @@ export function useLanguage() {
 }
 
 // AI Guidance: This context allows you to switch between English and Urdu across the app.
-// Wrap your app with <LanguageProvider> in _app.tsx or layout.tsx. 
+// Wrap your app with <LanguageProvider> in _app.tsx or layout.tsx.

@@ -1,10 +1,12 @@
+import { CreditCard, Paypal } from 'lucide-react';
 import React from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+
 import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
-import { CreditCard, Paypal } from 'lucide-react';
 
 interface CheckoutFormProps {
   onSubmit: (data: any) => void;
@@ -39,9 +41,7 @@ export function CheckoutForm({ onSubmit, total }: CheckoutFormProps) {
             <Input
               id="name"
               value={formData.name}
-              onChange={(e) =>
-                setFormData({ ...formData, name: e.target.value })
-              }
+              onChange={e => setFormData({ ...formData, name: e.target.value })}
               required
             />
           </div>
@@ -51,9 +51,7 @@ export function CheckoutForm({ onSubmit, total }: CheckoutFormProps) {
               id="email"
               type="email"
               value={formData.email}
-              onChange={(e) =>
-                setFormData({ ...formData, email: e.target.value })
-              }
+              onChange={e => setFormData({ ...formData, email: e.target.value })}
               required
             />
           </div>
@@ -62,9 +60,7 @@ export function CheckoutForm({ onSubmit, total }: CheckoutFormProps) {
             <Input
               id="address"
               value={formData.address}
-              onChange={(e) =>
-                setFormData({ ...formData, address: e.target.value })
-              }
+              onChange={e => setFormData({ ...formData, address: e.target.value })}
               required
             />
           </div>
@@ -74,9 +70,7 @@ export function CheckoutForm({ onSubmit, total }: CheckoutFormProps) {
               <Input
                 id="city"
                 value={formData.city}
-                onChange={(e) =>
-                  setFormData({ ...formData, city: e.target.value })
-                }
+                onChange={e => setFormData({ ...formData, city: e.target.value })}
                 required
               />
             </div>
@@ -85,9 +79,7 @@ export function CheckoutForm({ onSubmit, total }: CheckoutFormProps) {
               <Input
                 id="country"
                 value={formData.country}
-                onChange={(e) =>
-                  setFormData({ ...formData, country: e.target.value })
-                }
+                onChange={e => setFormData({ ...formData, country: e.target.value })}
                 required
               />
             </div>
@@ -97,9 +89,7 @@ export function CheckoutForm({ onSubmit, total }: CheckoutFormProps) {
             <Input
               id="zipCode"
               value={formData.zipCode}
-              onChange={(e) =>
-                setFormData({ ...formData, zipCode: e.target.value })
-              }
+              onChange={e => setFormData({ ...formData, zipCode: e.target.value })}
               required
             />
           </div>
@@ -107,17 +97,11 @@ export function CheckoutForm({ onSubmit, total }: CheckoutFormProps) {
             <Label>Payment Method</Label>
             <RadioGroup
               value={formData.paymentMethod}
-              onValueChange={(value) =>
-                setFormData({ ...formData, paymentMethod: value })
-              }
+              onValueChange={value => setFormData({ ...formData, paymentMethod: value })}
               className="grid grid-cols-2 gap-4"
             >
               <div>
-                <RadioGroupItem
-                  value="credit-card"
-                  id="credit-card"
-                  className="peer sr-only"
-                />
+                <RadioGroupItem value="credit-card" id="credit-card" className="peer sr-only" />
                 <Label
                   htmlFor="credit-card"
                   className="flex flex-col items-center justify-between rounded-md border-2 border-muted bg-popover p-4 hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary"
@@ -127,11 +111,7 @@ export function CheckoutForm({ onSubmit, total }: CheckoutFormProps) {
                 </Label>
               </div>
               <div>
-                <RadioGroupItem
-                  value="paypal"
-                  id="paypal"
-                  className="peer sr-only"
-                />
+                <RadioGroupItem value="paypal" id="paypal" className="peer sr-only" />
                 <Label
                   htmlFor="paypal"
                   className="flex flex-col items-center justify-between rounded-md border-2 border-muted bg-popover p-4 hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary"
@@ -155,4 +135,4 @@ export function CheckoutForm({ onSubmit, total }: CheckoutFormProps) {
       </CardContent>
     </Card>
   );
-} 
+}

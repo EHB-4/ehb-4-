@@ -1,5 +1,5 @@
-import React from 'react';
 import Link from 'next/link';
+import React from 'react';
 
 // Placeholder orders data (in a real app, fetch from backend)
 const ordersData = [
@@ -12,7 +12,7 @@ export default function OrderHistoryPage() {
     <div className="max-w-4xl mx-auto py-8 px-4">
       <h1 className="text-3xl font-bold mb-6">Order History</h1>
       <div className="space-y-4">
-        {ordersData.map((order) => (
+        {ordersData.map(order => (
           <div key={order.id} className="border rounded p-4">
             <div className="flex justify-between items-center">
               <div>
@@ -35,4 +35,4 @@ export default function OrderHistoryPage() {
       {/* AI Guidance: In a real app, this page fetches order history from the backend. */}
     </div>
   );
-} 
+}

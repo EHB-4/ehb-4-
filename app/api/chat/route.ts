@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth';
+
 import { authOptions } from '@/lib/auth';
 
 export async function POST(req: Request) {
@@ -25,4 +26,4 @@ export async function POST(req: Request) {
     console.error('Error in chat API:', error);
     return new NextResponse('Internal Server Error', { status: 500 });
   }
-} 
+}

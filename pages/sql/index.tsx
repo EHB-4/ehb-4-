@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
-import { useRouter } from 'next/router';
 import { motion } from 'framer-motion';
+import { useRouter } from 'next/router';
+import React, { useState } from 'react';
 import { FiArrowRight, FiAlertCircle } from 'react-icons/fi';
-import SQLLevelBadge from '../../components/SQL/SQLLevelBadge';
+
+import SQLApplyDialog from '../../components/SQL/SQLApplyDialog';
+import SQLLevelBadge, { SQLLevel } from '../../components/SQL/SQLLevelBadge';
 import SQLProgress from '../../components/SQL/SQLProgress';
 import SQLUpgradeSteps from '../../components/SQL/SQLUpgradeSteps';
 import SQLUserInfo from '../../components/SQL/SQLUserInfo';
-import SQLApplyDialog from '../../components/SQL/SQLApplyDialog';
-import { SQLLevel } from '../../components/SQL/SQLLevelBadge';
 
 // Mock data - replace with actual data from your backend
 const mockUserData = {

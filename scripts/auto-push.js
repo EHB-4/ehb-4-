@@ -1,8 +1,9 @@
 const { exec } = require('child_process');
-const chokidar = require('chokidar');
-const path = require('path');
-const os = require('os');
 const fs = require('fs');
+const os = require('os');
+const path = require('path');
+
+const chokidar = require('chokidar');
 
 // Configuration
 const WATCH_PATHS = [
@@ -28,7 +29,7 @@ const WATCH_PATHS = [
   '*.json',
   '*.md',
   '*.css',
-  '*.scss'
+  '*.scss',
 ];
 
 // Ignore paths
@@ -43,7 +44,7 @@ const IGNORE_PATHS = [
   'build/**',
   '**/*.log',
   '**/*.lock',
-  '**/.DS_Store'
+  '**/.DS_Store',
 ];
 
 // Configuration
@@ -81,7 +82,7 @@ const performanceMetrics = {
   cpuUsage: [],
   memoryUsage: [],
   pushHistory: [],
-  pullHistory: []
+  pullHistory: [],
 };
 
 // Log performance stats
@@ -89,7 +90,7 @@ function logPerformanceStats() {
   const uptime = (Date.now() - performanceMetrics.startTime) / 1000;
   const memoryUsed = process.memoryUsage().heapUsed / 1024 / 1024;
   const cpuCount = os.cpus().length;
-  
+
   console.log('\n📊 ===== AUTO-SYNC PERFORMANCE STATS =====');
   console.log(`⏱️  Uptime: ${Math.floor(uptime / 60)}m ${Math.floor(uptime % 60)}s`);
   console.log(`🔄 Total pushes: ${performanceMetrics.totalPushes}`);
@@ -97,8 +98,12 @@ function logPerformanceStats() {
   console.log(`📝 Total files processed: ${performanceMetrics.totalFilesChanged}`);
   console.log(`⚡ Average push time: ${performanceMetrics.averagePushTime.toFixed(2)}ms`);
   console.log(`⬇️  Average pull time: ${performanceMetrics.averagePullTime.toFixed(2)}ms`);
-  console.log(`🚀 Fastest push: ${performanceMetrics.fastestPush < Infinity ? performanceMetrics.fastestPush.toFixed(2) + 'ms' : 'N/A'}`);
-  console.log(`⬇️  Fastest pull: ${performanceMetrics.fastestPull < Infinity ? performanceMetrics.fastestPull.toFixed(2) + 'ms' : 'N/A'}`);
+  console.log(
+    `🚀 Fastest push: ${performanceMetrics.fastestPush < Infinity ? performanceMetrics.fastestPush.toFixed(2) + 'ms' : 'N/A'}`
+  );
+  console.log(
+    `⬇️  Fastest pull: ${performanceMetrics.fastestPull < Infinity ? performanceMetrics.fastestPull.toFixed(2) + 'ms' : 'N/A'}`
+  );
   console.log(`💾 Memory usage: ${memoryUsed.toFixed(2)}MB`);
   console.log(`💻 CPU cores: ${cpuCount}`);
   console.log('📊 ===============================================\n');
@@ -117,7 +122,9 @@ function executeCommand(command) {
         reject(error);
         return;
       }
-      console.log(`✓ Command completed in ${execTime}ms: ${command.slice(0, 40)}${command.length > 40 ? '...' : ''}`);
+      console.log(
+        `✓ Command completed in ${execTime}ms: ${command.slice(0, 40)}${command.length > 40 ? '...' : ''}`
+      );
       resolve(stdout);
     });
   });
@@ -136,38 +143,38 @@ async function pullChanges() {
   }
 
   const pullStartTime = Date.now();
-  
+
   try {
     isPullInProgress = true;
     console.log('⬇️  Checking for remote changes...');
-    
+
     const status = await executeCommand('git fetch origin');
     const diff = await executeCommand('git diff main origin/main');
-    
+
     if (!diff.trim()) {
       console.log('✓ No remote changes found');
       isPullInProgress = false;
       return;
     }
-    
+
     console.log('⬇️  Pulling remote changes...');
     await executeCommand('git pull origin main --no-verify');
-    
+
     lastPullTime = Date.now();
     const pullTime = Date.now() - pullStartTime;
-    
+
     performanceMetrics.totalPulls++;
     performanceMetrics.totalPullTime += pullTime;
-    performanceMetrics.averagePullTime = performanceMetrics.totalPullTime / performanceMetrics.totalPulls;
+    performanceMetrics.averagePullTime =
+      performanceMetrics.totalPullTime / performanceMetrics.totalPulls;
     performanceMetrics.fastestPull = Math.min(performanceMetrics.fastestPull, pullTime);
     performanceMetrics.lastPullTime = pullTime;
-    
+
     console.log(`✅ Successfully pulled changes in ${pullTime}ms`);
-    
+
     // Refresh Cursor IDE
     console.log('🔄 Refreshing Cursor IDE...');
     // Add Cursor refresh logic here if available
-    
   } catch (error) {
     console.error('❌ Error pulling changes:', error.message);
   } finally {
@@ -181,7 +188,7 @@ async function pushChanges() {
     pendingChanges = true;
     return;
   }
-  
+
   const now = Date.now();
   const timeSinceLastPush = now - lastPushTime;
   if (timeSinceLastPush < 10000 && consecutivePushes > 5) {
@@ -189,30 +196,30 @@ async function pushChanges() {
     setTimeout(pushChanges, 5000);
     return;
   }
-  
+
   const pushStartTime = Date.now();
   let fileCount = 0;
-  
+
   try {
     isPushInProgress = true;
     console.log('🚀 Fast-pushing changes to GitHub...');
-    
+
     const status = await executeCommand('git status --porcelain');
-    
+
     if (!status.trim()) {
       console.log('✓ No changes to commit');
       isPushInProgress = false;
       return;
     }
-    
+
     fileCount = status.split('\n').filter(line => line.trim()).length;
     console.log(`📊 Processing ${fileCount} changed files`);
-    
+
     await executeCommand('git add -A');
-    
+
     const timestamp = new Date().toISOString();
     await executeCommand(`git commit -m "⚡ Auto-push: ${timestamp}" --no-verify`);
-    
+
     try {
       if (forcePushNeeded) {
         console.log('🔄 Force pushing changes...');
@@ -221,20 +228,24 @@ async function pushChanges() {
       } else {
         await executeCommand('git push origin main --no-verify');
       }
-      
+
       lastPushTime = Date.now();
       consecutivePushes++;
-      
+
       const pushTime = Date.now() - pushStartTime;
       performanceMetrics.totalPushes++;
       performanceMetrics.totalPushTime += pushTime;
-      performanceMetrics.averagePushTime = performanceMetrics.totalPushTime / performanceMetrics.totalPushes;
+      performanceMetrics.averagePushTime =
+        performanceMetrics.totalPushTime / performanceMetrics.totalPushes;
       performanceMetrics.fastestPush = Math.min(performanceMetrics.fastestPush, pushTime);
       performanceMetrics.lastPushTime = pushTime;
-      
+
       console.log(`✅ Successfully pushed ${fileCount} files in ${pushTime}ms`);
     } catch (pushError) {
-      if (pushError.message.includes('rejected') || pushError.message.includes('non-fast-forward')) {
+      if (
+        pushError.message.includes('rejected') ||
+        pushError.message.includes('non-fast-forward')
+      ) {
         console.log('⚠️ Push rejected, attempting force push...');
         forcePushNeeded = true;
         await executeCommand('git pull origin main --allow-unrelated-histories');
@@ -262,15 +273,15 @@ const watcher = chokidar.watch(WATCH_PATHS, {
   ignoreInitial: true,
   awaitWriteFinish: {
     stabilityThreshold: 2000,
-    pollInterval: 100
-  }
+    pollInterval: 100,
+  },
 });
 
 // Handle file changes
-watcher.on('change', (path) => {
+watcher.on('change', path => {
   console.log(`📝 File changed: ${path}`);
   changedFiles.add(path);
-  
+
   if (BATCH_CHANGES) {
     clearTimeout(pushChanges);
     setTimeout(pushChanges, DEBOUNCE_DELAY);
@@ -280,10 +291,10 @@ watcher.on('change', (path) => {
 });
 
 // Handle new files
-watcher.on('add', (path) => {
+watcher.on('add', path => {
   console.log(`📝 New file: ${path}`);
   changedFiles.add(path);
-  
+
   if (BATCH_CHANGES) {
     clearTimeout(pushChanges);
     setTimeout(pushChanges, DEBOUNCE_DELAY);
@@ -293,10 +304,10 @@ watcher.on('add', (path) => {
 });
 
 // Handle deleted files
-watcher.on('unlink', (path) => {
+watcher.on('unlink', path => {
   console.log(`🗑️  File deleted: ${path}`);
   changedFiles.add(path);
-  
+
   if (BATCH_CHANGES) {
     clearTimeout(pushChanges);
     setTimeout(pushChanges, DEBOUNCE_DELAY);
@@ -313,4 +324,4 @@ console.log('📁 Watching paths:', WATCH_PATHS);
 console.log('⏱️  Debounce delay:', DEBOUNCE_DELAY, 'ms');
 console.log('⬇️  Pull interval:', PULL_INTERVAL / 1000, 'seconds');
 console.log('💻 CPU cores:', MAX_CONCURRENT_OPERATIONS);
-console.log('📦 Batch changes:', BATCH_CHANGES ? 'enabled' : 'disabled'); 
+console.log('📦 Batch changes:', BATCH_CHANGES ? 'enabled' : 'disabled');

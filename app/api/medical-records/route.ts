@@ -1,8 +1,9 @@
 import { NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth/next';
+import { z } from 'zod';
+
 import { authOptions } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
-import { z } from 'zod';
 
 const medicalRecordSchema = z.object({
   patientId: z.string(),
@@ -31,10 +32,7 @@ export async function GET(req: Request) {
 
     const records = await prisma.medicalRecord.findMany({
       where: {
-        OR: [
-          { patientId: patientId || undefined },
-          { doctorId: doctorId || undefined },
-        ],
+        OR: [{ patientId: patientId || undefined }, { doctorId: doctorId || undefined }],
       },
       include: {
         patient: true,
@@ -85,4 +83,4 @@ export async function POST(req: Request) {
     console.error('Medical record creation error:', error);
     return NextResponse.json({ error: 'Failed to create medical record' }, { status: 500 });
   }
-} 
+}

@@ -1,11 +1,11 @@
-import { NextResponse } from 'next/server';
-import type { NextRequest } from 'next/server';
 import { Ratelimit } from '@upstash/ratelimit';
 import { Redis } from '@upstash/redis';
-import { getToken } from 'next-auth/jwt';
 import { NextApiRequest, NextApiResponse } from 'next';
-import { getSession } from 'next-auth/react';
+import { NextResponse } from 'next/server';
+import type { NextRequest } from 'next/server';
 import { Session } from 'next-auth';
+import { getToken } from 'next-auth/jwt';
+import { getSession } from 'next-auth/react';
 
 // Initialize rate limiter
 const ratelimit = new Ratelimit({
@@ -108,7 +108,7 @@ export default async function security(
   res: NextApiResponse,
   next: () => void
 ) {
-  const session = await getSession({ req }) as CustomSession | null;
+  const session = (await getSession({ req })) as CustomSession | null;
 
   if (!session) {
     return res.status(401).json({ error: 'Unauthorized' });

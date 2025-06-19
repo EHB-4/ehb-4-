@@ -1,8 +1,9 @@
-import React from 'react';
-import { Button } from '@/components/ui/button';
-import { signOut, useSession } from 'next-auth/react';
-import Link from 'next/link';
 import { ShoppingCart, User } from 'lucide-react';
+import Link from 'next/link';
+import { signOut, useSession } from 'next-auth/react';
+import React from 'react';
+
+import { Button } from '@/components/ui/button';
 
 export function Header() {
   const { data: session } = useSession();
@@ -50,4 +51,4 @@ export function Header() {
       </div>
     </header>
   );
-} 
+}

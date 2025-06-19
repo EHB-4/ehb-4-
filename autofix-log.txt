@@ -1,0 +1,61 @@
+EHB AutoFix Log
+================
+[6/19/2025, 3:04:51 PM] EHB Next.js AutoFix Tool (Windows)
+
+[6/19/2025, 3:04:51 PM] Node.js version: v24.2.0
+[6/19/2025, 3:04:51 PM] ⚠️  Node.js v18 ya v20 use karein. Dusri version pe issues aa sakte hain.
+[6/19/2025, 3:04:51 PM] ✅ package.json mil gayi.
+[6/19/2025, 3:04:51 PM] ✅ next.config.js mil gayi.
+[6/19/2025, 3:04:51 PM] ✅ .env mil gayi.
+[6/19/2025, 3:04:51 PM] Dependencies install kar rahe hain...
+[6/19/2025, 3:04:51 PM] 
+> npm dependencies install karna (npm install --legacy-peer-deps)
+[6/19/2025, 3:04:54 PM] 
+> ehb-next@1.0.0 prepare
+> husky install
+
+husky - Git hooks installed
+
+up to date, audited 1755 packages in 2s
+
+372 packages are looking for funding
+  run `npm fund` for details
+
+found 0 vulnerabilities
+
+[6/19/2025, 3:04:54 PM] npm audit fix chala rahe hain...
+[6/19/2025, 3:04:54 PM] 
+> npm audit fix (npm audit fix --force)
+[6/19/2025, 3:04:56 PM] 
+up to date, audited 1755 packages in 2s
+
+372 packages are looking for funding
+  run `npm fund` for details
+
+found 0 vulnerabilities
+
+[6/19/2025, 3:04:56 PM] Next.js: ^14.2.30, React: ^18.2.0, TypeScript: ^5.0.0
+[6/19/2025, 3:04:56 PM] 
+Heavy files (>10MB) check kar rahe hain...
+[6/19/2025, 3:04:59 PM] ⚠️  Ye files bohat heavy hain:
+[6/19/2025, 3:04:59 PM]   .next\cache\webpack\client-development-fallback\0.pack.gz (11.1 MB)
+[6/19/2025, 3:04:59 PM]   node_modules\.next-4p4RFKP0\node_modules\@next\swc-win32-x64-msvc\next-swc.win32-x64-msvc.node (129.6 MB)
+[6/19/2025, 3:04:59 PM]   node_modules\@next\swc-win32-x64-msvc\next-swc.win32-x64-msvc.node (129.6 MB)
+[6/19/2025, 3:04:59 PM] 
+Files/folders count kar rahe hain...
+[6/19/2025, 3:05:01 PM] Total files: 195929, Total folders: 24348
+[6/19/2025, 3:05:01 PM] 
+Port conflicts check kar rahe hain...
+[6/19/2025, 3:05:01 PM] 
+Sab checks complete ho gaye!
+
+[6/19/2025, 3:05:01 PM] --- Urdu/Hindi Summary ---
+[6/19/2025, 3:05:01 PM] 1. Node.js version sahi hai ya nahi, check kar liya.
+[6/19/2025, 3:05:01 PM] 2. Dependencies install/auto-fix ho gayi.
+[6/19/2025, 3:05:01 PM] 3. Heavy files detect kar li.
+[6/19/2025, 3:05:01 PM] 4. Files/folders count kar li.
+[6/19/2025, 3:05:01 PM] 5. Port conflicts check kar liye.
+[6/19/2025, 3:05:01 PM] 6. Zaroori config files check kar li.
+[6/19/2025, 3:05:01 PM] Agar koi ⚠️ warning hai, usko follow karein. Baaki sab sahi hai to project run karein:
+[6/19/2025, 3:05:01 PM]   npm run dev
+[6/19/2025, 3:05:01 PM] Agar phir bhi problem ho, yeh autofix-log.txt file mujhe bhej dein.

@@ -1,7 +1,8 @@
 import React from 'react';
 import { FiUser, FiPackage, FiFileText, FiAlertTriangle } from 'react-icons/fi';
-import HealthDashboard from '@/components/wms/HealthDashboard';
+
 import BookDoctor from '@/components/wms/BookDoctor';
+import HealthDashboard from '@/components/wms/HealthDashboard';
 import HospitalDirectory from '@/components/wms/HospitalDirectory';
 import LabReports from '@/components/wms/LabReports';
 import MedicalHistory from '@/components/wms/MedicalHistory';

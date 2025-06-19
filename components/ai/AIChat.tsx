@@ -1,13 +1,14 @@
+import { motion, AnimatePresence } from 'framer-motion';
 import React, { useState, useRef, useEffect } from 'react';
+import { FaPaperPlane, FaRobot, FaUser, FaSpinner } from 'react-icons/fa';
+
 import { useAIChat } from '@/components/layout/AIChatProvider';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { ScrollArea } from '@/components/ui/scroll-area';
-import { cn } from '@/lib/utils';
-import { motion, AnimatePresence } from 'framer-motion';
-import { FaPaperPlane, FaRobot, FaUser, FaSpinner } from 'react-icons/fa';
-import { detectLanguage } from '@/lib/utils/languageUtils';
 import { detectIntent } from '@/lib/ai/intentRouter';
+import { cn } from '@/lib/utils';
+import { detectLanguage } from '@/lib/utils/languageUtils';
 
 interface Message {
   id: string;
@@ -72,9 +73,7 @@ export default function AIChat({ initialMessage, context }: AIChatProps) {
               <div
                 className={cn(
                   'rounded-lg px-4 py-2 max-w-[80%]',
-                  message.role === 'user'
-                    ? 'bg-primary text-primary-foreground'
-                    : 'bg-muted'
+                  message.role === 'user' ? 'bg-primary text-primary-foreground' : 'bg-muted'
                 )}
               >
                 {message.content}
@@ -98,7 +97,7 @@ export default function AIChat({ initialMessage, context }: AIChatProps) {
         <div className="flex space-x-2">
           <Input
             value={input}
-            onChange={(e) => setInput(e.target.value)}
+            onChange={e => setInput(e.target.value)}
             placeholder="Type your message..."
             disabled={isLoading}
             className="flex-1"

@@ -1,6 +1,6 @@
+import { motion } from 'framer-motion';
 import React from 'react';
 import { IconType } from 'react-icons';
-import { motion } from 'framer-motion';
 
 interface QuickActionCardProps {
   name: string;

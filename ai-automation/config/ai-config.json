@@ -1,0 +1,25 @@
+{
+  "version": "1.0.0",
+  "automation": {
+    "enabled": true,
+    "agents": [
+      "code-review",
+      "test-generator",
+      "deployment",
+      "monitoring"
+    ],
+    "triggers": [
+      "file-change",
+      "commit",
+      "deployment",
+      "error"
+    ]
+  },
+  "cursor": {
+    "integration": true,
+    "autoSuggest": true,
+    "codeCompletion": true,
+    "refactoring": true,
+    "autoActivate": true
+  }
+}

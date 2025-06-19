@@ -1,6 +1,4 @@
 import React from 'react';
-import AnalyticsOverview from '../../../components/AnalyticsOverview';
-import AnalyticsCharts from '../../../components/AnalyticsCharts';
 
 // Placeholder data (in a real app, fetch from backend)
 const analyticsData = {
@@ -22,20 +20,37 @@ export default function AnalyticsPage() {
   return (
     <div className="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
       <h1 className="text-3xl font-bold text-gray-900 mb-8">Analytics Dashboard</h1>
-      
-      <div className="space-y-8">
-        <AnalyticsOverview
-          totalOrders={analyticsData.totalOrders}
-          totalRevenue={analyticsData.totalRevenue}
-          totalProducts={analyticsData.totalProducts}
-          totalCustomers={analyticsData.totalCustomers}
-        />
-        
-        <AnalyticsCharts data={analyticsData.salesData} />
+
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+        <div className="bg-white rounded-lg shadow p-6">
+          <h3 className="text-lg font-semibold text-gray-900">Total Orders</h3>
+          <p className="text-3xl font-bold text-blue-600">{analyticsData.totalOrders}</p>
+        </div>
+        <div className="bg-white rounded-lg shadow p-6">
+          <h3 className="text-lg font-semibold text-gray-900">Total Revenue</h3>
+          <p className="text-3xl font-bold text-green-600">${analyticsData.totalRevenue}</p>
+        </div>
+        <div className="bg-white rounded-lg shadow p-6">
+          <h3 className="text-lg font-semibold text-gray-900">Total Products</h3>
+          <p className="text-3xl font-bold text-purple-600">{analyticsData.totalProducts}</p>
+        </div>
+        <div className="bg-white rounded-lg shadow p-6">
+          <h3 className="text-lg font-semibold text-gray-900">Total Customers</h3>
+          <p className="text-3xl font-bold text-orange-600">{analyticsData.totalCustomers}</p>
+        </div>
+      </div>
+
+      <div className="bg-white rounded-lg shadow p-6">
+        <h2 className="text-xl font-semibold text-gray-900 mb-4">Sales Data</h2>
+        <div className="space-y-2">
+          {analyticsData.salesData.map((item, index) => (
+            <div key={index} className="flex justify-between items-center py-2 border-b">
+              <span className="text-gray-600">{item.date}</span>
+              <span className="font-semibold">${item.sales}</span>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );
 }
-
-// AI Guidance: This page displays the analytics dashboard with overview stats and charts.
-// In a real app, data would be fetched from the backend and updated in real-time. 

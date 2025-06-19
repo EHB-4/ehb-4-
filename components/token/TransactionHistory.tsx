@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from 'react';
 import { ethers } from 'ethers';
+import React, { useState, useEffect } from 'react';
+
 import { TokenLocker } from '../../lib/token-locker';
-import TransactionStats from './TransactionStats';
+
 import TransactionCharts from './TransactionCharts';
+import TransactionStats from './TransactionStats';
 
 interface Transaction {
   type: 'lock' | 'unlock' | 'reward';

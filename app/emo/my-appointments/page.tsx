@@ -1,11 +1,12 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
-import { useSession } from 'next-auth/react';
 import { motion } from 'framer-motion';
+import { useSession } from 'next-auth/react';
+import React, { useEffect, useState } from 'react';
+
+import Modal from '@/components/ui/Modal';
 import { Appointment } from '@/lib/models/Appointment';
 import { Doctor } from '@/lib/models/Doctor';
-import Modal from '@/components/ui/Modal';
 
 interface AppointmentWithDoctor extends Appointment {
   doctor: Doctor;

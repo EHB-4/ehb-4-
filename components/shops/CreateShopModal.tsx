@@ -1,10 +1,12 @@
 'use client';
 
-import React, { useState } from 'react';
-import { useSession } from 'next-auth/react';
 import { motion } from 'framer-motion';
-import Modal from '../ui/Modal';
+import { useSession } from 'next-auth/react';
+import React, { useState } from 'react';
+
 import { Shop } from '@/lib/models/Product';
+
+import Modal from '../ui/Modal';
 
 interface CreateShopModalProps {
   isOpen: boolean;

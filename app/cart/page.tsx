@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useState } from 'react';
 
 // Placeholder cart data
@@ -12,16 +14,14 @@ export default function CartPage() {
 
   // Update quantity
   const updateQuantity = (id: number, qty: number) => {
-    setCart((prev) =>
-      prev.map((item) =>
-        item.id === id ? { ...item, quantity: Math.max(1, qty) } : item
-      )
+    setCart(prev =>
+      prev.map(item => (item.id === id ? { ...item, quantity: Math.max(1, qty) } : item))
     );
   };
 
   // Remove item
   const removeItem = (id: number) => {
-    setCart((prev) => prev.filter((item) => item.id !== id));
+    setCart(prev => prev.filter(item => item.id !== id));
   };
 
   // Calculate total
@@ -35,7 +35,7 @@ export default function CartPage() {
       ) : (
         <div>
           <ul className="divide-y">
-            {cart.map((item) => (
+            {cart.map(item => (
               <li key={item.id} className="flex items-center justify-between py-4">
                 <div>
                   <div className="font-semibold">{item.name}</div>
@@ -68,11 +68,16 @@ export default function CartPage() {
           <div className="mt-8 flex justify-between items-center border-t pt-4">
             <div className="text-xl font-bold">Total: ${total}</div>
             {/* In a real app, this would go to the checkout page */}
-            <a href="/checkout" className="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 transition">Checkout</a>
+            <a
+              href="/checkout"
+              className="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 transition"
+            >
+              Checkout
+            </a>
           </div>
         </div>
       )}
       {/* AI Guidance: In a real app, cart data comes from user actions and is saved in context or backend. */}
     </div>
   );
-} 
+}

@@ -1,6 +1,7 @@
 import React from 'react';
-import { ServiceCategory, FranchiseType } from '../FranchiseUtils/FranchiseTypes';
+
 import { FRANCHISE_TYPES, FRANCHISE_CONSTANTS } from '../FranchiseUtils/Constants';
+import { ServiceCategory, FranchiseType } from '../FranchiseUtils/FranchiseTypes';
 
 interface FeaturedFranchise {
   id: string;

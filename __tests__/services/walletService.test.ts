@@ -1,5 +1,5 @@
-import { WalletService } from '@/services/walletService';
 import { prisma } from '@/lib/prisma';
+import { WalletService } from '@/services/walletService';
 
 jest.mock('@/lib/prisma', () => ({
   prisma: {

@@ -1,8 +1,9 @@
 import { NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth/next';
+import { z } from 'zod';
+
 import { authOptions } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
-import { z } from 'zod';
 
 // Validation schemas
 const walletActionSchema = z.object({
@@ -22,9 +23,9 @@ const transactionSchema = z.object({
 const calculateLoyaltyBonus = (loyaltyType: string): number => {
   const bonuses = {
     BRONZE: 0.05,
-    SILVER: 0.10,
+    SILVER: 0.1,
     GOLD: 0.15,
-    PLATINUM: 0.20,
+    PLATINUM: 0.2,
   };
   return bonuses[loyaltyType as keyof typeof bonuses] || 0;
 };
@@ -70,10 +71,7 @@ export async function GET() {
     return NextResponse.json(wallet);
   } catch (error) {
     console.error('Wallet fetch error:', error);
-    return NextResponse.json(
-      { error: 'Failed to fetch wallet' },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: 'Failed to fetch wallet' }, { status: 500 });
   }
 }
 
@@ -91,10 +89,7 @@ export async function POST() {
     });
 
     if (existingWallet) {
-      return NextResponse.json(
-        { error: 'Wallet already exists' },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: 'Wallet already exists' }, { status: 400 });
     }
 
     // Create new wallet
@@ -108,16 +103,10 @@ export async function POST() {
       },
     });
 
-    return NextResponse.json(
-      { message: 'Wallet created successfully', wallet },
-      { status: 201 }
-    );
+    return NextResponse.json({ message: 'Wallet created successfully', wallet }, { status: 201 });
   } catch (error) {
     console.error('Wallet creation error:', error);
-    return NextResponse.json(
-      { error: 'Failed to create wallet' },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: 'Failed to create wallet' }, { status: 500 });
   }
 }
 
@@ -165,7 +154,10 @@ export async function PUT(req: Request) {
         break;
 
       case 'unlock':
-        if (!amount || !validateTransaction('unlock', amount, wallet.balance, wallet.lockedBalance)) {
+        if (
+          !amount ||
+          !validateTransaction('unlock', amount, wallet.balance, wallet.lockedBalance)
+        ) {
           return NextResponse.json(
             { error: 'Invalid amount or insufficient locked balance' },
             { status: 400 }
@@ -185,10 +177,7 @@ export async function PUT(req: Request) {
 
       case 'updateLoyalty':
         if (!loyaltyType) {
-          return NextResponse.json(
-            { error: 'Loyalty type is required' },
-            { status: 400 }
-          );
+          return NextResponse.json({ error: 'Loyalty type is required' }, { status: 400 });
         }
         const bonus = calculateLoyaltyBonus(loyaltyType);
         updateData = {
@@ -232,9 +221,6 @@ export async function PUT(req: Request) {
       );
     }
     console.error('Wallet update error:', error);
-    return NextResponse.json(
-      { error: 'Failed to update wallet' },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: 'Failed to update wallet' }, { status: 500 });
   }
 }

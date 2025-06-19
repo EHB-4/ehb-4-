@@ -1,4 +1,5 @@
 import { ethers } from 'ethers';
+
 import { initMoonbeamProvider } from './config';
 
 // ERC20 ABI
@@ -25,7 +26,11 @@ type ERC20Contract = ethers.Contract & {
   transfer(to: string, amount: bigint): Promise<ethers.ContractTransactionResponse>;
   allowance(owner: string, spender: string): Promise<bigint>;
   approve(spender: string, amount: bigint): Promise<ethers.ContractTransactionResponse>;
-  transferFrom(from: string, to: string, amount: bigint): Promise<ethers.ContractTransactionResponse>;
+  transferFrom(
+    from: string,
+    to: string,
+    amount: bigint
+  ): Promise<ethers.ContractTransactionResponse>;
 };
 
 export class MoonbeamToken {
@@ -34,11 +39,7 @@ export class MoonbeamToken {
 
   constructor(address: string) {
     this.provider = initMoonbeamProvider();
-    this.contract = new ethers.Contract(
-      address,
-      ERC20_ABI,
-      this.provider
-    ) as ERC20Contract;
+    this.contract = new ethers.Contract(address, ERC20_ABI, this.provider) as ERC20Contract;
   }
 
   async name(): Promise<string> {
@@ -81,17 +82,13 @@ export class MoonbeamToken {
     return this.contract.transferFrom(from, to, amount);
   }
 
-  onTransfer(
-    callback: (from: string, to: string, amount: bigint) => void
-  ): void {
+  onTransfer(callback: (from: string, to: string, amount: bigint) => void): void {
     this.contract.on('Transfer', (from, to, amount) => {
       callback(from, to, amount);
     });
   }
 
-  onApproval(
-    callback: (owner: string, spender: string, amount: bigint) => void
-  ): void {
+  onApproval(callback: (owner: string, spender: string, amount: bigint) => void): void {
     this.contract.on('Approval', (owner, spender, amount) => {
       callback(owner, spender, amount);
     });

@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
 import { ethers } from 'ethers';
+import React, { useState, useEffect } from 'react';
+
 import { getContractReadOnly } from '@/lib/contracts';
 
 interface TokenLockCardProps {

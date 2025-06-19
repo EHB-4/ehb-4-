@@ -13,7 +13,7 @@ const reviewsData = [
 export default function Reviews({ productId }: ReviewsProps) {
   return (
     <div className="space-y-4">
-      {reviewsData.map((review) => (
+      {reviewsData.map(review => (
         <div key={review.id} className="border rounded p-4">
           <p className="font-bold">{review.user}</p>
           <p className="text-yellow-500">{'★'.repeat(review.rating)}</p>
@@ -25,4 +25,4 @@ export default function Reviews({ productId }: ReviewsProps) {
 }
 
 // AI Guidance: This component displays product reviews.
-// In a real app, it fetches reviews from the backend based on the product ID. 
+// In a real app, it fetches reviews from the backend based on the product ID.

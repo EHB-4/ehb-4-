@@ -1,6 +1,6 @@
+import { motion } from 'framer-motion';
 import React from 'react';
 import { FiPlus, FiLock, FiGift, FiSettings, FiHelpCircle, FiMessageSquare } from 'react-icons/fi';
-import { motion } from 'framer-motion';
 
 interface Action {
   id: string;

@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+
 import { getProducts } from '../../../../lib/api/shopify';
 
 export async function GET() {

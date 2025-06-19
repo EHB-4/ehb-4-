@@ -1,9 +1,10 @@
-import React from 'react';
-import { ServiceCategory } from './FranchiseUtils/FranchiseTypes';
-import { FRANCHISE_TYPES } from './FranchiseUtils/Constants';
-import { FiSearch, FiDownload, FiBookmark, FiShare2 } from 'react-icons/fi';
-import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
+import jsPDF from 'jspdf';
+import React from 'react';
+import { FiSearch, FiDownload, FiBookmark, FiShare2 } from 'react-icons/fi';
+
+import { FRANCHISE_TYPES } from './FranchiseUtils/Constants';
+import { ServiceCategory } from './FranchiseUtils/FranchiseTypes';
 
 interface FranchiseLevel {
   type: string;

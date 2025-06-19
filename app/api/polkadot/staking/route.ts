@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+
 import { initPolkadotAPI } from '../../../../lib/polkadot/config';
 import { PolkadotStaking } from '../../../../lib/polkadot/staking';
 

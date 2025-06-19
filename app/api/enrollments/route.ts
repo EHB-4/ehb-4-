@@ -1,9 +1,10 @@
+import { ObjectId } from 'mongodb';
 import { NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth';
+
 import { authOptions } from '@/lib/authOptions';
-import clientPromise from '@/lib/mongodb';
-import { ObjectId } from 'mongodb';
 import { Enrollment } from '@/lib/models/Enrollment';
+import clientPromise from '@/lib/mongodb';
 import { calculateLoyaltyDiscount } from '@/lib/utils/franchiseUtils';
 
 // GET /api/enrollments
@@ -83,9 +84,9 @@ export async function POST(request: Request) {
     }
 
     // Start a session for transaction
-    const session = await client.startSession();
+    const dbSession = await client.startSession();
     try {
-      await session.withTransaction(async () => {
+      await dbSession.withTransaction(async () => {
         // Create enrollment
         const enrollment: Enrollment = {
           _id: new ObjectId(),
@@ -97,7 +98,7 @@ export async function POST(request: Request) {
           updatedAt: new Date(),
         };
 
-        await db.collection('enrollments').insertOne(enrollment, { session });
+        await db.collection('enrollments').insertOne(enrollment, { session: dbSession });
 
         // Deduct from student's wallet
         await db.collection('wallets').updateOne(
@@ -113,7 +114,7 @@ export async function POST(request: Request) {
               },
             },
           },
-          { session }
+          { session: dbSession }
         );
 
         // Add to tutor's wallet
@@ -133,12 +134,12 @@ export async function POST(request: Request) {
                 },
               },
             },
-            { session }
+            { session: dbSession }
           );
         }
       });
     } finally {
-      await session.endSession();
+      await dbSession.endSession();
     }
 
     return NextResponse.json({ success: true });
@@ -239,9 +240,9 @@ export async function DELETE(request: Request, { params }: { params: { id: strin
     }
 
     // Start a session for transaction
-    const session = await client.startSession();
+    const dbSession = await client.startSession();
     try {
-      await session.withTransaction(async () => {
+      await dbSession.withTransaction(async () => {
         // Update enrollment status
         await db.collection('enrollments').updateOne(
           { _id: new ObjectId(params.id) },
@@ -251,7 +252,7 @@ export async function DELETE(request: Request, { params }: { params: { id: strin
               updatedAt: new Date(),
             },
           },
-          { session }
+          { session: dbSession }
         );
 
         // Get course details
@@ -272,7 +273,7 @@ export async function DELETE(request: Request, { params }: { params: { id: strin
                 },
               },
             },
-            { session }
+            { session: dbSession }
           );
 
           // Deduct from tutor's wallet
@@ -282,23 +283,23 @@ export async function DELETE(request: Request, { params }: { params: { id: strin
             await db.collection('wallets').updateOne(
               { userId: tutor.userId },
               {
-                $inc: { balance: -course.price * 0.7 }, // 70% of course price
+                $inc: { balance: -course.price * 0.7 },
                 $push: {
                   transactions: {
-                    type: 'course_refund',
+                    type: 'course_refund_deduction',
                     amount: -course.price * 0.7,
-                    description: `Refund for course: ${course.title}`,
+                    description: `Refund deduction for course: ${course.title}`,
                     createdAt: new Date(),
                   },
                 },
               },
-              { session }
+              { session: dbSession }
             );
           }
         }
       });
     } finally {
-      await session.endSession();
+      await dbSession.endSession();
     }
 
     return NextResponse.json({ success: true });

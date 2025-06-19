@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+
 import { SearchFilters, SearchResult } from '../services/searchService';
 
 interface RoadmapSearchProps {
@@ -12,7 +13,7 @@ export const RoadmapSearch: React.FC<RoadmapSearchProps> = ({
   onSearch,
   onFilterChange,
   results,
-  isLoading = false
+  isLoading = false,
 }) => {
   const [query, setQuery] = useState('');
   const [filters, setFilters] = useState<SearchFilters>({});
@@ -42,7 +43,7 @@ export const RoadmapSearch: React.FC<RoadmapSearchProps> = ({
             <input
               type="text"
               value={query}
-              onChange={(e) => setQuery(e.target.value)}
+              onChange={e => setQuery(e.target.value)}
               placeholder="Search modules, features, or timeline events..."
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             />
@@ -57,7 +58,12 @@ export const RoadmapSearch: React.FC<RoadmapSearchProps> = ({
             className="px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded-lg flex items-center space-x-2"
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"
+              />
             </svg>
             <span>Filters</span>
           </button>
@@ -70,7 +76,7 @@ export const RoadmapSearch: React.FC<RoadmapSearchProps> = ({
                 <label className="block text-sm font-medium text-gray-700 mb-1">Status</label>
                 <select
                   value={filters.status || ''}
-                  onChange={(e) => handleFilterChange('status', e.target.value || undefined)}
+                  onChange={e => handleFilterChange('status', e.target.value || undefined)}
                   className="w-full px-3 py-2 border border-gray-300 rounded-md"
                 >
                   <option value="">All Statuses</option>
@@ -84,7 +90,7 @@ export const RoadmapSearch: React.FC<RoadmapSearchProps> = ({
                 <label className="block text-sm font-medium text-gray-700 mb-1">Priority</label>
                 <select
                   value={filters.priority || ''}
-                  onChange={(e) => handleFilterChange('priority', e.target.value || undefined)}
+                  onChange={e => handleFilterChange('priority', e.target.value || undefined)}
                   className="w-full px-3 py-2 border border-gray-300 rounded-md"
                 >
                   <option value="">All Priorities</option>
@@ -100,19 +106,23 @@ export const RoadmapSearch: React.FC<RoadmapSearchProps> = ({
                   <input
                     type="date"
                     value={filters.dateRange?.start?.toISOString().split('T')[0] || ''}
-                    onChange={(e) => handleFilterChange('dateRange', {
-                      ...filters.dateRange,
-                      start: e.target.value ? new Date(e.target.value) : undefined
-                    })}
+                    onChange={e =>
+                      handleFilterChange('dateRange', {
+                        ...filters.dateRange,
+                        start: e.target.value ? new Date(e.target.value) : undefined,
+                      })
+                    }
                     className="w-full px-3 py-2 border border-gray-300 rounded-md"
                   />
                   <input
                     type="date"
                     value={filters.dateRange?.end?.toISOString().split('T')[0] || ''}
-                    onChange={(e) => handleFilterChange('dateRange', {
-                      ...filters.dateRange,
-                      end: e.target.value ? new Date(e.target.value) : undefined
-                    })}
+                    onChange={e =>
+                      handleFilterChange('dateRange', {
+                        ...filters.dateRange,
+                        end: e.target.value ? new Date(e.target.value) : undefined,
+                      })
+                    }
                     className="w-full px-3 py-2 border border-gray-300 rounded-md"
                   />
                 </div>
@@ -123,9 +133,7 @@ export const RoadmapSearch: React.FC<RoadmapSearchProps> = ({
 
         {results.length > 0 && (
           <div className="mt-4">
-            <div className="text-sm text-gray-500 mb-2">
-              Found {results.length} results
-            </div>
+            <div className="text-sm text-gray-500 mb-2">Found {results.length} results</div>
             <div className="space-y-2">
               {results.map((result, index) => (
                 <div
@@ -134,12 +142,8 @@ export const RoadmapSearch: React.FC<RoadmapSearchProps> = ({
                 >
                   <div className="flex items-start justify-between">
                     <div>
-                      <h3 className="text-lg font-semibold text-gray-900">
-                        {result.item.title}
-                      </h3>
-                      <p className="text-sm text-gray-600 mt-1">
-                        {result.item.description}
-                      </p>
+                      <h3 className="text-lg font-semibold text-gray-900">{result.item.title}</h3>
+                      <p className="text-sm text-gray-600 mt-1">{result.item.description}</p>
                       <div className="mt-2 flex flex-wrap gap-2">
                         {result.matches.map((match, i) => (
                           <span
@@ -152,11 +156,15 @@ export const RoadmapSearch: React.FC<RoadmapSearchProps> = ({
                       </div>
                     </div>
                     <div className="flex items-center space-x-2">
-                      <span className={`px-2 py-1 rounded-full text-xs font-medium ${
-                        result.item.status === 'completed' ? 'bg-green-100 text-green-800' :
-                        result.item.status === 'in-progress' ? 'bg-yellow-100 text-yellow-800' :
-                        'bg-gray-100 text-gray-800'
-                      }`}>
+                      <span
+                        className={`px-2 py-1 rounded-full text-xs font-medium ${
+                          result.item.status === 'completed'
+                            ? 'bg-green-100 text-green-800'
+                            : result.item.status === 'in-progress'
+                              ? 'bg-yellow-100 text-yellow-800'
+                              : 'bg-gray-100 text-gray-800'
+                        }`}
+                      >
                         {result.item.status}
                       </span>
                       <span className="text-sm text-gray-500">
@@ -172,4 +180,4 @@ export const RoadmapSearch: React.FC<RoadmapSearchProps> = ({
       </div>
     </div>
   );
-}; 
+};

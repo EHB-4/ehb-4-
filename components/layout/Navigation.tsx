@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
+import { BrowserProvider } from 'ethers';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
+import { useRouter, usePathname } from 'next/navigation';
 import { useSession, signOut } from 'next-auth/react';
-import { ethers } from 'ethers';
+import React, { useState } from 'react';
 
 export default function Navigation() {
   const router = useRouter();
+  const pathname = usePathname();
   const { data: session } = useSession();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [walletAddress, setWalletAddress] = useState<string>('');
@@ -15,7 +16,7 @@ export default function Navigation() {
     try {
       setIsConnecting(true);
       if (typeof window !== 'undefined' && window.ethereum) {
-        const provider = new ethers.BrowserProvider(window.ethereum);
+        const provider = new BrowserProvider(window.ethereum);
         const signer = await provider.getSigner();
         const address = await signer.getAddress();
         setWalletAddress(address);
@@ -53,7 +54,7 @@ export default function Navigation() {
                   key={item.name}
                   href={item.href}
                   className={`${
-                    router.pathname === item.href
+                    pathname === item.href
                       ? 'border-blue-500 text-gray-900'
                       : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'
                   } inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium`}
@@ -151,7 +152,7 @@ export default function Navigation() {
               key={item.name}
               href={item.href}
               className={`${
-                router.pathname === item.href
+                pathname === item.href
                   ? 'bg-blue-50 border-blue-500 text-blue-700'
                   : 'border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700'
               } block pl-3 pr-4 py-2 border-l-4 text-base font-medium`}

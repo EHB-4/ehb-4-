@@ -1,10 +1,3 @@
-import React, { useState, useEffect } from 'react';
-import { useSession } from 'next-auth/react';
-import { useRouter } from 'next/router';
-import { ethers } from 'ethers';
-import { getContract } from '@/lib/contracts';
-import { toast } from 'react-hot-toast';
-import { formatDistanceToNow } from 'date-fns';
 import { Tab } from '@headlessui/react';
 import {
   TrophyIcon,
@@ -14,6 +7,12 @@ import {
   ArrowTrendingUpIcon,
   UserGroupIcon,
 } from '@heroicons/react/24/outline';
+import { formatDistanceToNow } from 'date-fns';
+import { ethers } from 'ethers';
+import { useRouter } from 'next/router';
+import { useSession } from 'next-auth/react';
+import React, { useState, useEffect } from 'react';
+import { toast } from 'react-hot-toast';
 import {
   LineChart,
   Line,
@@ -26,6 +25,8 @@ import {
   BarChart,
   Bar,
 } from 'recharts';
+
+import { getContract } from '@/lib/contracts';
 
 interface RewardData {
   totalRewards: bigint;

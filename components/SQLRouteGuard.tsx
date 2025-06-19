@@ -1,6 +1,6 @@
-import React from 'react';
+import { useRouter } from 'next/navigation';
 import { useSession } from 'next-auth/react';
-import { useRouter } from 'next/router';
+import React from 'react';
 import { FiLock, FiArrowUp } from 'react-icons/fi';
 
 interface SQLRouteGuardProps {

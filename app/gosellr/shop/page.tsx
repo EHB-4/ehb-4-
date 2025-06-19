@@ -1,8 +1,9 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
-import { useSession } from 'next-auth/react';
 import { motion } from 'framer-motion';
+import { useSession } from 'next-auth/react';
+import React, { useState, useEffect } from 'react';
+
 import { Shop } from '@/lib/models/Shop';
 
 export default function ShopManagementPage() {

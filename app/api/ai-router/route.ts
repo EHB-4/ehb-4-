@@ -1,8 +1,9 @@
 import { NextResponse } from 'next/server';
+import { getServerSession } from 'next-auth';
+
 import { detectIntent } from '@/lib/ai/intentRouter';
 import { buildPrompt } from '@/lib/ai/promptBuilder';
 import { getServiceMap } from '@/lib/ai/serviceMap';
-import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
 
 export async function POST(req: Request) {

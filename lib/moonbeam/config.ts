@@ -1,7 +1,7 @@
-import { ethers } from 'ethers';
 import { ApiPromise, WsProvider } from '@polkadot/api';
 import { Keyring } from '@polkadot/keyring';
 import { cryptoWaitReady } from '@polkadot/util-crypto';
+import { ethers } from 'ethers';
 
 // Moonbase Alpha Testnet endpoints
 const MOONBASE_RPC = process.env.NEXT_PUBLIC_MOONBASE_RPC || '';
@@ -58,18 +58,12 @@ export async function sendTransaction(
 }
 
 // Get transaction receipt
-export async function getTransaction(
-  provider: ethers.Provider,
-  txHash: string
-) {
+export async function getTransaction(provider: ethers.Provider, txHash: string) {
   return await provider.getTransaction(txHash);
 }
 
 // Get block info
-export async function getBlock(
-  provider: ethers.Provider,
-  blockNumber: number
-) {
+export async function getBlock(provider: ethers.Provider, blockNumber: number) {
   return await provider.getBlock(blockNumber);
 }
 

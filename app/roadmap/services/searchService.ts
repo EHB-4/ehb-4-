@@ -7,18 +7,18 @@ export class SearchService {
     description: 0.8,
     status: 0.6,
     priority: 0.4,
-    tags: 0.3
+    tags: 0.3,
   };
 
   private static calculateFuzzyScore(str1: string, str2: string): number {
     const s1 = str1.toLowerCase();
     const s2 = str2.toLowerCase();
-    
+
     if (s1.includes(s2) || s2.includes(s1)) return 1;
-    
+
     const words1 = s1.split(/\s+/);
     const words2 = s2.split(/\s+/);
-    
+
     let maxScore = 0;
     for (const word1 of words1) {
       for (const word2 of words2) {
@@ -26,14 +26,16 @@ export class SearchService {
         maxScore = Math.max(maxScore, score);
       }
     }
-    
+
     return maxScore;
   }
 
   private static calculateLevenshteinDistance(s1: string, s2: string): number {
     const m = s1.length;
     const n = s2.length;
-    const dp: number[][] = Array(m + 1).fill(0).map(() => Array(n + 1).fill(0));
+    const dp: number[][] = Array(m + 1)
+      .fill(0)
+      .map(() => Array(n + 1).fill(0));
 
     for (let i = 0; i <= m; i++) dp[i][0] = i;
     for (let j = 0; j <= n; j++) dp[0][j] = j;
@@ -43,11 +45,7 @@ export class SearchService {
         if (s1[i - 1] === s2[j - 1]) {
           dp[i][j] = dp[i - 1][j - 1];
         } else {
-          dp[i][j] = Math.min(
-            dp[i - 1][j - 1] + 1,
-            dp[i - 1][j] + 1,
-            dp[i][j - 1] + 1
-          );
+          dp[i][j] = Math.min(dp[i - 1][j - 1] + 1, dp[i - 1][j] + 1, dp[i][j - 1] + 1);
         }
       }
     }
@@ -82,9 +80,7 @@ export class SearchService {
 
     // Tags scoring
     if (item.tags && filters.tags) {
-      const matchingTags = item.tags.filter((tag: string) => 
-        filters.tags?.includes(tag)
-      ).length;
+      const matchingTags = item.tags.filter((tag: string) => filters.tags?.includes(tag)).length;
       score += (matchingTags / (filters.tags?.length || 1)) * this.WEIGHTS.tags;
     }
 
@@ -105,7 +101,7 @@ export class SearchService {
           type: 'module',
           item: module,
           score,
-          matches: this.findMatches(module, query)
+          matches: this.findMatches(module, query),
         });
       }
 
@@ -117,7 +113,7 @@ export class SearchService {
             type: 'feature',
             item: feature,
             score: featureScore,
-            matches: this.findMatches(feature, query)
+            matches: this.findMatches(feature, query),
           });
         }
       });
@@ -131,15 +127,13 @@ export class SearchService {
           type: 'timeline',
           item: event,
           score,
-          matches: this.findMatches(event, query)
+          matches: this.findMatches(event, query),
         });
       }
     });
 
     // Sort by score and return top results
-    return results
-      .sort((a, b) => b.score - a.score)
-      .slice(0, 20);
+    return results.sort((a, b) => b.score - a.score).slice(0, 20);
   }
 
   private static findMatches(item: any, query: string): string[] {
@@ -175,4 +169,4 @@ export interface SearchResult {
   item: Module | Feature | TimelineEvent;
   score: number;
   matches: string[];
-} 
+}

@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import { useSession } from 'next-auth/react';
-import { useRouter } from 'next/router';
-import { ethers } from 'ethers';
-import { getContract } from '@/lib/contracts';
-import { toast } from 'react-hot-toast';
 import { formatDistanceToNow } from 'date-fns';
+import { ethers } from 'ethers';
+import { useRouter } from 'next/router';
+import { useSession } from 'next-auth/react';
+import React, { useState, useEffect } from 'react';
+import { toast } from 'react-hot-toast';
+
+import { getContract } from '@/lib/contracts';
 
 interface Lock {
   id: string;

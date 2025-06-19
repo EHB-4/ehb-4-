@@ -1,19 +1,22 @@
 import { NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth/next';
+import { z } from 'zod';
+
 import { authOptions } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
-import { z } from 'zod';
 
 const prescriptionSchema = z.object({
   patientId: z.string(),
   doctorId: z.string(),
-  medications: z.array(z.object({
-    name: z.string(),
-    dosage: z.string(),
-    frequency: z.string(),
-    duration: z.string(),
-    instructions: z.string().optional(),
-  })),
+  medications: z.array(
+    z.object({
+      name: z.string(),
+      dosage: z.string(),
+      frequency: z.string(),
+      duration: z.string(),
+      instructions: z.string().optional(),
+    })
+  ),
   diagnosis: z.string(),
   notes: z.string().optional(),
   validUntil: z.string().datetime(),
@@ -36,10 +39,7 @@ export async function GET(req: Request) {
 
     const prescriptions = await prisma.prescription.findMany({
       where: {
-        OR: [
-          { patientId: patientId || undefined },
-          { doctorId: doctorId || undefined },
-        ],
+        OR: [{ patientId: patientId || undefined }, { doctorId: doctorId || undefined }],
         validUntil: {
           gte: new Date(),
         },
@@ -98,4 +98,4 @@ export async function POST(req: Request) {
     console.error('Prescription creation error:', error);
     return NextResponse.json({ error: 'Failed to create prescription' }, { status: 500 });
   }
-} 
+}

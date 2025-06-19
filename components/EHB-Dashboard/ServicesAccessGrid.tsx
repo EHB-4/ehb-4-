@@ -1,6 +1,6 @@
+import { motion } from 'framer-motion';
 import React from 'react';
 import { FiShoppingBag, FiUsers, FiBook, FiMap, FiDollarSign, FiSearch } from 'react-icons/fi';
-import { motion } from 'framer-motion';
 
 interface Service {
   id: string;

@@ -1,6 +1,6 @@
+import { PrismaClient } from '@prisma/client';
 import axios from 'axios';
 import chalk from 'chalk';
-import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 const BASE_URL = 'http://localhost:3001/api';
@@ -33,7 +33,7 @@ async function checkApi(endpoint: string, method: string = 'GET'): Promise<ApiCh
       timeout: 5000,
     });
     const responseTime = Date.now() - startTime;
-    
+
     return {
       endpoint,
       method,
@@ -91,11 +91,7 @@ async function runHealthCheck() {
   }
 
   // Define APIs to check
-  const apis = [
-    '/obs/certificate-log',
-    '/obs/study-pool',
-    '/payments/process',
-  ];
+  const apis = ['/obs/certificate-log', '/obs/study-pool', '/payments/process'];
 
   // Check each API
   console.log(chalk.blue('Checking APIs...\n'));
@@ -103,10 +99,10 @@ async function runHealthCheck() {
 
   // Print Results
   results.forEach(result => {
-    const statusColor = result.status === 'success' ? 'green' : 
-                       result.status === 'warning' ? 'yellow' : 'red';
-    const statusIcon = result.status === 'success' ? '✅' : 
-                      result.status === 'warning' ? '⚠️' : '❌';
+    const statusColor =
+      result.status === 'success' ? 'green' : result.status === 'warning' ? 'yellow' : 'red';
+    const statusIcon =
+      result.status === 'success' ? '✅' : result.status === 'warning' ? '⚠️' : '❌';
 
     console.log(chalk[statusColor](`${statusIcon} ${result.method} ${result.endpoint}`));
     console.log(`   Response Time: ${result.responseTime}ms`);
@@ -130,4 +126,4 @@ async function runHealthCheck() {
   await prisma.$disconnect();
 }
 
-runHealthCheck().catch(console.error); 
+runHealthCheck().catch(console.error);

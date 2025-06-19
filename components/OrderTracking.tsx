@@ -30,4 +30,4 @@ export default function OrderTracking() {
 }
 
 // AI Guidance: This component displays the tracking status of an order.
-// In a real app, tracking data is fetched from the backend. 
+// In a real app, tracking data is fetched from the backend.

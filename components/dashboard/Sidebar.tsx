@@ -1,15 +1,9 @@
-import React from 'react';
+import { LayoutDashboard, ShoppingBag, Users, Settings, BarChart, Package } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import React from 'react';
+
 import { cn } from '@/lib/utils';
-import {
-  LayoutDashboard,
-  ShoppingBag,
-  Users,
-  Settings,
-  BarChart,
-  Package,
-} from 'lucide-react';
 
 const navigation = [
   {
@@ -51,7 +45,7 @@ export function Sidebar() {
     <div className="w-64 bg-white shadow-sm h-screen">
       <nav className="mt-5 px-2">
         <div className="space-y-1">
-          {navigation.map((item) => {
+          {navigation.map(item => {
             const isActive = pathname === item.href;
             return (
               <Link
@@ -67,9 +61,7 @@ export function Sidebar() {
                 <item.icon
                   className={cn(
                     'mr-3 h-5 w-5',
-                    isActive
-                      ? 'text-gray-500'
-                      : 'text-gray-400 group-hover:text-gray-500'
+                    isActive ? 'text-gray-500' : 'text-gray-400 group-hover:text-gray-500'
                   )}
                 />
                 {item.name}
@@ -80,4 +72,4 @@ export function Sidebar() {
       </nav>
     </div>
   );
-} 
+}

@@ -1,6 +1,7 @@
+import { promisify } from 'util';
+
 import { NextApiRequest, NextApiResponse } from 'next';
 import Redis from 'redis';
-import { promisify } from 'util';
 
 const redisClient = Redis.createClient({
   url: process.env.REDIS_URL || 'redis://localhost:6379',

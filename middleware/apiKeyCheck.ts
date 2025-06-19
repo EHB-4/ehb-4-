@@ -1,4 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next';
+import { NextResponse } from 'next/server';
+import type { NextRequest } from 'next/server';
+
 import { prisma } from '../lib/prisma';
 
 export type ApiKeyRole = 'admin' | 'public' | 'internal';
@@ -111,4 +114,28 @@ export const apiKeyConfigs = {
   optional: {
     requireApiKey: false,
   },
+};
+
+export function middleware(request: NextRequest) {
+  const { pathname } = request.nextUrl;
+  // Allow only /development-portal and static assets
+  if (
+    pathname === '/development-portal' ||
+    pathname.startsWith('/_next') ||
+    pathname.startsWith('/favicon.ico') ||
+    pathname.startsWith('/api') ||
+    pathname.startsWith('/robots.txt') ||
+    pathname.startsWith('/manifest.json') ||
+    pathname.startsWith('/assets')
+  ) {
+    return NextResponse.next();
+  }
+  // Redirect all other routes to /development-portal
+  const url = request.nextUrl.clone();
+  url.pathname = '/development-portal';
+  return NextResponse.redirect(url);
+}
+
+export const config = {
+  matcher: '/:path*',
 };

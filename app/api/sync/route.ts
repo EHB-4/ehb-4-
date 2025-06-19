@@ -1,8 +1,9 @@
 import { NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth/next';
+import { z } from 'zod';
+
 import { authOptions } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
-import { z } from 'zod';
 
 // Validation schemas
 const syncRequestSchema = z.object({
@@ -118,10 +119,7 @@ export async function POST(req: Request) {
         break;
 
       default:
-        return NextResponse.json(
-          { error: 'Invalid entity type' },
-          { status: 400 }
-        );
+        return NextResponse.json({ error: 'Invalid entity type' }, { status: 400 });
     }
 
     const response = syncResponseSchema.parse({
@@ -140,10 +138,7 @@ export async function POST(req: Request) {
       );
     }
     console.error('Sync error:', error);
-    return NextResponse.json(
-      { error: 'Failed to sync data' },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: 'Failed to sync data' }, { status: 500 });
   }
 }
 
@@ -160,10 +155,7 @@ export async function GET(req: Request) {
     const lastSyncTimestamp = searchParams.get('lastSyncTimestamp');
 
     if (!entityType || !lastSyncTimestamp) {
-      return NextResponse.json(
-        { error: 'Missing required parameters' },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: 'Missing required parameters' }, { status: 400 });
     }
 
     const validatedData = syncRequestSchema.parse({
@@ -254,10 +246,7 @@ export async function GET(req: Request) {
         break;
 
       default:
-        return NextResponse.json(
-          { error: 'Invalid entity type' },
-          { status: 400 }
-        );
+        return NextResponse.json({ error: 'Invalid entity type' }, { status: 400 });
     }
 
     const response = syncResponseSchema.parse({
@@ -276,9 +265,6 @@ export async function GET(req: Request) {
       );
     }
     console.error('Sync error:', error);
-    return NextResponse.json(
-      { error: 'Failed to sync data' },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: 'Failed to sync data' }, { status: 500 });
   }
-} 
+}

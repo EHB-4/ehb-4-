@@ -15,25 +15,22 @@ interface ProductReviewsProps {
   onAddReview?: (review: Omit<Review, 'id' | 'date'>) => void;
 }
 
-export default function ProductReviews({
-  productId,
-  reviews,
-  onAddReview
-}: ProductReviewsProps) {
+export default function ProductReviews({ productId, reviews, onAddReview }: ProductReviewsProps) {
   const [isAddingReview, setIsAddingReview] = useState(false);
   const [newReview, setNewReview] = useState({
     rating: 5,
-    comment: ''
+    comment: '',
   });
 
-  const averageRating = reviews.reduce((acc, review) => acc + review.rating, 0) / reviews.length || 0;
+  const averageRating =
+    reviews.reduce((acc, review) => acc + review.rating, 0) / reviews.length || 0;
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     onAddReview?.({
       userId: 1, // In a real app, this would be the current user's ID
       userName: 'John Doe', // In a real app, this would be the current user's name
-      ...newReview
+      ...newReview,
     });
     setIsAddingReview(false);
     setNewReview({ rating: 5, comment: '' });
@@ -47,7 +44,7 @@ export default function ProductReviews({
             <h3 className="text-lg font-medium text-gray-900">Customer Reviews</h3>
             <div className="mt-1 flex items-center">
               <div className="flex items-center">
-                {[0, 1, 2, 3, 4].map((rating) => (
+                {[0, 1, 2, 3, 4].map(rating => (
                   <svg
                     key={rating}
                     className={`h-5 w-5 flex-shrink-0 ${
@@ -83,7 +80,7 @@ export default function ProductReviews({
               <div>
                 <label className="block text-sm font-medium text-gray-700">Rating</label>
                 <div className="mt-1 flex items-center">
-                  {[1, 2, 3, 4, 5].map((rating) => (
+                  {[1, 2, 3, 4, 5].map(rating => (
                     <button
                       key={rating}
                       type="button"
@@ -116,7 +113,7 @@ export default function ProductReviews({
                   id="comment"
                   rows={4}
                   value={newReview.comment}
-                  onChange={(e) => setNewReview(prev => ({ ...prev, comment: e.target.value }))}
+                  onChange={e => setNewReview(prev => ({ ...prev, comment: e.target.value }))}
                   className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
                   required
                 />
@@ -142,7 +139,7 @@ export default function ProductReviews({
         )}
 
         <div className="space-y-6">
-          {reviews.map((review) => (
+          {reviews.map(review => (
             <div key={review.id} className="border-b border-gray-200 pb-6 last:border-0 last:pb-0">
               <div className="flex items-center justify-between">
                 <div className="flex items-center">
@@ -156,7 +153,7 @@ export default function ProductReviews({
                   <div className="ml-3">
                     <p className="text-sm font-medium text-gray-900">{review.userName}</p>
                     <div className="flex items-center">
-                      {[0, 1, 2, 3, 4].map((rating) => (
+                      {[0, 1, 2, 3, 4].map(rating => (
                         <svg
                           key={rating}
                           className={`h-4 w-4 flex-shrink-0 ${
@@ -187,4 +184,4 @@ export default function ProductReviews({
 }
 
 // AI Guidance: This component displays and allows adding product reviews.
-// In a real app, reviews would be fetched from the backend and validated before submission. 
+// In a real app, reviews would be fetched from the backend and validated before submission.

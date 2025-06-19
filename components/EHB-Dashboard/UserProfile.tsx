@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion';
 import React from 'react';
 import {
   FiUser,
@@ -9,7 +10,6 @@ import {
   FiBell,
   FiLock,
 } from 'react-icons/fi';
-import { motion } from 'framer-motion';
 
 interface User {
   id: string;

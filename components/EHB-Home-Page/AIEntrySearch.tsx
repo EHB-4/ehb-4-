@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
+'use client';
+
 import { motion } from 'framer-motion';
+import React, { useState } from 'react';
 import { FiSearch, FiX, FiLoader } from 'react-icons/fi';
 
 interface SearchResult {

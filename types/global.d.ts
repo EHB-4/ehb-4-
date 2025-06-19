@@ -28,4 +28,4 @@ declare module 'next' {
   }
 }
 
-export {}; 
+export {};

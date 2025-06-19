@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { FiSearch, FiMic, FiUpload, FiFilter } from 'react-icons/fi';
+
+import { getSearchSuggestions } from '@/lib/ai-marketplace/searchSuggestions';
 import { SQLLevel } from '@/types/marketplace';
+
+import NoResultsFound from './NoResultsFound';
 import SearchInput from './SearchInput';
 import SearchResults from './SearchResults';
-import NoResultsFound from './NoResultsFound';
-import { getSearchSuggestions } from '@/lib/ai-marketplace/searchSuggestions';
 
 interface SearchResult {
   id: string;

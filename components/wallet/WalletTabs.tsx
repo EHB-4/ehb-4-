@@ -1,8 +1,9 @@
 import React from 'react';
+
 import BalanceCard from './BalanceCard';
-import WalletTransactionList from './WalletTransactionList';
 import CoinLockForm from './CoinLockForm';
 import SyncBadge from './SyncBadge';
+import WalletTransactionList from './WalletTransactionList';
 
 const mockTransactions = [
   { id: '1', date: '2024-06-01', type: 'Deposit', amount: 100, reference: 'Order #123' },

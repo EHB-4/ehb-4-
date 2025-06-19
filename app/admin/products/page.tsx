@@ -1,8 +1,9 @@
+import { Plus } from 'lucide-react';
 import React from 'react';
+
 import { ProductForm } from '@/components/products/ProductForm';
 import { ProductGrid } from '@/components/products/ProductGrid';
 import { Button } from '@/components/ui/button';
-import { Plus } from 'lucide-react';
 
 export default function ProductManagementPage() {
   const [showAddForm, setShowAddForm] = React.useState(false);
@@ -43,11 +44,7 @@ export default function ProductManagementPage() {
 
       {editingProduct && (
         <div className="mb-8">
-          <ProductForm
-            initialData={editingProduct}
-            onSubmit={handleEditProduct}
-            isEditing
-          />
+          <ProductForm initialData={editingProduct} onSubmit={handleEditProduct} isEditing />
         </div>
       )}
 
@@ -61,4 +58,4 @@ export default function ProductManagementPage() {
       />
     </div>
   );
-} 
+}

@@ -1,6 +1,6 @@
-import React from 'react';
-import { FiRobot, FiMessageSquare, FiSettings } from 'react-icons/fi';
 import Link from 'next/link';
+import React from 'react';
+import { FiCpu, FiMessageSquare, FiSettings } from 'react-icons/fi';
 
 interface SystemCard {
   title: string;
@@ -15,7 +15,7 @@ const systems: SystemCard[] = [
   {
     title: 'EHB AI Assistant',
     description: 'Your personal AI assistant for tasks and automation',
-    icon: <FiRobot className="w-8 h-8" />,
+    icon: <FiCpu className="w-8 h-8" />,
     href: '/sot/agent',
     color: 'from-blue-500 to-blue-600',
     features: ['Task Management', 'Command History', 'Scheduled Jobs', 'System Integration'],
