@@ -53,9 +53,9 @@
     "setup": "node scripts/setup.cjs",
     "auto-push": "node scripts/auto-git-push.cjs",
     "auto-agent": "node scripts/auto-agent-startup.cjs",
-    "auto-fix": "ts-node scripts/auto-startup.ts",
-    "fix-accessibility": "ts-node scripts/auto-accessibility-fixer.ts",
-    "fix-types": "ts-node scripts/auto-type-fixer.ts",
+    "fix": "node scripts/fix-all.cjs",
+    "fix:accessibility": "ts-node scripts/auto-accessibility-fixer.ts",
+    "fix:types": "ts-node scripts/auto-type-fixer.ts",
     "guardian-5500": "node scripts/port-5500-guardian.cjs",
     "auto-guardian": "node scripts/port-5500-guardian.cjs",
     "auto-startup": "node scripts/auto-guardian-startup.cjs"
