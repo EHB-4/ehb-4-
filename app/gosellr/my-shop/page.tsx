@@ -48,7 +48,7 @@ export default function ShopkeeperDashboard() {
 
   useEffect(() => {
     fetchShopAndData();
-  }, [session]);
+  }, [session, fetchShopAndData]);
 
   const fetchShopAndData = async () => {
     try {

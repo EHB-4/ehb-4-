@@ -1,46 +1,11 @@
 {
   "projectId": "ehb-next-js-04",
-  "autoActivate": true,
-  "autoRun": true,
-  "autoAccept": true,
-  "workspace": ".",
-  "aiFeatures": {
-    "codeCompletion": true,
-    "refactoring": true,
-    "debugging": true,
-    "documentation": true,
-    "testing": true,
-    "autoSetup": true,
-    "autoDeploy": true,
-    "autoMonitor": true
-  },
-  "automation": {
-    "autoFix": true,
-    "autoTest": true,
-    "autoDeploy": true,
-    "autoDocument": true,
-    "autoAccept": true,
-    "autoRunScripts": [
-      "npm run ultra-fast",
-      "npm run mongo-fast",
-      "npm run ai-setup",
-      "npm run ai-assistant",
-      "npm run production-ready"
-    ]
-  },
-  "scripts": {
-    "ultra-fast": "node scripts/ehb-ultra-fast-agent.cjs",
-    "auto-setup": "node scripts/ehb-ultra-fast-agent.cjs",
-    "ai-setup": "node scripts/ehb-ai-automation.cjs",
-    "ai-assistant": "node scripts/ehb-ai-assistant.cjs",
-    "production-ready": "node scripts/ehb-production-ready.cjs",
-    "mongo-fast": "node scripts/ehb-mongo-fast.cjs"
-  },
-  "monitoring": {
-    "enabled": true,
-    "autoCheck": true,
-    "performance": true,
-    "errors": true,
-    "security": true
-  }
+  "defaultLLM": "anthropic/claude-2.1",
+  "autoActivateAI": true,
+  "aiEnabled": true,
+  "aiAutoPush": true,
+  "aiAutoCommit": true,
+  "aiAutoTest": true,
+  "aiAutoFix": true,
+  "aiAutoDoc": true
 }

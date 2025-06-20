@@ -67,7 +67,7 @@ const AIAgentTools: React.FC = () => {
     // Update metrics data when module or time range changes
     const data = metricsService.getMetrics(selectedModule, timeRange);
     setMetricsData(data);
-  }, [selectedModule, timeRange]);
+  }, [selectedModule, timeRange, getMetrics, setMetricsData]);
 
   const handleExport = () => {
     const data = metricsService.exportMetrics(selectedModule, timeRange);

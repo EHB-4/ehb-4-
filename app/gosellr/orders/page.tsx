@@ -20,7 +20,7 @@ export default function OrderManagementPage() {
 
   useEffect(() => {
     fetchOrders();
-  }, [filters]);
+  }, [filters, fetchOrders]);
 
   const fetchOrders = async () => {
     try {

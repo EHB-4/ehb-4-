@@ -1,0 +1,19 @@
+# Cursor.sh configuration
+node_modules/
+.next/
+build/
+dist/
+coverage/
+.git/
+.github/
+.vscode/
+.idea/
+*.log
+*.lock
+.env
+.env.*
+
+# Allow these files
+!.env.example
+!.env.development
+!.env.test

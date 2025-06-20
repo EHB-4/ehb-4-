@@ -13,7 +13,7 @@ export const PSS: React.FC<PSSProps> = () => {
   useEffect(() => {
     // Initialize component
     setLoading(false);
-  }, []);
+  }, [setLoading]);
 
   if (loading) {
     return (

@@ -149,7 +149,7 @@ export function SecurityAgent() {
 
   React.useEffect(() => {
     scanSecurity();
-  }, []);
+  }, [scanSecurity]);
 
   return (
     <div className="space-y-6">

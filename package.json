@@ -2,7 +2,7 @@
   "name": "ehb-next",
   "version": "1.0.0",
   "private": true,
-  "type": "module",
+  "type": "commonjs",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -62,7 +62,18 @@
     "type-check": "tsc --noEmit",
     "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,md}\"",
     "replit-sync": "node scripts/github-replit-sync.cjs",
-    "replit-push": "node scripts/github-replit-sync.cjs --push"
+    "replit-push": "node scripts/github-replit-sync.cjs --push",
+    "fix-permissions": "node scripts/fix-permissions.cjs",
+    "fix-all": "npm run fix-permissions && npm run replit-sync",
+    "start-dev": "node scripts/start-dev.cjs",
+    "dev-tools": "node scripts/dev-tools.cjs start",
+    "auto-recovery": "node scripts/auto-recovery.cjs",
+    "gen:component": "node scripts/dev-tools.cjs gen:component",
+    "gen:page": "node scripts/dev-tools.cjs gen:page",
+    "gen:api": "node scripts/dev-tools.cjs gen:api",
+    "monitor": "npm run auto-recovery",
+    "dev:full": "concurrently \"npm run start-dev\" \"npm run auto-recovery\" \"npm run dev-tools\"",
+    "open": "node scripts/dev-tools.cjs start"
   },
   "dependencies": {
     "@analytics/google-analytics": "^1.1.0",

@@ -1,20 +1,24 @@
 {
-  "editor.formatOnSave": true,
-  "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": true
+  "projectId": "ehb-next-js-04",
+  "environment": "development",
+  "telemetry": true,
+  "analytics": true,
+  "ignorePatterns": [],
+  "typescript": {
+    "enabled": true,
+    "validateOnSave": true
   },
-  "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "liveServer.settings.donotShowInfoMsg": true,
-  "liveServer.settings.donotVerifyTags": true,
-  "liveServer.settings.https": {
-    "enable": false,
-    "cert": "",
-    "key": "",
-    "passphrase": ""
+  "formatting": {
+    "enabled": true,
+    "formatOnSave": true
   },
-  "liveServer.settings.proxy": {
-    "enable": true,
-    "baseUri": "/",
-    "proxyUri": "http://localhost:3000"
+  "linting": {
+    "enabled": true,
+    "lintOnSave": true
+  },
+  "git": {
+    "enabled": true,
+    "autoFetch": true,
+    "autoPush": true
   }
 }

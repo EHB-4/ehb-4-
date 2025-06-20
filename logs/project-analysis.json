@@ -1,9 +1,9 @@
 {
-  "timestamp": "2025-06-19T15:23:32.614Z",
+  "timestamp": "2025-06-20T11:19:40.322Z",
   "files": {
-    "components": 235,
-    "pages": 246,
-    "api": 99,
+    "components": 230,
+    "pages": 173,
+    "api": 98,
     "tests": 4,
     "config": 3
   },

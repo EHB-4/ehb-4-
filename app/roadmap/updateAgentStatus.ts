@@ -10,11 +10,11 @@ export function updateAgentStatus(
   error?: string
 ) {
   // Find the module in roadmapData
-  const module = roadmapData.modules.find(m => m.name === moduleName);
-  if (!module) return false;
-  module.status = status;
-  if (typeof progress === 'number') module.progress = progress;
-  if (error && 'error' in module) (module as any).error = error;
+  const moduleItem = roadmapData.modules.find(m => m.name === moduleName);
+  if (!moduleItem) return false;
+  moduleItem.status = status;
+  if (typeof progress === 'number') moduleItem.progress = progress;
+  if (error && 'error' in moduleItem) (moduleItem as any).error = error;
   // Optionally: log update, trigger UI refresh, notify dashboard, etc.
   return true;
 }

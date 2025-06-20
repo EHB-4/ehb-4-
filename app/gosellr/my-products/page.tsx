@@ -26,7 +26,7 @@ export default function MyProductsPage() {
 
   useEffect(() => {
     fetchProducts();
-  }, []);
+  }, [fetchProducts]);
 
   const fetchProducts = async () => {
     try {

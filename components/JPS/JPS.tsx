@@ -13,7 +13,7 @@ export const JPS: React.FC<JPSProps> = () => {
   useEffect(() => {
     // Initialize component
     setLoading(false);
-  }, []);
+  }, [setLoading]);
 
   if (loading) {
     return (

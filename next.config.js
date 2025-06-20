@@ -4,27 +4,14 @@ const nextConfig = {
     optimizeCss: true,
     optimizePackageImports: ['@mui/material', '@mui/icons-material'],
   },
-
+  
   images: {
     domains: ['localhost', 'your-domain.com'],
     formats: ['image/webp', 'image/avif'],
   },
-
+  
   compress: true,
-
-  // Temporarily exclude problematic files from build
-  webpack: (config, { isServer }) => {
-    // Exclude problematic API routes for now
-    config.resolve.fallback = {
-      ...config.resolve.fallback,
-      fs: false,
-      net: false,
-      tls: false,
-    };
-
-    return config;
-  },
-
+  
   async headers() {
     return [
       {
@@ -39,4 +26,4 @@ const nextConfig = {
   },
 };
 
-export default nextConfig;
+module.exports = nextConfig;

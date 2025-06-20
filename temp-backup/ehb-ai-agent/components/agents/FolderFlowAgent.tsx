@@ -162,7 +162,7 @@ export function FolderFlowAgent() {
 
   React.useEffect(() => {
     scanStructure();
-  }, []);
+  }, [scanStructure]);
 
   return (
     <div className="bg-white rounded-lg shadow p-4">

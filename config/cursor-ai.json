@@ -43,18 +43,5 @@
     "autoTest": true,
     "autoFix": true,
     "continuousDevelopment": true
-  },
-  "startupScripts": [
-    {
-      "name": "Auto Fix Script",
-      "path": "../scripts/auto-startup.ts",
-      "runOnStartup": true
-    }
-  ],
-  "watchPatterns": ["app/**/*.{ts,tsx}", "components/**/*.{ts,tsx}"],
-  "excludePatterns": ["node_modules", ".next", "dist"],
-  "notifications": {
-    "onSuccess": true,
-    "onError": true
   }
 }

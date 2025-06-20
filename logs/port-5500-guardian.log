@@ -1,0 +1,58 @@
+[2025-06-19T19:57:37.958Z] 🎯 Port 5500 Guardian Started
+[2025-06-19T19:57:37.961Z] 📁 Project Root: F:\ehb next.js 04
+[2025-06-19T19:57:37.962Z] 🔧 Port: 5500
+[2025-06-19T19:57:37.962Z] ⏱️ Check Interval: 5000ms
+[2025-06-19T19:57:37.963Z] 🔄 Max Restarts: 10
+[2025-06-19T19:57:37.963Z] 🔍 Starting Port 5500 Guardian Monitor...
+[2025-06-19T19:57:37.963Z] 🚀 Starting Next.js server on port 5500...
+[2025-06-19T19:57:41.079Z] ✅ Port 5500 cleared
+[2025-06-19T19:57:41.344Z] 📤 Server Output: > ehb-next@1.0.0 dev:5500
+> next dev -p 5500
+[2025-06-19T19:57:42.018Z] 📤 Server Output: ▲ Next.js 14.2.30
+[2025-06-19T19:57:42.018Z] 📤 Server Output: - Local:        http://localhost:5500
+  - Environments: .env.local, .env
+  - Experiments (use with caution):
+    · optimizeCss
+
+ ✓ Starting...
+[2025-06-19T19:57:42.019Z] ✅ Server successfully started on port 5500
+[2025-06-19T19:57:44.037Z] 📤 Server Output: ✓ Ready in 2.1s
+[2025-06-19T19:57:44.038Z] ✅ Server successfully started on port 5500
+[2025-06-19T20:00:01.297Z] 🔄 Starting auto Git push...
+[2025-06-19T20:00:01.485Z] ✅ Added all changes to Git
+[2025-06-19T20:00:01.595Z] ✅ Committed changes
+[2025-06-19T20:00:04.036Z] ✅ Pushed to remote repository
+[2025-06-19T20:07:09.006Z] 📤 Server Output: [?25h
+[2025-06-19T20:07:09.007Z] 📤 Server Output: 
+[2025-06-19T20:07:09.040Z] ⚠️ Server process closed with code 0
+[2025-06-19T20:07:09.040Z] 🔄 Restarting server... (Attempt 2/10)
+[2025-06-19T20:07:11.043Z] 🚀 Starting Next.js server on port 5500...
+[2025-06-19T20:07:11.894Z] ✅ Port 5500 is active but process flag is wrong, fixing...
+[2025-06-19T20:07:14.009Z] ✅ Port 5500 cleared
+[2025-06-19T20:07:14.253Z] 📤 Server Output: > ehb-next@1.0.0 dev:5500
+> next dev -p 5500
+[2025-06-19T20:07:14.893Z] 📤 Server Output: ▲ Next.js 14.2.30
+[2025-06-19T20:07:14.894Z] 📤 Server Output: - Local:        http://localhost:5500
+  - Environments: .env.local, .env
+  - Experiments (use with caution):
+    · optimizeCss
+
+ ✓ Starting...
+[2025-06-19T20:07:14.895Z] ✅ Server successfully started on port 5500
+[2025-06-19T20:07:17.591Z] 📤 Server Output: ✓ Ready in 2.8s
+[2025-06-19T20:07:17.591Z] ✅ Server successfully started on port 5500
+[2025-06-19T20:10:02.202Z] 🔄 Starting auto Git push...
+[2025-06-19T20:10:02.364Z] ✅ Added all changes to Git
+[2025-06-19T20:10:02.476Z] ✅ Committed changes
+[2025-06-19T20:10:04.910Z] ✅ Pushed to remote repository
+[2025-06-19T20:20:03.159Z] 🔄 Starting auto Git push...
+[2025-06-19T20:20:03.681Z] ✅ Added all changes to Git
+[2025-06-19T20:20:04.074Z] ✅ Committed changes
+[2025-06-19T20:20:06.559Z] ✅ Pushed to remote repository
+[2025-06-19T20:25:25.355Z] 📤 Server Output: ✓ Compiled /middleware in 159ms (72 modules)
+[2025-06-19T20:25:25.954Z] 📤 Server Output: ○ Compiling /_not-found ...
+[2025-06-19T20:25:29.836Z] 📤 Server Output: ✓ Compiled /_not-found in 4.4s (522 modules)
+[2025-06-19T20:25:29.980Z] 📤 Server Output: POST /api/auth/callback/credentials 404 in 4552ms
+[2025-06-19T20:25:51.167Z] 📤 Server Output: Reload env: .env.development
+[2025-06-19T20:25:51.627Z] 📤 Server Output: ✓ Compiled in 454ms (585 modules)
+[2025-06-19T20:28:15.699Z] 📤 Server Output: POST /api/auth/callback/credentials 404 in 88ms

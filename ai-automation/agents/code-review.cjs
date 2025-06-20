@@ -1,1 +1,27 @@
-const fs = require('fs'); const path = require('path'); class CodeReviewAgent { constructor() { this.projectRoot = process.cwd(); } async reviewCode(filePath) { console.log(\🤖 AI Code Review: \\); const review = { file: filePath, timestamp: new Date().toISOString(), issues: [], suggestions: [], score: 95 }; const reviewFile = path.join(this.projectRoot, 'ai-automation', 'logs', \eview-\.json\); fs.writeFileSync(reviewFile, JSON.stringify(review, null, 2)); return review; } async runReview() { console.log('🔍 Starting AI Code Review...'); const files = ['scripts/affiliate-automation.cjs', 'app/layout.tsx', 'components/EHB-Dashboard/Dashboard.tsx']; for (const file of files) { if (fs.existsSync(file)) { await this.reviewCode(file); } } console.log('✅ AI Code Review completed!'); } } module.exports = CodeReviewAgent; if (require.main === module) { const agent = new CodeReviewAgent(); agent.runReview(); }
+const fs = require('fs');
+const path = require('path');
+
+class CodeReviewAgent {
+  constructor() {
+    this.projectRoot = process.cwd();
+  }
+
+  async reviewCode(filePath) {
+    console.log(`🤖 AI Code Review: ${filePath}`);
+    
+    const review = {
+      file: filePath,
+      timestamp: new Date().toISOString(),
+      issues: [],
+      suggestions: [],
+      score: 95
+    };
+
+    const reviewFile = path.join(this.projectRoot, 'ai-automation', 'logs', `review-${Date.now()}.json`);
+    fs.writeFileSync(reviewFile, JSON.stringify(review, null, 2));
+    
+    return review;
+  }
+}
+
+module.exports = CodeReviewAgent;

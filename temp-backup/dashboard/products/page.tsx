@@ -13,7 +13,7 @@ export default function ProductsPage() {
 
   React.useEffect(() => {
     fetchProducts();
-  }, []);
+  }, [fetchProducts]);
 
   const fetchProducts = async () => {
     try {

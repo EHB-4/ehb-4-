@@ -27,7 +27,7 @@ export function AIAgentChat() {
 
   useEffect(() => {
     scrollToBottom();
-  }, [state.messages, logs]);
+  }, [state.messages, logs, scrollToBottom]);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();

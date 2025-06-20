@@ -1,3 +1,4 @@
+
 // Auto-activation script for Cursor AI
 const { exec } = require('child_process');
 

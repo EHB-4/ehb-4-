@@ -40,7 +40,7 @@ export default function TokenLockCard({ userAddress }: TokenLockCardProps) {
 
   useEffect(() => {
     fetchLockInfo();
-  }, [userAddress]);
+  }, [userAddress, fetchLockInfo]);
 
   const handleClaimReward = async () => {
     try {

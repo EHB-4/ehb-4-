@@ -1,4 +1,5 @@
 generator client {
+  enableTracing = true
   provider = "prisma-client-js"
 }
 
@@ -199,11 +200,10 @@ enum CommissionStatus {
 
 enum WithdrawalMethod {
   EHB_WALLET
-  BEP20_USDT
+  BEP20_WALLET
   BANK_TRANSFER
-  STRIPE
-  EASYPAISA
-  JAZZCASH
+  PAYPAL
+  PAYONEER
 }
 
 enum WithdrawalStatus {
@@ -216,32 +216,33 @@ enum WithdrawalStatus {
 }
 
 enum BonusType {
-  QUICK_BONUS
-  WEEKLY_RANK_BONUS
-  LOYALTY_COIN_LOCK
-  MILESTONE_BONUS
-  FRANCHISE_REWARD
-  VALIDATOR_MONTHLY
+  WELCOME_BONUS
+  RANK_ACHIEVEMENT
+  MONTHLY_TARGET
+  REFERRAL_MILESTONE
+  FRANCHISE_SALES
+  COIN_LOCK_REWARD
 }
 
 enum BonusStatus {
   PENDING
-  ACTIVE
+  APPROVED
+  REJECTED
   LOCKED
   UNLOCKED
-  WITHDRAWN
 }
 
 enum StoreType {
-  GOSELLR
-  BOOKSTORE
-  VIDEO_CONTENT
+  AMAZON
+  EBAY
+  SHOPIFY
+  WOOCOMMERCE
   CUSTOM
 }
 
 enum StoreLayout {
   AMAZON_STYLE
-  CAROUSEL_SLIDER
-  BOOKSTORE_FRONT
-  VIDEO_BANNER
+  EBAY_STYLE
+  SHOPIFY_STYLE
+  CUSTOM_LAYOUT
 }

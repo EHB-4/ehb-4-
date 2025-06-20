@@ -20,7 +20,7 @@ export default function EHBMarketplace() {
 
   useEffect(() => {
     loadServices();
-  }, [filters]);
+  }, [filters, loadServices]);
 
   const loadServices = async () => {
     try {

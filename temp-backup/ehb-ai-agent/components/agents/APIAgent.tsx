@@ -84,7 +84,7 @@ export function APIAgent() {
 
   React.useEffect(() => {
     scanEndpoints();
-  }, []);
+  }, [scanEndpoints]);
 
   return (
     <div className="bg-white rounded-lg shadow p-4">

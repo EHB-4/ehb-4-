@@ -187,7 +187,7 @@ export function PerformanceAgent() {
     // Set up periodic monitoring
     const interval = setInterval(monitorPerformance, 60000); // Every minute
     return () => clearInterval(interval);
-  }, []);
+  }, [monitorPerformance, setInterval, clearInterval]);
 
   return (
     <div className="space-y-6">

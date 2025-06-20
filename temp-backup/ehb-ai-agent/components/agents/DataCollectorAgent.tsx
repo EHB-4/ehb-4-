@@ -120,7 +120,7 @@ export function DataCollectorAgent() {
 
   React.useEffect(() => {
     collectData();
-  }, []);
+  }, [collectData]);
 
   return (
     <div className="bg-white rounded-lg shadow p-4">

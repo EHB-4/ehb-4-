@@ -123,7 +123,7 @@ export default function EMOPage() {
 
   useEffect(() => {
     fetchDoctors();
-  }, [filters]);
+  }, [filters, fetchDoctors]);
 
   const fetchDoctors = async () => {
     try {

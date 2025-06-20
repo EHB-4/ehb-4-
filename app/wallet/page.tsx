@@ -16,7 +16,7 @@ export default function WalletPage() {
 
   useEffect(() => {
     fetchWallet();
-  }, [session]);
+  }, [session, fetchWallet]);
 
   const fetchWallet = async () => {
     try {
