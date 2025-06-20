@@ -5,6 +5,7 @@ import { GeistSans } from 'geist/font/sans';
 import { Toaster } from 'sonner';
 import { ThemeProvider } from 'next-themes';
 import AuthProvider from '@/components/auth/AuthProvider';
+import { LanguageProvider } from '@/contexts/LanguageContext';
 
 export const metadata: Metadata = {
   title: 'EHB-Next.js',
@@ -22,9 +23,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           disableTransitionOnChange
         >
           <AuthProvider>
-            <AIAssistantPanel />
-            {children}
-            <Toaster />
+            <LanguageProvider>
+              <AIAssistantPanel />
+              {children}
+              <Toaster />
+            </LanguageProvider>
           </AuthProvider>
         </ThemeProvider>
       </body>
