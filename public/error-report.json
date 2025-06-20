@@ -1,0 +1,4692 @@
+{
+  "totalFilesScanned": 647,
+  "filesWithIssues": 211,
+  "totalErrors": 15,
+  "totalWarnings": 443,
+  "generatedAt": "2025-06-20T18:57:41.587Z",
+  "results": [
+    {
+      "filePath": "\\ai-automation\\tests\\ai-api-template.test.js",
+      "errorCount": 0,
+      "warningCount": 1,
+      "messages": [
+        {
+          "line": 1,
+          "column": 8,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'request' is defined but never used."
+        }
+      ]
+    },
+    {
+      "filePath": "\\ai-automation\\tests\\ai-component-template.test.js",
+      "errorCount": 0,
+      "warningCount": 2,
+      "messages": [
+        {
+          "line": 1,
+          "column": 10,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'render' is defined but never used."
+        },
+        {
+          "line": 1,
+          "column": 18,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'screen' is defined but never used."
+        }
+      ]
+    },
+    {
+      "filePath": "\\api-health-checker.js",
+      "errorCount": 0,
+      "warningCount": 3,
+      "messages": [
+        {
+          "line": 3,
+          "column": 7,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'fs' is assigned a value but never used."
+        },
+        {
+          "line": 4,
+          "column": 7,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'path' is assigned a value but never used."
+        },
+        {
+          "line": 57,
+          "column": 12,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'error' is defined but never used."
+        }
+      ]
+    },
+    {
+      "filePath": "\\app\\admin\\affiliate\\page.tsx",
+      "errorCount": 0,
+      "warningCount": 2,
+      "messages": [
+        {
+          "line": 9,
+          "column": 3,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'FiAlertTriangle' is defined but never used."
+        },
+        {
+          "line": 13,
+          "column": 3,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'FiFilter' is defined but never used."
+        }
+      ]
+    },
+    {
+      "filePath": "\\app\\admin\\page.tsx",
+      "errorCount": 0,
+      "warningCount": 2,
+      "messages": [
+        {
+          "line": 10,
+          "column": 3,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'Settings' is defined but never used."
+        },
+        {
+          "line": 18,
+          "column": 3,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'Filter' is defined but never used."
+        }
+      ]
+    },
+    {
+      "filePath": "\\app\\ai-agents\\RewardAgent.ts",
+      "errorCount": 0,
+      "warningCount": 4,
+      "messages": [
+        {
+          "line": 31,
+          "column": 25,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'userId' is defined but never used. Allowed unused args must match /^_/u."
+        },
+        {
+          "line": 31,
+          "column": 41,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'amount' is defined but never used. Allowed unused args must match /^_/u."
+        },
+        {
+          "line": 31,
+          "column": 57,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'reason' is defined but never used. Allowed unused args must match /^_/u."
+        },
+        {
+          "line": 36,
+          "column": 32,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'userId' is defined but never used. Allowed unused args must match /^_/u."
+        }
+      ]
+    },
+    {
+      "filePath": "\\app\\ai-marketplace\\page.tsx",
+      "errorCount": 0,
+      "warningCount": 2,
+      "messages": [
+        {
+          "line": 13,
+          "column": 3,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'FaUsers' is defined but never used."
+        },
+        {
+          "line": 17,
+          "column": 3,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'FaFilter' is defined but never used."
+        }
+      ]
+    },
+    {
+      "filePath": "\\app\\api\\admin\\route.ts",
+      "errorCount": 0,
+      "warningCount": 1,
+      "messages": [
+        {
+          "line": 36,
+          "column": 19,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'data' is assigned a value but never used."
+        }
+      ]
+    },
+    {
+      "filePath": "\\app\\api\\appointments\\route.ts",
+      "errorCount": 0,
+      "warningCount": 2,
+      "messages": [
+        {
+          "line": 7,
+          "column": 10,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'Doctor' is defined but never used."
+        },
+        {
+          "line": 8,
+          "column": 10,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'Wallet' is defined but never used."
+        }
+      ]
+    },
+    {
+      "filePath": "\\app\\api\\auth\\register\\route.ts",
+      "errorCount": 0,
+      "warningCount": 1,
+      "messages": [
+        {
+          "line": 37,
+          "column": 23,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'_' is assigned a value but never used."
+        }
+      ]
+    },
+    {
+      "filePath": "\\app\\api\\cart\\route.ts",
+      "errorCount": 0,
+      "warningCount": 1,
+      "messages": [
+        {
+          "line": 21,
+          "column": 27,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'req' is defined but never used. Allowed unused args must match /^_/u."
+        }
+      ]
+    },
+    {
+      "filePath": "\\app\\api\\checkout\\route.ts",
+      "errorCount": 0,
+      "warningCount": 1,
+      "messages": [
+        {
+          "line": 28,
+          "column": 12,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'error' is defined but never used."
+        }
+      ]
+    },
+    {
+      "filePath": "\\app\\api\\ehb-ads\\post\\route.ts",
+      "errorCount": 0,
+      "warningCount": 3,
+      "messages": [
+        {
+          "line": 8,
+          "column": 32,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'content' is defined but never used. Allowed unused args must match /^_/u."
+        },
+        {
+          "line": 13,
+          "column": 38,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'userId' is defined but never used. Allowed unused args must match /^_/u."
+        },
+        {
+          "line": 123,
+          "column": 34,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'file' is defined but never used. Allowed unused args must match /^_/u."
+        }
+      ]
+    },
+    {
+      "filePath": "\\app\\api\\enrollments\\route.ts",
+      "errorCount": 0,
+      "warningCount": 1,
+      "messages": [
+        {
+          "line": 11,
+          "column": 27,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'request' is defined but never used. Allowed unused args must match /^_/u."
+        }
+      ]
+    },
+    {
+      "filePath": "\\app\\api\\franchise\\area-check\\route.ts",
+      "errorCount": 0,
+      "warningCount": 3,
+      "messages": [
+        {
+          "line": 3,
+          "column": 10,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'ServiceCategory' is defined but never used."
+        },
+        {
+          "line": 38,
+          "column": 31,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'address' is defined but never used. Allowed unused args must match /^_/u."
+        },
+        {
+          "line": 64,
+          "column": 19,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'serviceCategory' is assigned a value but never used."
+        }
+      ]
+    },
+    {
+      "filePath": "\\app\\api\\gosellr\\store-setup\\route.ts",
+      "errorCount": 0,
+      "warningCount": 1,
+      "messages": [
+        {
+          "line": 3,
+          "column": 28,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'request' is defined but never used. Allowed unused args must match /^_/u."
+        }
+      ]
+    },
+    {
+      "filePath": "\\app\\api\\kyc\\create-applicant\\route.ts",
+      "errorCount": 0,
+      "warningCount": 1,
+      "messages": [
+        {
+          "line": 3,
+          "column": 28,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'request' is defined but never used. Allowed unused args must match /^_/u."
+        }
+      ]
+    },
+    {
+      "filePath": "\\app\\api\\kyc\\upload-document\\route.ts",
+      "errorCount": 0,
+      "warningCount": 1,
+      "messages": [
+        {
+          "line": 3,
+          "column": 28,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'request' is defined but never used. Allowed unused args must match /^_/u."
+        }
+      ]
+    },
+    {
+      "filePath": "\\app\\api\\moonbeam\\route.ts",
+      "errorCount": 0,
+      "warningCount": 1,
+      "messages": [
+        {
+          "line": 1,
+          "column": 10,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'NextRequest' is defined but never used."
+        }
+      ]
+    },
+    {
+      "filePath": "\\app\\api\\obs\\certificate-log\\route.ts",
+      "errorCount": 0,
+      "warningCount": 1,
+      "messages": [
+        {
+          "line": 7,
+          "column": 27,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'request' is defined but never used. Allowed unused args must match /^_/u."
+        }
+      ]
+    },
+    {
+      "filePath": "\\app\\api\\obs\\list-categories\\route.ts",
+      "errorCount": 0,
+      "warningCount": 1,
+      "messages": [
+        {
+          "line": 6,
+          "column": 27,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'request' is defined but never used. Allowed unused args must match /^_/u."
+        }
+      ]
+    },
+    {
+      "filePath": "\\app\\api\\obs\\study-pool\\route.ts",
+      "errorCount": 0,
+      "warningCount": 1,
+      "messages": [
+        {
+          "line": 7,
+          "column": 27,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'request' is defined but never used. Allowed unused args must match /^_/u."
+        }
+      ]
+    },
+    {
+      "filePath": "\\app\\api\\payoneer\\balance\\route.ts",
+      "errorCount": 0,
+      "warningCount": 1,
+      "messages": [
+        {
+          "line": 1,
+          "column": 10,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'NextRequest' is defined but never used."
+        }
+      ]
+    },
+    {
+      "filePath": "\\app\\api\\polkadot\\route.ts",
+      "errorCount": 0,
+      "warningCount": 1,
+      "messages": [
+        {
+          "line": 4,
+          "column": 3,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'initPolkadotAPI' is defined but never used."
+        }
+      ]
+    },
+    {
+      "filePath": "\\app\\api\\pss\\sql\\assign\\route.ts",
+      "errorCount": 0,
+      "warningCount": 1,
+      "messages": [
+        {
+          "line": 3,
+          "column": 28,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'request' is defined but never used. Allowed unused args must match /^_/u."
+        }
+      ]
+    },
+    {
+      "filePath": "\\app\\api\\pss\\sql\\downgrade\\route.ts",
+      "errorCount": 0,
+      "warningCount": 1,
+      "messages": [
+        {
+          "line": 3,
+          "column": 28,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'request' is defined but never used. Allowed unused args must match /^_/u."
+        }
+      ]
+    },
+    {
+      "filePath": "\\app\\api\\pss\\sql\\log\\route.ts",
+      "errorCount": 0,
+      "warningCount": 1,
+      "messages": [
+        {
+          "line": 3,
+          "column": 28,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'request' is defined but never used. Allowed unused args must match /^_/u."
+        }
+      ]
+    },
+    {
+      "filePath": "\\app\\api\\shopify\\products\\route.ts",
+      "errorCount": 0,
+      "warningCount": 1,
+      "messages": [
+        {
+          "line": 1,
+          "column": 10,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'NextRequest' is defined but never used."
+        }
+      ]
+    },
+    {
+      "filePath": "\\app\\api\\shops\\my-shop\\route.ts",
+      "errorCount": 0,
+      "warningCount": 1,
+      "messages": [
+        {
+          "line": 7,
+          "column": 27,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'request' is defined but never used. Allowed unused args must match /^_/u."
+        }
+      ]
+    },
+    {
+      "filePath": "\\app\\api\\sql\\admin-review\\route.ts",
+      "errorCount": 0,
+      "warningCount": 1,
+      "messages": [
+        {
+          "line": 3,
+          "column": 28,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'request' is defined but never used. Allowed unused args must match /^_/u."
+        }
+      ]
+    },
+    {
+      "filePath": "\\app\\api\\sql\\cross-system-update\\route.ts",
+      "errorCount": 0,
+      "warningCount": 1,
+      "messages": [
+        {
+          "line": 3,
+          "column": 28,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'request' is defined but never used. Allowed unused args must match /^_/u."
+        }
+      ]
+    },
+    {
+      "filePath": "\\app\\api\\sql\\upgrade-request\\route.ts",
+      "errorCount": 0,
+      "warningCount": 1,
+      "messages": [
+        {
+          "line": 3,
+          "column": 28,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'request' is defined but never used. Allowed unused args must match /^_/u."
+        }
+      ]
+    },
+    {
+      "filePath": "\\app\\api\\sql\\upgrade\\route.ts",
+      "errorCount": 0,
+      "warningCount": 1,
+      "messages": [
+        {
+          "line": 3,
+          "column": 28,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'request' is defined but never used. Allowed unused args must match /^_/u."
+        }
+      ]
+    },
+    {
+      "filePath": "\\app\\api\\sql\\verify\\route.ts",
+      "errorCount": 0,
+      "warningCount": 1,
+      "messages": [
+        {
+          "line": 3,
+          "column": 28,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'request' is defined but never used. Allowed unused args must match /^_/u."
+        }
+      ]
+    },
+    {
+      "filePath": "\\app\\api\\token\\claim-reward\\route.ts",
+      "errorCount": 0,
+      "warningCount": 1,
+      "messages": [
+        {
+          "line": 8,
+          "column": 28,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'request' is defined but never used. Allowed unused args must match /^_/u."
+        }
+      ]
+    },
+    {
+      "filePath": "\\app\\api\\tutors\\route.ts",
+      "errorCount": 0,
+      "warningCount": 3,
+      "messages": [
+        {
+          "line": 6,
+          "column": 10,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'Course' is defined but never used."
+        },
+        {
+          "line": 7,
+          "column": 10,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'Tutor' is defined but never used."
+        },
+        {
+          "line": 8,
+          "column": 10,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'Wallet' is defined but never used."
+        }
+      ]
+    },
+    {
+      "filePath": "\\app\\api\\user\\settings\\route.ts",
+      "errorCount": 0,
+      "warningCount": 1,
+      "messages": [
+        {
+          "line": 13,
+          "column": 27,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'request' is defined but never used. Allowed unused args must match /^_/u."
+        }
+      ]
+    },
+    {
+      "filePath": "\\app\\api\\users\\route.ts",
+      "errorCount": 0,
+      "warningCount": 3,
+      "messages": [
+        {
+          "line": 3,
+          "column": 27,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'request' is defined but never used. Allowed unused args must match /^_/u."
+        },
+        {
+          "line": 9,
+          "column": 12,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'error' is defined but never used."
+        },
+        {
+          "line": 22,
+          "column": 12,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'error' is defined but never used."
+        }
+      ]
+    },
+    {
+      "filePath": "\\app\\api\\wallet\\lock\\route.ts",
+      "errorCount": 0,
+      "warningCount": 1,
+      "messages": [
+        {
+          "line": 3,
+          "column": 28,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'request' is defined but never used. Allowed unused args must match /^_/u."
+        }
+      ]
+    },
+    {
+      "filePath": "\\app\\api\\wallet\\route.ts",
+      "errorCount": 0,
+      "warningCount": 1,
+      "messages": [
+        {
+          "line": 15,
+          "column": 7,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'transactionSchema' is assigned a value but never used."
+        }
+      ]
+    },
+    {
+      "filePath": "\\app\\api\\wallet\\sync\\route.ts",
+      "errorCount": 0,
+      "warningCount": 1,
+      "messages": [
+        {
+          "line": 3,
+          "column": 28,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'request' is defined but never used. Allowed unused args must match /^_/u."
+        }
+      ]
+    },
+    {
+      "filePath": "\\app\\api\\wallet\\transaction\\route.ts",
+      "errorCount": 0,
+      "warningCount": 1,
+      "messages": [
+        {
+          "line": 3,
+          "column": 28,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'request' is defined but never used. Allowed unused args must match /^_/u."
+        }
+      ]
+    },
+    {
+      "filePath": "\\app\\api\\wallet\\transactions\\route.ts",
+      "errorCount": 0,
+      "warningCount": 2,
+      "messages": [
+        {
+          "line": 7,
+          "column": 10,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'CreateTransactionRequest' is defined but never used."
+        },
+        {
+          "line": 7,
+          "column": 36,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'PaginationParams' is defined but never used."
+        }
+      ]
+    },
+    {
+      "filePath": "\\app\\auth\\signin\\page.tsx",
+      "errorCount": 0,
+      "warningCount": 1,
+      "messages": [
+        {
+          "line": 35,
+          "column": 14,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'error' is defined but never used."
+        }
+      ]
+    },
+    {
+      "filePath": "\\app\\dashboard\\page.tsx",
+      "errorCount": 0,
+      "warningCount": 4,
+      "messages": [
+        {
+          "line": 7,
+          "column": 3,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'ShoppingCart' is defined but never used."
+        },
+        {
+          "line": 11,
+          "column": 3,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'Star' is defined but never used."
+        },
+        {
+          "line": 14,
+          "column": 3,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'Search' is defined but never used."
+        },
+        {
+          "line": 15,
+          "column": 3,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'Menu' is defined but never used."
+        }
+      ]
+    },
+    {
+      "filePath": "\\app\\edr\\my-courses\\page.tsx",
+      "errorCount": 0,
+      "warningCount": 1,
+      "messages": [
+        {
+          "line": 59,
+          "column": 6,
+          "severity": "warning",
+          "ruleId": "react-hooks/exhaustive-deps",
+          "message": "React Hook useEffect has a missing dependency: 'fetchStudentData'. Either include it or remove the dependency array."
+        }
+      ]
+    },
+    {
+      "filePath": "\\app\\edr\\page.tsx",
+      "errorCount": 0,
+      "warningCount": 1,
+      "messages": [
+        {
+          "line": 37,
+          "column": 6,
+          "severity": "warning",
+          "ruleId": "react-hooks/exhaustive-deps",
+          "message": "React Hook useEffect has a missing dependency: 'fetchCourses'. Either include it or remove the dependency array."
+        }
+      ]
+    },
+    {
+      "filePath": "\\app\\edr\\tutor-dashboard\\page.tsx",
+      "errorCount": 0,
+      "warningCount": 2,
+      "messages": [
+        {
+          "line": 35,
+          "column": 10,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'selectedCourse' is assigned a value but never used."
+        },
+        {
+          "line": 35,
+          "column": 26,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'setSelectedCourse' is assigned a value but never used."
+        }
+      ]
+    },
+    {
+      "filePath": "\\app\\ehb-dashboard\\page.tsx",
+      "errorCount": 0,
+      "warningCount": 2,
+      "messages": [
+        {
+          "line": 14,
+          "column": 3,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'Activity' is defined but never used."
+        },
+        {
+          "line": 16,
+          "column": 3,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'Clock' is defined but never used."
+        }
+      ]
+    },
+    {
+      "filePath": "\\app\\emo\\my-appointments\\page.tsx",
+      "errorCount": 0,
+      "warningCount": 1,
+      "messages": [
+        {
+          "line": 32,
+          "column": 6,
+          "severity": "warning",
+          "ruleId": "react-hooks/exhaustive-deps",
+          "message": "React Hook useEffect has a missing dependency: 'fetchAvailableSlots'. Either include it or remove the dependency array."
+        }
+      ]
+    },
+    {
+      "filePath": "\\app\\emo\\page.tsx",
+      "errorCount": 0,
+      "warningCount": 2,
+      "messages": [
+        {
+          "line": 27,
+          "column": 6,
+          "severity": "warning",
+          "ruleId": "react-hooks/exhaustive-deps",
+          "message": "React Hook useEffect has a missing dependency: 'fetchAvailableSlots'. Either include it or remove the dependency array."
+        },
+        {
+          "line": 128,
+          "column": 9,
+          "severity": "warning",
+          "ruleId": "react-hooks/exhaustive-deps",
+          "message": "The 'fetchDoctors' function makes the dependencies of useEffect Hook (at line 126) change on every render. To fix this, wrap the definition of 'fetchDoctors' in its own useCallback() Hook."
+        }
+      ]
+    },
+    {
+      "filePath": "\\app\\gosellr\\my-orders\\page.tsx",
+      "errorCount": 0,
+      "warningCount": 1,
+      "messages": [
+        {
+          "line": 24,
+          "column": 6,
+          "severity": "warning",
+          "ruleId": "react-hooks/exhaustive-deps",
+          "message": "React Hook useEffect has a missing dependency: 'fetchOrders'. Either include it or remove the dependency array."
+        }
+      ]
+    },
+    {
+      "filePath": "\\app\\gosellr\\my-products\\page.tsx",
+      "errorCount": 0,
+      "warningCount": 4,
+      "messages": [
+        {
+          "line": 3,
+          "column": 10,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'motion' is defined but never used."
+        },
+        {
+          "line": 9,
+          "column": 10,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'checkModuleEligibility' is defined but never used."
+        },
+        {
+          "line": 12,
+          "column": 17,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'session' is assigned a value but never used."
+        },
+        {
+          "line": 31,
+          "column": 9,
+          "severity": "warning",
+          "ruleId": "react-hooks/exhaustive-deps",
+          "message": "The 'fetchProducts' function makes the dependencies of useEffect Hook (at line 29) change on every render. To fix this, wrap the definition of 'fetchProducts' in its own useCallback() Hook."
+        }
+      ]
+    },
+    {
+      "filePath": "\\app\\gosellr\\my-shop\\page.tsx",
+      "errorCount": 0,
+      "warningCount": 3,
+      "messages": [
+        {
+          "line": 10,
+          "column": 10,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'Wallet' is defined but never used."
+        },
+        {
+          "line": 11,
+          "column": 10,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'checkModuleEligibility' is defined but never used."
+        },
+        {
+          "line": 53,
+          "column": 9,
+          "severity": "warning",
+          "ruleId": "react-hooks/exhaustive-deps",
+          "message": "The 'fetchShopAndData' function makes the dependencies of useEffect Hook (at line 51) change on every render. To fix this, wrap the definition of 'fetchShopAndData' in its own useCallback() Hook."
+        }
+      ]
+    },
+    {
+      "filePath": "\\app\\gosellr\\orders\\page.tsx",
+      "errorCount": 0,
+      "warningCount": 2,
+      "messages": [
+        {
+          "line": 10,
+          "column": 17,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'session' is assigned a value but never used."
+        },
+        {
+          "line": 25,
+          "column": 9,
+          "severity": "warning",
+          "ruleId": "react-hooks/exhaustive-deps",
+          "message": "The 'fetchOrders' function makes the dependencies of useEffect Hook (at line 23) change on every render. To fix this, wrap the definition of 'fetchOrders' in its own useCallback() Hook."
+        }
+      ]
+    },
+    {
+      "filePath": "\\app\\gosellr\\page.tsx",
+      "errorCount": 0,
+      "warningCount": 7,
+      "messages": [
+        {
+          "line": 6,
+          "column": 10,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'FiShoppingCart' is defined but never used."
+        },
+        {
+          "line": 6,
+          "column": 26,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'FiHeart' is defined but never used."
+        },
+        {
+          "line": 6,
+          "column": 35,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'FiStar' is defined but never used."
+        },
+        {
+          "line": 6,
+          "column": 43,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'FiMapPin' is defined but never used."
+        },
+        {
+          "line": 6,
+          "column": 53,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'FiFilter' is defined but never used."
+        },
+        {
+          "line": 6,
+          "column": 63,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'FiSearch' is defined but never used."
+        },
+        {
+          "line": 67,
+          "column": 6,
+          "severity": "warning",
+          "ruleId": "react-hooks/exhaustive-deps",
+          "message": "React Hook useEffect has a missing dependency: 'fetchProducts'. Either include it or remove the dependency array."
+        }
+      ]
+    },
+    {
+      "filePath": "\\app\\page.tsx",
+      "errorCount": 0,
+      "warningCount": 1,
+      "messages": [
+        {
+          "line": 12,
+          "column": 3,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'Play' is defined but never used."
+        }
+      ]
+    },
+    {
+      "filePath": "\\app\\reviews\\page.tsx",
+      "errorCount": 0,
+      "warningCount": 1,
+      "messages": [
+        {
+          "line": 41,
+          "column": 9,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'handleAddReview' is assigned a value but never used."
+        }
+      ]
+    },
+    {
+      "filePath": "\\app\\roadmap-agent\\page.tsx",
+      "errorCount": 0,
+      "warningCount": 1,
+      "messages": [
+        {
+          "line": 60,
+          "column": 20,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'companyInfo' is assigned a value but never used."
+        }
+      ]
+    },
+    {
+      "filePath": "\\app\\roadmap\\components\\RoadmapModules.tsx",
+      "errorCount": 0,
+      "warningCount": 1,
+      "messages": [
+        {
+          "line": 8,
+          "column": 51,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'status' is defined but never used. Allowed unused args must match /^_/u."
+        }
+      ]
+    },
+    {
+      "filePath": "\\app\\roadmap\\components\\RoadmapSearch.tsx",
+      "errorCount": 0,
+      "warningCount": 1,
+      "messages": [
+        {
+          "line": 30,
+          "column": 6,
+          "severity": "warning",
+          "ruleId": "react-hooks/exhaustive-deps",
+          "message": "React Hook useEffect has a missing dependency: 'onSearch'. Either include it or remove the dependency array. If 'onSearch' changes too often, find the parent component that defines it and wrap that definition in useCallback."
+        }
+      ]
+    },
+    {
+      "filePath": "\\app\\roadmap\\components\\RoadmapTimeline.tsx",
+      "errorCount": 0,
+      "warningCount": 1,
+      "messages": [
+        {
+          "line": 8,
+          "column": 53,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'status' is defined but never used. Allowed unused args must match /^_/u."
+        }
+      ]
+    },
+    {
+      "filePath": "\\app\\roadmap\\components\\TimelineView.tsx",
+      "errorCount": 0,
+      "warningCount": 1,
+      "messages": [
+        {
+          "line": 68,
+          "column": 35,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'index' is defined but never used. Allowed unused args must match /^_/u."
+        }
+      ]
+    },
+    {
+      "filePath": "\\app\\roadmap\\services\\searchService.ts",
+      "errorCount": 0,
+      "warningCount": 4,
+      "messages": [
+        {
+          "line": 1,
+          "column": 40,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'ApiEndpoint' is defined but never used."
+        },
+        {
+          "line": 1,
+          "column": 53,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'BusinessRule' is defined but never used."
+        },
+        {
+          "line": 59,
+          "column": 11,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'queryLower' is assigned a value but never used."
+        },
+        {
+          "line": 94,
+          "column": 11,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'queryLower' is assigned a value but never used."
+        }
+      ]
+    },
+    {
+      "filePath": "\\app\\wallet\\page.tsx",
+      "errorCount": 0,
+      "warningCount": 1,
+      "messages": [
+        {
+          "line": 21,
+          "column": 9,
+          "severity": "warning",
+          "ruleId": "react-hooks/exhaustive-deps",
+          "message": "The 'fetchWallet' function makes the dependencies of useEffect Hook (at line 19) change on every render. To fix this, wrap the definition of 'fetchWallet' in its own useCallback() Hook."
+        }
+      ]
+    },
+    {
+      "filePath": "\\components\\AddToCartButton.tsx",
+      "errorCount": 0,
+      "warningCount": 1,
+      "messages": [
+        {
+          "line": 7,
+          "column": 43,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'productId' is defined but never used. Allowed unused args must match /^_/u."
+        }
+      ]
+    },
+    {
+      "filePath": "\\components\\AdminPanel\\AdminPanel.tsx",
+      "errorCount": 0,
+      "warningCount": 2,
+      "messages": [
+        {
+          "line": 12,
+          "column": 10,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'data' is assigned a value but never used."
+        },
+        {
+          "line": 12,
+          "column": 16,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'setData' is assigned a value but never used."
+        }
+      ]
+    },
+    {
+      "filePath": "\\components\\AnalyticsOverview.tsx",
+      "errorCount": 0,
+      "warningCount": 1,
+      "messages": [
+        {
+          "line": 16,
+          "column": 3,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'growthRate' is assigned a value but never used. Allowed unused args must match /^_/u."
+        }
+      ]
+    },
+    {
+      "filePath": "\\components\\DevelopmentPage\\index.tsx",
+      "errorCount": 0,
+      "warningCount": 2,
+      "messages": [
+        {
+          "line": 29,
+          "column": 10,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'selectedModule' is assigned a value but never used."
+        },
+        {
+          "line": 31,
+          "column": 29,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'setDevelopmentStatus' is assigned a value but never used."
+        }
+      ]
+    },
+    {
+      "filePath": "\\components\\EHB-Dashboard\\ActivityChart.tsx",
+      "errorCount": 0,
+      "warningCount": 2,
+      "messages": [
+        {
+          "line": 1,
+          "column": 10,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'motion' is defined but never used."
+        },
+        {
+          "line": 3,
+          "column": 40,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'FiCalendar' is defined but never used."
+        }
+      ]
+    },
+    {
+      "filePath": "\\components\\EHB-Dashboard\\DashboardLayout.tsx",
+      "errorCount": 0,
+      "warningCount": 1,
+      "messages": [
+        {
+          "line": 2,
+          "column": 24,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'User' is defined but never used."
+        }
+      ]
+    },
+    {
+      "filePath": "\\components\\EHB-Dashboard\\DashboardStats.tsx",
+      "errorCount": 0,
+      "warningCount": 3,
+      "messages": [
+        {
+          "line": 3,
+          "column": 24,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'FiUsers' is defined but never used."
+        },
+        {
+          "line": 3,
+          "column": 33,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'FiShoppingBag' is defined but never used."
+        },
+        {
+          "line": 3,
+          "column": 48,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'FiDollarSign' is defined but never used."
+        }
+      ]
+    },
+    {
+      "filePath": "\\components\\EHB-Dashboard\\HeaderBar.tsx",
+      "errorCount": 0,
+      "warningCount": 1,
+      "messages": [
+        {
+          "line": 1,
+          "column": 10,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'ThemeSwitcher' is defined but never used."
+        }
+      ]
+    },
+    {
+      "filePath": "\\components\\EHB-Dashboard\\HelpCenter.tsx",
+      "errorCount": 0,
+      "warningCount": 1,
+      "messages": [
+        {
+          "line": 5,
+          "column": 3,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'FiBook' is defined but never used."
+        }
+      ]
+    },
+    {
+      "filePath": "\\components\\EHB-Dashboard\\PerformanceMetrics.tsx",
+      "errorCount": 0,
+      "warningCount": 1,
+      "messages": [
+        {
+          "line": 3,
+          "column": 40,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'FiTarget' is defined but never used."
+        }
+      ]
+    },
+    {
+      "filePath": "\\components\\EHB-Dashboard\\SettingsPanel.tsx",
+      "errorCount": 0,
+      "warningCount": 6,
+      "messages": [
+        {
+          "line": 3,
+          "column": 10,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'FiMoon' is defined but never used."
+        },
+        {
+          "line": 3,
+          "column": 18,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'FiSun' is defined but never used."
+        },
+        {
+          "line": 3,
+          "column": 25,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'FiGlobe' is defined but never used."
+        },
+        {
+          "line": 3,
+          "column": 34,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'FiBell' is defined but never used."
+        },
+        {
+          "line": 3,
+          "column": 42,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'FiLock' is defined but never used."
+        },
+        {
+          "line": 3,
+          "column": 50,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'FiCreditCard' is defined but never used."
+        }
+      ]
+    },
+    {
+      "filePath": "\\components\\EHB-Dashboard\\TaskList.tsx",
+      "errorCount": 0,
+      "warningCount": 2,
+      "messages": [
+        {
+          "line": 21,
+          "column": 59,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'onTaskStatusChange' is defined but never used. Allowed unused args must match /^_/u."
+        },
+        {
+          "line": 22,
+          "column": 9,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'getStatusIcon' is assigned a value but never used."
+        }
+      ]
+    },
+    {
+      "filePath": "\\components\\EHB-Dashboard\\UserProfile.tsx",
+      "errorCount": 0,
+      "warningCount": 1,
+      "messages": [
+        {
+          "line": 1,
+          "column": 10,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'motion' is defined but never used."
+        }
+      ]
+    },
+    {
+      "filePath": "\\components\\EHB-Franchise\\DevelopmentPage.tsx",
+      "errorCount": 0,
+      "warningCount": 3,
+      "messages": [
+        {
+          "line": 6,
+          "column": 10,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'FRANCHISE_TYPES' is defined but never used."
+        },
+        {
+          "line": 7,
+          "column": 10,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'ServiceCategory' is defined but never used."
+        },
+        {
+          "line": 141,
+          "column": 25,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'setShowBookmarks' is assigned a value but never used."
+        }
+      ]
+    },
+    {
+      "filePath": "\\components\\EHB-Franchise\\HomePage\\FeaturedFranchises.tsx",
+      "errorCount": 0,
+      "warningCount": 1,
+      "messages": [
+        {
+          "line": 3,
+          "column": 27,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'FRANCHISE_CONSTANTS' is defined but never used."
+        }
+      ]
+    },
+    {
+      "filePath": "\\components\\EHB-Franchise\\HomePage\\FranchiseTypes.tsx",
+      "errorCount": 0,
+      "warningCount": 1,
+      "messages": [
+        {
+          "line": 14,
+          "column": 3,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'type' is defined but never used. Allowed unused args must match /^_/u."
+        }
+      ]
+    },
+    {
+      "filePath": "\\components\\EHB-Home-Page\\Features.tsx",
+      "errorCount": 0,
+      "warningCount": 4,
+      "messages": [
+        {
+          "line": 6,
+          "column": 3,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'FaCloud' is defined but never used."
+        },
+        {
+          "line": 10,
+          "column": 3,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'FaEye' is defined but never used."
+        },
+        {
+          "line": 11,
+          "column": 3,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'FaGift' is defined but never used."
+        },
+        {
+          "line": 13,
+          "column": 3,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'FaLock' is defined but never used."
+        }
+      ]
+    },
+    {
+      "filePath": "\\components\\EMO\\EMOHomeCard.tsx",
+      "errorCount": 0,
+      "warningCount": 2,
+      "messages": [
+        {
+          "line": 1,
+          "column": 10,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'motion' is defined but never used."
+        },
+        {
+          "line": 17,
+          "column": 37,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'orders' is assigned a value but never used."
+        }
+      ]
+    },
+    {
+      "filePath": "\\components\\GoSellr\\CheckoutForm.tsx",
+      "errorCount": 0,
+      "warningCount": 4,
+      "messages": [
+        {
+          "line": 7,
+          "column": 32,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'FiTruck' is defined but never used."
+        },
+        {
+          "line": 7,
+          "column": 59,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'FiPhone' is defined but never used."
+        },
+        {
+          "line": 7,
+          "column": 68,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'FiMail' is defined but never used."
+        },
+        {
+          "line": 67,
+          "column": 5,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'watch' is assigned a value but never used."
+        }
+      ]
+    },
+    {
+      "filePath": "\\components\\GoSellr\\CustomerManagement.tsx",
+      "errorCount": 0,
+      "warningCount": 6,
+      "messages": [
+        {
+          "line": 6,
+          "column": 3,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'FiMail' is defined but never used."
+        },
+        {
+          "line": 7,
+          "column": 3,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'FiPhone' is defined but never used."
+        },
+        {
+          "line": 8,
+          "column": 3,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'FiMapPin' is defined but never used."
+        },
+        {
+          "line": 12,
+          "column": 3,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'FiFilter' is defined but never used."
+        },
+        {
+          "line": 102,
+          "column": 6,
+          "severity": "warning",
+          "ruleId": "react-hooks/exhaustive-deps",
+          "message": "React Hook useEffect has a missing dependency: 'mockCustomers'. Either include it or remove the dependency array."
+        },
+        {
+          "line": 139,
+          "column": 72,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'avgOrderValue' is assigned a value but never used."
+        }
+      ]
+    },
+    {
+      "filePath": "\\components\\GoSellr\\GoSellrDashboard.tsx",
+      "errorCount": 0,
+      "warningCount": 2,
+      "messages": [
+        {
+          "line": 105,
+          "column": 6,
+          "severity": "warning",
+          "ruleId": "react-hooks/exhaustive-deps",
+          "message": "React Hook useEffect has a missing dependency: 'fetchDashboardData'. Either include it or remove the dependency array."
+        },
+        {
+          "line": 419,
+          "column": 3,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'showCreateShop' is defined but never used. Allowed unused args must match /^_/u."
+        }
+      ]
+    },
+    {
+      "filePath": "\\components\\GoSellr\\InventoryManager.tsx",
+      "errorCount": 0,
+      "warningCount": 4,
+      "messages": [
+        {
+          "line": 11,
+          "column": 3,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'FiFilter' is defined but never used."
+        },
+        {
+          "line": 38,
+          "column": 10,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'showAddModal' is assigned a value but never used."
+        },
+        {
+          "line": 39,
+          "column": 10,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'editingItem' is assigned a value but never used."
+        },
+        {
+          "line": 112,
+          "column": 6,
+          "severity": "warning",
+          "ruleId": "react-hooks/exhaustive-deps",
+          "message": "React Hook useEffect has a missing dependency: 'mockInventory'. Either include it or remove the dependency array."
+        }
+      ]
+    },
+    {
+      "filePath": "\\components\\GoSellr\\OrderHistory.tsx",
+      "errorCount": 0,
+      "warningCount": 1,
+      "messages": [
+        {
+          "line": 2,
+          "column": 54,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'FiFilter' is defined but never used."
+        }
+      ]
+    },
+    {
+      "filePath": "\\components\\GoSellr\\ProductCard.tsx",
+      "errorCount": 0,
+      "warningCount": 1,
+      "messages": [
+        {
+          "line": 2,
+          "column": 26,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'FiLock' is defined but never used."
+        }
+      ]
+    },
+    {
+      "filePath": "\\components\\GoSellr\\ProductEditor.tsx",
+      "errorCount": 0,
+      "warningCount": 3,
+      "messages": [
+        {
+          "line": 7,
+          "column": 18,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'FiUpload' is defined but never used."
+        },
+        {
+          "line": 7,
+          "column": 41,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'FiTrash2' is defined but never used."
+        },
+        {
+          "line": 45,
+          "column": 5,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'watch' is assigned a value but never used."
+        }
+      ]
+    },
+    {
+      "filePath": "\\components\\GoSellr\\SalesAnalytics.tsx",
+      "errorCount": 0,
+      "warningCount": 3,
+      "messages": [
+        {
+          "line": 13,
+          "column": 3,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'BarChart' is defined but never used."
+        },
+        {
+          "line": 14,
+          "column": 3,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'Bar' is defined but never used."
+        },
+        {
+          "line": 88,
+          "column": 6,
+          "severity": "warning",
+          "ruleId": "react-hooks/exhaustive-deps",
+          "message": "React Hook useEffect has missing dependencies: 'mockCategoryData' and 'mockSalesData'. Either include them or remove the dependency array."
+        }
+      ]
+    },
+    {
+      "filePath": "\\components\\GoSellr\\ShippingCalculator.tsx",
+      "errorCount": 0,
+      "warningCount": 3,
+      "messages": [
+        {
+          "line": 38,
+          "column": 10,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'customAddress' is assigned a value but never used."
+        },
+        {
+          "line": 38,
+          "column": 25,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'setCustomAddress' is assigned a value but never used."
+        },
+        {
+          "line": 111,
+          "column": 6,
+          "severity": "warning",
+          "ruleId": "react-hooks/exhaustive-deps",
+          "message": "React Hook useEffect has a missing dependency: 'mockShippingMethods'. Either include it or remove the dependency array."
+        }
+      ]
+    },
+    {
+      "filePath": "\\components\\HPS\\HPSDashboard.tsx",
+      "errorCount": 0,
+      "warningCount": 1,
+      "messages": [
+        {
+          "line": 2,
+          "column": 18,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'FiClock' is defined but never used."
+        }
+      ]
+    },
+    {
+      "filePath": "\\components\\HPS\\LectureManager.tsx",
+      "errorCount": 0,
+      "warningCount": 1,
+      "messages": [
+        {
+          "line": 2,
+          "column": 10,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'FiUpload' is defined but never used."
+        }
+      ]
+    },
+    {
+      "filePath": "\\components\\HPS\\StudentProgress.tsx",
+      "errorCount": 0,
+      "warningCount": 1,
+      "messages": [
+        {
+          "line": 2,
+          "column": 36,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'FiTrendingUp' is defined but never used."
+        }
+      ]
+    },
+    {
+      "filePath": "\\components\\JPS\\JPS.tsx",
+      "errorCount": 1,
+      "warningCount": 2,
+      "messages": [
+        {
+          "line": 5,
+          "column": 11,
+          "severity": "error",
+          "ruleId": "@typescript-eslint/no-empty-object-type",
+          "message": "An empty interface declaration allows any non-nullish value, including literals like `0` and `\"\"`.\n- If that's what you want, disable this lint rule with an inline comment or configure the 'allowInterfaces' rule option.\n- If you want a type meaning \"any object\", you probably want `object` instead.\n- If you want a type meaning \"any value\", you probably want `unknown` instead."
+        },
+        {
+          "line": 11,
+          "column": 10,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'data' is assigned a value but never used."
+        },
+        {
+          "line": 11,
+          "column": 16,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'setData' is assigned a value but never used."
+        }
+      ]
+    },
+    {
+      "filePath": "\\components\\OBS\\BookUpload.tsx",
+      "errorCount": 0,
+      "warningCount": 1,
+      "messages": [
+        {
+          "line": 2,
+          "column": 33,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'FiInfo' is defined but never used."
+        }
+      ]
+    },
+    {
+      "filePath": "\\components\\OBS\\ReadingHistory.tsx",
+      "errorCount": 0,
+      "warningCount": 1,
+      "messages": [
+        {
+          "line": 52,
+          "column": 49,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'book' is defined but never used. Allowed unused args must match /^_/u."
+        }
+      ]
+    },
+    {
+      "filePath": "\\components\\OLS\\LegalBooking.tsx",
+      "errorCount": 0,
+      "warningCount": 1,
+      "messages": [
+        {
+          "line": 2,
+          "column": 10,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'FiCalendar' is defined but never used."
+        }
+      ]
+    },
+    {
+      "filePath": "\\components\\PSS\\PSS.tsx",
+      "errorCount": 1,
+      "warningCount": 2,
+      "messages": [
+        {
+          "line": 5,
+          "column": 11,
+          "severity": "error",
+          "ruleId": "@typescript-eslint/no-empty-object-type",
+          "message": "An empty interface declaration allows any non-nullish value, including literals like `0` and `\"\"`.\n- If that's what you want, disable this lint rule with an inline comment or configure the 'allowInterfaces' rule option.\n- If you want a type meaning \"any object\", you probably want `object` instead.\n- If you want a type meaning \"any value\", you probably want `unknown` instead."
+        },
+        {
+          "line": 11,
+          "column": 10,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'data' is assigned a value but never used."
+        },
+        {
+          "line": 11,
+          "column": 16,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'setData' is assigned a value but never used."
+        }
+      ]
+    },
+    {
+      "filePath": "\\components\\ProductReviews.tsx",
+      "errorCount": 0,
+      "warningCount": 1,
+      "messages": [
+        {
+          "line": 18,
+          "column": 42,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'productId' is defined but never used. Allowed unused args must match /^_/u."
+        }
+      ]
+    },
+    {
+      "filePath": "\\components\\Reviews.tsx",
+      "errorCount": 0,
+      "warningCount": 1,
+      "messages": [
+        {
+          "line": 13,
+          "column": 35,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'productId' is defined but never used. Allowed unused args must match /^_/u."
+        }
+      ]
+    },
+    {
+      "filePath": "\\components\\SOT\\EHB-AI-Agent.tsx",
+      "errorCount": 0,
+      "warningCount": 2,
+      "messages": [
+        {
+          "line": 2,
+          "column": 18,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'FiClock' is defined but never used."
+        },
+        {
+          "line": 2,
+          "column": 39,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'FiCheck' is defined but never used."
+        }
+      ]
+    },
+    {
+      "filePath": "\\components\\SOT\\EHB-Chat.tsx",
+      "errorCount": 0,
+      "warningCount": 2,
+      "messages": [
+        {
+          "line": 2,
+          "column": 26,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'FiMessageSquare' is defined but never used."
+        },
+        {
+          "line": 53,
+          "column": 9,
+          "severity": "warning",
+          "ruleId": "react-hooks/exhaustive-deps",
+          "message": "The 'scrollToBottom' function makes the dependencies of useEffect Hook (at line 59) change on every render. Move it inside the useEffect callback. Alternatively, wrap the definition of 'scrollToBottom' in its own useCallback() Hook."
+        }
+      ]
+    },
+    {
+      "filePath": "\\components\\SQL\\SQLApplyDialog.tsx",
+      "errorCount": 0,
+      "warningCount": 2,
+      "messages": [
+        {
+          "line": 3,
+          "column": 25,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'FiCheck' is defined but never used."
+        },
+        {
+          "line": 50,
+          "column": 3,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'className' is assigned a value but never used. Allowed unused args must match /^_/u."
+        }
+      ]
+    },
+    {
+      "filePath": "\\components\\SQL\\SQLLevelBadge.tsx",
+      "errorCount": 0,
+      "warningCount": 2,
+      "messages": [
+        {
+          "line": 17,
+          "column": 3,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'size' is assigned a value but never used. Allowed unused args must match /^_/u."
+        },
+        {
+          "line": 19,
+          "column": 3,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'animated' is assigned a value but never used. Allowed unused args must match /^_/u."
+        }
+      ]
+    },
+    {
+      "filePath": "\\components\\SQL\\SQLUpgradeSteps.tsx",
+      "errorCount": 0,
+      "warningCount": 1,
+      "messages": [
+        {
+          "line": 53,
+          "column": 3,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'targetLevel' is defined but never used. Allowed unused args must match /^_/u."
+        }
+      ]
+    },
+    {
+      "filePath": "\\components\\SQL\\SQLVerifier.tsx",
+      "errorCount": 0,
+      "warningCount": 2,
+      "messages": [
+        {
+          "line": 43,
+          "column": 10,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'documentRejectReason' is assigned a value but never used."
+        },
+        {
+          "line": 43,
+          "column": 32,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'setDocumentRejectReason' is assigned a value but never used."
+        }
+      ]
+    },
+    {
+      "filePath": "\\components\\ai-marketplace\\MarketplaceHeader.tsx",
+      "errorCount": 0,
+      "warningCount": 1,
+      "messages": [
+        {
+          "line": 2,
+          "column": 27,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'FiFilter' is defined but never used."
+        }
+      ]
+    },
+    {
+      "filePath": "\\components\\ai-marketplace\\SearchEngine.tsx",
+      "errorCount": 0,
+      "warningCount": 4,
+      "messages": [
+        {
+          "line": 2,
+          "column": 10,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'FiSearch' is defined but never used."
+        },
+        {
+          "line": 2,
+          "column": 20,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'FiMic' is defined but never used."
+        },
+        {
+          "line": 2,
+          "column": 27,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'FiUpload' is defined but never used."
+        },
+        {
+          "line": 2,
+          "column": 37,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'FiFilter' is defined but never used."
+        }
+      ]
+    },
+    {
+      "filePath": "\\components\\ai-marketplace\\ServiceCard.tsx",
+      "errorCount": 0,
+      "warningCount": 1,
+      "messages": [
+        {
+          "line": 14,
+          "column": 48,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'userSqlLevel' is defined but never used. Allowed unused args must match /^_/u."
+        }
+      ]
+    },
+    {
+      "filePath": "\\components\\ai\\AIChat.tsx",
+      "errorCount": 0,
+      "warningCount": 10,
+      "messages": [
+        {
+          "line": 1,
+          "column": 10,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'motion' is defined but never used."
+        },
+        {
+          "line": 1,
+          "column": 18,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'AnimatePresence' is defined but never used."
+        },
+        {
+          "line": 3,
+          "column": 10,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'FaPaperPlane' is defined but never used."
+        },
+        {
+          "line": 3,
+          "column": 24,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'FaRobot' is defined but never used."
+        },
+        {
+          "line": 3,
+          "column": 33,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'FaUser' is defined but never used."
+        },
+        {
+          "line": 3,
+          "column": 41,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'FaSpinner' is defined but never used."
+        },
+        {
+          "line": 9,
+          "column": 10,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'detectIntent' is defined but never used."
+        },
+        {
+          "line": 11,
+          "column": 10,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'detectLanguage' is defined but never used."
+        },
+        {
+          "line": 35,
+          "column": 50,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'context' is defined but never used. Allowed unused args must match /^_/u."
+        },
+        {
+          "line": 36,
+          "column": 45,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'clearMessages' is assigned a value but never used."
+        }
+      ]
+    },
+    {
+      "filePath": "\\components\\ai\\AIChatWidget.tsx",
+      "errorCount": 0,
+      "warningCount": 2,
+      "messages": [
+        {
+          "line": 25,
+          "column": 45,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'clearMessages' is assigned a value but never used."
+        },
+        {
+          "line": 55,
+          "column": 9,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'getWelcomeMessage' is assigned a value but never used."
+        }
+      ]
+    },
+    {
+      "filePath": "\\components\\am\\AffiliateDashboard.tsx",
+      "errorCount": 0,
+      "warningCount": 1,
+      "messages": [
+        {
+          "line": 2,
+          "column": 19,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'FiLink' is defined but never used."
+        }
+      ]
+    },
+    {
+      "filePath": "\\components\\am\\CoinLockBonus.tsx",
+      "errorCount": 0,
+      "warningCount": 1,
+      "messages": [
+        {
+          "line": 2,
+          "column": 18,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'FiUnlock' is defined but never used."
+        }
+      ]
+    },
+    {
+      "filePath": "\\components\\am\\SQLCommissionBreakdown.tsx",
+      "errorCount": 0,
+      "warningCount": 1,
+      "messages": [
+        {
+          "line": 2,
+          "column": 19,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'FiTrendingUp' is defined but never used."
+        }
+      ]
+    },
+    {
+      "filePath": "\\components\\dashboard\\Header.tsx",
+      "errorCount": 0,
+      "warningCount": 1,
+      "messages": [
+        {
+          "line": 9,
+          "column": 17,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'session' is assigned a value but never used."
+        }
+      ]
+    },
+    {
+      "filePath": "\\components\\edr\\CourseEditor.tsx",
+      "errorCount": 0,
+      "warningCount": 2,
+      "messages": [
+        {
+          "line": 1,
+          "column": 10,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'motion' is defined but never used."
+        },
+        {
+          "line": 31,
+          "column": 5,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'watch' is assigned a value but never used."
+        }
+      ]
+    },
+    {
+      "filePath": "\\components\\edr\\ExamSubmission.tsx",
+      "errorCount": 0,
+      "warningCount": 1,
+      "messages": [
+        {
+          "line": 93,
+          "column": 6,
+          "severity": "warning",
+          "ruleId": "react-hooks/exhaustive-deps",
+          "message": "React Hook useEffect has a missing dependency: 'handleSubmit'. Either include it or remove the dependency array."
+        }
+      ]
+    },
+    {
+      "filePath": "\\components\\edr\\ResultView.tsx",
+      "errorCount": 0,
+      "warningCount": 1,
+      "messages": [
+        {
+          "line": 30,
+          "column": 10,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'error' is assigned a value but never used."
+        }
+      ]
+    },
+    {
+      "filePath": "\\components\\edr\\RetakeNotice.tsx",
+      "errorCount": 0,
+      "warningCount": 1,
+      "messages": [
+        {
+          "line": 21,
+          "column": 10,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'error' is assigned a value but never used."
+        }
+      ]
+    },
+    {
+      "filePath": "\\components\\layout\\Navigation.tsx",
+      "errorCount": 0,
+      "warningCount": 1,
+      "messages": [
+        {
+          "line": 8,
+          "column": 9,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'router' is assigned a value but never used."
+        }
+      ]
+    },
+    {
+      "filePath": "\\components\\products\\ProductGrid.tsx",
+      "errorCount": 0,
+      "warningCount": 2,
+      "messages": [
+        {
+          "line": 1,
+          "column": 31,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'Star' is defined but never used."
+        },
+        {
+          "line": 4,
+          "column": 10,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'Badge' is defined but never used."
+        }
+      ]
+    },
+    {
+      "filePath": "\\components\\token\\TokenLockCard.tsx",
+      "errorCount": 0,
+      "warningCount": 1,
+      "messages": [
+        {
+          "line": 24,
+          "column": 9,
+          "severity": "warning",
+          "ruleId": "react-hooks/exhaustive-deps",
+          "message": "The 'fetchLockInfo' function makes the dependencies of useEffect Hook (at line 43) change on every render. To fix this, wrap the definition of 'fetchLockInfo' in its own useCallback() Hook."
+        }
+      ]
+    },
+    {
+      "filePath": "\\components\\token\\TransactionCharts.tsx",
+      "errorCount": 0,
+      "warningCount": 5,
+      "messages": [
+        {
+          "line": 12,
+          "column": 3,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'ChartType' is defined but never used."
+        },
+        {
+          "line": 15,
+          "column": 3,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'ChartEvent' is defined but never used."
+        },
+        {
+          "line": 16,
+          "column": 3,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'ChartArea' is defined but never used."
+        },
+        {
+          "line": 20,
+          "column": 3,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'ScriptableContext' is defined but never used."
+        },
+        {
+          "line": 72,
+          "column": 6,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'BarDataset' is defined but never used."
+        }
+      ]
+    },
+    {
+      "filePath": "\\components\\token\\TransactionHistory.tsx",
+      "errorCount": 0,
+      "warningCount": 1,
+      "messages": [
+        {
+          "line": 49,
+          "column": 15,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'thirtyDaysAgo' is assigned a value but never used."
+        }
+      ]
+    },
+    {
+      "filePath": "\\components\\ui\\input.tsx",
+      "errorCount": 1,
+      "warningCount": 0,
+      "messages": [
+        {
+          "line": 5,
+          "column": 18,
+          "severity": "error",
+          "ruleId": "@typescript-eslint/no-empty-object-type",
+          "message": "An interface declaring no members is equivalent to its supertype."
+        }
+      ]
+    },
+    {
+      "filePath": "\\components\\ui\\textarea.tsx",
+      "errorCount": 1,
+      "warningCount": 0,
+      "messages": [
+        {
+          "line": 5,
+          "column": 18,
+          "severity": "error",
+          "ruleId": "@typescript-eslint/no-empty-object-type",
+          "message": "An interface declaring no members is equivalent to its supertype."
+        }
+      ]
+    },
+    {
+      "filePath": "\\components\\wallet\\WalletLockManager.tsx",
+      "errorCount": 0,
+      "warningCount": 2,
+      "messages": [
+        {
+          "line": 38,
+          "column": 14,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'error' is defined but never used."
+        },
+        {
+          "line": 56,
+          "column": 14,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'error' is defined but never used."
+        }
+      ]
+    },
+    {
+      "filePath": "\\components\\wallet\\WalletPenalty.tsx",
+      "errorCount": 0,
+      "warningCount": 2,
+      "messages": [
+        {
+          "line": 56,
+          "column": 14,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'error' is defined but never used."
+        },
+        {
+          "line": 70,
+          "column": 14,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'error' is defined but never used."
+        }
+      ]
+    },
+    {
+      "filePath": "\\components\\wallet\\WalletTransfer.tsx",
+      "errorCount": 0,
+      "warningCount": 1,
+      "messages": [
+        {
+          "line": 53,
+          "column": 14,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'error' is defined but never used."
+        }
+      ]
+    },
+    {
+      "filePath": "\\components\\wishlist\\WishlistGrid.tsx",
+      "errorCount": 0,
+      "warningCount": 1,
+      "messages": [
+        {
+          "line": 1,
+          "column": 10,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'Heart' is defined but never used."
+        }
+      ]
+    },
+    {
+      "filePath": "\\cypress\\support\\commands.ts",
+      "errorCount": 1,
+      "warningCount": 0,
+      "messages": [
+        {
+          "line": 2,
+          "column": 3,
+          "severity": "error",
+          "ruleId": "@typescript-eslint/no-namespace",
+          "message": "ES2015 module syntax is preferred over namespaces."
+        }
+      ]
+    },
+    {
+      "filePath": "\\cypress\\support\\e2e.ts",
+      "errorCount": 1,
+      "warningCount": 0,
+      "messages": [
+        {
+          "line": 28,
+          "column": 3,
+          "severity": "error",
+          "ruleId": "@typescript-eslint/no-namespace",
+          "message": "ES2015 module syntax is preferred over namespaces."
+        }
+      ]
+    },
+    {
+      "filePath": "\\ehb-accessibility-watcher.js",
+      "errorCount": 0,
+      "warningCount": 2,
+      "messages": [
+        {
+          "line": 41,
+          "column": 53,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'stdout' is defined but never used. Allowed unused args must match /^_/u."
+        },
+        {
+          "line": 41,
+          "column": 61,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'stderr' is defined but never used. Allowed unused args must match /^_/u."
+        }
+      ]
+    },
+    {
+      "filePath": "\\ehb-autofix.js",
+      "errorCount": 0,
+      "warningCount": 5,
+      "messages": [
+        {
+          "line": 5,
+          "column": 19,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'exec' is assigned a value but never used."
+        },
+        {
+          "line": 65,
+          "column": 14,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'e' is defined but never used."
+        },
+        {
+          "line": 86,
+          "column": 14,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'e' is defined but never used."
+        },
+        {
+          "line": 99,
+          "column": 14,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'e' is defined but never used."
+        },
+        {
+          "line": 108,
+          "column": 12,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'e' is defined but never used."
+        }
+      ]
+    },
+    {
+      "filePath": "\\ehb-backend\\server.js",
+      "errorCount": 0,
+      "warningCount": 1,
+      "messages": [
+        {
+          "line": 39,
+          "column": 25,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'next' is defined but never used. Allowed unused args must match /^_/u."
+        }
+      ]
+    },
+    {
+      "filePath": "\\ehb-cuda-cudnn-auto-guide.js",
+      "errorCount": 0,
+      "warningCount": 1,
+      "messages": [
+        {
+          "line": 47,
+          "column": 12,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'e' is defined but never used."
+        }
+      ]
+    },
+    {
+      "filePath": "\\ehb-cuda-cudnn-watcher.js",
+      "errorCount": 0,
+      "warningCount": 2,
+      "messages": [
+        {
+          "line": 58,
+          "column": 61,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'stdout' is defined but never used. Allowed unused args must match /^_/u."
+        },
+        {
+          "line": 58,
+          "column": 69,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'stderr' is defined but never used. Allowed unused args must match /^_/u."
+        }
+      ]
+    },
+    {
+      "filePath": "\\ehb-ml-gpu-setup.js",
+      "errorCount": 0,
+      "warningCount": 8,
+      "messages": [
+        {
+          "line": 40,
+          "column": 12,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'e' is defined but never used."
+        },
+        {
+          "line": 109,
+          "column": 12,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'e' is defined but never used."
+        },
+        {
+          "line": 120,
+          "column": 11,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'out' is assigned a value but never used."
+        },
+        {
+          "line": 123,
+          "column": 12,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'e' is defined but never used."
+        },
+        {
+          "line": 143,
+          "column": 12,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'e' is defined but never used."
+        },
+        {
+          "line": 162,
+          "column": 12,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'e' is defined but never used."
+        },
+        {
+          "line": 199,
+          "column": 12,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'e' is defined but never used."
+        },
+        {
+          "line": 219,
+          "column": 12,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'e' is defined but never used."
+        }
+      ]
+    },
+    {
+      "filePath": "\\ehb-npm-auto-fix.js",
+      "errorCount": 0,
+      "warningCount": 1,
+      "messages": [
+        {
+          "line": 87,
+          "column": 48,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'errorLines' is defined but never used. Allowed unused args must match /^_/u."
+        }
+      ]
+    },
+    {
+      "filePath": "\\ehb-optimize.js",
+      "errorCount": 0,
+      "warningCount": 3,
+      "messages": [
+        {
+          "line": 44,
+          "column": 14,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'e' is defined but never used."
+        },
+        {
+          "line": 64,
+          "column": 14,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'e' is defined but never used."
+        },
+        {
+          "line": 99,
+          "column": 46,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'stderr' is defined but never used. Allowed unused args must match /^_/u."
+        }
+      ]
+    },
+    {
+      "filePath": "\\ehb-tf-docker-fix.js",
+      "errorCount": 0,
+      "warningCount": 3,
+      "messages": [
+        {
+          "line": 5,
+          "column": 9,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'execSync' is assigned a value but never used."
+        },
+        {
+          "line": 7,
+          "column": 7,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'os' is assigned a value but never used."
+        },
+        {
+          "line": 32,
+          "column": 16,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'e' is defined but never used."
+        }
+      ]
+    },
+    {
+      "filePath": "\\ehb-watcher.js",
+      "errorCount": 0,
+      "warningCount": 3,
+      "messages": [
+        {
+          "line": 8,
+          "column": 7,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'path' is assigned a value but never used."
+        },
+        {
+          "line": 13,
+          "column": 39,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'stdout' is defined but never used. Allowed unused args must match /^_/u."
+        },
+        {
+          "line": 13,
+          "column": 47,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'stderr' is defined but never used. Allowed unused args must match /^_/u."
+        }
+      ]
+    },
+    {
+      "filePath": "\\hooks\\useWallet.ts",
+      "errorCount": 0,
+      "warningCount": 1,
+      "messages": [
+        {
+          "line": 5,
+          "column": 41,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'TransactionResponse' is defined but never used."
+        }
+      ]
+    },
+    {
+      "filePath": "\\lib\\analytics.ts",
+      "errorCount": 0,
+      "warningCount": 2,
+      "messages": [
+        {
+          "line": 1,
+          "column": 10,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'NextApiRequest' is defined but never used."
+        },
+        {
+          "line": 1,
+          "column": 26,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'NextApiResponse' is defined but never used."
+        }
+      ]
+    },
+    {
+      "filePath": "\\lib\\analytics\\google-analytics.ts",
+      "errorCount": 0,
+      "warningCount": 1,
+      "messages": [
+        {
+          "line": 12,
+          "column": 31,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'url' is defined but never used. Allowed unused args must match /^_/u."
+        }
+      ]
+    },
+    {
+      "filePath": "\\lib\\api\\shopify.ts",
+      "errorCount": 0,
+      "warningCount": 2,
+      "messages": [
+        {
+          "line": 3,
+          "column": 7,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'SHOPIFY_API_KEY' is assigned a value but never used."
+        },
+        {
+          "line": 4,
+          "column": 7,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'SHOPIFY_API_SECRET' is assigned a value but never used."
+        }
+      ]
+    },
+    {
+      "filePath": "\\lib\\api\\test.ts",
+      "errorCount": 0,
+      "warningCount": 4,
+      "messages": [
+        {
+          "line": 35,
+          "column": 7,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'dataValidator' is assigned a value but never used."
+        },
+        {
+          "line": 38,
+          "column": 7,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'dataMoonbeam' is assigned a value but never used."
+        },
+        {
+          "line": 41,
+          "column": 7,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'dataBalance' is assigned a value but never used."
+        },
+        {
+          "line": 50,
+          "column": 7,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'data' is assigned a value but never used."
+        }
+      ]
+    },
+    {
+      "filePath": "\\lib\\authOptions.ts",
+      "errorCount": 0,
+      "warningCount": 1,
+      "messages": [
+        {
+          "line": 2,
+          "column": 10,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'compare' is defined but never used."
+        }
+      ]
+    },
+    {
+      "filePath": "\\lib\\contracts.ts",
+      "errorCount": 0,
+      "warningCount": 1,
+      "messages": [
+        {
+          "line": 2,
+          "column": 10,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'getSession' is defined but never used."
+        }
+      ]
+    },
+    {
+      "filePath": "\\lib\\ethereum\\test.ts",
+      "errorCount": 0,
+      "warningCount": 1,
+      "messages": [
+        {
+          "line": 5,
+          "column": 3,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'getTransaction' is defined but never used."
+        }
+      ]
+    },
+    {
+      "filePath": "\\lib\\models\\Availability.ts",
+      "errorCount": 1,
+      "warningCount": 1,
+      "messages": [
+        {
+          "line": 1,
+          "column": 10,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'ObjectId' is defined but never used."
+        },
+        {
+          "line": 20,
+          "column": 18,
+          "severity": "error",
+          "ruleId": "@typescript-eslint/no-empty-object-type",
+          "message": "An interface declaring no members is equivalent to its supertype."
+        }
+      ]
+    },
+    {
+      "filePath": "\\lib\\models\\Course.ts",
+      "errorCount": 1,
+      "warningCount": 0,
+      "messages": [
+        {
+          "line": 34,
+          "column": 18,
+          "severity": "error",
+          "ruleId": "@typescript-eslint/no-empty-object-type",
+          "message": "An interface declaring no members is equivalent to its supertype."
+        }
+      ]
+    },
+    {
+      "filePath": "\\lib\\models\\Shop.ts",
+      "errorCount": 1,
+      "warningCount": 0,
+      "messages": [
+        {
+          "line": 34,
+          "column": 18,
+          "severity": "error",
+          "ruleId": "@typescript-eslint/no-empty-object-type",
+          "message": "An interface declaring no members is equivalent to its supertype."
+        }
+      ]
+    },
+    {
+      "filePath": "\\lib\\models\\Tutor.ts",
+      "errorCount": 1,
+      "warningCount": 0,
+      "messages": [
+        {
+          "line": 25,
+          "column": 18,
+          "severity": "error",
+          "ruleId": "@typescript-eslint/no-empty-object-type",
+          "message": "An interface declaring no members is equivalent to its supertype."
+        }
+      ]
+    },
+    {
+      "filePath": "\\lib\\moonbeam\\config.ts",
+      "errorCount": 0,
+      "warningCount": 1,
+      "messages": [
+        {
+          "line": 2,
+          "column": 10,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'Keyring' is defined but never used."
+        }
+      ]
+    },
+    {
+      "filePath": "\\lib\\polkadot\\config.ts",
+      "errorCount": 0,
+      "warningCount": 2,
+      "messages": [
+        {
+          "line": 5,
+          "column": 10,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'cryptoWaitReady' is defined but never used."
+        },
+        {
+          "line": 51,
+          "column": 9,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'activeEra' is assigned a value but never used."
+        }
+      ]
+    },
+    {
+      "filePath": "\\lib\\polkadot\\governance.ts",
+      "errorCount": 0,
+      "warningCount": 2,
+      "messages": [
+        {
+          "line": 44,
+          "column": 28,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'propIndex' is defined but never used. Allowed unused args must match /^_/u."
+        },
+        {
+          "line": 55,
+          "column": 13,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'refIndex' is assigned a value but never used."
+        }
+      ]
+    },
+    {
+      "filePath": "\\lib\\polkadot\\staking.ts",
+      "errorCount": 0,
+      "warningCount": 2,
+      "messages": [
+        {
+          "line": 32,
+          "column": 20,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'bonded' is assigned a value but never used."
+        },
+        {
+          "line": 32,
+          "column": 40,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'activeEra' is assigned a value but never used."
+        }
+      ]
+    },
+    {
+      "filePath": "\\lib\\wallet\\syncWithServices.ts",
+      "errorCount": 0,
+      "warningCount": 1,
+      "messages": [
+        {
+          "line": 1,
+          "column": 40,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'userId' is defined but never used. Allowed unused args must match /^_/u."
+        }
+      ]
+    },
+    {
+      "filePath": "\\lib\\web3\\config.ts",
+      "errorCount": 0,
+      "warningCount": 1,
+      "messages": [
+        {
+          "line": 1,
+          "column": 10,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'Web3Provider' is defined but never used."
+        }
+      ]
+    },
+    {
+      "filePath": "\\middleware.ts",
+      "errorCount": 0,
+      "warningCount": 1,
+      "messages": [
+        {
+          "line": 4,
+          "column": 28,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'request' is defined but never used. Allowed unused args must match /^_/u."
+        }
+      ]
+    },
+    {
+      "filePath": "\\middleware\\checkSQLLevel.ts",
+      "errorCount": 0,
+      "warningCount": 1,
+      "messages": [
+        {
+          "line": 16,
+          "column": 11,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'SQLLevelConfig' is defined but never used."
+        }
+      ]
+    },
+    {
+      "filePath": "\\pages\\ehb-ai-marketplace\\index.tsx",
+      "errorCount": 0,
+      "warningCount": 2,
+      "messages": [
+        {
+          "line": 11,
+          "column": 9,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'router' is assigned a value but never used."
+        },
+        {
+          "line": 25,
+          "column": 9,
+          "severity": "warning",
+          "ruleId": "react-hooks/exhaustive-deps",
+          "message": "The 'loadServices' function makes the dependencies of useEffect Hook (at line 23) change on every render. Move it inside the useEffect callback. Alternatively, wrap the definition of 'loadServices' in its own useCallback() Hook."
+        }
+      ]
+    },
+    {
+      "filePath": "\\pages\\franchise\\gosellr.tsx",
+      "errorCount": 0,
+      "warningCount": 3,
+      "messages": [
+        {
+          "line": 3,
+          "column": 19,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'FiAlertCircle' is defined but never used."
+        },
+        {
+          "line": 3,
+          "column": 34,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'FiArrowRight' is defined but never used."
+        },
+        {
+          "line": 55,
+          "column": 17,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'session' is assigned a value but never used."
+        }
+      ]
+    },
+    {
+      "filePath": "\\pages\\sql-level\\index.tsx",
+      "errorCount": 0,
+      "warningCount": 2,
+      "messages": [
+        {
+          "line": 4,
+          "column": 24,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'FiAlertCircle' is defined but never used."
+        },
+        {
+          "line": 7,
+          "column": 8,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'SQLLevelBadge' is defined but never used."
+        }
+      ]
+    },
+    {
+      "filePath": "\\pages\\token\\analytics.tsx",
+      "errorCount": 0,
+      "warningCount": 2,
+      "messages": [
+        {
+          "line": 72,
+          "column": 17,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'session' is assigned a value but never used."
+        },
+        {
+          "line": 88,
+          "column": 15,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'contract' is assigned a value but never used."
+        }
+      ]
+    },
+    {
+      "filePath": "\\pages\\token\\dashboard.tsx",
+      "errorCount": 0,
+      "warningCount": 2,
+      "messages": [
+        {
+          "line": 19,
+          "column": 17,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'session' is assigned a value but never used."
+        },
+        {
+          "line": 41,
+          "column": 16,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'err' is defined but never used."
+        }
+      ]
+    },
+    {
+      "filePath": "\\pages\\token\\help.tsx",
+      "errorCount": 0,
+      "warningCount": 2,
+      "messages": [
+        {
+          "line": 2,
+          "column": 10,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'ChevronDownIcon' is defined but never used."
+        },
+        {
+          "line": 135,
+          "column": 17,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'session' is assigned a value but never used."
+        }
+      ]
+    },
+    {
+      "filePath": "\\pages\\token\\history.tsx",
+      "errorCount": 0,
+      "warningCount": 2,
+      "messages": [
+        {
+          "line": 26,
+          "column": 17,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'session' is assigned a value but never used."
+        },
+        {
+          "line": 53,
+          "column": 15,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'contract' is assigned a value but never used."
+        }
+      ]
+    },
+    {
+      "filePath": "\\pages\\token\\operations.tsx",
+      "errorCount": 0,
+      "warningCount": 4,
+      "messages": [
+        {
+          "line": 27,
+          "column": 17,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'session' is assigned a value but never used."
+        },
+        {
+          "line": 51,
+          "column": 15,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'contract' is assigned a value but never used."
+        },
+        {
+          "line": 107,
+          "column": 13,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'contract' is assigned a value but never used."
+        },
+        {
+          "line": 127,
+          "column": 13,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'contract' is assigned a value but never used."
+        }
+      ]
+    },
+    {
+      "filePath": "\\pages\\token\\profile.tsx",
+      "errorCount": 0,
+      "warningCount": 1,
+      "messages": [
+        {
+          "line": 131,
+          "column": 10,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'selectedTab' is assigned a value but never used."
+        }
+      ]
+    },
+    {
+      "filePath": "\\pages\\token\\referral.tsx",
+      "errorCount": 0,
+      "warningCount": 3,
+      "messages": [
+        {
+          "line": 42,
+          "column": 17,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'session' is assigned a value but never used."
+        },
+        {
+          "line": 58,
+          "column": 15,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'contract' is assigned a value but never used."
+        },
+        {
+          "line": 133,
+          "column": 13,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'contract' is assigned a value but never used."
+        }
+      ]
+    },
+    {
+      "filePath": "\\pages\\token\\referrals.tsx",
+      "errorCount": 0,
+      "warningCount": 2,
+      "messages": [
+        {
+          "line": 34,
+          "column": 17,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'session' is assigned a value but never used."
+        },
+        {
+          "line": 54,
+          "column": 15,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'contract' is assigned a value but never used."
+        }
+      ]
+    },
+    {
+      "filePath": "\\pages\\token\\rewards.tsx",
+      "errorCount": 0,
+      "warningCount": 13,
+      "messages": [
+        {
+          "line": 4,
+          "column": 3,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'StarIcon' is defined but never used."
+        },
+        {
+          "line": 7,
+          "column": 3,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'ArrowTrendingUpIcon' is defined but never used."
+        },
+        {
+          "line": 10,
+          "column": 10,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'formatDistanceToNow' is defined but never used."
+        },
+        {
+          "line": 25,
+          "column": 3,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'BarChart' is defined but never used."
+        },
+        {
+          "line": 26,
+          "column": 3,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'Bar' is defined but never used."
+        },
+        {
+          "line": 193,
+          "column": 17,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'session' is assigned a value but never used."
+        },
+        {
+          "line": 197,
+          "column": 10,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'timeRange' is assigned a value but never used."
+        },
+        {
+          "line": 197,
+          "column": 21,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'setTimeRange' is assigned a value but never used."
+        },
+        {
+          "line": 198,
+          "column": 10,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'selectedTab' is assigned a value but never used."
+        },
+        {
+          "line": 210,
+          "column": 15,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'contract' is assigned a value but never used."
+        },
+        {
+          "line": 277,
+          "column": 9,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'handleClaimRewards' is assigned a value but never used."
+        },
+        {
+          "line": 280,
+          "column": 13,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'contract' is assigned a value but never used."
+        },
+        {
+          "line": 289,
+          "column": 9,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'totalRewards' is assigned a value but never used."
+        }
+      ]
+    },
+    {
+      "filePath": "\\pages\\token\\settings.tsx",
+      "errorCount": 0,
+      "warningCount": 4,
+      "messages": [
+        {
+          "line": 2,
+          "column": 10,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'ethers' is defined but never used."
+        },
+        {
+          "line": 42,
+          "column": 17,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'session' is assigned a value but never used."
+        },
+        {
+          "line": 45,
+          "column": 10,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'saving' is assigned a value but never used."
+        },
+        {
+          "line": 58,
+          "column": 15,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'contract' is assigned a value but never used."
+        }
+      ]
+    },
+    {
+      "filePath": "\\pages\\token\\transactions.tsx",
+      "errorCount": 0,
+      "warningCount": 4,
+      "messages": [
+        {
+          "line": 31,
+          "column": 17,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'session' is assigned a value but never used."
+        },
+        {
+          "line": 43,
+          "column": 10,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'page' is assigned a value but never used."
+        },
+        {
+          "line": 43,
+          "column": 16,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'setPage' is assigned a value but never used."
+        },
+        {
+          "line": 57,
+          "column": 15,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'contract' is assigned a value but never used."
+        }
+      ]
+    },
+    {
+      "filePath": "\\pages\\token\\validator.tsx",
+      "errorCount": 0,
+      "warningCount": 9,
+      "messages": [
+        {
+          "line": 6,
+          "column": 3,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'ClockIcon' is defined but never used."
+        },
+        {
+          "line": 7,
+          "column": 3,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'UserGroupIcon' is defined but never used."
+        },
+        {
+          "line": 8,
+          "column": 3,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'ArrowTrendingUpIcon' is defined but never used."
+        },
+        {
+          "line": 56,
+          "column": 17,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'session' is assigned a value but never used."
+        },
+        {
+          "line": 59,
+          "column": 25,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'setValidatorData' is assigned a value but never used."
+        },
+        {
+          "line": 60,
+          "column": 26,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'setStakingHistory' is assigned a value but never used."
+        },
+        {
+          "line": 61,
+          "column": 25,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'setRewardHistory' is assigned a value but never used."
+        },
+        {
+          "line": 78,
+          "column": 14,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'error' is defined but never used."
+        },
+        {
+          "line": 87,
+          "column": 14,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'error' is defined but never used."
+        }
+      ]
+    },
+    {
+      "filePath": "\\scripts\\api-health-checker.ts",
+      "errorCount": 0,
+      "warningCount": 1,
+      "messages": [
+        {
+          "line": 30,
+          "column": 11,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'response' is assigned a value but never used."
+        }
+      ]
+    },
+    {
+      "filePath": "\\temp-backup\\ai-agent\\ultra-fast\\route.ts",
+      "errorCount": 0,
+      "warningCount": 2,
+      "messages": [
+        {
+          "line": 20,
+          "column": 12,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'error' is defined but never used."
+        },
+        {
+          "line": 67,
+          "column": 12,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'error' is defined but never used."
+        }
+      ]
+    },
+    {
+      "filePath": "\\temp-backup\\dashboard\\inventory\\page.tsx",
+      "errorCount": 0,
+      "warningCount": 1,
+      "messages": [
+        {
+          "line": 7,
+          "column": 10,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'Label' is defined but never used."
+        }
+      ]
+    },
+    {
+      "filePath": "\\temp-backup\\dashboard\\notifications\\page.tsx",
+      "errorCount": 0,
+      "warningCount": 1,
+      "messages": [
+        {
+          "line": 25,
+          "column": 9,
+          "severity": "warning",
+          "ruleId": "react-hooks/exhaustive-deps",
+          "message": "The 'fetchNotifications' function makes the dependencies of useEffect Hook (at line 23) change on every render. Move it inside the useEffect callback. Alternatively, wrap the definition of 'fetchNotifications' in its own useCallback() Hook."
+        }
+      ]
+    },
+    {
+      "filePath": "\\temp-backup\\dashboard\\products\\page.tsx",
+      "errorCount": 0,
+      "warningCount": 1,
+      "messages": [
+        {
+          "line": 18,
+          "column": 9,
+          "severity": "warning",
+          "ruleId": "react-hooks/exhaustive-deps",
+          "message": "The 'fetchProducts' function makes the dependencies of useEffect Hook (at line 16) change on every render. To fix this, wrap the definition of 'fetchProducts' in its own useCallback() Hook."
+        }
+      ]
+    },
+    {
+      "filePath": "\\temp-backup\\dashboard\\profile\\page.tsx",
+      "errorCount": 3,
+      "warningCount": 0,
+      "messages": [
+        {
+          "line": 80,
+          "column": 18,
+          "severity": "error",
+          "ruleId": "react/jsx-no-undef",
+          "message": "'Switch' is not defined."
+        },
+        {
+          "line": 89,
+          "column": 18,
+          "severity": "error",
+          "ruleId": "react/jsx-no-undef",
+          "message": "'Switch' is not defined."
+        },
+        {
+          "line": 98,
+          "column": 18,
+          "severity": "error",
+          "ruleId": "react/jsx-no-undef",
+          "message": "'Switch' is not defined."
+        }
+      ]
+    },
+    {
+      "filePath": "\\temp-backup\\ehb-ai-agent\\components\\AIAgentChat.tsx",
+      "errorCount": 0,
+      "warningCount": 1,
+      "messages": [
+        {
+          "line": 24,
+          "column": 9,
+          "severity": "warning",
+          "ruleId": "react-hooks/exhaustive-deps",
+          "message": "The 'scrollToBottom' function makes the dependencies of useEffect Hook (at line 30) change on every render. Move it inside the useEffect callback. Alternatively, wrap the definition of 'scrollToBottom' in its own useCallback() Hook."
+        }
+      ]
+    },
+    {
+      "filePath": "\\temp-backup\\ehb-ai-agent\\components\\AIAgentTools.tsx",
+      "errorCount": 0,
+      "warningCount": 11,
+      "messages": [
+        {
+          "line": 2,
+          "column": 10,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'FiCheckCircle' is defined but never used."
+        },
+        {
+          "line": 2,
+          "column": 25,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'FiAlertCircle' is defined but never used."
+        },
+        {
+          "line": 2,
+          "column": 40,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'FiClock' is defined but never used."
+        },
+        {
+          "line": 4,
+          "column": 10,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'roadmapAgentMap' is defined but never used."
+        },
+        {
+          "line": 29,
+          "column": 11,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'AgentStatus' is defined but never used."
+        },
+        {
+          "line": 51,
+          "column": 10,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'metricsData' is assigned a value but never used."
+        },
+        {
+          "line": 70,
+          "column": 6,
+          "severity": "warning",
+          "ruleId": "react-hooks/exhaustive-deps",
+          "message": "React Hook useEffect has a missing dependency: 'metricsService'. Either include it or remove the dependency array. Outer scope values like 'getMetrics' aren't valid dependencies because mutating them doesn't re-render the component."
+        },
+        {
+          "line": 72,
+          "column": 9,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'handleExport' is assigned a value but never used."
+        },
+        {
+          "line": 85,
+          "column": 9,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'handleImport' is assigned a value but never used."
+        },
+        {
+          "line": 145,
+          "column": 9,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'handlePauseResume' is assigned a value but never used."
+        },
+        {
+          "line": 149,
+          "column": 9,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'handleReset' is assigned a value but never used."
+        }
+      ]
+    },
+    {
+      "filePath": "\\temp-backup\\ehb-ai-agent\\components\\AgentLogPanel.tsx",
+      "errorCount": 0,
+      "warningCount": 2,
+      "messages": [
+        {
+          "line": 21,
+          "column": 11,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'state' is assigned a value but never used."
+        },
+        {
+          "line": 22,
+          "column": 16,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'setLogs' is assigned a value but never used."
+        }
+      ]
+    },
+    {
+      "filePath": "\\temp-backup\\ehb-ai-agent\\components\\EHBDevAgent.tsx",
+      "errorCount": 0,
+      "warningCount": 3,
+      "messages": [
+        {
+          "line": 27,
+          "column": 11,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'state' is assigned a value but never used."
+        },
+        {
+          "line": 53,
+          "column": 16,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'error' is defined but never used."
+        },
+        {
+          "line": 64,
+          "column": 6,
+          "severity": "warning",
+          "ruleId": "react-hooks/exhaustive-deps",
+          "message": "React Hook useEffect has a missing dependency: 'handleAlert'. Either include it or remove the dependency array."
+        }
+      ]
+    },
+    {
+      "filePath": "\\temp-backup\\ehb-ai-agent\\components\\agents\\APIAgent.tsx",
+      "errorCount": 0,
+      "warningCount": 1,
+      "messages": [
+        {
+          "line": 19,
+          "column": 9,
+          "severity": "warning",
+          "ruleId": "react-hooks/exhaustive-deps",
+          "message": "The 'scanEndpoints' function makes the dependencies of useEffect Hook (at line 87) change on every render. To fix this, wrap the definition of 'scanEndpoints' in its own useCallback() Hook."
+        }
+      ]
+    },
+    {
+      "filePath": "\\temp-backup\\ehb-ai-agent\\components\\agents\\DataCollectorAgent.tsx",
+      "errorCount": 0,
+      "warningCount": 1,
+      "messages": [
+        {
+          "line": 33,
+          "column": 9,
+          "severity": "warning",
+          "ruleId": "react-hooks/exhaustive-deps",
+          "message": "The 'collectData' function makes the dependencies of useEffect Hook (at line 123) change on every render. To fix this, wrap the definition of 'collectData' in its own useCallback() Hook."
+        }
+      ]
+    },
+    {
+      "filePath": "\\temp-backup\\ehb-ai-agent\\components\\agents\\FolderFlowAgent.tsx",
+      "errorCount": 0,
+      "warningCount": 2,
+      "messages": [
+        {
+          "line": 81,
+          "column": 9,
+          "severity": "warning",
+          "ruleId": "react-hooks/exhaustive-deps",
+          "message": "The 'scanStructure' function makes the dependencies of useEffect Hook (at line 165) change on every render. To fix this, wrap the definition of 'scanStructure' in its own useCallback() Hook."
+        },
+        {
+          "line": 106,
+          "column": 18,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'error' is defined but never used."
+        }
+      ]
+    },
+    {
+      "filePath": "\\temp-backup\\ehb-ai-agent\\components\\agents\\PerformanceAgent.tsx",
+      "errorCount": 0,
+      "warningCount": 1,
+      "messages": [
+        {
+          "line": 190,
+          "column": 6,
+          "severity": "warning",
+          "ruleId": "react-hooks/exhaustive-deps",
+          "message": "React Hook React.useEffect has unnecessary dependencies: 'clearInterval' and 'setInterval'. Either exclude them or remove the dependency array. Outer scope values like 'setInterval' aren't valid dependencies because mutating them doesn't re-render the component."
+        }
+      ]
+    },
+    {
+      "filePath": "\\temp-backup\\ehb-ai-agent\\components\\agents\\SecurityAgent.tsx",
+      "errorCount": 0,
+      "warningCount": 1,
+      "messages": [
+        {
+          "line": 41,
+          "column": 9,
+          "severity": "warning",
+          "ruleId": "react-hooks/exhaustive-deps",
+          "message": "The 'scanSecurity' function makes the dependencies of useEffect Hook (at line 152) change on every render. To fix this, wrap the definition of 'scanSecurity' in its own useCallback() Hook."
+        }
+      ]
+    },
+    {
+      "filePath": "\\temp-backup\\ehb-ai-agent\\components\\visualizations\\AdvancedMetrics.tsx",
+      "errorCount": 0,
+      "warningCount": 9,
+      "messages": [
+        {
+          "line": 3,
+          "column": 3,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'LineChart' is defined but never used."
+        },
+        {
+          "line": 5,
+          "column": 3,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'BarChart' is defined but never used."
+        },
+        {
+          "line": 6,
+          "column": 3,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'Bar' is defined but never used."
+        },
+        {
+          "line": 7,
+          "column": 3,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'PieChart' is defined but never used."
+        },
+        {
+          "line": 8,
+          "column": 3,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'Pie' is defined but never used."
+        },
+        {
+          "line": 20,
+          "column": 3,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'Surface' is defined but never used."
+        },
+        {
+          "line": 21,
+          "column": 3,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'Symbols' is defined but never used."
+        },
+        {
+          "line": 88,
+          "column": 6,
+          "severity": "warning",
+          "ruleId": "react-hooks/exhaustive-deps",
+          "message": "React Hook useEffect has a missing dependency: 'metricsService'. Either include it or remove the dependency array."
+        },
+        {
+          "line": 137,
+          "column": 33,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'x' is defined but never used. Allowed unused args must match /^_/u."
+        }
+      ]
+    },
+    {
+      "filePath": "\\temp-backup\\ehb-ai-agent\\components\\visualizations\\AdvancedVisualizations.tsx",
+      "errorCount": 0,
+      "warningCount": 11,
+      "messages": [
+        {
+          "line": 3,
+          "column": 3,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'LineChart' is defined but never used."
+        },
+        {
+          "line": 4,
+          "column": 3,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'Line' is defined but never used."
+        },
+        {
+          "line": 5,
+          "column": 3,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'BarChart' is defined but never used."
+        },
+        {
+          "line": 6,
+          "column": 3,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'Bar' is defined but never used."
+        },
+        {
+          "line": 7,
+          "column": 3,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'PieChart' is defined but never used."
+        },
+        {
+          "line": 8,
+          "column": 3,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'Pie' is defined but never used."
+        },
+        {
+          "line": 19,
+          "column": 3,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'Surface' is defined but never used."
+        },
+        {
+          "line": 20,
+          "column": 3,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'Symbols' is defined but never used."
+        },
+        {
+          "line": 21,
+          "column": 3,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'ComposedChart' is defined but never used."
+        },
+        {
+          "line": 22,
+          "column": 3,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'Area' is defined but never used."
+        },
+        {
+          "line": 86,
+          "column": 6,
+          "severity": "warning",
+          "ruleId": "react-hooks/exhaustive-deps",
+          "message": "React Hook useEffect has a missing dependency: 'metricsService'. Either include it or remove the dependency array."
+        }
+      ]
+    },
+    {
+      "filePath": "\\temp-backup\\ehb-ai-agent\\components\\visualizations\\AgentMetrics.tsx",
+      "errorCount": 0,
+      "warningCount": 2,
+      "messages": [
+        {
+          "line": 16,
+          "column": 3,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'PieLabelRenderProps' is defined but never used."
+        },
+        {
+          "line": 96,
+          "column": 6,
+          "severity": "warning",
+          "ruleId": "react-hooks/exhaustive-deps",
+          "message": "React Hook useEffect has a missing dependency: 'metricsService'. Either include it or remove the dependency array."
+        }
+      ]
+    },
+    {
+      "filePath": "\\temp-backup\\ehb-ai-agent\\components\\visualizations\\SystemMonitor.tsx",
+      "errorCount": 0,
+      "warningCount": 4,
+      "messages": [
+        {
+          "line": 15,
+          "column": 3,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'PieChart' is defined but never used."
+        },
+        {
+          "line": 16,
+          "column": 3,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'Pie' is defined but never used."
+        },
+        {
+          "line": 17,
+          "column": 3,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'Cell' is defined but never used."
+        },
+        {
+          "line": 82,
+          "column": 6,
+          "severity": "warning",
+          "ruleId": "react-hooks/exhaustive-deps",
+          "message": "React Hook useEffect has a missing dependency: 'metricsService'. Either include it or remove the dependency array."
+        }
+      ]
+    },
+    {
+      "filePath": "\\temp-backup\\ehb-ai-agent\\services\\agentService.ts",
+      "errorCount": 0,
+      "warningCount": 10,
+      "messages": [
+        {
+          "line": 208,
+          "column": 38,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'task' is defined but never used. Allowed unused args must match /^_/u."
+        },
+        {
+          "line": 222,
+          "column": 30,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'data' is defined but never used. Allowed unused args must match /^_/u."
+        },
+        {
+          "line": 228,
+          "column": 31,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'data' is defined but never used. Allowed unused args must match /^_/u."
+        },
+        {
+          "line": 234,
+          "column": 37,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'data' is defined but never used. Allowed unused args must match /^_/u."
+        },
+        {
+          "line": 240,
+          "column": 30,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'data' is defined but never used. Allowed unused args must match /^_/u."
+        },
+        {
+          "line": 246,
+          "column": 37,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'data' is defined but never used. Allowed unused args must match /^_/u."
+        },
+        {
+          "line": 252,
+          "column": 37,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'data' is defined but never used. Allowed unused args must match /^_/u."
+        },
+        {
+          "line": 258,
+          "column": 30,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'data' is defined but never used. Allowed unused args must match /^_/u."
+        },
+        {
+          "line": 264,
+          "column": 35,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'data' is defined but never used. Allowed unused args must match /^_/u."
+        },
+        {
+          "line": 270,
+          "column": 37,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'data' is defined but never used. Allowed unused args must match /^_/u."
+        }
+      ]
+    },
+    {
+      "filePath": "\\temp-backup\\ehb-ai-agent\\services\\fastAgent.ts",
+      "errorCount": 0,
+      "warningCount": 13,
+      "messages": [
+        {
+          "line": 104,
+          "column": 32,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'data' is defined but never used. Allowed unused args must match /^_/u."
+        },
+        {
+          "line": 110,
+          "column": 30,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'data' is defined but never used. Allowed unused args must match /^_/u."
+        },
+        {
+          "line": 115,
+          "column": 31,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'data' is defined but never used. Allowed unused args must match /^_/u."
+        },
+        {
+          "line": 120,
+          "column": 28,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'data' is defined but never used. Allowed unused args must match /^_/u."
+        },
+        {
+          "line": 125,
+          "column": 30,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'data' is defined but never used. Allowed unused args must match /^_/u."
+        },
+        {
+          "line": 130,
+          "column": 37,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'data' is defined but never used. Allowed unused args must match /^_/u."
+        },
+        {
+          "line": 135,
+          "column": 37,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'data' is defined but never used. Allowed unused args must match /^_/u."
+        },
+        {
+          "line": 140,
+          "column": 30,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'data' is defined but never used. Allowed unused args must match /^_/u."
+        },
+        {
+          "line": 145,
+          "column": 31,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'data' is defined but never used. Allowed unused args must match /^_/u."
+        },
+        {
+          "line": 150,
+          "column": 24,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'data' is defined but never used. Allowed unused args must match /^_/u."
+        },
+        {
+          "line": 155,
+          "column": 32,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'data' is defined but never used. Allowed unused args must match /^_/u."
+        },
+        {
+          "line": 159,
+          "column": 29,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'data' is defined but never used. Allowed unused args must match /^_/u."
+        },
+        {
+          "line": 163,
+          "column": 29,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'data' is defined but never used. Allowed unused args must match /^_/u."
+        }
+      ]
+    },
+    {
+      "filePath": "\\temp-backup\\ehb-ai-agent\\services\\gitService.ts",
+      "errorCount": 0,
+      "warningCount": 1,
+      "messages": [
+        {
+          "line": 139,
+          "column": 14,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'error' is defined but never used."
+        }
+      ]
+    },
+    {
+      "filePath": "\\temp-backup\\ehb-ai-agent\\services\\metricsService.ts",
+      "errorCount": 0,
+      "warningCount": 2,
+      "messages": [
+        {
+          "line": 1,
+          "column": 10,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'performance' is defined but never used."
+        },
+        {
+          "line": 3,
+          "column": 10,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'Message' is defined but never used."
+        }
+      ]
+    },
+    {
+      "filePath": "\\temp-backup\\ehb-ai-agent\\services\\ultraFastAgent.ts",
+      "errorCount": 0,
+      "warningCount": 12,
+      "messages": [
+        {
+          "line": 109,
+          "column": 13,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'startTime' is assigned a value but never used."
+        },
+        {
+          "line": 200,
+          "column": 32,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'data' is defined but never used. Allowed unused args must match /^_/u."
+        },
+        {
+          "line": 249,
+          "column": 30,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'data' is defined but never used. Allowed unused args must match /^_/u."
+        },
+        {
+          "line": 254,
+          "column": 31,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'data' is defined but never used. Allowed unused args must match /^_/u."
+        },
+        {
+          "line": 259,
+          "column": 37,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'data' is defined but never used. Allowed unused args must match /^_/u."
+        },
+        {
+          "line": 264,
+          "column": 30,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'data' is defined but never used. Allowed unused args must match /^_/u."
+        },
+        {
+          "line": 269,
+          "column": 37,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'data' is defined but never used. Allowed unused args must match /^_/u."
+        },
+        {
+          "line": 274,
+          "column": 37,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'data' is defined but never used. Allowed unused args must match /^_/u."
+        },
+        {
+          "line": 279,
+          "column": 30,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'data' is defined but never used. Allowed unused args must match /^_/u."
+        },
+        {
+          "line": 284,
+          "column": 31,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'data' is defined but never used. Allowed unused args must match /^_/u."
+        },
+        {
+          "line": 289,
+          "column": 36,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'data' is defined but never used. Allowed unused args must match /^_/u."
+        },
+        {
+          "line": 337,
+          "column": 32,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'data' is defined but never used. Allowed unused args must match /^_/u."
+        }
+      ]
+    },
+    {
+      "filePath": "\\temp-backup\\ehb-franchise\\gosellr\\booking\\page.tsx",
+      "errorCount": 0,
+      "warningCount": 2,
+      "messages": [
+        {
+          "line": 3,
+          "column": 10,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'FRANCHISE_TYPES' is defined but never used."
+        },
+        {
+          "line": 4,
+          "column": 10,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'FranchiseType' is defined but never used."
+        }
+      ]
+    },
+    {
+      "filePath": "\\temp-backup\\login\\page.tsx",
+      "errorCount": 0,
+      "warningCount": 1,
+      "messages": [
+        {
+          "line": 40,
+          "column": 14,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'error' is defined but never used."
+        }
+      ]
+    },
+    {
+      "filePath": "\\temp-backup\\openai\\route.ts",
+      "errorCount": 0,
+      "warningCount": 1,
+      "messages": [
+        {
+          "line": 11,
+          "column": 10,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'generateText' is defined but never used."
+        }
+      ]
+    },
+    {
+      "filePath": "\\types\\api.ts",
+      "errorCount": 0,
+      "warningCount": 1,
+      "messages": [
+        {
+          "line": 1,
+          "column": 10,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'PrismaClient' is defined but never used."
+        }
+      ]
+    },
+    {
+      "filePath": "\\types\\global.d.ts",
+      "errorCount": 0,
+      "warningCount": 1,
+      "messages": [
+        {
+          "line": 1,
+          "column": 10,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'NextApiRequest' is defined but never used."
+        }
+      ]
+    },
+    {
+      "filePath": "\\types\\next-auth.d.ts",
+      "errorCount": 0,
+      "warningCount": 2,
+      "messages": [
+        {
+          "line": 1,
+          "column": 10,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'DefaultSession' is defined but never used."
+        },
+        {
+          "line": 2,
+          "column": 10,
+          "severity": "warning",
+          "ruleId": "@typescript-eslint/no-unused-vars",
+          "message": "'JWT' is defined but never used."
+        }
+      ]
+    },
+    {
+      "filePath": "\\ultra-fast-agent-v2.js",
+      "errorCount": 1,
+      "warningCount": 0,
+      "messages": [
+        {
+          "line": 5,
+          "column": 0,
+          "severity": "error",
+          "ruleId": null,
+          "message": "Parsing error: '}' expected."
+        }
+      ]
+    },
+    {
+      "filePath": "\\ultra-fast-agent-v3.js",
+      "errorCount": 1,
+      "warningCount": 0,
+      "messages": [
+        {
+          "line": 4,
+          "column": 0,
+          "severity": "error",
+          "ruleId": null,
+          "message": "Parsing error: '}' expected."
+        }
+      ]
+    }
+  ]
+}

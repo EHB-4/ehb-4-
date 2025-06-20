@@ -4,6 +4,9 @@ import { motion } from 'framer-motion';
 import { useSession } from 'next-auth/react';
 import React, { useState, useEffect } from 'react';
 
+import { BalanceSummary } from '@/components/wallet/BalanceSummary';
+import { WalletActions } from '@/components/wallet/WalletActions';
+import { TransactionHistory } from '@/components/wallet/TransactionHistory';
 import { Wallet, Transaction } from '@/lib/models/Wallet';
 
 export default function WalletPage() {
@@ -112,108 +115,25 @@ export default function WalletPage() {
       >
         <h1 className="text-3xl font-bold mb-6">Your Trusty Wallet</h1>
 
-        {/* Balance Section */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-          <div className="bg-blue-50 p-6 rounded-lg">
-            <h3 className="text-lg font-semibold text-blue-800 mb-2">Available Balance</h3>
-            <p className="text-3xl font-bold text-blue-600">{wallet.balance} coins</p>
-          </div>
-          <div className="bg-purple-50 p-6 rounded-lg">
-            <h3 className="text-lg font-semibold text-purple-800 mb-2">Locked Balance</h3>
-            <p className="text-3xl font-bold text-purple-600">{wallet.lockedBalance} coins</p>
-          </div>
-          <div className="bg-green-50 p-6 rounded-lg">
-            <h3 className="text-lg font-semibold text-green-800 mb-2">Monthly Bonus</h3>
-            <p className="text-3xl font-bold text-green-600">{monthlyBonus.toFixed(2)} coins</p>
-            <p className="text-sm text-green-600 mt-1">
-              {wallet.loyaltyBonus * 100}% monthly on locked balance
-            </p>
-          </div>
-        </div>
+        <BalanceSummary
+          balance={wallet.balance}
+          lockedBalance={wallet.lockedBalance}
+          monthlyBonus={monthlyBonus}
+          loyaltyBonus={wallet.loyaltyBonus}
+        />
 
-        {/* Actions Section */}
-        <div className="mb-8">
-          <h2 className="text-xl font-bold mb-4">Wallet Actions</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="space-y-4">
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Amount</label>
-                <input
-                  type="number"
-                  value={actionAmount}
-                  onChange={e => setActionAmount(e.target.value)}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  placeholder="Enter amount"
-                />
-              </div>
-              <div className="flex gap-2">
-                <button
-                  onClick={() => handleAction('lock')}
-                  className="flex-1 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
-                >
-                  Lock Coins
-                </button>
-                <button
-                  onClick={() => handleAction('unlock')}
-                  className="flex-1 bg-purple-500 text-white px-4 py-2 rounded hover:bg-purple-600"
-                >
-                  Unlock Coins
-                </button>
-              </div>
-            </div>
-            <div className="space-y-4">
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Lock Duration
-                </label>
-                <select
-                  value={selectedLoyaltyType}
-                  onChange={e => setSelectedLoyaltyType(e.target.value)}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                >
-                  <option value="">Select lock duration</option>
-                  <option value="1yr">1 Year (0.5% monthly)</option>
-                  <option value="2yr">2 Years (1.0% monthly)</option>
-                  <option value="3yr">3 Years (1.1% monthly)</option>
-                </select>
-              </div>
-              <button
-                onClick={() => handleAction('updateLoyalty')}
-                className="w-full bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600"
-              >
-                Update Lock Duration
-              </button>
-            </div>
-          </div>
-        </div>
+        <WalletActions
+          actionAmount={actionAmount}
+          selectedLoyaltyType={selectedLoyaltyType}
+          onAmountChange={setActionAmount}
+          onLoyaltyTypeChange={setSelectedLoyaltyType}
+          onLock={() => handleAction('lock')}
+          onUnlock={() => handleAction('unlock')}
+          onUpdateLoyalty={() => handleAction('updateLoyalty')}
+          error={error}
+        />
 
-        {/* Transaction History */}
-        <div>
-          <h2 className="text-xl font-bold mb-4">Transaction History</h2>
-          <div className="space-y-4">
-            {wallet.transactionHistory.map((transaction: Transaction) => (
-              <motion.div
-                key={transaction.id}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                className="bg-gray-50 p-4 rounded-lg"
-              >
-                <div className="flex justify-between items-center">
-                  <div>
-                    <p className="font-semibold">{transaction.type}</p>
-                    <p className="text-sm text-gray-600">{transaction.description}</p>
-                  </div>
-                  <div className="text-right">
-                    <p className="font-bold">{transaction.amount} coins</p>
-                    <p className="text-sm text-gray-600">
-                      {new Date(transaction.timestamp).toLocaleDateString()}
-                    </p>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
+        <TransactionHistory transactions={wallet.transactionHistory} />
       </motion.div>
     </div>
   );

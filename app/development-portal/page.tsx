@@ -56,6 +56,15 @@ export default function DevelopmentPortalPage() {
       progress: 75,
     },
     {
+      icon: FaLaptopCode,
+      title: 'Roadmap Agent',
+      description: 'AI-powered roadmap management and real-time project tracking.',
+      color: 'text-emerald-600',
+      bgColor: 'bg-emerald-50',
+      href: '/roadmap-agent',
+      progress: 60,
+    },
+    {
       icon: FaMobile,
       title: 'Mobile Development',
       description: 'Cross-platform mobile apps with React Native.',

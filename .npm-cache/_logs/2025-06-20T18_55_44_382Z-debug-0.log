@@ -1,0 +1,149 @@
+0 verbose cli C:\Program Files\nodejs\node.exe C:\Program Files\nodejs\node_modules\npm\bin\npm-cli.js
+1 info using npm@11.3.0
+2 info using node@v24.2.0
+3 silly config load:file:C:\Program Files\nodejs\node_modules\npm\npmrc
+4 silly config load:file:F:\ehb next.js 04\.npmrc
+5 silly config load:file:C:\Users\PC\.npmrc
+6 silly config load:file:C:\Users\PC\AppData\Roaming\npm\etc\npmrc
+7 verbose title npm install @typescript-eslint/eslint-plugin@latest
+8 verbose argv "install" "@typescript-eslint/eslint-plugin@latest" "--save-dev"
+9 verbose logfile logs-max:10 dir:F:\ehb next.js 04\.npm-cache\_logs\2025-06-20T18_55_44_382Z-
+10 verbose logfile F:\ehb next.js 04\.npm-cache\_logs\2025-06-20T18_55_44_382Z-debug-0.log
+11 silly logfile start cleaning logs, removing 1 files
+12 silly packumentCache heap:4496293888 maxSize:1124073472 maxEntrySize:562036736
+13 silly logfile done cleaning log files
+14 silly packumentCache corgi:https://registry.npmjs.org/@typescript-eslint%2feslint-plugin cache-miss
+15 http fetch GET 200 https://registry.npmjs.org/@typescript-eslint%2feslint-plugin 2010ms (cache miss)
+16 silly packumentCache corgi:https://registry.npmjs.org/@typescript-eslint%2feslint-plugin set size:undefined disposed:false
+17 silly idealTree buildDeps
+18 silly fetch manifest @typescript-eslint/eslint-plugin@8.34.1
+19 silly packumentCache full:https://registry.npmjs.org/@typescript-eslint%2feslint-plugin cache-miss
+20 http fetch GET 200 https://registry.npmjs.org/@typescript-eslint%2feslint-plugin 436ms (cache miss)
+21 silly packumentCache full:https://registry.npmjs.org/@typescript-eslint%2feslint-plugin set size:undefined disposed:false
+22 silly placeDep ROOT @typescript-eslint/eslint-plugin@8.34.1 OK for: ehb-next-js-04@1.0.0 want: 8.34.1
+23 silly fetch manifest ignore@^7.0.0
+24 silly packumentCache full:https://registry.npmjs.org/ignore cache-miss
+25 silly fetch manifest ts-api-utils@^2.1.0
+26 silly packumentCache full:https://registry.npmjs.org/ts-api-utils cache-miss
+27 silly fetch manifest @typescript-eslint/utils@8.34.1
+28 silly packumentCache full:https://registry.npmjs.org/@typescript-eslint%2futils cache-miss
+29 silly fetch manifest @typescript-eslint/type-utils@8.34.1
+30 silly packumentCache full:https://registry.npmjs.org/@typescript-eslint%2ftype-utils cache-miss
+31 silly fetch manifest @typescript-eslint/visitor-keys@8.34.1
+32 silly packumentCache full:https://registry.npmjs.org/@typescript-eslint%2fvisitor-keys cache-miss
+33 silly fetch manifest @typescript-eslint/scope-manager@8.34.1
+34 silly packumentCache full:https://registry.npmjs.org/@typescript-eslint%2fscope-manager cache-miss
+35 http fetch GET 200 https://registry.npmjs.org/ignore 250ms (cache miss)
+36 silly packumentCache full:https://registry.npmjs.org/ignore set size:undefined disposed:false
+37 http fetch GET 200 https://registry.npmjs.org/ts-api-utils 588ms (cache miss)
+38 silly packumentCache full:https://registry.npmjs.org/ts-api-utils set size:undefined disposed:false
+39 http fetch GET 200 https://registry.npmjs.org/@typescript-eslint%2futils 1249ms (cache miss)
+40 silly packumentCache full:https://registry.npmjs.org/@typescript-eslint%2futils set size:undefined disposed:false
+41 http fetch GET 200 https://registry.npmjs.org/@typescript-eslint%2ftype-utils 1318ms (cache miss)
+42 silly packumentCache full:https://registry.npmjs.org/@typescript-eslint%2ftype-utils set size:undefined disposed:false
+43 http fetch GET 200 https://registry.npmjs.org/@typescript-eslint%2fvisitor-keys 1373ms (cache miss)
+44 silly packumentCache full:https://registry.npmjs.org/@typescript-eslint%2fvisitor-keys set size:undefined disposed:false
+45 http fetch GET 200 https://registry.npmjs.org/@typescript-eslint%2fscope-manager 1837ms (cache miss)
+46 silly packumentCache full:https://registry.npmjs.org/@typescript-eslint%2fscope-manager set size:undefined disposed:false
+47 silly placeDep ROOT @typescript-eslint/scope-manager@8.34.1 OK for: @typescript-eslint/eslint-plugin@8.34.1 want: 8.34.1
+48 silly placeDep ROOT @typescript-eslint/type-utils@8.34.1 OK for: @typescript-eslint/eslint-plugin@8.34.1 want: 8.34.1
+49 silly placeDep ROOT @typescript-eslint/utils@8.34.1 OK for: @typescript-eslint/eslint-plugin@8.34.1 want: 8.34.1
+50 silly placeDep ROOT @typescript-eslint/visitor-keys@8.34.1 OK for: @typescript-eslint/eslint-plugin@8.34.1 want: 8.34.1
+51 silly placeDep ROOT ignore@7.0.5 OK for: @typescript-eslint/eslint-plugin@8.34.1 want: ^7.0.0
+52 silly placeDep ROOT ts-api-utils@2.1.0 OK for: @typescript-eslint/eslint-plugin@8.34.1 want: ^2.1.0
+53 silly fetch manifest @typescript-eslint/types@8.34.1
+54 silly packumentCache full:https://registry.npmjs.org/@typescript-eslint%2ftypes cache-miss
+55 silly fetch manifest @typescript-eslint/typescript-estree@8.34.1
+56 silly packumentCache full:https://registry.npmjs.org/@typescript-eslint%2ftypescript-estree cache-miss
+57 silly fetch manifest @typescript-eslint/types@8.34.1
+58 silly packumentCache full:https://registry.npmjs.org/@typescript-eslint%2ftypes cache-miss
+59 silly fetch manifest @typescript-eslint/typescript-estree@8.34.1
+60 silly packumentCache full:https://registry.npmjs.org/@typescript-eslint%2ftypescript-estree cache-miss
+61 silly fetch manifest eslint-visitor-keys@^4.2.1
+62 silly packumentCache full:https://registry.npmjs.org/eslint-visitor-keys cache-miss
+63 silly fetch manifest @typescript-eslint/types@8.34.1
+64 silly packumentCache full:https://registry.npmjs.org/@typescript-eslint%2ftypes cache-miss
+65 http fetch GET 200 https://registry.npmjs.org/eslint-visitor-keys 233ms (cache miss)
+66 silly packumentCache full:https://registry.npmjs.org/eslint-visitor-keys set size:undefined disposed:false
+67 http fetch GET 200 https://registry.npmjs.org/@typescript-eslint%2ftypes 865ms (cache miss)
+68 silly packumentCache full:https://registry.npmjs.org/@typescript-eslint%2ftypes set size:undefined disposed:false
+69 http fetch GET 200 https://registry.npmjs.org/@typescript-eslint%2ftypes 916ms (cache miss)
+70 silly packumentCache full:https://registry.npmjs.org/@typescript-eslint%2ftypes set size:undefined disposed:false
+71 http fetch GET 200 https://registry.npmjs.org/@typescript-eslint%2ftypescript-estree 1285ms (cache miss)
+72 silly packumentCache full:https://registry.npmjs.org/@typescript-eslint%2ftypescript-estree set size:undefined disposed:false
+73 http fetch GET 200 https://registry.npmjs.org/@typescript-eslint%2ftypes 1536ms (cache miss)
+74 silly packumentCache full:https://registry.npmjs.org/@typescript-eslint%2ftypes set size:undefined disposed:false
+75 http fetch GET 200 https://registry.npmjs.org/@typescript-eslint%2ftypescript-estree 4146ms (cache miss)
+76 silly packumentCache full:https://registry.npmjs.org/@typescript-eslint%2ftypescript-estree set size:undefined disposed:false
+77 silly placeDep ROOT @typescript-eslint/types@8.34.1 OK for: @typescript-eslint/scope-manager@8.34.1 want: 8.34.1
+78 silly placeDep ROOT @typescript-eslint/typescript-estree@8.34.1 OK for: @typescript-eslint/type-utils@8.34.1 want: 8.34.1
+79 silly fetch manifest @typescript-eslint/tsconfig-utils@8.34.1
+80 silly packumentCache full:https://registry.npmjs.org/@typescript-eslint%2ftsconfig-utils cache-miss
+81 silly fetch manifest @typescript-eslint/project-service@8.34.1
+82 silly packumentCache full:https://registry.npmjs.org/@typescript-eslint%2fproject-service cache-miss
+83 http fetch GET 200 https://registry.npmjs.org/@typescript-eslint%2ftsconfig-utils 247ms (cache miss)
+84 silly packumentCache full:https://registry.npmjs.org/@typescript-eslint%2ftsconfig-utils set size:undefined disposed:false
+85 http fetch GET 200 https://registry.npmjs.org/@typescript-eslint%2fproject-service 248ms (cache miss)
+86 silly packumentCache full:https://registry.npmjs.org/@typescript-eslint%2fproject-service set size:undefined disposed:false
+87 silly placeDep ROOT @typescript-eslint/project-service@8.34.1 OK for: @typescript-eslint/typescript-estree@8.34.1 want: 8.34.1
+88 silly placeDep ROOT @typescript-eslint/tsconfig-utils@8.34.1 OK for: @typescript-eslint/typescript-estree@8.34.1 want: 8.34.1
+89 silly fetch manifest @typescript-eslint/tsconfig-utils@^8.34.1
+90 silly packumentCache full:https://registry.npmjs.org/@typescript-eslint%2ftsconfig-utils cache-miss
+91 http cache https://registry.npmjs.org/@typescript-eslint%2ftsconfig-utils 8ms (cache hit)
+92 silly packumentCache full:https://registry.npmjs.org/@typescript-eslint%2ftsconfig-utils set size:82307 disposed:false
+93 silly placeDep node_modules/@typescript-eslint/visitor-keys eslint-visitor-keys@4.2.1 OK for: @typescript-eslint/visitor-keys@8.34.1 want: ^4.2.1
+94 silly reify moves {}
+95 http cache @typescript-eslint/tsconfig-utils@https://registry.npmjs.org/@typescript-eslint/tsconfig-utils/-/tsconfig-utils-8.34.1.tgz 0ms (cache hit)
+96 http cache ts-api-utils@https://registry.npmjs.org/ts-api-utils/-/ts-api-utils-2.1.0.tgz 0ms (cache hit)
+97 http cache ignore@https://registry.npmjs.org/ignore/-/ignore-7.0.5.tgz 0ms (cache hit)
+98 http cache @typescript-eslint/project-service@https://registry.npmjs.org/@typescript-eslint/project-service/-/project-service-8.34.1.tgz 0ms (cache hit)
+99 http cache @typescript-eslint/typescript-estree@https://registry.npmjs.org/@typescript-eslint/typescript-estree/-/typescript-estree-8.34.1.tgz 0ms (cache hit)
+100 http cache @typescript-eslint/types@https://registry.npmjs.org/@typescript-eslint/types/-/types-8.34.1.tgz 0ms (cache hit)
+101 http cache @typescript-eslint/type-utils@https://registry.npmjs.org/@typescript-eslint/type-utils/-/type-utils-8.34.1.tgz 0ms (cache hit)
+102 http cache @typescript-eslint/utils@https://registry.npmjs.org/@typescript-eslint/utils/-/utils-8.34.1.tgz 0ms (cache hit)
+103 http cache @typescript-eslint/scope-manager@https://registry.npmjs.org/@typescript-eslint/scope-manager/-/scope-manager-8.34.1.tgz 0ms (cache hit)
+104 http cache @typescript-eslint/eslint-plugin@https://registry.npmjs.org/@typescript-eslint/eslint-plugin/-/eslint-plugin-8.34.1.tgz 0ms (cache hit)
+105 silly tarball no local data for @typescript-eslint/tsconfig-utils@https://registry.npmjs.org/@typescript-eslint/tsconfig-utils/-/tsconfig-utils-8.34.1.tgz. Extracting by manifest.
+106 silly tarball no local data for ts-api-utils@https://registry.npmjs.org/ts-api-utils/-/ts-api-utils-2.1.0.tgz. Extracting by manifest.
+107 silly tarball no local data for ignore@https://registry.npmjs.org/ignore/-/ignore-7.0.5.tgz. Extracting by manifest.
+108 silly tarball no local data for @typescript-eslint/project-service@https://registry.npmjs.org/@typescript-eslint/project-service/-/project-service-8.34.1.tgz. Extracting by manifest.
+109 silly tarball no local data for @typescript-eslint/typescript-estree@https://registry.npmjs.org/@typescript-eslint/typescript-estree/-/typescript-estree-8.34.1.tgz. Extracting by manifest.
+110 silly tarball no local data for @typescript-eslint/types@https://registry.npmjs.org/@typescript-eslint/types/-/types-8.34.1.tgz. Extracting by manifest.
+111 silly tarball no local data for @typescript-eslint/type-utils@https://registry.npmjs.org/@typescript-eslint/type-utils/-/type-utils-8.34.1.tgz. Extracting by manifest.
+112 silly tarball no local data for @typescript-eslint/utils@https://registry.npmjs.org/@typescript-eslint/utils/-/utils-8.34.1.tgz. Extracting by manifest.
+113 http cache @typescript-eslint/visitor-keys@https://registry.npmjs.org/@typescript-eslint/visitor-keys/-/visitor-keys-8.34.1.tgz 0ms (cache hit)
+114 silly tarball no local data for @typescript-eslint/scope-manager@https://registry.npmjs.org/@typescript-eslint/scope-manager/-/scope-manager-8.34.1.tgz. Extracting by manifest.
+115 http cache eslint-visitor-keys@https://registry.npmjs.org/eslint-visitor-keys/-/eslint-visitor-keys-4.2.1.tgz 0ms (cache hit)
+116 silly tarball no local data for @typescript-eslint/eslint-plugin@https://registry.npmjs.org/@typescript-eslint/eslint-plugin/-/eslint-plugin-8.34.1.tgz. Extracting by manifest.
+117 silly tarball no local data for @typescript-eslint/visitor-keys@https://registry.npmjs.org/@typescript-eslint/visitor-keys/-/visitor-keys-8.34.1.tgz. Extracting by manifest.
+118 silly tarball no local data for eslint-visitor-keys@https://registry.npmjs.org/eslint-visitor-keys/-/eslint-visitor-keys-4.2.1.tgz. Extracting by manifest.
+119 http fetch GET 200 https://registry.npmjs.org/@typescript-eslint/tsconfig-utils/-/tsconfig-utils-8.34.1.tgz 169ms (cache miss)
+120 http fetch GET 200 https://registry.npmjs.org/@typescript-eslint/project-service/-/project-service-8.34.1.tgz 168ms (cache miss)
+121 http fetch GET 200 https://registry.npmjs.org/@typescript-eslint/types/-/types-8.34.1.tgz 180ms (cache miss)
+122 http fetch GET 200 https://registry.npmjs.org/ts-api-utils/-/ts-api-utils-2.1.0.tgz 237ms (cache miss)
+123 http fetch GET 200 https://registry.npmjs.org/ignore/-/ignore-7.0.5.tgz 238ms (cache miss)
+124 http fetch GET 200 https://registry.npmjs.org/@typescript-eslint/typescript-estree/-/typescript-estree-8.34.1.tgz 289ms (cache miss)
+125 http fetch GET 200 https://registry.npmjs.org/@typescript-eslint/visitor-keys/-/visitor-keys-8.34.1.tgz 484ms (cache miss)
+126 http fetch GET 200 https://registry.npmjs.org/eslint-visitor-keys/-/eslint-visitor-keys-4.2.1.tgz 553ms (cache miss)
+127 http fetch GET 200 https://registry.npmjs.org/@typescript-eslint/type-utils/-/type-utils-8.34.1.tgz 581ms (cache miss)
+128 http fetch GET 200 https://registry.npmjs.org/@typescript-eslint/utils/-/utils-8.34.1.tgz 838ms (cache miss)
+129 http fetch GET 200 https://registry.npmjs.org/@typescript-eslint/scope-manager/-/scope-manager-8.34.1.tgz 928ms (cache miss)
+130 http fetch GET 200 https://registry.npmjs.org/@typescript-eslint/eslint-plugin/-/eslint-plugin-8.34.1.tgz 1136ms (cache miss)
+131 silly ADD node_modules/@typescript-eslint/tsconfig-utils
+132 silly ADD node_modules/@typescript-eslint/project-service
+133 silly ADD node_modules/@typescript-eslint/typescript-estree
+134 silly ADD node_modules/@typescript-eslint/types
+135 silly ADD node_modules/ts-api-utils
+136 silly ADD node_modules/ignore
+137 silly ADD node_modules/@typescript-eslint/visitor-keys
+138 silly ADD node_modules/@typescript-eslint/visitor-keys/node_modules/eslint-visitor-keys
+139 silly ADD node_modules/@typescript-eslint/utils
+140 silly ADD node_modules/@typescript-eslint/type-utils
+141 silly ADD node_modules/@typescript-eslint/scope-manager
+142 silly ADD node_modules/@typescript-eslint/eslint-plugin
+143 verbose cwd F:\ehb next.js 04
+144 verbose os Windows_NT 10.0.26100
+145 verbose node v24.2.0
+146 verbose npm  v11.3.0
+147 verbose exit 0
+148 info ok

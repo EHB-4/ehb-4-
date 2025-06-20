@@ -5,7 +5,9 @@ import { useSession } from 'next-auth/react';
 import { useState, useEffect } from 'react';
 import { toast } from 'react-hot-toast';
 
-import Modal from '@/components/Modal';
+import { CourseFilters } from '@/components/edr/CourseFilters';
+import { CourseGrid } from '@/components/edr/CourseGrid';
+import { BookingModal } from '@/components/edr/BookingModal';
 import { Course } from '@/lib/models/Course';
 import { Tutor } from '@/lib/models/Tutor';
 import { Wallet } from '@/lib/models/Wallet';
@@ -146,175 +148,26 @@ export default function CourseListing() {
           </p>
         </div>
 
-        {/* Filters */}
-        <div className="bg-white rounded-lg shadow-sm p-6 mb-8">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-            <select
-              value={filters.subject}
-              onChange={e => setFilters(prev => ({ ...prev, subject: e.target.value }))}
-              className="rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
-            >
-              <option value="">All Subjects</option>
-              <option value="mathematics">Mathematics</option>
-              <option value="physics">Physics</option>
-              <option value="chemistry">Chemistry</option>
-              <option value="biology">Biology</option>
-              <option value="computer-science">Computer Science</option>
-            </select>
+        <CourseFilters filters={filters} onFiltersChange={setFilters} />
 
-            <select
-              value={filters.city}
-              onChange={e => setFilters(prev => ({ ...prev, city: e.target.value }))}
-              className="rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
-            >
-              <option value="">All Cities</option>
-              <option value="karachi">Karachi</option>
-              <option value="lahore">Lahore</option>
-              <option value="islamabad">Islamabad</option>
-              <option value="peshawar">Peshawar</option>
-              <option value="quetta">Quetta</option>
-            </select>
-
-            <select
-              value={filters.mode}
-              onChange={e => setFilters(prev => ({ ...prev, mode: e.target.value }))}
-              className="rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
-            >
-              <option value="">All Modes</option>
-              <option value="online">Online</option>
-              <option value="onsite">Onsite</option>
-            </select>
-
-            <input
-              type="number"
-              placeholder="Max Fee (coins)"
-              value={filters.maxFee}
-              onChange={e => setFilters(prev => ({ ...prev, maxFee: e.target.value }))}
-              className="rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
-            />
-          </div>
-        </div>
-
-        {/* Course Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {courses.map(course => {
-            const tutor = tutors[course.tutorId.toString()];
-            const discount = wallet ? calculateLoyaltyDiscount(wallet.coinLock) : 0;
-            const finalPrice = course.price * (1 - discount);
-
-            return (
-              <motion.div
-                key={course._id.toString()}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                className="bg-white rounded-lg shadow-sm overflow-hidden"
-              >
-                <div className="p-6">
-                  <div className="flex items-center justify-between mb-4">
-                    <h3 className="text-lg font-medium text-gray-900">{course.title}</h3>
-                    <span className="px-2 py-1 text-xs font-medium text-blue-600 bg-blue-50 rounded-full">
-                      SQL {tutor?.sqlLevel || 3}
-                    </span>
-                  </div>
-
-                  <p className="text-gray-600 mb-4">{course.description}</p>
-
-                  <div className="space-y-2 mb-4">
-                    <div className="flex items-center text-sm text-gray-500">
-                      <span className="font-medium mr-2">Tutor:</span>
-                      {tutor?.name}
-                    </div>
-                    <div className="flex items-center text-sm text-gray-500">
-                      <span className="font-medium mr-2">Subject:</span>
-                      {course.subject}
-                    </div>
-                    <div className="flex items-center text-sm text-gray-500">
-                      <span className="font-medium mr-2">Schedule:</span>
-                      {course.schedule}
-                    </div>
-                    <div className="flex items-center text-sm text-gray-500">
-                      <span className="font-medium mr-2">Mode:</span>
-                      {course.mode}
-                    </div>
-                    <div className="flex items-center text-sm text-gray-500">
-                      <span className="font-medium mr-2">Location:</span>
-                      {course.city}
-                    </div>
-                  </div>
-
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <p className="text-lg font-medium text-gray-900">{finalPrice} coins</p>
-                      {discount > 0 && (
-                        <p className="text-sm text-green-600">
-                          {discount * 100}% loyalty discount applied
-                        </p>
-                      )}
-                    </div>
-                    <button
-                      onClick={() => handleBookCourse(course)}
-                      className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
-                    >
-                      Book Now
-                    </button>
-                  </div>
-                </div>
-              </motion.div>
-            );
-          })}
-
-          {courses.length === 0 && (
-            <div className="col-span-full text-center text-gray-500 py-12">
-              No courses found matching your criteria
-            </div>
-          )}
-        </div>
+        <CourseGrid
+          courses={courses}
+          tutors={tutors}
+          wallet={wallet}
+          calculateLoyaltyDiscount={calculateLoyaltyDiscount}
+          onBookCourse={handleBookCourse}
+        />
       </div>
 
-      {/* Booking Modal */}
-      {showBookingModal && selectedCourse && (
-        <Modal
-          isOpen={showBookingModal}
-          onClose={() => setShowBookingModal(false)}
-          title="Confirm Course Booking"
-        >
-          <div className="space-y-4">
-            <p className="text-gray-600">
-              You are about to book the course "{selectedCourse.title}" with{' '}
-              {tutors[selectedCourse.tutorId.toString()]?.name}
-            </p>
-
-            <div className="bg-gray-50 p-4 rounded-lg">
-              <h4 className="font-medium text-gray-900 mb-2">Booking Details</h4>
-              <div className="space-y-2 text-sm text-gray-600">
-                <p>Schedule: {selectedCourse.schedule}</p>
-                <p>Mode: {selectedCourse.mode}</p>
-                <p>Location: {selectedCourse.city}</p>
-                <p>
-                  Price:{' '}
-                  {selectedCourse.price * (1 - calculateLoyaltyDiscount(wallet?.coinLock || 0))}{' '}
-                  coins
-                </p>
-              </div>
-            </div>
-
-            <div className="flex justify-end space-x-4">
-              <button
-                onClick={() => setShowBookingModal(false)}
-                className="px-4 py-2 text-gray-700 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors"
-              >
-                Cancel
-              </button>
-              <button
-                onClick={handleConfirmBooking}
-                className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
-              >
-                Confirm Booking
-              </button>
-            </div>
-          </div>
-        </Modal>
-      )}
+      <BookingModal
+        isOpen={showBookingModal}
+        onClose={() => setShowBookingModal(false)}
+        selectedCourse={selectedCourse}
+        tutors={tutors}
+        wallet={wallet}
+        calculateLoyaltyDiscount={calculateLoyaltyDiscount}
+        onConfirmBooking={handleConfirmBooking}
+      />
     </div>
   );
 }
