@@ -1,5 +1,7 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
 generator client {
-  enableTracing = true
   provider = "prisma-client-js"
 }
 
@@ -9,240 +11,173 @@ datasource db {
 }
 
 model User {
-  id            String    @id @default(auto()) @map("_id") @db.ObjectId
-  name          String
-  email         String    @unique
-  password      String?
-  role          String    @default("user")
-  sqlLevel      Int       @default(0)
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
-  
-  // Affiliate relation
-  affiliateProfile AffiliateUser?
-}
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  email     String   @unique
+  name      String?
+  password  String
+  role      Role     @default(USER)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
-// Affiliate Program Models
-model AffiliateUser {
-  id            String   @id @default(auto()) @map("_id") @db.ObjectId
-  userId        String   @unique @db.ObjectId
-  user          User     @relation(fields: [userId], references: [id])
-  
-  // Referral System
-  referralCode  String   @unique
-  referrerId    String?  @db.ObjectId
-  referrer      AffiliateUser? @relation("ReferralTree", fields: [referrerId], references: [id], onDelete: NoAction, onUpdate: NoAction)
-  referrals     AffiliateUser[] @relation("ReferralTree")
-  
-  // SQL Level & Rank
-  sqlLevel      SQLLevel @default(FREE)
-  affiliateRank AffiliateRank @default(BRONZE)
-  isActive      Boolean  @default(true)
-  
-  // Financial
-  totalEarnings Float    @default(0)
-  totalWithdrawn Float   @default(0)
-  currentBalance Float   @default(0)
-  lockedBalance  Float   @default(0)
-  
-  // Settings
-  autoWithdraw  Boolean  @default(false)
-  bep20Address  String?
-  withdrawalMethod WithdrawalMethod @default(EHB_WALLET)
-  
-  // Timestamps
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
-  
   // Relations
-  commissions   AffiliateCommission[]
-  withdrawals   AffiliateWithdrawal[]
-  bonuses       AffiliateBonus[]
-  storeLinks    AffiliateStoreLink[]
+  orders     Order[]
+  reviews    Review[]
+  wishlist   WishlistItem[]
+  cart       CartItem[]
+  wallet     Wallet?
+  profile    Profile?
+  kyc        KYC?
   
-  @@map("affiliateUsers")
+  @@map("users")
 }
 
-model AffiliateCommission {
-  id            String   @id @default(auto()) @map("_id") @db.ObjectId
-  affiliateId   String   @db.ObjectId
-  affiliate     AffiliateUser @relation(fields: [affiliateId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+model Profile {
+  id          String  @id @default(auto()) @map("_id") @db.ObjectId
+  userId      String  @unique @db.ObjectId
+  avatar      String?
+  phone       String?
+  address     String?
+  city        String?
+  country     String?
+  postalCode  String?
+  bio         String?
   
-  // Commission Details
-  amount        Float
-  level         Int      // L1=1, L2=2, etc.
-  commissionType CommissionType
-  sourceUserId  String   @db.ObjectId
-  sourceOrderId String?  @db.ObjectId
+  user        User    @relation(fields: [userId], references: [id], onDelete: Cascade)
   
-  // Status
-  status        CommissionStatus @default(PENDING)
-  isWithdrawn   Boolean  @default(false)
-  
-  // Metadata
-  description   String?
-  createdAt     DateTime @default(now())
-  
-  @@map("affiliateCommissions")
+  @@map("profiles")
 }
 
-model AffiliateWithdrawal {
-  id            String   @id @default(auto()) @map("_id") @db.ObjectId
-  affiliateId   String   @db.ObjectId
-  affiliate     AffiliateUser @relation(fields: [affiliateId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+model Product {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  name        String
+  description String
+  price       Float
+  images      String[]
+  category    String
+  stock       Int      @default(0)
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relations
+  reviews     Review[]
+  cartItems   CartItem[]
+  wishlistItems WishlistItem[]
+  orders      OrderItem[]
   
-  // Withdrawal Details
-  amount        Float
-  method        WithdrawalMethod
-  status        WithdrawalStatus @default(PENDING)
-  
-  // Transaction Details
-  transactionHash String?
-  bep20Address    String?
-  bankDetails     Json?
-  
-  // Admin
-  approvedBy     String?  @db.ObjectId
-  approvedAt     DateTime?
-  notes          String?
-  
-  createdAt      DateTime @default(now())
-  updatedAt      DateTime @updatedAt
-  
-  @@map("affiliateWithdrawals")
+  @@map("products")
 }
 
-model AffiliateBonus {
-  id            String   @id @default(auto()) @map("_id") @db.ObjectId
-  affiliateId   String   @db.ObjectId
-  affiliate     AffiliateUser @relation(fields: [affiliateId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+model Order {
+  id        String      @id @default(auto()) @map("_id") @db.ObjectId
+  userId    String      @db.ObjectId
+  status    OrderStatus @default(PENDING)
+  total     Float
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
+
+  // Relations
+  user      User        @relation(fields: [userId], references: [id])
+  items     OrderItem[]
   
-  // Bonus Details
-  bonusType     BonusType
-  amount        Float
-  criteria      String   // e.g., "5 Franchise Sales in 1 Month"
-  status        BonusStatus @default(PENDING)
-  
-  // Lock Details
-  lockDuration  Int?     // in months
-  unlockDate    DateTime?
-  
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
-  
-  @@map("affiliateBonuses")
+  @@map("orders")
 }
 
-model AffiliateStoreLink {
-  id            String   @id @default(auto()) @map("_id") @db.ObjectId
-  affiliateId   String   @db.ObjectId
-  affiliate     AffiliateUser @relation(fields: [affiliateId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+model OrderItem {
+  id        String @id @default(auto()) @map("_id") @db.ObjectId
+  orderId   String @db.ObjectId
+  productId String @db.ObjectId
+  quantity  Int
+  price     Float
+
+  // Relations
+  order     Order   @relation(fields: [orderId], references: [id])
+  product   Product @relation(fields: [productId], references: [id])
   
-  // Store Details
-  storeType     StoreType
-  storeUrl      String   @unique
-  storeName     String?
-  layout        StoreLayout @default(AMAZON_STYLE)
-  
-  // Content
-  bannerUrl     String?
-  videoUrl      String?
-  description   String?
-  
-  // Stats
-  views         Int      @default(0)
-  clicks        Int      @default(0)
-  conversions   Int      @default(0)
-  
-  isActive      Boolean  @default(true)
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
-  
-  @@map("affiliateStoreLinks")
+  @@map("order_items")
 }
 
-// Enums
-enum SQLLevel {
-  FREE
-  BASIC
-  NORMAL
-  HIGH
-  VIP
+model CartItem {
+  id        String @id @default(auto()) @map("_id") @db.ObjectId
+  userId    String @db.ObjectId
+  productId String @db.ObjectId
+  quantity  Int    @default(1)
+
+  // Relations
+  user      User    @relation(fields: [userId], references: [id])
+  product   Product @relation(fields: [productId], references: [id])
+  
+  @@map("cart_items")
 }
 
-enum AffiliateRank {
-  BRONZE
-  SILVER
-  GOLD
-  PLATINUM
-  DIAMOND
+model Review {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId    String   @db.ObjectId
+  productId String   @db.ObjectId
+  rating    Int
+  comment   String?
+  createdAt DateTime @default(now())
+
+  // Relations
+  user      User     @relation(fields: [userId], references: [id])
+  product   Product  @relation(fields: [productId], references: [id])
+  
+  @@map("reviews")
 }
 
-enum CommissionType {
-  DIRECT_L1
-  INDIRECT_L2
-  INDIRECT_L3
-  INDIRECT_L4
-  INDIRECT_L5
-  BINARY_MATCH
-  QUICK_BONUS
-  RANK_BONUS
-  COIN_LOCK_BONUS
-  FRANCHISE_REWARD
+model Wallet {
+  id      String  @id @default(auto()) @map("_id") @db.ObjectId
+  userId  String  @unique @db.ObjectId
+  balance Float   @default(0)
+  
+  user    User    @relation(fields: [userId], references: [id])
+  
+  @@map("wallets")
 }
 
-enum CommissionStatus {
+model KYC {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId      String   @unique @db.ObjectId
+  status      KYCStatus @default(PENDING)
+  documents   String[]
+  verifiedAt  DateTime?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  user        User     @relation(fields: [userId], references: [id])
+  
+  @@map("kyc")
+}
+
+model WishlistItem {
+  id        String @id @default(auto()) @map("_id") @db.ObjectId
+  userId    String @db.ObjectId
+  productId String @db.ObjectId
+  createdAt DateTime @default(now())
+
+  user      User    @relation(fields: [userId], references: [id])
+  product   Product @relation(fields: [productId], references: [id])
+
+  @@unique([userId, productId])
+  @@map("wishlist_items")
+}
+
+enum Role {
+  USER
+  ADMIN
+  MODERATOR
+}
+
+enum OrderStatus {
+  PENDING
+  CONFIRMED
+  SHIPPED
+  DELIVERED
+  CANCELLED
+}
+
+enum KYCStatus {
   PENDING
   APPROVED
   REJECTED
-  WITHDRAWN
-}
-
-enum WithdrawalMethod {
-  EHB_WALLET
-  BEP20_WALLET
-  BANK_TRANSFER
-  PAYPAL
-  PAYONEER
-}
-
-enum WithdrawalStatus {
-  PENDING
-  APPROVED
-  REJECTED
-  PROCESSING
-  COMPLETED
-  FAILED
-}
-
-enum BonusType {
-  WELCOME_BONUS
-  RANK_ACHIEVEMENT
-  MONTHLY_TARGET
-  REFERRAL_MILESTONE
-  FRANCHISE_SALES
-  COIN_LOCK_REWARD
-}
-
-enum BonusStatus {
-  PENDING
-  APPROVED
-  REJECTED
-  LOCKED
-  UNLOCKED
-}
-
-enum StoreType {
-  AMAZON
-  EBAY
-  SHOPIFY
-  WOOCOMMERCE
-  CUSTOM
-}
-
-enum StoreLayout {
-  AMAZON_STYLE
-  EBAY_STYLE
-  SHOPIFY_STYLE
-  CUSTOM_LAYOUT
 }

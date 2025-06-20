@@ -1,0 +1,2010 @@
+[2025-06-20T17:07:35.671Z] 🎯 Starting EHB Live Launcher...
+[2025-06-20T17:07:35.674Z] 🧹 Cleaning up existing processes...
+[2025-06-20T17:07:36.236Z] 🚀 Starting Next.js development server...
+[2025-06-20T17:07:36.555Z] Killed process 41152 on port 3000
+[2025-06-20T17:07:38.616Z] Killed process 43240 on port 3000
+[2025-06-20T17:07:38.929Z] [Next.js] > ehb-next-js-04@1.0.0 dev
+> next dev
+[2025-06-20T17:07:39.603Z] [Next.js] ▲ Next.js 14.2.30
+[2025-06-20T17:07:39.604Z] [Next.js] - Local:        http://localhost:3000
+  - Environments: .env.local, .env.development, .env
+  - Experiments (use with caution):
+    · optimizeCss
+
+ ✓ Starting...
+[2025-06-20T17:07:39.604Z] ✅ Next.js server is ready!
+[2025-06-20T17:07:39.605Z] 🌐 Opening all EHB services in browser...
+[2025-06-20T17:07:42.103Z] [Next.js] ✓ Ready in 2.6s
+[2025-06-20T17:07:42.103Z] ✅ Next.js server is ready!
+[2025-06-20T17:07:42.104Z] 🌐 Opening all EHB services in browser...
+[2025-06-20T17:07:42.617Z] 🎉 Opening 30 services in browser...
+[2025-06-20T17:07:42.645Z] [Next.js] ○ Compiling /_not-found ...
+[2025-06-20T17:07:42.690Z] ✅ Opened Main App: http://localhost:3000
+[2025-06-20T17:07:43.206Z] ✅ Opened Admin Panel: http://localhost:3000/admin
+[2025-06-20T17:07:43.710Z] ✅ Opened Dashboard: http://localhost:3000/dashboard
+[2025-06-20T17:07:44.239Z] ✅ Opened AI Services: http://localhost:3000/ai
+[2025-06-20T17:07:44.695Z] ✅ Opened Wallet: http://localhost:3000/wallet
+[2025-06-20T17:07:44.981Z] [Next.js] 
+[2025-06-20T17:07:45.026Z] [Next.js] Source path: F:\ehb next.js 04\app\globals.css
+[2025-06-20T17:07:45.026Z] [Next.js] Setting up new context...
+[2025-06-20T17:07:45.107Z] [Next.js] Finding changed files: 17.523ms
+[2025-06-20T17:07:45.107Z] 🎉 Opening 30 services in browser...
+[2025-06-20T17:07:45.194Z] ✅ Opened Main App: http://localhost:3000
+[2025-06-20T17:07:45.211Z] ✅ Opened Analytics: http://localhost:3000/analytics
+[2025-06-20T17:07:45.518Z] [Next.js] Reading changed files: 410.281ms
+[2025-06-20T17:07:45.528Z] [Next.js] Sorting candidates: 9.506ms
+[2025-06-20T17:07:45.692Z] ✅ Opened Admin Panel: http://localhost:3000/admin
+[2025-06-20T17:07:45.702Z] ✅ Opened EHB Dashboard: http://localhost:3000/ehb-dashboard
+[2025-06-20T17:07:45.710Z] [Next.js] Generate rules: 191.535ms
+[2025-06-20T17:07:45.716Z] [Next.js] Build stylesheet: 6.475ms
+[2025-06-20T17:07:45.725Z] [Next.js] Potential classes:  14569
+[2025-06-20T17:07:45.726Z] [Next.js] Active contexts:  1
+[2025-06-20T17:07:45.748Z] [Next.js] JIT TOTAL: 766.387ms
+[2025-06-20T17:07:46.178Z] ✅ Opened Dashboard: http://localhost:3000/dashboard
+[2025-06-20T17:07:46.188Z] ✅ Opened EHB Home: http://localhost:3000/ehb-home-page
+[2025-06-20T17:07:46.396Z] [Next.js] ✓ Compiled /_not-found in 4.3s (576 modules)
+[2025-06-20T17:07:46.595Z] [Next.js ERROR] ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[2025-06-20T17:07:46.633Z] [Next.js] GET /_next/static/webpack/dec4d5b4a8d91127.webpack.hot-update.json 404 in 4493ms
+[2025-06-20T17:07:46.691Z] ✅ Opened AI Services: http://localhost:3000/ai
+[2025-06-20T17:07:46.719Z] ✅ Opened AI Marketplace: http://localhost:3000/ehb-ai-market-place
+[2025-06-20T17:07:47.117Z] [Next.js] ○ Compiling /wallet ...
+[2025-06-20T17:07:47.222Z] ✅ Opened Wallet: http://localhost:3000/wallet
+[2025-06-20T17:07:47.232Z] ✅ Opened EHB Tube: http://localhost:3000/ehb-tube
+[2025-06-20T17:07:47.678Z] ✅ Opened Analytics: http://localhost:3000/analytics
+[2025-06-20T17:07:47.689Z] ✅ Opened EHB Wallet: http://localhost:3000/ehb-wallet
+[2025-06-20T17:07:48.195Z] ✅ Opened EHB Dashboard: http://localhost:3000/ehb-dashboard
+[2025-06-20T17:07:48.202Z] ✅ Opened EHB Ads: http://localhost:3000/ehb-ads
+[2025-06-20T17:07:48.685Z] ✅ Opened EHB Home: http://localhost:3000/ehb-home-page
+[2025-06-20T17:07:48.693Z] ✅ Opened GoSellr: http://localhost:3000/gosellr
+[2025-06-20T17:07:49.208Z] ✅ Opened AI Marketplace: http://localhost:3000/ehb-ai-market-place
+[2025-06-20T17:07:49.249Z] ✅ Opened Franchise: http://localhost:3000/franchise
+[2025-06-20T17:07:49.693Z] ✅ Opened EHB Tube: http://localhost:3000/ehb-tube
+[2025-06-20T17:07:49.706Z] ✅ Opened Orders: http://localhost:3000/orders
+[2025-06-20T17:07:50.139Z] [Next.js] 
+[2025-06-20T17:07:50.141Z] [Next.js] Source path: F:\ehb next.js 04\app\globals.css
+[2025-06-20T17:07:50.159Z] [Next.js] Finding changed files: 17.44ms
+[2025-06-20T17:07:50.160Z] [Next.js] Reading changed files: 0.021ms
+Sorting candidates: 0.005ms
+Generate rules: 0.055ms
+Build stylesheet: 0.003ms
+[2025-06-20T17:07:50.166Z] [Next.js] Potential classes:  1
+[2025-06-20T17:07:50.167Z] [Next.js] Active contexts:  1
+[2025-06-20T17:07:50.178Z] [Next.js] JIT TOTAL: 38.559ms
+[2025-06-20T17:07:50.178Z] [Next.js] 
+[2025-06-20T17:07:50.194Z] ✅ Opened EHB Wallet: http://localhost:3000/ehb-wallet
+[2025-06-20T17:07:50.204Z] ✅ Opened Cart: http://localhost:3000/cart
+[2025-06-20T17:07:50.763Z] ✅ Opened EHB Ads: http://localhost:3000/ehb-ads
+[2025-06-20T17:07:50.766Z] ✅ Opened Wishlist: http://localhost:3000/wishlist
+[2025-06-20T17:07:51.191Z] ✅ Opened GoSellr: http://localhost:3000/gosellr
+[2025-06-20T17:07:51.220Z] ✅ Opened Profile: http://localhost:3000/profile
+[2025-06-20T17:07:51.263Z] 🔍 Performing health check...
+[2025-06-20T17:07:51.274Z] ❌ Main App is not available on port 3000
+[2025-06-20T17:07:51.278Z] ❌ Admin Panel is not available on port 3000
+[2025-06-20T17:07:51.285Z] ❌ Dashboard is not available on port 3000
+[2025-06-20T17:07:51.292Z] ❌ AI Services is not available on port 3000
+[2025-06-20T17:07:51.313Z] ❌ Wallet is not available on port 3000
+[2025-06-20T17:07:51.331Z] ❌ Analytics is not available on port 3000
+[2025-06-20T17:07:51.333Z] ❌ EHB Dashboard is not available on port 3000
+[2025-06-20T17:07:51.334Z] ❌ EHB Home is not available on port 3000
+[2025-06-20T17:07:51.335Z] ❌ AI Marketplace is not available on port 3000
+[2025-06-20T17:07:51.336Z] ❌ EHB Tube is not available on port 3000
+[2025-06-20T17:07:51.337Z] ❌ EHB Wallet is not available on port 3000
+[2025-06-20T17:07:51.338Z] ❌ EHB Ads is not available on port 3000
+[2025-06-20T17:07:51.339Z] ❌ GoSellr is not available on port 3000
+[2025-06-20T17:07:51.339Z] ❌ Franchise is not available on port 3000
+[2025-06-20T17:07:51.340Z] ❌ Orders is not available on port 3000
+[2025-06-20T17:07:51.341Z] ❌ Cart is not available on port 3000
+[2025-06-20T17:07:51.343Z] ❌ Wishlist is not available on port 3000
+[2025-06-20T17:07:51.345Z] ❌ Profile is not available on port 3000
+[2025-06-20T17:07:51.352Z] ❌ Settings is not available on port 3000
+[2025-06-20T17:07:51.353Z] ❌ Search is not available on port 3000
+[2025-06-20T17:07:51.356Z] ❌ Reviews is not available on port 3000
+[2025-06-20T17:07:51.361Z] ❌ Notifications is not available on port 3000
+[2025-06-20T17:07:51.366Z] ❌ Roadmap is not available on port 3000
+[2025-06-20T17:07:51.367Z] ❌ Development is not available on port 3000
+[2025-06-20T17:07:51.368Z] ❌ Development Portal is not available on port 3000
+[2025-06-20T17:07:51.368Z] ❌ AM Affiliate is not available on port 3000
+[2025-06-20T17:07:51.369Z] ❌ Assistant is not available on port 3000
+[2025-06-20T17:07:51.369Z] ❌ Auth is not available on port 3000
+[2025-06-20T17:07:51.370Z] ❌ Signup is not available on port 3000
+[2025-06-20T17:07:51.371Z] ❌ Register is not available on port 3000
+[2025-06-20T17:07:51.371Z] 🎉 EHB Live Launcher is running!
+[2025-06-20T17:07:51.372Z] 📊 All services are being opened in browser...
+[2025-06-20T17:07:51.372Z] 🛑 Press Ctrl+C to stop
+[2025-06-20T17:07:51.688Z] ✅ Opened Franchise: http://localhost:3000/franchise
+[2025-06-20T17:07:51.700Z] ✅ Opened Settings: http://localhost:3000/settings
+[2025-06-20T17:07:52.177Z] ✅ Opened Orders: http://localhost:3000/orders
+[2025-06-20T17:07:52.203Z] ✅ Opened Search: http://localhost:3000/search
+[2025-06-20T17:07:52.684Z] ✅ Opened Cart: http://localhost:3000/cart
+[2025-06-20T17:07:52.696Z] ✅ Opened Reviews: http://localhost:3000/reviews
+[2025-06-20T17:07:52.999Z] [Next.js ERROR] ⨯ ./app/ai/page.tsx:6:1
+Module not found: Can't resolve '@/components/ai/AIChat'
+[0m [90m 4 |[39m [36mimport[39m { [33mFaRobot[39m[33m,[39m [33mFaGraduationCap[39m[33m,[39m [33mFaHeartbeat[39m[33m,[39m [33mFaShoppingCart[39m[33m,[39m [33mFaGlobe[39m } [36mfrom[39m [32m'react-icons/fa'[39m[33m;[39m[0m
+[0m [90m 5 |[39m[0m
+[0m[31m[1m>[22m[39m[90m 6 |[39m [36mimport[39m [33mAIChat[39m [36mfrom[39m [32m'@/components/ai/AIChat'[39m[33m;[39m[0m
+[0m [90m   |[39m [31m[1m^[22m[39m[0m
+[0m [90m 7 |[39m[0m
+[0m [90m 8 |[39m [36mexport[39m [36mdefault[39m [36mfunction[39m [33mAIPage[39m() {[0m
+[0m [90m 9 |[39m   [36mreturn[39m ([0m
+
+https://nextjs.org/docs/messages/module-not-found
+[2025-06-20T17:07:53.210Z] ✅ Opened Wishlist: http://localhost:3000/wishlist
+[2025-06-20T17:07:53.220Z] ✅ Opened Notifications: http://localhost:3000/notifications
+[2025-06-20T17:07:53.690Z] ✅ Opened Profile: http://localhost:3000/profile
+[2025-06-20T17:07:53.697Z] ✅ Opened Roadmap: http://localhost:3000/roadmap
+[2025-06-20T17:07:53.867Z] [Next.js ERROR] ⨯ ./app/ai/page.tsx:6:1
+Module not found: Can't resolve '@/components/ai/AIChat'
+[0m [90m 4 |[39m [36mimport[39m { [33mFaRobot[39m[33m,[39m [33mFaGraduationCap[39m[33m,[39m [33mFaHeartbeat[39m[33m,[39m [33mFaShoppingCart[39m[33m,[39m [33mFaGlobe[39m } [36mfrom[39m [32m'react-icons/fa'[39m[33m;[39m[0m
+[0m [90m 5 |[39m[0m
+[0m[31m[1m>[22m[39m[90m 6 |[39m [36mimport[39m [33mAIChat[39m [36mfrom[39m [32m'@/components/ai/AIChat'[39m[33m;[39m[0m
+[0m [90m   |[39m [31m[1m^[22m[39m[0m
+[0m [90m 7 |[39m[0m
+[0m [90m 8 |[39m [36mexport[39m [36mdefault[39m [36mfunction[39m [33mAIPage[39m() {[0m
+[0m [90m 9 |[39m   [36mreturn[39m ([0m
+
+https://nextjs.org/docs/messages/module-not-found
+[2025-06-20T17:07:54.188Z] ✅ Opened Settings: http://localhost:3000/settings
+[2025-06-20T17:07:54.201Z] ✅ Opened Development: http://localhost:3000/development
+[2025-06-20T17:07:54.683Z] ✅ Opened Search: http://localhost:3000/search
+[2025-06-20T17:07:54.690Z] ✅ Opened Development Portal: http://localhost:3000/development-portal
+[2025-06-20T17:07:55.190Z] ✅ Opened Reviews: http://localhost:3000/reviews
+[2025-06-20T17:07:55.197Z] ✅ Opened AM Affiliate: http://localhost:3000/am-affiliate
+[2025-06-20T17:07:55.681Z] ✅ Opened Notifications: http://localhost:3000/notifications
+[2025-06-20T17:07:55.687Z] ✅ Opened Assistant: http://localhost:3000/assistant
+[2025-06-20T17:07:56.175Z] ✅ Opened Roadmap: http://localhost:3000/roadmap
+[2025-06-20T17:07:56.200Z] ✅ Opened Auth: http://localhost:3000/auth
+[2025-06-20T17:07:56.684Z] ✅ Opened Development: http://localhost:3000/development
+[2025-06-20T17:07:56.694Z] ✅ Opened Signup: http://localhost:3000/signup
+[2025-06-20T17:07:57.216Z] ✅ Opened Development Portal: http://localhost:3000/development-portal
+[2025-06-20T17:07:57.232Z] ✅ Opened Register: http://localhost:3000/register
+[2025-06-20T17:07:57.695Z] ✅ Opened AM Affiliate: http://localhost:3000/am-affiliate
+[2025-06-20T17:07:58.172Z] ✅ Opened Assistant: http://localhost:3000/assistant
+[2025-06-20T17:07:58.685Z] ✅ Opened Auth: http://localhost:3000/auth
+[2025-06-20T17:07:59.181Z] ✅ Opened Signup: http://localhost:3000/signup
+[2025-06-20T17:07:59.670Z] ✅ Opened Register: http://localhost:3000/register
+[2025-06-20T17:08:03.762Z] [Next.js ERROR] ⨯ ./pages/_app.tsx:1:1
+Module not found: Can't resolve '@/styles/globals.css'
+[0m[31m[1m>[22m[39m[90m 1 |[39m [36mimport[39m [32m'@/styles/globals.css'[39m[33m;[39m[0m
+[0m [90m   |[39m [31m[1m^[22m[39m[0m
+[0m [90m 2 |[39m [36mimport[39m type { [33mAppProps[39m } [36mfrom[39m [32m'next/app'[39m[33m;[39m[0m
+[0m [90m 3 |[39m [36mimport[39m { [33mSessionProvider[39m } [36mfrom[39m [32m'next-auth/react'[39m[33m;[39m[0m
+[0m [90m 4 |[39m[0m
+
+https://nextjs.org/docs/messages/module-not-found
+[2025-06-20T17:08:04.070Z] [Next.js] Time 4.3648
+[2025-06-20T17:08:04.074Z] [Next.js] Time 0.7504
+[2025-06-20T17:08:04.075Z] [Next.js] Time 0.5949
+[2025-06-20T17:08:04.077Z] [Next.js] Time 0.3161
+[2025-06-20T17:08:04.078Z] [Next.js] Time 0.2848
+[2025-06-20T17:08:04.079Z] [Next.js] Time 0.3364
+[2025-06-20T17:08:04.081Z] [Next.js] Time 0.3296
+[2025-06-20T17:08:04.082Z] [Next.js] Time 0.2942
+[2025-06-20T17:08:04.091Z] [Next.js] GET /dashboard 500 in 17504ms
+[2025-06-20T17:08:04.091Z] [Next.js] GET /admin 500 in 17505ms
+ GET /ai 500 in 17445ms
+ GET / 500 in 17506ms
+[2025-06-20T17:08:04.092Z] [Next.js] GET /wallet 500 in 17419ms
+[2025-06-20T17:08:04.092Z] [Next.js] GET /analytics 500 in 11040ms
+[2025-06-20T17:08:06.143Z] [Next.js ERROR] ⨯ ./pages/_app.tsx:1:1
+Module not found: Can't resolve '@/styles/globals.css'
+[0m[31m[1m>[22m[39m[90m 1 |[39m [36mimport[39m [32m'@/styles/globals.css'[39m[33m;[39m[0m
+[0m [90m   |[39m [31m[1m^[22m[39m[0m
+[0m [90m 2 |[39m [36mimport[39m type { [33mAppProps[39m } [36mfrom[39m [32m'next/app'[39m[33m;[39m[0m
+[0m [90m 3 |[39m [36mimport[39m { [33mSessionProvider[39m } [36mfrom[39m [32m'next-auth/react'[39m[33m;[39m[0m
+[0m [90m 4 |[39m[0m
+
+https://nextjs.org/docs/messages/module-not-found
+[2025-06-20T17:08:06.162Z] [Next.js] Time 0.6996
+[2025-06-20T17:08:06.163Z] [Next.js] Time 0.2883
+[2025-06-20T17:08:06.175Z] [Next.js] GET /ehb-tube 500 in 1981ms
+[2025-06-20T17:08:06.176Z] [Next.js] GET /ehb-wallet 500 in 1981ms
+[2025-06-20T17:08:07.714Z] [Next.js ERROR] ⨯ ./pages/_app.tsx:1:1
+Module not found: Can't resolve '@/styles/globals.css'
+[0m[31m[1m>[22m[39m[90m 1 |[39m [36mimport[39m [32m'@/styles/globals.css'[39m[33m;[39m[0m
+[0m [90m   |[39m [31m[1m^[22m[39m[0m
+[0m [90m 2 |[39m [36mimport[39m type { [33mAppProps[39m } [36mfrom[39m [32m'next/app'[39m[33m;[39m[0m
+[0m [90m 3 |[39m [36mimport[39m { [33mSessionProvider[39m } [36mfrom[39m [32m'next-auth/react'[39m[33m;[39m[0m
+[0m [90m 4 |[39m[0m
+
+https://nextjs.org/docs/messages/module-not-found
+[2025-06-20T17:08:07.727Z] [Next.js] Time 0.2691
+[2025-06-20T17:08:07.728Z] [Next.js] Time 0.1967
+[2025-06-20T17:08:07.729Z] [Next.js] Time 0.1837
+[2025-06-20T17:08:07.730Z] [Next.js] Time 0.2188
+[2025-06-20T17:08:07.743Z] [Next.js] GET /ehb-home-page 500 in 3566ms
+[2025-06-20T17:08:07.744Z] [Next.js] GET /ehb-ads 500 in 3562ms
+ GET /ehb-ai-market-place 500 in 3563ms
+ GET /ehb-dashboard 500 in 3564ms
+[2025-06-20T17:08:07.854Z] [Next.js] Time 0.2404
+[2025-06-20T17:08:07.856Z] [Next.js] Time 0.404
+[2025-06-20T17:08:07.865Z] [Next.js] GET /franchise 500 in 1566ms
+[2025-06-20T17:08:07.866Z] [Next.js] GET /gosellr 500 in 1565ms
+[2025-06-20T17:08:09.158Z] [Next.js ERROR] ⨯ ./pages/_app.tsx:1:1
+Module not found: Can't resolve '@/styles/globals.css'
+[0m[31m[1m>[22m[39m[90m 1 |[39m [36mimport[39m [32m'@/styles/globals.css'[39m[33m;[39m[0m
+[0m [90m   |[39m [31m[1m^[22m[39m[0m
+[0m [90m 2 |[39m [36mimport[39m type { [33mAppProps[39m } [36mfrom[39m [32m'next/app'[39m[33m;[39m[0m
+[0m [90m 3 |[39m [36mimport[39m { [33mSessionProvider[39m } [36mfrom[39m [32m'next-auth/react'[39m[33m;[39m[0m
+[0m [90m 4 |[39m[0m
+
+https://nextjs.org/docs/messages/module-not-found
+[2025-06-20T17:08:09.168Z] [Next.js] Time 0.2311
+[2025-06-20T17:08:09.174Z] [Next.js] GET /wishlist 500 in 1327ms
+[2025-06-20T17:08:10.328Z] [Next.js ERROR] ⨯ ./pages/_app.tsx:1:1
+Module not found: Can't resolve '@/styles/globals.css'
+[0m[31m[1m>[22m[39m[90m 1 |[39m [36mimport[39m [32m'@/styles/globals.css'[39m[33m;[39m[0m
+[0m [90m   |[39m [31m[1m^[22m[39m[0m
+[0m [90m 2 |[39m [36mimport[39m type { [33mAppProps[39m } [36mfrom[39m [32m'next/app'[39m[33m;[39m[0m
+[0m [90m 3 |[39m [36mimport[39m { [33mSessionProvider[39m } [36mfrom[39m [32m'next-auth/react'[39m[33m;[39m[0m
+[0m [90m 4 |[39m[0m
+
+https://nextjs.org/docs/messages/module-not-found
+[2025-06-20T17:08:10.338Z] [Next.js] Time 0.2873
+[2025-06-20T17:08:10.340Z] [Next.js] Time 0.3654
+[2025-06-20T17:08:10.341Z] [Next.js] Time 0.327
+[2025-06-20T17:08:10.342Z] [Next.js] Time 0.1782
+[2025-06-20T17:08:10.343Z] [Next.js] Time 0.4699
+[2025-06-20T17:08:10.353Z] [Next.js] GET /settings 500 in 2373ms
+[2025-06-20T17:08:10.354Z] [Next.js] GET /search 500 in 2373ms
+ GET /cart 500 in 2522ms
+ GET /profile 500 in 2524ms
+ GET /orders 500 in 2523ms
+[2025-06-20T17:08:10.456Z] [Next.js] Time 0.1968
+[2025-06-20T17:08:10.471Z] [Next.js] GET /reviews 500 in 1210ms
+[2025-06-20T17:08:12.074Z] [Next.js ERROR] ⨯ ./pages/_app.tsx:1:1
+Module not found: Can't resolve '@/styles/globals.css'
+[0m[31m[1m>[22m[39m[90m 1 |[39m [36mimport[39m [32m'@/styles/globals.css'[39m[33m;[39m[0m
+[0m [90m   |[39m [31m[1m^[22m[39m[0m
+[0m [90m 2 |[39m [36mimport[39m type { [33mAppProps[39m } [36mfrom[39m [32m'next/app'[39m[33m;[39m[0m
+[0m [90m 3 |[39m [36mimport[39m { [33mSessionProvider[39m } [36mfrom[39m [32m'next-auth/react'[39m[33m;[39m[0m
+[0m [90m 4 |[39m[0m
+
+https://nextjs.org/docs/messages/module-not-found
+[2025-06-20T17:08:12.085Z] [Next.js] Time 0.2035
+[2025-06-20T17:08:12.086Z] [Next.js] Time 0.1874
+[2025-06-20T17:08:12.093Z] [Next.js] GET /notifications 500 in 1652ms
+[2025-06-20T17:08:12.094Z] [Next.js] GET /auth 500 in 1651ms
+[2025-06-20T17:08:13.220Z] [Next.js ERROR] ⨯ ./pages/_app.tsx:1:1
+Module not found: Can't resolve '@/styles/globals.css'
+[0m[31m[1m>[22m[39m[90m 1 |[39m [36mimport[39m [32m'@/styles/globals.css'[39m[33m;[39m[0m
+[0m [90m   |[39m [31m[1m^[22m[39m[0m
+[0m [90m 2 |[39m [36mimport[39m type { [33mAppProps[39m } [36mfrom[39m [32m'next/app'[39m[33m;[39m[0m
+[0m [90m 3 |[39m [36mimport[39m { [33mSessionProvider[39m } [36mfrom[39m [32m'next-auth/react'[39m[33m;[39m[0m
+[0m [90m 4 |[39m[0m
+
+https://nextjs.org/docs/messages/module-not-found
+[2025-06-20T17:08:13.228Z] [Next.js] Time 0.196
+[2025-06-20T17:08:13.229Z] [Next.js] Time 0.2604
+[2025-06-20T17:08:13.231Z] [Next.js] Time 0.1967
+[2025-06-20T17:08:13.232Z] [Next.js] Time 0.3214
+[2025-06-20T17:08:13.240Z] [Next.js] GET /assistant 500 in 2809ms
+[2025-06-20T17:08:13.241Z] [Next.js] GET /register 500 in 2809ms
+ GET /signup 500 in 2810ms
+ GET /development 500 in 2654ms
+[2025-06-20T17:08:13.328Z] [Next.js] Time 0.439
+[2025-06-20T17:08:13.329Z] [Next.js] Time 0.3187
+[2025-06-20T17:08:13.338Z] [Next.js] GET /development-portal 500 in 1155ms
+[2025-06-20T17:08:13.339Z] [Next.js] GET /am-affiliate 500 in 1156ms
+[2025-06-20T17:08:13.875Z] [Next.js ERROR] ⨯ ./pages/_app.tsx:1:1
+Module not found: Can't resolve '@/styles/globals.css'
+[0m[31m[1m>[22m[39m[90m 1 |[39m [36mimport[39m [32m'@/styles/globals.css'[39m[33m;[39m[0m
+[0m [90m   |[39m [31m[1m^[22m[39m[0m
+[0m [90m 2 |[39m [36mimport[39m type { [33mAppProps[39m } [36mfrom[39m [32m'next/app'[39m[33m;[39m[0m
+[0m [90m 3 |[39m [36mimport[39m { [33mSessionProvider[39m } [36mfrom[39m [32m'next-auth/react'[39m[33m;[39m[0m
+[0m [90m 4 |[39m[0m
+
+https://nextjs.org/docs/messages/module-not-found
+[2025-06-20T17:08:14.620Z] [Next.js ERROR] ⨯ ./pages/_app.tsx:1:1
+Module not found: Can't resolve '@/styles/globals.css'
+[0m[31m[1m>[22m[39m[90m 1 |[39m [36mimport[39m [32m'@/styles/globals.css'[39m[33m;[39m[0m
+[0m [90m   |[39m [31m[1m^[22m[39m[0m
+[0m [90m 2 |[39m [36mimport[39m type { [33mAppProps[39m } [36mfrom[39m [32m'next/app'[39m[33m;[39m[0m
+[0m [90m 3 |[39m [36mimport[39m { [33mSessionProvider[39m } [36mfrom[39m [32m'next-auth/react'[39m[33m;[39m[0m
+[0m [90m 4 |[39m[0m
+
+https://nextjs.org/docs/messages/module-not-found
+[2025-06-20T17:08:14.696Z] [Next.js] Time 0.2088
+[2025-06-20T17:08:14.697Z] [Next.js] Time 0.2222
+[2025-06-20T17:08:14.698Z] [Next.js] Time 0.3705
+[2025-06-20T17:08:14.699Z] [Next.js] Time 0.3391
+[2025-06-20T17:08:14.700Z] [Next.js] Time 0.282
+[2025-06-20T17:08:14.701Z] [Next.js] Time 0.1273
+[2025-06-20T17:08:14.709Z] [Next.js] GET /error 500 in 88ms
+[2025-06-20T17:08:14.710Z] [Next.js] GET /dashboard 500 in 1404ms
+[2025-06-20T17:08:14.710Z] [Next.js] GET /ai 500 in 1267ms
+[2025-06-20T17:08:14.711Z] [Next.js] GET /admin 500 in 1268ms
+ GET /unauthorized 500 in 1405ms
+ GET /roadmap 500 in 1406ms
+[2025-06-20T17:08:14.723Z] [Next.js ERROR] ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[2025-06-20T17:08:14.729Z] [Next.js ERROR] ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[2025-06-20T17:08:14.873Z] [Next.js] Time 0.2262
+[2025-06-20T17:08:14.875Z] [Next.js] Time 0.2253
+[2025-06-20T17:08:14.889Z] [Next.js] GET /ehb-tube 500 in 87ms
+[2025-06-20T17:08:14.890Z] [Next.js] GET /ehb-wallet 500 in 87ms
+[2025-06-20T17:08:15.017Z] [Next.js] Time 0.2356
+[2025-06-20T17:08:15.018Z] [Next.js] Time 0.2771
+[2025-06-20T17:08:15.019Z] [Next.js] Time 0.2094
+[2025-06-20T17:08:15.021Z] [Next.js] Time 0.2226
+[2025-06-20T17:08:15.030Z] [Next.js] GET / 500 in 241ms
+[2025-06-20T17:08:15.032Z] [Next.js] GET /wallet 500 in 241ms
+ GET /analytics 500 in 240ms
+[2025-06-20T17:08:15.038Z] [Next.js] GET /ehb-home-page 500 in 245ms
+[2025-06-20T17:08:15.250Z] [Next.js] Time 0.8542
+[2025-06-20T17:08:15.256Z] [Next.js] Time 3.1808
+[2025-06-20T17:08:15.259Z] [Next.js] Time 0.5466
+[2025-06-20T17:08:15.287Z] [Next.js] GET /ehb-ai-market-place 500 in 260ms
+[2025-06-20T17:08:15.288Z] [Next.js] GET /wishlist 500 in 111ms
+ GET /ehb-ads 500 in 260ms
+[2025-06-20T17:08:15.396Z] [Next.js] Time 0.2378
+[2025-06-20T17:08:15.398Z] [Next.js] Time 0.2229
+[2025-06-20T17:08:15.399Z] [Next.js] Time 0.2081
+[2025-06-20T17:08:15.412Z] [Next.js] GET /franchise 500 in 247ms
+[2025-06-20T17:08:15.413Z] [Next.js] GET /gosellr 500 in 247ms
+[2025-06-20T17:08:15.413Z] [Next.js] GET /ehb-dashboard 500 in 249ms
+[2025-06-20T17:08:15.502Z] [Next.js] Time 0.2736
+[2025-06-20T17:08:15.503Z] [Next.js] Time 0.2582
+[2025-06-20T17:08:15.515Z] [Next.js] GET /search 500 in 113ms
+[2025-06-20T17:08:15.516Z] [Next.js] GET /settings 500 in 113ms
+[2025-06-20T17:08:15.631Z] [Next.js] Time 0.2331
+[2025-06-20T17:08:15.643Z] [Next.js] GET /cart 500 in 263ms
+[2025-06-20T17:08:15.743Z] [Next.js] Time 0.2329
+[2025-06-20T17:08:15.744Z] [Next.js] Time 0.3305
+[2025-06-20T17:08:15.745Z] [Next.js] Time 0.2866
+[2025-06-20T17:08:15.746Z] [Next.js] Time 0.1766
+[2025-06-20T17:08:15.748Z] [Next.js] Time 0.5724
+[2025-06-20T17:08:15.765Z] [Next.js] GET /notifications 500 in 108ms
+[2025-06-20T17:08:15.766Z] [Next.js] GET /auth 500 in 108ms
+[2025-06-20T17:08:15.767Z] [Next.js] GET /profile 500 in 235ms
+[2025-06-20T17:08:15.768Z] [Next.js] GET /reviews 500 in 232ms
+[2025-06-20T17:08:15.768Z] [Next.js] GET /orders 500 in 233ms
+[2025-06-20T17:08:15.936Z] [Next.js] Time 0.2642
+[2025-06-20T17:08:15.948Z] [Next.js] GET /assistant 500 in 178ms
+[2025-06-20T17:08:16.103Z] [Next.js] Time 0.2506
+[2025-06-20T17:08:16.104Z] [Next.js] Time 0.2353
+[2025-06-20T17:08:16.105Z] [Next.js] Time 0.241
+[2025-06-20T17:08:16.107Z] [Next.js] Time 0.2191
+[2025-06-20T17:08:16.108Z] [Next.js] Time 0.2283
+[2025-06-20T17:08:16.119Z] [Next.js] GET /register 500 in 240ms
+[2025-06-20T17:08:16.120Z] [Next.js] GET /signup 500 in 241ms
+[2025-06-20T17:08:16.121Z] [Next.js] GET /am-affiliate 500 in 240ms
+[2025-06-20T17:08:16.122Z] [Next.js] GET /development-portal 500 in 242ms
+ GET /development 500 in 242ms
+[2025-06-20T17:08:16.275Z] [Next.js] Time 0.23
+[2025-06-20T17:08:16.285Z] [Next.js] GET /ai 500 in 224ms
+[2025-06-20T17:08:16.310Z] [Next.js ERROR] ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[2025-06-20T17:08:16.343Z] [Next.js] Time 0.2585
+[2025-06-20T17:08:16.345Z] [Next.js] Time 0.2763
+[2025-06-20T17:08:16.358Z] [Next.js] GET /ehb-tube 500 in 123ms
+[2025-06-20T17:08:16.359Z] [Next.js] GET /ehb-wallet 500 in 123ms
+[2025-06-20T17:08:16.374Z] [Next.js ERROR] ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[2025-06-20T17:08:16.375Z] [Next.js ERROR] ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[2025-06-20T17:08:16.487Z] [Next.js] Time 0.309
+[2025-06-20T17:08:16.489Z] [Next.js] Time 0.2249
+[2025-06-20T17:08:16.509Z] [Next.js] GET /admin 500 in 287ms
+[2025-06-20T17:08:16.511Z] [Next.js] GET / 500 in 288ms
+[2025-06-20T17:08:16.559Z] [Next.js ERROR] ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[2025-06-20T17:08:16.559Z] [Next.js ERROR] ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[2025-06-20T17:08:16.627Z] [Next.js] Time 0.3686
+[2025-06-20T17:08:16.644Z] [Next.js] GET /roadmap 500 in 422ms
+[2025-06-20T17:08:16.738Z] [Next.js] Time 0.2387
+[2025-06-20T17:08:16.740Z] [Next.js] Time 0.2328
+[2025-06-20T17:08:16.751Z] [Next.js] GET /wallet 500 in 316ms
+[2025-06-20T17:08:16.752Z] [Next.js] GET /ehb-home-page 500 in 281ms
+[2025-06-20T17:08:16.776Z] [Next.js ERROR] ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[2025-06-20T17:08:16.783Z] [Next.js ERROR] ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[2025-06-20T17:08:16.807Z] [Next.js] Time 0.3376
+[2025-06-20T17:08:16.810Z] [Next.js] Time 0.3189
+[2025-06-20T17:08:16.821Z] [Next.js] GET /wishlist 500 in 121ms
+[2025-06-20T17:08:16.822Z] [Next.js] GET /analytics 500 in 350ms
+[2025-06-20T17:08:16.854Z] [Next.js ERROR] ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[2025-06-20T17:08:16.856Z] [Next.js ERROR] ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[2025-06-20T17:08:16.931Z] [Next.js] Time 0.3257
+[2025-06-20T17:08:16.940Z] [Next.js] GET /ehb-ai-market-place 500 in 252ms
+[2025-06-20T17:08:16.961Z] [Next.js ERROR] ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[2025-06-20T17:08:17.000Z] [Next.js] Time 0.259
+[2025-06-20T17:08:17.002Z] [Next.js] Time 0.2459
+[2025-06-20T17:08:17.013Z] [Next.js] GET /ehb-ads 500 in 259ms
+[2025-06-20T17:08:17.013Z] [Next.js] GET /search 500 in 89ms
+[2025-06-20T17:08:17.055Z] [Next.js ERROR] ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[2025-06-20T17:08:17.056Z] [Next.js ERROR] ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[2025-06-20T17:08:17.124Z] [Next.js] Time 0.3206
+[2025-06-20T17:08:17.127Z] [Next.js] Time 0.296
+[2025-06-20T17:08:17.129Z] [Next.js] Time 0.2687
+[2025-06-20T17:08:17.154Z] [Next.js] GET /gosellr 500 in 275ms
+[2025-06-20T17:08:17.155Z] [Next.js] GET /franchise 500 in 274ms
+[2025-06-20T17:08:17.157Z] [Next.js] GET /settings 500 in 81ms
+[2025-06-20T17:08:17.192Z] [Next.js ERROR] ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[2025-06-20T17:08:17.200Z] [Next.js ERROR] ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[2025-06-20T17:08:17.201Z] [Next.js ERROR] ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[2025-06-20T17:08:17.312Z] [Next.js] Time 0.2449
+[2025-06-20T17:08:17.314Z] [Next.js] Time 0.285
+[2025-06-20T17:08:17.340Z] [Next.js] GET /ehb-dashboard 500 in 428ms
+[2025-06-20T17:08:17.342Z] [Next.js] GET /notifications 500 in 145ms
+[2025-06-20T17:08:17.370Z] [Next.js ERROR] ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[2025-06-20T17:08:17.371Z] [Next.js ERROR] ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[2025-06-20T17:08:17.457Z] [Next.js] Time 0.3688
+[2025-06-20T17:08:17.459Z] [Next.js] Time 0.2014
+[2025-06-20T17:08:17.497Z] [Next.js] GET /auth 500 in 178ms
+[2025-06-20T17:08:17.498Z] [Next.js] GET /cart 500 in 313ms
+[2025-06-20T17:08:17.528Z] [Next.js ERROR] ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[2025-06-20T17:08:17.536Z] [Next.js ERROR] ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[2025-06-20T17:08:17.608Z] [Next.js] Time 0.2143
+[2025-06-20T17:08:17.609Z] [Next.js] Time 0.1898
+[2025-06-20T17:08:17.626Z] [Next.js] GET /profile 500 in 326ms
+[2025-06-20T17:08:17.627Z] [Next.js] GET /reviews 500 in 325ms
+[2025-06-20T17:08:17.654Z] [Next.js ERROR] ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[2025-06-20T17:08:17.663Z] [Next.js ERROR] ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[2025-06-20T17:08:17.707Z] [Next.js] Time 0.34
+[2025-06-20T17:08:17.718Z] [Next.js] GET /assistant 500 in 215ms
+[2025-06-20T17:08:17.752Z] [Next.js ERROR] ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[2025-06-20T17:08:17.760Z] [Next.js] Time 0.2453
+[2025-06-20T17:08:17.778Z] [Next.js] GET /orders 500 in 274ms
+[2025-06-20T17:08:17.793Z] [Next.js ERROR] ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[2025-06-20T17:08:17.895Z] [Next.js] Time 0.2527
+[2025-06-20T17:08:17.896Z] [Next.js] Time 0.2932
+[2025-06-20T17:08:17.914Z] [Next.js] GET /register 500 in 283ms
+[2025-06-20T17:08:17.915Z] [Next.js] GET /signup 500 in 282ms
+[2025-06-20T17:08:17.958Z] [Next.js ERROR] ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[2025-06-20T17:08:17.958Z] [Next.js ERROR] ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[2025-06-20T17:08:18.061Z] [Next.js] Time 0.2842
+[2025-06-20T17:08:18.063Z] [Next.js] Time 0.2381
+[2025-06-20T17:08:18.066Z] [Next.js] Time 0.2976
+[2025-06-20T17:08:18.076Z] [Next.js] GET /am-affiliate 500 in 290ms
+[2025-06-20T17:08:18.077Z] [Next.js] GET /development-portal 500 in 290ms
+[2025-06-20T17:08:18.078Z] [Next.js] GET /_next/static/webpack/dec4d5b4a8d91127.webpack.hot-update.json 500 in 83ms
+[2025-06-20T17:08:18.098Z] [Next.js ERROR] ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[2025-06-20T17:08:18.099Z] [Next.js ERROR] ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[2025-06-20T17:08:18.147Z] [Next.js] Time 0.2286
+[2025-06-20T17:08:18.150Z] [Next.js] Time 0.351
+[2025-06-20T17:08:18.165Z] [Next.js] GET /development 500 in 305ms
+[2025-06-20T17:08:18.166Z] [Next.js] GET /_next/static/webpack/dec4d5b4a8d91127.webpack.hot-update.json 500 in 114ms
+[2025-06-20T17:08:18.171Z] [Next.js ERROR] ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[2025-06-20T17:08:18.238Z] [Next.js] Time 0.2767
+[2025-06-20T17:08:18.239Z] [Next.js] Time 0.2012
+[2025-06-20T17:08:18.249Z] [Next.js] GET /_next/static/webpack/dec4d5b4a8d91127.webpack.hot-update.json 500 in 97ms
+[2025-06-20T17:08:18.251Z] [Next.js] GET /roadmap 500 in 340ms
+[2025-06-20T17:08:18.259Z] [Next.js ERROR] ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[2025-06-20T17:08:18.513Z] [Next.js] Time 0.2319
+[2025-06-20T17:08:18.515Z] [Next.js] Time 0.7025
+[2025-06-20T17:08:18.528Z] [Next.js] GET /development-portal 500 in 260ms
+[2025-06-20T17:08:18.528Z] [Next.js] GET /development 500 in 218ms
+[2025-06-20T17:08:18.669Z] [Next.js] Time 0.4178
+[2025-06-20T17:08:18.685Z] [Next.js] GET /roadmap 500 in 306ms
+[2025-06-20T17:08:23.414Z] [Next.js ERROR] <w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: ENOENT: no such file or directory, rename 'F:\ehb next.js 04\.next\cache\webpack\client-development-fallback\0.pack.gz_' -> 'F:\ehb next.js 04\.next\cache\webpack\client-development-fallback\0.pack.gz'
+[2025-06-20T17:08:23.418Z] [Next.js ERROR] <w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: ENOENT: no such file or directory, rename 'F:\ehb next.js 04\.next\cache\webpack\client-development-fallback\0.pack.gz_' -> 'F:\ehb next.js 04\.next\cache\webpack\client-development-fallback\0.pack.gz'
+[2025-06-20T17:08:23.434Z] [Next.js ERROR] <w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: ENOENT: no such file or directory, rename 'F:\ehb next.js 04\.next\cache\webpack\client-development-fallback\0.pack.gz_' -> 'F:\ehb next.js 04\.next\cache\webpack\client-development-fallback\0.pack.gz'
+[2025-06-20T17:08:23.436Z] [Next.js ERROR] <w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: ENOENT: no such file or directory, rename 'F:\ehb next.js 04\.next\cache\webpack\client-development-fallback\0.pack.gz_' -> 'F:\ehb next.js 04\.next\cache\webpack\client-development-fallback\0.pack.gz'
+[2025-06-20T17:08:23.447Z] [Next.js ERROR] <w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: ENOENT: no such file or directory, rename 'F:\ehb next.js 04\.next\cache\webpack\client-development-fallback\0.pack.gz_' -> 'F:\ehb next.js 04\.next\cache\webpack\client-development-fallback\0.pack.gz'
+[2025-06-20T17:08:23.544Z] [Next.js ERROR] <w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: ENOENT: no such file or directory, rename 'F:\ehb next.js 04\.next\cache\webpack\client-development-fallback\0.pack.gz_' -> 'F:\ehb next.js 04\.next\cache\webpack\client-development-fallback\0.pack.gz'
+[2025-06-20T17:08:23.722Z] [Next.js ERROR] <w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: ENOENT: no such file or directory, rename 'F:\ehb next.js 04\.next\cache\webpack\client-development-fallback\0.pack.gz_' -> 'F:\ehb next.js 04\.next\cache\webpack\client-development-fallback\0.pack.gz'
+[2025-06-20T17:08:51.379Z] 🔍 Performing health check...
+[2025-06-20T17:08:51.380Z] ❌ Main App is not available on port 3000
+[2025-06-20T17:08:51.380Z] ❌ Admin Panel is not available on port 3000
+[2025-06-20T17:08:51.381Z] ❌ Dashboard is not available on port 3000
+[2025-06-20T17:08:51.381Z] ❌ AI Services is not available on port 3000
+[2025-06-20T17:08:51.382Z] ❌ Wallet is not available on port 3000
+[2025-06-20T17:08:51.382Z] ❌ Analytics is not available on port 3000
+[2025-06-20T17:08:51.382Z] ❌ EHB Dashboard is not available on port 3000
+[2025-06-20T17:08:51.383Z] ❌ EHB Home is not available on port 3000
+[2025-06-20T17:08:51.383Z] ❌ AI Marketplace is not available on port 3000
+[2025-06-20T17:08:51.384Z] ❌ EHB Tube is not available on port 3000
+[2025-06-20T17:08:51.384Z] ❌ EHB Wallet is not available on port 3000
+[2025-06-20T17:08:51.384Z] ❌ EHB Ads is not available on port 3000
+[2025-06-20T17:08:51.385Z] ❌ GoSellr is not available on port 3000
+[2025-06-20T17:08:51.385Z] ❌ Franchise is not available on port 3000
+[2025-06-20T17:08:51.386Z] ❌ Orders is not available on port 3000
+[2025-06-20T17:08:51.386Z] ❌ Cart is not available on port 3000
+[2025-06-20T17:08:51.387Z] ❌ Wishlist is not available on port 3000
+[2025-06-20T17:08:51.387Z] ❌ Profile is not available on port 3000
+[2025-06-20T17:08:51.387Z] ❌ Settings is not available on port 3000
+[2025-06-20T17:08:51.388Z] ❌ Search is not available on port 3000
+[2025-06-20T17:08:51.388Z] ❌ Reviews is not available on port 3000
+[2025-06-20T17:08:51.388Z] ❌ Notifications is not available on port 3000
+[2025-06-20T17:08:51.389Z] ❌ Roadmap is not available on port 3000
+[2025-06-20T17:08:51.389Z] ❌ Development is not available on port 3000
+[2025-06-20T17:08:51.390Z] ❌ Development Portal is not available on port 3000
+[2025-06-20T17:08:51.390Z] ❌ AM Affiliate is not available on port 3000
+[2025-06-20T17:08:51.391Z] ❌ Assistant is not available on port 3000
+[2025-06-20T17:08:51.391Z] ❌ Auth is not available on port 3000
+[2025-06-20T17:08:51.391Z] ❌ Signup is not available on port 3000
+[2025-06-20T17:08:51.392Z] ❌ Register is not available on port 3000
+[2025-06-20T17:09:51.392Z] 🔍 Performing health check...
+[2025-06-20T17:09:51.393Z] ❌ Main App is not available on port 3000
+[2025-06-20T17:09:51.393Z] ❌ Admin Panel is not available on port 3000
+[2025-06-20T17:09:51.394Z] ❌ Dashboard is not available on port 3000
+[2025-06-20T17:09:51.394Z] ❌ AI Services is not available on port 3000
+[2025-06-20T17:09:51.395Z] ❌ Wallet is not available on port 3000
+[2025-06-20T17:09:51.395Z] ❌ Analytics is not available on port 3000
+[2025-06-20T17:09:51.396Z] ❌ EHB Dashboard is not available on port 3000
+[2025-06-20T17:09:51.396Z] ❌ EHB Home is not available on port 3000
+[2025-06-20T17:09:51.396Z] ❌ AI Marketplace is not available on port 3000
+[2025-06-20T17:09:51.397Z] ❌ EHB Tube is not available on port 3000
+[2025-06-20T17:09:51.397Z] ❌ EHB Wallet is not available on port 3000
+[2025-06-20T17:09:51.398Z] ❌ EHB Ads is not available on port 3000
+[2025-06-20T17:09:51.398Z] ❌ GoSellr is not available on port 3000
+[2025-06-20T17:09:51.399Z] ❌ Franchise is not available on port 3000
+[2025-06-20T17:09:51.399Z] ❌ Orders is not available on port 3000
+[2025-06-20T17:09:51.400Z] ❌ Cart is not available on port 3000
+[2025-06-20T17:09:51.400Z] ❌ Wishlist is not available on port 3000
+[2025-06-20T17:09:51.400Z] ❌ Profile is not available on port 3000
+[2025-06-20T17:09:51.401Z] ❌ Settings is not available on port 3000
+[2025-06-20T17:09:51.401Z] ❌ Search is not available on port 3000
+[2025-06-20T17:09:51.402Z] ❌ Reviews is not available on port 3000
+[2025-06-20T17:09:51.402Z] ❌ Notifications is not available on port 3000
+[2025-06-20T17:09:51.403Z] ❌ Roadmap is not available on port 3000
+[2025-06-20T17:09:51.403Z] ❌ Development is not available on port 3000
+[2025-06-20T17:09:51.403Z] ❌ Development Portal is not available on port 3000
+[2025-06-20T17:09:51.404Z] ❌ AM Affiliate is not available on port 3000
+[2025-06-20T17:09:51.404Z] ❌ Assistant is not available on port 3000
+[2025-06-20T17:09:51.405Z] ❌ Auth is not available on port 3000
+[2025-06-20T17:09:51.405Z] ❌ Signup is not available on port 3000
+[2025-06-20T17:09:51.406Z] ❌ Register is not available on port 3000
+[2025-06-20T17:10:01.461Z] [Next.js] 
+[2025-06-20T17:10:01.464Z] [Next.js] Source path: F:\ehb next.js 04\styles\globals.css
+[2025-06-20T17:10:01.466Z] [Next.js] JIT TOTAL: 5.129ms
+[2025-06-20T17:10:01.467Z] [Next.js] 
+[2025-06-20T17:10:01.494Z] [Next.js] 
+[2025-06-20T17:10:01.496Z] [Next.js] Source path: F:\ehb next.js 04\app\globals.css
+[2025-06-20T17:10:01.536Z] [Next.js] Finding changed files: 39.155ms
+[2025-06-20T17:10:01.683Z] [Next.js] Reading changed files: 145.891ms
+[2025-06-20T17:10:01.683Z] [Next.js] Sorting candidates: 0.022ms
+Generate rules: 0.309ms
+Build stylesheet: 0.001ms
+[2025-06-20T17:10:01.691Z] [Next.js] Potential classes:  34
+[2025-06-20T17:10:01.692Z] [Next.js] Active contexts:  1
+[2025-06-20T17:10:01.705Z] [Next.js] JIT TOTAL: 210.968ms
+[2025-06-20T17:10:01.706Z] [Next.js] 
+[2025-06-20T17:10:02.091Z] [Next.js ERROR] ⨯ ./pages/_app.tsx:5:1
+Module not found: Can't resolve '@/components/layout/Navigation'
+[0m [90m 3 |[39m [36mimport[39m { [33mSessionProvider[39m } [36mfrom[39m [32m'next-auth/react'[39m[33m;[39m[0m
+[0m [90m 4 |[39m[0m
+[0m[31m[1m>[22m[39m[90m 5 |[39m [36mimport[39m [33mNavigation[39m [36mfrom[39m [32m'@/components/layout/Navigation'[39m[33m;[39m[0m
+[0m [90m   |[39m [31m[1m^[22m[39m[0m
+[0m [90m 6 |[39m[0m
+[0m [90m 7 |[39m [36mexport[39m [36mdefault[39m [36mfunction[39m [33mApp[39m({ [33mComponent[39m[33m,[39m pageProps[33m:[39m { session[33m,[39m [33m...[39mpageProps } }[33m:[39m [33mAppProps[39m) {[0m
+[0m [90m 8 |[39m   [36mreturn[39m ([0m
+
+https://nextjs.org/docs/messages/module-not-found
+[2025-06-20T17:10:09.728Z] [Next.js] 
+[2025-06-20T17:10:09.729Z] [Next.js] Source path: F:\ehb next.js 04\app\globals.css
+[2025-06-20T17:10:09.753Z] [Next.js] Finding changed files: 19.506ms
+[2025-06-20T17:10:09.762Z] [Next.js] Reading changed files: 9.125ms
+[2025-06-20T17:10:09.763Z] [Next.js] Sorting candidates: 0.014ms
+Generate rules: 0.123ms
+Build stylesheet: 0.001ms
+[2025-06-20T17:10:09.768Z] [Next.js] Potential classes:  34
+Active contexts:  1
+[2025-06-20T17:10:09.778Z] [Next.js] JIT TOTAL: 50.253ms
+[2025-06-20T17:10:09.779Z] [Next.js] 
+[2025-06-20T17:10:10.645Z] [Next.js ERROR] ⨯ ./app/ai/page.tsx:6:1
+Module not found: Can't resolve '@/components/ai/AIChat'
+[0m [90m 4 |[39m [36mimport[39m { [33mFaRobot[39m[33m,[39m [33mFaGraduationCap[39m[33m,[39m [33mFaHeartbeat[39m[33m,[39m [33mFaShoppingCart[39m[33m,[39m [33mFaGlobe[39m } [36mfrom[39m [32m'react-icons/fa'[39m[33m;[39m[0m
+[0m [90m 5 |[39m[0m
+[0m[31m[1m>[22m[39m[90m 6 |[39m [36mimport[39m [33mAIChat[39m [36mfrom[39m [32m'@/components/ai/AIChat'[39m[33m;[39m[0m
+[0m [90m   |[39m [31m[1m^[22m[39m[0m
+[0m [90m 7 |[39m[0m
+[0m [90m 8 |[39m [36mexport[39m [36mdefault[39m [36mfunction[39m [33mAIPage[39m() {[0m
+[0m [90m 9 |[39m   [36mreturn[39m ([0m
+
+https://nextjs.org/docs/messages/module-not-found
+[2025-06-20T17:10:46.074Z] [Next.js] ✓ Compiled /unauthorized in 480ms (1349 modules)
+[2025-06-20T17:10:46.633Z] [Next.js] ✓ Compiled /dashboard in 248ms (330 modules)
+[2025-06-20T17:10:47.636Z] [Next.js] ✓ Compiled (772 modules)
+[2025-06-20T17:10:48.035Z] [Next.js ERROR] ⨯ Error: Invalid src prop (https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1200&q=80) on `next/image`, hostname "images.unsplash.com" is not configured under images in your `next.config.js`
+See more info: https://nextjs.org/docs/messages/next-image-unconfigured-host
+    at Array.map (<anonymous>)
+digest: "1709614307"
+[2025-06-20T17:10:48.062Z] [Next.js ERROR] ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[2025-06-20T17:10:48.090Z] [Next.js] GET /search 404 in 1719ms
+[2025-06-20T17:10:48.110Z] [Next.js] GET /am-affiliate 200 in 1745ms
+[2025-06-20T17:10:48.112Z] [Next.js] GET /development-portal 200 in 1729ms
+[2025-06-20T17:10:48.114Z] [Next.js] GET /ehb-home-page 200 in 1730ms
+[2025-06-20T17:10:48.116Z] [Next.js] GET /ehb-ads 200 in 1750ms
+[2025-06-20T17:10:48.117Z] [Next.js] GET /dashboard 200 in 1735ms
+[2025-06-20T17:10:48.128Z] [Next.js ERROR] ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[2025-06-20T17:10:48.128Z] [Next.js ERROR] ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[2025-06-20T17:10:48.129Z] [Next.js ERROR] ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[2025-06-20T17:10:48.141Z] [Next.js ERROR] ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[2025-06-20T17:10:48.144Z] [Next.js ERROR] ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[2025-06-20T17:10:48.369Z] [Next.js] ✓ Compiled /reviews in 200ms (783 modules)
+[2025-06-20T17:10:49.003Z] [Next.js] ✓ Compiled (869 modules)
+[2025-06-20T17:10:49.273Z] [Next.js ERROR] ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[2025-06-20T17:10:49.416Z] [Next.js ERROR] ⨯ components\layout\AIChatProvider.tsx (108:11) @ useAIChat
+[2025-06-20T17:10:49.417Z] [Next.js ERROR] ⨯ Error: useAIChat must be used within an AIChatProvider
+    at useAIChat (./components/layout/AIChatProvider.tsx:103:15)
+    at AIChat (./components/ai/AIChat.tsx:22:141)
+digest: "1226601783"
+[0m [90m 106 |[39m   [36mconst[39m context [33m=[39m useContext([33mAIChatContext[39m)[33m;[39m[0m
+[0m [90m 107 |[39m   [36mif[39m (context [33m===[39m undefined) {[0m
+[0m[31m[1m>[22m[39m[90m 108 |[39m     [36mthrow[39m [36mnew[39m [33mError[39m([32m'useAIChat must be used within an AIChatProvider'[39m)[33m;[39m[0m
+[0m [90m     |[39m           [31m[1m^[22m[39m[0m
+[0m [90m 109 |[39m   }[0m
+[0m [90m 110 |[39m   [36mreturn[39m context[33m;[39m[0m
+[0m [90m 111 |[39m }[0m
+[2025-06-20T17:10:49.451Z] [Next.js ERROR] ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[2025-06-20T17:10:49.452Z] [Next.js ERROR] ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[2025-06-20T17:10:49.464Z] [Next.js] GET /ehb-tube 404 in 1305ms
+[2025-06-20T17:10:49.465Z] [Next.js ERROR] ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[2025-06-20T17:10:49.479Z] [Next.js] GET / 200 in 1334ms
+[2025-06-20T17:10:49.480Z] [Next.js] GET /ai 200 in 1331ms
+[2025-06-20T17:10:49.483Z] [Next.js] GET /reviews 200 in 1318ms
+[2025-06-20T17:10:49.488Z] [Next.js] GET /roadmap 200 in 1340ms
+[2025-06-20T17:10:49.492Z] [Next.js ERROR] ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[2025-06-20T17:10:49.497Z] [Next.js ERROR] ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[2025-06-20T17:10:49.561Z] [Next.js ERROR] ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[2025-06-20T17:10:49.566Z] [Next.js] GET /notifications 404 in 71ms
+[2025-06-20T17:10:49.848Z] [Next.js] ✓ Compiled /error in 303ms (874 modules)
+[2025-06-20T17:10:49.885Z] [Next.js] GET /development 200 in 1738ms
+[2025-06-20T17:10:50.214Z] [Next.js] ✓ Compiled /signup in 0ms (913 modules)
+[2025-06-20T17:10:50.320Z] [Next.js ERROR] ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[2025-06-20T17:10:50.324Z] [Next.js] GET /auth 404 in 808ms
+[2025-06-20T17:10:50.585Z] [Next.js] ✓ Compiled /franchise in 0ms (918 modules)
+[2025-06-20T17:10:50.950Z] [Next.js] ✓ Compiled in 0ms (920 modules)
+[2025-06-20T17:10:51.063Z] [Next.js ERROR] ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[2025-06-20T17:10:51.065Z] [Next.js] GET /assistant 200 in 1561ms
+[2025-06-20T17:10:51.307Z] [Next.js] ✓ Compiled in 0ms (920 modules)
+[2025-06-20T17:10:51.399Z] 🔍 Performing health check...
+[2025-06-20T17:10:51.400Z] ❌ Main App is not available on port 3000
+[2025-06-20T17:10:51.400Z] ❌ Admin Panel is not available on port 3000
+[2025-06-20T17:10:51.401Z] ❌ Dashboard is not available on port 3000
+[2025-06-20T17:10:51.401Z] ❌ AI Services is not available on port 3000
+[2025-06-20T17:10:51.402Z] ❌ Wallet is not available on port 3000
+[2025-06-20T17:10:51.402Z] ❌ Analytics is not available on port 3000
+[2025-06-20T17:10:51.403Z] ❌ EHB Dashboard is not available on port 3000
+[2025-06-20T17:10:51.403Z] ❌ EHB Home is not available on port 3000
+[2025-06-20T17:10:51.404Z] ❌ AI Marketplace is not available on port 3000
+[2025-06-20T17:10:51.404Z] ❌ EHB Tube is not available on port 3000
+[2025-06-20T17:10:51.405Z] ❌ EHB Wallet is not available on port 3000
+[2025-06-20T17:10:51.406Z] ❌ EHB Ads is not available on port 3000
+[2025-06-20T17:10:51.407Z] ❌ GoSellr is not available on port 3000
+[2025-06-20T17:10:51.407Z] ❌ Franchise is not available on port 3000
+[2025-06-20T17:10:51.408Z] ❌ Orders is not available on port 3000
+[2025-06-20T17:10:51.408Z] ❌ Cart is not available on port 3000
+[2025-06-20T17:10:51.409Z] ❌ Wishlist is not available on port 3000
+[2025-06-20T17:10:51.410Z] ❌ Profile is not available on port 3000
+[2025-06-20T17:10:51.411Z] ❌ Settings is not available on port 3000
+[2025-06-20T17:10:51.411Z] ❌ Search is not available on port 3000
+[2025-06-20T17:10:51.412Z] ❌ Reviews is not available on port 3000
+[2025-06-20T17:10:51.412Z] ❌ Notifications is not available on port 3000
+[2025-06-20T17:10:51.413Z] ❌ Roadmap is not available on port 3000
+[2025-06-20T17:10:51.413Z] ❌ Development is not available on port 3000
+[2025-06-20T17:10:51.413Z] ❌ Development Portal is not available on port 3000
+[2025-06-20T17:10:51.414Z] ❌ AM Affiliate is not available on port 3000
+[2025-06-20T17:10:51.414Z] ❌ Assistant is not available on port 3000
+[2025-06-20T17:10:51.415Z] ❌ Auth is not available on port 3000
+[2025-06-20T17:10:51.415Z] ❌ Signup is not available on port 3000
+[2025-06-20T17:10:51.416Z] ❌ Register is not available on port 3000
+[2025-06-20T17:10:51.460Z] [Next.js] GET /admin 200 in 1953ms
+[2025-06-20T17:10:51.570Z] [Next.js] GET /ehb-dashboard 200 in 2058ms
+[2025-06-20T17:10:51.571Z] [Next.js ERROR] ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[2025-06-20T17:10:51.578Z] [Next.js ERROR] ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[2025-06-20T17:10:51.792Z] [Next.js] ✓ Compiled in 0ms (920 modules)
+[2025-06-20T17:10:51.864Z] [Next.js] GET /signup 200 in 1941ms
+[2025-06-20T17:10:51.867Z] [Next.js ERROR] ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[2025-06-20T17:10:52.182Z] [Next.js] ✓ Compiled /gosellr in 1ms (920 modules)
+[2025-06-20T17:10:52.283Z] [Next.js ERROR] ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[2025-06-20T17:10:52.290Z] [Next.js ERROR] ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[2025-06-20T17:10:52.291Z] [Next.js ERROR] ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[2025-06-20T17:10:52.295Z] [Next.js] GET /error 404 in 1705ms
+[2025-06-20T17:10:52.298Z] [Next.js] GET /wishlist 404 in 1197ms
+[2025-06-20T17:10:52.301Z] [Next.js] GET /franchise 200 in 1940ms
+[2025-06-20T17:10:52.598Z] [Next.js] ✓ Compiled /ehb-ai-market-place in 1ms (928 modules)
+[2025-06-20T17:10:52.799Z] [Next.js] ✓ Compiled (936 modules)
+[2025-06-20T17:10:52.887Z] [Next.js ERROR] ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[2025-06-20T17:10:52.888Z] [Next.js ERROR] ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[2025-06-20T17:10:52.912Z] [Next.js ERROR] ⨯ Error: [next-auth]: `useSession` must be wrapped in a <SessionProvider />
+    at GoSellrPage (./app/gosellr/page.tsx:22:90)
+[2025-06-20T17:10:52.913Z] [Next.js ERROR] digest: "1343624261"
+[2025-06-20T17:10:52.930Z] [Next.js] GET /settings 404 in 1145ms
+[2025-06-20T17:10:52.931Z] [Next.js] GET /ehb-wallet 404 in 1015ms
+[2025-06-20T17:10:52.933Z] [Next.js ERROR] ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[2025-06-20T17:10:52.935Z] [Next.js ERROR] ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[2025-06-20T17:10:52.936Z] [Next.js] GET /gosellr 200 in 1155ms
+[2025-06-20T17:10:52.936Z] [Next.js] GET /ehb-ai-market-place 200 in 585ms
+[2025-06-20T17:10:52.937Z] [Next.js] GET /cart 200 in 586ms
+[2025-06-20T17:10:52.938Z] [Next.js] GET /orders 200 in 585ms
+[2025-06-20T17:10:52.944Z] [Next.js ERROR] ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[2025-06-20T17:10:52.948Z] [Next.js ERROR] ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[2025-06-20T17:10:53.249Z] [Next.js] ✓ Compiled /unauthorized in 287ms (940 modules)
+[2025-06-20T17:10:53.727Z] [Next.js] ✓ Compiled in 291ms (1184 modules)
+[2025-06-20T17:10:53.831Z] [Next.js ERROR] ⨯ Error: [next-auth]: `useSession` must be wrapped in a <SessionProvider />
+    at ProfilePage (./app/profile/page.tsx:17:98)
+digest: "983143659"
+[2025-06-20T17:10:53.839Z] [Next.js ERROR] ⨯ Error: [next-auth]: `useSession` must be wrapped in a <SessionProvider />
+    at WalletPage (./app/wallet/page.tsx:17:90)
+digest: "4004425859"
+[2025-06-20T17:10:53.845Z] [Next.js ERROR] ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[2025-06-20T17:10:53.846Z] [Next.js ERROR] ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[2025-06-20T17:10:53.848Z] [Next.js ERROR] ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[2025-06-20T17:10:53.849Z] [Next.js] GET /search 404 in 881ms
+[2025-06-20T17:10:53.851Z] [Next.js] GET /profile 200 in 890ms
+[2025-06-20T17:10:53.852Z] [Next.js] GET /unauthorized 200 in 891ms
+[2025-06-20T17:10:53.852Z] [Next.js] GET /wallet 200 in 907ms
+[2025-06-20T17:10:53.853Z] [Next.js] GET /analytics 200 in 907ms
+[2025-06-20T17:10:53.854Z] [Next.js] GET /register 200 in 894ms
+[2025-06-20T17:10:53.867Z] [Next.js ERROR] ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[2025-06-20T17:10:53.890Z] [Next.js ERROR] ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[2025-06-20T17:10:53.894Z] [Next.js ERROR] ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[2025-06-20T17:10:53.950Z] [Next.js ERROR] ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[2025-06-20T17:10:53.967Z] [Next.js] GET /_next/static/css/app/layout.css?v=1750439447712 404 in 98ms
+[2025-06-20T17:10:53.977Z] [Next.js ERROR] ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[2025-06-20T17:10:53.997Z] [Next.js ERROR] ⨯ Error: Invalid src prop (https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1200&q=80) on `next/image`, hostname "images.unsplash.com" is not configured under images in your `next.config.js`
+See more info: https://nextjs.org/docs/messages/next-image-unconfigured-host
+    at Array.map (<anonymous>)
+[2025-06-20T17:10:53.998Z] [Next.js ERROR] digest: "1709614307"
+[2025-06-20T17:10:54.008Z] [Next.js] GET /am-affiliate 200 in 148ms
+[2025-06-20T17:10:54.014Z] [Next.js ERROR] ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[2025-06-20T17:10:54.019Z] [Next.js] GET /development-portal 200 in 151ms
+[2025-06-20T17:10:54.029Z] [Next.js] GET /ehb-home-page 200 in 160ms
+[2025-06-20T17:10:54.071Z] [Next.js] GET /_next/static/css/app/layout.css?v=1750439447844 404 in 60ms
+[2025-06-20T17:10:54.079Z] [Next.js] GET /_next/static/css/app/layout.css?v=1750439447817 404 in 55ms
+[2025-06-20T17:10:54.097Z] [Next.js ERROR] ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[2025-06-20T17:10:54.110Z] [Next.js ERROR] ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[2025-06-20T17:10:54.111Z] [Next.js] GET /_next/static/css/app/layout.css?v=1750439447832 404 in 78ms
+[2025-06-20T17:10:54.118Z] [Next.js] GET /dashboard 200 in 115ms
+[2025-06-20T17:10:54.133Z] [Next.js] GET /_next/static/css/app/layout.css?v=1750439447826 404 in 81ms
+[2025-06-20T17:10:54.136Z] [Next.js] GET /ehb-ads 200 in 133ms
+[2025-06-20T17:10:54.154Z] [Next.js] GET /_next/static/css/app/layout.css?v=1750439447780 404 in 50ms
+[2025-06-20T17:10:54.184Z] [Next.js] GET /_next/static/css/app/layout.css?v=1750439449062 404 in 54ms
+[2025-06-20T17:10:54.196Z] [Next.js ERROR] ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[2025-06-20T17:10:54.208Z] [Next.js] GET /ehb-tube 404 in 77ms
+[2025-06-20T17:10:54.296Z] [Next.js ERROR] ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[2025-06-20T17:10:54.315Z] [Next.js ERROR] ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[2025-06-20T17:10:54.323Z] [Next.js ERROR] ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[2025-06-20T17:10:54.344Z] [Next.js ERROR] ⨯ components\layout\AIChatProvider.tsx (108:11) @ useAIChat
+[2025-06-20T17:10:54.344Z] [Next.js ERROR] ⨯ Error: useAIChat must be used within an AIChatProvider
+    at useAIChat (./components/layout/AIChatProvider.tsx:103:15)
+    at AIChat (./components/ai/AIChat.tsx:22:141)
+digest: "1226601783"
+[0m [90m 106 |[39m   [36mconst[39m context [33m=[39m useContext([33mAIChatContext[39m)[33m;[39m[0m
+[0m [90m 107 |[39m   [36mif[39m (context [33m===[39m undefined) {[0m
+[0m[31m[1m>[22m[39m[90m 108 |[39m     [36mthrow[39m [36mnew[39m [33mError[39m([32m'useAIChat must be used within an AIChatProvider'[39m)[33m;[39m[0m
+[0m [90m     |[39m           [31m[1m^[22m[39m[0m
+[0m [90m 109 |[39m   }[0m
+[0m [90m 110 |[39m   [36mreturn[39m context[33m;[39m[0m
+[0m [90m 111 |[39m }[0m
+[2025-06-20T17:10:54.345Z] [Next.js] GET / 200 in 190ms
+[2025-06-20T17:10:54.352Z] [Next.js] GET /reviews 200 in 193ms
+[2025-06-20T17:10:54.358Z] [Next.js ERROR] ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[2025-06-20T17:10:54.379Z] [Next.js] GET /ai 200 in 183ms
+[2025-06-20T17:10:54.380Z] [Next.js] GET /_next/static/css/app/layout.css?v=1750439449259 404 in 105ms
+[2025-06-20T17:10:54.452Z] [Next.js] GET /_next/static/css/app/layout.css?v=1750439449202 404 in 91ms
+[2025-06-20T17:10:54.454Z] [Next.js ERROR] ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[2025-06-20T17:10:54.457Z] [Next.js] GET /_next/static/css/app/layout.css?v=1750439449263 404 in 80ms
+[2025-06-20T17:10:54.461Z] [Next.js] GET /_next/static/css/app/layout.css?v=1750439449428 404 in 67ms
+[2025-06-20T17:10:54.462Z] [Next.js] GET /_next/static/css/app/layout.css?v=1750439449271 404 in 64ms
+[2025-06-20T17:10:54.466Z] [Next.js] GET /roadmap 200 in 224ms
+[2025-06-20T17:10:54.535Z] [Next.js] GET /_next/static/css/app/layout.css?v=1750439450245 404 in 60ms
+[2025-06-20T17:10:54.544Z] [Next.js] GET /_next/static/css/app/layout.css?v=1750439449527 404 in 73ms
+[2025-06-20T17:10:54.577Z] [Next.js ERROR] ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[2025-06-20T17:10:54.578Z] [Next.js ERROR] ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[2025-06-20T17:10:54.590Z] [Next.js] GET /notifications 404 in 102ms
+[2025-06-20T17:10:54.593Z] [Next.js] GET /auth 404 in 104ms
+[2025-06-20T17:10:54.616Z] [Next.js ERROR] ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[2025-06-20T17:10:54.618Z] [Next.js] GET /assistant 200 in 125ms
+[2025-06-20T17:10:54.626Z] [Next.js] GET /_next/static/css/app/layout.css?v=1750439450965 404 in 61ms
+[2025-06-20T17:10:54.671Z] [Next.js] GET /_next/static/css/app/layout.css?v=1750439451327 404 in 60ms
+[2025-06-20T17:10:54.736Z] [Next.js] GET /_next/static/css/app/layout.css?v=1750439451802 404 in 90ms
+[2025-06-20T17:10:54.743Z] [Next.js] GET /development 200 in 585ms
+[2025-06-20T17:10:54.766Z] [Next.js ERROR] ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[2025-06-20T17:10:54.782Z] [Next.js ERROR] ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[2025-06-20T17:10:54.800Z] [Next.js] GET /admin 200 in 167ms
+[2025-06-20T17:10:54.808Z] [Next.js ERROR] ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[2025-06-20T17:10:54.825Z] [Next.js] GET /signup 200 in 166ms
+[2025-06-20T17:10:54.835Z] [Next.js] GET /_next/static/css/app/layout.css?v=1750439452205 404 in 61ms
+[2025-06-20T17:10:54.842Z] [Next.js] GET /ehb-dashboard 200 in 244ms
+[2025-06-20T17:10:54.853Z] [Next.js ERROR] ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[2025-06-20T17:10:54.855Z] [Next.js] GET /wishlist 404 in 87ms
+[2025-06-20T17:10:54.871Z] [Next.js ERROR] ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[2025-06-20T17:10:54.881Z] [Next.js] GET /_next/static/css/app/layout.css?v=1750439452200 404 in 64ms
+[2025-06-20T17:10:54.886Z] [Next.js] GET /franchise 200 in 89ms
+[2025-06-20T17:10:54.953Z] [Next.js] GET /_next/static/css/app/layout.css?v=1750439452806 404 in 72ms
+[2025-06-20T17:10:54.953Z] [Next.js] GET /_next/static/css/app/layout.css?v=1750439452805 404 in 84ms
+[2025-06-20T17:10:54.966Z] [Next.js] GET /ehb-wallet 404 in 87ms
+[2025-06-20T17:10:54.966Z] [Next.js] GET /settings 404 in 90ms
+[2025-06-20T17:10:54.975Z] [Next.js ERROR] ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[2025-06-20T17:10:55.043Z] [Next.js ERROR] ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[2025-06-20T17:10:55.044Z] [Next.js ERROR] ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[2025-06-20T17:10:55.048Z] [Next.js ERROR] ⨯ Error: [next-auth]: `useSession` must be wrapped in a <SessionProvider />
+    at GoSellrPage (./app/gosellr/page.tsx:22:90)
+[2025-06-20T17:10:55.049Z] [Next.js ERROR] digest: "1343624261"
+[2025-06-20T17:10:55.063Z] [Next.js ERROR] ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[2025-06-20T17:10:55.074Z] [Next.js] GET /orders 200 in 143ms
+[2025-06-20T17:10:55.102Z] [Next.js] GET /gosellr 200 in 144ms
+[2025-06-20T17:10:55.119Z] [Next.js] GET /_next/static/css/app/layout.css?v=1750439452841 404 in 135ms
+[2025-06-20T17:10:55.121Z] [Next.js] GET /_next/static/css/app/layout.css?v=1750439452879 404 in 131ms
+[2025-06-20T17:10:55.123Z] [Next.js] GET /cart 200 in 146ms
+[2025-06-20T17:10:55.128Z] [Next.js] GET /ehb-ai-market-place 200 in 150ms
+[2025-06-20T17:10:55.137Z] [Next.js ERROR] ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[2025-06-20T17:10:55.163Z] [Next.js] GET /_next/static/css/app/layout.css?v=1750439452882 404 in 56ms
+[2025-06-20T17:10:55.164Z] [Next.js] GET /_next/static/css/app/layout.css?v=1750439452884 404 in 46ms
+[2025-06-20T17:10:55.262Z] [Next.js ERROR] ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[2025-06-20T17:10:55.266Z] [Next.js ERROR] ⨯ Error: [next-auth]: `useSession` must be wrapped in a <SessionProvider />
+    at ProfilePage (./app/profile/page.tsx:17:98)
+[2025-06-20T17:10:55.267Z] [Next.js ERROR] digest: "983143659"
+[2025-06-20T17:10:55.269Z] [Next.js] GET /search 404 in 102ms
+[2025-06-20T17:10:55.270Z] [Next.js] GET /_next/static/css/app/layout.css?v=1750439453760 404 in 89ms
+[2025-06-20T17:10:55.280Z] [Next.js ERROR] ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[2025-06-20T17:10:55.283Z] [Next.js ERROR] ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[2025-06-20T17:10:55.287Z] [Next.js ERROR] ⨯ Error: [next-auth]: `useSession` must be wrapped in a <SessionProvider />
+    at WalletPage (./app/wallet/page.tsx:17:90)
+[2025-06-20T17:10:55.287Z] [Next.js ERROR] digest: "4004425859"
+[2025-06-20T17:10:55.288Z] [Next.js] GET /analytics 200 in 123ms
+[2025-06-20T17:10:55.298Z] [Next.js] GET /register 200 in 123ms
+[2025-06-20T17:10:55.302Z] [Next.js] GET /profile 200 in 115ms
+[2025-06-20T17:10:55.310Z] [Next.js ERROR] ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[2025-06-20T17:10:55.311Z] [Next.js ERROR] ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[2025-06-20T17:10:55.318Z] [Next.js] GET /wallet 200 in 122ms
+[2025-06-20T17:10:55.368Z] [Next.js] GET /_next/static/css/app/layout.css?v=1750439453776 404 in 63ms
+[2025-06-20T17:10:55.375Z] [Next.js] GET /_next/static/css/app/layout.css?v=1750439453778 404 in 60ms
+[2025-06-20T17:10:55.376Z] [Next.js] GET /_next/static/css/app/layout.css?v=1750439453781 404 in 55ms
+[2025-06-20T17:10:55.378Z] [Next.js] GET /_next/static/css/app/layout.css?v=1750439453768 404 in 85ms
+[2025-06-20T17:10:55.407Z] [Next.js] GET /_next/static/css/app/layout.css?v=1750439453808 404 in 65ms
+[2025-06-20T17:10:55.409Z] [Next.js ERROR] ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[2025-06-20T17:10:55.424Z] [Next.js] GET /am-affiliate 200 in 112ms
+[2025-06-20T17:10:55.447Z] [Next.js ERROR] ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[2025-06-20T17:10:55.460Z] [Next.js] GET /_next/static/css/app/layout.css?v=1750439453920 404 in 56ms
+[2025-06-20T17:10:55.482Z] [Next.js] GET /_next/static/css/app/layout.css?v=1750439453889 404 in 79ms
+[2025-06-20T17:10:55.482Z] [Next.js] GET /_next/static/css/app/layout.css?v=1750439453972 404 in 68ms
+[2025-06-20T17:10:55.508Z] [Next.js ERROR] ⨯ Error: Invalid src prop (https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1200&q=80) on `next/image`, hostname "images.unsplash.com" is not configured under images in your `next.config.js`
+See more info: https://nextjs.org/docs/messages/next-image-unconfigured-host
+    at Array.map (<anonymous>)
+[2025-06-20T17:10:55.509Z] [Next.js ERROR] digest: "1709614307"
+[2025-06-20T17:10:55.527Z] [Next.js ERROR] ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[2025-06-20T17:10:55.532Z] [Next.js] GET /development-portal 200 in 112ms
+[2025-06-20T17:10:55.537Z] [Next.js ERROR] ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[2025-06-20T17:10:55.554Z] [Next.js] GET /ehb-home-page 200 in 134ms
+[2025-06-20T17:10:55.570Z] [Next.js] GET /_next/static/css/app/layout.css?v=1750439454061 404 in 59ms
+[2025-06-20T17:10:55.573Z] [Next.js] GET /_next/static/css/app/layout.css?v=1750439454084 404 in 99ms
+[2025-06-20T17:10:55.573Z] [Next.js ERROR] ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[2025-06-20T17:10:55.591Z] [Next.js] GET /ehb-ads 200 in 118ms
+[2025-06-20T17:10:55.592Z] [Next.js ERROR] ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[2025-06-20T17:10:55.611Z] [Next.js] GET /ehb-tube 404 in 78ms
+[2025-06-20T17:10:55.661Z] [Next.js ERROR] ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[2025-06-20T17:10:55.685Z] [Next.js ERROR] ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[2025-06-20T17:10:55.711Z] [Next.js ERROR] ⨯ components\layout\AIChatProvider.tsx (108:11) @ useAIChat
+[2025-06-20T17:10:55.712Z] [Next.js ERROR] ⨯ Error: useAIChat must be used within an AIChatProvider
+    at useAIChat (./components/layout/AIChatProvider.tsx:103:15)
+    at AIChat (./components/ai/AIChat.tsx:22:141)
+digest: "1226601783"
+[0m [90m 106 |[39m   [36mconst[39m context [33m=[39m useContext([33mAIChatContext[39m)[33m;[39m[0m
+[0m [90m 107 |[39m   [36mif[39m (context [33m===[39m undefined) {[0m
+[0m[31m[1m>[22m[39m[90m 108 |[39m     [36mthrow[39m [36mnew[39m [33mError[39m([32m'useAIChat must be used within an AIChatProvider'[39m)[33m;[39m[0m
+[0m [90m     |[39m           [31m[1m^[22m[39m[0m
+[0m [90m 109 |[39m   }[0m
+[0m [90m 110 |[39m   [36mreturn[39m context[33m;[39m[0m
+[0m [90m 111 |[39m }[0m
+[2025-06-20T17:10:55.712Z] [Next.js] GET / 200 in 131ms
+[2025-06-20T17:10:55.713Z] [Next.js ERROR] ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[2025-06-20T17:10:55.715Z] [Next.js] GET /_next/static/css/app/layout.css?v=1750439454234 404 in 106ms
+[2025-06-20T17:10:55.723Z] [Next.js] GET /reviews 200 in 131ms
+[2025-06-20T17:10:55.724Z] [Next.js] GET /_next/static/css/app/layout.css?v=1750439454161 404 in 97ms
+[2025-06-20T17:10:55.727Z] [Next.js ERROR] ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[2025-06-20T17:10:55.732Z] [Next.js] GET /ai 200 in 117ms
+[2025-06-20T17:10:55.806Z] [Next.js ERROR] ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[2025-06-20T17:10:55.809Z] [Next.js ERROR] ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[2025-06-20T17:10:55.829Z] [Next.js] GET /auth 404 in 82ms
+[2025-06-20T17:10:55.831Z] [Next.js] GET /notifications 404 in 93ms
+[2025-06-20T17:10:55.832Z] [Next.js] GET /_next/static/css/app/layout.css?v=1750439454215 404 in 81ms
+[2025-06-20T17:10:55.835Z] [Next.js ERROR] ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[2025-06-20T17:10:55.848Z] [Next.js ERROR] ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[2025-06-20T17:10:55.853Z] [Next.js] GET /roadmap 200 in 120ms
+[2025-06-20T17:10:55.855Z] [Next.js] GET /assistant 200 in 98ms
+[2025-06-20T17:10:55.894Z] [Next.js] GET /_next/static/css/app/layout.css?v=1750439451327 404 in 45ms
+[2025-06-20T17:10:55.913Z] [Next.js] GET /_next/static/css/app/layout.css?v=1750439454321 404 in 66ms
+[2025-06-20T17:10:55.915Z] [Next.js] GET /_next/static/css/app/layout.css?v=1750439454390 404 in 64ms
+[2025-06-20T17:10:55.930Z] [Next.js] GET /_next/static/css/app/layout.css?v=1750439454241 404 in 70ms
+[2025-06-20T17:10:56.010Z] [Next.js] GET /_next/static/css/app/layout.css?v=1750439454523 404 in 98ms
+[2025-06-20T17:10:56.013Z] [Next.js ERROR] ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[2025-06-20T17:10:56.020Z] [Next.js] GET /_next/static/css/app/layout.css?v=1750439454572 404 in 91ms
+[2025-06-20T17:10:56.029Z] [Next.js] GET /development 200 in 426ms
+[2025-06-20T17:10:56.036Z] [Next.js] GET /_next/static/css/app/layout.css?v=1750439454524 404 in 89ms
+[2025-06-20T17:10:56.068Z] [Next.js ERROR] ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[2025-06-20T17:10:56.078Z] [Next.js] GET /admin 200 in 115ms
+[2025-06-20T17:10:56.093Z] [Next.js] GET /ehb-dashboard 200 in 197ms
+[2025-06-20T17:10:56.159Z] [Next.js] GET /_next/static/css/app/layout.css?v=1750439452200 404 in 90ms
+[2025-06-20T17:10:56.192Z] [Next.js] 
+[2025-06-20T17:10:56.194Z] [Next.js] Source path: F:\ehb next.js 04\app\globals.css
+[2025-06-20T17:10:56.231Z] [Next.js] Finding changed files: 33.288ms
+[2025-06-20T17:10:56.234Z] [Next.js] GET /signup 200 in 184ms
+[2025-06-20T17:10:56.235Z] [Next.js ERROR] ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[2025-06-20T17:10:56.238Z] [Next.js] GET /wishlist 404 in 167ms
+[2025-06-20T17:10:56.243Z] [Next.js] Reading changed files: 12.441ms
+[2025-06-20T17:10:56.244Z] [Next.js] Sorting candidates: 0.022ms
+Generate rules: 0.17ms
+Build stylesheet: 0.002ms
+[2025-06-20T17:10:56.253Z] [Next.js] Potential classes:  34
+Active contexts:  1
+[2025-06-20T17:10:56.268Z] [Next.js] JIT TOTAL: 75.611ms
+[2025-06-20T17:10:56.506Z] [Next.js] GET /franchise 200 in 439ms
+[2025-06-20T17:10:56.508Z] [Next.js ERROR] ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[2025-06-20T17:10:56.508Z] [Next.js ERROR] ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[2025-06-20T17:10:56.511Z] [Next.js] GET /_next/static/css/app/layout.css?v=1750439454846 404 in 415ms
+[2025-06-20T17:10:56.588Z] [Next.js ERROR] ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[2025-06-20T17:10:56.604Z] [Next.js] GET /settings 404 in 431ms
+[2025-06-20T17:10:56.756Z] [Next.js ERROR] ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[2025-06-20T17:10:56.774Z] [Next.js ERROR] ⨯ Error: [next-auth]: `useSession` must be wrapped in a <SessionProvider />
+    at GoSellrPage (./app/gosellr/page.tsx:22:90)
+[2025-06-20T17:10:56.774Z] [Next.js ERROR] digest: "1343624261"
+[2025-06-20T17:10:56.786Z] [Next.js ERROR] ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[2025-06-20T17:10:56.788Z] [Next.js] GET /ehb-wallet 404 in 228ms
+[2025-06-20T17:10:56.806Z] [Next.js ERROR] ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[2025-06-20T17:10:56.826Z] [Next.js ERROR] ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[2025-06-20T17:10:56.836Z] [Next.js] GET /orders 200 in 268ms
+[2025-06-20T17:10:56.841Z] [Next.js] GET /gosellr 200 in 260ms
+[2025-06-20T17:10:56.853Z] [Next.js] GET /ehb-ai-market-place 200 in 272ms
+[2025-06-20T17:10:56.855Z] [Next.js] GET /cart 200 in 274ms
+[2025-06-20T17:10:56.876Z] [Next.js ERROR] ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[2025-06-20T17:10:56.898Z] [Next.js] GET /_next/static/css/app/layout.css?v=1750439454731 404 in 147ms
+[2025-06-20T17:10:57.196Z] [Next.js] ✓ Compiled in 1100ms (2163 modules)
+[2025-06-20T17:10:57.775Z] [Next.js] GET /_next/static/css/app/layout.css?v=1750439454994 404 in 877ms
+[2025-06-20T17:10:57.789Z] [Next.js] GET /_next/static/css/app/layout.css?v=1750439454810 404 in 958ms
+[2025-06-20T17:10:57.790Z] [Next.js] GET /_next/static/css/app/layout.css?v=1750439454892 404 in 930ms
+[2025-06-20T17:10:57.791Z] [Next.js] GET /_next/static/css/app/layout.css?v=1750439454680 404 in 908ms
+[2025-06-20T17:10:57.792Z] [Next.js] GET /_next/static/css/app/layout.css?v=1750439455089 404 in 527ms
+[2025-06-20T17:10:57.793Z] [Next.js] GET /_next/static/css/app/layout.css?v=1750439455023 404 in 527ms
+[2025-06-20T17:10:57.852Z] [Next.js] GET /_next/static/css/app/layout.css?v=1750439455219 404 in 51ms
+[2025-06-20T17:10:57.857Z] [Next.js] GET /_next/static/css/app/layout.css?v=1750439455067 404 in 69ms
+[2025-06-20T17:10:57.860Z] [Next.js] GET /_next/static/css/app/layout.css?v=1750439454779 404 in 62ms
+[2025-06-20T17:10:57.861Z] [Next.js] GET /_next/static/css/app/layout.css?v=1750439455205 404 in 60ms
+[2025-06-20T17:10:57.862Z] [Next.js] GET /_next/static/css/app/layout.css?v=1750439455236 404 in 59ms
+[2025-06-20T17:10:57.862Z] [Next.js] GET /_next/static/css/app/layout.css?v=1750439455256 404 in 59ms
+[2025-06-20T17:10:57.907Z] [Next.js] GET /_next/static/css/app/layout.css?v=1750439455276 404 in 49ms
+[2025-06-20T17:10:57.910Z] [Next.js] GET /_next/static/css/app/layout.css?v=1750439455380 404 in 45ms
+[2025-06-20T17:10:57.911Z] [Next.js] GET /_next/static/css/app/layout.css?v=1750439455478 404 in 40ms
+[2025-06-20T17:10:57.911Z] [Next.js] GET /_next/static/css/app/layout.css?v=1750439455497 404 in 38ms
+[2025-06-20T17:10:57.912Z] [Next.js] GET /_next/static/css/app/layout.css?v=1750439455543 404 in 39ms
+[2025-06-20T17:10:57.912Z] [Next.js] GET /_next/static/css/app/layout.css?v=1750439455566 404 in 38ms
+[2025-06-20T17:10:57.959Z] [Next.js] GET /_next/static/css/app/layout.css?v=1750439455645 404 in 42ms
+[2025-06-20T17:10:57.960Z] [Next.js] GET /_next/static/css/app/layout.css?v=1750439455701 404 in 42ms
+[2025-06-20T17:10:57.961Z] [Next.js] GET /_next/static/css/app/layout.css?v=1750439455767 404 in 41ms
+[2025-06-20T17:10:57.962Z] [Next.js] GET /_next/static/css/app/layout.css?v=1750439455664 404 in 43ms
+[2025-06-20T17:10:57.963Z] [Next.js] GET /_next/static/css/app/layout.css?v=1750439455816 404 in 41ms
+[2025-06-20T17:10:57.964Z] [Next.js] GET /_next/static/css/app/layout.css?v=1750439455802 404 in 42ms
+[2025-06-20T17:10:58.042Z] [Next.js] GET /_next/static/css/app/layout.css?v=1750439455630 404 in 72ms
+[2025-06-20T17:10:58.043Z] [Next.js] GET /_next/static/css/app/layout.css?v=1750439456034 404 in 70ms
+[2025-06-20T17:10:58.044Z] [Next.js] GET /_next/static/css/app/layout.css?v=1750439456119 404 in 70ms
+[2025-06-20T17:10:58.044Z] [Next.js] GET /_next/static/css/app/layout.css?v=1750439456099 404 in 69ms
+[2025-06-20T17:10:58.045Z] [Next.js] GET /_next/static/css/app/layout.css?v=1750439455961 404 in 67ms
+[2025-06-20T17:10:58.045Z] [Next.js] GET /_next/static/css/app/layout.css?v=1750439456113 404 in 66ms
+[2025-06-20T17:10:58.114Z] [Next.js] GET /_next/static/css/app/layout.css?v=1750439456602 404 in 61ms
+[2025-06-20T17:10:58.115Z] [Next.js] GET /_next/static/css/app/layout.css?v=1750439456561 404 in 62ms
+[2025-06-20T17:10:58.116Z] [Next.js] GET /_next/static/css/app/layout.css?v=1750439456764 404 in 61ms
+[2025-06-20T17:10:58.119Z] [Next.js] GET /_next/static/css/app/layout.css?v=1750439456743 404 in 64ms
+[2025-06-20T17:10:58.120Z] [Next.js] GET /_next/static/css/app/layout.css?v=1750439456779 404 in 62ms
+[2025-06-20T17:10:58.122Z] [Next.js] GET /_next/static/css/app/layout.css?v=1750439456781 404 in 65ms
+[2025-06-20T17:10:58.202Z] [Next.js ERROR] ⨯ Error: [next-auth]: `useSession` must be wrapped in a <SessionProvider />
+    at ProfilePage (./app/profile/page.tsx:17:98)
+[2025-06-20T17:10:58.202Z] [Next.js ERROR] digest: "983143659"
+[2025-06-20T17:10:58.223Z] [Next.js ERROR] ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[2025-06-20T17:10:58.243Z] [Next.js] GET /_next/static/css/app/layout.css?v=1750439454892 404 in 97ms
+[2025-06-20T17:10:58.251Z] [Next.js ERROR] ⨯ Error: [next-auth]: `useSession` must be wrapped in a <SessionProvider />
+    at WalletPage (./app/wallet/page.tsx:17:90)
+[2025-06-20T17:10:58.251Z] [Next.js ERROR] digest: "4004425859"
+[2025-06-20T17:10:58.270Z] [Next.js] GET /profile 200 in 131ms
+[2025-06-20T17:10:58.271Z] [Next.js ERROR] ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[2025-06-20T17:10:58.273Z] [Next.js] GET /_next/static/css/app/layout.css?v=1750439455767 404 in 126ms
+[2025-06-20T17:10:58.280Z] [Next.js] GET /wallet 200 in 141ms
+[2025-06-20T17:10:58.284Z] [Next.js] GET /analytics 200 in 145ms
+[2025-06-20T17:10:58.287Z] [Next.js] GET /register 200 in 147ms
+[2025-06-20T17:10:58.715Z] [Next.js ERROR] ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[2025-06-20T17:10:58.716Z] [Next.js ERROR] ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[2025-06-20T17:10:58.949Z] [Next.js] GET /_next/static/css/app/layout.css?v=1750439458179 404 in 18ms
+[2025-06-20T17:10:59.023Z] [Next.js] GET /_next/static/css/app/layout.css?v=1750439458220 404 in 15ms
+[2025-06-20T17:10:59.608Z] [Next.js] GET /_next/static/chunks/app-pages-internals.js 404 in 19ms
+[2025-06-20T17:11:00.665Z] [Next.js] GET /_next/static/css/app/layout.css?v=1750439458225 404 in 27ms
+[2025-06-20T17:11:00.668Z] [Next.js] GET /_next/static/css/app/layout.css?v=1750439458215 404 in 23ms
+[2025-06-20T17:11:03.669Z] [Next.js] GET /_next/static/chunks/app/not-found.js 404 in 30ms
+[2025-06-20T17:11:03.773Z] [Next.js] GET /_next/static/chunks/app/error.js 404 in 28ms
+[2025-06-20T17:11:04.858Z] [Next.js] GET /_next/static/chunks/app/assistant/page.js 404 in 19ms
+[2025-06-20T17:11:05.266Z] [Next.js] GET /_next/static/chunks/app-pages-internals.js 404 in 66ms
+[2025-06-20T17:11:06.579Z] [Next.js] GET /_next/static/css/app/layout.css?v=1750439458179 404 in 54ms
+[2025-06-20T17:11:07.832Z] [Next.js] GET /_next/static/css/app/layout.css?v=1750439458225 404 in 16ms
+[2025-06-20T17:11:08.298Z] [Next.js] GET /_next/static/chunks/app/not-found.js 404 in 47ms
+[2025-06-20T17:11:08.463Z] [Next.js] GET /_next/static/chunks/app/error.js 404 in 17ms
+[2025-06-20T17:11:08.811Z] [Next.js] GET /_next/static/chunks/app/assistant/page.js 404 in 22ms
+[2025-06-20T17:11:08.882Z] [Next.js] GET /_next/static/chunks/app-pages-internals.js 404 in 27ms
+[2025-06-20T17:11:09.542Z] [Next.js] 
+[2025-06-20T17:11:09.545Z] [Next.js] Source path: F:\ehb next.js 04\app\globals.css
+[2025-06-20T17:11:09.577Z] [Next.js] Finding changed files: 29.469ms
+[2025-06-20T17:11:09.583Z] [Next.js] Reading changed files: 5.581ms
+[2025-06-20T17:11:09.584Z] [Next.js] Sorting candidates: 0.039ms
+[2025-06-20T17:11:09.585Z] [Next.js] Generate rules: 2.041ms
+[2025-06-20T17:11:09.586Z] [Next.js] Build stylesheet: 0.005ms
+[2025-06-20T17:11:09.595Z] [Next.js] Potential classes:  81
+[2025-06-20T17:11:09.597Z] [Next.js] Active contexts:  1
+[2025-06-20T17:11:09.614Z] [Next.js] JIT TOTAL: 71.829ms
+[2025-06-20T17:11:09.615Z] [Next.js] 
+[2025-06-20T17:11:10.019Z] [Next.js] ✓ Compiled in 1060ms (2163 modules)
+[2025-06-20T17:11:11.033Z] [Next.js] GET /_next/static/chunks/app/not-found.js 404 in 134ms
+[2025-06-20T17:11:11.159Z] [Next.js] GET /_next/static/chunks/app/assistant/page.js 404 in 38ms
+[2025-06-20T17:11:11.303Z] [Next.js] GET /_next/static/chunks/app-pages-internals.js 404 in 33ms
+[2025-06-20T17:11:11.355Z] [Next.js] GET /_next/static/chunks/app/not-found.js 404 in 20ms
+[2025-06-20T17:11:11.374Z] [Next.js] GET /_next/static/chunks/app-pages-internals.js 404 in 21ms
+[2025-06-20T17:11:11.395Z] [Next.js] GET /_next/static/chunks/app/not-found.js 404 in 24ms
+[2025-06-20T17:11:11.428Z] [Next.js] GET /_next/static/chunks/app/not-found.js 404 in 29ms
+[2025-06-20T17:11:11.431Z] [Next.js] GET /_next/static/chunks/app-pages-internals.js 404 in 38ms
+[2025-06-20T17:11:11.457Z] [Next.js] GET /_next/static/chunks/app-pages-internals.js 404 in 21ms
+[2025-06-20T17:11:11.461Z] [Next.js] GET /_next/static/chunks/app/not-found.js 404 in 23ms
+[2025-06-20T17:11:11.488Z] [Next.js] GET /_next/static/chunks/app-pages-internals.js 404 in 24ms
+[2025-06-20T17:11:11.491Z] [Next.js] GET /_next/static/chunks/app/not-found.js 404 in 24ms
+[2025-06-20T17:11:11.519Z] [Next.js] GET /_next/static/chunks/app-pages-internals.js 404 in 25ms
+[2025-06-20T17:11:11.521Z] [Next.js] GET /_next/static/chunks/app/not-found.js 404 in 25ms
+[2025-06-20T17:11:11.553Z] [Next.js] GET /_next/static/chunks/app-pages-internals.js 404 in 26ms
+[2025-06-20T17:11:11.563Z] [Next.js] GET /_next/static/chunks/app/not-found.js 404 in 33ms
+[2025-06-20T17:11:11.583Z] [Next.js] GET /_next/static/chunks/app-pages-internals.js 404 in 23ms
+[2025-06-20T17:11:11.594Z] [Next.js] GET /_next/static/chunks/app/not-found.js 404 in 33ms
+[2025-06-20T17:11:11.619Z] [Next.js] GET /_next/static/chunks/app-pages-internals.js 404 in 29ms
+[2025-06-20T17:11:11.620Z] [Next.js] GET /_next/static/chunks/app/not-found.js 404 in 27ms
+[2025-06-20T17:11:11.642Z] [Next.js] GET /_next/static/chunks/app-pages-internals.js 404 in 24ms
+[2025-06-20T17:11:11.655Z] [Next.js] GET /_next/static/chunks/app/not-found.js 404 in 31ms
+[2025-06-20T17:11:11.682Z] [Next.js] GET /_next/static/chunks/app-pages-internals.js 404 in 30ms
+[2025-06-20T17:11:11.688Z] [Next.js] GET /_next/static/chunks/app/not-found.js 404 in 27ms
+[2025-06-20T17:11:11.719Z] [Next.js] GET /_next/static/chunks/app-pages-internals.js 404 in 27ms
+[2025-06-20T17:11:11.720Z] [Next.js] GET /_next/static/chunks/app/not-found.js 404 in 25ms
+[2025-06-20T17:11:11.748Z] [Next.js] GET /_next/static/chunks/app-pages-internals.js 404 in 21ms
+[2025-06-20T17:11:11.751Z] [Next.js] GET /_next/static/chunks/app/not-found.js 404 in 23ms
+[2025-06-20T17:11:11.776Z] [Next.js] GET /_next/static/chunks/app-pages-internals.js 404 in 23ms
+[2025-06-20T17:11:11.780Z] [Next.js] GET /_next/static/chunks/app/not-found.js 404 in 23ms
+[2025-06-20T17:11:11.808Z] [Next.js] GET /_next/static/chunks/app-pages-internals.js 404 in 25ms
+[2025-06-20T17:11:11.811Z] [Next.js] GET /_next/static/chunks/app/not-found.js 404 in 27ms
+[2025-06-20T17:11:11.836Z] [Next.js] GET /_next/static/chunks/app-pages-internals.js 404 in 24ms
+[2025-06-20T17:11:11.840Z] [Next.js] GET /_next/static/chunks/app/not-found.js 404 in 22ms
+[2025-06-20T17:11:11.870Z] [Next.js] GET /_next/static/chunks/app-pages-internals.js 404 in 26ms
+[2025-06-20T17:11:11.876Z] [Next.js] GET /_next/static/chunks/app/not-found.js 404 in 30ms
+[2025-06-20T17:11:11.899Z] [Next.js] GET /_next/static/chunks/app-pages-internals.js 404 in 25ms
+[2025-06-20T17:11:11.902Z] [Next.js] GET /_next/static/chunks/app/not-found.js 404 in 24ms
+[2025-06-20T17:11:11.930Z] [Next.js] GET /_next/static/chunks/app-pages-internals.js 404 in 25ms
+[2025-06-20T17:11:11.932Z] [Next.js] GET /_next/static/chunks/app/not-found.js 404 in 23ms
+[2025-06-20T17:11:11.970Z] [Next.js] GET /_next/static/chunks/app/not-found.js 404 in 33ms
+[2025-06-20T17:11:11.971Z] [Next.js] GET /_next/static/chunks/app-pages-internals.js 404 in 33ms
+[2025-06-20T17:11:12.015Z] [Next.js] GET /_next/static/chunks/app-pages-internals.js 404 in 32ms
+[2025-06-20T17:11:12.016Z] [Next.js] GET /_next/static/chunks/app/not-found.js 404 in 38ms
+[2025-06-20T17:11:12.045Z] [Next.js] GET /_next/static/chunks/app/not-found.js 404 in 31ms
+[2025-06-20T17:11:12.061Z] [Next.js] GET /_next/static/chunks/app-pages-internals.js 404 in 39ms
+[2025-06-20T17:11:12.082Z] [Next.js] GET /_next/static/chunks/app/not-found.js 404 in 24ms
+[2025-06-20T17:11:12.097Z] [Next.js] GET /_next/static/chunks/app-pages-internals.js 404 in 30ms
+[2025-06-20T17:11:12.119Z] [Next.js] GET /_next/static/chunks/app/not-found.js 404 in 27ms
+[2025-06-20T17:11:12.129Z] [Next.js] GET /_next/static/chunks/app-pages-internals.js 404 in 28ms
+[2025-06-20T17:11:12.157Z] [Next.js] GET /_next/static/chunks/app/not-found.js 404 in 31ms
+[2025-06-20T17:11:12.160Z] [Next.js] GET /_next/static/chunks/app-pages-internals.js 404 in 28ms
+[2025-06-20T17:11:12.192Z] [Next.js] GET /_next/static/chunks/app/not-found.js 404 in 27ms
+[2025-06-20T17:11:12.199Z] [Next.js] GET /_next/static/chunks/app-pages-internals.js 404 in 30ms
+[2025-06-20T17:11:12.225Z] [Next.js] GET /_next/static/chunks/app/not-found.js 404 in 28ms
+[2025-06-20T17:11:12.232Z] [Next.js] GET /_next/static/chunks/app-pages-internals.js 404 in 31ms
+[2025-06-20T17:11:12.257Z] [Next.js] GET /_next/static/chunks/app/not-found.js 404 in 27ms
+[2025-06-20T17:11:12.259Z] [Next.js] GET /_next/static/chunks/app-pages-internals.js 404 in 25ms
+[2025-06-20T17:11:12.286Z] [Next.js] GET /_next/static/chunks/app/not-found.js 404 in 23ms
+[2025-06-20T17:11:12.289Z] [Next.js] GET /_next/static/chunks/app-pages-internals.js 404 in 23ms
+[2025-06-20T17:11:12.313Z] [Next.js] GET /_next/static/chunks/app/not-found.js 404 in 20ms
+[2025-06-20T17:11:12.317Z] [Next.js] GET /_next/static/chunks/app-pages-internals.js 404 in 21ms
+[2025-06-20T17:11:12.339Z] [Next.js] GET /_next/static/chunks/app/not-found.js 404 in 19ms
+[2025-06-20T17:11:12.342Z] [Next.js] GET /_next/static/chunks/app-pages-internals.js 404 in 21ms
+[2025-06-20T17:11:12.378Z] [Next.js] GET /_next/static/chunks/app/not-found.js 404 in 32ms
+[2025-06-20T17:11:12.385Z] [Next.js] GET /_next/static/chunks/app-pages-internals.js 404 in 36ms
+[2025-06-20T17:11:12.426Z] [Next.js] GET /_next/static/chunks/app/not-found.js 404 in 44ms
+[2025-06-20T17:11:12.433Z] [Next.js] GET /_next/static/chunks/app-pages-internals.js 404 in 50ms
+[2025-06-20T17:11:12.470Z] [Next.js] GET /_next/static/chunks/app-pages-internals.js 404 in 37ms
+[2025-06-20T17:11:12.475Z] [Next.js] GET /_next/static/chunks/app/not-found.js 404 in 44ms
+[2025-06-20T17:11:12.520Z] [Next.js] GET /_next/static/chunks/app/not-found.js 404 in 47ms
+[2025-06-20T17:11:12.522Z] [Next.js] GET /_next/static/chunks/app-pages-internals.js 404 in 47ms
+[2025-06-20T17:11:12.560Z] [Next.js] GET /_next/static/chunks/app/not-found.js 404 in 34ms
+[2025-06-20T17:11:12.562Z] [Next.js] GET /_next/static/chunks/app-pages-internals.js 404 in 33ms
+[2025-06-20T17:11:12.622Z] [Next.js] GET /_next/static/chunks/app-pages-internals.js 404 in 56ms
+[2025-06-20T17:11:12.623Z] [Next.js] GET /_next/static/chunks/app/not-found.js 404 in 56ms
+[2025-06-20T17:11:12.664Z] [Next.js] GET /_next/static/chunks/app-pages-internals.js 404 in 47ms
+[2025-06-20T17:11:12.664Z] [Next.js] GET /_next/static/chunks/app/not-found.js 404 in 44ms
+[2025-06-20T17:11:12.713Z] [Next.js] GET /_next/static/chunks/app-pages-internals.js 404 in 52ms
+[2025-06-20T17:11:12.714Z] [Next.js] GET /_next/static/chunks/app/not-found.js 404 in 51ms
+[2025-06-20T17:11:12.775Z] [Next.js] GET /_next/static/chunks/app/not-found.js 404 in 56ms
+[2025-06-20T17:11:12.775Z] [Next.js] GET /_next/static/chunks/app-pages-internals.js 404 in 58ms
+[2025-06-20T17:11:12.848Z] [Next.js] GET /_next/static/chunks/app-pages-internals.js 404 in 69ms
+[2025-06-20T17:11:12.849Z] [Next.js] GET /_next/static/chunks/app/not-found.js 404 in 68ms
+[2025-06-20T17:11:12.884Z] [Next.js] GET /_next/static/chunks/app-pages-internals.js 404 in 32ms
+[2025-06-20T17:11:12.885Z] [Next.js] GET /_next/static/chunks/app/not-found.js 404 in 33ms
+[2025-06-20T17:11:12.928Z] [Next.js] GET /_next/static/chunks/app-pages-internals.js 404 in 39ms
+[2025-06-20T17:11:12.929Z] [Next.js] GET /_next/static/chunks/app/not-found.js 404 in 38ms
+[2025-06-20T17:11:12.979Z] [Next.js] GET /_next/static/chunks/app-pages-internals.js 404 in 46ms
+[2025-06-20T17:11:12.980Z] [Next.js] GET /_next/static/chunks/app/not-found.js 404 in 47ms
+[2025-06-20T17:11:13.034Z] [Next.js] GET /_next/static/chunks/app-pages-internals.js 404 in 52ms
+[2025-06-20T17:11:13.035Z] [Next.js] GET /_next/static/chunks/app/not-found.js 404 in 50ms
+[2025-06-20T17:11:13.095Z] [Next.js] GET /_next/static/chunks/app-pages-internals.js 404 in 46ms
+[2025-06-20T17:11:13.096Z] [Next.js] GET /_next/static/chunks/app/not-found.js 404 in 45ms
+[2025-06-20T17:11:13.153Z] [Next.js] GET /_next/static/chunks/app-pages-internals.js 404 in 55ms
+[2025-06-20T17:11:13.154Z] [Next.js] GET /_next/static/chunks/app/not-found.js 404 in 54ms
+[2025-06-20T17:11:13.187Z] [Next.js] GET /_next/static/chunks/app-pages-internals.js 404 in 30ms
+[2025-06-20T17:11:13.195Z] [Next.js] GET /_next/static/chunks/app/not-found.js 404 in 35ms
+[2025-06-20T17:11:13.261Z] [Next.js] GET /_next/static/chunks/app-pages-internals.js 404 in 70ms
+[2025-06-20T17:11:13.262Z] [Next.js] GET /_next/static/chunks/app/not-found.js 404 in 69ms
+[2025-06-20T17:11:13.325Z] [Next.js] GET /_next/static/chunks/app-pages-internals.js 404 in 60ms
+[2025-06-20T17:11:13.327Z] [Next.js] GET /_next/static/chunks/app/not-found.js 404 in 61ms
+[2025-06-20T17:11:13.387Z] [Next.js] GET /_next/static/chunks/app-pages-internals.js 404 in 59ms
+[2025-06-20T17:11:13.388Z] [Next.js] GET /_next/static/chunks/app/not-found.js 404 in 58ms
+[2025-06-20T17:11:13.449Z] [Next.js] GET /_next/static/chunks/app-pages-internals.js 404 in 57ms
+[2025-06-20T17:11:13.450Z] [Next.js] GET /_next/static/chunks/app/not-found.js 404 in 58ms
+[2025-06-20T17:11:13.512Z] [Next.js] GET /_next/static/chunks/app-pages-internals.js 404 in 60ms
+[2025-06-20T17:11:13.514Z] [Next.js] GET /_next/static/chunks/app/not-found.js 404 in 61ms
+[2025-06-20T17:11:13.562Z] [Next.js] GET /_next/static/chunks/app-pages-internals.js 404 in 45ms
+[2025-06-20T17:11:13.563Z] [Next.js] GET /_next/static/chunks/app/not-found.js 404 in 45ms
+[2025-06-20T17:11:13.620Z] [Next.js] GET /_next/static/chunks/app-pages-internals.js 404 in 54ms
+[2025-06-20T17:11:13.620Z] [Next.js] GET /_next/static/chunks/app/not-found.js 404 in 54ms
+[2025-06-20T17:11:13.665Z] [Next.js] GET /_next/static/chunks/app-pages-internals.js 404 in 43ms
+[2025-06-20T17:11:13.666Z] [Next.js] GET /_next/static/chunks/app/not-found.js 404 in 42ms
+[2025-06-20T17:11:13.712Z] [Next.js] GET /_next/static/chunks/app-pages-internals.js 404 in 43ms
+[2025-06-20T17:11:13.713Z] [Next.js] GET /_next/static/chunks/app/not-found.js 404 in 44ms
+[2025-06-20T17:11:13.744Z] [Next.js] GET /_next/static/chunks/app-pages-internals.js 404 in 30ms
+[2025-06-20T17:11:13.745Z] [Next.js] GET /_next/static/chunks/app/not-found.js 404 in 29ms
+[2025-06-20T17:11:13.788Z] [Next.js] GET /_next/static/chunks/app-pages-internals.js 404 in 41ms
+[2025-06-20T17:11:13.791Z] [Next.js] GET /_next/static/chunks/app/not-found.js 404 in 42ms
+[2025-06-20T17:11:13.851Z] [Next.js] GET /_next/static/chunks/app-pages-internals.js 404 in 59ms
+[2025-06-20T17:11:13.852Z] [Next.js] GET /_next/static/chunks/app/not-found.js 404 in 58ms
+[2025-06-20T17:11:13.898Z] [Next.js] GET /_next/static/chunks/app-pages-internals.js 404 in 40ms
+[2025-06-20T17:11:13.899Z] [Next.js] GET /_next/static/chunks/app/not-found.js 404 in 39ms
+[2025-06-20T17:11:13.960Z] [Next.js] GET /_next/static/chunks/app-pages-internals.js 404 in 59ms
+[2025-06-20T17:11:13.961Z] [Next.js] GET /_next/static/chunks/app/not-found.js 404 in 60ms
+[2025-06-20T17:11:13.994Z] [Next.js] GET /_next/static/chunks/app/not-found.js 404 in 31ms
+[2025-06-20T17:11:13.998Z] [Next.js] GET /_next/static/chunks/app-pages-internals.js 404 in 35ms
+[2025-06-20T17:11:14.020Z] [Next.js] GET /_next/static/chunks/app/not-found.js 404 in 24ms
+[2025-06-20T17:11:14.021Z] [Next.js] GET /_next/static/chunks/app-pages-internals.js 404 in 24ms
+[2025-06-20T17:11:14.068Z] [Next.js] GET /_next/static/chunks/app/not-found.js 404 in 43ms
+[2025-06-20T17:11:14.069Z] [Next.js] GET /_next/static/chunks/app-pages-internals.js 404 in 44ms
+[2025-06-20T17:11:14.129Z] [Next.js] GET /_next/static/chunks/app/not-found.js 404 in 58ms
+[2025-06-20T17:11:14.130Z] [Next.js] GET /_next/static/chunks/app-pages-internals.js 404 in 58ms
+[2025-06-20T17:11:14.190Z] [Next.js] GET /_next/static/chunks/app/not-found.js 404 in 58ms
+[2025-06-20T17:11:14.191Z] [Next.js] GET /_next/static/chunks/app-pages-internals.js 404 in 57ms
+[2025-06-20T17:11:14.236Z] [Next.js] GET /_next/static/chunks/app/not-found.js 404 in 42ms
+[2025-06-20T17:11:14.236Z] [Next.js] GET /_next/static/chunks/app-pages-internals.js 404 in 43ms
+[2025-06-20T17:11:14.267Z] [Next.js] GET /_next/static/chunks/app/not-found.js 404 in 29ms
+[2025-06-20T17:11:14.268Z] [Next.js] GET /_next/static/chunks/app-pages-internals.js 404 in 29ms
+[2025-06-20T17:11:14.320Z] [Next.js] GET /_next/static/chunks/app/not-found.js 404 in 50ms
+[2025-06-20T17:11:14.321Z] [Next.js] GET /_next/static/chunks/app-pages-internals.js 404 in 49ms
+[2025-06-20T17:11:14.378Z] [Next.js] GET /_next/static/chunks/app/not-found.js 404 in 59ms
+[2025-06-20T17:11:14.380Z] [Next.js] GET /_next/static/chunks/app-pages-internals.js 404 in 58ms
+[2025-06-20T17:11:14.438Z] [Next.js] GET /_next/static/chunks/app/not-found.js 404 in 52ms
+[2025-06-20T17:11:14.440Z] [Next.js] GET /_next/static/chunks/app-pages-internals.js 404 in 52ms
+[2025-06-20T17:11:14.499Z] [Next.js] GET /_next/static/chunks/app/not-found.js 404 in 57ms
+[2025-06-20T17:11:14.499Z] [Next.js] GET /_next/static/chunks/app-pages-internals.js 404 in 56ms
+[2025-06-20T17:11:14.563Z] [Next.js] GET /_next/static/chunks/app/not-found.js 404 in 60ms
+[2025-06-20T17:11:14.563Z] [Next.js] GET /_next/static/chunks/app-pages-internals.js 404 in 61ms
+[2025-06-20T17:11:14.621Z] [Next.js] GET /_next/static/chunks/app/not-found.js 404 in 56ms
+[2025-06-20T17:11:14.622Z] [Next.js] GET /_next/static/chunks/app-pages-internals.js 404 in 56ms
+[2025-06-20T17:11:14.652Z] [Next.js] GET /_next/static/chunks/app/not-found.js 404 in 28ms
+[2025-06-20T17:11:14.653Z] [Next.js] GET /_next/static/chunks/app-pages-internals.js 404 in 28ms
+[2025-06-20T17:11:14.729Z] [Next.js] GET /_next/static/chunks/app-pages-internals.js 404 in 75ms
+[2025-06-20T17:11:14.789Z] [Next.js] GET /_next/static/chunks/app-pages-internals.js 404 in 58ms
+[2025-06-20T17:11:14.849Z] [Next.js] GET /_next/static/chunks/app-pages-internals.js 404 in 57ms
+[2025-06-20T17:11:14.911Z] [Next.js] GET /_next/static/chunks/app-pages-internals.js 404 in 59ms
+[2025-06-20T17:11:14.987Z] [Next.js] GET /_next/static/chunks/app-pages-internals.js 404 in 74ms
+[2025-06-20T17:11:15.047Z] [Next.js] GET /_next/static/chunks/app-pages-internals.js 404 in 58ms
+[2025-06-20T17:11:15.127Z] [Next.js] GET /_next/static/chunks/app-pages-internals.js 404 in 78ms
+[2025-06-20T17:11:15.205Z] [Next.js] GET /_next/static/chunks/app-pages-internals.js 404 in 76ms
+[2025-06-20T17:11:15.251Z] [Next.js] GET /_next/static/chunks/app-pages-internals.js 404 in 43ms
+[2025-06-20T17:11:15.329Z] [Next.js] GET /_next/static/chunks/app-pages-internals.js 404 in 75ms
+[2025-06-20T17:11:15.390Z] [Next.js] GET /_next/static/chunks/app-pages-internals.js 404 in 59ms
+[2025-06-20T17:11:15.451Z] [Next.js] GET /_next/static/chunks/app-pages-internals.js 404 in 59ms
+[2025-06-20T17:11:15.808Z] [Next.js] 
+[2025-06-20T17:11:15.810Z] [Next.js] Source path: F:\ehb next.js 04\app\globals.css
+[2025-06-20T17:11:15.830Z] [Next.js] Finding changed files: 19.716ms
+[2025-06-20T17:11:15.834Z] [Next.js] Reading changed files: 4.041ms
+[2025-06-20T17:11:15.835Z] [Next.js] Sorting candidates: 0.004ms
+Generate rules: 0.064ms
+Build stylesheet: 0.001ms
+[2025-06-20T17:11:15.841Z] [Next.js] Potential classes:  1
+Active contexts:  1
+[2025-06-20T17:11:15.852Z] [Next.js] JIT TOTAL: 43.749ms
+[2025-06-20T17:11:16.873Z] [Next.js] ✓ Compiled in 1110ms (2151 modules)
+[2025-06-20T17:11:20.565Z] [Next.js] 
+[2025-06-20T17:11:20.566Z] [Next.js] Source path: F:\ehb next.js 04\app\globals.css
+[2025-06-20T17:11:20.577Z] [Next.js] Finding changed files: 10.956ms
+[2025-06-20T17:11:20.587Z] [Next.js] Reading changed files: 9.153ms
+[2025-06-20T17:11:20.587Z] [Next.js] Sorting candidates: 0.044ms
+[2025-06-20T17:11:20.588Z] [Next.js] Generate rules: 0.615ms
+Build stylesheet: 0.002ms
+[2025-06-20T17:11:20.593Z] [Next.js] Potential classes:  77
+Active contexts:  1
+[2025-06-20T17:11:20.600Z] [Next.js] JIT TOTAL: 34.716ms
+[2025-06-20T17:11:21.411Z] [Next.js] ✓ Compiled in 890ms (2155 modules)
+[2025-06-20T17:11:33.572Z] [Next.js] 
+[2025-06-20T17:11:33.573Z] [Next.js] Source path: F:\ehb next.js 04\app\globals.css
+[2025-06-20T17:11:33.603Z] [Next.js] Finding changed files: 28.724ms
+[2025-06-20T17:11:33.612Z] [Next.js] Reading changed files: 9.133ms
+[2025-06-20T17:11:33.613Z] [Next.js] Sorting candidates: 0.034ms
+[2025-06-20T17:11:33.613Z] [Next.js] Generate rules: 0.699ms
+Build stylesheet: 0.002ms
+[2025-06-20T17:11:33.619Z] [Next.js] Potential classes:  73
+Active contexts:  1
+[2025-06-20T17:11:33.633Z] [Next.js] JIT TOTAL: 60.679ms
+[2025-06-20T17:11:34.270Z] [Next.js] ✓ Compiled in 762ms (2168 modules)
+[2025-06-20T17:11:51.413Z] 🔍 Performing health check...
+[2025-06-20T17:11:51.414Z] ❌ Main App is not available on port 3000
+[2025-06-20T17:11:51.414Z] ❌ Admin Panel is not available on port 3000
+[2025-06-20T17:11:51.415Z] ❌ Dashboard is not available on port 3000
+[2025-06-20T17:11:51.415Z] ❌ AI Services is not available on port 3000
+[2025-06-20T17:11:51.416Z] ❌ Wallet is not available on port 3000
+[2025-06-20T17:11:51.416Z] ❌ Analytics is not available on port 3000
+[2025-06-20T17:11:51.417Z] ❌ EHB Dashboard is not available on port 3000
+[2025-06-20T17:11:51.417Z] ❌ EHB Home is not available on port 3000
+[2025-06-20T17:11:51.418Z] ❌ AI Marketplace is not available on port 3000
+[2025-06-20T17:11:51.418Z] ❌ EHB Tube is not available on port 3000
+[2025-06-20T17:11:51.418Z] ❌ EHB Wallet is not available on port 3000
+[2025-06-20T17:11:51.419Z] ❌ EHB Ads is not available on port 3000
+[2025-06-20T17:11:51.419Z] ❌ GoSellr is not available on port 3000
+[2025-06-20T17:11:51.419Z] ❌ Franchise is not available on port 3000
+[2025-06-20T17:11:51.420Z] ❌ Orders is not available on port 3000
+[2025-06-20T17:11:51.420Z] ❌ Cart is not available on port 3000
+[2025-06-20T17:11:51.420Z] ❌ Wishlist is not available on port 3000
+[2025-06-20T17:11:51.421Z] ❌ Profile is not available on port 3000
+[2025-06-20T17:11:51.421Z] ❌ Settings is not available on port 3000
+[2025-06-20T17:11:51.422Z] ❌ Search is not available on port 3000
+[2025-06-20T17:11:51.422Z] ❌ Reviews is not available on port 3000
+[2025-06-20T17:11:51.423Z] ❌ Notifications is not available on port 3000
+[2025-06-20T17:11:51.423Z] ❌ Roadmap is not available on port 3000
+[2025-06-20T17:11:51.423Z] ❌ Development is not available on port 3000
+[2025-06-20T17:11:51.424Z] ❌ Development Portal is not available on port 3000
+[2025-06-20T17:11:51.425Z] ❌ AM Affiliate is not available on port 3000
+[2025-06-20T17:11:51.425Z] ❌ Assistant is not available on port 3000
+[2025-06-20T17:11:51.426Z] ❌ Auth is not available on port 3000
+[2025-06-20T17:11:51.426Z] ❌ Signup is not available on port 3000
+[2025-06-20T17:11:51.427Z] ❌ Register is not available on port 3000
+[2025-06-20T17:12:10.369Z] [Next.js ERROR] ⨯ Error: Invalid src prop (https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1200&q=80) on `next/image`, hostname "images.unsplash.com" is not configured under images in your `next.config.js`
+See more info: https://nextjs.org/docs/messages/next-image-unconfigured-host
+    at Array.map (<anonymous>)
+digest: "1709614307"
+[2025-06-20T17:12:10.396Z] [Next.js] GET /ehb-home-page 200 in 155ms
+[2025-06-20T17:12:10.506Z] [Next.js] GET /_next/static/css/app/layout.css?v=1750439530265 404 in 77ms
+[2025-06-20T17:12:10.617Z] [Next.js] GET /_next/static/chunks/app-pages-internals.js 404 in 24ms
+[2025-06-20T17:12:10.618Z] [Next.js] GET /_next/static/chunks/app/not-found.js 404 in 22ms
+[2025-06-20T17:12:14.446Z] [Next.js] GET /analytics 200 in 77ms
+[2025-06-20T17:12:14.491Z] [Next.js] GET /_next/static/css/app/layout.css?v=1750439534379 404 in 27ms
+[2025-06-20T17:12:14.635Z] [Next.js] GET /_next/static/chunks/app-pages-internals.js 404 in 21ms
+[2025-06-20T17:12:14.636Z] [Next.js] GET /_next/static/chunks/app/not-found.js 404 in 19ms
+[2025-06-20T17:12:18.580Z] [Next.js] GET / 200 in 76ms
+[2025-06-20T17:12:18.657Z] [Next.js] GET /_next/static/css/app/layout.css?v=1750439538515 404 in 54ms
+[2025-06-20T17:12:18.783Z] [Next.js] GET /_next/static/chunks/app-pages-internals.js 404 in 27ms
+[2025-06-20T17:12:18.784Z] [Next.js] GET /_next/static/chunks/app/not-found.js 404 in 27ms
+[2025-06-20T17:12:34.847Z] [Next.js ERROR] <w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: ENOENT: no such file or directory, stat 'F:\ehb next.js 04\.next\cache\webpack\server-development\3.pack.gz'
+[2025-06-20T17:12:48.622Z] [Next.js] ✓ Compiled in 609ms (1952 modules)
+[2025-06-20T17:12:51.427Z] 🔍 Performing health check...
+[2025-06-20T17:12:51.428Z] ❌ Main App is not available on port 3000
+[2025-06-20T17:12:51.429Z] ❌ Admin Panel is not available on port 3000
+[2025-06-20T17:12:51.429Z] ❌ Dashboard is not available on port 3000
+[2025-06-20T17:12:51.430Z] ❌ AI Services is not available on port 3000
+[2025-06-20T17:12:51.430Z] ❌ Wallet is not available on port 3000
+[2025-06-20T17:12:51.431Z] ❌ Analytics is not available on port 3000
+[2025-06-20T17:12:51.431Z] ❌ EHB Dashboard is not available on port 3000
+[2025-06-20T17:12:51.431Z] ❌ EHB Home is not available on port 3000
+[2025-06-20T17:12:51.432Z] ❌ AI Marketplace is not available on port 3000
+[2025-06-20T17:12:51.432Z] ❌ EHB Tube is not available on port 3000
+[2025-06-20T17:12:51.433Z] ❌ EHB Wallet is not available on port 3000
+[2025-06-20T17:12:51.433Z] ❌ EHB Ads is not available on port 3000
+[2025-06-20T17:12:51.433Z] ❌ GoSellr is not available on port 3000
+[2025-06-20T17:12:51.434Z] ❌ Franchise is not available on port 3000
+[2025-06-20T17:12:51.434Z] ❌ Orders is not available on port 3000
+[2025-06-20T17:12:51.435Z] ❌ Cart is not available on port 3000
+[2025-06-20T17:12:51.435Z] ❌ Wishlist is not available on port 3000
+[2025-06-20T17:12:51.435Z] ❌ Profile is not available on port 3000
+[2025-06-20T17:12:51.436Z] ❌ Settings is not available on port 3000
+[2025-06-20T17:12:51.436Z] ❌ Search is not available on port 3000
+[2025-06-20T17:12:51.437Z] ❌ Reviews is not available on port 3000
+[2025-06-20T17:12:51.437Z] ❌ Notifications is not available on port 3000
+[2025-06-20T17:12:51.438Z] ❌ Roadmap is not available on port 3000
+[2025-06-20T17:12:51.438Z] ❌ Development is not available on port 3000
+[2025-06-20T17:12:51.439Z] ❌ Development Portal is not available on port 3000
+[2025-06-20T17:12:51.439Z] ❌ AM Affiliate is not available on port 3000
+[2025-06-20T17:12:51.439Z] ❌ Assistant is not available on port 3000
+[2025-06-20T17:12:51.440Z] ❌ Auth is not available on port 3000
+[2025-06-20T17:12:51.440Z] ❌ Signup is not available on port 3000
+[2025-06-20T17:12:51.440Z] ❌ Register is not available on port 3000
+[2025-06-20T17:13:14.126Z] [Next.js] GET / 200 in 126ms
+[2025-06-20T17:13:14.230Z] [Next.js] GET /_next/static/css/app/layout.css?v=1750439594043 404 in 72ms
+[2025-06-20T17:13:14.469Z] [Next.js] GET /_next/static/chunks/app-pages-internals.js 404 in 34ms
+[2025-06-20T17:13:14.469Z] [Next.js] GET /_next/static/chunks/app/not-found.js 404 in 33ms
+[2025-06-20T17:13:20.324Z] [Next.js] GET / 200 in 45ms
+[2025-06-20T17:13:51.441Z] 🔍 Performing health check...
+[2025-06-20T17:13:51.442Z] ❌ Main App is not available on port 3000
+[2025-06-20T17:13:51.443Z] ❌ Admin Panel is not available on port 3000
+[2025-06-20T17:13:51.443Z] ❌ Dashboard is not available on port 3000
+[2025-06-20T17:13:51.444Z] ❌ AI Services is not available on port 3000
+[2025-06-20T17:13:51.444Z] ❌ Wallet is not available on port 3000
+[2025-06-20T17:13:51.444Z] ❌ Analytics is not available on port 3000
+[2025-06-20T17:13:51.445Z] ❌ EHB Dashboard is not available on port 3000
+[2025-06-20T17:13:51.445Z] ❌ EHB Home is not available on port 3000
+[2025-06-20T17:13:51.445Z] ❌ AI Marketplace is not available on port 3000
+[2025-06-20T17:13:51.446Z] ❌ EHB Tube is not available on port 3000
+[2025-06-20T17:13:51.448Z] ❌ EHB Wallet is not available on port 3000
+[2025-06-20T17:13:51.448Z] ❌ EHB Ads is not available on port 3000
+[2025-06-20T17:13:51.449Z] ❌ GoSellr is not available on port 3000
+[2025-06-20T17:13:51.449Z] ❌ Franchise is not available on port 3000
+[2025-06-20T17:13:51.450Z] ❌ Orders is not available on port 3000
+[2025-06-20T17:13:51.450Z] ❌ Cart is not available on port 3000
+[2025-06-20T17:13:51.450Z] ❌ Wishlist is not available on port 3000
+[2025-06-20T17:13:51.451Z] ❌ Profile is not available on port 3000
+[2025-06-20T17:13:51.451Z] ❌ Settings is not available on port 3000
+[2025-06-20T17:13:51.452Z] ❌ Search is not available on port 3000
+[2025-06-20T17:13:51.452Z] ❌ Reviews is not available on port 3000
+[2025-06-20T17:13:51.453Z] ❌ Notifications is not available on port 3000
+[2025-06-20T17:13:51.453Z] ❌ Roadmap is not available on port 3000
+[2025-06-20T17:13:51.453Z] ❌ Development is not available on port 3000
+[2025-06-20T17:13:51.454Z] ❌ Development Portal is not available on port 3000
+[2025-06-20T17:13:51.454Z] ❌ AM Affiliate is not available on port 3000
+[2025-06-20T17:13:51.455Z] ❌ Assistant is not available on port 3000
+[2025-06-20T17:13:51.455Z] ❌ Auth is not available on port 3000
+[2025-06-20T17:13:51.456Z] ❌ Signup is not available on port 3000
+[2025-06-20T17:13:51.456Z] ❌ Register is not available on port 3000
+[2025-06-20T17:13:57.068Z] [Next.js ERROR] <w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: ENOENT: no such file or directory, rename 'F:\ehb next.js 04\.next\cache\webpack\client-development-fallback\0.pack.gz_' -> 'F:\ehb next.js 04\.next\cache\webpack\client-development-fallback\0.pack.gz'
+[2025-06-20T17:13:57.074Z] [Next.js ERROR] <w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: ENOENT: no such file or directory, rename 'F:\ehb next.js 04\.next\cache\webpack\client-development-fallback\0.pack.gz_' -> 'F:\ehb next.js 04\.next\cache\webpack\client-development-fallback\0.pack.gz'
+[2025-06-20T17:13:57.075Z] [Next.js ERROR] <w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: ENOENT: no such file or directory, rename 'F:\ehb next.js 04\.next\cache\webpack\client-development-fallback\0.pack.gz_' -> 'F:\ehb next.js 04\.next\cache\webpack\client-development-fallback\0.pack.gz'
+[2025-06-20T17:13:57.076Z] [Next.js ERROR] <w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: ENOENT: no such file or directory, rename 'F:\ehb next.js 04\.next\cache\webpack\client-development-fallback\0.pack.gz_' -> 'F:\ehb next.js 04\.next\cache\webpack\client-development-fallback\0.pack.gz'
+[2025-06-20T17:13:57.077Z] [Next.js ERROR] <w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: ENOENT: no such file or directory, rename 'F:\ehb next.js 04\.next\cache\webpack\client-development-fallback\0.pack.gz_' -> 'F:\ehb next.js 04\.next\cache\webpack\client-development-fallback\0.pack.gz'
+[2025-06-20T17:13:57.078Z] [Next.js ERROR] <w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: ENOENT: no such file or directory, rename 'F:\ehb next.js 04\.next\cache\webpack\client-development-fallback\0.pack.gz_' -> 'F:\ehb next.js 04\.next\cache\webpack\client-development-fallback\0.pack.gz'
+[2025-06-20T17:14:10.554Z] [Next.js] ✓ Compiled in 683ms (1536 modules)
+[2025-06-20T17:14:51.441Z] 🔍 Performing health check...
+[2025-06-20T17:14:51.441Z] ❌ Main App is not available on port 3000
+[2025-06-20T17:14:51.441Z] ❌ Admin Panel is not available on port 3000
+[2025-06-20T17:14:51.442Z] ❌ Dashboard is not available on port 3000
+[2025-06-20T17:14:51.442Z] ❌ AI Services is not available on port 3000
+[2025-06-20T17:14:51.442Z] ❌ Wallet is not available on port 3000
+[2025-06-20T17:14:51.443Z] ❌ Analytics is not available on port 3000
+[2025-06-20T17:14:51.443Z] ❌ EHB Dashboard is not available on port 3000
+[2025-06-20T17:14:51.444Z] ❌ EHB Home is not available on port 3000
+[2025-06-20T17:14:51.444Z] ❌ AI Marketplace is not available on port 3000
+[2025-06-20T17:14:51.444Z] ❌ EHB Tube is not available on port 3000
+[2025-06-20T17:14:51.445Z] ❌ EHB Wallet is not available on port 3000
+[2025-06-20T17:14:51.446Z] ❌ EHB Ads is not available on port 3000
+[2025-06-20T17:14:51.446Z] ❌ GoSellr is not available on port 3000
+[2025-06-20T17:14:51.446Z] ❌ Franchise is not available on port 3000
+[2025-06-20T17:14:51.447Z] ❌ Orders is not available on port 3000
+[2025-06-20T17:14:51.447Z] ❌ Cart is not available on port 3000
+[2025-06-20T17:14:51.448Z] ❌ Wishlist is not available on port 3000
+[2025-06-20T17:14:51.448Z] ❌ Profile is not available on port 3000
+[2025-06-20T17:14:51.449Z] ❌ Settings is not available on port 3000
+[2025-06-20T17:14:51.449Z] ❌ Search is not available on port 3000
+[2025-06-20T17:14:51.450Z] ❌ Reviews is not available on port 3000
+[2025-06-20T17:14:51.450Z] ❌ Notifications is not available on port 3000
+[2025-06-20T17:14:51.450Z] ❌ Roadmap is not available on port 3000
+[2025-06-20T17:14:51.451Z] ❌ Development is not available on port 3000
+[2025-06-20T17:14:51.451Z] ❌ Development Portal is not available on port 3000
+[2025-06-20T17:14:51.452Z] ❌ AM Affiliate is not available on port 3000
+[2025-06-20T17:14:51.452Z] ❌ Assistant is not available on port 3000
+[2025-06-20T17:14:51.452Z] ❌ Auth is not available on port 3000
+[2025-06-20T17:14:51.453Z] ❌ Signup is not available on port 3000
+[2025-06-20T17:14:51.453Z] ❌ Register is not available on port 3000
+[2025-06-20T17:15:10.297Z] [Next.js ERROR] <w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: ENOENT: no such file or directory, rename 'F:\ehb next.js 04\.next\cache\webpack\client-development-fallback\0.pack.gz_' -> 'F:\ehb next.js 04\.next\cache\webpack\client-development-fallback\0.pack.gz'
+[2025-06-20T17:15:14.996Z] [Next.js ERROR] <w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: ENOENT: no such file or directory, rename 'F:\ehb next.js 04\.next\cache\webpack\client-development-fallback\0.pack.gz_' -> 'F:\ehb next.js 04\.next\cache\webpack\client-development-fallback\0.pack.gz'
+[2025-06-20T17:15:14.998Z] [Next.js ERROR] <w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: ENOENT: no such file or directory, rename 'F:\ehb next.js 04\.next\cache\webpack\client-development-fallback\0.pack.gz_' -> 'F:\ehb next.js 04\.next\cache\webpack\client-development-fallback\0.pack.gz'
+[2025-06-20T17:15:14.998Z] [Next.js ERROR] <w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: ENOENT: no such file or directory, rename 'F:\ehb next.js 04\.next\cache\webpack\client-development-fallback\0.pack.gz_' -> 'F:\ehb next.js 04\.next\cache\webpack\client-development-fallback\0.pack.gz'
+[2025-06-20T17:15:14.999Z] [Next.js ERROR] <w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: ENOENT: no such file or directory, rename 'F:\ehb next.js 04\.next\cache\webpack\client-development-fallback\0.pack.gz_' -> 'F:\ehb next.js 04\.next\cache\webpack\client-development-fallback\0.pack.gz'
+[2025-06-20T17:15:51.444Z] 🔍 Performing health check...
+[2025-06-20T17:15:51.445Z] ❌ Main App is not available on port 3000
+[2025-06-20T17:15:51.446Z] ❌ Admin Panel is not available on port 3000
+[2025-06-20T17:15:51.446Z] ❌ Dashboard is not available on port 3000
+[2025-06-20T17:15:51.447Z] ❌ AI Services is not available on port 3000
+[2025-06-20T17:15:51.447Z] ❌ Wallet is not available on port 3000
+[2025-06-20T17:15:51.447Z] ❌ Analytics is not available on port 3000
+[2025-06-20T17:15:51.448Z] ❌ EHB Dashboard is not available on port 3000
+[2025-06-20T17:15:51.448Z] ❌ EHB Home is not available on port 3000
+[2025-06-20T17:15:51.448Z] ❌ AI Marketplace is not available on port 3000
+[2025-06-20T17:15:51.449Z] ❌ EHB Tube is not available on port 3000
+[2025-06-20T17:15:51.449Z] ❌ EHB Wallet is not available on port 3000
+[2025-06-20T17:15:51.450Z] ❌ EHB Ads is not available on port 3000
+[2025-06-20T17:15:51.450Z] ❌ GoSellr is not available on port 3000
+[2025-06-20T17:15:51.451Z] ❌ Franchise is not available on port 3000
+[2025-06-20T17:15:51.451Z] ❌ Orders is not available on port 3000
+[2025-06-20T17:15:51.451Z] ❌ Cart is not available on port 3000
+[2025-06-20T17:15:51.452Z] ❌ Wishlist is not available on port 3000
+[2025-06-20T17:15:51.452Z] ❌ Profile is not available on port 3000
+[2025-06-20T17:15:51.453Z] ❌ Settings is not available on port 3000
+[2025-06-20T17:15:51.453Z] ❌ Search is not available on port 3000
+[2025-06-20T17:15:51.453Z] ❌ Reviews is not available on port 3000
+[2025-06-20T17:15:51.454Z] ❌ Notifications is not available on port 3000
+[2025-06-20T17:15:51.454Z] ❌ Roadmap is not available on port 3000
+[2025-06-20T17:15:51.455Z] ❌ Development is not available on port 3000
+[2025-06-20T17:15:51.455Z] ❌ Development Portal is not available on port 3000
+[2025-06-20T17:15:51.455Z] ❌ AM Affiliate is not available on port 3000
+[2025-06-20T17:15:51.456Z] ❌ Assistant is not available on port 3000
+[2025-06-20T17:15:51.456Z] ❌ Auth is not available on port 3000
+[2025-06-20T17:15:51.457Z] ❌ Signup is not available on port 3000
+[2025-06-20T17:15:51.457Z] ❌ Register is not available on port 3000
+[2025-06-20T17:16:51.451Z] 🔍 Performing health check...
+[2025-06-20T17:16:51.452Z] ❌ Main App is not available on port 3000
+[2025-06-20T17:16:51.452Z] ❌ Admin Panel is not available on port 3000
+[2025-06-20T17:16:51.453Z] ❌ Dashboard is not available on port 3000
+[2025-06-20T17:16:51.454Z] ❌ AI Services is not available on port 3000
+[2025-06-20T17:16:51.454Z] ❌ Wallet is not available on port 3000
+[2025-06-20T17:16:51.455Z] ❌ Analytics is not available on port 3000
+[2025-06-20T17:16:51.455Z] ❌ EHB Dashboard is not available on port 3000
+[2025-06-20T17:16:51.455Z] ❌ EHB Home is not available on port 3000
+[2025-06-20T17:16:51.456Z] ❌ AI Marketplace is not available on port 3000
+[2025-06-20T17:16:51.456Z] ❌ EHB Tube is not available on port 3000
+[2025-06-20T17:16:51.456Z] ❌ EHB Wallet is not available on port 3000
+[2025-06-20T17:16:51.457Z] ❌ EHB Ads is not available on port 3000
+[2025-06-20T17:16:51.457Z] ❌ GoSellr is not available on port 3000
+[2025-06-20T17:16:51.458Z] ❌ Franchise is not available on port 3000
+[2025-06-20T17:16:51.459Z] ❌ Orders is not available on port 3000
+[2025-06-20T17:16:51.459Z] ❌ Cart is not available on port 3000
+[2025-06-20T17:16:51.460Z] ❌ Wishlist is not available on port 3000
+[2025-06-20T17:16:51.460Z] ❌ Profile is not available on port 3000
+[2025-06-20T17:16:51.461Z] ❌ Settings is not available on port 3000
+[2025-06-20T17:16:51.461Z] ❌ Search is not available on port 3000
+[2025-06-20T17:16:51.461Z] ❌ Reviews is not available on port 3000
+[2025-06-20T17:16:51.462Z] ❌ Notifications is not available on port 3000
+[2025-06-20T17:16:51.462Z] ❌ Roadmap is not available on port 3000
+[2025-06-20T17:16:51.463Z] ❌ Development is not available on port 3000
+[2025-06-20T17:16:51.464Z] ❌ Development Portal is not available on port 3000
+[2025-06-20T17:16:51.464Z] ❌ AM Affiliate is not available on port 3000
+[2025-06-20T17:16:51.464Z] ❌ Assistant is not available on port 3000
+[2025-06-20T17:16:51.465Z] ❌ Auth is not available on port 3000
+[2025-06-20T17:16:51.465Z] ❌ Signup is not available on port 3000
+[2025-06-20T17:16:51.466Z] ❌ Register is not available on port 3000
+[2025-06-20T17:17:51.461Z] 🔍 Performing health check...
+[2025-06-20T17:17:51.462Z] ❌ Main App is not available on port 3000
+[2025-06-20T17:17:51.463Z] ❌ Admin Panel is not available on port 3000
+[2025-06-20T17:17:51.464Z] ❌ Dashboard is not available on port 3000
+[2025-06-20T17:17:51.464Z] ❌ AI Services is not available on port 3000
+[2025-06-20T17:17:51.464Z] ❌ Wallet is not available on port 3000
+[2025-06-20T17:17:51.465Z] ❌ Analytics is not available on port 3000
+[2025-06-20T17:17:51.465Z] ❌ EHB Dashboard is not available on port 3000
+[2025-06-20T17:17:51.466Z] ❌ EHB Home is not available on port 3000
+[2025-06-20T17:17:51.466Z] ❌ AI Marketplace is not available on port 3000
+[2025-06-20T17:17:51.466Z] ❌ EHB Tube is not available on port 3000
+[2025-06-20T17:17:51.467Z] ❌ EHB Wallet is not available on port 3000
+[2025-06-20T17:17:51.468Z] ❌ EHB Ads is not available on port 3000
+[2025-06-20T17:17:51.468Z] ❌ GoSellr is not available on port 3000
+[2025-06-20T17:17:51.468Z] ❌ Franchise is not available on port 3000
+[2025-06-20T17:17:51.469Z] ❌ Orders is not available on port 3000
+[2025-06-20T17:17:51.469Z] ❌ Cart is not available on port 3000
+[2025-06-20T17:17:51.470Z] ❌ Wishlist is not available on port 3000
+[2025-06-20T17:17:51.470Z] ❌ Profile is not available on port 3000
+[2025-06-20T17:17:51.470Z] ❌ Settings is not available on port 3000
+[2025-06-20T17:17:51.471Z] ❌ Search is not available on port 3000
+[2025-06-20T17:17:51.471Z] ❌ Reviews is not available on port 3000
+[2025-06-20T17:17:51.472Z] ❌ Notifications is not available on port 3000
+[2025-06-20T17:17:51.473Z] ❌ Roadmap is not available on port 3000
+[2025-06-20T17:17:51.473Z] ❌ Development is not available on port 3000
+[2025-06-20T17:17:51.474Z] ❌ Development Portal is not available on port 3000
+[2025-06-20T17:17:51.474Z] ❌ AM Affiliate is not available on port 3000
+[2025-06-20T17:17:51.475Z] ❌ Assistant is not available on port 3000
+[2025-06-20T17:17:51.475Z] ❌ Auth is not available on port 3000
+[2025-06-20T17:17:51.476Z] ❌ Signup is not available on port 3000
+[2025-06-20T17:17:51.476Z] ❌ Register is not available on port 3000
+[2025-06-20T17:18:51.476Z] 🔍 Performing health check...
+[2025-06-20T17:18:51.476Z] ❌ Main App is not available on port 3000
+[2025-06-20T17:18:51.477Z] ❌ Admin Panel is not available on port 3000
+[2025-06-20T17:18:51.477Z] ❌ Dashboard is not available on port 3000
+[2025-06-20T17:18:51.478Z] ❌ AI Services is not available on port 3000
+[2025-06-20T17:18:51.478Z] ❌ Wallet is not available on port 3000
+[2025-06-20T17:18:51.479Z] ❌ Analytics is not available on port 3000
+[2025-06-20T17:18:51.479Z] ❌ EHB Dashboard is not available on port 3000
+[2025-06-20T17:18:51.480Z] ❌ EHB Home is not available on port 3000
+[2025-06-20T17:18:51.480Z] ❌ AI Marketplace is not available on port 3000
+[2025-06-20T17:18:51.480Z] ❌ EHB Tube is not available on port 3000
+[2025-06-20T17:18:51.481Z] ❌ EHB Wallet is not available on port 3000
+[2025-06-20T17:18:51.481Z] ❌ EHB Ads is not available on port 3000
+[2025-06-20T17:18:51.482Z] ❌ GoSellr is not available on port 3000
+[2025-06-20T17:18:51.482Z] ❌ Franchise is not available on port 3000
+[2025-06-20T17:18:51.483Z] ❌ Orders is not available on port 3000
+[2025-06-20T17:18:51.483Z] ❌ Cart is not available on port 3000
+[2025-06-20T17:18:51.483Z] ❌ Wishlist is not available on port 3000
+[2025-06-20T17:18:51.484Z] ❌ Profile is not available on port 3000
+[2025-06-20T17:18:51.484Z] ❌ Settings is not available on port 3000
+[2025-06-20T17:18:51.485Z] ❌ Search is not available on port 3000
+[2025-06-20T17:18:51.485Z] ❌ Reviews is not available on port 3000
+[2025-06-20T17:18:51.486Z] ❌ Notifications is not available on port 3000
+[2025-06-20T17:18:51.486Z] ❌ Roadmap is not available on port 3000
+[2025-06-20T17:18:51.486Z] ❌ Development is not available on port 3000
+[2025-06-20T17:18:51.487Z] ❌ Development Portal is not available on port 3000
+[2025-06-20T17:18:51.487Z] ❌ AM Affiliate is not available on port 3000
+[2025-06-20T17:18:51.487Z] ❌ Assistant is not available on port 3000
+[2025-06-20T17:18:51.488Z] ❌ Auth is not available on port 3000
+[2025-06-20T17:18:51.488Z] ❌ Signup is not available on port 3000
+[2025-06-20T17:18:51.489Z] ❌ Register is not available on port 3000
+[2025-06-20T17:19:51.486Z] 🔍 Performing health check...
+[2025-06-20T17:19:51.487Z] ❌ Main App is not available on port 3000
+[2025-06-20T17:19:51.488Z] ❌ Admin Panel is not available on port 3000
+[2025-06-20T17:19:51.488Z] ❌ Dashboard is not available on port 3000
+[2025-06-20T17:19:51.489Z] ❌ AI Services is not available on port 3000
+[2025-06-20T17:19:51.489Z] ❌ Wallet is not available on port 3000
+[2025-06-20T17:19:51.490Z] ❌ Analytics is not available on port 3000
+[2025-06-20T17:19:51.491Z] ❌ EHB Dashboard is not available on port 3000
+[2025-06-20T17:19:51.491Z] ❌ EHB Home is not available on port 3000
+[2025-06-20T17:19:51.491Z] ❌ AI Marketplace is not available on port 3000
+[2025-06-20T17:19:51.492Z] ❌ EHB Tube is not available on port 3000
+[2025-06-20T17:19:51.492Z] ❌ EHB Wallet is not available on port 3000
+[2025-06-20T17:19:51.493Z] ❌ EHB Ads is not available on port 3000
+[2025-06-20T17:19:51.493Z] ❌ GoSellr is not available on port 3000
+[2025-06-20T17:19:51.494Z] ❌ Franchise is not available on port 3000
+[2025-06-20T17:19:51.495Z] ❌ Orders is not available on port 3000
+[2025-06-20T17:19:51.495Z] ❌ Cart is not available on port 3000
+[2025-06-20T17:19:51.496Z] ❌ Wishlist is not available on port 3000
+[2025-06-20T17:19:51.496Z] ❌ Profile is not available on port 3000
+[2025-06-20T17:19:51.496Z] ❌ Settings is not available on port 3000
+[2025-06-20T17:19:51.497Z] ❌ Search is not available on port 3000
+[2025-06-20T17:19:51.497Z] ❌ Reviews is not available on port 3000
+[2025-06-20T17:19:51.497Z] ❌ Notifications is not available on port 3000
+[2025-06-20T17:19:51.498Z] ❌ Roadmap is not available on port 3000
+[2025-06-20T17:19:51.498Z] ❌ Development is not available on port 3000
+[2025-06-20T17:19:51.499Z] ❌ Development Portal is not available on port 3000
+[2025-06-20T17:19:51.499Z] ❌ AM Affiliate is not available on port 3000
+[2025-06-20T17:19:51.499Z] ❌ Assistant is not available on port 3000
+[2025-06-20T17:19:51.500Z] ❌ Auth is not available on port 3000
+[2025-06-20T17:19:51.500Z] ❌ Signup is not available on port 3000
+[2025-06-20T17:19:51.500Z] ❌ Register is not available on port 3000
+[2025-06-20T17:20:51.490Z] 🔍 Performing health check...
+[2025-06-20T17:20:51.491Z] ❌ Main App is not available on port 3000
+[2025-06-20T17:20:51.492Z] ❌ Admin Panel is not available on port 3000
+[2025-06-20T17:20:51.492Z] ❌ Dashboard is not available on port 3000
+[2025-06-20T17:20:51.493Z] ❌ AI Services is not available on port 3000
+[2025-06-20T17:20:51.493Z] ❌ Wallet is not available on port 3000
+[2025-06-20T17:20:51.494Z] ❌ Analytics is not available on port 3000
+[2025-06-20T17:20:51.494Z] ❌ EHB Dashboard is not available on port 3000
+[2025-06-20T17:20:51.494Z] ❌ EHB Home is not available on port 3000
+[2025-06-20T17:20:51.495Z] ❌ AI Marketplace is not available on port 3000
+[2025-06-20T17:20:51.495Z] ❌ EHB Tube is not available on port 3000
+[2025-06-20T17:20:51.495Z] ❌ EHB Wallet is not available on port 3000
+[2025-06-20T17:20:51.496Z] ❌ EHB Ads is not available on port 3000
+[2025-06-20T17:20:51.496Z] ❌ GoSellr is not available on port 3000
+[2025-06-20T17:20:51.497Z] ❌ Franchise is not available on port 3000
+[2025-06-20T17:20:51.497Z] ❌ Orders is not available on port 3000
+[2025-06-20T17:20:51.498Z] ❌ Cart is not available on port 3000
+[2025-06-20T17:20:51.498Z] ❌ Wishlist is not available on port 3000
+[2025-06-20T17:20:51.498Z] ❌ Profile is not available on port 3000
+[2025-06-20T17:20:51.499Z] ❌ Settings is not available on port 3000
+[2025-06-20T17:20:51.499Z] ❌ Search is not available on port 3000
+[2025-06-20T17:20:51.500Z] ❌ Reviews is not available on port 3000
+[2025-06-20T17:20:51.500Z] ❌ Notifications is not available on port 3000
+[2025-06-20T17:20:51.500Z] ❌ Roadmap is not available on port 3000
+[2025-06-20T17:20:51.501Z] ❌ Development is not available on port 3000
+[2025-06-20T17:20:51.501Z] ❌ Development Portal is not available on port 3000
+[2025-06-20T17:20:51.501Z] ❌ AM Affiliate is not available on port 3000
+[2025-06-20T17:20:51.502Z] ❌ Assistant is not available on port 3000
+[2025-06-20T17:20:51.502Z] ❌ Auth is not available on port 3000
+[2025-06-20T17:20:51.503Z] ❌ Signup is not available on port 3000
+[2025-06-20T17:20:51.503Z] ❌ Register is not available on port 3000
+[2025-06-20T17:21:51.493Z] 🔍 Performing health check...
+[2025-06-20T17:21:51.494Z] ❌ Main App is not available on port 3000
+[2025-06-20T17:21:51.495Z] ❌ Admin Panel is not available on port 3000
+[2025-06-20T17:21:51.495Z] ❌ Dashboard is not available on port 3000
+[2025-06-20T17:21:51.496Z] ❌ AI Services is not available on port 3000
+[2025-06-20T17:21:51.496Z] ❌ Wallet is not available on port 3000
+[2025-06-20T17:21:51.497Z] ❌ Analytics is not available on port 3000
+[2025-06-20T17:21:51.497Z] ❌ EHB Dashboard is not available on port 3000
+[2025-06-20T17:21:51.497Z] ❌ EHB Home is not available on port 3000
+[2025-06-20T17:21:51.498Z] ❌ AI Marketplace is not available on port 3000
+[2025-06-20T17:21:51.498Z] ❌ EHB Tube is not available on port 3000
+[2025-06-20T17:21:51.499Z] ❌ EHB Wallet is not available on port 3000
+[2025-06-20T17:21:51.499Z] ❌ EHB Ads is not available on port 3000
+[2025-06-20T17:21:51.500Z] ❌ GoSellr is not available on port 3000
+[2025-06-20T17:21:51.500Z] ❌ Franchise is not available on port 3000
+[2025-06-20T17:21:51.500Z] ❌ Orders is not available on port 3000
+[2025-06-20T17:21:51.501Z] ❌ Cart is not available on port 3000
+[2025-06-20T17:21:51.501Z] ❌ Wishlist is not available on port 3000
+[2025-06-20T17:21:51.501Z] ❌ Profile is not available on port 3000
+[2025-06-20T17:21:51.502Z] ❌ Settings is not available on port 3000
+[2025-06-20T17:21:51.502Z] ❌ Search is not available on port 3000
+[2025-06-20T17:21:51.502Z] ❌ Reviews is not available on port 3000
+[2025-06-20T17:21:51.503Z] ❌ Notifications is not available on port 3000
+[2025-06-20T17:21:51.503Z] ❌ Roadmap is not available on port 3000
+[2025-06-20T17:21:51.503Z] ❌ Development is not available on port 3000
+[2025-06-20T17:21:51.504Z] ❌ Development Portal is not available on port 3000
+[2025-06-20T17:21:51.504Z] ❌ AM Affiliate is not available on port 3000
+[2025-06-20T17:21:51.505Z] ❌ Assistant is not available on port 3000
+[2025-06-20T17:21:51.505Z] ❌ Auth is not available on port 3000
+[2025-06-20T17:21:51.506Z] ❌ Signup is not available on port 3000
+[2025-06-20T17:21:51.506Z] ❌ Register is not available on port 3000
+[2025-06-20T17:22:40.587Z] [Next.js] ✓ Compiled /admin in 65ms (357 modules)
+[2025-06-20T17:22:40.803Z] [Next.js] GET /admin 200 in 334ms
+[2025-06-20T17:22:40.883Z] [Next.js] ✓ Compiled /_not-found in 54ms (358 modules)
+[2025-06-20T17:22:40.969Z] [Next.js] GET /_next/static/css/app/layout.css?v=1750440160669 404 in 143ms
+[2025-06-20T17:22:41.009Z] [Next.js] GET /_next/static/chunks/app-pages-internals.js 404 in 26ms
+[2025-06-20T17:22:41.011Z] [Next.js] GET /_next/static/chunks/app/not-found.js 404 in 25ms
+[2025-06-20T17:22:48.288Z] [Next.js] ✓ Compiled /dashboard in 99ms (367 modules)
+[2025-06-20T17:22:48.342Z] [Next.js] GET /dashboard 200 in 158ms
+[2025-06-20T17:22:48.405Z] [Next.js] GET /_next/static/css/app/layout.css?v=1750440168304 404 in 41ms
+[2025-06-20T17:22:48.534Z] [Next.js] GET /_next/static/chunks/app-pages-internals.js 404 in 21ms
+[2025-06-20T17:22:48.534Z] [Next.js] GET /_next/static/chunks/app/not-found.js 404 in 20ms
+[2025-06-20T17:22:51.500Z] 🔍 Performing health check...
+[2025-06-20T17:22:51.501Z] ❌ Main App is not available on port 3000
+[2025-06-20T17:22:51.502Z] ❌ Admin Panel is not available on port 3000
+[2025-06-20T17:22:51.503Z] ❌ Dashboard is not available on port 3000
+[2025-06-20T17:22:51.504Z] ❌ AI Services is not available on port 3000
+[2025-06-20T17:22:51.504Z] ❌ Wallet is not available on port 3000
+[2025-06-20T17:22:51.505Z] ❌ Analytics is not available on port 3000
+[2025-06-20T17:22:51.506Z] ❌ EHB Dashboard is not available on port 3000
+[2025-06-20T17:22:51.507Z] ❌ EHB Home is not available on port 3000
+[2025-06-20T17:22:51.508Z] ❌ AI Marketplace is not available on port 3000
+[2025-06-20T17:22:51.508Z] ❌ EHB Tube is not available on port 3000
+[2025-06-20T17:22:51.509Z] ❌ EHB Wallet is not available on port 3000
+[2025-06-20T17:22:51.510Z] ❌ EHB Ads is not available on port 3000
+[2025-06-20T17:22:51.510Z] ❌ GoSellr is not available on port 3000
+[2025-06-20T17:22:51.511Z] ❌ Franchise is not available on port 3000
+[2025-06-20T17:22:51.511Z] ❌ Orders is not available on port 3000
+[2025-06-20T17:22:51.512Z] ❌ Cart is not available on port 3000
+[2025-06-20T17:22:51.512Z] ❌ Wishlist is not available on port 3000
+[2025-06-20T17:22:51.513Z] ❌ Profile is not available on port 3000
+[2025-06-20T17:22:51.513Z] ❌ Settings is not available on port 3000
+[2025-06-20T17:22:51.514Z] ❌ Search is not available on port 3000
+[2025-06-20T17:22:51.514Z] ❌ Reviews is not available on port 3000
+[2025-06-20T17:22:51.515Z] ❌ Notifications is not available on port 3000
+[2025-06-20T17:22:51.515Z] ❌ Roadmap is not available on port 3000
+[2025-06-20T17:22:51.516Z] ❌ Development is not available on port 3000
+[2025-06-20T17:22:51.517Z] ❌ Development Portal is not available on port 3000
+[2025-06-20T17:22:51.518Z] ❌ AM Affiliate is not available on port 3000
+[2025-06-20T17:22:51.519Z] ❌ Assistant is not available on port 3000
+[2025-06-20T17:22:51.520Z] ❌ Auth is not available on port 3000
+[2025-06-20T17:22:51.520Z] ❌ Signup is not available on port 3000
+[2025-06-20T17:22:51.521Z] ❌ Register is not available on port 3000
+[2025-06-20T17:22:51.678Z] [Next.js] ○ Compiling /ai ...
+[2025-06-20T17:22:52.324Z] [Next.js] ✓ Compiled /ai in 1156ms (827 modules)
+[2025-06-20T17:22:52.504Z] [Next.js ERROR] ⨯ components\layout\AIChatProvider.tsx (108:11) @ useAIChat
+[2025-06-20T17:22:52.505Z] [Next.js ERROR] ⨯ Error: useAIChat must be used within an AIChatProvider
+    at useAIChat (./components/layout/AIChatProvider.tsx:103:15)
+    at AIChat (./components/ai/AIChat.tsx:22:141)
+digest: "1226601783"
+[0m [90m 106 |[39m   [36mconst[39m context [33m=[39m useContext([33mAIChatContext[39m)[33m;[39m[0m
+[0m [90m 107 |[39m   [36mif[39m (context [33m===[39m undefined) {[0m
+[0m[31m[1m>[22m[39m[90m 108 |[39m     [36mthrow[39m [36mnew[39m [33mError[39m([32m'useAIChat must be used within an AIChatProvider'[39m)[33m;[39m[0m
+[0m [90m     |[39m           [31m[1m^[22m[39m[0m
+[0m [90m 109 |[39m   }[0m
+[0m [90m 110 |[39m   [36mreturn[39m context[33m;[39m[0m
+[0m [90m 111 |[39m }[0m
+[2025-06-20T17:22:52.527Z] [Next.js] GET /ai 200 in 1363ms
+[2025-06-20T17:22:52.603Z] [Next.js] GET /_next/static/css/app/layout.css?v=1750440172412 404 in 52ms
+[2025-06-20T17:22:52.722Z] [Next.js] GET /_next/static/chunks/app/not-found.js 404 in 18ms
+[2025-06-20T17:22:52.723Z] [Next.js] GET /_next/static/chunks/app-pages-internals.js 404 in 16ms
+[2025-06-20T17:22:56.016Z] [Next.js] ✓ Compiled /wallet in 115ms (831 modules)
+[2025-06-20T17:22:56.120Z] [Next.js ERROR] ⨯ Error: [next-auth]: `useSession` must be wrapped in a <SessionProvider />
+    at WalletPage (./app/wallet/page.tsx:17:90)
+digest: "4004425859"
+[2025-06-20T17:22:56.153Z] [Next.js] GET /wallet 200 in 256ms
+[2025-06-20T17:22:56.202Z] [Next.js] GET /_next/static/css/app/layout.css?v=1750440176038 404 in 32ms
+[2025-06-20T17:22:56.337Z] [Next.js] GET /_next/static/chunks/app-pages-internals.js 404 in 17ms
+[2025-06-20T17:22:56.337Z] [Next.js] GET /_next/static/chunks/app/not-found.js 404 in 16ms
+[2025-06-20T17:22:59.567Z] [Next.js] ✓ Compiled / in 207ms (841 modules)
+[2025-06-20T17:22:59.640Z] [Next.js] GET / 200 in 285ms
+[2025-06-20T17:22:59.733Z] [Next.js] GET /_next/static/css/app/layout.css?v=1750440179586 404 in 67ms
+[2025-06-20T17:22:59.825Z] [Next.js] GET /_next/static/chunks/app/not-found.js 404 in 18ms
+[2025-06-20T17:22:59.825Z] [Next.js] GET /_next/static/chunks/app-pages-internals.js 404 in 20ms
+[2025-06-20T17:23:51.513Z] 🔍 Performing health check...
+[2025-06-20T17:23:51.514Z] ❌ Main App is not available on port 3000
+[2025-06-20T17:23:51.514Z] ❌ Admin Panel is not available on port 3000
+[2025-06-20T17:23:51.515Z] ❌ Dashboard is not available on port 3000
+[2025-06-20T17:23:51.515Z] ❌ AI Services is not available on port 3000
+[2025-06-20T17:23:51.516Z] ❌ Wallet is not available on port 3000
+[2025-06-20T17:23:51.516Z] ❌ Analytics is not available on port 3000
+[2025-06-20T17:23:51.517Z] ❌ EHB Dashboard is not available on port 3000
+[2025-06-20T17:23:51.517Z] ❌ EHB Home is not available on port 3000
+[2025-06-20T17:23:51.518Z] ❌ AI Marketplace is not available on port 3000
+[2025-06-20T17:23:51.518Z] ❌ EHB Tube is not available on port 3000
+[2025-06-20T17:23:51.519Z] ❌ EHB Wallet is not available on port 3000
+[2025-06-20T17:23:51.519Z] ❌ EHB Ads is not available on port 3000
+[2025-06-20T17:23:51.520Z] ❌ GoSellr is not available on port 3000
+[2025-06-20T17:23:51.520Z] ❌ Franchise is not available on port 3000
+[2025-06-20T17:23:51.521Z] ❌ Orders is not available on port 3000
+[2025-06-20T17:23:51.521Z] ❌ Cart is not available on port 3000
+[2025-06-20T17:23:51.522Z] ❌ Wishlist is not available on port 3000
+[2025-06-20T17:23:51.522Z] ❌ Profile is not available on port 3000
+[2025-06-20T17:23:51.522Z] ❌ Settings is not available on port 3000
+[2025-06-20T17:23:51.523Z] ❌ Search is not available on port 3000
+[2025-06-20T17:23:51.523Z] ❌ Reviews is not available on port 3000
+[2025-06-20T17:23:51.524Z] ❌ Notifications is not available on port 3000
+[2025-06-20T17:23:51.524Z] ❌ Roadmap is not available on port 3000
+[2025-06-20T17:23:51.525Z] ❌ Development is not available on port 3000
+[2025-06-20T17:23:51.525Z] ❌ Development Portal is not available on port 3000
+[2025-06-20T17:23:51.526Z] ❌ AM Affiliate is not available on port 3000
+[2025-06-20T17:23:51.526Z] ❌ Assistant is not available on port 3000
+[2025-06-20T17:23:51.526Z] ❌ Auth is not available on port 3000
+[2025-06-20T17:23:51.527Z] ❌ Signup is not available on port 3000
+[2025-06-20T17:23:51.527Z] ❌ Register is not available on port 3000
+[2025-06-20T17:24:51.517Z] 🔍 Performing health check...
+[2025-06-20T17:24:51.518Z] ❌ Main App is not available on port 3000
+[2025-06-20T17:24:51.519Z] ❌ Admin Panel is not available on port 3000
+[2025-06-20T17:24:51.519Z] ❌ Dashboard is not available on port 3000
+[2025-06-20T17:24:51.520Z] ❌ AI Services is not available on port 3000
+[2025-06-20T17:24:51.520Z] ❌ Wallet is not available on port 3000
+[2025-06-20T17:24:51.520Z] ❌ Analytics is not available on port 3000
+[2025-06-20T17:24:51.521Z] ❌ EHB Dashboard is not available on port 3000
+[2025-06-20T17:24:51.521Z] ❌ EHB Home is not available on port 3000
+[2025-06-20T17:24:51.521Z] ❌ AI Marketplace is not available on port 3000
+[2025-06-20T17:24:51.522Z] ❌ EHB Tube is not available on port 3000
+[2025-06-20T17:24:51.522Z] ❌ EHB Wallet is not available on port 3000
+[2025-06-20T17:24:51.522Z] ❌ EHB Ads is not available on port 3000
+[2025-06-20T17:24:51.523Z] ❌ GoSellr is not available on port 3000
+[2025-06-20T17:24:51.523Z] ❌ Franchise is not available on port 3000
+[2025-06-20T17:24:51.524Z] ❌ Orders is not available on port 3000
+[2025-06-20T17:24:51.524Z] ❌ Cart is not available on port 3000
+[2025-06-20T17:24:51.524Z] ❌ Wishlist is not available on port 3000
+[2025-06-20T17:24:51.525Z] ❌ Profile is not available on port 3000
+[2025-06-20T17:24:51.525Z] ❌ Settings is not available on port 3000
+[2025-06-20T17:24:51.526Z] ❌ Search is not available on port 3000
+[2025-06-20T17:24:51.526Z] ❌ Reviews is not available on port 3000
+[2025-06-20T17:24:51.526Z] ❌ Notifications is not available on port 3000
+[2025-06-20T17:24:51.527Z] ❌ Roadmap is not available on port 3000
+[2025-06-20T17:24:51.527Z] ❌ Development is not available on port 3000
+[2025-06-20T17:24:51.527Z] ❌ Development Portal is not available on port 3000
+[2025-06-20T17:24:51.528Z] ❌ AM Affiliate is not available on port 3000
+[2025-06-20T17:24:51.528Z] ❌ Assistant is not available on port 3000
+[2025-06-20T17:24:51.529Z] ❌ Auth is not available on port 3000
+[2025-06-20T17:24:51.529Z] ❌ Signup is not available on port 3000
+[2025-06-20T17:24:51.529Z] ❌ Register is not available on port 3000
+[2025-06-20T17:25:51.517Z] 🔍 Performing health check...
+[2025-06-20T17:25:51.518Z] ❌ Main App is not available on port 3000
+[2025-06-20T17:25:51.518Z] ❌ Admin Panel is not available on port 3000
+[2025-06-20T17:25:51.519Z] ❌ Dashboard is not available on port 3000
+[2025-06-20T17:25:51.519Z] ❌ AI Services is not available on port 3000
+[2025-06-20T17:25:51.519Z] ❌ Wallet is not available on port 3000
+[2025-06-20T17:25:51.520Z] ❌ Analytics is not available on port 3000
+[2025-06-20T17:25:51.520Z] ❌ EHB Dashboard is not available on port 3000
+[2025-06-20T17:25:51.520Z] ❌ EHB Home is not available on port 3000
+[2025-06-20T17:25:51.521Z] ❌ AI Marketplace is not available on port 3000
+[2025-06-20T17:25:51.521Z] ❌ EHB Tube is not available on port 3000
+[2025-06-20T17:25:51.521Z] ❌ EHB Wallet is not available on port 3000
+[2025-06-20T17:25:51.522Z] ❌ EHB Ads is not available on port 3000
+[2025-06-20T17:25:51.522Z] ❌ GoSellr is not available on port 3000
+[2025-06-20T17:25:51.523Z] ❌ Franchise is not available on port 3000
+[2025-06-20T17:25:51.523Z] ❌ Orders is not available on port 3000
+[2025-06-20T17:25:51.523Z] ❌ Cart is not available on port 3000
+[2025-06-20T17:25:51.524Z] ❌ Wishlist is not available on port 3000
+[2025-06-20T17:25:51.524Z] ❌ Profile is not available on port 3000
+[2025-06-20T17:25:51.524Z] ❌ Settings is not available on port 3000
+[2025-06-20T17:25:51.525Z] ❌ Search is not available on port 3000
+[2025-06-20T17:25:51.525Z] ❌ Reviews is not available on port 3000
+[2025-06-20T17:25:51.526Z] ❌ Notifications is not available on port 3000
+[2025-06-20T17:25:51.526Z] ❌ Roadmap is not available on port 3000
+[2025-06-20T17:25:51.526Z] ❌ Development is not available on port 3000
+[2025-06-20T17:25:51.527Z] ❌ Development Portal is not available on port 3000
+[2025-06-20T17:25:51.527Z] ❌ AM Affiliate is not available on port 3000
+[2025-06-20T17:25:51.528Z] ❌ Assistant is not available on port 3000
+[2025-06-20T17:25:51.528Z] ❌ Auth is not available on port 3000
+[2025-06-20T17:25:51.529Z] ❌ Signup is not available on port 3000
+[2025-06-20T17:25:51.529Z] ❌ Register is not available on port 3000
+[2025-06-20T17:26:22.925Z] [Next.js] 
+[2025-06-20T17:26:22.927Z] [Next.js] Source path: F:\ehb next.js 04\app\globals.css
+[2025-06-20T17:26:22.944Z] [Next.js] Finding changed files: 16.251ms
+[2025-06-20T17:26:22.945Z] [Next.js] Reading changed files: 0.01ms
+Sorting candidates: 0.003ms
+Generate rules: 0.098ms
+Build stylesheet: 0.001ms
+[2025-06-20T17:26:22.954Z] [Next.js] Potential classes:  1
+[2025-06-20T17:26:22.955Z] [Next.js] Active contexts:  1
+[2025-06-20T17:26:22.971Z] [Next.js] JIT TOTAL: 45.887ms
+[2025-06-20T17:26:23.757Z] [Next.js] ✓ Compiled in 978ms (1294 modules)
+[2025-06-20T17:26:51.529Z] 🔍 Performing health check...
+[2025-06-20T17:26:51.529Z] ❌ Main App is not available on port 3000
+[2025-06-20T17:26:51.530Z] ❌ Admin Panel is not available on port 3000
+[2025-06-20T17:26:51.530Z] ❌ Dashboard is not available on port 3000
+[2025-06-20T17:26:51.531Z] ❌ AI Services is not available on port 3000
+[2025-06-20T17:26:51.531Z] ❌ Wallet is not available on port 3000
+[2025-06-20T17:26:51.531Z] ❌ Analytics is not available on port 3000
+[2025-06-20T17:26:51.532Z] ❌ EHB Dashboard is not available on port 3000
+[2025-06-20T17:26:51.532Z] ❌ EHB Home is not available on port 3000
+[2025-06-20T17:26:51.532Z] ❌ AI Marketplace is not available on port 3000
+[2025-06-20T17:26:51.533Z] ❌ EHB Tube is not available on port 3000
+[2025-06-20T17:26:51.533Z] ❌ EHB Wallet is not available on port 3000
+[2025-06-20T17:26:51.533Z] ❌ EHB Ads is not available on port 3000
+[2025-06-20T17:26:51.533Z] ❌ GoSellr is not available on port 3000
+[2025-06-20T17:26:51.534Z] ❌ Franchise is not available on port 3000
+[2025-06-20T17:26:51.534Z] ❌ Orders is not available on port 3000
+[2025-06-20T17:26:51.535Z] ❌ Cart is not available on port 3000
+[2025-06-20T17:26:51.535Z] ❌ Wishlist is not available on port 3000
+[2025-06-20T17:26:51.535Z] ❌ Profile is not available on port 3000
+[2025-06-20T17:26:51.536Z] ❌ Settings is not available on port 3000
+[2025-06-20T17:26:51.536Z] ❌ Search is not available on port 3000
+[2025-06-20T17:26:51.536Z] ❌ Reviews is not available on port 3000
+[2025-06-20T17:26:51.537Z] ❌ Notifications is not available on port 3000
+[2025-06-20T17:26:51.537Z] ❌ Roadmap is not available on port 3000
+[2025-06-20T17:26:51.537Z] ❌ Development is not available on port 3000
+[2025-06-20T17:26:51.538Z] ❌ Development Portal is not available on port 3000
+[2025-06-20T17:26:51.538Z] ❌ AM Affiliate is not available on port 3000
+[2025-06-20T17:26:51.538Z] ❌ Assistant is not available on port 3000
+[2025-06-20T17:26:51.539Z] ❌ Auth is not available on port 3000
+[2025-06-20T17:26:51.539Z] ❌ Signup is not available on port 3000
+[2025-06-20T17:26:51.539Z] ❌ Register is not available on port 3000
+[2025-06-20T17:27:23.432Z] [Next.js ERROR] <w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: ENOENT: no such file or directory, rename 'F:\ehb next.js 04\.next\cache\webpack\client-development-fallback\0.pack.gz_' -> 'F:\ehb next.js 04\.next\cache\webpack\client-development-fallback\0.pack.gz'
+[2025-06-20T17:27:23.440Z] [Next.js ERROR] <w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: ENOENT: no such file or directory, rename 'F:\ehb next.js 04\.next\cache\webpack\client-development-fallback\0.pack.gz_' -> 'F:\ehb next.js 04\.next\cache\webpack\client-development-fallback\0.pack.gz'
+[2025-06-20T17:27:23.442Z] [Next.js ERROR] <w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: ENOENT: no such file or directory, rename 'F:\ehb next.js 04\.next\cache\webpack\client-development-fallback\0.pack.gz_' -> 'F:\ehb next.js 04\.next\cache\webpack\client-development-fallback\0.pack.gz'
+[2025-06-20T17:27:26.853Z] [Next.js ERROR] <w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: ENOENT: no such file or directory, rename 'F:\ehb next.js 04\.next\cache\webpack\client-development-fallback\0.pack.gz_' -> 'F:\ehb next.js 04\.next\cache\webpack\client-development-fallback\0.pack.gz'
+[2025-06-20T17:27:26.895Z] [Next.js ERROR] <w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: ENOENT: no such file or directory, rename 'F:\ehb next.js 04\.next\cache\webpack\client-development-fallback\0.pack.gz_' -> 'F:\ehb next.js 04\.next\cache\webpack\client-development-fallback\0.pack.gz'
+[2025-06-20T17:27:26.896Z] [Next.js ERROR] <w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: ENOENT: no such file or directory, rename 'F:\ehb next.js 04\.next\cache\webpack\client-development-fallback\0.pack.gz_' -> 'F:\ehb next.js 04\.next\cache\webpack\client-development-fallback\0.pack.gz'
+[2025-06-20T17:27:51.533Z] 🔍 Performing health check...
+[2025-06-20T17:27:51.534Z] ❌ Main App is not available on port 3000
+[2025-06-20T17:27:51.534Z] ❌ Admin Panel is not available on port 3000
+[2025-06-20T17:27:51.535Z] ❌ Dashboard is not available on port 3000
+[2025-06-20T17:27:51.535Z] ❌ AI Services is not available on port 3000
+[2025-06-20T17:27:51.536Z] ❌ Wallet is not available on port 3000
+[2025-06-20T17:27:51.536Z] ❌ Analytics is not available on port 3000
+[2025-06-20T17:27:51.536Z] ❌ EHB Dashboard is not available on port 3000
+[2025-06-20T17:27:51.537Z] ❌ EHB Home is not available on port 3000
+[2025-06-20T17:27:51.537Z] ❌ AI Marketplace is not available on port 3000
+[2025-06-20T17:27:51.538Z] ❌ EHB Tube is not available on port 3000
+[2025-06-20T17:27:51.538Z] ❌ EHB Wallet is not available on port 3000
+[2025-06-20T17:27:51.538Z] ❌ EHB Ads is not available on port 3000
+[2025-06-20T17:27:51.539Z] ❌ GoSellr is not available on port 3000
+[2025-06-20T17:27:51.539Z] ❌ Franchise is not available on port 3000
+[2025-06-20T17:27:51.540Z] ❌ Orders is not available on port 3000
+[2025-06-20T17:27:51.540Z] ❌ Cart is not available on port 3000
+[2025-06-20T17:27:51.540Z] ❌ Wishlist is not available on port 3000
+[2025-06-20T17:27:51.541Z] ❌ Profile is not available on port 3000
+[2025-06-20T17:27:51.541Z] ❌ Settings is not available on port 3000
+[2025-06-20T17:27:51.542Z] ❌ Search is not available on port 3000
+[2025-06-20T17:27:51.542Z] ❌ Reviews is not available on port 3000
+[2025-06-20T17:27:51.542Z] ❌ Notifications is not available on port 3000
+[2025-06-20T17:27:51.543Z] ❌ Roadmap is not available on port 3000
+[2025-06-20T17:27:51.543Z] ❌ Development is not available on port 3000
+[2025-06-20T17:27:51.544Z] ❌ Development Portal is not available on port 3000
+[2025-06-20T17:27:51.544Z] ❌ AM Affiliate is not available on port 3000
+[2025-06-20T17:27:51.544Z] ❌ Assistant is not available on port 3000
+[2025-06-20T17:27:51.545Z] ❌ Auth is not available on port 3000
+[2025-06-20T17:27:51.545Z] ❌ Signup is not available on port 3000
+[2025-06-20T17:27:51.546Z] ❌ Register is not available on port 3000
+[2025-06-20T17:28:51.545Z] 🔍 Performing health check...
+[2025-06-20T17:28:51.546Z] ❌ Main App is not available on port 3000
+[2025-06-20T17:28:51.547Z] ❌ Admin Panel is not available on port 3000
+[2025-06-20T17:28:51.547Z] ❌ Dashboard is not available on port 3000
+[2025-06-20T17:28:51.548Z] ❌ AI Services is not available on port 3000
+[2025-06-20T17:28:51.548Z] ❌ Wallet is not available on port 3000
+[2025-06-20T17:28:51.549Z] ❌ Analytics is not available on port 3000
+[2025-06-20T17:28:51.549Z] ❌ EHB Dashboard is not available on port 3000
+[2025-06-20T17:28:51.550Z] ❌ EHB Home is not available on port 3000
+[2025-06-20T17:28:51.550Z] ❌ AI Marketplace is not available on port 3000
+[2025-06-20T17:28:51.551Z] ❌ EHB Tube is not available on port 3000
+[2025-06-20T17:28:51.551Z] ❌ EHB Wallet is not available on port 3000
+[2025-06-20T17:28:51.552Z] ❌ EHB Ads is not available on port 3000
+[2025-06-20T17:28:51.552Z] ❌ GoSellr is not available on port 3000
+[2025-06-20T17:28:51.552Z] ❌ Franchise is not available on port 3000
+[2025-06-20T17:28:51.553Z] ❌ Orders is not available on port 3000
+[2025-06-20T17:28:51.553Z] ❌ Cart is not available on port 3000
+[2025-06-20T17:28:51.553Z] ❌ Wishlist is not available on port 3000
+[2025-06-20T17:28:51.554Z] ❌ Profile is not available on port 3000
+[2025-06-20T17:28:51.554Z] ❌ Settings is not available on port 3000
+[2025-06-20T17:28:51.554Z] ❌ Search is not available on port 3000
+[2025-06-20T17:28:51.555Z] ❌ Reviews is not available on port 3000
+[2025-06-20T17:28:51.555Z] ❌ Notifications is not available on port 3000
+[2025-06-20T17:28:51.555Z] ❌ Roadmap is not available on port 3000
+[2025-06-20T17:28:51.556Z] ❌ Development is not available on port 3000
+[2025-06-20T17:28:51.556Z] ❌ Development Portal is not available on port 3000
+[2025-06-20T17:28:51.556Z] ❌ AM Affiliate is not available on port 3000
+[2025-06-20T17:28:51.557Z] ❌ Assistant is not available on port 3000
+[2025-06-20T17:28:51.557Z] ❌ Auth is not available on port 3000
+[2025-06-20T17:28:51.558Z] ❌ Signup is not available on port 3000
+[2025-06-20T17:28:51.558Z] ❌ Register is not available on port 3000
+[2025-06-20T17:29:51.549Z] 🔍 Performing health check...
+[2025-06-20T17:29:51.550Z] ❌ Main App is not available on port 3000
+[2025-06-20T17:29:51.550Z] ❌ Admin Panel is not available on port 3000
+[2025-06-20T17:29:51.550Z] ❌ Dashboard is not available on port 3000
+[2025-06-20T17:29:51.551Z] ❌ AI Services is not available on port 3000
+[2025-06-20T17:29:51.552Z] ❌ Wallet is not available on port 3000
+[2025-06-20T17:29:51.552Z] ❌ Analytics is not available on port 3000
+[2025-06-20T17:29:51.552Z] ❌ EHB Dashboard is not available on port 3000
+[2025-06-20T17:29:51.553Z] ❌ EHB Home is not available on port 3000
+[2025-06-20T17:29:51.553Z] ❌ AI Marketplace is not available on port 3000
+[2025-06-20T17:29:51.554Z] ❌ EHB Tube is not available on port 3000
+[2025-06-20T17:29:51.554Z] ❌ EHB Wallet is not available on port 3000
+[2025-06-20T17:29:51.554Z] ❌ EHB Ads is not available on port 3000
+[2025-06-20T17:29:51.555Z] ❌ GoSellr is not available on port 3000
+[2025-06-20T17:29:51.555Z] ❌ Franchise is not available on port 3000
+[2025-06-20T17:29:51.556Z] ❌ Orders is not available on port 3000
+[2025-06-20T17:29:51.556Z] ❌ Cart is not available on port 3000
+[2025-06-20T17:29:51.556Z] ❌ Wishlist is not available on port 3000
+[2025-06-20T17:29:51.557Z] ❌ Profile is not available on port 3000
+[2025-06-20T17:29:51.557Z] ❌ Settings is not available on port 3000
+[2025-06-20T17:29:51.557Z] ❌ Search is not available on port 3000
+[2025-06-20T17:29:51.558Z] ❌ Reviews is not available on port 3000
+[2025-06-20T17:29:51.558Z] ❌ Notifications is not available on port 3000
+[2025-06-20T17:29:51.559Z] ❌ Roadmap is not available on port 3000
+[2025-06-20T17:29:51.559Z] ❌ Development is not available on port 3000
+[2025-06-20T17:29:51.559Z] ❌ Development Portal is not available on port 3000
+[2025-06-20T17:29:51.560Z] ❌ AM Affiliate is not available on port 3000
+[2025-06-20T17:29:51.560Z] ❌ Assistant is not available on port 3000
+[2025-06-20T17:29:51.560Z] ❌ Auth is not available on port 3000
+[2025-06-20T17:29:51.561Z] ❌ Signup is not available on port 3000
+[2025-06-20T17:29:51.561Z] ❌ Register is not available on port 3000
+[2025-06-20T17:30:51.555Z] 🔍 Performing health check...
+[2025-06-20T17:30:51.557Z] ❌ Main App is not available on port 3000
+[2025-06-20T17:30:51.558Z] ❌ Admin Panel is not available on port 3000
+[2025-06-20T17:30:51.559Z] ❌ Dashboard is not available on port 3000
+[2025-06-20T17:30:51.559Z] ❌ AI Services is not available on port 3000
+[2025-06-20T17:30:51.560Z] ❌ Wallet is not available on port 3000
+[2025-06-20T17:30:51.560Z] ❌ Analytics is not available on port 3000
+[2025-06-20T17:30:51.560Z] ❌ EHB Dashboard is not available on port 3000
+[2025-06-20T17:30:51.561Z] ❌ EHB Home is not available on port 3000
+[2025-06-20T17:30:51.561Z] ❌ AI Marketplace is not available on port 3000
+[2025-06-20T17:30:51.562Z] ❌ EHB Tube is not available on port 3000
+[2025-06-20T17:30:51.562Z] ❌ EHB Wallet is not available on port 3000
+[2025-06-20T17:30:51.562Z] ❌ EHB Ads is not available on port 3000
+[2025-06-20T17:30:51.563Z] ❌ GoSellr is not available on port 3000
+[2025-06-20T17:30:51.563Z] ❌ Franchise is not available on port 3000
+[2025-06-20T17:30:51.563Z] ❌ Orders is not available on port 3000
+[2025-06-20T17:30:51.564Z] ❌ Cart is not available on port 3000
+[2025-06-20T17:30:51.564Z] ❌ Wishlist is not available on port 3000
+[2025-06-20T17:30:51.564Z] ❌ Profile is not available on port 3000
+[2025-06-20T17:30:51.565Z] ❌ Settings is not available on port 3000
+[2025-06-20T17:30:51.565Z] ❌ Search is not available on port 3000
+[2025-06-20T17:30:51.565Z] ❌ Reviews is not available on port 3000
+[2025-06-20T17:30:51.565Z] ❌ Notifications is not available on port 3000
+[2025-06-20T17:30:51.566Z] ❌ Roadmap is not available on port 3000
+[2025-06-20T17:30:51.566Z] ❌ Development is not available on port 3000
+[2025-06-20T17:30:51.566Z] ❌ Development Portal is not available on port 3000
+[2025-06-20T17:30:51.567Z] ❌ AM Affiliate is not available on port 3000
+[2025-06-20T17:30:51.567Z] ❌ Assistant is not available on port 3000
+[2025-06-20T17:30:51.568Z] ❌ Auth is not available on port 3000
+[2025-06-20T17:30:51.568Z] ❌ Signup is not available on port 3000
+[2025-06-20T17:30:51.569Z] ❌ Register is not available on port 3000
+[2025-06-20T17:31:51.559Z] 🔍 Performing health check...
+[2025-06-20T17:31:51.560Z] ❌ Main App is not available on port 3000
+[2025-06-20T17:31:51.561Z] ❌ Admin Panel is not available on port 3000
+[2025-06-20T17:31:51.561Z] ❌ Dashboard is not available on port 3000
+[2025-06-20T17:31:51.561Z] ❌ AI Services is not available on port 3000
+[2025-06-20T17:31:51.562Z] ❌ Wallet is not available on port 3000
+[2025-06-20T17:31:51.562Z] ❌ Analytics is not available on port 3000
+[2025-06-20T17:31:51.562Z] ❌ EHB Dashboard is not available on port 3000
+[2025-06-20T17:31:51.563Z] ❌ EHB Home is not available on port 3000
+[2025-06-20T17:31:51.563Z] ❌ AI Marketplace is not available on port 3000
+[2025-06-20T17:31:51.564Z] ❌ EHB Tube is not available on port 3000
+[2025-06-20T17:31:51.564Z] ❌ EHB Wallet is not available on port 3000
+[2025-06-20T17:31:51.565Z] ❌ EHB Ads is not available on port 3000
+[2025-06-20T17:31:51.565Z] ❌ GoSellr is not available on port 3000
+[2025-06-20T17:31:51.565Z] ❌ Franchise is not available on port 3000
+[2025-06-20T17:31:51.566Z] ❌ Orders is not available on port 3000
+[2025-06-20T17:31:51.566Z] ❌ Cart is not available on port 3000
+[2025-06-20T17:31:51.567Z] ❌ Wishlist is not available on port 3000
+[2025-06-20T17:31:51.567Z] ❌ Profile is not available on port 3000
+[2025-06-20T17:31:51.567Z] ❌ Settings is not available on port 3000
+[2025-06-20T17:31:51.568Z] ❌ Search is not available on port 3000
+[2025-06-20T17:31:51.568Z] ❌ Reviews is not available on port 3000
+[2025-06-20T17:31:51.568Z] ❌ Notifications is not available on port 3000
+[2025-06-20T17:31:51.568Z] ❌ Roadmap is not available on port 3000
+[2025-06-20T17:31:51.569Z] ❌ Development is not available on port 3000
+[2025-06-20T17:31:51.569Z] ❌ Development Portal is not available on port 3000
+[2025-06-20T17:31:51.569Z] ❌ AM Affiliate is not available on port 3000
+[2025-06-20T17:31:51.570Z] ❌ Assistant is not available on port 3000
+[2025-06-20T17:31:51.570Z] ❌ Auth is not available on port 3000
+[2025-06-20T17:31:51.571Z] ❌ Signup is not available on port 3000
+[2025-06-20T17:31:51.571Z] ❌ Register is not available on port 3000
+[2025-06-20T17:32:51.566Z] 🔍 Performing health check...
+[2025-06-20T17:32:51.567Z] ❌ Main App is not available on port 3000
+[2025-06-20T17:32:51.567Z] ❌ Admin Panel is not available on port 3000
+[2025-06-20T17:32:51.568Z] ❌ Dashboard is not available on port 3000
+[2025-06-20T17:32:51.568Z] ❌ AI Services is not available on port 3000
+[2025-06-20T17:32:51.569Z] ❌ Wallet is not available on port 3000
+[2025-06-20T17:32:51.569Z] ❌ Analytics is not available on port 3000
+[2025-06-20T17:32:51.569Z] ❌ EHB Dashboard is not available on port 3000
+[2025-06-20T17:32:51.570Z] ❌ EHB Home is not available on port 3000
+[2025-06-20T17:32:51.570Z] ❌ AI Marketplace is not available on port 3000
+[2025-06-20T17:32:51.571Z] ❌ EHB Tube is not available on port 3000
+[2025-06-20T17:32:51.571Z] ❌ EHB Wallet is not available on port 3000
+[2025-06-20T17:32:51.571Z] ❌ EHB Ads is not available on port 3000
+[2025-06-20T17:32:51.572Z] ❌ GoSellr is not available on port 3000
+[2025-06-20T17:32:51.572Z] ❌ Franchise is not available on port 3000
+[2025-06-20T17:32:51.573Z] ❌ Orders is not available on port 3000
+[2025-06-20T17:32:51.573Z] ❌ Cart is not available on port 3000
+[2025-06-20T17:32:51.574Z] ❌ Wishlist is not available on port 3000
+[2025-06-20T17:32:51.575Z] ❌ Profile is not available on port 3000
+[2025-06-20T17:32:51.575Z] ❌ Settings is not available on port 3000
+[2025-06-20T17:32:51.576Z] ❌ Search is not available on port 3000
+[2025-06-20T17:32:51.576Z] ❌ Reviews is not available on port 3000
+[2025-06-20T17:32:51.576Z] ❌ Notifications is not available on port 3000
+[2025-06-20T17:32:51.577Z] ❌ Roadmap is not available on port 3000
+[2025-06-20T17:32:51.577Z] ❌ Development is not available on port 3000
+[2025-06-20T17:32:51.578Z] ❌ Development Portal is not available on port 3000
+[2025-06-20T17:32:51.578Z] ❌ AM Affiliate is not available on port 3000
+[2025-06-20T17:32:51.578Z] ❌ Assistant is not available on port 3000
+[2025-06-20T17:32:51.579Z] ❌ Auth is not available on port 3000
+[2025-06-20T17:32:51.579Z] ❌ Signup is not available on port 3000
+[2025-06-20T17:32:51.580Z] ❌ Register is not available on port 3000
+[2025-06-20T17:33:00.730Z] [Next.js] 
+[2025-06-20T17:33:00.755Z] [Next.js] Source path: F:\ehb next.js 04\styles\globals.css
+[2025-06-20T17:33:00.756Z] [Next.js] Setting up new context...
+[2025-06-20T17:33:00.826Z] [Next.js] JIT TOTAL: 96.282ms
+[2025-06-20T17:33:00.836Z] [Next.js] 
+[2025-06-20T17:33:00.836Z] [Next.js] Source path: F:\ehb next.js 04\app\globals.css
+[2025-06-20T17:33:00.837Z] [Next.js] Setting up new context...
+[2025-06-20T17:33:00.899Z] [Next.js] Finding changed files: 22.754ms
+[2025-06-20T17:33:01.710Z] [Next.js] Reading changed files: 810.212ms
+[2025-06-20T17:33:01.725Z] [Next.js] Sorting candidates: 14.311ms
+[2025-06-20T17:33:01.922Z] [Next.js] Generate rules: 211.391ms
+[2025-06-20T17:33:01.926Z] [Next.js] Build stylesheet: 4.064ms
+[2025-06-20T17:33:01.935Z] [Next.js] Potential classes:  14567
+[2025-06-20T17:33:01.935Z] [Next.js] Active contexts:  2
+[2025-06-20T17:33:01.951Z] [Next.js] JIT TOTAL: 1.115s
+[2025-06-20T17:33:01.951Z] [Next.js] 
+[2025-06-20T17:33:02.697Z] [Next.js] ✓ Compiled in 2s (1199 modules)

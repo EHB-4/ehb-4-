@@ -1,0 +1,402 @@
+[2025-06-20T17:02:17.798Z] 🚀 Starting Auto Port Manager...
+[2025-06-20T17:02:17.802Z] Cleaning up ports...
+[2025-06-20T17:02:18.078Z] Killed process 2352 on port 5000
+[2025-06-20T17:02:18.170Z] Installing dependencies...
+[2025-06-20T17:02:18.171Z] Running: npm install critters Installing critters
+[2025-06-20T17:02:18.181Z] Killed process 20104 on port 6379
+[2025-06-20T17:02:21.877Z] [Installing critters] up to date in 3s
+[2025-06-20T17:02:21.905Z] Output: 
+up to date in 3s
+
+[2025-06-20T17:02:21.906Z] Running: npm install next Installing next
+[2025-06-20T17:02:27.235Z] [Installing next] up to date in 5s
+[2025-06-20T17:02:27.282Z] Output: 
+up to date in 5s
+
+[2025-06-20T17:02:27.283Z] Running: npm install react Installing react
+[2025-06-20T17:02:32.946Z] [Installing react] up to date in 5s
+[2025-06-20T17:02:32.972Z] Output: 
+up to date in 5s
+
+[2025-06-20T17:02:32.973Z] Running: npm install react-dom Installing react-dom
+[2025-06-20T17:02:37.691Z] [Installing react-dom] up to date in 4s
+[2025-06-20T17:02:37.721Z] Output: 
+up to date in 4s
+
+[2025-06-20T17:02:37.722Z] Running: npm install typescript Installing typescript
+[2025-06-20T17:02:41.962Z] [Installing typescript] up to date in 4s
+[2025-06-20T17:02:41.993Z] Output: 
+up to date in 4s
+
+[2025-06-20T17:02:41.994Z] Running: npm install @types/node Installing @types/node
+[2025-06-20T17:02:45.856Z] [Installing @types/node] up to date in 4s
+[2025-06-20T17:02:45.878Z] Output: 
+up to date in 4s
+
+[2025-06-20T17:02:45.879Z] Running: npm install @types/react Installing @types/react
+[2025-06-20T17:02:50.280Z] [Installing @types/react] up to date in 4s
+[2025-06-20T17:02:50.303Z] Output: 
+up to date in 4s
+
+[2025-06-20T17:02:50.304Z] Running: npm install tailwindcss Installing tailwindcss
+[2025-06-20T17:02:54.949Z] [Installing tailwindcss] up to date in 4s
+[2025-06-20T17:02:54.977Z] Output: 
+up to date in 4s
+
+[2025-06-20T17:02:54.978Z] Running: npm install autoprefixer Installing autoprefixer
+[2025-06-20T17:02:59.172Z] [Installing autoprefixer] up to date in 4s
+[2025-06-20T17:02:59.202Z] Output: 
+up to date in 4s
+
+[2025-06-20T17:02:59.203Z] Running: npm install postcss Installing postcss
+[2025-06-20T17:03:02.300Z] [Installing postcss ERROR] npm error code UNKNOWN
+[2025-06-20T17:03:02.301Z] [Installing postcss ERROR] npm error syscall open
+npm error path F:\ehb next.js 04\package.json
+npm error errno -4094
+npm error UNKNOWN: unknown error, open 'F:\ehb next.js 04\package.json'
+[2025-06-20T17:03:02.302Z] [Installing postcss ERROR] npm error A complete log of this run can be found in: F:\ehb next.js 04\.npm-cache\_logs\2025-06-20T17_02_59_391Z-debug-0.log
+[2025-06-20T17:03:02.338Z] Error: Command failed: npm install postcss
+npm error code UNKNOWN
+npm error syscall open
+npm error path F:\ehb next.js 04\package.json
+npm error errno -4094
+npm error UNKNOWN: unknown error, open 'F:\ehb next.js 04\package.json'
+npm error A complete log of this run can be found in: F:\ehb next.js 04\.npm-cache\_logs\2025-06-20T17_02_59_391Z-debug-0.log
+
+[2025-06-20T17:03:02.339Z] Failed to install postcss: Command failed: npm install postcss
+npm error code UNKNOWN
+npm error syscall open
+npm error path F:\ehb next.js 04\package.json
+npm error errno -4094
+npm error UNKNOWN: unknown error, open 'F:\ehb next.js 04\package.json'
+npm error A complete log of this run can be found in: F:\ehb next.js 04\.npm-cache\_logs\2025-06-20T17_02_59_391Z-debug-0.log
+
+[2025-06-20T17:03:02.340Z] Checking database connection...
+[2025-06-20T17:03:02.340Z] Database check completed
+[2025-06-20T17:03:02.343Z] Starting Backend on port 5000
+[2025-06-20T17:03:02.355Z] Starting Next.js on port 3001
+[2025-06-20T17:03:02.849Z] [Next.js] > ehb-next-js-04@1.0.0 dev
+> next dev
+[2025-06-20T17:03:02.876Z] [Backend] > ehb-backend@1.0.0 start
+> node server.js
+[2025-06-20T17:03:03.128Z] [Backend] 🚀 EHB Backend Server running on http://localhost:5000
+[2025-06-20T17:03:03.129Z] [Backend] ✅ Server Status: ACTIVE
+📊 Environment: undefined
+[2025-06-20T17:03:03.568Z] [Next.js] ▲ Next.js 14.2.30
+[2025-06-20T17:03:03.569Z] [Next.js] - Local:        http://localhost:3001
+  - Environments: .env.local, .env.development, .env
+  - Experiments (use with caution):
+    · optimizeCss
+
+ ✓ Starting...
+[2025-06-20T17:03:06.447Z] [Next.js] ✓ Ready in 3s
+[2025-06-20T17:03:07.384Z] Performing health check...
+[2025-06-20T17:03:07.386Z] ✅ backend is running on port 5000
+[2025-06-20T17:03:07.386Z] ✅ nextjs is running on port 3001
+[2025-06-20T17:03:07.387Z] ✅ All services started successfully!
+[2025-06-20T17:03:07.387Z] 📊 Monitoring active processes...
+[2025-06-20T17:05:30.904Z] 🚀 Starting Auto Port Manager...
+[2025-06-20T17:05:30.908Z] Cleaning up ports...
+[2025-06-20T17:05:32.624Z] Killed process 27608 on port 3000
+[2025-06-20T17:05:32.842Z] Killed process 16716 on port 3000
+[2025-06-20T17:05:34.567Z] Killed process 22516 on port 5000
+[2025-06-20T17:05:34.777Z] Installing dependencies...
+[2025-06-20T17:05:34.778Z] Running: npm install critters Installing critters
+[2025-06-20T17:05:34.860Z] Killed process 36008 on port 3001
+[2025-06-20T17:05:34.877Z] [Next.js] [?25h
+[2025-06-20T17:05:34.878Z] [Next.js] 
+[2025-06-20T17:05:34.901Z] Next.js process exited with code 0
+[2025-06-20T17:05:38.200Z] [Installing critters] up to date in 3s
+[2025-06-20T17:05:38.224Z] Output: 
+up to date in 3s
+
+[2025-06-20T17:05:38.225Z] Running: npm install next Installing next
+[2025-06-20T17:05:41.430Z] [Installing next] up to date in 3s
+[2025-06-20T17:05:41.468Z] Output: 
+up to date in 3s
+
+[2025-06-20T17:05:41.469Z] Running: npm install react Installing react
+[2025-06-20T17:05:45.144Z] [Installing react] up to date in 3s
+[2025-06-20T17:05:45.177Z] Output: 
+up to date in 3s
+
+[2025-06-20T17:05:45.178Z] Running: npm install react-dom Installing react-dom
+[2025-06-20T17:05:48.329Z] [Installing react-dom] up to date in 3s
+[2025-06-20T17:05:48.353Z] Output: 
+up to date in 3s
+
+[2025-06-20T17:05:48.354Z] Running: npm install typescript Installing typescript
+[2025-06-20T17:05:51.439Z] [Installing typescript] up to date in 3s
+[2025-06-20T17:05:51.465Z] Output: 
+up to date in 3s
+
+[2025-06-20T17:05:51.465Z] Running: npm install @types/node Installing @types/node
+[2025-06-20T17:05:54.458Z] [Installing @types/node] up to date in 3s
+[2025-06-20T17:05:54.489Z] Output: 
+up to date in 3s
+
+[2025-06-20T17:05:54.489Z] Running: npm install @types/react Installing @types/react
+[2025-06-20T17:05:57.361Z] [Installing @types/react] up to date in 3s
+[2025-06-20T17:05:57.386Z] Output: 
+up to date in 3s
+
+[2025-06-20T17:05:57.387Z] Running: npm install tailwindcss Installing tailwindcss
+[2025-06-20T17:06:00.384Z] [Installing tailwindcss] up to date in 3s
+[2025-06-20T17:06:00.410Z] Output: 
+up to date in 3s
+
+[2025-06-20T17:06:00.411Z] Running: npm install autoprefixer Installing autoprefixer
+[2025-06-20T17:06:05.112Z] [Installing autoprefixer] up to date in 4s
+[2025-06-20T17:06:05.146Z] Output: 
+up to date in 4s
+
+[2025-06-20T17:06:05.147Z] Running: npm install postcss Installing postcss
+[2025-06-20T17:06:09.324Z] [Installing postcss] up to date in 4s
+[2025-06-20T17:06:09.352Z] Output: 
+up to date in 4s
+
+[2025-06-20T17:06:09.353Z] Checking database connection...
+[2025-06-20T17:06:09.353Z] Database check completed
+[2025-06-20T17:06:09.356Z] Starting Backend on port 5000
+[2025-06-20T17:06:09.364Z] Starting Next.js on port 3000
+[2025-06-20T17:06:09.602Z] [Next.js] > ehb-next-js-04@1.0.0 dev
+> next dev
+[2025-06-20T17:06:09.603Z] [Backend] > ehb-backend@1.0.0 start
+> node server.js
+[2025-06-20T17:06:09.760Z] [Backend] 🚀 EHB Backend Server running on http://localhost:5000
+[2025-06-20T17:06:09.761Z] [Backend] ✅ Server Status: ACTIVE
+📊 Environment: undefined
+[2025-06-20T17:06:10.265Z] [Next.js] ▲ Next.js 14.2.30
+[2025-06-20T17:06:10.265Z] [Next.js] - Local:        http://localhost:3000
+  - Environments: .env.local, .env.development, .env
+  - Experiments (use with caution):
+    · optimizeCss
+
+ ✓ Starting...
+[2025-06-20T17:06:12.602Z] [Next.js] ✓ Ready in 2.4s
+[2025-06-20T17:06:13.153Z] [Next.js] ○ Compiling /middleware ...
+[2025-06-20T17:06:14.372Z] Performing health check...
+[2025-06-20T17:06:14.373Z] ✅ backend is running on port 5000
+[2025-06-20T17:06:14.374Z] ✅ nextjs is running on port 3000
+[2025-06-20T17:06:14.374Z] ✅ All services started successfully!
+[2025-06-20T17:06:14.375Z] 📊 Monitoring active processes...
+[2025-06-20T17:06:14.773Z] [Next.js] 
+[2025-06-20T17:06:14.822Z] [Next.js] Source path: F:\ehb next.js 04\app\globals.css
+[2025-06-20T17:06:14.823Z] [Next.js] Setting up new context...
+[2025-06-20T17:06:14.953Z] [Next.js] Finding changed files: 31.524ms
+[2025-06-20T17:06:15.435Z] [Next.js] Reading changed files: 479.545ms
+[2025-06-20T17:06:15.445Z] [Next.js] Sorting candidates: 10.355ms
+[2025-06-20T17:06:15.612Z] [Next.js] Generate rules: 177.561ms
+[2025-06-20T17:06:15.616Z] [Next.js] Build stylesheet: 3.679ms
+[2025-06-20T17:06:15.628Z] [Next.js] Potential classes:  14569
+[2025-06-20T17:06:15.629Z] [Next.js] Active contexts:  1
+[2025-06-20T17:06:15.642Z] [Next.js] JIT TOTAL: 868.164ms
+[2025-06-20T17:06:16.455Z] [Next.js] ✓ Compiled /middleware in 3.8s (576 modules)
+[2025-06-20T17:06:16.769Z] [Next.js ERROR] ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[2025-06-20T17:06:16.822Z] [Next.js] GET /_next/static/webpack/dec4d5b4a8d91127.webpack.hot-update.json 404 in 4176ms
+[2025-06-20T17:06:17.303Z] [Next.js] ○ Compiling /ehb-dashboard ...
+[2025-06-20T17:06:22.232Z] [Next.js] 
+[2025-06-20T17:06:22.233Z] [Next.js] Source path: F:\ehb next.js 04\app\globals.css
+[2025-06-20T17:06:22.250Z] [Next.js] Finding changed files: 16.279ms
+[2025-06-20T17:06:22.251Z] [Next.js] Reading changed files: 0.02ms
+Sorting candidates: 0.004ms
+Generate rules: 0.047ms
+Build stylesheet: 0.002ms
+[2025-06-20T17:06:22.257Z] [Next.js] Potential classes:  1
+Active contexts:  1
+[2025-06-20T17:06:22.270Z] [Next.js] JIT TOTAL: 37.707ms
+[2025-06-20T17:06:22.271Z] [Next.js] 
+[2025-06-20T17:06:23.784Z] [Next.js ERROR] ⨯ ./app/register/page.tsx:4:1
+Module not found: Can't resolve '@/components/ui/button'
+[0m [90m 2 |[39m [36mimport[39m [33mReact[39m [36mfrom[39m [32m'react'[39m[33m;[39m[0m
+[0m [90m 3 |[39m[0m
+[0m[31m[1m>[22m[39m[90m 4 |[39m [36mimport[39m { [33mButton[39m } [36mfrom[39m [32m'@/components/ui/button'[39m[33m;[39m[0m
+[0m [90m   |[39m [31m[1m^[22m[39m[0m
+[0m [90m 5 |[39m [36mimport[39m { [33mCard[39m[33m,[39m [33mCardContent[39m[33m,[39m [33mCardHeader[39m[33m,[39m [33mCardTitle[39m } [36mfrom[39m [32m'@/components/ui/card'[39m[33m;[39m[0m
+[0m [90m 6 |[39m [36mimport[39m { [33mInput[39m } [36mfrom[39m [32m'@/components/ui/input'[39m[33m;[39m[0m
+[0m [90m 7 |[39m [36mimport[39m { [33mLabel[39m } [36mfrom[39m [32m'@/components/ui/label'[39m[33m;[39m[0m
+
+https://nextjs.org/docs/messages/module-not-found
+[2025-06-20T17:06:23.825Z] [Next.js] GET /ehb-home-page 200 in 6960ms
+[2025-06-20T17:06:23.826Z] [Next.js] GET /ehb-tube 404 in 7059ms
+[2025-06-20T17:06:29.466Z] [Next.js] GET /ehb-home-page 200 in 5396ms
+[2025-06-20T17:06:31.820Z] [Next.js ERROR] ⨯ ./pages/_app.tsx:1:1
+Module not found: Can't resolve '@/styles/globals.css'
+[0m[31m[1m>[22m[39m[90m 1 |[39m [36mimport[39m [32m'@/styles/globals.css'[39m[33m;[39m[0m
+[0m [90m   |[39m [31m[1m^[22m[39m[0m
+[0m [90m 2 |[39m [36mimport[39m type { [33mAppProps[39m } [36mfrom[39m [32m'next/app'[39m[33m;[39m[0m
+[0m [90m 3 |[39m [36mimport[39m { [33mSessionProvider[39m } [36mfrom[39m [32m'next-auth/react'[39m[33m;[39m[0m
+[0m [90m 4 |[39m[0m
+
+https://nextjs.org/docs/messages/module-not-found
+[2025-06-20T17:06:32.133Z] [Next.js] Time 5.0991
+[2025-06-20T17:06:32.135Z] [Next.js] Time 0.6267
+[2025-06-20T17:06:32.137Z] [Next.js] Time 0.6266
+[2025-06-20T17:06:32.140Z] [Next.js] Time 0.4998
+[2025-06-20T17:06:32.141Z] [Next.js] Time 0.3567
+[2025-06-20T17:06:32.143Z] [Next.js] Time 0.3635
+[2025-06-20T17:06:32.145Z] [Next.js] Time 0.4018
+[2025-06-20T17:06:32.163Z] [Next.js] GET /_next/static/webpack/dec4d5b4a8d91127.webpack.hot-update.json 500 in 15249ms
+[2025-06-20T17:06:32.169Z] [Next.js ERROR] ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[2025-06-20T17:06:32.187Z] [Next.js] Time 0.5593
+[2025-06-20T17:06:32.189Z] [Next.js] Time 0.4515
+[2025-06-20T17:06:32.190Z] [Next.js] Time 0.312
+[2025-06-20T17:06:32.192Z] [Next.js] Time 0.2849
+[2025-06-20T17:06:32.200Z] [Next.js] GET /ehb-tube 500 in 2275ms
+[2025-06-20T17:06:32.201Z] [Next.js] GET /settings 500 in 2275ms
+[2025-06-20T17:06:32.212Z] [Next.js ERROR] ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[2025-06-20T17:06:32.214Z] [Next.js ERROR] ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[2025-06-20T17:06:32.254Z] [Next.js] Time 0.3913
+[2025-06-20T17:06:32.326Z] [Next.js] Time 0.3636
+[2025-06-20T17:06:32.328Z] [Next.js] Time 0.415
+[2025-06-20T17:06:32.330Z] [Next.js] Time 0.4005
+[2025-06-20T17:06:32.331Z] [Next.js] Time 0.3764
+[2025-06-20T17:06:32.332Z] [Next.js] Time 0.251
+[2025-06-20T17:06:32.334Z] [Next.js] Time 0.2869
+[2025-06-20T17:06:32.346Z] [Next.js] GET /orders 500 in 2470ms
+[2025-06-20T17:06:32.346Z] [Next.js] GET /signup 500 in 2471ms
+[2025-06-20T17:06:32.347Z] [Next.js] GET /analytics 500 in 2473ms
+[2025-06-20T17:06:32.362Z] [Next.js ERROR] ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[2025-06-20T17:06:32.363Z] [Next.js ERROR] ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[2025-06-20T17:06:32.363Z] [Next.js ERROR] ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[2025-06-20T17:06:35.115Z] [Next.js ERROR] ⨯ ./pages/_app.tsx:1:1
+Module not found: Can't resolve '@/styles/globals.css'
+[0m[31m[1m>[22m[39m[90m 1 |[39m [36mimport[39m [32m'@/styles/globals.css'[39m[33m;[39m[0m
+[0m [90m   |[39m [31m[1m^[22m[39m[0m
+[0m [90m 2 |[39m [36mimport[39m type { [33mAppProps[39m } [36mfrom[39m [32m'next/app'[39m[33m;[39m[0m
+[0m [90m 3 |[39m [36mimport[39m { [33mSessionProvider[39m } [36mfrom[39m [32m'next-auth/react'[39m[33m;[39m[0m
+[0m [90m 4 |[39m[0m
+
+https://nextjs.org/docs/messages/module-not-found
+[2025-06-20T17:06:35.197Z] [Next.js] Time 0.2805
+[2025-06-20T17:06:35.198Z] [Next.js] Time 0.2206
+[2025-06-20T17:06:35.199Z] [Next.js] Time 0.1592
+[2025-06-20T17:06:35.200Z] [Next.js] Time 0.294
+[2025-06-20T17:06:35.200Z] [Next.js] Time 0.1808
+[2025-06-20T17:06:35.201Z] [Next.js] Time 0.1727
+[2025-06-20T17:06:35.207Z] [Next.js] GET /error 500 in 90ms
+[2025-06-20T17:06:35.208Z] [Next.js] GET /wallet 500 in 2912ms
+ GET /development 500 in 2912ms
+[2025-06-20T17:06:35.208Z] [Next.js] GET /unauthorized 500 in 2756ms
+[2025-06-20T17:06:35.209Z] [Next.js] GET /gosellr 500 in 2913ms
+ GET /ehb-dashboard 500 in 2755ms
+[2025-06-20T17:06:35.223Z] [Next.js ERROR] ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[2025-06-20T17:06:35.231Z] [Next.js ERROR] ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[2025-06-20T17:06:35.239Z] [Next.js ERROR] ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[2025-06-20T17:06:35.239Z] [Next.js ERROR] ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[2025-06-20T17:06:35.246Z] [Next.js ERROR] ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[2025-06-20T17:06:35.247Z] [Next.js ERROR] ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[2025-06-20T17:06:35.387Z] [Next.js] Time 0.2822
+[2025-06-20T17:06:35.398Z] [Next.js] GET /auth 500 in 76ms
+[2025-06-20T17:06:35.419Z] [Next.js ERROR] ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[2025-06-20T17:06:37.298Z] [Next.js ERROR] ⨯ ./pages/_app.tsx:1:1
+Module not found: Can't resolve '@/styles/globals.css'
+[0m[31m[1m>[22m[39m[90m 1 |[39m [36mimport[39m [32m'@/styles/globals.css'[39m[33m;[39m[0m
+[0m [90m   |[39m [31m[1m^[22m[39m[0m
+[0m [90m 2 |[39m [36mimport[39m type { [33mAppProps[39m } [36mfrom[39m [32m'next/app'[39m[33m;[39m[0m
+[0m [90m 3 |[39m [36mimport[39m { [33mSessionProvider[39m } [36mfrom[39m [32m'next-auth/react'[39m[33m;[39m[0m
+[0m [90m 4 |[39m[0m
+
+https://nextjs.org/docs/messages/module-not-found
+[2025-06-20T17:06:37.317Z] [Next.js] Time 0.2422
+[2025-06-20T17:06:37.323Z] [Next.js] GET /ehb-home-page 500 in 2016ms
+[2025-06-20T17:06:37.330Z] [Next.js ERROR] ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[2025-06-20T17:06:37.349Z] [Next.js] Time 0.324
+[2025-06-20T17:06:37.357Z] [Next.js] GET / 500 in 2047ms
+[2025-06-20T17:06:37.366Z] [Next.js ERROR] ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[2025-06-20T17:06:37.399Z] [Next.js] Time 0.3812
+[2025-06-20T17:06:37.400Z] [Next.js] Time 0.3282
+[2025-06-20T17:06:37.401Z] [Next.js] Time 0.209
+[2025-06-20T17:06:37.402Z] [Next.js] Time 0.1965
+[2025-06-20T17:06:37.415Z] [Next.js] GET /am-affiliate 500 in 2105ms
+[2025-06-20T17:06:37.416Z] [Next.js] GET /development-portal 500 in 2106ms
+ GET /cart 500 in 2105ms
+ GET /roadmap 500 in 1866ms
+[2025-06-20T17:06:37.426Z] [Next.js ERROR] ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[2025-06-20T17:06:37.437Z] [Next.js ERROR] ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[2025-06-20T17:06:37.437Z] [Next.js ERROR] ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[2025-06-20T17:06:37.438Z] [Next.js ERROR] ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[2025-06-20T17:06:37.488Z] [Next.js] Time 0.2864
+[2025-06-20T17:06:37.489Z] [Next.js] Time 0.2204
+[2025-06-20T17:06:37.500Z] [Next.js] GET /ehb-wallet 500 in 87ms
+[2025-06-20T17:06:37.500Z] [Next.js] GET /search 500 in 50ms
+[2025-06-20T17:06:37.509Z] [Next.js ERROR] ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[2025-06-20T17:06:37.510Z] [Next.js ERROR] ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[2025-06-20T17:06:37.584Z] [Next.js] Time 0.2727
+[2025-06-20T17:06:37.597Z] [Next.js] GET /wishlist 500 in 95ms
+[2025-06-20T17:06:37.649Z] [Next.js ERROR] ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[2025-06-20T17:06:39.267Z] [Next.js ERROR] ⨯ ./pages/_app.tsx:1:1
+Module not found: Can't resolve '@/styles/globals.css'
+[0m[31m[1m>[22m[39m[90m 1 |[39m [36mimport[39m [32m'@/styles/globals.css'[39m[33m;[39m[0m
+[0m [90m   |[39m [31m[1m^[22m[39m[0m
+[0m [90m 2 |[39m [36mimport[39m type { [33mAppProps[39m } [36mfrom[39m [32m'next/app'[39m[33m;[39m[0m
+[0m [90m 3 |[39m [36mimport[39m { [33mSessionProvider[39m } [36mfrom[39m [32m'next-auth/react'[39m[33m;[39m[0m
+[0m [90m 4 |[39m[0m
+
+https://nextjs.org/docs/messages/module-not-found
+[2025-06-20T17:06:39.285Z] [Next.js] Time 0.1609
+[2025-06-20T17:06:39.290Z] [Next.js] GET /notifications 500 in 1681ms
+[2025-06-20T17:06:39.305Z] [Next.js ERROR] ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[2025-06-20T17:06:39.341Z] [Next.js] Time 0.1557
+[2025-06-20T17:06:39.342Z] [Next.js] Time 0.1469
+[2025-06-20T17:06:39.343Z] [Next.js] Time 0.1145
+[2025-06-20T17:06:39.343Z] [Next.js] Time 0.1983
+[2025-06-20T17:06:39.345Z] [Next.js] Time 0.1984
+[2025-06-20T17:06:39.353Z] [Next.js] GET /ehb-ads 500 in 1760ms
+[2025-06-20T17:06:39.354Z] [Next.js] GET /ai 500 in 1831ms
+ GET /profile 500 in 1831ms
+ GET /reviews 500 in 1658ms
+ GET /admin 500 in 1832ms
+[2025-06-20T17:06:39.369Z] [Next.js ERROR] ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[2025-06-20T17:06:39.370Z] [Next.js ERROR] ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+ ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[2025-06-20T17:06:39.379Z] [Next.js ERROR] ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[2025-06-20T17:06:39.380Z] [Next.js ERROR] ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[2025-06-20T17:06:40.655Z] [Next.js ERROR] ⨯ ./pages/_app.tsx:1:1
+Module not found: Can't resolve '@/styles/globals.css'
+[0m[31m[1m>[22m[39m[90m 1 |[39m [36mimport[39m [32m'@/styles/globals.css'[39m[33m;[39m[0m
+[0m [90m   |[39m [31m[1m^[22m[39m[0m
+[0m [90m 2 |[39m [36mimport[39m type { [33mAppProps[39m } [36mfrom[39m [32m'next/app'[39m[33m;[39m[0m
+[0m [90m 3 |[39m [36mimport[39m { [33mSessionProvider[39m } [36mfrom[39m [32m'next-auth/react'[39m[33m;[39m[0m
+[0m [90m 4 |[39m[0m
+
+https://nextjs.org/docs/messages/module-not-found
+[2025-06-20T17:06:40.671Z] [Next.js] Time 0.2637
+[2025-06-20T17:06:40.679Z] [Next.js] GET /_next/static/webpack/dec4d5b4a8d91127.webpack.hot-update.json 500 in 1263ms
+[2025-06-20T17:06:40.683Z] [Next.js ERROR] ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[2025-06-20T17:06:41.424Z] [Next.js ERROR] ⨯ ./pages/_app.tsx:1:1
+Module not found: Can't resolve '@/styles/globals.css'
+[0m[31m[1m>[22m[39m[90m 1 |[39m [36mimport[39m [32m'@/styles/globals.css'[39m[33m;[39m[0m
+[0m [90m   |[39m [31m[1m^[22m[39m[0m
+[0m [90m 2 |[39m [36mimport[39m type { [33mAppProps[39m } [36mfrom[39m [32m'next/app'[39m[33m;[39m[0m
+[0m [90m 3 |[39m [36mimport[39m { [33mSessionProvider[39m } [36mfrom[39m [32m'next-auth/react'[39m[33m;[39m[0m
+[0m [90m 4 |[39m[0m
+
+https://nextjs.org/docs/messages/module-not-found
+[2025-06-20T17:06:41.450Z] [Next.js] Time 0.2294
+[2025-06-20T17:06:41.452Z] [Next.js] Time 0.165
+[2025-06-20T17:06:41.453Z] [Next.js] Time 0.243
+[2025-06-20T17:06:41.454Z] [Next.js] Time 0.1541
+[2025-06-20T17:06:41.455Z] [Next.js] Time 0.2372
+[2025-06-20T17:06:41.463Z] [Next.js] GET /_next/static/webpack/dec4d5b4a8d91127.webpack.hot-update.json 500 in 746ms
+[2025-06-20T17:06:41.463Z] [Next.js] GET /register 500 in 1998ms
+ GET /ehb-ai-market-place 500 in 2105ms
+ GET /franchise 500 in 1998ms
+[2025-06-20T17:06:41.467Z] [Next.js ERROR] ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[2025-06-20T17:06:41.485Z] [Next.js ERROR] ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[2025-06-20T17:06:41.564Z] [Next.js] Time 0.1768
+[2025-06-20T17:06:41.571Z] [Next.js] GET /assistant 500 in 795ms
+[2025-06-20T17:06:41.702Z] [Next.js] Time 0.2343
+[2025-06-20T17:06:41.710Z] [Next.js] GET /franchise 500 in 156ms
+[2025-06-20T17:06:45.799Z] [Next.js ERROR] <w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: ENOENT: no such file or directory, rename 'F:\ehb next.js 04\.next\cache\webpack\client-development-fallback\0.pack.gz_' -> 'F:\ehb next.js 04\.next\cache\webpack\client-development-fallback\0.pack.gz'
+[2025-06-20T17:06:45.806Z] [Next.js ERROR] <w> [webpack.cache.PackFileCacheStrategy] Restoring pack failed from F:\ehb next.js 04\.next\cache\webpack\client-development-fallback.pack.gz: Error: incorrect header check
+[2025-06-20T17:06:45.834Z] [Next.js ERROR] <w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: EPERM: operation not permitted, rename 'F:\ehb next.js 04\.next\cache\webpack\client-development-fallback\0.pack.gz_' -> 'F:\ehb next.js 04\.next\cache\webpack\client-development-fallback\0.pack.gz'
+[2025-06-20T17:06:45.841Z] [Next.js ERROR] <w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: EPERM: operation not permitted, rename 'F:\ehb next.js 04\.next\cache\webpack\client-development-fallback\0.pack.gz_' -> 'F:\ehb next.js 04\.next\cache\webpack\client-development-fallback\0.pack.gz'
+[2025-06-20T17:06:45.843Z] [Next.js ERROR] <w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: EPERM: operation not permitted, rename 'F:\ehb next.js 04\.next\cache\webpack\client-development-fallback\0.pack.gz_' -> 'F:\ehb next.js 04\.next\cache\webpack\client-development-fallback\0.pack.gz'
+[2025-06-20T17:06:46.266Z] [Next.js ERROR] <w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: EPERM: operation not permitted, rename 'F:\ehb next.js 04\.next\cache\webpack\client-development-fallback\0.pack.gz_' -> 'F:\ehb next.js 04\.next\cache\webpack\client-development-fallback\0.pack.gz'
+[2025-06-20T17:06:46.731Z] [Next.js ERROR] <w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: EPERM: operation not permitted, rename 'F:\ehb next.js 04\.next\cache\webpack\client-development-fallback\0.pack.gz_' -> 'F:\ehb next.js 04\.next\cache\webpack\client-development-fallback\0.pack.gz'
+[2025-06-20T17:06:46.902Z] [Next.js ERROR] <w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: EPERM: operation not permitted, rename 'F:\ehb next.js 04\.next\cache\webpack\client-development-fallback\0.pack.gz_' -> 'F:\ehb next.js 04\.next\cache\webpack\client-development-fallback\0.pack.gz'
+[2025-06-20T17:06:49.831Z] [Next.js ERROR] <w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: ENOENT: no such file or directory, rename 'F:\ehb next.js 04\.next\cache\webpack\client-development-fallback\0.pack.gz_' -> 'F:\ehb next.js 04\.next\cache\webpack\client-development-fallback\0.pack.gz'
+[2025-06-20T17:07:36.466Z] [Next.js] [?25h
+[2025-06-20T17:07:36.481Z] [Next.js] 
+[2025-06-20T17:07:37.240Z] Next.js process exited with code 0

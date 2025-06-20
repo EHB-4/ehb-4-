@@ -1,0 +1,9 @@
+[2025-06-20T18:39:03.668Z] 🚀 EHB Auto Page Opener is running...
+[2025-06-20T18:39:03.671Z] Watching for changes in `app` and `pages` directories...
+[2025-06-20T18:44:07.003Z] New page detected: app\roadmap-agent\page.tsx
+[2025-06-20T18:44:08.007Z] File changed: app\roadmap-agent\page.tsx
+[2025-06-20T18:44:08.008Z] Attempting to open URL: http://localhost:3000/roadmap-agent
+[2025-06-20T18:44:08.097Z] Successfully opened http://localhost:3000/roadmap-agent in browser.
+[2025-06-20T18:44:13.556Z] File changed: app\roadmap-agent\page.tsx
+[2025-06-20T18:44:13.556Z] Attempting to open URL: http://localhost:3000/roadmap-agent
+[2025-06-20T18:44:13.632Z] Successfully opened http://localhost:3000/roadmap-agent in browser.

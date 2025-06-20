@@ -1,157 +1,19 @@
-# EHB Next.js 04 - Cursor AI Rules
-
-## Auto-Activation Configuration
-
-autoActivate: true
-autoRun: true
-autoAccept: true
-projectId: "ehb-next-js-04"
-
-## Project Overview
-
-This is a comprehensive Next.js application with MongoDB, Prisma, Docker, and AI automation. The project follows modern development practices with automated testing, deployment, and monitoring.
-
-## AI Automation Features
-
-- 🤖 AI-powered code review and suggestions
-- 🧪 Automated test generation
-- 🚀 Smart deployment automation
-- 📊 Real-time monitoring and analytics
-- 🔄 CI/CD pipeline integration
-- ⚡ Ultra Fast Auto Agent for complete automation
-
-## Ultra Fast Auto Agent
-
-The project includes an ultra-fast auto agent that automatically:
-
-- Sets up MongoDB with Docker
-- Configures AI automation
-- Runs AI assistant analysis
-- Prepares production-ready setup
-- Performs quality checks
-- Configures Cursor AI auto-activation
-
-### Commands
-
-```bash
-# Ultra Fast Complete Setup (Recommended)
-npm run ultra-fast
-
-# Auto Setup (Alternative)
-npm run auto-setup
-
-# Individual AI Commands
-npm run ai-setup
-npm run ai-test
-npm run ai-deploy
-npm run ai-review
-npm run ai-monitor
-npm run ai-assistant
-npm run production-ready
-npm run mongo-fast
-```
-
-## Code Style & Standards
-
-- Use TypeScript for all new files
-- Follow Next.js 14+ App Router patterns
-- Use Prisma for database operations
-- Implement proper error handling
-- Add comprehensive JSDoc comments
-- Use Tailwind CSS for styling
-
-## Database Guidelines
-
-- Use MongoDB with Prisma ORM
-- Follow MongoDB best practices
-- Implement proper indexing
-- Use transactions where appropriate
-- Add data validation with Zod
-
-## Testing Requirements
-
-- Write unit tests for all components
-- Implement integration tests for APIs
-- Use Jest and React Testing Library
-- Maintain 80%+ code coverage
-- Run tests before deployment
-
-## AI Agent Instructions
-
-When working on this project:
-
-1. **Code Review**: Always suggest improvements and catch potential issues
-2. **Test Generation**: Automatically generate relevant tests for new code
-3. **Documentation**: Create comprehensive documentation for new features
-4. **Performance**: Optimize code for performance and scalability
-5. **Security**: Ensure security best practices are followed
-6. **Accessibility**: Make sure code is accessible and follows WCAG guidelines
-7. **Auto-Accept**: Automatically accept and apply suggested improvements
-
-## File Structure
-
-```
-app/                    # Next.js App Router
-├── api/               # API routes
-├── components/        # Reusable components
-├── lib/              # Utility functions
-├── prisma/           # Database schema
-├── scripts/          # Automation scripts
-├── ai-automation/    # AI agents and automation
-└── config/           # Configuration files
-```
-
-## Automation Commands
-
-- `npm run ultra-fast` - Complete automated setup
-- `npm run auto-setup` - Alternative auto setup
-- `npm run ai-setup` - Setup AI automation
-- `npm run ai-test` - Generate AI-powered tests
-- `npm run ai-deploy` - Smart deployment
-- `npm run ai-review` - AI code review
-- `npm run mongo-fast` - Fast MongoDB testing
-
-## Best Practices
-
-- Always use TypeScript
-- Implement proper error boundaries
-- Use React hooks effectively
-- Follow the DRY principle
-- Write self-documenting code
-- Use meaningful variable names
-- Add proper logging and monitoring
-
-## Security Guidelines
-
-- Validate all user inputs
-- Use environment variables for secrets
-- Implement proper authentication
-- Use HTTPS in production
-- Follow OWASP guidelines
-- Regular security audits
-
-## Performance Guidelines
-
-- Optimize images and assets
-- Use proper caching strategies
-- Implement lazy loading
-- Monitor Core Web Vitals
-- Use CDN for static assets
-- Optimize database queries
-
-## Accessibility Guidelines
-
-- Use semantic HTML
-- Implement proper ARIA labels
-- Ensure keyboard navigation
-- Maintain color contrast ratios
-- Test with screen readers
-- Follow WCAG 2.1 guidelines
-
-## Auto-Activation Features
-
-- **Auto-Run**: Automatically runs relevant scripts when files change
-- **Auto-Accept**: Automatically accepts and applies AI suggestions
-- **Auto-Setup**: Automatically configures new features
-- **Auto-Deploy**: Automatically deploys when tests pass
-- **Auto-Monitor**: Automatically monitors performance and errors
+{
+  "autoActivate": true,
+  "autoRun": true,
+  "autoAccept": true,
+  "projectId": "ehb-next-js-04",
+  "features": {
+    "codeCompletion": true,
+    "codeReview": true,
+    "testGeneration": true,
+    "documentation": true,
+    "refactoring": true
+  },
+  "settings": {
+    "language": "typescript",
+    "framework": "nextjs",
+    "style": "modern",
+    "quality": "high"
+  }
+}

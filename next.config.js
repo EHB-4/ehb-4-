@@ -1,28 +1,52 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  experimental: {
-    optimizeCss: true,
-    optimizePackageImports: ['@mui/material', '@mui/icons-material'],
-  },
+  // Performance optimizations
+  compress: true,
+  poweredByHeader: false,
+  generateEtags: false,
   
+  // Image optimization
   images: {
-    domains: ['localhost', 'your-domain.com'],
+    domains: ['localhost'],
     formats: ['image/webp', 'image/avif'],
   },
   
-  compress: true,
+  // Bundle optimization
+  experimental: {
+    optimizeCss: true,
+    optimizePackageImports: ['@mui/material', 'lodash'],
+  },
   
+  // Security headers
   async headers() {
     return [
       {
         source: '/(.*)',
         headers: [
-          { key: 'X-Content-Type-Options', value: 'nosniff' },
-          { key: 'X-Frame-Options', value: 'DENY' },
-          { key: 'X-XSS-Protection', value: '1; mode=block' },
+          {
+            key: 'X-Frame-Options',
+            value: 'DENY',
+          },
+          {
+            key: 'X-Content-Type-Options',
+            value: 'nosniff',
+          },
+          {
+            key: 'Referrer-Policy',
+            value: 'origin-when-cross-origin',
+          },
+          {
+            key: 'X-XSS-Protection',
+            value: '1; mode=block',
+          },
         ],
       },
     ];
+  },
+  
+  // Environment variables
+  env: {
+    CUSTOM_KEY: process.env.CUSTOM_KEY,
   },
 };
 

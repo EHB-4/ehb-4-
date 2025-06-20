@@ -1,0 +1,19 @@
+{
+  "autoActivate": true,
+  "autoRun": true,
+  "autoAccept": true,
+  "projectId": "ehb-next-js-04",
+  "features": {
+    "codeReview": true,
+    "testGeneration": true,
+    "deployment": true,
+    "monitoring": true,
+    "documentation": true
+  },
+  "settings": {
+    "language": "en",
+    "framework": "nextjs",
+    "database": "mongodb",
+    "orm": "prisma"
+  }
+}

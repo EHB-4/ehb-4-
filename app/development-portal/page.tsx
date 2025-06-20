@@ -15,22 +15,50 @@ import {
   FaMobile,
   FaShieldAlt,
   FaLightbulb,
+  FaHome,
+  FaTachometerAlt,
+  FaRoute,
 } from 'react-icons/fa';
 
 export default function DevelopmentPortalPage() {
   const services = [
     {
+      icon: FaHome,
+      title: 'EHB Home Page',
+      description: 'The main landing page with a Microsoft Store-like design.',
+      color: 'text-teal-600',
+      bgColor: 'bg-teal-50',
+      href: '/ehb-home-page',
+    },
+    {
+      icon: FaTachometerAlt,
+      title: 'EHB Dashboard',
+      description: 'The central dashboard for analytics and management.',
+      color: 'text-cyan-600',
+      bgColor: 'bg-cyan-50',
+      href: '/ehb-dashboard',
+    },
+    {
       icon: FaLaptopCode,
       title: 'Web Development',
-      description: 'Modern web applications with React, Next.js, and TypeScript',
+      description: 'Modern web applications with React, Next.js, and TypeScript.',
       color: 'text-blue-600',
       bgColor: 'bg-blue-50',
       href: '/development/web',
     },
     {
+      icon: FaRoute,
+      title: 'Project Roadmap',
+      description: 'Track the progress of ongoing and future projects.',
+      color: 'text-yellow-600',
+      bgColor: 'bg-yellow-50',
+      href: '/roadmap',
+      progress: 75,
+    },
+    {
       icon: FaMobile,
       title: 'Mobile Development',
-      description: 'Cross-platform mobile apps with React Native',
+      description: 'Cross-platform mobile apps with React Native.',
       color: 'text-green-600',
       bgColor: 'bg-green-50',
       href: '/development/mobile',
@@ -38,7 +66,7 @@ export default function DevelopmentPortalPage() {
     {
       icon: FaDatabase,
       title: 'Database Design',
-      description: 'MongoDB, PostgreSQL, and cloud database solutions',
+      description: 'MongoDB, PostgreSQL, and cloud database solutions.',
       color: 'text-purple-600',
       bgColor: 'bg-purple-50',
       href: '/development/database',
@@ -46,7 +74,7 @@ export default function DevelopmentPortalPage() {
     {
       icon: FaCloud,
       title: 'Cloud Services',
-      description: 'AWS, Azure, and Google Cloud deployment',
+      description: 'AWS, Azure, and Google Cloud deployment.',
       color: 'text-orange-600',
       bgColor: 'bg-orange-50',
       href: '/development/cloud',
@@ -54,7 +82,7 @@ export default function DevelopmentPortalPage() {
     {
       icon: FaShieldAlt,
       title: 'Security & Testing',
-      description: 'Security audits, penetration testing, and QA',
+      description: 'Security audits, penetration testing, and QA.',
       color: 'text-red-600',
       bgColor: 'bg-red-50',
       href: '/development/security',
@@ -62,7 +90,7 @@ export default function DevelopmentPortalPage() {
     {
       icon: FaLightbulb,
       title: 'AI & ML Integration',
-      description: 'Machine learning and AI-powered solutions',
+      description: 'Machine learning and AI-powered solutions.',
       color: 'text-indigo-600',
       bgColor: 'bg-indigo-50',
       href: '/development/ai',
@@ -183,13 +211,27 @@ export default function DevelopmentPortalPage() {
               >
                 <Link href={service.href}>
                   <div
-                    className={`${service.bgColor} p-6 rounded-xl hover:shadow-lg transition-all duration-300 group-hover:scale-105`}
+                    className={`${service.bgColor} p-6 rounded-xl hover:shadow-xl transition-all duration-300 group-hover:scale-105 h-full flex flex-col`}
                   >
                     <div className={`${service.color} mb-4`}>
                       <service.icon className="w-12 h-12" />
                     </div>
                     <h3 className="text-xl font-semibold text-gray-900 mb-3">{service.title}</h3>
-                    <p className="text-gray-600">{service.description}</p>
+                    <p className="text-gray-600 flex-grow">{service.description}</p>
+                    {service.progress !== undefined && (
+                      <div className="mt-4">
+                        <div className="flex justify-between text-sm font-medium text-gray-700 mb-1">
+                          <span>Progress</span>
+                          <span>{service.progress}%</span>
+                        </div>
+                        <div className="w-full bg-gray-200 rounded-full h-2.5">
+                          <div
+                            className="bg-green-500 h-2.5 rounded-full"
+                            style={{ width: `${service.progress}%` }}
+                          ></div>
+                        </div>
+                      </div>
+                    )}
                   </div>
                 </Link>
               </motion.div>

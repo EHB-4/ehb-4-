@@ -1,24 +1,30 @@
 version: '3.8'
-
 services:
-  app:
-    build: .
-    ports:
-      - "3000:3000"
-    environment:
-      - NODE_ENV=production
-      - DATABASE_URL=mongodb://mongo:27017/ehb
-    depends_on:
-      - mongo
-    restart: unless-stopped
-
-  mongo:
+  mongodb:
     image: mongo:latest
+    container_name: ehb-mongodb
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: ehb123456
+      MONGO_INITDB_DATABASE: ehb_database
     ports:
       - "27017:27017"
     volumes:
-      - mongo_data:/data/db
-    restart: unless-stopped
+      - mongodb_data:/data/db
+
+  mongo-express:
+    image: mongo-express:latest
+    container_name: ehb-mongo-express
+    restart: always
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: admin
+      ME_CONFIG_MONGODB_ADMINPASSWORD: ehb123456
+      ME_CONFIG_MONGODB_URL: mongodb://admin:ehb123456@mongodb:27017/
+    ports:
+      - "8081:8081"
+    depends_on:
+      - mongodb
 
 volumes:
-  mongo_data:
+  mongodb_data:

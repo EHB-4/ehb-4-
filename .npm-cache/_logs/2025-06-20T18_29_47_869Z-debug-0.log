@@ -1,0 +1,90 @@
+0 verbose cli C:\Program Files\nodejs\node.exe C:\Program Files\nodejs\node_modules\npm\bin\npm-cli.js
+1 info using npm@11.3.0
+2 info using node@v24.2.0
+3 silly config load:file:C:\Program Files\nodejs\node_modules\npm\npmrc
+4 silly config load:file:F:\ehb next.js 04\.npmrc
+5 silly config load:file:C:\Users\PC\.npmrc
+6 silly config load:file:C:\Users\PC\AppData\Roaming\npm\etc\npmrc
+7 verbose title npm install chokidar
+8 verbose argv "install" "chokidar"
+9 verbose logfile logs-max:10 dir:F:\ehb next.js 04\.npm-cache\_logs\2025-06-20T18_29_47_869Z-
+10 verbose logfile F:\ehb next.js 04\.npm-cache\_logs\2025-06-20T18_29_47_869Z-debug-0.log
+11 silly logfile start cleaning logs, removing 1 files
+12 silly packumentCache heap:4496293888 maxSize:1124073472 maxEntrySize:562036736
+13 silly logfile done cleaning log files
+14 silly idealTree buildDeps
+15 silly fetch manifest chokidar@*
+16 silly packumentCache full:https://registry.npmjs.org/chokidar cache-miss
+17 http fetch GET 200 https://registry.npmjs.org/chokidar 1271ms (cache miss)
+18 silly packumentCache full:https://registry.npmjs.org/chokidar set size:undefined disposed:false
+19 silly placeDep ROOT chokidar@4.0.3 REPLACE for: ehb-next-js-04@1.0.0 want: *
+20 silly fetch manifest readdirp@^4.0.1
+21 silly packumentCache full:https://registry.npmjs.org/readdirp cache-miss
+22 http fetch GET 200 https://registry.npmjs.org/readdirp 320ms (cache miss)
+23 silly packumentCache full:https://registry.npmjs.org/readdirp set size:undefined disposed:false
+24 silly placeDep ROOT readdirp@4.1.2 OK for: chokidar@4.0.3 want: ^4.0.1
+25 silly fetch manifest chokidar@^3.6.0
+26 silly packumentCache full:https://registry.npmjs.org/chokidar cache-miss
+27 http cache https://registry.npmjs.org/chokidar 6ms (cache hit)
+28 silly packumentCache full:https://registry.npmjs.org/chokidar set size:253451 disposed:false
+29 silly placeDep node_modules/tailwindcss chokidar@3.6.0 OK for: tailwindcss@3.4.17 want: ^3.6.0
+30 silly fetch manifest readdirp@~3.6.0
+31 silly packumentCache full:https://registry.npmjs.org/readdirp cache-miss
+32 silly fetch manifest glob-parent@~5.1.2
+33 silly packumentCache full:https://registry.npmjs.org/glob-parent cache-miss
+34 silly fetch manifest is-binary-path@~2.1.0
+35 silly packumentCache full:https://registry.npmjs.org/is-binary-path cache-miss
+36 http cache https://registry.npmjs.org/readdirp 10ms (cache hit)
+37 silly packumentCache full:https://registry.npmjs.org/readdirp set size:105089 disposed:false
+38 http fetch GET 200 https://registry.npmjs.org/glob-parent 331ms (cache miss)
+39 silly packumentCache full:https://registry.npmjs.org/glob-parent set size:undefined disposed:false
+40 http fetch GET 200 https://registry.npmjs.org/is-binary-path 848ms (cache miss)
+41 silly packumentCache full:https://registry.npmjs.org/is-binary-path set size:undefined disposed:false
+42 silly placeDep node_modules/tailwindcss/node_modules/chokidar glob-parent@5.1.2 OK for: chokidar@3.6.0 want: ~5.1.2
+43 silly placeDep ROOT is-binary-path@2.1.0 OK for: chokidar@3.6.0 want: ~2.1.0
+44 silly placeDep node_modules/tailwindcss readdirp@3.6.0 OK for: chokidar@3.6.0 want: ~3.6.0
+45 silly fetch manifest binary-extensions@^2.0.0
+46 silly packumentCache full:https://registry.npmjs.org/binary-extensions cache-miss
+47 silly fetch manifest picomatch@^2.2.1
+48 silly packumentCache full:https://registry.npmjs.org/picomatch cache-miss
+49 http fetch GET 200 https://registry.npmjs.org/binary-extensions 350ms (cache miss)
+50 silly packumentCache full:https://registry.npmjs.org/binary-extensions set size:undefined disposed:false
+51 http fetch GET 200 https://registry.npmjs.org/picomatch 388ms (cache miss)
+52 silly packumentCache full:https://registry.npmjs.org/picomatch set size:undefined disposed:false
+53 silly placeDep ROOT binary-extensions@2.3.0 OK for: is-binary-path@2.1.0 want: ^2.0.0
+54 silly placeDep node_modules/tailwindcss picomatch@2.3.1 OK for: readdirp@3.6.0 want: ^2.2.1
+55 silly reify mark retired [ 'F:\\ehb next.js 04\\node_modules\\chokidar' ]
+56 silly reify mark retired [ 'F:\\ehb next.js 04\\node_modules\\readdirp' ]
+57 silly reify mark retired [
+57 silly reify   'F:\\ehb next.js 04\\node_modules\\unstorage\\node_modules\\chokidar'
+57 silly reify ]
+58 silly reify mark retired [
+58 silly reify   'F:\\ehb next.js 04\\node_modules\\unstorage\\node_modules\\readdirp'
+58 silly reify ]
+59 silly reify moves {
+59 silly reify   'F:\\ehb next.js 04\\node_modules\\chokidar': 'F:\\ehb next.js 04\\node_modules\\.chokidar-eVCxd0Nz',
+59 silly reify   'F:\\ehb next.js 04\\node_modules\\readdirp': 'F:\\ehb next.js 04\\node_modules\\.readdirp-vIzNX7ud',
+59 silly reify   'F:\\ehb next.js 04\\node_modules\\unstorage\\node_modules\\chokidar': 'F:\\ehb next.js 04\\node_modules\\unstorage\\node_modules\\.chokidar-L9GVQvur',
+59 silly reify   'F:\\ehb next.js 04\\node_modules\\unstorage\\node_modules\\readdirp': 'F:\\ehb next.js 04\\node_modules\\unstorage\\node_modules\\.readdirp-UWANHxdC'
+59 silly reify }
+60 http cache readdirp@https://registry.npmjs.org/readdirp/-/readdirp-4.1.2.tgz 0ms (cache hit)
+61 http cache picomatch@https://registry.npmjs.org/picomatch/-/picomatch-2.3.1.tgz 0ms (cache hit)
+62 http cache glob-parent@https://registry.npmjs.org/glob-parent/-/glob-parent-5.1.2.tgz 0ms (cache hit)
+63 http cache chokidar@https://registry.npmjs.org/chokidar/-/chokidar-4.0.3.tgz 0ms (cache hit)
+64 http cache chokidar@https://registry.npmjs.org/chokidar/-/chokidar-3.6.0.tgz 0ms (cache hit)
+65 http cache readdirp@https://registry.npmjs.org/readdirp/-/readdirp-3.6.0.tgz 0ms (cache hit)
+66 silly REMOVE node_modules/unstorage/node_modules/readdirp
+67 silly REMOVE node_modules/unstorage/node_modules/chokidar
+68 silly ADD node_modules/tailwindcss/node_modules/picomatch
+69 silly ADD node_modules/tailwindcss/node_modules/readdirp
+70 silly ADD node_modules/tailwindcss/node_modules/chokidar
+71 silly ADD node_modules/tailwindcss/node_modules/chokidar/node_modules/glob-parent
+72 silly CHANGE node_modules/readdirp
+73 silly REMOVE node_modules/readdirp/node_modules/picomatch
+74 silly CHANGE node_modules/chokidar
+75 verbose cwd F:\ehb next.js 04
+76 verbose os Windows_NT 10.0.26100
+77 verbose node v24.2.0
+78 verbose npm  v11.3.0
+79 verbose exit 0
+80 info ok
