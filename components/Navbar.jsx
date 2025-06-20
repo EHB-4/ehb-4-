@@ -1,5 +1,6 @@
 'use client';
 import { useState } from 'react';
+import { ThemeSwitcher } from './ui/ThemeSwitcher';
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -35,6 +36,7 @@ export default function Navbar() {
             <a href="/franchise" className="text-gray-700 hover:text-blue-600">
               Franchise
             </a>
+            <ThemeSwitcher />
           </div>
 
           {/* Mobile menu button */}
