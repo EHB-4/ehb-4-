@@ -34,3 +34,4 @@ export default function LanguageSwitcher() {
 
 // AI Guidance: This component allows users to switch between English, Urdu, Arabic, and Chinese.
 // It uses the LanguageContext to update the language state across the app.
+// The component now uses a DropdownMenu for a more modern UI and populates the language options dynamically from the LanguageContext.

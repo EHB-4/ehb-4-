@@ -92,6 +92,9 @@ export default function Navbar() {
             <a href="/franchise" className="block px-3 py-2 text-gray-700 hover:text-blue-600">
               Franchise
             </a>
+            <div className="px-3 py-2">
+              <ThemeSwitcher />
+            </div>
           </div>
         </div>
       )}

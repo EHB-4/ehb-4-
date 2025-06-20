@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { Search, ShoppingCart, User, Menu } from 'lucide-react';
+import LanguageSwitcher from '../LanguageSwitcher';
 
 export default function Header() {
   return (
@@ -29,8 +30,7 @@ export default function Header() {
 
           {/* Navigation */}
           <div className="flex items-center space-x-4">
-            {/* Language Switcher Placeholder */}
-            <div>Language</div>
+            <LanguageSwitcher />
             <Link href="/dashboard" className="p-2 hover:bg-gray-100 rounded-lg">
               <User className="h-6 w-6 text-gray-600" />
             </Link>
@@ -40,7 +40,7 @@ export default function Header() {
                 3
               </span>
             </Link>
-            <button className="p-2 hover:bg-gray-100 rounded-lg">
+            <button className="p-2 hover:bg-gray-100 rounded-lg" title="Menu">
               <Menu className="h-6 w-6 text-gray-600" />
             </button>
           </div>
