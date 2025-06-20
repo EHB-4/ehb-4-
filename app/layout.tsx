@@ -4,6 +4,7 @@ import AIAssistantPanel from '@/components/ai-assistant-panel/AIAssistantPanel';
 import { GeistSans } from 'geist/font/sans';
 import { Toaster } from 'sonner';
 import { ThemeProvider } from 'next-themes';
+import AuthProvider from '@/components/auth/AuthProvider';
 
 export const metadata: Metadata = {
   title: 'EHB-Next.js',
@@ -20,9 +21,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           enableSystem
           disableTransitionOnChange
         >
-          <AIAssistantPanel />
-          {children}
-          <Toaster />
+          <AuthProvider>
+            <AIAssistantPanel />
+            {children}
+            <Toaster />
+          </AuthProvider>
         </ThemeProvider>
       </body>
     </html>

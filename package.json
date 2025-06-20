@@ -61,6 +61,7 @@
     "auto-admin": "node scripts/ehb-auto-system/agents/admin-agent.cjs",
     "auto-push": "node scripts/auto-git-push.cjs",
     "auto-push:start": "node scripts/start-auto-push.js",
+    "auto-push:start:win": "powershell -ExecutionPolicy Bypass -File scripts/start-auto-push.ps1",
     "auto-push:watch": "node scripts/github-auto-push.js",
     "auto-agent": "node scripts/auto-agent-startup.cjs",
     "fix": "node scripts/fix-all.cjs",

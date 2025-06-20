@@ -3,6 +3,8 @@
 import { roadmapData } from '../roadmap/data/roadmapData';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
 import {
   Activity,
   Box,
@@ -25,8 +27,14 @@ import {
   Store,
   Wallet,
   MessageSquare,
+  Send,
 } from 'lucide-react';
 import { useState } from 'react';
+
+interface Message {
+  sender: 'user' | 'agent';
+  text: string;
+}
 
 const getStatusIcon = (status: string) => {
   switch (status.toLowerCase()) {
@@ -100,6 +108,10 @@ const getDepartmentIcon = (departmentName: string) => {
 export default function RoadmapAgentPage() {
   const { companyOverview, departments, uiRoadmap, agentAssignments, phases } = roadmapData;
   const [activeTab, setActiveTab] = useState('overview');
+  const [messages, setMessages] = useState<Message[]>([
+    { sender: 'agent', text: 'Hello! How can I help you with the roadmap today?' },
+  ]);
+  const [input, setInput] = useState('');
 
   // Calculate overall progress
   const totalTasks = phases.reduce((acc, phase) => acc + phase.tasks.length, 0);
@@ -112,6 +124,20 @@ export default function RoadmapAgentPage() {
   // Calculate department progress
   const completedDepartments = departments.filter(dept => dept.status === 'Completed').length;
   const inProgressDepartments = departments.filter(dept => dept.status === 'In Progress').length;
+
+  const handleSendMessage = () => {
+    if (input.trim() === '') return;
+
+    const newMessages: Message[] = [...messages, { sender: 'user', text: input }];
+    setMessages(newMessages);
+
+    // Simulate agent response
+    setTimeout(() => {
+      const agentResponse = `I've processed your query: "${input}". Based on the current roadmap data, I can provide details on departments, phases, or specific tasks. What would you like to know?`;
+      setMessages([...newMessages, { sender: 'agent', text: agentResponse }]);
+    }, 1500);
+    setInput('');
+  };
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 p-4 sm:p-6 lg:p-8 text-gray-900 dark:text-gray-100">
@@ -403,6 +429,58 @@ export default function RoadmapAgentPage() {
                       </div>
                     </div>
                   ))}
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <MessageSquare className="h-6 w-6" />
+                  Interact with Roadmap Agent
+                </CardTitle>
+                <p className="text-gray-600 dark:text-gray-400">
+                  Ask questions about the roadmap, tasks, and progress.
+                </p>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-4">
+                  <div className="h-64 overflow-y-auto p-4 bg-gray-50 dark:bg-gray-800 rounded-lg border">
+                    {messages.map((msg, index) => (
+                      <div
+                        key={index}
+                        className={`flex items-start gap-2.5 mb-4 ${
+                          msg.sender === 'user' ? 'justify-end' : ''
+                        }`}
+                      >
+                        {msg.sender === 'agent' && <Cpu className="h-6 w-6 text-blue-500" />}
+                        <div
+                          className={`flex flex-col gap-1 w-full max-w-[320px] p-4 border-gray-200 rounded-lg ${
+                            msg.sender === 'user'
+                              ? 'bg-blue-100 dark:bg-blue-900 rounded-tr-none'
+                              : 'bg-gray-100 dark:bg-gray-700 rounded-tl-none'
+                          }`}
+                        >
+                          <p className="text-sm font-normal text-gray-900 dark:text-white">
+                            {msg.text}
+                          </p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Input
+                      type="text"
+                      placeholder="Type your message..."
+                      value={input}
+                      onChange={e => setInput(e.target.value)}
+                      onKeyPress={e => e.key === 'Enter' && handleSendMessage()}
+                      className="flex-1"
+                    />
+                    <Button onClick={handleSendMessage}>
+                      <Send className="h-4 w-4" />
+                    </Button>
+                  </div>
                 </div>
               </CardContent>
             </Card>

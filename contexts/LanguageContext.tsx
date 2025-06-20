@@ -4,29 +4,29 @@ import React, { createContext, useState, useContext, ReactNode } from 'react';
 
 // Define the shape of your translation content
 interface TranslationContent {
-  mission: {
-    title: string;
-    text: string;
+  readonly mission: {
+    readonly title: string;
+    readonly text: string;
   };
-  vision: {
-    title: string;
-    text: string;
+  readonly vision: {
+    readonly title: string;
+    readonly text: string;
   };
-  coreValues: {
-    title: string;
-    values: {
-      title: string;
-      text: string;
+  readonly coreValues: {
+    readonly title: string;
+    readonly values: readonly {
+      readonly title: string;
+      readonly text: string;
     }[];
   };
   // Add other sections as needed
 }
 
 // Define the translations for each language
-const translations: Record<string, TranslationContent> = {
+const translations = {
   'Roman Urdu': {
     mission: {
-      title: 'EHB ka Maqsad',
+      title: 'EHB Ka Maqsad',
       text: 'Duniya bhar ke logon ko 100% verified, quality services aur products faraham karna – har shaks, har business, har service provider, aur har product ka mukammal verification, taake fraud, dhoka, ya ghair-mutmaeen services ka khatma ho sake. EHB har customer ko digital trust, transparency, aur global access dena chahta hai.',
     },
     vision: {
@@ -94,13 +94,15 @@ const translations: Record<string, TranslationContent> = {
       ],
     },
   },
-  // We can add more languages here, like Urdu
-};
+  // We can add more languages here, for example Urdu
+} as const;
+
+type AvailableLanguages = keyof typeof translations;
 
 // Define the context shape
 interface LanguageContextType {
-  language: string;
-  setLanguage: (language: string) => void;
+  language: AvailableLanguages;
+  setLanguage: (language: AvailableLanguages) => void;
   t: TranslationContent;
   availableLanguages: string[];
 }
@@ -108,9 +110,9 @@ interface LanguageContextType {
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
 export const LanguageProvider = ({ children }: { children: ReactNode }) => {
-  const [language, setLanguage] = useState('Roman Urdu');
+  const [language, setLanguage] = useState<AvailableLanguages>('Roman Urdu');
 
-  const t = translations[language] || translations['Roman Urdu'];
+  const t = translations[language];
   const availableLanguages = Object.keys(translations);
 
   return (
