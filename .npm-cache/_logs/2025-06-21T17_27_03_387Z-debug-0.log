@@ -1,0 +1,27 @@
+0 verbose cli C:\Program Files\nodejs\node.exe C:\Users\PC\AppData\Roaming\npm\node_modules\npm\bin\npm-cli.js
+1 info using npm@11.4.2
+2 info using node@v24.2.0
+3 silly config load:file:C:\Users\PC\AppData\Roaming\npm\node_modules\npm\npmrc
+4 silly config load:file:F:\ehb next.js 04\.npmrc
+5 silly config load:file:C:\Users\PC\.npmrc
+6 silly config load:file:C:\Users\PC\AppData\Roaming\npm\etc\npmrc
+7 verbose title npm install critters
+8 verbose argv "install" "critters"
+9 verbose logfile logs-max:10 dir:F:\ehb next.js 04\.npm-cache\_logs\2025-06-21T17_27_03_387Z-
+10 verbose logfile F:\ehb next.js 04\.npm-cache\_logs\2025-06-21T17_27_03_387Z-debug-0.log
+11 silly logfile start cleaning logs, removing 1 files
+12 silly packumentCache heap:4496293888 maxSize:1124073472 maxEntrySize:562036736
+13 silly logfile done cleaning log files
+14 silly idealTree buildDeps
+15 silly fetch manifest critters@^0.0.23
+16 silly packumentCache full:https://registry.npmjs.org/critters cache-miss
+17 http fetch GET 200 https://registry.npmjs.org/critters 470ms (cache stale)
+18 silly packumentCache full:https://registry.npmjs.org/critters set size:87093 disposed:false
+19 silly placeDep ROOT critters@0.0.23 REPLACE for: ehb-next-js-04@0.1.0 want: ^0.0.23
+20 silly reify moves {}
+21 verbose cwd F:\ehb next.js 04
+22 verbose os Windows_NT 10.0.26100
+23 verbose node v24.2.0
+24 verbose npm  v11.4.2
+25 verbose exit 0
+26 info ok

@@ -1,19 +1,58 @@
-{
-  "autoActivate": true,
-  "autoRun": true,
-  "autoAccept": true,
-  "projectId": "ehb-next-js-04",
-  "features": {
-    "codeCompletion": true,
-    "codeReview": true,
-    "testGeneration": true,
-    "documentation": true,
-    "refactoring": true
-  },
-  "settings": {
-    "language": "typescript",
-    "framework": "nextjs",
-    "style": "modern",
-    "quality": "high"
-  }
-}
+# EHB Next.js 04 - Frontend Development Rules
+
+## Auto-Activation Configuration
+autoActivate: true
+autoRun: true
+autoAccept: true
+projectId: "ehb-next-js-04-frontend"
+
+## Frontend Development Focus
+- Use TypeScript for all components
+- Follow Next.js 14+ App Router patterns
+- Use Tailwind CSS for styling
+- Implement proper component structure
+- Add comprehensive JSDoc comments
+- Use React hooks effectively
+
+## Backend Features (DISABLED)
+- MongoDB setup disabled
+- Database operations disabled
+- Backend API development disabled
+- Docker services disabled
+
+## Frontend Guidelines
+- Create reusable components
+- Implement proper TypeScript types
+- Use modern React patterns
+- Optimize for performance
+- Ensure accessibility
+- Write comprehensive tests
+
+## AI Agent Instructions
+1. Focus on frontend development only
+2. Generate components and hooks
+3. Optimize UI/UX
+4. Create frontend tests
+5. Improve styling and layout
+6. Ensure responsive design
+
+## Performance Guidelines
+- Use Next.js Image optimization
+- Implement lazy loading
+- Optimize bundle size
+- Use proper caching
+- Monitor Core Web Vitals
+
+## Accessibility Guidelines
+- Use semantic HTML
+- Implement ARIA labels
+- Ensure keyboard navigation
+- Maintain color contrast
+- Test with screen readers
+
+## Auto-Activation Features
+- Auto-Run: Automatically runs frontend scripts
+- Auto-Accept: Automatically accepts frontend suggestions
+- Auto-Setup: Automatically configures frontend features
+- Auto-Test: Automatically generates frontend tests
+- Auto-Optimize: Automatically optimizes UI/UX

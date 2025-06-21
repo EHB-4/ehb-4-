@@ -1,0 +1,24 @@
+{
+  "timestamp": "2025-06-21T16:59:47.139Z",
+  "mode": "frontend-only",
+  "files": {
+    "components": 325,
+    "hooks": 5,
+    "styles": 1,
+    "types": 11,
+    "tests": 14
+  },
+  "frontendSuggestions": [
+    "Create more reusable components",
+    "Add TypeScript interfaces for all components",
+    "Implement proper error boundaries",
+    "Add loading states for better UX",
+    "Optimize images and assets",
+    "Add comprehensive frontend tests"
+  ],
+  "performance": {
+    "bundleSize": "Optimized for frontend only",
+    "loadTime": "Fast due to backend features disabled",
+    "cursorSpeed": "Ultra-fast due to reduced complexity"
+  }
+}

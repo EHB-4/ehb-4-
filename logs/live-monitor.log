@@ -18,3 +18,806 @@
 [2025-06-21T16:50:50.510Z] ✅ Opened Main App in browser: http://localhost:3000
 [2025-06-21T16:50:51.585Z] ✅ Opened Admin Panel in browser: http://localhost:3000/admin
 [2025-06-21T16:50:52.095Z] [Next.js] 
+[2025-06-21T16:50:52.171Z] [Next.js] Source path: F:\ehb next.js 04\app\globals.css
+[2025-06-21T16:50:52.172Z] [Next.js] Setting up new context...
+[2025-06-21T16:50:52.330Z] [Next.js] Finding changed files: 36.009ms
+[2025-06-21T16:50:52.528Z] ✅ Opened Dashboard in browser: http://localhost:3000/dashboard
+[2025-06-21T16:50:53.051Z] [Next.js] Reading changed files: 719.335ms
+[2025-06-21T16:50:53.063Z] [Next.js] Sorting candidates: 11.92ms
+[2025-06-21T16:50:53.308Z] [Next.js] Generate rules: 257.335ms
+[2025-06-21T16:50:53.318Z] [Next.js] Build stylesheet: 9.444ms
+[2025-06-21T16:50:53.330Z] [Next.js] Potential classes:  17249
+[2025-06-21T16:50:53.331Z] [Next.js] Active contexts:  1
+[2025-06-21T16:50:53.354Z] [Next.js] JIT TOTAL: 1.259s
+[2025-06-21T16:50:53.354Z] [Next.js] 
+[2025-06-21T16:50:53.558Z] ✅ Opened API in browser: http://localhost:3000/api
+[2025-06-21T16:50:53.913Z] 🔍 Performing health check...
+[2025-06-21T16:50:53.915Z] ❌ Main App is not available on port 3000
+[2025-06-21T16:50:53.917Z] ❌ Admin Panel is not available on port 3000
+[2025-06-21T16:50:53.918Z] ❌ Dashboard is not available on port 3000
+[2025-06-21T16:50:53.920Z] ❌ API is not available on port 3000
+[2025-06-21T16:50:53.920Z] ❌ AI Services is not available on port 3000
+[2025-06-21T16:50:53.921Z] ❌ Wallet is not available on port 3000
+[2025-06-21T16:50:53.921Z] ❌ Analytics is not available on port 3000
+[2025-06-21T16:50:53.922Z] 🌐 Opening all services in browser...
+[2025-06-21T16:50:55.621Z] ✅ Opened Wallet in browser: http://localhost:3000/wallet
+[2025-06-21T16:50:56.623Z] ✅ Opened Analytics in browser: http://localhost:3000/analytics
+[2025-06-21T16:50:57.091Z] ✅ Opened Main App in browser: http://localhost:3000
+[2025-06-21T16:50:58.007Z] ✅ Opened Admin Panel in browser: http://localhost:3000/admin
+[2025-06-21T16:50:59.015Z] ✅ Opened Dashboard in browser: http://localhost:3000/dashboard
+[2025-06-21T16:51:00.039Z] ✅ Opened API in browser: http://localhost:3000/api
+[2025-06-21T16:51:00.215Z] [Next.js] 
+[2025-06-21T16:51:00.215Z] [Next.js] Source path: F:\ehb next.js 04\app\globals.css
+[2025-06-21T16:51:00.233Z] [Next.js] Finding changed files: 16.403ms
+[2025-06-21T16:51:00.241Z] [Next.js] Reading changed files: 7.927ms
+[2025-06-21T16:51:00.241Z] [Next.js] Sorting candidates: 0.072ms
+[2025-06-21T16:51:00.242Z] [Next.js] Generate rules: 0.985ms
+[2025-06-21T16:51:00.242Z] [Next.js] Build stylesheet: 0.004ms
+[2025-06-21T16:51:00.248Z] [Next.js] Potential classes:  200
+Active contexts:  1
+[2025-06-21T16:51:00.256Z] [Next.js] JIT TOTAL: 40.9ms
+[2025-06-21T16:51:00.960Z] [Next.js] ✓ Compiled /ai in 13s (1645 modules)
+[2025-06-21T16:51:01.117Z] ✅ Opened AI Services in browser: http://localhost:3000/ai
+[2025-06-21T16:51:01.484Z] [Next.js] GET /api 404 in 7423ms
+[2025-06-21T16:51:01.493Z] [Next.js] GET / 200 in 10851ms
+[2025-06-21T16:51:01.497Z] [Next.js] GET /ai 200 in 6194ms
+[2025-06-21T16:51:01.512Z] [Next.js] GET /dashboard 200 in 6990ms
+[2025-06-21T16:51:01.514Z] [Next.js] GET /pss 200 in 13547ms
+[2025-06-21T16:51:01.523Z] [Next.js] GET /admin 200 in 7507ms
+[2025-06-21T16:51:01.644Z] [Next.js] GET /api 404 in 133ms
+[2025-06-21T16:51:02.076Z] ✅ Opened Wallet in browser: http://localhost:3000/wallet
+[2025-06-21T16:51:02.194Z] [Next.js] ○ Compiling /analytics ...
+[2025-06-21T16:51:02.665Z] [Next.js] ✓ Compiled /analytics in 1067ms (1645 modules)
+[2025-06-21T16:51:02.996Z] [Next.js] GET /ai 200 in 1180ms
+[2025-06-21T16:51:02.999Z] [Next.js] GET /analytics 200 in 1454ms
+[2025-06-21T16:51:03.001Z] [Next.js] GET /wallet 200 in 1459ms
+[2025-06-21T16:51:03.002Z] [Next.js] GET / 200 in 1408ms
+[2025-06-21T16:51:03.008Z] [Next.js] GET /dashboard 200 in 1174ms
+[2025-06-21T16:51:03.021Z] [Next.js] GET /admin 200 in 1205ms
+[2025-06-21T16:51:03.109Z] [Next.js] GET /wallet 200 in 60ms
+[2025-06-21T16:51:03.116Z] ✅ Opened Analytics in browser: http://localhost:3000/analytics
+[2025-06-21T16:51:03.263Z] [Next.js] GET /analytics 200 in 51ms
+[2025-06-21T16:51:03.991Z] 🎉 All services are live and running!
+[2025-06-21T16:51:03.992Z] 📊 Monitoring active... Press Ctrl+C to stop
+[2025-06-21T16:51:04.663Z] [Next.js] ○ Compiling /api/auth/[...nextauth] ...
+[2025-06-21T16:51:05.738Z] [Next.js] ✓ Compiled /api/auth/[...nextauth] in 1651ms (1161 modules)
+[2025-06-21T16:51:07.030Z] [Next.js] GET /api/auth/session 200 in 2954ms
+[2025-06-21T16:51:07.103Z] [Next.js] GET /api/auth/session 200 in 61ms
+[2025-06-21T16:51:07.157Z] [Next.js] GET /api/auth/session 200 in 26ms
+[2025-06-21T16:51:07.201Z] [Next.js] GET /api/auth/session 200 in 28ms
+[2025-06-21T16:51:07.343Z] [Next.js] GET /api/auth/session 200 in 62ms
+[2025-06-21T16:51:07.915Z] [Next.js] GET /api/auth/session 200 in 20ms
+[2025-06-21T16:51:08.004Z] [Next.js] GET /api/auth/session 200 in 29ms
+[2025-06-21T16:51:08.168Z] [Next.js] GET /api/auth/session 200 in 16ms
+[2025-06-21T16:51:08.189Z] [Next.js] GET /api/auth/session 200 in 17ms
+[2025-06-21T16:51:08.478Z] [Next.js] GET /api/auth/session 200 in 19ms
+[2025-06-21T16:51:08.533Z] [Next.js] GET /api/auth/session 200 in 16ms
+[2025-06-21T16:51:08.685Z] [Next.js] GET /api/auth/session 200 in 25ms
+[2025-06-21T16:51:08.954Z] [Next.js] GET /api/auth/session 200 in 15ms
+[2025-06-21T16:51:09.021Z] [Next.js] GET /api/auth/session 200 in 15ms
+[2025-06-21T16:51:09.060Z] [Next.js] GET /api/auth/session 200 in 14ms
+[2025-06-21T16:51:09.629Z] [Next.js] ○ Compiling /api/pss/requests ...
+[2025-06-21T16:51:09.797Z] [Next.js] ✓ Compiled /api/pss/requests in 723ms (1189 modules)
+[2025-06-21T16:51:10.777Z] [Next.js] ✓ Compiled (1202 modules)
+[2025-06-21T16:51:10.963Z] [Next.js] GET /api/auth/session 200 in 1875ms
+[2025-06-21T16:51:11.045Z] [Next.js] GET /api/auth/session 200 in 64ms
+[2025-06-21T16:51:11.074Z] [Next.js] GET /api/auth/session 200 in 16ms
+[2025-06-21T16:51:11.100Z] [Next.js] GET /api/auth/session 200 in 15ms
+[2025-06-21T16:51:11.120Z] [Next.js ERROR] Database get requests error: PrismaClientKnownRequestError: 
+Invalid `prisma.verificationRequest.count()` invocation:
+
+
+Raw query failed. Code: `unknown`. Message: `Kind: Command failed: Error code 13 (Unauthorized): Command aggregate requires authentication, labels: {}`
+    at $n.handleRequestError (F:\ehb next.js 04\node_modules\@prisma\client\runtime\library.js:121:7315)
+    at $n.handleAndLogRequestError (F:\ehb next.js 04\node_modules\@prisma\client\runtime\library.js:121:6623)
+    at $n.request (F:\ehb next.js 04\node_modules\@prisma\client\runtime\library.js:121:6307)
+    at async l (F:\ehb next.js 04\node_modules\@prisma\client\runtime\library.js:130:9633)
+    at async Promise.all (index 4)
+    at async PSSDatabase.getRequests (webpack-internal:///(rsc)/./lib/pss/database.ts:65:68)
+    at async GET (webpack-internal:///(rsc)/./app/api/pss/requests/route.ts:46:24)
+    at async F:\ehb next.js 04\node_modules\next\dist\compiled\next-server\app-route.runtime.dev.js:6:57228
+    at async eT.execute (F:\ehb next.js 04\node_modules\next\dist\compiled\next-server\app-route.runtime.dev.js:6:46851)
+    at async eT.handle (F:\ehb next.js 04\node_modules\next\dist\compiled\next-server\app-route.runtime.dev.js:6:58760)
+    at async doRender (F:\ehb next.js 04\node_modules\next\dist\server\base-server.js:1366:42)
+    at async cacheEntry.responseCache.get.routeKind (F:\ehb next.js 04\node_modules\next\dist\server\base-server.js:1588:28)
+    at async DevServer.renderToResponseWithComponentsImpl (F:\ehb next.js 04\node_modules\next\dist\server\base-server.js:1496:28)
+    at async DevServer.renderPageComponent (F:\ehb next.js 04\node_modules\next\dist\server\base-server.js:1924:24)
+    at async DevServer.renderToResponseImpl (F:\ehb next.js 04\node_modules\next\dist\server\base-server.js:1962:32)
+    at async DevServer.pipeImpl (F:\ehb next.js 04\node_modules\next\dist\server\base-server.js:922:25)
+    at async NextNodeServer.handleCatchallRenderRequest (F:\ehb next.js 04\node_modules\next\dist\server\next-server.js:272:17)
+    at async DevServer.handleRequestImpl (F:\ehb next.js 04\node_modules\next\dist\server\base-server.js:818:17)
+    at async F:\ehb next.js 04\node_modules\next\dist\server\dev\next-dev-server.js:339:20
+    at async Span.traceAsyncFn (F:\ehb next.js 04\node_modules\next\dist\trace\trace.js:154:20)
+    at async DevServer.handleRequest (F:\ehb next.js 04\node_modules\next\dist\server\dev\next-dev-server.js:336:24)
+    at async invokeRender (F:\ehb next.js 04\node_modules\next\dist\server\lib\router-server.js:179:21)
+    at async handleRequest (F:\ehb next.js 04\node_modules\next\dist\server\lib\router-server.js:359:24)
+    at async requestHandlerImpl (F:\ehb next.js 04\node_modules\next\dist\server\lib\router-server.js:383:13)
+    at async Server.requestListener (F:\ehb next.js 04\node_modules\next\dist\server\lib\start-server.js:141:13) {
+  code: 'P2010',
+  clientVersion: '5.22.0',
+  meta: {
+    modelName: 'VerificationRequest',
+    code: 'unknown',
+    message: 'Kind: Command failed: Error code 13 (Unauthorized): Command aggregate requires authentication, labels: {}'
+  }
+}
+[2025-06-21T16:51:11.121Z] [Next.js ERROR] GET /api/pss/requests error: Error: Failed to fetch verification requests
+    at PSSDatabase.getRequests (webpack-internal:///(rsc)/./lib/pss/database.ts:100:19)
+    at async GET (webpack-internal:///(rsc)/./app/api/pss/requests/route.ts:46:24)
+    at async F:\ehb next.js 04\node_modules\next\dist\compiled\next-server\app-route.runtime.dev.js:6:57228
+    at async eT.execute (F:\ehb next.js 04\node_modules\next\dist\compiled\next-server\app-route.runtime.dev.js:6:46851)
+    at async eT.handle (F:\ehb next.js 04\node_modules\next\dist\compiled\next-server\app-route.runtime.dev.js:6:58760)
+    at async doRender (F:\ehb next.js 04\node_modules\next\dist\server\base-server.js:1366:42)
+    at async cacheEntry.responseCache.get.routeKind (F:\ehb next.js 04\node_modules\next\dist\server\base-server.js:1588:28)
+    at async DevServer.renderToResponseWithComponentsImpl (F:\ehb next.js 04\node_modules\next\dist\server\base-server.js:1496:28)
+    at async DevServer.renderPageComponent (F:\ehb next.js 04\node_modules\next\dist\server\base-server.js:1924:24)
+    at async DevServer.renderToResponseImpl (F:\ehb next.js 04\node_modules\next\dist\server\base-server.js:1962:32)
+    at async DevServer.pipeImpl (F:\ehb next.js 04\node_modules\next\dist\server\base-server.js:922:25)
+    at async NextNodeServer.handleCatchallRenderRequest (F:\ehb next.js 04\node_modules\next\dist\server\next-server.js:272:17)
+    at async DevServer.handleRequestImpl (F:\ehb next.js 04\node_modules\next\dist\server\base-server.js:818:17)
+    at async F:\ehb next.js 04\node_modules\next\dist\server\dev\next-dev-server.js:339:20
+    at async Span.traceAsyncFn (F:\ehb next.js 04\node_modules\next\dist\trace\trace.js:154:20)
+    at async DevServer.handleRequest (F:\ehb next.js 04\node_modules\next\dist\server\dev\next-dev-server.js:336:24)
+    at async invokeRender (F:\ehb next.js 04\node_modules\next\dist\server\lib\router-server.js:179:21)
+    at async handleRequest (F:\ehb next.js 04\node_modules\next\dist\server\lib\router-server.js:359:24)
+    at async requestHandlerImpl (F:\ehb next.js 04\node_modules\next\dist\server\lib\router-server.js:383:13)
+    at async Server.requestListener (F:\ehb next.js 04\node_modules\next\dist\server\lib\start-server.js:141:13)
+[2025-06-21T16:51:11.122Z] [Next.js] GET /api/pss/requests? 500 in 2055ms
+[2025-06-21T16:51:11.124Z] [Next.js ERROR] Database stats error: PrismaClientKnownRequestError: 
+Invalid `prisma.verificationRequest.count()` invocation:
+
+
+Raw query failed. Code: `unknown`. Message: `Kind: Command failed: Error code 13 (Unauthorized): Command aggregate requires authentication, labels: {}`
+    at $n.handleRequestError (F:\ehb next.js 04\node_modules\@prisma\client\runtime\library.js:121:7315)
+    at $n.handleAndLogRequestError (F:\ehb next.js 04\node_modules\@prisma\client\runtime\library.js:121:6623)
+    at $n.request (F:\ehb next.js 04\node_modules\@prisma\client\runtime\library.js:121:6307)
+    at async l (F:\ehb next.js 04\node_modules\@prisma\client\runtime\library.js:130:9633)
+    at async Promise.all (index 0)
+    at async PSSDatabase.getStats (webpack-internal:///(rsc)/./lib/pss/database.ts:136:68)
+    at async GET (webpack-internal:///(rsc)/./app/api/pss/stats/route.ts:12:23)
+    at async F:\ehb next.js 04\node_modules\next\dist\compiled\next-server\app-route.runtime.dev.js:6:57228
+    at async eT.execute (F:\ehb next.js 04\node_modules\next\dist\compiled\next-server\app-route.runtime.dev.js:6:46851)
+    at async eT.handle (F:\ehb next.js 04\node_modules\next\dist\compiled\next-server\app-route.runtime.dev.js:6:58760)
+    at async doRender (F:\ehb next.js 04\node_modules\next\dist\server\base-server.js:1366:42)
+    at async cacheEntry.responseCache.get.routeKind (F:\ehb next.js 04\node_modules\next\dist\server\base-server.js:1588:28)
+    at async DevServer.renderToResponseWithComponentsImpl (F:\ehb next.js 04\node_modules\next\dist\server\base-server.js:1496:28)
+    at async DevServer.renderPageComponent (F:\ehb next.js 04\node_modules\next\dist\server\base-server.js:1924:24)
+    at async DevServer.renderToResponseImpl (F:\ehb next.js 04\node_modules\next\dist\server\base-server.js:1962:32)
+    at async DevServer.pipeImpl (F:\ehb next.js 04\node_modules\next\dist\server\base-server.js:922:25)
+    at async NextNodeServer.handleCatchallRenderRequest (F:\ehb next.js 04\node_modules\next\dist\server\next-server.js:272:17)
+    at async DevServer.handleRequestImpl (F:\ehb next.js 04\node_modules\next\dist\server\base-server.js:818:17)
+    at async F:\ehb next.js 04\node_modules\next\dist\server\dev\next-dev-server.js:339:20
+    at async Span.traceAsyncFn (F:\ehb next.js 04\node_modules\next\dist\trace\trace.js:154:20)
+    at async DevServer.handleRequest (F:\ehb next.js 04\node_modules\next\dist\server\dev\next-dev-server.js:336:24)
+    at async invokeRender (F:\ehb next.js 04\node_modules\next\dist\server\lib\router-server.js:179:21)
+    at async handleRequest (F:\ehb next.js 04\node_modules\next\dist\server\lib\router-server.js:359:24)
+    at async requestHandlerImpl (F:\ehb next.js 04\node_modules\next\dist\server\lib\router-server.js:383:13)
+    at async Server.requestListener (F:\ehb next.js 04\node_modules\next\dist\server\lib\start-server.js:141:13) {
+  code: 'P2010',
+  clientVersion: '5.22.0',
+  meta: {
+    modelName: 'VerificationRequest',
+    code: 'unknown',
+    message: 'Kind: Command failed: Error code 13 (Unauthorized): Command aggregate requires authentication, labels: {}'
+  }
+}
+[2025-06-21T16:51:11.126Z] [Next.js ERROR] GET /api/pss/stats error: Error: Failed to get dashboard statistics
+    at PSSDatabase.getStats (webpack-internal:///(rsc)/./lib/pss/database.ts:168:19)
+    at async GET (webpack-internal:///(rsc)/./app/api/pss/stats/route.ts:12:23)
+    at async F:\ehb next.js 04\node_modules\next\dist\compiled\next-server\app-route.runtime.dev.js:6:57228
+    at async eT.execute (F:\ehb next.js 04\node_modules\next\dist\compiled\next-server\app-route.runtime.dev.js:6:46851)
+    at async eT.handle (F:\ehb next.js 04\node_modules\next\dist\compiled\next-server\app-route.runtime.dev.js:6:58760)
+    at async doRender (F:\ehb next.js 04\node_modules\next\dist\server\base-server.js:1366:42)
+    at async cacheEntry.responseCache.get.routeKind (F:\ehb next.js 04\node_modules\next\dist\server\base-server.js:1588:28)
+    at async DevServer.renderToResponseWithComponentsImpl (F:\ehb next.js 04\node_modules\next\dist\server\base-server.js:1496:28)
+    at async DevServer.renderPageComponent (F:\ehb next.js 04\node_modules\next\dist\server\base-server.js:1924:24)
+    at async DevServer.renderToResponseImpl (F:\ehb next.js 04\node_modules\next\dist\server\base-server.js:1962:32)
+    at async DevServer.pipeImpl (F:\ehb next.js 04\node_modules\next\dist\server\base-server.js:922:25)
+    at async NextNodeServer.handleCatchallRenderRequest (F:\ehb next.js 04\node_modules\next\dist\server\next-server.js:272:17)
+    at async DevServer.handleRequestImpl (F:\ehb next.js 04\node_modules\next\dist\server\base-server.js:818:17)
+    at async F:\ehb next.js 04\node_modules\next\dist\server\dev\next-dev-server.js:339:20
+    at async Span.traceAsyncFn (F:\ehb next.js 04\node_modules\next\dist\trace\trace.js:154:20)
+    at async DevServer.handleRequest (F:\ehb next.js 04\node_modules\next\dist\server\dev\next-dev-server.js:336:24)
+    at async invokeRender (F:\ehb next.js 04\node_modules\next\dist\server\lib\router-server.js:179:21)
+    at async handleRequest (F:\ehb next.js 04\node_modules\next\dist\server\lib\router-server.js:359:24)
+    at async requestHandlerImpl (F:\ehb next.js 04\node_modules\next\dist\server\lib\router-server.js:383:13)
+    at async Server.requestListener (F:\ehb next.js 04\node_modules\next\dist\server\lib\start-server.js:141:13)
+[2025-06-21T16:51:11.127Z] [Next.js] GET /api/pss/stats 500 in 2061ms
+[2025-06-21T16:51:11.138Z] [Next.js] GET /api/auth/session 200 in 34ms
+[2025-06-21T16:51:11.187Z] [Next.js ERROR] Database get requests error: PrismaClientKnownRequestError: 
+Invalid `prisma.verificationRequest.findMany()` invocation:
+
+
+Raw query failed. Code: `unknown`. Message: `Kind: Command failed: Error code 13 (Unauthorized): Command aggregate requires authentication, labels: {}`
+    at $n.handleRequestError (F:\ehb next.js 04\node_modules\@prisma\client\runtime\library.js:121:7315)
+    at $n.handleAndLogRequestError (F:\ehb next.js 04\node_modules\@prisma\client\runtime\library.js:121:6623)
+    at $n.request (F:\ehb next.js 04\node_modules\@prisma\client\runtime\library.js:121:6307)
+    at async l (F:\ehb next.js 04\node_modules\@prisma\client\runtime\library.js:130:9633)
+    at async Promise.all (index 0)
+    at async PSSDatabase.getRequests (webpack-internal:///(rsc)/./lib/pss/database.ts:65:68)
+    at async GET (webpack-internal:///(rsc)/./app/api/pss/requests/route.ts:46:24)
+    at async F:\ehb next.js 04\node_modules\next\dist\compiled\next-server\app-route.runtime.dev.js:6:57228
+    at async eT.execute (F:\ehb next.js 04\node_modules\next\dist\compiled\next-server\app-route.runtime.dev.js:6:46851)
+    at async eT.handle (F:\ehb next.js 04\node_modules\next\dist\compiled\next-server\app-route.runtime.dev.js:6:58760)
+    at async doRender (F:\ehb next.js 04\node_modules\next\dist\server\base-server.js:1366:42)
+    at async cacheEntry.responseCache.get.routeKind (F:\ehb next.js 04\node_modules\next\dist\server\base-server.js:1588:28)
+    at async DevServer.renderToResponseWithComponentsImpl (F:\ehb next.js 04\node_modules\next\dist\server\base-server.js:1496:28)
+    at async DevServer.renderPageComponent (F:\ehb next.js 04\node_modules\next\dist\server\base-server.js:1924:24)
+    at async DevServer.renderToResponseImpl (F:\ehb next.js 04\node_modules\next\dist\server\base-server.js:1962:32)
+    at async DevServer.pipeImpl (F:\ehb next.js 04\node_modules\next\dist\server\base-server.js:922:25)
+    at async NextNodeServer.handleCatchallRenderRequest (F:\ehb next.js 04\node_modules\next\dist\server\next-server.js:272:17)
+    at async DevServer.handleRequestImpl (F:\ehb next.js 04\node_modules\next\dist\server\base-server.js:818:17)
+    at async F:\ehb next.js 04\node_modules\next\dist\server\dev\next-dev-server.js:339:20
+    at async Span.traceAsyncFn (F:\ehb next.js 04\node_modules\next\dist\trace\trace.js:154:20)
+    at async DevServer.handleRequest (F:\ehb next.js 04\node_modules\next\dist\server\dev\next-dev-server.js:336:24)
+    at async invokeRender (F:\ehb next.js 04\node_modules\next\dist\server\lib\router-server.js:179:21)
+    at async handleRequest (F:\ehb next.js 04\node_modules\next\dist\server\lib\router-server.js:359:24)
+    at async requestHandlerImpl (F:\ehb next.js 04\node_modules\next\dist\server\lib\router-server.js:383:13)
+    at async Server.requestListener (F:\ehb next.js 04\node_modules\next\dist\server\lib\start-server.js:141:13) {
+  code: 'P2010',
+  clientVersion: '5.22.0',
+  meta: {
+    modelName: 'VerificationRequest',
+    code: 'unknown',
+    message: 'Kind: Command failed: Error code 13 (Unauthorized): Command aggregate requires authentication, labels: {}'
+  }
+}
+[2025-06-21T16:51:11.188Z] [Next.js ERROR] GET /api/pss/requests error: Error: Failed to fetch verification requests
+    at PSSDatabase.getRequests (webpack-internal:///(rsc)/./lib/pss/database.ts:100:19)
+    at async GET (webpack-internal:///(rsc)/./app/api/pss/requests/route.ts:46:24)
+    at async F:\ehb next.js 04\node_modules\next\dist\compiled\next-server\app-route.runtime.dev.js:6:57228
+    at async eT.execute (F:\ehb next.js 04\node_modules\next\dist\compiled\next-server\app-route.runtime.dev.js:6:46851)
+    at async eT.handle (F:\ehb next.js 04\node_modules\next\dist\compiled\next-server\app-route.runtime.dev.js:6:58760)
+    at async doRender (F:\ehb next.js 04\node_modules\next\dist\server\base-server.js:1366:42)
+    at async cacheEntry.responseCache.get.routeKind (F:\ehb next.js 04\node_modules\next\dist\server\base-server.js:1588:28)
+    at async DevServer.renderToResponseWithComponentsImpl (F:\ehb next.js 04\node_modules\next\dist\server\base-server.js:1496:28)
+    at async DevServer.renderPageComponent (F:\ehb next.js 04\node_modules\next\dist\server\base-server.js:1924:24)
+    at async DevServer.renderToResponseImpl (F:\ehb next.js 04\node_modules\next\dist\server\base-server.js:1962:32)
+    at async DevServer.pipeImpl (F:\ehb next.js 04\node_modules\next\dist\server\base-server.js:922:25)
+    at async NextNodeServer.handleCatchallRenderRequest (F:\ehb next.js 04\node_modules\next\dist\server\next-server.js:272:17)
+    at async DevServer.handleRequestImpl (F:\ehb next.js 04\node_modules\next\dist\server\base-server.js:818:17)
+    at async F:\ehb next.js 04\node_modules\next\dist\server\dev\next-dev-server.js:339:20
+    at async Span.traceAsyncFn (F:\ehb next.js 04\node_modules\next\dist\trace\trace.js:154:20)
+    at async DevServer.handleRequest (F:\ehb next.js 04\node_modules\next\dist\server\dev\next-dev-server.js:336:24)
+    at async invokeRender (F:\ehb next.js 04\node_modules\next\dist\server\lib\router-server.js:179:21)
+    at async handleRequest (F:\ehb next.js 04\node_modules\next\dist\server\lib\router-server.js:359:24)
+    at async requestHandlerImpl (F:\ehb next.js 04\node_modules\next\dist\server\lib\router-server.js:383:13)
+    at async Server.requestListener (F:\ehb next.js 04\node_modules\next\dist\server\lib\start-server.js:141:13)
+[2025-06-21T16:51:11.189Z] [Next.js] GET /api/pss/requests? 500 in 38ms
+[2025-06-21T16:51:11.197Z] [Next.js ERROR] Database stats error: PrismaClientKnownRequestError: 
+Invalid `prisma.verificationRequest.count()` invocation:
+
+
+Raw query failed. Code: `unknown`. Message: `Kind: Command failed: Error code 13 (Unauthorized): Command aggregate requires authentication, labels: {}`
+    at $n.handleRequestError (F:\ehb next.js 04\node_modules\@prisma\client\runtime\library.js:121:7315)
+    at $n.handleAndLogRequestError (F:\ehb next.js 04\node_modules\@prisma\client\runtime\library.js:121:6623)
+    at $n.request (F:\ehb next.js 04\node_modules\@prisma\client\runtime\library.js:121:6307)
+    at async l (F:\ehb next.js 04\node_modules\@prisma\client\runtime\library.js:130:9633)
+    at async Promise.all (index 4)
+    at async PSSDatabase.getStats (webpack-internal:///(rsc)/./lib/pss/database.ts:136:68)
+    at async GET (webpack-internal:///(rsc)/./app/api/pss/stats/route.ts:12:23)
+    at async F:\ehb next.js 04\node_modules\next\dist\compiled\next-server\app-route.runtime.dev.js:6:57228
+    at async eT.execute (F:\ehb next.js 04\node_modules\next\dist\compiled\next-server\app-route.runtime.dev.js:6:46851)
+    at async eT.handle (F:\ehb next.js 04\node_modules\next\dist\compiled\next-server\app-route.runtime.dev.js:6:58760)
+    at async doRender (F:\ehb next.js 04\node_modules\next\dist\server\base-server.js:1366:42)
+    at async cacheEntry.responseCache.get.routeKind (F:\ehb next.js 04\node_modules\next\dist\server\base-server.js:1588:28)
+    at async DevServer.renderToResponseWithComponentsImpl (F:\ehb next.js 04\node_modules\next\dist\server\base-server.js:1496:28)
+    at async DevServer.renderPageComponent (F:\ehb next.js 04\node_modules\next\dist\server\base-server.js:1924:24)
+    at async DevServer.renderToResponseImpl (F:\ehb next.js 04\node_modules\next\dist\server\base-server.js:1962:32)
+    at async DevServer.pipeImpl (F:\ehb next.js 04\node_modules\next\dist\server\base-server.js:922:25)
+    at async NextNodeServer.handleCatchallRenderRequest (F:\ehb next.js 04\node_modules\next\dist\server\next-server.js:272:17)
+    at async DevServer.handleRequestImpl (F:\ehb next.js 04\node_modules\next\dist\server\base-server.js:818:17)
+    at async F:\ehb next.js 04\node_modules\next\dist\server\dev\next-dev-server.js:339:20
+    at async Span.traceAsyncFn (F:\ehb next.js 04\node_modules\next\dist\trace\trace.js:154:20)
+    at async DevServer.handleRequest (F:\ehb next.js 04\node_modules\next\dist\server\dev\next-dev-server.js:336:24)
+    at async invokeRender (F:\ehb next.js 04\node_modules\next\dist\server\lib\router-server.js:179:21)
+    at async handleRequest (F:\ehb next.js 04\node_modules\next\dist\server\lib\router-server.js:359:24)
+    at async requestHandlerImpl (F:\ehb next.js 04\node_modules\next\dist\server\lib\router-server.js:383:13)
+    at async Server.requestListener (F:\ehb next.js 04\node_modules\next\dist\server\lib\start-server.js:141:13) {
+  code: 'P2010',
+  clientVersion: '5.22.0',
+  meta: {
+    modelName: 'VerificationRequest',
+    code: 'unknown',
+    message: 'Kind: Command failed: Error code 13 (Unauthorized): Command aggregate requires authentication, labels: {}'
+  }
+}
+[2025-06-21T16:51:11.199Z] [Next.js ERROR] GET /api/pss/stats error: Error: Failed to get dashboard statistics
+    at PSSDatabase.getStats (webpack-internal:///(rsc)/./lib/pss/database.ts:168:19)
+    at async GET (webpack-internal:///(rsc)/./app/api/pss/stats/route.ts:12:23)
+    at async F:\ehb next.js 04\node_modules\next\dist\compiled\next-server\app-route.runtime.dev.js:6:57228
+    at async eT.execute (F:\ehb next.js 04\node_modules\next\dist\compiled\next-server\app-route.runtime.dev.js:6:46851)
+    at async eT.handle (F:\ehb next.js 04\node_modules\next\dist\compiled\next-server\app-route.runtime.dev.js:6:58760)
+    at async doRender (F:\ehb next.js 04\node_modules\next\dist\server\base-server.js:1366:42)
+    at async cacheEntry.responseCache.get.routeKind (F:\ehb next.js 04\node_modules\next\dist\server\base-server.js:1588:28)
+    at async DevServer.renderToResponseWithComponentsImpl (F:\ehb next.js 04\node_modules\next\dist\server\base-server.js:1496:28)
+    at async DevServer.renderPageComponent (F:\ehb next.js 04\node_modules\next\dist\server\base-server.js:1924:24)
+    at async DevServer.renderToResponseImpl (F:\ehb next.js 04\node_modules\next\dist\server\base-server.js:1962:32)
+    at async DevServer.pipeImpl (F:\ehb next.js 04\node_modules\next\dist\server\base-server.js:922:25)
+    at async NextNodeServer.handleCatchallRenderRequest (F:\ehb next.js 04\node_modules\next\dist\server\next-server.js:272:17)
+    at async DevServer.handleRequestImpl (F:\ehb next.js 04\node_modules\next\dist\server\base-server.js:818:17)
+    at async F:\ehb next.js 04\node_modules\next\dist\server\dev\next-dev-server.js:339:20
+    at async Span.traceAsyncFn (F:\ehb next.js 04\node_modules\next\dist\trace\trace.js:154:20)
+    at async DevServer.handleRequest (F:\ehb next.js 04\node_modules\next\dist\server\dev\next-dev-server.js:336:24)
+    at async invokeRender (F:\ehb next.js 04\node_modules\next\dist\server\lib\router-server.js:179:21)
+    at async handleRequest (F:\ehb next.js 04\node_modules\next\dist\server\lib\router-server.js:359:24)
+    at async requestHandlerImpl (F:\ehb next.js 04\node_modules\next\dist\server\lib\router-server.js:383:13)
+    at async Server.requestListener (F:\ehb next.js 04\node_modules\next\dist\server\lib\start-server.js:141:13)
+[2025-06-21T16:51:11.199Z] [Next.js] GET /api/pss/stats 500 in 47ms
+[2025-06-21T16:51:11.217Z] [Next.js] GET /api/auth/session 200 in 52ms
+[2025-06-21T16:51:11.243Z] [Next.js] GET /api/auth/session 200 in 17ms
+[2025-06-21T16:51:11.270Z] [Next.js] GET /api/auth/session 200 in 21ms
+[2025-06-21T16:51:11.279Z] [Next.js ERROR] Database get requests error: PrismaClientKnownRequestError: 
+Invalid `prisma.verificationRequest.count()` invocation:
+
+
+Raw query failed. Code: `unknown`. Message: `Kind: Command failed: Error code 13 (Unauthorized): Command aggregate requires authentication, labels: {}`
+    at $n.handleRequestError (F:\ehb next.js 04\node_modules\@prisma\client\runtime\library.js:121:7315)
+    at $n.handleAndLogRequestError (F:\ehb next.js 04\node_modules\@prisma\client\runtime\library.js:121:6623)
+    at $n.request (F:\ehb next.js 04\node_modules\@prisma\client\runtime\library.js:121:6307)
+    at async l (F:\ehb next.js 04\node_modules\@prisma\client\runtime\library.js:130:9633)
+    at async Promise.all (index 1)
+    at async PSSDatabase.getRequests (webpack-internal:///(rsc)/./lib/pss/database.ts:65:68)
+    at async GET (webpack-internal:///(rsc)/./app/api/pss/requests/route.ts:46:24)
+    at async F:\ehb next.js 04\node_modules\next\dist\compiled\next-server\app-route.runtime.dev.js:6:57228
+    at async eT.execute (F:\ehb next.js 04\node_modules\next\dist\compiled\next-server\app-route.runtime.dev.js:6:46851)
+    at async eT.handle (F:\ehb next.js 04\node_modules\next\dist\compiled\next-server\app-route.runtime.dev.js:6:58760)
+    at async doRender (F:\ehb next.js 04\node_modules\next\dist\server\base-server.js:1366:42)
+    at async cacheEntry.responseCache.get.routeKind (F:\ehb next.js 04\node_modules\next\dist\server\base-server.js:1588:28)
+    at async DevServer.renderToResponseWithComponentsImpl (F:\ehb next.js 04\node_modules\next\dist\server\base-server.js:1496:28)
+    at async DevServer.renderPageComponent (F:\ehb next.js 04\node_modules\next\dist\server\base-server.js:1924:24)
+    at async DevServer.renderToResponseImpl (F:\ehb next.js 04\node_modules\next\dist\server\base-server.js:1962:32)
+    at async DevServer.pipeImpl (F:\ehb next.js 04\node_modules\next\dist\server\base-server.js:922:25)
+    at async NextNodeServer.handleCatchallRenderRequest (F:\ehb next.js 04\node_modules\next\dist\server\next-server.js:272:17)
+    at async DevServer.handleRequestImpl (F:\ehb next.js 04\node_modules\next\dist\server\base-server.js:818:17)
+    at async F:\ehb next.js 04\node_modules\next\dist\server\dev\next-dev-server.js:339:20
+    at async Span.traceAsyncFn (F:\ehb next.js 04\node_modules\next\dist\trace\trace.js:154:20)
+    at async DevServer.handleRequest (F:\ehb next.js 04\node_modules\next\dist\server\dev\next-dev-server.js:336:24)
+    at async invokeRender (F:\ehb next.js 04\node_modules\next\dist\server\lib\router-server.js:179:21)
+    at async handleRequest (F:\ehb next.js 04\node_modules\next\dist\server\lib\router-server.js:359:24)
+    at async requestHandlerImpl (F:\ehb next.js 04\node_modules\next\dist\server\lib\router-server.js:383:13)
+    at async Server.requestListener (F:\ehb next.js 04\node_modules\next\dist\server\lib\start-server.js:141:13) {
+  code: 'P2010',
+  clientVersion: '5.22.0',
+  meta: {
+    modelName: 'VerificationRequest',
+    code: 'unknown',
+    message: 'Kind: Command failed: Error code 13 (Unauthorized): Command aggregate requires authentication, labels: {}'
+  }
+}
+[2025-06-21T16:51:11.280Z] [Next.js ERROR] GET /api/pss/requests error: Error: Failed to fetch verification requests
+    at PSSDatabase.getRequests (webpack-internal:///(rsc)/./lib/pss/database.ts:100:19)
+    at async GET (webpack-internal:///(rsc)/./app/api/pss/requests/route.ts:46:24)
+    at async F:\ehb next.js 04\node_modules\next\dist\compiled\next-server\app-route.runtime.dev.js:6:57228
+    at async eT.execute (F:\ehb next.js 04\node_modules\next\dist\compiled\next-server\app-route.runtime.dev.js:6:46851)
+    at async eT.handle (F:\ehb next.js 04\node_modules\next\dist\compiled\next-server\app-route.runtime.dev.js:6:58760)
+    at async doRender (F:\ehb next.js 04\node_modules\next\dist\server\base-server.js:1366:42)
+    at async cacheEntry.responseCache.get.routeKind (F:\ehb next.js 04\node_modules\next\dist\server\base-server.js:1588:28)
+    at async DevServer.renderToResponseWithComponentsImpl (F:\ehb next.js 04\node_modules\next\dist\server\base-server.js:1496:28)
+    at async DevServer.renderPageComponent (F:\ehb next.js 04\node_modules\next\dist\server\base-server.js:1924:24)
+    at async DevServer.renderToResponseImpl (F:\ehb next.js 04\node_modules\next\dist\server\base-server.js:1962:32)
+    at async DevServer.pipeImpl (F:\ehb next.js 04\node_modules\next\dist\server\base-server.js:922:25)
+    at async NextNodeServer.handleCatchallRenderRequest (F:\ehb next.js 04\node_modules\next\dist\server\next-server.js:272:17)
+    at async DevServer.handleRequestImpl (F:\ehb next.js 04\node_modules\next\dist\server\base-server.js:818:17)
+    at async F:\ehb next.js 04\node_modules\next\dist\server\dev\next-dev-server.js:339:20
+    at async Span.traceAsyncFn (F:\ehb next.js 04\node_modules\next\dist\trace\trace.js:154:20)
+    at async DevServer.handleRequest (F:\ehb next.js 04\node_modules\next\dist\server\dev\next-dev-server.js:336:24)
+    at async invokeRender (F:\ehb next.js 04\node_modules\next\dist\server\lib\router-server.js:179:21)
+    at async handleRequest (F:\ehb next.js 04\node_modules\next\dist\server\lib\router-server.js:359:24)
+    at async requestHandlerImpl (F:\ehb next.js 04\node_modules\next\dist\server\lib\router-server.js:383:13)
+    at async Server.requestListener (F:\ehb next.js 04\node_modules\next\dist\server\lib\start-server.js:141:13)
+[2025-06-21T16:51:11.281Z] [Next.js] GET /api/pss/requests 500 in 28ms
+[2025-06-21T16:51:11.306Z] [Next.js] GET /api/auth/session 200 in 30ms
+[2025-06-21T16:51:11.315Z] [Next.js ERROR] Database get requests error: PrismaClientKnownRequestError: 
+Invalid `prisma.verificationRequest.count()` invocation:
+
+
+Raw query failed. Code: `unknown`. Message: `Kind: Command failed: Error code 13 (Unauthorized): Command aggregate requires authentication, labels: {}`
+    at $n.handleRequestError (F:\ehb next.js 04\node_modules\@prisma\client\runtime\library.js:121:7315)
+    at $n.handleAndLogRequestError (F:\ehb next.js 04\node_modules\@prisma\client\runtime\library.js:121:6623)
+    at $n.request (F:\ehb next.js 04\node_modules\@prisma\client\runtime\library.js:121:6307)
+    at async l (F:\ehb next.js 04\node_modules\@prisma\client\runtime\library.js:130:9633)
+    at async Promise.all (index 1)
+    at async PSSDatabase.getRequests (webpack-internal:///(rsc)/./lib/pss/database.ts:65:68)
+    at async GET (webpack-internal:///(rsc)/./app/api/pss/requests/route.ts:46:24)
+    at async F:\ehb next.js 04\node_modules\next\dist\compiled\next-server\app-route.runtime.dev.js:6:57228
+    at async eT.execute (F:\ehb next.js 04\node_modules\next\dist\compiled\next-server\app-route.runtime.dev.js:6:46851)
+    at async eT.handle (F:\ehb next.js 04\node_modules\next\dist\compiled\next-server\app-route.runtime.dev.js:6:58760)
+    at async doRender (F:\ehb next.js 04\node_modules\next\dist\server\base-server.js:1366:42)
+    at async cacheEntry.responseCache.get.routeKind (F:\ehb next.js 04\node_modules\next\dist\server\base-server.js:1588:28)
+    at async DevServer.renderToResponseWithComponentsImpl (F:\ehb next.js 04\node_modules\next\dist\server\base-server.js:1496:28)
+    at async DevServer.renderPageComponent (F:\ehb next.js 04\node_modules\next\dist\server\base-server.js:1924:24)
+    at async DevServer.renderToResponseImpl (F:\ehb next.js 04\node_modules\next\dist\server\base-server.js:1962:32)
+    at async DevServer.pipeImpl (F:\ehb next.js 04\node_modules\next\dist\server\base-server.js:922:25)
+    at async NextNodeServer.handleCatchallRenderRequest (F:\ehb next.js 04\node_modules\next\dist\server\next-server.js:272:17)
+    at async DevServer.handleRequestImpl (F:\ehb next.js 04\node_modules\next\dist\server\base-server.js:818:17)
+    at async F:\ehb next.js 04\node_modules\next\dist\server\dev\next-dev-server.js:339:20
+    at async Span.traceAsyncFn (F:\ehb next.js 04\node_modules\next\dist\trace\trace.js:154:20)
+    at async DevServer.handleRequest (F:\ehb next.js 04\node_modules\next\dist\server\dev\next-dev-server.js:336:24)
+    at async invokeRender (F:\ehb next.js 04\node_modules\next\dist\server\lib\router-server.js:179:21)
+    at async handleRequest (F:\ehb next.js 04\node_modules\next\dist\server\lib\router-server.js:359:24)
+    at async requestHandlerImpl (F:\ehb next.js 04\node_modules\next\dist\server\lib\router-server.js:383:13)
+    at async Server.requestListener (F:\ehb next.js 04\node_modules\next\dist\server\lib\start-server.js:141:13) {
+  code: 'P2010',
+  clientVersion: '5.22.0',
+  meta: {
+    modelName: 'VerificationRequest',
+    code: 'unknown',
+    message: 'Kind: Command failed: Error code 13 (Unauthorized): Command aggregate requires authentication, labels: {}'
+  }
+}
+[2025-06-21T16:51:11.316Z] [Next.js ERROR] GET /api/pss/requests error: Error: Failed to fetch verification requests
+    at PSSDatabase.getRequests (webpack-internal:///(rsc)/./lib/pss/database.ts:100:19)
+    at async GET (webpack-internal:///(rsc)/./app/api/pss/requests/route.ts:46:24)
+    at async F:\ehb next.js 04\node_modules\next\dist\compiled\next-server\app-route.runtime.dev.js:6:57228
+    at async eT.execute (F:\ehb next.js 04\node_modules\next\dist\compiled\next-server\app-route.runtime.dev.js:6:46851)
+    at async eT.handle (F:\ehb next.js 04\node_modules\next\dist\compiled\next-server\app-route.runtime.dev.js:6:58760)
+    at async doRender (F:\ehb next.js 04\node_modules\next\dist\server\base-server.js:1366:42)
+    at async cacheEntry.responseCache.get.routeKind (F:\ehb next.js 04\node_modules\next\dist\server\base-server.js:1588:28)
+    at async DevServer.renderToResponseWithComponentsImpl (F:\ehb next.js 04\node_modules\next\dist\server\base-server.js:1496:28)
+    at async DevServer.renderPageComponent (F:\ehb next.js 04\node_modules\next\dist\server\base-server.js:1924:24)
+    at async DevServer.renderToResponseImpl (F:\ehb next.js 04\node_modules\next\dist\server\base-server.js:1962:32)
+    at async DevServer.pipeImpl (F:\ehb next.js 04\node_modules\next\dist\server\base-server.js:922:25)
+    at async NextNodeServer.handleCatchallRenderRequest (F:\ehb next.js 04\node_modules\next\dist\server\next-server.js:272:17)
+    at async DevServer.handleRequestImpl (F:\ehb next.js 04\node_modules\next\dist\server\base-server.js:818:17)
+    at async F:\ehb next.js 04\node_modules\next\dist\server\dev\next-dev-server.js:339:20
+    at async Span.traceAsyncFn (F:\ehb next.js 04\node_modules\next\dist\trace\trace.js:154:20)
+    at async DevServer.handleRequest (F:\ehb next.js 04\node_modules\next\dist\server\dev\next-dev-server.js:336:24)
+    at async invokeRender (F:\ehb next.js 04\node_modules\next\dist\server\lib\router-server.js:179:21)
+    at async handleRequest (F:\ehb next.js 04\node_modules\next\dist\server\lib\router-server.js:359:24)
+    at async requestHandlerImpl (F:\ehb next.js 04\node_modules\next\dist\server\lib\router-server.js:383:13)
+    at async Server.requestListener (F:\ehb next.js 04\node_modules\next\dist\server\lib\start-server.js:141:13)
+[2025-06-21T16:51:11.317Z] [Next.js] GET /api/pss/requests 500 in 29ms
+[2025-06-21T16:51:11.354Z] [Next.js] GET /api/auth/session 200 in 28ms
+[2025-06-21T16:51:11.376Z] [Next.js] GET /api/auth/session 200 in 17ms
+[2025-06-21T16:51:11.407Z] [Next.js] GET /api/auth/session 200 in 24ms
+[2025-06-21T16:51:11.730Z] [Next.js] ✓ Compiled /api/wallet in 335ms (1209 modules)
+[2025-06-21T16:51:11.949Z] [Next.js ERROR] [next-auth][warn][DEBUG_ENABLED] 
+https://next-auth.js.org/warnings#debug_enabled
+[2025-06-21T16:51:11.959Z] [Next.js] GET /api/auth/session 200 in 544ms
+[2025-06-21T16:51:11.962Z] [Next.js ERROR] Wallet fetch error: PrismaClientKnownRequestError: 
+Invalid `prisma.wallet.findUnique()` invocation:
+
+
+Raw query failed. Code: `unknown`. Message: `Kind: Command failed: Error code 13 (Unauthorized): Command aggregate requires authentication, labels: {}`
+    at $n.handleRequestError (F:\ehb next.js 04\node_modules\@prisma\client\runtime\library.js:121:7315)
+    at $n.handleAndLogRequestError (F:\ehb next.js 04\node_modules\@prisma\client\runtime\library.js:121:6623)
+    at $n.request (F:\ehb next.js 04\node_modules\@prisma\client\runtime\library.js:121:6307)
+    at async l (F:\ehb next.js 04\node_modules\@prisma\client\runtime\library.js:130:9633)
+    at async GET (webpack-internal:///(rsc)/./app/api/wallet/route.ts:78:24)
+    at async F:\ehb next.js 04\node_modules\next\dist\compiled\next-server\app-route.runtime.dev.js:6:57228
+    at async eT.execute (F:\ehb next.js 04\node_modules\next\dist\compiled\next-server\app-route.runtime.dev.js:6:46851)
+    at async eT.handle (F:\ehb next.js 04\node_modules\next\dist\compiled\next-server\app-route.runtime.dev.js:6:58760)
+    at async doRender (F:\ehb next.js 04\node_modules\next\dist\server\base-server.js:1366:42)
+    at async cacheEntry.responseCache.get.routeKind (F:\ehb next.js 04\node_modules\next\dist\server\base-server.js:1588:28)
+    at async DevServer.renderToResponseWithComponentsImpl (F:\ehb next.js 04\node_modules\next\dist\server\base-server.js:1496:28)
+    at async DevServer.renderPageComponent (F:\ehb next.js 04\node_modules\next\dist\server\base-server.js:1924:24)
+    at async DevServer.renderToResponseImpl (F:\ehb next.js 04\node_modules\next\dist\server\base-server.js:1962:32)
+    at async DevServer.pipeImpl (F:\ehb next.js 04\node_modules\next\dist\server\base-server.js:922:25)
+    at async NextNodeServer.handleCatchallRenderRequest (F:\ehb next.js 04\node_modules\next\dist\server\next-server.js:272:17)
+    at async DevServer.handleRequestImpl (F:\ehb next.js 04\node_modules\next\dist\server\base-server.js:818:17)
+    at async F:\ehb next.js 04\node_modules\next\dist\server\dev\next-dev-server.js:339:20
+    at async Span.traceAsyncFn (F:\ehb next.js 04\node_modules\next\dist\trace\trace.js:154:20)
+    at async DevServer.handleRequest (F:\ehb next.js 04\node_modules\next\dist\server\dev\next-dev-server.js:336:24)
+    at async invokeRender (F:\ehb next.js 04\node_modules\next\dist\server\lib\router-server.js:179:21)
+    at async handleRequest (F:\ehb next.js 04\node_modules\next\dist\server\lib\router-server.js:359:24)
+    at async requestHandlerImpl (F:\ehb next.js 04\node_modules\next\dist\server\lib\router-server.js:383:13)
+    at async Server.requestListener (F:\ehb next.js 04\node_modules\next\dist\server\lib\start-server.js:141:13) {
+  code: 'P2010',
+  clientVersion: '5.22.0',
+  meta: {
+    modelName: 'Wallet',
+    code: 'unknown',
+    message: 'Kind: Command failed: Error code 13 (Unauthorized): Command aggregate requires authentication, labels: {}'
+  }
+}
+[2025-06-21T16:51:11.963Z] [Next.js] GET /api/wallet 500 in 578ms
+[2025-06-21T16:51:11.980Z] [Next.js] GET /api/auth/session 200 in 14ms
+[2025-06-21T16:51:11.995Z] [Next.js ERROR] Wallet fetch error: PrismaClientKnownRequestError: 
+Invalid `prisma.wallet.findUnique()` invocation:
+
+
+Raw query failed. Code: `unknown`. Message: `Kind: Command failed: Error code 13 (Unauthorized): Command aggregate requires authentication, labels: {}`
+    at $n.handleRequestError (F:\ehb next.js 04\node_modules\@prisma\client\runtime\library.js:121:7315)
+    at $n.handleAndLogRequestError (F:\ehb next.js 04\node_modules\@prisma\client\runtime\library.js:121:6623)
+    at $n.request (F:\ehb next.js 04\node_modules\@prisma\client\runtime\library.js:121:6307)
+    at async l (F:\ehb next.js 04\node_modules\@prisma\client\runtime\library.js:130:9633)
+    at async GET (webpack-internal:///(rsc)/./app/api/wallet/route.ts:78:24)
+    at async F:\ehb next.js 04\node_modules\next\dist\compiled\next-server\app-route.runtime.dev.js:6:57228
+    at async eT.execute (F:\ehb next.js 04\node_modules\next\dist\compiled\next-server\app-route.runtime.dev.js:6:46851)
+    at async eT.handle (F:\ehb next.js 04\node_modules\next\dist\compiled\next-server\app-route.runtime.dev.js:6:58760)
+    at async doRender (F:\ehb next.js 04\node_modules\next\dist\server\base-server.js:1366:42)
+    at async cacheEntry.responseCache.get.routeKind (F:\ehb next.js 04\node_modules\next\dist\server\base-server.js:1588:28)
+    at async DevServer.renderToResponseWithComponentsImpl (F:\ehb next.js 04\node_modules\next\dist\server\base-server.js:1496:28)
+    at async DevServer.renderPageComponent (F:\ehb next.js 04\node_modules\next\dist\server\base-server.js:1924:24)
+    at async DevServer.renderToResponseImpl (F:\ehb next.js 04\node_modules\next\dist\server\base-server.js:1962:32)
+    at async DevServer.pipeImpl (F:\ehb next.js 04\node_modules\next\dist\server\base-server.js:922:25)
+    at async NextNodeServer.handleCatchallRenderRequest (F:\ehb next.js 04\node_modules\next\dist\server\next-server.js:272:17)
+    at async DevServer.handleRequestImpl (F:\ehb next.js 04\node_modules\next\dist\server\base-server.js:818:17)
+    at async F:\ehb next.js 04\node_modules\next\dist\server\dev\next-dev-server.js:339:20
+    at async Span.traceAsyncFn (F:\ehb next.js 04\node_modules\next\dist\trace\trace.js:154:20)
+    at async DevServer.handleRequest (F:\ehb next.js 04\node_modules\next\dist\server\dev\next-dev-server.js:336:24)
+    at async invokeRender (F:\ehb next.js 04\node_modules\next\dist\server\lib\router-server.js:179:21)
+    at async handleRequest (F:\ehb next.js 04\node_modules\next\dist\server\lib\router-server.js:359:24)
+    at async requestHandlerImpl (F:\ehb next.js 04\node_modules\next\dist\server\lib\router-server.js:383:13)
+    at async Server.requestListener (F:\ehb next.js 04\node_modules\next\dist\server\lib\start-server.js:141:13) {
+  code: 'P2010',
+  clientVersion: '5.22.0',
+  meta: {
+    modelName: 'Wallet',
+    code: 'unknown',
+    message: 'Kind: Command failed: Error code 13 (Unauthorized): Command aggregate requires authentication, labels: {}'
+  }
+}
+[2025-06-21T16:51:11.996Z] [Next.js] GET /api/wallet 500 in 22ms
+[2025-06-21T16:51:12.003Z] [Next.js] GET /api/auth/session 200 in 19ms
+[2025-06-21T16:51:12.017Z] [Next.js] GET /api/auth/session 200 in 12ms
+[2025-06-21T16:51:12.033Z] [Next.js] GET /api/auth/session 200 in 13ms
+[2025-06-21T16:51:12.049Z] [Next.js] GET /api/auth/session 200 in 13ms
+[2025-06-21T16:51:12.066Z] [Next.js] GET /api/auth/session 200 in 14ms
+[2025-06-21T16:51:12.085Z] [Next.js] GET /api/auth/session 200 in 15ms
+[2025-06-21T16:51:12.105Z] [Next.js] GET /api/auth/session 200 in 17ms
+[2025-06-21T16:51:12.121Z] [Next.js ERROR] Wallet fetch error: PrismaClientKnownRequestError: 
+Invalid `prisma.wallet.findUnique()` invocation:
+
+
+Raw query failed. Code: `unknown`. Message: `Kind: Command failed: Error code 13 (Unauthorized): Command aggregate requires authentication, labels: {}`
+    at $n.handleRequestError (F:\ehb next.js 04\node_modules\@prisma\client\runtime\library.js:121:7315)
+    at $n.handleAndLogRequestError (F:\ehb next.js 04\node_modules\@prisma\client\runtime\library.js:121:6623)
+    at $n.request (F:\ehb next.js 04\node_modules\@prisma\client\runtime\library.js:121:6307)
+    at async l (F:\ehb next.js 04\node_modules\@prisma\client\runtime\library.js:130:9633)
+    at async GET (webpack-internal:///(rsc)/./app/api/wallet/route.ts:78:24)
+    at async F:\ehb next.js 04\node_modules\next\dist\compiled\next-server\app-route.runtime.dev.js:6:57228
+    at async eT.execute (F:\ehb next.js 04\node_modules\next\dist\compiled\next-server\app-route.runtime.dev.js:6:46851)
+    at async eT.handle (F:\ehb next.js 04\node_modules\next\dist\compiled\next-server\app-route.runtime.dev.js:6:58760)
+    at async doRender (F:\ehb next.js 04\node_modules\next\dist\server\base-server.js:1366:42)
+    at async cacheEntry.responseCache.get.routeKind (F:\ehb next.js 04\node_modules\next\dist\server\base-server.js:1588:28)
+    at async DevServer.renderToResponseWithComponentsImpl (F:\ehb next.js 04\node_modules\next\dist\server\base-server.js:1496:28)
+    at async DevServer.renderPageComponent (F:\ehb next.js 04\node_modules\next\dist\server\base-server.js:1924:24)
+    at async DevServer.renderToResponseImpl (F:\ehb next.js 04\node_modules\next\dist\server\base-server.js:1962:32)
+    at async DevServer.pipeImpl (F:\ehb next.js 04\node_modules\next\dist\server\base-server.js:922:25)
+    at async NextNodeServer.handleCatchallRenderRequest (F:\ehb next.js 04\node_modules\next\dist\server\next-server.js:272:17)
+    at async DevServer.handleRequestImpl (F:\ehb next.js 04\node_modules\next\dist\server\base-server.js:818:17)
+    at async F:\ehb next.js 04\node_modules\next\dist\server\dev\next-dev-server.js:339:20
+    at async Span.traceAsyncFn (F:\ehb next.js 04\node_modules\next\dist\trace\trace.js:154:20)
+    at async DevServer.handleRequest (F:\ehb next.js 04\node_modules\next\dist\server\dev\next-dev-server.js:336:24)
+    at async invokeRender (F:\ehb next.js 04\node_modules\next\dist\server\lib\router-server.js:179:21)
+    at async handleRequest (F:\ehb next.js 04\node_modules\next\dist\server\lib\router-server.js:359:24)
+    at async requestHandlerImpl (F:\ehb next.js 04\node_modules\next\dist\server\lib\router-server.js:383:13)
+    at async Server.requestListener (F:\ehb next.js 04\node_modules\next\dist\server\lib\start-server.js:141:13) {
+  code: 'P2010',
+  clientVersion: '5.22.0',
+  meta: {
+    modelName: 'Wallet',
+    code: 'unknown',
+    message: 'Kind: Command failed: Error code 13 (Unauthorized): Command aggregate requires authentication, labels: {}'
+  }
+}
+[2025-06-21T16:51:12.122Z] [Next.js] GET /api/wallet 500 in 25ms
+[2025-06-21T16:51:12.131Z] [Next.js] GET /api/auth/session 200 in 22ms
+[2025-06-21T16:51:12.155Z] [Next.js ERROR] Wallet fetch error: PrismaClientKnownRequestError: 
+Invalid `prisma.wallet.findUnique()` invocation:
+
+
+Raw query failed. Code: `unknown`. Message: `Kind: Command failed: Error code 13 (Unauthorized): Command aggregate requires authentication, labels: {}`
+    at $n.handleRequestError (F:\ehb next.js 04\node_modules\@prisma\client\runtime\library.js:121:7315)
+    at $n.handleAndLogRequestError (F:\ehb next.js 04\node_modules\@prisma\client\runtime\library.js:121:6623)
+    at $n.request (F:\ehb next.js 04\node_modules\@prisma\client\runtime\library.js:121:6307)
+    at async l (F:\ehb next.js 04\node_modules\@prisma\client\runtime\library.js:130:9633)
+    at async GET (webpack-internal:///(rsc)/./app/api/wallet/route.ts:78:24)
+    at async F:\ehb next.js 04\node_modules\next\dist\compiled\next-server\app-route.runtime.dev.js:6:57228
+    at async eT.execute (F:\ehb next.js 04\node_modules\next\dist\compiled\next-server\app-route.runtime.dev.js:6:46851)
+    at async eT.handle (F:\ehb next.js 04\node_modules\next\dist\compiled\next-server\app-route.runtime.dev.js:6:58760)
+    at async doRender (F:\ehb next.js 04\node_modules\next\dist\server\base-server.js:1366:42)
+    at async cacheEntry.responseCache.get.routeKind (F:\ehb next.js 04\node_modules\next\dist\server\base-server.js:1588:28)
+    at async DevServer.renderToResponseWithComponentsImpl (F:\ehb next.js 04\node_modules\next\dist\server\base-server.js:1496:28)
+    at async DevServer.renderPageComponent (F:\ehb next.js 04\node_modules\next\dist\server\base-server.js:1924:24)
+    at async DevServer.renderToResponseImpl (F:\ehb next.js 04\node_modules\next\dist\server\base-server.js:1962:32)
+    at async DevServer.pipeImpl (F:\ehb next.js 04\node_modules\next\dist\server\base-server.js:922:25)
+    at async NextNodeServer.handleCatchallRenderRequest (F:\ehb next.js 04\node_modules\next\dist\server\next-server.js:272:17)
+    at async DevServer.handleRequestImpl (F:\ehb next.js 04\node_modules\next\dist\server\base-server.js:818:17)
+    at async F:\ehb next.js 04\node_modules\next\dist\server\dev\next-dev-server.js:339:20
+    at async Span.traceAsyncFn (F:\ehb next.js 04\node_modules\next\dist\trace\trace.js:154:20)
+    at async DevServer.handleRequest (F:\ehb next.js 04\node_modules\next\dist\server\dev\next-dev-server.js:336:24)
+    at async invokeRender (F:\ehb next.js 04\node_modules\next\dist\server\lib\router-server.js:179:21)
+    at async handleRequest (F:\ehb next.js 04\node_modules\next\dist\server\lib\router-server.js:359:24)
+    at async requestHandlerImpl (F:\ehb next.js 04\node_modules\next\dist\server\lib\router-server.js:383:13)
+    at async Server.requestListener (F:\ehb next.js 04\node_modules\next\dist\server\lib\start-server.js:141:13) {
+  code: 'P2010',
+  clientVersion: '5.22.0',
+  meta: {
+    modelName: 'Wallet',
+    code: 'unknown',
+    message: 'Kind: Command failed: Error code 13 (Unauthorized): Command aggregate requires authentication, labels: {}'
+  }
+}
+[2025-06-21T16:51:12.156Z] [Next.js] GET /api/wallet 500 in 30ms
+[2025-06-21T16:51:12.160Z] [Next.js] GET /api/auth/session 200 in 23ms
+[2025-06-21T16:51:12.175Z] [Next.js] GET /api/auth/session 200 in 11ms
+[2025-06-21T16:51:12.193Z] [Next.js] GET /api/auth/session 200 in 14ms
+[2025-06-21T16:51:12.209Z] [Next.js] GET /api/auth/session 200 in 11ms
+[2025-06-21T16:51:12.225Z] [Next.js] GET /api/auth/session 200 in 13ms
+[2025-06-21T16:51:12.238Z] [Next.js] GET /api/auth/session 200 in 10ms
+[2025-06-21T16:51:12.252Z] [Next.js] GET /api/auth/session 200 in 11ms
+[2025-06-21T16:51:12.264Z] [Next.js] GET /api/auth/session 200 in 10ms
+[2025-06-21T16:51:12.276Z] [Next.js] GET /api/auth/session 200 in 10ms
+[2025-06-21T16:51:12.290Z] [Next.js] GET /api/auth/session 200 in 11ms
+[2025-06-21T16:51:12.305Z] [Next.js] GET /api/auth/session 200 in 12ms
+[2025-06-21T16:51:12.328Z] [Next.js ERROR] Wallet fetch error: PrismaClientKnownRequestError: 
+Invalid `prisma.wallet.findUnique()` invocation:
+
+
+Raw query failed. Code: `unknown`. Message: `Kind: Command failed: Error code 13 (Unauthorized): Command aggregate requires authentication, labels: {}`
+    at $n.handleRequestError (F:\ehb next.js 04\node_modules\@prisma\client\runtime\library.js:121:7315)
+    at $n.handleAndLogRequestError (F:\ehb next.js 04\node_modules\@prisma\client\runtime\library.js:121:6623)
+    at $n.request (F:\ehb next.js 04\node_modules\@prisma\client\runtime\library.js:121:6307)
+    at async l (F:\ehb next.js 04\node_modules\@prisma\client\runtime\library.js:130:9633)
+    at async GET (webpack-internal:///(rsc)/./app/api/wallet/route.ts:78:24)
+    at async F:\ehb next.js 04\node_modules\next\dist\compiled\next-server\app-route.runtime.dev.js:6:57228
+    at async eT.execute (F:\ehb next.js 04\node_modules\next\dist\compiled\next-server\app-route.runtime.dev.js:6:46851)
+    at async eT.handle (F:\ehb next.js 04\node_modules\next\dist\compiled\next-server\app-route.runtime.dev.js:6:58760)
+    at async doRender (F:\ehb next.js 04\node_modules\next\dist\server\base-server.js:1366:42)
+    at async cacheEntry.responseCache.get.routeKind (F:\ehb next.js 04\node_modules\next\dist\server\base-server.js:1588:28)
+    at async DevServer.renderToResponseWithComponentsImpl (F:\ehb next.js 04\node_modules\next\dist\server\base-server.js:1496:28)
+    at async DevServer.renderPageComponent (F:\ehb next.js 04\node_modules\next\dist\server\base-server.js:1924:24)
+    at async DevServer.renderToResponseImpl (F:\ehb next.js 04\node_modules\next\dist\server\base-server.js:1962:32)
+    at async DevServer.pipeImpl (F:\ehb next.js 04\node_modules\next\dist\server\base-server.js:922:25)
+    at async NextNodeServer.handleCatchallRenderRequest (F:\ehb next.js 04\node_modules\next\dist\server\next-server.js:272:17)
+    at async DevServer.handleRequestImpl (F:\ehb next.js 04\node_modules\next\dist\server\base-server.js:818:17)
+    at async F:\ehb next.js 04\node_modules\next\dist\server\dev\next-dev-server.js:339:20
+    at async Span.traceAsyncFn (F:\ehb next.js 04\node_modules\next\dist\trace\trace.js:154:20)
+    at async DevServer.handleRequest (F:\ehb next.js 04\node_modules\next\dist\server\dev\next-dev-server.js:336:24)
+    at async invokeRender (F:\ehb next.js 04\node_modules\next\dist\server\lib\router-server.js:179:21)
+    at async handleRequest (F:\ehb next.js 04\node_modules\next\dist\server\lib\router-server.js:359:24)
+    at async requestHandlerImpl (F:\ehb next.js 04\node_modules\next\dist\server\lib\router-server.js:383:13)
+    at async Server.requestListener (F:\ehb next.js 04\node_modules\next\dist\server\lib\start-server.js:141:13) {
+  code: 'P2010',
+  clientVersion: '5.22.0',
+  meta: {
+    modelName: 'Wallet',
+    code: 'unknown',
+    message: 'Kind: Command failed: Error code 13 (Unauthorized): Command aggregate requires authentication, labels: {}'
+  }
+}
+[2025-06-21T16:51:12.329Z] [Next.js] GET /api/wallet 500 in 23ms
+[2025-06-21T16:51:12.331Z] [Next.js] GET /api/auth/session 200 in 20ms
+[2025-06-21T16:51:12.346Z] [Next.js] GET /api/auth/session 200 in 11ms
+[2025-06-21T16:51:12.365Z] [Next.js] GET /api/auth/session 200 in 12ms
+[2025-06-21T16:51:12.380Z] [Next.js] GET /api/auth/session 200 in 13ms
+[2025-06-21T16:51:12.405Z] [Next.js] GET /api/auth/session 200 in 20ms
+[2025-06-21T16:51:12.407Z] [Next.js ERROR] Wallet fetch error: PrismaClientKnownRequestError: 
+Invalid `prisma.wallet.findUnique()` invocation:
+
+
+Raw query failed. Code: `unknown`. Message: `Kind: Command failed: Error code 13 (Unauthorized): Command aggregate requires authentication, labels: {}`
+    at $n.handleRequestError (F:\ehb next.js 04\node_modules\@prisma\client\runtime\library.js:121:7315)
+    at $n.handleAndLogRequestError (F:\ehb next.js 04\node_modules\@prisma\client\runtime\library.js:121:6623)
+    at $n.request (F:\ehb next.js 04\node_modules\@prisma\client\runtime\library.js:121:6307)
+    at async l (F:\ehb next.js 04\node_modules\@prisma\client\runtime\library.js:130:9633)
+    at async GET (webpack-internal:///(rsc)/./app/api/wallet/route.ts:78:24)
+    at async F:\ehb next.js 04\node_modules\next\dist\compiled\next-server\app-route.runtime.dev.js:6:57228
+    at async eT.execute (F:\ehb next.js 04\node_modules\next\dist\compiled\next-server\app-route.runtime.dev.js:6:46851)
+    at async eT.handle (F:\ehb next.js 04\node_modules\next\dist\compiled\next-server\app-route.runtime.dev.js:6:58760)
+    at async doRender (F:\ehb next.js 04\node_modules\next\dist\server\base-server.js:1366:42)
+    at async cacheEntry.responseCache.get.routeKind (F:\ehb next.js 04\node_modules\next\dist\server\base-server.js:1588:28)
+    at async DevServer.renderToResponseWithComponentsImpl (F:\ehb next.js 04\node_modules\next\dist\server\base-server.js:1496:28)
+    at async DevServer.renderPageComponent (F:\ehb next.js 04\node_modules\next\dist\server\base-server.js:1924:24)
+    at async DevServer.renderToResponseImpl (F:\ehb next.js 04\node_modules\next\dist\server\base-server.js:1962:32)
+    at async DevServer.pipeImpl (F:\ehb next.js 04\node_modules\next\dist\server\base-server.js:922:25)
+    at async NextNodeServer.handleCatchallRenderRequest (F:\ehb next.js 04\node_modules\next\dist\server\next-server.js:272:17)
+    at async DevServer.handleRequestImpl (F:\ehb next.js 04\node_modules\next\dist\server\base-server.js:818:17)
+    at async F:\ehb next.js 04\node_modules\next\dist\server\dev\next-dev-server.js:339:20
+    at async Span.traceAsyncFn (F:\ehb next.js 04\node_modules\next\dist\trace\trace.js:154:20)
+    at async DevServer.handleRequest (F:\ehb next.js 04\node_modules\next\dist\server\dev\next-dev-server.js:336:24)
+    at async invokeRender (F:\ehb next.js 04\node_modules\next\dist\server\lib\router-server.js:179:21)
+    at async handleRequest (F:\ehb next.js 04\node_modules\next\dist\server\lib\router-server.js:359:24)
+    at async requestHandlerImpl (F:\ehb next.js 04\node_modules\next\dist\server\lib\router-server.js:383:13)
+    at async Server.requestListener (F:\ehb next.js 04\node_modules\next\dist\server\lib\start-server.js:141:13) {
+  code: 'P2010',
+  clientVersion: '5.22.0',
+  meta: {
+    modelName: 'Wallet',
+    code: 'unknown',
+    message: 'Kind: Command failed: Error code 13 (Unauthorized): Command aggregate requires authentication, labels: {}'
+  }
+}
+[2025-06-21T16:51:12.408Z] [Next.js] GET /api/wallet 500 in 26ms
+[2025-06-21T16:51:12.426Z] [Next.js] GET /api/auth/session 200 in 12ms
+[2025-06-21T16:51:12.442Z] [Next.js] GET /api/auth/session 200 in 10ms
+[2025-06-21T16:51:12.457Z] [Next.js] GET /api/auth/session 200 in 11ms
+[2025-06-21T16:51:12.472Z] [Next.js] GET /api/auth/session 200 in 11ms
+[2025-06-21T16:51:12.486Z] [Next.js] GET /api/auth/session 200 in 12ms
+[2025-06-21T16:51:12.509Z] [Next.js] GET /api/auth/session 200 in 20ms
+[2025-06-21T16:51:12.523Z] [Next.js] GET /api/auth/session 200 in 10ms
+[2025-06-21T16:51:12.536Z] [Next.js] GET /api/auth/session 200 in 10ms
+[2025-06-21T16:51:12.550Z] [Next.js] GET /api/auth/session 200 in 12ms
+[2025-06-21T16:51:12.566Z] [Next.js ERROR] Wallet fetch error: PrismaClientKnownRequestError: 
+Invalid `prisma.wallet.findUnique()` invocation:
+
+
+Raw query failed. Code: `unknown`. Message: `Kind: Command failed: Error code 13 (Unauthorized): Command aggregate requires authentication, labels: {}`
+    at $n.handleRequestError (F:\ehb next.js 04\node_modules\@prisma\client\runtime\library.js:121:7315)
+    at $n.handleAndLogRequestError (F:\ehb next.js 04\node_modules\@prisma\client\runtime\library.js:121:6623)
+    at $n.request (F:\ehb next.js 04\node_modules\@prisma\client\runtime\library.js:121:6307)
+    at async l (F:\ehb next.js 04\node_modules\@prisma\client\runtime\library.js:130:9633)
+    at async GET (webpack-internal:///(rsc)/./app/api/wallet/route.ts:78:24)
+    at async F:\ehb next.js 04\node_modules\next\dist\compiled\next-server\app-route.runtime.dev.js:6:57228
+    at async eT.execute (F:\ehb next.js 04\node_modules\next\dist\compiled\next-server\app-route.runtime.dev.js:6:46851)
+    at async eT.handle (F:\ehb next.js 04\node_modules\next\dist\compiled\next-server\app-route.runtime.dev.js:6:58760)
+    at async doRender (F:\ehb next.js 04\node_modules\next\dist\server\base-server.js:1366:42)
+    at async cacheEntry.responseCache.get.routeKind (F:\ehb next.js 04\node_modules\next\dist\server\base-server.js:1588:28)
+    at async DevServer.renderToResponseWithComponentsImpl (F:\ehb next.js 04\node_modules\next\dist\server\base-server.js:1496:28)
+    at async DevServer.renderPageComponent (F:\ehb next.js 04\node_modules\next\dist\server\base-server.js:1924:24)
+    at async DevServer.renderToResponseImpl (F:\ehb next.js 04\node_modules\next\dist\server\base-server.js:1962:32)
+    at async DevServer.pipeImpl (F:\ehb next.js 04\node_modules\next\dist\server\base-server.js:922:25)
+    at async NextNodeServer.handleCatchallRenderRequest (F:\ehb next.js 04\node_modules\next\dist\server\next-server.js:272:17)
+    at async DevServer.handleRequestImpl (F:\ehb next.js 04\node_modules\next\dist\server\base-server.js:818:17)
+    at async F:\ehb next.js 04\node_modules\next\dist\server\dev\next-dev-server.js:339:20
+    at async Span.traceAsyncFn (F:\ehb next.js 04\node_modules\next\dist\trace\trace.js:154:20)
+    at async DevServer.handleRequest (F:\ehb next.js 04\node_modules\next\dist\server\dev\next-dev-server.js:336:24)
+    at async invokeRender (F:\ehb next.js 04\node_modules\next\dist\server\lib\router-server.js:179:21)
+    at async handleRequest (F:\ehb next.js 04\node_modules\next\dist\server\lib\router-server.js:359:24)
+    at async requestHandlerImpl (F:\ehb next.js 04\node_modules\next\dist\server\lib\router-server.js:383:13)
+    at async Server.requestListener (F:\ehb next.js 04\node_modules\next\dist\server\lib\start-server.js:141:13) {
+  code: 'P2010',
+  clientVersion: '5.22.0',
+  meta: {
+    modelName: 'Wallet',
+    code: 'unknown',
+    message: 'Kind: Command failed: Error code 13 (Unauthorized): Command aggregate requires authentication, labels: {}'
+  }
+}
+[2025-06-21T16:51:12.567Z] [Next.js] GET /api/wallet 500 in 21ms
+[2025-06-21T16:51:12.570Z] [Next.js] GET /api/auth/session 200 in 17ms
+[2025-06-21T16:51:12.583Z] [Next.js] GET /api/auth/session 200 in 10ms
+[2025-06-21T16:51:12.594Z] [Next.js] GET /api/auth/session 200 in 9ms
+[2025-06-21T16:51:12.607Z] [Next.js] GET /api/auth/session 200 in 9ms
+[2025-06-21T16:51:12.621Z] [Next.js] GET /api/auth/session 200 in 11ms
+[2025-06-21T16:51:12.634Z] [Next.js ERROR] Wallet fetch error: PrismaClientKnownRequestError: 
+Invalid `prisma.wallet.findUnique()` invocation:
+
+
+Raw query failed. Code: `unknown`. Message: `Kind: Command failed: Error code 13 (Unauthorized): Command aggregate requires authentication, labels: {}`
+    at $n.handleRequestError (F:\ehb next.js 04\node_modules\@prisma\client\runtime\library.js:121:7315)
+    at $n.handleAndLogRequestError (F:\ehb next.js 04\node_modules\@prisma\client\runtime\library.js:121:6623)
+    at $n.request (F:\ehb next.js 04\node_modules\@prisma\client\runtime\library.js:121:6307)
+    at async l (F:\ehb next.js 04\node_modules\@prisma\client\runtime\library.js:130:9633)
+    at async GET (webpack-internal:///(rsc)/./app/api/wallet/route.ts:78:24)
+    at async F:\ehb next.js 04\node_modules\next\dist\compiled\next-server\app-route.runtime.dev.js:6:57228
+    at async eT.execute (F:\ehb next.js 04\node_modules\next\dist\compiled\next-server\app-route.runtime.dev.js:6:46851)
+    at async eT.handle (F:\ehb next.js 04\node_modules\next\dist\compiled\next-server\app-route.runtime.dev.js:6:58760)
+    at async doRender (F:\ehb next.js 04\node_modules\next\dist\server\base-server.js:1366:42)
+    at async cacheEntry.responseCache.get.routeKind (F:\ehb next.js 04\node_modules\next\dist\server\base-server.js:1588:28)
+    at async DevServer.renderToResponseWithComponentsImpl (F:\ehb next.js 04\node_modules\next\dist\server\base-server.js:1496:28)
+    at async DevServer.renderPageComponent (F:\ehb next.js 04\node_modules\next\dist\server\base-server.js:1924:24)
+    at async DevServer.renderToResponseImpl (F:\ehb next.js 04\node_modules\next\dist\server\base-server.js:1962:32)
+    at async DevServer.pipeImpl (F:\ehb next.js 04\node_modules\next\dist\server\base-server.js:922:25)
+    at async NextNodeServer.handleCatchallRenderRequest (F:\ehb next.js 04\node_modules\next\dist\server\next-server.js:272:17)
+    at async DevServer.handleRequestImpl (F:\ehb next.js 04\node_modules\next\dist\server\base-server.js:818:17)
+    at async F:\ehb next.js 04\node_modules\next\dist\server\dev\next-dev-server.js:339:20
+    at async Span.traceAsyncFn (F:\ehb next.js 04\node_modules\next\dist\trace\trace.js:154:20)
+    at async DevServer.handleRequest (F:\ehb next.js 04\node_modules\next\dist\server\dev\next-dev-server.js:336:24)
+    at async invokeRender (F:\ehb next.js 04\node_modules\next\dist\server\lib\router-server.js:179:21)
+    at async handleRequest (F:\ehb next.js 04\node_modules\next\dist\server\lib\router-server.js:359:24)
+    at async requestHandlerImpl (F:\ehb next.js 04\node_modules\next\dist\server\lib\router-server.js:383:13)
+    at async Server.requestListener (F:\ehb next.js 04\node_modules\next\dist\server\lib\start-server.js:141:13) {
+  code: 'P2010',
+  clientVersion: '5.22.0',
+  meta: {
+    modelName: 'Wallet',
+    code: 'unknown',
+    message: 'Kind: Command failed: Error code 13 (Unauthorized): Command aggregate requires authentication, labels: {}'
+  }
+}
+[2025-06-21T16:51:12.634Z] [Next.js] GET /api/wallet 500 in 12ms
+[2025-06-21T16:51:16.302Z] [Next.js] [?25h
+[2025-06-21T16:51:16.307Z] [Next.js] 
+[2025-06-21T16:51:16.839Z] Next.js process exited with code 0
+[2025-06-21T16:51:34.007Z] 🔍 Performing health check...
+[2025-06-21T16:51:34.009Z] ❌ Main App is not available on port 3000
+[2025-06-21T16:51:34.010Z] ❌ Admin Panel is not available on port 3000
+[2025-06-21T16:51:34.011Z] ❌ Dashboard is not available on port 3000
+[2025-06-21T16:51:34.013Z] ❌ API is not available on port 3000
+[2025-06-21T16:51:34.015Z] ❌ AI Services is not available on port 3000
+[2025-06-21T16:51:34.016Z] ❌ Wallet is not available on port 3000
+[2025-06-21T16:51:34.017Z] ❌ Analytics is not available on port 3000

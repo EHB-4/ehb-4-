@@ -1,0 +1,33 @@
+{
+  "name": "ehb-next-frontend",
+  "version": "1.0.0",
+  "private": true,
+  "type": "commonjs",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint . --fix",
+    "clean": "rimraf .next && rimraf node_modules/.cache",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
+    "type-check": "tsc --noEmit",
+    "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,md}\"",
+    "ultra-fast-cursor": "node scripts/ehb-ultra-fast-frontend-agent.cjs",
+    "auto-frontend": "node scripts/ehb-auto-system/agents/frontend-agent.cjs",
+    "ai-setup": "node scripts/ehb-ai-automation.cjs",
+    "ai-test": "node ai-automation/agents/test-generator.cjs",
+    "ai-review": "node ai-automation/agents/code-review.cjs",
+    "auto-start": "npm run dev",
+    "auto-status": "node scripts/ehb-auto-system/tools/status-checker.cjs",
+    "auto-fix-all": "node scripts/auto-fix-all.cjs",
+    "auto-test": "node scripts/ehb-auto-system/tools/test-runner.cjs",
+    "auto-monitor": "node scripts/ehb-auto-system/tools/monitor.cjs",
+    "auto-ports": "node scripts/ehb-auto-system/tools/port-manager.cjs",
+    "gen:component": "node scripts/dev-tools.cjs gen:component",
+    "gen:page": "node scripts/dev-tools.cjs gen:page",
+    "dev:full": "concurrently \"npm run auto-monitor\" \"npm run dev-tools\"",
+    "open": "node scripts/dev-tools.cjs start"
+  }
+}

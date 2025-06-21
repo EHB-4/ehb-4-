@@ -1,0 +1,18 @@
+{
+  "version": "1.0.0",
+  "autoActivate": true,
+  "autoRun": true,
+  "autoAccept": true,
+  "projectId": "ehb-next-js-04-frontend",
+  "frontendMode": true,
+  "optimizations": {
+    "disableBackendFeatures": true,
+    "enableFrontendFeatures": true,
+    "fastMode": true,
+    "autoComplete": true,
+    "smartSuggestions": true,
+    "componentGeneration": true,
+    "styleOptimization": true,
+    "testGeneration": true
+  }
+}

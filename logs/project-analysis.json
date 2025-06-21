@@ -1,12 +1,12 @@
 {
-  "timestamp": "2025-06-21T16:49:54.973Z",
+  "timestamp": "2025-06-21T16:59:44.890Z",
   "files": {
     "components": 270,
     "pages": 216,
     "api": 118,
     "tests": 7,
-    "config": 3
+    "config": 4
   },
-  "issues": [],
+  "issues": ["Low test coverage - consider adding more tests"],
   "suggestions": []
 }

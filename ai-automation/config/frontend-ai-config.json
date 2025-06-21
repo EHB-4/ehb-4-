@@ -1,0 +1,19 @@
+{
+  "version": "1.0.0",
+  "mode": "frontend-only",
+  "automation": {
+    "enabled": true,
+    "agents": ["code-review", "test-generator", "component-generator", "ui-optimizer"],
+    "triggers": ["file-change", "component-create", "style-change"],
+    "backendDisabled": true
+  },
+  "cursor": {
+    "integration": true,
+    "autoSuggest": true,
+    "codeCompletion": true,
+    "refactoring": true,
+    "autoActivate": true,
+    "frontendOptimized": true,
+    "fastMode": true
+  }
+}

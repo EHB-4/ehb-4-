@@ -10,12 +10,6 @@ export default defineConfig({
   use: {
     baseURL: 'http://localhost:3000',
     trace: 'on-first-retry',
-    // Ultra-fast settings
-    actionTimeout: 5000,
-    navigationTimeout: 10000,
-    expect: {
-      timeout: 5000,
-    },
   },
 
   projects: [
@@ -42,9 +36,8 @@ export default defineConfig({
   ],
 
   webServer: {
-    command: 'npm run dev',
+    command: 'npm run start',
     url: 'http://localhost:3000',
     reuseExistingServer: !process.env.CI,
-    timeout: 30000,
   },
 });
