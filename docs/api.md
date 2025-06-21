@@ -76,7 +76,7 @@ Get order by ID
 
 Update order status
 
-### Authentication Endpoints
+### Authentication
 
 #### POST /api/auth/login
 

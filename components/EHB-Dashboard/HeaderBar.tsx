@@ -1,4 +1,5 @@
-import { ThemeSwitcher } from "@/components/ui/ThemeSwitcher";
+import { ThemeSwitcher } from '@/components/ui/ThemeSwitcher';
+import { ThemeSwitcher } from '@/components/ui/ThemeSwitcher';
 import { motion } from 'framer-motion';
 import React from 'react';
 import { FiBell, FiUser, FiLogOut, FiSettings } from 'react-icons/fi';

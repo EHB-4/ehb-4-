@@ -1,0 +1,20 @@
+[2025-06-21T16:50:43.892Z] 🎯 Starting Live Monitor...
+[2025-06-21T16:50:43.897Z] 🚀 Starting Next.js development server...
+[2025-06-21T16:50:44.251Z] [Next.js] > ehb-next-js-04@0.1.0 dev
+> next dev
+[2025-06-21T16:50:44.991Z] [Next.js] ▲ Next.js 14.2.30
+[2025-06-21T16:50:44.992Z] [Next.js] - Local:        http://localhost:3000
+  - Environments: .env.local, .env.development, .env
+  - Experiments (use with caution):
+    · optimizeCss
+
+ ✓ Starting...
+[2025-06-21T16:50:47.405Z] [Next.js] ✓ Ready in 2.5s
+[2025-06-21T16:50:47.405Z] ✅ Next.js server is ready!
+[2025-06-21T16:50:47.406Z] 🌐 Opening all services in browser...
+[2025-06-21T16:50:47.450Z] [Next.js] ✓ Compiled /middleware in 204ms
+[2025-06-21T16:50:47.899Z] [Next.js] ✓ Compiled (72 modules)
+[2025-06-21T16:50:48.998Z] [Next.js] ○ Compiling /pss ...
+[2025-06-21T16:50:50.510Z] ✅ Opened Main App in browser: http://localhost:3000
+[2025-06-21T16:50:51.585Z] ✅ Opened Admin Panel in browser: http://localhost:3000/admin
+[2025-06-21T16:50:52.095Z] [Next.js] 
