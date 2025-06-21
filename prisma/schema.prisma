@@ -19,14 +19,22 @@ model User {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
+  // EMO-specific fields
+  sqlLevel     SQLLevel @default(BASIC)
+  subscription Subscription @default(NORMAL)
+  emoStatus    EMOStatus @default(ACTIVE)
+
   // Relations
-  orders     Order[]
-  reviews    Review[]
-  wishlist   WishlistItem[]
-  cart       CartItem[]
-  wallet     Wallet?
-  profile    Profile?
-  kyc        KYC?
+  orders       Order[]
+  reviews      Review[]
+  wishlist     WishlistItem[]
+  cart         CartItem[]
+  wallet       Wallet?
+  profile      Profile?
+  kyc          KYC?
+  complaints   Complaint[]
+  products     Product[]
+  transactions Transaction[]
   
   @@map("users")
 }
@@ -41,6 +49,12 @@ model Profile {
   country     String?
   postalCode  String?
   bio         String?
+  
+  // EMO-specific fields
+  businessType String?
+  businessName String?
+  cnic         String?
+  emoVerified  Boolean @default(false)
   
   user        User    @relation(fields: [userId], references: [id], onDelete: Cascade)
   
@@ -59,7 +73,15 @@ model Product {
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 
+  // EMO-specific fields
+  sellerId    String   @db.ObjectId
+  emoStatus   EMOProductStatus @default(PENDING)
+  approvedAt  DateTime?
+  approvedBy  String?  @db.ObjectId
+  commission  Float    @default(0.05) // 5% default commission
+
   // Relations
+  seller      User     @relation(fields: [sellerId], references: [id])
   reviews     Review[]
   cartItems   CartItem[]
   wishlistItems WishlistItem[]
@@ -76,9 +98,16 @@ model Order {
   createdAt DateTime    @default(now())
   updatedAt DateTime    @updatedAt
 
+  // EMO-specific fields
+  deliveryAddress String?
+  paymentMethod   String?
+  emoCommission   Float?
+  franchiseId     String?  @db.ObjectId
+
   // Relations
   user      User        @relation(fields: [userId], references: [id])
   items     OrderItem[]
+  complaints Complaint[]
   
   @@map("orders")
 }
@@ -130,9 +159,33 @@ model Wallet {
   userId  String  @unique @db.ObjectId
   balance Float   @default(0)
   
+  // EMO-specific fields
+  lockedBalance Float @default(0)
+  totalEarned   Float @default(0)
+  totalSpent    Float @default(0)
+  
   user    User    @relation(fields: [userId], references: [id])
+  transactions Transaction[]
   
   @@map("wallets")
+}
+
+model Transaction {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId    String   @db.ObjectId
+  walletId  String   @db.ObjectId
+  type      TransactionType
+  amount    Float
+  description String
+  status    TransactionStatus @default(PENDING)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  user      User     @relation(fields: [userId], references: [id])
+  wallet    Wallet   @relation(fields: [walletId], references: [id])
+  
+  @@map("transactions")
 }
 
 model KYC {
@@ -144,28 +197,124 @@ model KYC {
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
   
+  // EMO-specific fields
+  documentType String?
+  rejectionReason String?
+  verifiedBy   String?  @db.ObjectId
+  
   user        User     @relation(fields: [userId], references: [id])
   
   @@map("kyc")
+}
+
+model Complaint {
+  id          String            @id @default(auto()) @map("_id") @db.ObjectId
+  userId      String            @db.ObjectId
+  orderId     String?           @db.ObjectId
+  type        ComplaintType
+  subject     String
+  description String
+  status      ComplaintStatus   @default(FILED)
+  priority    ComplaintPriority @default(MEDIUM)
+  createdAt   DateTime          @default(now())
+  updatedAt   DateTime          @updatedAt
+
+  // EMO-specific fields
+  caseNo      String   @unique
+  assignedTo  String?  @db.ObjectId
+  resolvedAt  DateTime?
+  resolution  String?
+  escalatedAt DateTime?
+  escalatedTo String?  @db.ObjectId
+
+  // Relations
+  user        User      @relation(fields: [userId], references: [id])
+  order       Order?    @relation(fields: [orderId], references: [id])
+  
+  @@map("complaints")
 }
 
 model WishlistItem {
   id        String @id @default(auto()) @map("_id") @db.ObjectId
   userId    String @db.ObjectId
   productId String @db.ObjectId
-  createdAt DateTime @default(now())
 
+  // Relations
   user      User    @relation(fields: [userId], references: [id])
   product   Product @relation(fields: [productId], references: [id])
-
-  @@unique([userId, productId])
+  
   @@map("wishlist_items")
+}
+
+// PSS (Patient Safety System) Models
+model VerificationRequest {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  applicant   String
+  role        String
+  submitted   String
+  risk        String   @default("low")
+  status      String   @default("pending")
+  
+  // Personal Information
+  fullName    String
+  contactNumber String
+  dateOfBirth String
+  address     String
+  
+  // Documents
+  idCard      String?
+  license     String?
+  
+  // Liveness Check
+  selfie      String?
+  
+  // Payment
+  amount      Float
+  method      String
+  transactionId String?
+  
+  // Admin
+  adminNotes  String?
+  
+  // Timestamps
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  @@map("verification_requests")
 }
 
 enum Role {
   USER
   ADMIN
   MODERATOR
+  FRANCHISE
+}
+
+enum SQLLevel {
+  BASIC
+  NORMAL
+  HIGH
+  VIP
+}
+
+enum Subscription {
+  BASIC
+  NORMAL
+  PREMIUM
+  VIP
+}
+
+enum EMOStatus {
+  ACTIVE
+  SUSPENDED
+  BANNED
+}
+
+enum EMOProductStatus {
+  PENDING
+  APPROVED
+  REJECTED
+  SUSPENDED
 }
 
 enum OrderStatus {
@@ -181,3 +330,44 @@ enum KYCStatus {
   APPROVED
   REJECTED
 }
+
+enum TransactionType {
+  DEPOSIT
+  WITHDRAWAL
+  PURCHASE
+  REFUND
+  COMMISSION
+  BONUS
+}
+
+enum TransactionStatus {
+  PENDING
+  COMPLETED
+  FAILED
+  CANCELLED
+}
+
+enum ComplaintType {
+  DELIVERY
+  QUALITY
+  PAYMENT
+  SERVICE
+  TECHNICAL
+  OTHER
+}
+
+enum ComplaintStatus {
+  FILED
+  ASSIGNED
+  IN_PROGRESS
+  RESOLVED
+  ESCALATED
+  CLOSED
+}
+
+enum ComplaintPriority {
+  LOW
+  MEDIUM
+  HIGH
+  URGENT
+} 

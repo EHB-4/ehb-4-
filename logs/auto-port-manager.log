@@ -400,3 +400,136 @@ https://nextjs.org/docs/messages/module-not-found
 [2025-06-20T17:07:36.466Z] [Next.js] [?25h
 [2025-06-20T17:07:36.481Z] [Next.js] 
 [2025-06-20T17:07:37.240Z] Next.js process exited with code 0
+[2025-06-21T16:49:26.732Z] 🚀 Starting Auto Port Manager...
+[2025-06-21T16:49:26.740Z] Cleaning up ports...
+[2025-06-21T16:49:27.064Z] Installing dependencies...
+[2025-06-21T16:49:27.065Z] Running: npm install critters Installing critters
+[2025-06-21T16:49:30.300Z] [Installing critters ERROR] npm error code UNKNOWN
+[2025-06-21T16:49:30.300Z] [Installing critters ERROR] npm error syscall open
+npm error path F:\ehb next.js 04\package-lock.json
+npm error errno -4094
+npm error UNKNOWN: unknown error, open 'F:\ehb next.js 04\package-lock.json'
+[2025-06-21T16:49:30.301Z] [Installing critters ERROR] npm error A complete log of this run can be found in: F:\ehb next.js 04\.npm-cache\_logs\2025-06-21T16_49_27_249Z-debug-0.log
+[2025-06-21T16:49:30.322Z] Error: Command failed: npm install critters
+npm error code UNKNOWN
+npm error syscall open
+npm error path F:\ehb next.js 04\package-lock.json
+npm error errno -4094
+npm error UNKNOWN: unknown error, open 'F:\ehb next.js 04\package-lock.json'
+npm error A complete log of this run can be found in: F:\ehb next.js 04\.npm-cache\_logs\2025-06-21T16_49_27_249Z-debug-0.log
+
+[2025-06-21T16:49:30.322Z] Failed to install critters: Command failed: npm install critters
+npm error code UNKNOWN
+npm error syscall open
+npm error path F:\ehb next.js 04\package-lock.json
+npm error errno -4094
+npm error UNKNOWN: unknown error, open 'F:\ehb next.js 04\package-lock.json'
+npm error A complete log of this run can be found in: F:\ehb next.js 04\.npm-cache\_logs\2025-06-21T16_49_27_249Z-debug-0.log
+
+[2025-06-21T16:49:30.322Z] Running: npm install next Installing next
+[2025-06-21T16:49:35.720Z] [Installing next] up to date in 5s
+[2025-06-21T16:49:35.764Z] Output: 
+up to date in 5s
+
+[2025-06-21T16:49:35.764Z] Running: npm install react Installing react
+[2025-06-21T16:49:40.202Z] [Installing react ERROR] npm error code UNKNOWN
+npm error syscall open
+[2025-06-21T16:49:40.203Z] [Installing react ERROR] npm error path F:\ehb next.js 04\package-lock.json
+npm error errno -4094
+npm error UNKNOWN: unknown error, open 'F:\ehb next.js 04\package-lock.json'
+[2025-06-21T16:49:40.204Z] [Installing react ERROR] npm error A complete log of this run can be found in: F:\ehb next.js 04\.npm-cache\_logs\2025-06-21T16_49_36_025Z-debug-0.log
+[2025-06-21T16:49:40.230Z] Error: Command failed: npm install react
+npm error code UNKNOWN
+npm error syscall open
+npm error path F:\ehb next.js 04\package-lock.json
+npm error errno -4094
+npm error UNKNOWN: unknown error, open 'F:\ehb next.js 04\package-lock.json'
+npm error A complete log of this run can be found in: F:\ehb next.js 04\.npm-cache\_logs\2025-06-21T16_49_36_025Z-debug-0.log
+
+[2025-06-21T16:49:40.230Z] Failed to install react: Command failed: npm install react
+npm error code UNKNOWN
+npm error syscall open
+npm error path F:\ehb next.js 04\package-lock.json
+npm error errno -4094
+npm error UNKNOWN: unknown error, open 'F:\ehb next.js 04\package-lock.json'
+npm error A complete log of this run can be found in: F:\ehb next.js 04\.npm-cache\_logs\2025-06-21T16_49_36_025Z-debug-0.log
+
+[2025-06-21T16:49:40.231Z] Running: npm install react-dom Installing react-dom
+[2025-06-21T16:49:45.613Z] [Installing react-dom ERROR] npm error code UNKNOWN
+[2025-06-21T16:49:45.613Z] [Installing react-dom ERROR] npm error syscall open
+npm error path F:\ehb next.js 04\package-lock.json
+npm error errno -4094
+npm error UNKNOWN: unknown error, open 'F:\ehb next.js 04\package-lock.json'
+[2025-06-21T16:49:45.614Z] [Installing react-dom ERROR] npm error A complete log of this run can be found in: F:\ehb next.js 04\.npm-cache\_logs\2025-06-21T16_49_40_405Z-debug-0.log
+[2025-06-21T16:49:45.637Z] Error: Command failed: npm install react-dom
+npm error code UNKNOWN
+npm error syscall open
+npm error path F:\ehb next.js 04\package-lock.json
+npm error errno -4094
+npm error UNKNOWN: unknown error, open 'F:\ehb next.js 04\package-lock.json'
+npm error A complete log of this run can be found in: F:\ehb next.js 04\.npm-cache\_logs\2025-06-21T16_49_40_405Z-debug-0.log
+
+[2025-06-21T16:49:45.638Z] Failed to install react-dom: Command failed: npm install react-dom
+npm error code UNKNOWN
+npm error syscall open
+npm error path F:\ehb next.js 04\package-lock.json
+npm error errno -4094
+npm error UNKNOWN: unknown error, open 'F:\ehb next.js 04\package-lock.json'
+npm error A complete log of this run can be found in: F:\ehb next.js 04\.npm-cache\_logs\2025-06-21T16_49_40_405Z-debug-0.log
+
+[2025-06-21T16:49:45.638Z] Running: npm install typescript Installing typescript
+[2025-06-21T16:49:51.973Z] [Installing typescript ERROR] npm error code UNKNOWN
+[2025-06-21T16:49:51.974Z] [Installing typescript ERROR] npm error syscall open
+npm error path F:\ehb next.js 04\package.json
+npm error errno -4094
+npm error UNKNOWN: unknown error, open 'F:\ehb next.js 04\package.json'
+[2025-06-21T16:49:51.976Z] [Installing typescript ERROR] npm error A complete log of this run can be found in: F:\ehb next.js 04\.npm-cache\_logs\2025-06-21T16_49_45_857Z-debug-0.log
+[2025-06-21T16:49:52.016Z] Error: Command failed: npm install typescript
+npm error code UNKNOWN
+npm error syscall open
+npm error path F:\ehb next.js 04\package.json
+npm error errno -4094
+npm error UNKNOWN: unknown error, open 'F:\ehb next.js 04\package.json'
+npm error A complete log of this run can be found in: F:\ehb next.js 04\.npm-cache\_logs\2025-06-21T16_49_45_857Z-debug-0.log
+
+[2025-06-21T16:49:52.016Z] Failed to install typescript: Command failed: npm install typescript
+npm error code UNKNOWN
+npm error syscall open
+npm error path F:\ehb next.js 04\package.json
+npm error errno -4094
+npm error UNKNOWN: unknown error, open 'F:\ehb next.js 04\package.json'
+npm error A complete log of this run can be found in: F:\ehb next.js 04\.npm-cache\_logs\2025-06-21T16_49_45_857Z-debug-0.log
+
+[2025-06-21T16:49:52.017Z] Running: npm install @types/node Installing @types/node
+[2025-06-21T16:49:58.834Z] [Installing @types/node ERROR] npm error code UNKNOWN
+[2025-06-21T16:49:58.836Z] [Installing @types/node ERROR] npm error syscall open
+npm error path F:\ehb next.js 04\package-lock.json
+npm error errno -4094
+npm error UNKNOWN: unknown error, open 'F:\ehb next.js 04\package-lock.json'
+npm error A complete log of this run can be found in: F:\ehb next.js 04\.npm-cache\_logs\2025-06-21T16_49_52_272Z-debug-0.log
+[2025-06-21T16:49:58.888Z] Error: Command failed: npm install @types/node
+npm error code UNKNOWN
+npm error syscall open
+npm error path F:\ehb next.js 04\package-lock.json
+npm error errno -4094
+npm error UNKNOWN: unknown error, open 'F:\ehb next.js 04\package-lock.json'
+npm error A complete log of this run can be found in: F:\ehb next.js 04\.npm-cache\_logs\2025-06-21T16_49_52_272Z-debug-0.log
+
+[2025-06-21T16:49:58.889Z] Failed to install @types/node: Command failed: npm install @types/node
+npm error code UNKNOWN
+npm error syscall open
+npm error path F:\ehb next.js 04\package-lock.json
+npm error errno -4094
+npm error UNKNOWN: unknown error, open 'F:\ehb next.js 04\package-lock.json'
+npm error A complete log of this run can be found in: F:\ehb next.js 04\.npm-cache\_logs\2025-06-21T16_49_52_272Z-debug-0.log
+
+[2025-06-21T16:49:58.890Z] Running: npm install @types/react Installing @types/react
+[2025-06-21T16:50:06.599Z] [Installing @types/react] up to date in 7s
+[2025-06-21T16:50:06.664Z] Output: 
+up to date in 7s
+
+[2025-06-21T16:50:06.667Z] Running: npm install tailwindcss Installing tailwindcss
+[2025-06-21T16:50:10.770Z] 🚀 Starting Auto Port Manager...
+[2025-06-21T16:50:10.784Z] Cleaning up ports...
+[2025-06-21T16:50:12.351Z] Installing dependencies...
+[2025-06-21T16:50:12.351Z] Running: npm install critters Installing critters

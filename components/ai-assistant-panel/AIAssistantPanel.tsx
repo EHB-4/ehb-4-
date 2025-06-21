@@ -1,136 +1,120 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import { motion, AnimatePresence, Variants } from 'framer-motion';
-import { FiX, FiChevronsRight, FiZap, FiCheckCircle, FiBell } from 'react-icons/fi';
+import { useState, useEffect, useRef } from 'react';
+import { motion } from 'framer-motion';
+import { FiChevronsLeft, FiChevronsRight, FiSend, FiMessageSquare } from 'react-icons/fi';
 import { Button } from '../ui/button';
-
-// Define a type for our state for better type safety
-interface AssistantState {
-  suggestions: { id: number; description: string; status: string }[];
-  actions: { description: string; timestamp: string }[];
-  dailySummary: { improvements: number; suggestionsAdded: number };
-  autoMode: boolean;
-}
+import { Input } from '../ui/input';
+import { ScrollArea } from '../ui/scroll-area';
+import { useAIChat } from '../layout/AIChatProvider';
+import { cn } from '@/lib/utils';
 
 export default function AIAssistantPanel() {
   const [isOpen, setIsOpen] = useState(true);
-  const [state, setState] = useState<AssistantState>({
-    suggestions: [],
-    actions: [],
-    dailySummary: { improvements: 0, suggestionsAdded: 0 },
-    autoMode: true,
-  });
+  const { messages, isLoading, sendMessage } = useAIChat();
+  const [input, setInput] = useState('');
+  const scrollRef = useRef<HTMLDivElement>(null);
 
-  // In a real app, you'd fetch this from an API route that reads the state file.
-  // For this demo, we'll just use some initial mock data.
   useEffect(() => {
-    const mockState: AssistantState = {
-      suggestions: [
-        {
-          id: 1,
-          description: 'Theme switcher is missing from the main layout.',
-          status: 'pending',
-        },
-        {
-          id: 2,
-          description: 'Sidebar should be collapsible to save screen space.',
-          status: 'pending',
-        },
-      ],
-      actions: [
-        {
-          description: 'Agent initialized and scan complete.',
-          timestamp: new Date().toISOString(),
-        },
-      ],
-      dailySummary: { improvements: 0, suggestionsAdded: 2 },
-      autoMode: true,
-    };
-    setState(mockState);
-  }, []);
+    if (scrollRef.current) {
+      scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
+    }
+  }, [messages]);
 
-  const sidebarVariants: Variants = {
-    open: { x: 0, transition: { type: 'spring', stiffness: 300, damping: 30 } },
-    closed: { x: '100%', transition: { type: 'spring', stiffness: 300, damping: 30 } },
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (!input.trim() || isLoading) return;
+
+    const message = input.trim();
+    setInput('');
+    await sendMessage(message);
   };
 
-  if (!isOpen) {
-    return (
-      <motion.div
-        className="fixed top-1/2 right-0 -translate-y-1/2 z-50"
-        initial={{ x: '100%' }}
-        animate={{ x: 0 }}
-        transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-      >
-        <Button onClick={() => setIsOpen(true)} size="icon" className="rounded-r-none shadow-lg">
-          <FiChevronsRight className="h-5 w-5" />
-        </Button>
-      </motion.div>
-    );
-  }
+  const sidebarVariants = {
+    open: { x: 0 },
+    closed: { x: 'calc(100% - 48px)' },
+  };
 
   return (
-    <AnimatePresence>
-      <motion.div
-        className="fixed top-0 right-0 h-full w-96 bg-slate-900 text-white shadow-2xl z-50 p-4 flex flex-col font-sans"
-        variants={sidebarVariants}
-        initial="closed"
-        animate="open"
-        exit="closed"
-      >
-        <div className="flex items-center justify-between pb-4 border-b border-slate-700">
-          <h2 className="text-lg font-bold">🚀 AI UI/UX Assistant</h2>
-          <Button onClick={() => setIsOpen(false)} variant="ghost" size="icon">
-            <FiX className="h-5 w-5" />
-          </Button>
+    <motion.div
+      variants={sidebarVariants}
+      initial="open"
+      animate={isOpen ? 'open' : 'closed'}
+      transition={{ type: 'spring', stiffness: 400, damping: 40 }}
+      className="fixed top-0 right-0 h-full w-96 bg-slate-900 text-white shadow-2xl z-50 flex flex-col font-sans"
+    >
+      <div className="absolute top-1/2 -translate-y-1/2 -left-12">
+        <Button onClick={() => setIsOpen(!isOpen)} size="icon" className="rounded-r-none shadow-lg">
+          {isOpen ? (
+            <FiChevronsRight className="h-5 w-5" />
+          ) : (
+            <FiChevronsLeft className="h-5 w-5" />
+          )}
+        </Button>
+      </div>
+
+      <div className="p-4 flex flex-col h-full overflow-hidden">
+        <div className="flex items-center justify-between pb-4 border-b border-slate-700 flex-shrink-0">
+          <h2 className="text-lg font-bold flex items-center">
+            <FiMessageSquare className="mr-2" /> AI Assistant
+          </h2>
         </div>
 
-        {/* Summary Section */}
-        <div className="grid grid-cols-2 gap-4 p-2 my-4 bg-slate-800 rounded-lg">
-          <div className="text-center p-2">
-            <p className="text-2xl font-bold">{state.dailySummary.improvements}</p>
-            <p className="text-xs text-slate-400">Improvements Today</p>
-          </div>
-          <div className="text-center p-2">
-            <p className="text-2xl font-bold">{state.dailySummary.suggestionsAdded}</p>
-            <p className="text-xs text-slate-400">Pending Suggestions</p>
-          </div>
-        </div>
-
-        {/* Suggestions Section */}
-        <div className="flex-grow overflow-y-auto space-y-6">
-          <div>
-            <h3 className="font-bold mb-2 text-slate-300 flex items-center">
-              <FiBell className="mr-2" /> Suggestions
-            </h3>
-            <ul className="space-y-2">
-              {state.suggestions.map(s => (
-                <li
-                  key={s.id}
-                  className="p-3 bg-slate-800 rounded-lg text-sm flex items-start hover:bg-slate-700 transition-colors"
+        <ScrollArea ref={scrollRef} className="flex-1 my-4">
+          <div className="space-y-4 pr-4">
+            {messages.map(message => (
+              <div
+                key={message.id}
+                className={cn(
+                  'flex flex-col space-y-2',
+                  message.role === 'user' ? 'items-end' : 'items-start'
+                )}
+              >
+                <div
+                  className={cn(
+                    'rounded-lg px-4 py-2 max-w-[90%]',
+                    message.role === 'user'
+                      ? 'bg-blue-600 text-white'
+                      : 'bg-slate-700 text-slate-200'
+                  )}
                 >
-                  <FiZap className="w-4 h-4 mr-3 mt-0.5 text-yellow-400 flex-shrink-0" />
-                  <span>{s.description}</span>
-                </li>
-              ))}
-            </ul>
+                  <p className="text-sm">{message.content}</p>
+                </div>
+                <span className="text-xs text-slate-400">
+                  {new Date(message.timestamp).toLocaleTimeString()}
+                </span>
+              </div>
+            ))}
+            {isLoading && (
+              <div className="flex items-start space-x-2 text-slate-400">
+                <div className="w-2 h-2 bg-current rounded-full animate-bounce" />
+                <div className="w-2 h-2 bg-current rounded-full animate-bounce delay-100" />
+                <div className="w-2 h-2 bg-current rounded-full animate-bounce delay-200" />
+              </div>
+            )}
           </div>
+        </ScrollArea>
 
-          <div>
-            <h3 className="font-bold mb-2 text-slate-300 flex items-center">
-              <FiCheckCircle className="mr-2" /> Recent Actions
-            </h3>
-            <ul className="space-y-2 text-sm text-slate-400">
-              {state.actions.map((a, i) => (
-                <li key={i} className="p-3 bg-slate-800/50 rounded-lg text-xs">
-                  {a.description}
-                </li>
-              ))}
-            </ul>
+        <form onSubmit={handleSubmit} className="border-t border-slate-700 pt-4">
+          <div className="flex space-x-2">
+            <Input
+              value={input}
+              onChange={e => setInput(e.target.value)}
+              placeholder="Ask the AI assistant..."
+              disabled={isLoading}
+              className="flex-1 bg-slate-800 border-slate-600 text-white placeholder-slate-400"
+            />
+            <Button
+              type="submit"
+              disabled={isLoading || !input.trim()}
+              size="icon"
+              className="bg-blue-600 hover:bg-blue-700"
+            >
+              <FiSend className="h-5 w-5" />
+            </Button>
           </div>
-        </div>
-      </motion.div>
-    </AnimatePresence>
+        </form>
+      </div>
+    </motion.div>
   );
 }

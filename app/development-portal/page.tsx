@@ -181,8 +181,8 @@ export default function DevelopmentPortalPage() {
             transition={{ delay: 0.2 }}
             className="grid grid-cols-2 md:grid-cols-4 gap-8"
           >
-            {stats.map((stat, index) => (
-              <div key={index} className="text-center">
+            {stats.map(stat => (
+              <div key={stat.label} className="text-center">
                 <div className="flex justify-center mb-4">
                   <stat.icon className="w-8 h-8 text-blue-600" />
                 </div>
@@ -210,12 +210,12 @@ export default function DevelopmentPortalPage() {
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {services.map((service, index) => (
+            {services.map(service => (
               <motion.div
-                key={index}
+                key={service.title}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.1 * index }}
+                transition={{ delay: 0.1 * services.indexOf(service) }}
                 className="group"
               >
                 <Link href={service.href}>

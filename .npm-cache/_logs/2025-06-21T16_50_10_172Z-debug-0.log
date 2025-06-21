@@ -1,0 +1,16 @@
+0 verbose cli C:\Program Files\nodejs\node.exe C:\Users\PC\AppData\Roaming\npm\node_modules\npm\bin\npm-cli.js
+1 info using npm@11.4.2
+2 info using node@v24.2.0
+3 silly config load:file:C:\Users\PC\AppData\Roaming\npm\node_modules\npm\npmrc
+4 silly config load:file:F:\ehb next.js 04\.npmrc
+5 silly config load:file:C:\Users\PC\.npmrc
+6 silly config load:file:C:\Users\PC\AppData\Roaming\npm\etc\npmrc
+7 verbose title npm exec kill-port 5500
+8 verbose argv "exec" "--" "kill-port" "5500"
+9 verbose logfile logs-max:10 dir:F:\ehb next.js 04\.npm-cache\_logs\2025-06-21T16_50_10_172Z-
+10 verbose logfile F:\ehb next.js 04\.npm-cache\_logs\2025-06-21T16_50_10_172Z-debug-0.log
+11 silly logfile start cleaning logs, removing 1 files
+12 silly logfile done cleaning log files
+13 silly packumentCache heap:4496293888 maxSize:1124073472 maxEntrySize:562036736
+14 http cache https://registry.npmjs.org/kill-port 97ms (cache hit)
+15 silly packumentCache heap:4496293888 maxSize:1124073472 maxEntrySize:562036736

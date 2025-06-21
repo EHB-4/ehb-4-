@@ -17,63 +17,81 @@ Authorization: Bearer <your-jwt-token>
 ### Users
 
 #### GET /api/users
+
 Get all users (admin only)
 
 #### POST /api/users
+
 Create a new user
 
 #### GET /api/users/[id]
+
 Get user by ID
 
 #### PUT /api/users/[id]
+
 Update user
 
 #### DELETE /api/users/[id]
+
 Delete user
 
 ### Products
 
 #### GET /api/products
+
 Get all products
 
 #### POST /api/products
+
 Create a new product
 
 #### GET /api/products/[id]
+
 Get product by ID
 
 #### PUT /api/products/[id]
+
 Update product
 
 #### DELETE /api/products/[id]
+
 Delete product
 
 ### Orders
 
 #### GET /api/orders
+
 Get all orders
 
 #### POST /api/orders
+
 Create a new order
 
 #### GET /api/orders/[id]
+
 Get order by ID
 
 #### PUT /api/orders/[id]
+
 Update order status
 
-### Authentication
+### Authentication Endpoints
 
 #### POST /api/auth/login
+
 User login
 
 #### POST /api/auth/register
+
 User registration
 
 #### POST /api/auth/logout
+
 User logout
 
 #### GET /api/auth/me
+
 Get current user
 
 ## Error Responses

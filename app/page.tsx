@@ -107,7 +107,11 @@ export default function HomePage() {
                   3
                 </span>
               </Link>
-              <button className="p-2 hover:bg-gray-100 rounded-lg">
+              <button
+                type="button"
+                aria-label="Open menu"
+                className="p-2 hover:bg-gray-100 rounded-lg"
+              >
                 <Menu className="h-6 w-6 text-gray-600" />
               </button>
             </div>
@@ -125,10 +129,16 @@ export default function HomePage() {
               Discover amazing apps, games, and digital content
             </p>
             <div className="flex space-x-4">
-              <button className="bg-white text-blue-600 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
+              <button
+                type="button"
+                className="bg-white text-blue-600 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors"
+              >
                 Explore Now
               </button>
-              <button className="border border-white text-white px-6 py-3 rounded-lg font-semibold hover:bg-white hover:text-blue-600 transition-colors">
+              <button
+                type="button"
+                className="border border-white text-white px-6 py-3 rounded-lg font-semibold hover:bg-white hover:text-blue-600 transition-colors"
+              >
                 Learn More
               </button>
             </div>
@@ -177,10 +187,18 @@ export default function HomePage() {
                     </div>
                   )}
                   <div className="absolute top-2 right-2 flex space-x-1">
-                    <button className="p-1 bg-black bg-opacity-50 rounded text-white hover:bg-opacity-70">
+                    <button
+                      type="button"
+                      aria-label="Add to wishlist"
+                      className="p-1 bg-black bg-opacity-50 rounded text-white hover:bg-opacity-70"
+                    >
                       <Heart className="h-4 w-4" />
                     </button>
-                    <button className="p-1 bg-black bg-opacity-50 rounded text-white hover:bg-opacity-70">
+                    <button
+                      type="button"
+                      aria-label="Share app"
+                      className="p-1 bg-black bg-opacity-50 rounded text-white hover:bg-opacity-70"
+                    >
                       <Share2 className="h-4 w-4" />
                     </button>
                   </div>
@@ -197,7 +215,10 @@ export default function HomePage() {
                   </div>
                   <div className="flex items-center justify-between">
                     <span className="font-semibold text-green-600">{app.price}</span>
-                    <button className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors flex items-center space-x-1">
+                    <button
+                      type="button"
+                      className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors flex items-center space-x-1"
+                    >
                       <Download className="h-4 w-4" />
                       <span>Get</span>
                     </button>

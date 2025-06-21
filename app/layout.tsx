@@ -6,6 +6,7 @@ import { Toaster } from 'sonner';
 import { ThemeProvider } from 'next-themes';
 import AuthProvider from '@/components/auth/AuthProvider';
 import { LanguageProvider } from '@/contexts/LanguageContext';
+import { AIChatProvider } from '@/components/layout/AIChatProvider';
 
 export const metadata: Metadata = {
   title: 'EHB-Next.js',
@@ -24,9 +25,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         >
           <AuthProvider>
             <LanguageProvider>
-              <AIAssistantPanel />
-              {children}
-              <Toaster />
+              <AIChatProvider>
+                <AIAssistantPanel />
+                {children}
+                <Toaster />
+              </AIChatProvider>
             </LanguageProvider>
           </AuthProvider>
         </ThemeProvider>

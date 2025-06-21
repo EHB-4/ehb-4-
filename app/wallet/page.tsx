@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { useSession } from 'next-auth/react';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 
 import { BalanceSummary } from '@/components/wallet/BalanceSummary';
 import { WalletActions } from '@/components/wallet/WalletActions';
@@ -17,11 +17,7 @@ export default function WalletPage() {
   const [actionAmount, setActionAmount] = useState('');
   const [selectedLoyaltyType, setSelectedLoyaltyType] = useState<string>('');
 
-  useEffect(() => {
-    fetchWallet();
-  }, [session, fetchWallet]);
-
-  const fetchWallet = async () => {
+  const fetchWallet = useCallback(async () => {
     try {
       const response = await fetch('/api/wallet');
       if (!response.ok) {
@@ -34,7 +30,13 @@ export default function WalletPage() {
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
+
+  useEffect(() => {
+    if (session) {
+      fetchWallet();
+    }
+  }, [session, fetchWallet]);
 
   const handleAction = async (action: 'lock' | 'unlock' | 'updateLoyalty' | 'create') => {
     try {

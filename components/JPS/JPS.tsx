@@ -1,10 +1,9 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
 
-interface JPSProps {
-  // Add props as needed
-}
+type JPSProps = object;
 
 export const JPS: React.FC<JPSProps> = () => {
   const [loading, setLoading] = useState(true);

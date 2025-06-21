@@ -1,0 +1,86 @@
+[2025-06-21T16:49:46.860Z] 🎯 Port 5500 Guardian Started
+[2025-06-21T16:49:46.869Z] 📁 Project Root: F:\ehb next.js 04
+[2025-06-21T16:49:46.870Z] 🔧 Port: 5500
+[2025-06-21T16:49:46.870Z] ⏱️ Check Interval: 5000ms
+[2025-06-21T16:49:46.871Z] 🔄 Max Restarts: 10
+[2025-06-21T16:49:46.871Z] 🔍 Starting Port 5500 Guardian Monitor...
+[2025-06-21T16:49:46.872Z] 🚀 Starting Next.js server on port 5500...
+[2025-06-21T16:49:49.510Z] ✅ Port 5500 cleared
+[2025-06-21T16:49:49.780Z] ❌ Server Error: npm error Missing script: "dev:5500"
+npm error
+npm error To see a list of scripts, run:
+npm error   npm run
+[2025-06-21T16:49:49.781Z] ❌ Server Error: npm error A complete log of this run can be found in: F:\ehb next.js 04\.npm-cache\_logs\2025-06-21T16_49_49_714Z-debug-0.log
+[2025-06-21T16:49:49.793Z] ⚠️ Server process closed with code 1
+[2025-06-21T16:49:49.793Z] 🔄 Restarting server... (Attempt 2/10)
+[2025-06-21T16:49:51.797Z] 🚀 Starting Next.js server on port 5500...
+[2025-06-21T16:49:54.347Z] ✅ Port 5500 cleared
+[2025-06-21T16:49:54.580Z] ⚠️ Port 5500 is not responding but process is running
+[2025-06-21T16:49:54.580Z] 🚀 Starting Next.js server on port 5500...
+[2025-06-21T16:49:54.651Z] ❌ Server Error: npm error Missing script: "dev:5500"
+npm error
+npm error To see a list of scripts, run:
+npm error   npm run
+[2025-06-21T16:49:54.652Z] ❌ Server Error: npm error A complete log of this run can be found in: F:\ehb next.js 04\.npm-cache\_logs\2025-06-21T16_49_54_585Z-debug-0.log
+[2025-06-21T16:49:54.663Z] ⚠️ Server process closed with code 1
+[2025-06-21T16:49:54.664Z] 🔄 Restarting server... (Attempt 3/10)
+[2025-06-21T16:49:56.671Z] 🚀 Starting Next.js server on port 5500...
+[2025-06-21T16:49:58.860Z] ✅ Port 5500 cleared
+[2025-06-21T16:49:59.329Z] ❌ Server Error: npm error Missing script: "dev:5500"
+npm error
+npm error To see a list of scripts, run:
+npm error   npm run
+[2025-06-21T16:49:59.330Z] ❌ Server Error: npm error A complete log of this run can be found in: F:\ehb next.js 04\.npm-cache\_logs\2025-06-21T16_49_59_250Z-debug-0.log
+[2025-06-21T16:49:59.344Z] ⚠️ Server process closed with code 1
+[2025-06-21T16:49:59.344Z] 🔄 Restarting server... (Attempt 4/10)
+[2025-06-21T16:49:59.713Z] ⚠️ Port 5500 is not active, restarting server
+[2025-06-21T16:49:59.713Z] 🚀 Starting Next.js server on port 5500...
+[2025-06-21T16:50:01.355Z] 🚀 Starting Next.js server on port 5500...
+[2025-06-21T16:50:01.400Z] ✅ Port 5500 cleared
+[2025-06-21T16:50:02.170Z] ❌ Server Error: npm error Missing script: "dev:5500"
+npm error
+npm error To see a list of scripts, run:
+npm error   npm run
+[2025-06-21T16:50:02.173Z] ❌ Server Error: npm error A complete log of this run can be found in: F:\ehb next.js 04\.npm-cache\_logs\2025-06-21T16_50_01_863Z-debug-0.log
+[2025-06-21T16:50:02.205Z] ⚠️ Server process closed with code 1
+[2025-06-21T16:50:02.206Z] 🔄 Restarting server... (Attempt 5/10)
+[2025-06-21T16:50:04.220Z] 🚀 Starting Next.js server on port 5500...
+[2025-06-21T16:50:04.696Z] ⚠️ Port 5500 is not active, restarting server
+[2025-06-21T16:50:04.697Z] 🚀 Starting Next.js server on port 5500...
+[2025-06-21T16:50:05.446Z] ✅ Port 5500 cleared
+[2025-06-21T16:50:06.270Z] ❌ Server Error: npm error Missing script: "dev:5500"
+npm error
+npm error To see a list of scripts, run:
+npm error   npm run
+[2025-06-21T16:50:06.273Z] ❌ Server Error: npm error A complete log of this run can be found in: F:\ehb next.js 04\.npm-cache\_logs\2025-06-21T16_50_05_943Z-debug-0.log
+[2025-06-21T16:50:06.356Z] ⚠️ Server process closed with code 1
+[2025-06-21T16:50:06.356Z] 🔄 Restarting server... (Attempt 6/10)
+[2025-06-21T16:50:08.368Z] 🚀 Starting Next.js server on port 5500...
+[2025-06-21T16:50:08.598Z] ✅ Port 5500 cleared
+[2025-06-21T16:50:09.318Z] ❌ Server Error: npm error Missing script: "dev:5500"
+npm error
+npm error To see a list of scripts, run:
+npm error   npm run
+[2025-06-21T16:50:09.320Z] ❌ Server Error: npm error A complete log of this run can be found in: F:\ehb next.js 04\.npm-cache\_logs\2025-06-21T16_50_09_168Z-debug-0.log
+[2025-06-21T16:50:09.338Z] ⚠️ Server process closed with code 1
+[2025-06-21T16:50:09.338Z] 🔄 Restarting server... (Attempt 7/10)
+[2025-06-21T16:50:09.752Z] ⚠️ Port 5500 is not active, restarting server
+[2025-06-21T16:50:09.752Z] 🚀 Starting Next.js server on port 5500...
+[2025-06-21T16:50:10.427Z] ✅ Port 5500 cleared
+[2025-06-21T16:50:11.249Z] ❌ Server Error: npm error Missing script: "dev:5500"
+npm error
+npm error To see a list of scripts, run:
+npm error   npm run
+[2025-06-21T16:50:11.252Z] ❌ Server Error: npm error A complete log of this run can be found in: F:\ehb next.js 04\.npm-cache\_logs\2025-06-21T16_50_11_086Z-debug-0.log
+[2025-06-21T16:50:11.273Z] ⚠️ Server process closed with code 1
+[2025-06-21T16:50:11.274Z] 🔄 Restarting server... (Attempt 8/10)
+[2025-06-21T16:50:11.349Z] 🚀 Starting Next.js server on port 5500...
+[2025-06-21T16:50:11.815Z] ✅ Port 5500 cleared
+[2025-06-21T16:50:12.497Z] ❌ Server Error: npm error Missing script: "dev:5500"
+npm error
+npm error To see a list of scripts, run:
+npm error   npm run
+[2025-06-21T16:50:12.506Z] ❌ Server Error: npm error A complete log of this run can be found in: F:\ehb next.js 04\.npm-cache\_logs\2025-06-21T16_50_12_352Z-debug-0.log
+[2025-06-21T16:50:12.606Z] ⚠️ Server process closed with code 1
+[2025-06-21T16:50:12.606Z] 🔄 Restarting server... (Attempt 9/10)
+[2025-06-21T16:50:13.281Z] 🚀 Starting Next.js server on port 5500...

@@ -1,277 +1,517 @@
 'use client';
 
-import { motion } from 'framer-motion';
-import { useSession } from 'next-auth/react';
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Input } from '@/components/ui/input';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
+import {
+  ShoppingCart,
+  Package,
+  Users,
+  DollarSign,
+  TrendingUp,
+  AlertTriangle,
+  Plus,
+  Search,
+  Filter,
+  BarChart3,
+  Settings,
+  Bell,
+} from 'lucide-react';
 
-import Modal from '@/components/ui/Modal';
-import { Doctor } from '@/lib/models/Doctor';
-
-interface BookingModalProps {
-  doctor: Doctor;
-  onClose: () => void;
-  onConfirm: (date: string, timeSlot: string) => Promise<void>;
+interface EMOStats {
+  totalOrders: number;
+  totalProducts: number;
+  totalCustomers: number;
+  totalRevenue: number;
+  pendingOrders: number;
+  lowStockProducts: number;
 }
 
-function BookingModal({ doctor, onClose, onConfirm }: BookingModalProps) {
-  const [selectedDate, setSelectedDate] = useState('');
-  const [selectedSlot, setSelectedSlot] = useState('');
-  const [availableSlots, setAvailableSlots] = useState<string[]>([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+interface Order {
+  id: string;
+  customerName: string;
+  orderNumber: string;
+  status: 'pending' | 'processing' | 'shipped' | 'delivered' | 'cancelled';
+  total: number;
+  date: string;
+  items: number;
+}
 
-  useEffect(() => {
-    if (selectedDate) {
-      fetchAvailableSlots(selectedDate);
-    }
-  }, [selectedDate]);
-
-  const fetchAvailableSlots = async (date: string) => {
-    try {
-      const response = await fetch(`/api/availability?doctorId=${doctor._id}&date=${date}`);
-      if (!response.ok) throw new Error('Failed to fetch slots');
-      const data = await response.json();
-      setAvailableSlots(data.slots);
-    } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to fetch slots');
-    }
-  };
-
-  const handleConfirm = async () => {
-    if (!selectedDate || !selectedSlot) {
-      setError('Please select both date and time slot');
-      return;
-    }
-
-    setLoading(true);
-    try {
-      await onConfirm(selectedDate, selectedSlot);
-      onClose();
-    } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to book appointment');
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  return (
-    <div className="p-6">
-      <h2 className="mb-4 text-xl font-bold">Book Appointment with Dr. {doctor.name}</h2>
-
-      <div className="mb-4">
-        <label className="mb-2 block text-sm font-medium">Select Date</label>
-        <input
-          type="date"
-          value={selectedDate}
-          onChange={e => setSelectedDate(e.target.value)}
-          min={new Date().toISOString().split('T')[0]}
-          className="w-full rounded-lg border border-gray-300 p-2"
-        />
-      </div>
-
-      {selectedDate && (
-        <div className="mb-4">
-          <label className="mb-2 block text-sm font-medium">Select Time Slot</label>
-          <div className="grid grid-cols-2 gap-2">
-            {availableSlots.map(slot => (
-              <button
-                key={slot}
-                onClick={() => setSelectedSlot(slot)}
-                className={`rounded-lg p-2 text-sm ${
-                  selectedSlot === slot ? 'bg-blue-500 text-white' : 'bg-gray-100 hover:bg-gray-200'
-                }`}
-              >
-                {slot}
-              </button>
-            ))}
-          </div>
-        </div>
-      )}
-
-      {error && <p className="mb-4 text-sm text-red-500">{error}</p>}
-
-      <div className="mt-6 flex justify-end space-x-4">
-        <button
-          onClick={onClose}
-          className="rounded-lg border border-gray-300 px-4 py-2 text-gray-700 hover:bg-gray-50"
-        >
-          Cancel
-        </button>
-        <button
-          onClick={handleConfirm}
-          disabled={loading}
-          className="rounded-lg bg-blue-500 px-4 py-2 text-white hover:bg-blue-600 disabled:opacity-50"
-        >
-          {loading ? 'Booking...' : 'Confirm Booking'}
-        </button>
-      </div>
-    </div>
-  );
+interface Product {
+  id: string;
+  name: string;
+  category: string;
+  price: number;
+  stock: number;
+  status: 'active' | 'inactive' | 'out_of_stock';
+  sales: number;
 }
 
 export default function EMOPage() {
-  const { data: session } = useSession();
-  const [doctors, setDoctors] = useState<Doctor[]>([]);
+  const [stats, setStats] = useState<EMOStats | null>(null);
+  const [orders, setOrders] = useState<Order[]>([]);
+  const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-  const [selectedDoctor, setSelectedDoctor] = useState<Doctor | null>(null);
-  const [filters, setFilters] = useState({
-    city: '',
-    specialty: '',
-    hospital: '',
-  });
+  const [searchTerm, setSearchTerm] = useState('');
+  const [statusFilter, setStatusFilter] = useState('all');
 
+  // Mock data for demonstration
   useEffect(() => {
-    fetchDoctors();
-  }, [filters, fetchDoctors]);
-
-  const fetchDoctors = async () => {
-    try {
-      setLoading(true);
-      const queryParams = new URLSearchParams({
-        ...filters,
-        minSqlLevel: '3',
+    // Simulate API call
+    setTimeout(() => {
+      setStats({
+        totalOrders: 1247,
+        totalProducts: 89,
+        totalCustomers: 3421,
+        totalRevenue: 45678.9,
+        pendingOrders: 23,
+        lowStockProducts: 7,
       });
-      const response = await fetch(`/api/doctors?${queryParams}`);
-      if (!response.ok) throw new Error('Failed to fetch doctors');
-      const data = await response.json();
-      setDoctors(data.doctors);
-    } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to fetch doctors');
-    } finally {
+
+      setOrders([
+        {
+          id: '1',
+          customerName: 'John Doe',
+          orderNumber: 'ORD-001',
+          status: 'pending',
+          total: 299.99,
+          date: '2024-01-15',
+          items: 3,
+        },
+        {
+          id: '2',
+          customerName: 'Jane Smith',
+          orderNumber: 'ORD-002',
+          status: 'processing',
+          total: 149.5,
+          date: '2024-01-15',
+          items: 2,
+        },
+        {
+          id: '3',
+          customerName: 'Bob Johnson',
+          orderNumber: 'ORD-003',
+          status: 'shipped',
+          total: 89.99,
+          date: '2024-01-14',
+          items: 1,
+        },
+      ]);
+
+      setProducts([
+        {
+          id: '1',
+          name: 'Premium Wireless Headphones',
+          category: 'Electronics',
+          price: 199.99,
+          stock: 15,
+          status: 'active',
+          sales: 45,
+        },
+        {
+          id: '2',
+          name: 'Organic Cotton T-Shirt',
+          category: 'Clothing',
+          price: 29.99,
+          stock: 3,
+          status: 'active',
+          sales: 128,
+        },
+        {
+          id: '3',
+          name: 'Smart Fitness Watch',
+          category: 'Electronics',
+          price: 299.99,
+          stock: 0,
+          status: 'out_of_stock',
+          sales: 67,
+        },
+      ]);
+
       setLoading(false);
+    }, 1000);
+  }, []);
+
+  const getStatusBadge = (status: string) => {
+    switch (status) {
+      case 'pending':
+        return (
+          <Badge variant="secondary" className="bg-yellow-100 text-yellow-800">
+            Pending
+          </Badge>
+        );
+      case 'processing':
+        return (
+          <Badge variant="default" className="bg-blue-100 text-blue-800">
+            Processing
+          </Badge>
+        );
+      case 'shipped':
+        return (
+          <Badge variant="default" className="bg-purple-100 text-purple-800">
+            Shipped
+          </Badge>
+        );
+      case 'delivered':
+        return (
+          <Badge variant="default" className="bg-green-100 text-green-800">
+            Delivered
+          </Badge>
+        );
+      case 'cancelled':
+        return <Badge variant="destructive">Cancelled</Badge>;
+      default:
+        return <Badge variant="outline">{status}</Badge>;
     }
   };
 
-  const handleBooking = async (date: string, timeSlot: string) => {
-    if (!selectedDoctor || !session?.user?.id) return;
-
-    try {
-      const response = await fetch('/api/appointments', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          doctorId: selectedDoctor._id,
-          patientId: session.user.id,
-          date,
-          timeSlot,
-        }),
-      });
-
-      if (!response.ok) throw new Error('Failed to book appointment');
-
-      // Refresh doctors list
-      fetchDoctors();
-    } catch (err) {
-      throw new Error(err instanceof Error ? err.message : 'Failed to book appointment');
+  const getStockBadge = (stock: number, status: string) => {
+    if (status === 'out_of_stock') {
+      return <Badge variant="destructive">Out of Stock</Badge>;
     }
+    if (stock <= 5) {
+      return (
+        <Badge variant="secondary" className="bg-orange-100 text-orange-800">
+          Low Stock
+        </Badge>
+      );
+    }
+    return (
+      <Badge variant="default" className="bg-green-100 text-green-800">
+        In Stock
+      </Badge>
+    );
   };
 
   if (loading) {
     return (
-      <div className="flex min-h-screen items-center justify-center">
-        <div className="h-32 w-32 animate-spin rounded-full border-b-2 border-t-2 border-blue-500"></div>
-      </div>
-    );
-  }
-
-  if (error) {
-    return (
-      <div className="flex min-h-screen items-center justify-center">
-        <div className="text-red-500">{error}</div>
+      <div className="flex items-center justify-center min-h-[400px]">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto"></div>
+          <p className="mt-4 text-gray-600">Loading EMO Dashboard...</p>
+        </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 p-6">
-      {/* Filters */}
-      <div className="mb-8 flex flex-wrap gap-4">
-        <select
-          value={filters.city}
-          onChange={e => setFilters(prev => ({ ...prev, city: e.target.value }))}
-          className="rounded-lg border border-gray-300 px-4 py-2"
-        >
-          <option value="">All Cities</option>
-          <option value="Karachi">Karachi</option>
-          <option value="Lahore">Lahore</option>
-          <option value="Islamabad">Islamabad</option>
-        </select>
-
-        <select
-          value={filters.specialty}
-          onChange={e => setFilters(prev => ({ ...prev, specialty: e.target.value }))}
-          className="rounded-lg border border-gray-300 px-4 py-2"
-        >
-          <option value="">All Specialties</option>
-          <option value="Cardiology">Cardiology</option>
-          <option value="Dermatology">Dermatology</option>
-          <option value="Pediatrics">Pediatrics</option>
-        </select>
-
-        <select
-          value={filters.hospital}
-          onChange={e => setFilters(prev => ({ ...prev, hospital: e.target.value }))}
-          className="rounded-lg border border-gray-300 px-4 py-2"
-        >
-          <option value="">All Hospitals</option>
-          <option value="Aga Khan">Aga Khan</option>
-          <option value="Shaukat Khanum">Shaukat Khanum</option>
-          <option value="Shifa">Shifa</option>
-        </select>
+    <div className="space-y-6">
+      {/* Header */}
+      <div className="flex justify-between items-center">
+        <div>
+          <h1 className="text-3xl font-bold text-gray-900">EMO Dashboard</h1>
+          <p className="text-gray-600 mt-1">E-commerce Management Operations</p>
+        </div>
+        <div className="flex items-center space-x-4">
+          <Button type="button" variant="outline" size="sm">
+            <Settings className="h-4 w-4 mr-2" />
+            Settings
+          </Button>
+          <Button type="button" size="sm">
+            <Plus className="h-4 w-4 mr-2" />
+            New Order
+          </Button>
+        </div>
       </div>
 
-      {/* Doctors Grid */}
-      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {doctors.map(doctor => (
-          <motion.div
-            key={doctor._id.toString()}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="rounded-lg bg-white p-6 shadow-sm"
-          >
-            <div className="mb-4 flex items-center justify-between">
-              <div>
-                <h3 className="text-lg font-semibold">Dr. {doctor.name}</h3>
-                <p className="text-sm text-gray-600">{doctor.specialty}</p>
+      {/* Stats Cards */}
+      {stats && (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-4">
+          <Card>
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+              <CardTitle className="text-sm font-medium">Total Orders</CardTitle>
+              <ShoppingCart className="h-4 w-4 text-muted-foreground" />
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold">{stats.totalOrders.toLocaleString()}</div>
+              <p className="text-xs text-muted-foreground">+12% from last month</p>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+              <CardTitle className="text-sm font-medium">Total Products</CardTitle>
+              <Package className="h-4 w-4 text-muted-foreground" />
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold">{stats.totalProducts}</div>
+              <p className="text-xs text-muted-foreground">{stats.lowStockProducts} low stock</p>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+              <CardTitle className="text-sm font-medium">Total Customers</CardTitle>
+              <Users className="h-4 w-4 text-muted-foreground" />
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold">{stats.totalCustomers.toLocaleString()}</div>
+              <p className="text-xs text-muted-foreground">+8% from last month</p>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+              <CardTitle className="text-sm font-medium">Total Revenue</CardTitle>
+              <DollarSign className="h-4 w-4 text-muted-foreground" />
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold">${stats.totalRevenue.toLocaleString()}</div>
+              <p className="text-xs text-muted-foreground">+15% from last month</p>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+              <CardTitle className="text-sm font-medium">Pending Orders</CardTitle>
+              <AlertTriangle className="h-4 w-4 text-muted-foreground" />
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold text-yellow-600">{stats.pendingOrders}</div>
+              <p className="text-xs text-muted-foreground">Requires attention</p>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+              <CardTitle className="text-sm font-medium">Growth</CardTitle>
+              <TrendingUp className="h-4 w-4 text-muted-foreground" />
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold text-green-600">+23%</div>
+              <p className="text-xs text-muted-foreground">vs last month</p>
+            </CardContent>
+          </Card>
+        </div>
+      )}
+
+      {/* Main Content Tabs */}
+      <Tabs defaultValue="orders" className="space-y-4">
+        <TabsList>
+          <TabsTrigger value="orders">Orders</TabsTrigger>
+          <TabsTrigger value="products">Products</TabsTrigger>
+          <TabsTrigger value="analytics">Analytics</TabsTrigger>
+        </TabsList>
+
+        <TabsContent value="orders" className="space-y-4">
+          {/* Orders Filters */}
+          <Card>
+            <CardHeader>
+              <CardTitle>Order Management</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="flex items-center space-x-4">
+                <div className="relative">
+                  <label htmlFor="order-search" className="sr-only">
+                    Search Orders
+                  </label>
+                  <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                  <Input
+                    id="order-search"
+                    placeholder="Search orders..."
+                    value={searchTerm}
+                    onChange={e => setSearchTerm(e.target.value)}
+                    className="pl-9"
+                  />
+                </div>
+                <div>
+                  <label htmlFor="order-status-filter" className="sr-only">
+                    Filter by status
+                  </label>
+                  <Select value={statusFilter} onValueChange={setStatusFilter}>
+                    <SelectTrigger id="order-status-filter" className="w-[180px]">
+                      <Filter className="h-4 w-4 mr-2" />
+                      <SelectValue placeholder="Filter by status" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="all">All Statuses</SelectItem>
+                      <SelectItem value="pending">Pending</SelectItem>
+                      <SelectItem value="processing">Processing</SelectItem>
+                      <SelectItem value="shipped">Shipped</SelectItem>
+                      <SelectItem value="delivered">Delivered</SelectItem>
+                      <SelectItem value="cancelled">Cancelled</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
               </div>
-              <span className="rounded-full bg-blue-100 px-3 py-1 text-sm text-blue-800">
-                SQL {doctor.sqlLevel}
-              </span>
-            </div>
+            </CardContent>
+          </Card>
 
-            <div className="mb-4 space-y-2 text-sm">
-              <p className="flex items-center text-gray-600">
-                <span className="mr-2">🏥</span> {doctor.hospital}
-              </p>
-              <p className="flex items-center text-gray-600">
-                <span className="mr-2">📍</span> {doctor.city}
-              </p>
-              <p className="flex items-center text-gray-600">
-                <span className="mr-2">💰</span> Fee: ${doctor.fee}
-              </p>
-            </div>
+          {/* Orders Table */}
+          <Card>
+            <CardContent className="pt-6">
+              <div className="overflow-x-auto">
+                <table className="w-full">
+                  <thead>
+                    <tr className="border-b">
+                      <th className="text-left p-2">Order #</th>
+                      <th className="text-left p-2">Customer</th>
+                      <th className="text-left p-2">Status</th>
+                      <th className="text-left p-2">Items</th>
+                      <th className="text-left p-2">Total</th>
+                      <th className="text-left p-2">Date</th>
+                      <th className="text-left p-2">Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {orders.map(order => (
+                      <tr key={order.id} className="border-b hover:bg-gray-50">
+                        <td className="p-2 font-medium">{order.orderNumber}</td>
+                        <td className="p-2">{order.customerName}</td>
+                        <td className="p-2">{getStatusBadge(order.status)}</td>
+                        <td className="p-2">{order.items}</td>
+                        <td className="p-2 font-medium">${order.total}</td>
+                        <td className="p-2 text-sm text-gray-500">{order.date}</td>
+                        <td className="p-2">
+                          <div className="flex space-x-2">
+                            <Button size="sm" variant="outline">
+                              View
+                            </Button>
+                            <Button size="sm" variant="outline">
+                              Edit
+                            </Button>
+                          </div>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </CardContent>
+          </Card>
+        </TabsContent>
 
-            <button
-              onClick={() => setSelectedDoctor(doctor)}
-              className="w-full rounded-lg bg-blue-500 px-4 py-2 text-white hover:bg-blue-600"
-            >
-              Book Appointment
-            </button>
-          </motion.div>
-        ))}
-      </div>
+        <TabsContent value="products" className="space-y-4">
+          {/* Products Filters */}
+          <Card>
+            <CardHeader>
+              <CardTitle>Product Management</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div className="relative">
+                  <Search className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
+                  <Input placeholder="Search products..." className="pl-10" />
+                </div>
 
-      {/* Booking Modal */}
-      <Modal open={!!selectedDoctor} onClose={() => setSelectedDoctor(null)}>
-        {selectedDoctor && (
-          <BookingModal
-            doctor={selectedDoctor}
-            onClose={() => setSelectedDoctor(null)}
-            onConfirm={handleBooking}
-          />
-        )}
-      </Modal>
+                <Select>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Filter by category" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="all">All Categories</SelectItem>
+                    <SelectItem value="electronics">Electronics</SelectItem>
+                    <SelectItem value="clothing">Clothing</SelectItem>
+                    <SelectItem value="books">Books</SelectItem>
+                  </SelectContent>
+                </Select>
+
+                <Button>
+                  <Plus className="h-4 w-4 mr-2" />
+                  Add Product
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Products Table */}
+          <Card>
+            <CardContent className="pt-6">
+              <div className="overflow-x-auto">
+                <table className="w-full">
+                  <thead>
+                    <tr className="border-b">
+                      <th className="text-left p-2">Product</th>
+                      <th className="text-left p-2">Category</th>
+                      <th className="text-left p-2">Price</th>
+                      <th className="text-left p-2">Stock</th>
+                      <th className="text-left p-2">Status</th>
+                      <th className="text-left p-2">Sales</th>
+                      <th className="text-left p-2">Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {products.map(product => (
+                      <tr key={product.id} className="border-b hover:bg-gray-50">
+                        <td className="p-2">
+                          <div>
+                            <div className="font-medium">{product.name}</div>
+                          </div>
+                        </td>
+                        <td className="p-2">
+                          <Badge variant="outline">{product.category}</Badge>
+                        </td>
+                        <td className="p-2 font-medium">${product.price}</td>
+                        <td className="p-2">{product.stock}</td>
+                        <td className="p-2">{getStockBadge(product.stock, product.status)}</td>
+                        <td className="p-2">{product.sales}</td>
+                        <td className="p-2">
+                          <div className="flex space-x-2">
+                            <Button size="sm" variant="outline">
+                              Edit
+                            </Button>
+                            <Button size="sm" variant="outline">
+                              View
+                            </Button>
+                          </div>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </CardContent>
+          </Card>
+        </TabsContent>
+
+        <TabsContent value="analytics" className="space-y-4">
+          <Card>
+            <CardHeader>
+              <CardTitle>Analytics Dashboard</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="space-y-4">
+                  <h3 className="text-lg font-semibold">Sales Overview</h3>
+                  <div className="h-64 bg-gray-100 rounded-lg flex items-center justify-center">
+                    <div className="text-center">
+                      <BarChart3 className="h-12 w-12 text-gray-400 mx-auto mb-2" />
+                      <p className="text-gray-500">Sales Chart</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="space-y-4">
+                  <h3 className="text-lg font-semibold">Top Products</h3>
+                  <div className="space-y-2">
+                    {products.slice(0, 5).map((product, index) => (
+                      <div
+                        key={product.id}
+                        className="flex items-center justify-between p-2 bg-gray-50 rounded"
+                      >
+                        <span className="font-medium">
+                          #{index + 1} {product.name}
+                        </span>
+                        <span className="text-sm text-gray-600">{product.sales} sales</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </TabsContent>
+      </Tabs>
     </div>
   );
 }

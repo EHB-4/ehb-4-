@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import {
   Building,
@@ -49,6 +50,14 @@ export default function AdminPanelPage() {
   const { departments, phases, companyOverview } = roadmapData;
   const suggestions = InsightEngine.getSuggestions();
 
+  const getDepartmentLink = (departmentName: string) => {
+    if (departmentName === 'EDR') {
+      return '/edr';
+    }
+    // Placeholder for other departments, can be built out later
+    return `/#`;
+  };
+
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 p-4 sm:p-6 lg:p-8">
       <div className="max-w-7xl mx-auto">
@@ -73,17 +82,21 @@ export default function AdminPanelPage() {
             <CardContent>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {departments.map(dept => (
-                  <Card key={dept.name} className="flex flex-col">
-                    <CardHeader>
-                      <CardTitle className="flex items-center justify-between">
-                        {dept.name}
-                        <Badge className={getStatusColor(dept.status)}>{dept.status}</Badge>
-                      </CardTitle>
-                    </CardHeader>
-                    <CardContent className="flex-grow">
-                      <p className="text-sm text-gray-600 dark:text-gray-400">{dept.description}</p>
-                    </CardContent>
-                  </Card>
+                  <Link href={getDepartmentLink(dept.name)} key={dept.name} passHref>
+                    <Card className="flex flex-col h-full hover:shadow-lg transition-shadow duration-300 cursor-pointer">
+                      <CardHeader>
+                        <CardTitle className="flex items-center justify-between">
+                          {dept.name}
+                          <Badge className={getStatusColor(dept.status)}>{dept.status}</Badge>
+                        </CardTitle>
+                      </CardHeader>
+                      <CardContent className="flex-grow">
+                        <p className="text-sm text-gray-600 dark:text-gray-400">
+                          {dept.description}
+                        </p>
+                      </CardContent>
+                    </Card>
+                  </Link>
                 ))}
               </div>
             </CardContent>

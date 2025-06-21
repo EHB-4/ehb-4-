@@ -11,9 +11,8 @@ const productSchema = z.object({
   description: z.string().min(1, 'Description is required'),
   price: z.number().positive('Price must be positive'),
   category: z.string().min(1, 'Category is required'),
-  image: z.string().url('Valid image URL is required'),
+  images: z.array(z.string().url()).optional(),
   stock: z.number().int().min(0, 'Stock must be non-negative'),
-  shopId: z.string().min(1, 'Shop ID is required'),
 });
 
 const updateProductSchema = productSchema.partial();
@@ -44,8 +43,10 @@ export async function GET(request: NextRequest) {
     }
 
     if (city) {
-      where.shop = {
-        city: { contains: city, mode: 'insensitive' },
+      where.seller = {
+        profile: {
+          city: { contains: city, mode: 'insensitive' },
+        },
       };
     }
 
@@ -54,12 +55,15 @@ export async function GET(request: NextRequest) {
       prisma.product.findMany({
         where,
         include: {
-          shop: {
+          seller: {
             select: {
               id: true,
               name: true,
-              city: true,
-              rating: true,
+              profile: {
+                select: {
+                  city: true,
+                },
+              },
             },
           },
         },
@@ -96,29 +100,27 @@ export async function POST(request: NextRequest) {
     const body = await request.json();
     const validatedData = productSchema.parse(body);
 
-    // Check if user has a shop
-    const shop = await prisma.shop.findFirst({
-      where: { userId: session.user.id },
-    });
-
-    if (!shop) {
-      return NextResponse.json({ error: 'You need to create a shop first' }, { status: 400 });
+    const data: any = { ...validatedData };
+    if (validatedData.images) {
+      data.images = validatedData.images;
     }
 
     // Create product
     const product = await prisma.product.create({
       data: {
-        ...validatedData,
-        shopId: shop.id,
-        userId: session.user.id,
+        ...data,
+        sellerId: session.user.id,
       },
       include: {
-        shop: {
+        seller: {
           select: {
             id: true,
             name: true,
-            city: true,
-            rating: true,
+            profile: {
+              select: {
+                city: true,
+              },
+            },
           },
         },
       },
@@ -154,7 +156,7 @@ export async function PUT(request: NextRequest) {
     const existingProduct = await prisma.product.findFirst({
       where: {
         id,
-        userId: session.user.id,
+        sellerId: session.user.id,
       },
     });
 
@@ -162,17 +164,27 @@ export async function PUT(request: NextRequest) {
       return NextResponse.json({ error: 'Product not found or unauthorized' }, { status: 404 });
     }
 
+    const dataToUpdate: any = { ...validatedData };
+    if (validatedData.images) {
+      dataToUpdate.images = {
+        set: validatedData.images,
+      };
+    }
+
     // Update product
     const product = await prisma.product.update({
       where: { id },
-      data: validatedData,
+      data: dataToUpdate,
       include: {
-        shop: {
+        seller: {
           select: {
             id: true,
             name: true,
-            city: true,
-            rating: true,
+            profile: {
+              select: {
+                city: true,
+              },
+            },
           },
         },
       },
@@ -206,7 +218,7 @@ export async function DELETE(request: NextRequest) {
     const existingProduct = await prisma.product.findFirst({
       where: {
         id,
-        userId: session.user.id,
+        sellerId: session.user.id,
       },
     });
 

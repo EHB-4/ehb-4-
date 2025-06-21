@@ -1,4 +1,5 @@
 import { ObjectId } from 'mongodb';
+import mongoose, { Document } from 'mongoose';
 
 export interface Course {
   _id: ObjectId;
@@ -32,3 +33,59 @@ export interface CreateCourseInput {
 }
 
 export interface UpdateCourseInput extends Partial<CreateCourseInput> {}
+
+const courseSchema = new mongoose.Schema(
+  {
+    tutorId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User',
+      required: true,
+    },
+    title: {
+      type: String,
+      required: true,
+    },
+    description: {
+      type: String,
+      required: true,
+    },
+    subject: {
+      type: String,
+      required: true,
+    },
+    price: {
+      type: Number,
+      required: true,
+    },
+    schedule: {
+      days: {
+        type: [String],
+        required: true,
+      },
+      times: {
+        type: [String],
+        required: true,
+      },
+    },
+    city: {
+      type: String,
+      required: true,
+    },
+    mode: {
+      type: String,
+      enum: ['online', 'onsite'],
+      required: true,
+    },
+    rating: {
+      type: Number,
+    },
+  },
+  { timestamps: true }
+);
+
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
+export interface ICourse extends Document {}
+
+const Course = mongoose.models.Course || mongoose.model<ICourse>('Course', courseSchema);
+
+export default Course;

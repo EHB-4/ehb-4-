@@ -76,3 +76,57 @@
 [2025-06-20T19:59:09.707Z] File changed: app\admin-panel\page.tsx
 [2025-06-20T19:59:09.708Z] Attempting to open URL: http://localhost:3000/admin-panel
 [2025-06-20T19:59:09.790Z] Successfully opened http://localhost:3000/admin-panel in browser.
+[2025-06-20T20:43:36.242Z] 🚀 EHB Auto Page Opener is running...
+[2025-06-20T20:43:36.246Z] Watching for changes in `app` and `pages` directories...
+[2025-06-20T21:26:27.020Z] 🚀 EHB Auto Page Opener is running...
+[2025-06-20T21:26:27.024Z] Watching for changes in `app` and `pages` directories...
+[2025-06-20T21:26:39.167Z] File changed: app\roadmap-agent\page.tsx
+[2025-06-20T21:26:39.169Z] Attempting to open URL: http://localhost:3000/roadmap-agent
+[2025-06-20T21:26:39.167Z] File changed: app\roadmap-agent\page.tsx
+[2025-06-20T21:26:39.170Z] Attempting to open URL: http://localhost:3000/roadmap-agent
+[2025-06-20T21:26:39.281Z] Successfully opened http://localhost:3000/roadmap-agent in browser.
+[2025-06-20T21:26:39.283Z] Successfully opened http://localhost:3000/roadmap-agent in browser.
+[2025-06-20T21:27:22.670Z] File changed: app\roadmap-agent\page.tsx
+[2025-06-20T21:27:22.670Z] File changed: app\roadmap-agent\page.tsx
+[2025-06-20T21:27:22.671Z] Attempting to open URL: http://localhost:3000/roadmap-agent
+[2025-06-20T21:27:22.671Z] Attempting to open URL: http://localhost:3000/roadmap-agent
+[2025-06-20T21:27:22.747Z] Successfully opened http://localhost:3000/roadmap-agent in browser.
+[2025-06-20T21:27:22.748Z] Successfully opened http://localhost:3000/roadmap-agent in browser.
+[2025-06-20T21:39:22.075Z] File changed: app\roadmap-agent\page.tsx
+[2025-06-20T21:39:22.075Z] File changed: app\roadmap-agent\page.tsx
+[2025-06-20T21:39:22.076Z] Attempting to open URL: http://localhost:3000/roadmap-agent
+[2025-06-20T21:39:22.075Z] Attempting to open URL: http://localhost:3000/roadmap-agent
+[2025-06-20T21:39:22.151Z] Successfully opened http://localhost:3000/roadmap-agent in browser.
+[2025-06-20T21:39:22.153Z] Successfully opened http://localhost:3000/roadmap-agent in browser.
+[2025-06-20T21:47:49.875Z] File changed: app\roadmap-agent\page.tsx
+[2025-06-20T21:47:49.876Z] Attempting to open URL: http://localhost:3000/roadmap-agent
+[2025-06-20T21:47:49.891Z] File changed: app\roadmap-agent\page.tsx
+[2025-06-20T21:47:49.892Z] Attempting to open URL: http://localhost:3000/roadmap-agent
+[2025-06-20T21:47:49.965Z] Successfully opened http://localhost:3000/roadmap-agent in browser.
+[2025-06-20T21:47:49.987Z] Successfully opened http://localhost:3000/roadmap-agent in browser.
+[2025-06-20T22:14:31.666Z] File changed: app\emo\page.tsx
+[2025-06-20T22:14:31.666Z] File changed: app\emo\page.tsx
+[2025-06-20T22:14:31.667Z] Attempting to open URL: http://localhost:3000/emo
+[2025-06-20T22:14:31.667Z] Attempting to open URL: http://localhost:3000/emo
+[2025-06-20T22:14:31.760Z] Successfully opened http://localhost:3000/emo in browser.
+[2025-06-20T22:14:31.761Z] Successfully opened http://localhost:3000/emo in browser.
+[2025-06-20T22:15:49.478Z] File changed: app\emo\page.tsx
+[2025-06-20T22:15:49.478Z] File changed: app\emo\page.tsx
+[2025-06-20T22:15:49.479Z] Attempting to open URL: http://localhost:3000/emo
+[2025-06-20T22:15:49.479Z] Attempting to open URL: http://localhost:3000/emo
+[2025-06-20T22:15:49.546Z] Successfully opened http://localhost:3000/emo in browser.
+[2025-06-20T22:15:49.546Z] Successfully opened http://localhost:3000/emo in browser.
+[2025-06-20T22:28:22.110Z] File changed: app\page.tsx
+[2025-06-20T22:28:22.112Z] Attempting to open URL: http://localhost:3000/
+[2025-06-20T22:28:22.268Z] Successfully opened http://localhost:3000/ in browser.
+[2025-06-20T22:28:41.720Z] File changed: app\page.tsx
+[2025-06-20T22:28:41.722Z] Attempting to open URL: http://localhost:3000/
+[2025-06-20T22:28:41.810Z] Successfully opened http://localhost:3000/ in browser.
+[2025-06-20T22:31:18.674Z] File changed: app\development-portal\page.tsx
+[2025-06-20T22:31:18.674Z] Attempting to open URL: http://localhost:3000/development-portal
+[2025-06-20T22:31:18.757Z] Successfully opened http://localhost:3000/development-portal in browser.
+[2025-06-20T22:50:07.035Z] File changed: app\roadmap-agent\page.tsx
+[2025-06-20T22:50:07.036Z] Attempting to open URL: http://localhost:3000/roadmap-agent
+[2025-06-20T22:50:07.106Z] Successfully opened http://localhost:3000/roadmap-agent in browser.
+[2025-06-21T16:50:36.795Z] 🚀 EHB Auto Page Opener is running...
+[2025-06-21T16:50:36.802Z] Watching for changes in `app` and `pages` directories...

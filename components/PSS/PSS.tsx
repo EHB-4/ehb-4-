@@ -1,10 +1,9 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
 
-interface PSSProps {
-  // Add props as needed
-}
+type PSSProps = object;
 
 export const PSS: React.FC<PSSProps> = () => {
   const [loading, setLoading] = useState(true);

@@ -158,10 +158,11 @@ export class RoadmapAgent {
     }));
   }
 
-  // Get agent status (simulated)
+  // Get a random status for a module
   private getAgentStatus(module: string): string {
     const statuses = ['active', 'idle', 'processing', 'error'];
-    return statuses[Math.floor(Math.random() * statuses.length)];
+    const status = statuses[Math.floor(Math.random() * statuses.length)];
+    return status || 'idle';
   }
 
   // Get development recommendations
@@ -173,9 +174,10 @@ export class RoadmapAgent {
       dept => dept.status === 'Planned'
     );
     if (plannedDepartments.length > 0) {
-      recommendations.push(
-        `Consider starting development for ${plannedDepartments[0].name} department`
-      );
+      const nextDepartment = plannedDepartments[0];
+      if (nextDepartment) {
+        recommendations.push(`Consider starting development for ${nextDepartment.name} department`);
+      }
     }
 
     // Check for phases with low progress

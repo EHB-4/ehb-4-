@@ -21,13 +21,21 @@ export function DashboardLayout({ children, title, subtitle, serviceCount }: Das
         </div>
         <div className="flex items-center space-x-4">
           <div className="relative">
+            <label htmlFor="service-search" className="sr-only">
+              Search services
+            </label>
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
             <input
+              id="service-search"
               placeholder="Search services..."
               className="pl-10 pr-4 py-2 border rounded-lg w-64 focus:ring-2 focus:ring-blue-500 focus:outline-none"
             />
           </div>
-          <button className="relative p-2 rounded-full hover:bg-gray-100">
+          <button
+            type="button"
+            aria-label="View notifications"
+            className="relative p-2 rounded-full hover:bg-gray-100"
+          >
             <Bell className="h-6 w-6" />
             <span className="absolute top-1 right-1 flex h-2 w-2">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>

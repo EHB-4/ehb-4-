@@ -1,42 +1,90 @@
-import type { Notification as PrismaNotification } from '@prisma/client';
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth';
-
-import { authOptions } from '@/lib/auth';
+import { authOptions } from '@/lib/authOptions';
 import { prisma } from '@/lib/prisma';
 
-// GET /api/notifications
-export async function GET() {
+// Get notifications
+export async function GET(request: NextRequest) {
   try {
     const session = await getServerSession(authOptions);
-    if (!session?.user?.id) {
+
+    if (!session) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
-    const notifications = await prisma.notification.findMany({
-      where: {
+    const { searchParams } = new URL(request.url);
+    const page = parseInt(searchParams.get('page') || '1');
+    const limit = parseInt(searchParams.get('limit') || '10');
+    const unreadOnly = searchParams.get('unreadOnly') === 'true';
+
+    const skip = (page - 1) * limit;
+
+    const where = {
+      userId: session.user.id,
+      ...(unreadOnly && { read: false }),
+    };
+
+    const [notifications, total] = await Promise.all([
+      prisma.notification.findMany({
+        where,
+        orderBy: { createdAt: 'desc' },
+        skip,
+        take: limit,
+      }),
+      prisma.notification.count({ where }),
+    ]);
+
+    const pagination = {
+      page,
+      limit,
+      total,
+      pages: Math.ceil(total / limit),
+    };
+
+    return NextResponse.json({
+      success: true,
+      data: { notifications, pagination },
+    });
+  } catch (error) {
+    console.error('Notifications API Error:', error);
+    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
+  }
+}
+
+// Create notification
+export async function POST(request: NextRequest) {
+  try {
+    const session = await getServerSession(authOptions);
+
+    if (!session) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    }
+
+    const body = await request.json();
+    const { title, message, type = 'default' } = body;
+
+    if (!title || !message) {
+      return NextResponse.json({ error: 'Title and message are required' }, { status: 400 });
+    }
+
+    const notification = await prisma.notification.create({
+      data: {
         userId: session.user.id,
-      },
-      orderBy: {
-        createdAt: 'desc',
+        title,
+        message,
+        type,
+        read: false,
       },
     });
 
-    // Format the notifications for the frontend
-    const formattedNotifications = notifications.map((notification: PrismaNotification) => ({
-      id: notification.id,
-      userId: notification.userId,
-      title: notification.title,
-      message: notification.message,
-      type: notification.type,
-      read: notification.read,
-      time: formatTimeAgo(notification.createdAt),
-    }));
-
-    return NextResponse.json(formattedNotifications);
+    return NextResponse.json({
+      success: true,
+      data: notification,
+      message: 'Notification created successfully',
+    });
   } catch (error) {
-    console.error('Error fetching notifications:', error);
-    return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
+    console.error('Create notification error:', error);
+    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
   }
 }
 

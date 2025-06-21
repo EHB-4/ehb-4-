@@ -3,81 +3,20 @@
   "autoRun": true,
   "autoAccept": true,
   "projectId": "ehb-next-js-04",
-  "performance": {
-    "enabled": true,
-    "optimization": "ultra-fast",
-    "cacheEnabled": true,
-    "parallelProcessing": true,
-    "memoryOptimization": true,
-    "cpuOptimization": true
-  },
-  "agents": {
-    "frontend": {
-      "enabled": true,
-      "priority": 1,
-      "autoAccept": true,
-      "performance": "ultra-fast",
-      "interval": 500
-    },
-    "backend": {
-      "enabled": true,
-      "priority": 2,
-      "autoAccept": true,
-      "performance": "ultra-fast",
-      "interval": 500
-    },
-    "admin": {
-      "enabled": true,
-      "priority": 3,
-      "autoAccept": true,
-      "performance": "ultra-fast",
-      "interval": 500
-    },
-    "testing": {
-      "enabled": true,
-      "priority": 4,
-      "autoAccept": true,
-      "performance": "ultra-fast",
-      "interval": 500
-    },
-    "security": {
-      "enabled": true,
-      "priority": 5,
-      "autoAccept": true,
-      "performance": "ultra-fast",
-      "interval": 500
-    },
-    "deployment": {
-      "enabled": true,
-      "priority": 6,
-      "autoAccept": true,
-      "performance": "ultra-fast",
-      "interval": 500
-    }
+  "workspace": "F:\\ehb next.js 04",
+  "aiFeatures": {
+    "codeCompletion": true,
+    "refactoring": true,
+    "debugging": true,
+    "documentation": true,
+    "testing": true,
+    "autoSetup": true
   },
   "automation": {
-    "autoStart": true,
-    "autoAccept": true,
-    "autoRun": true,
-    "autoDeploy": true,
-    "autoTest": true,
     "autoFix": true,
-    "continuousDevelopment": true,
-    "performance": "ultra-fast"
-  },
-  "optimization": {
-    "memoryLimit": "4GB",
-    "cpuLimit": "80%",
-    "cacheSize": "1GB",
-    "parallelThreads": 8,
-    "timeout": 15000,
-    "retryAttempts": 2
-  },
-  "monitoring": {
-    "enabled": true,
-    "interval": 1000,
-    "errorCheck": true,
-    "performanceCheck": true,
-    "autoFix": true
+    "autoTest": true,
+    "autoDeploy": true,
+    "autoDocument": true,
+    "autoAccept": true
   }
 }
