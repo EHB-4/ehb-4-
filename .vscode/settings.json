@@ -17,5 +17,6 @@
     "enable": true,
     "baseUri": "/",
     "proxyUri": "http://localhost:3000"
-  }
+  },
+  "diffEditor.codeLens": true
 }

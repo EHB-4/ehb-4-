@@ -1,0 +1,101 @@
+[2025-06-23T21:55:32.947Z] ❌ Auto-push failed: Command failed: git commit -m "Auto-push: 2025-06-23T21:55:27.706Z"
+husky - DEPRECATED
+
+Please remove the following two lines from .husky/pre-commit:
+
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+They WILL FAIL in v10.0.0
+
+[33m[STARTED][39m Backing up original state...
+[32m[COMPLETED][39m Backed up original state in git stash (5b59173e)
+[33m[STARTED][39m Hiding unstaged changes to partially staged files...
+[32m[COMPLETED][39m Hiding unstaged changes to partially staged files...
+[33m[STARTED][39m Running tasks for staged files...
+[33m[STARTED][39m .lintstagedrc — 44 files
+[33m[STARTED][39m *.{js,jsx,ts,tsx} — 4 files
+[33m[STARTED][39m *.{json,md,yml,yaml} — 8 files
+[33m[STARTED][39m eslint --fix
+[33m[STARTED][39m prettier --write
+[32m[COMPLETED][39m prettier --write
+[32m[COMPLETED][39m *.{json,md,yml,yaml} — 8 files
+[31m[FAILED][39m eslint --fix [FAILED]
+[31m[FAILED][39m eslint --fix [FAILED]
+[32m[COMPLETED][39m Running tasks for staged files...
+[33m[STARTED][39m Applying modifications from tasks...
+[33m[SKIPPED][39m Skipped because of errors from tasks.
+[33m[STARTED][39m Restoring unstaged changes to partially staged files...
+[33m[SKIPPED][39m Skipped because of errors from tasks.
+[33m[STARTED][39m Reverting to original state because of errors...
+[31m[FAILED][39m <stdin>:24436: trailing whitespace.
+ 
+<stdin>:24954: trailing whitespace.
+        
+<stdin>:24959: trailing whitespace.
+        
+<stdin>:24965: trailing whitespace.
+        
+<stdin>:24968: trailing whitespace.
+        
+warning: squelched 30 whitespace errors
+warning: 35 lines add whitespace errors.
+error: The following untracked working tree files would be overwritten by merge:
+	scripts/force-auto-push.bat
+Please move or remove them before you merge.
+Aborting
+Index was not unstashed.
+[33m[STARTED][39m Cleaning up temporary files...
+[33m[SKIPPED][39m 
+  ✖ lint-staged failed due to a git error.
+
+  ✖ lint-staged failed due to a git error.
+Any lost modifications can be restored from a git stash:
+
+  > git stash list
+  stash@{0}: automatic lint-staged backup
+  > git stash apply --index stash@{0}
+
+
+✖ eslint --fix:
+
+Oops! Something went wrong! :(
+
+ESLint: 9.29.0
+
+ESLint couldn't find an eslint.config.(js|mjs|cjs) file.
+
+From ESLint v9.0.0, the default configuration file is now eslint.config.js.
+If you are using a .eslintrc.* file, please follow the migration guide
+to update your configuration file to the new format:
+
+https://eslint.org/docs/latest/use/configure/migration-guide
+
+If you still have problems after following the migration guide, please stop by
+https://eslint.org/chat/help to chat with the team.
+
+husky - pre-commit script failed (code 1)
+
+[2025-06-23T21:56:27.417Z] 🔄 Starting auto-push...
+[2025-06-23T21:56:27.696Z] 📦 Changes staged
+[2025-06-23T21:56:31.077Z] ❌ Auto-push failed: Command failed: git commit -m "Auto-push: 2025-06-23T21:56:27.697Z"
+husky - DEPRECATED
+
+Please remove the following two lines from .husky/pre-commit:
+
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+They WILL FAIL in v10.0.0
+
+npm error code ENOENT
+npm error syscall open
+npm error path F:\ehb next.js 04\.npm-cache\_npx\8facc973fbdb1091\package.json
+npm error errno -4058
+npm error enoent Could not read package.json: Error: ENOENT: no such file or directory, open 'F:\ehb next.js 04\.npm-cache\_npx\8facc973fbdb1091\package.json'
+npm error enoent This is related to npm not being able to find a file.
+npm error enoent
+npm error A complete log of this run can be found in: F:\ehb next.js 04\.npm-cache\_logs\2025-06-23T21_56_28_448Z-debug-0.log
+husky - pre-commit script failed (code 127)
+husky - command not found in PATH=node_modules/.bin:/mingw64/libexec/git-core:/mingw64/bin:/usr/bin:/c/Users/PC/bin:/c/Users/PC/.cursor/extensions/ms-python.python-2025.6.1-win32-x64/python_files/deactivate/powershell:/f/ehb next.js 04/.venv/Scripts:/c/Program Files/PowerShell/7:/c/Users/PC/.cursor/extensions/ms-python.python-2025.6.1-win32-x64/python_files/deactivate/powershell:/f/ehb next.js 04/.venv/Scripts:%PATH:/c/Program Files/nodejs:/c/Windows:/c/Windows/System32:/c/Windows/System32/Wbem:/c/Windows/System32/WindowsPowerShell/v1.0:/c/Windows/System32/OpenSSH:/c/Users/PC/AppData/Local/Programs/Python/Python310:/c/Users/PC/AppData/Local/Programs/Python/Python310/Scripts:/cmd:/mingw64/bin:/usr/bin:/c/ProgramData/chocolatey/bin:/c/Windows/System32/winget.exe:/c/Program Files (x86)/Microsoft Visual Studio/2022/BuildTools/MSBuild/Current/Bin:/c/Program Files (x86)/Microsoft Visual Studio/2022/BuildTools/Common7/Tools:/c/Program Files (x86)/Microsoft Visual Studio/2022/BuildTools/VC/Tools/MSVC/14.39.33519/bin/Hostx64/x64:/c/Program Files (x86)/Microsoft Visual Studio/2022/BuildTools/VC/Tools/MSVC/14.44.35207/bin/Hostx64/x64:/c/Program Files/Docker/Docker/resources/bin:/c/Program Files/MongoDB/Server/8.0/bin:/c/Program Files/MongoDB Shell/bin:/bin:/c/Users/PC/AppData/Roaming/npm:/c/Users/PC/AppData/Local/Programs/Ollama:/c/Users/PC/AppData/Local/Programs/cursor/resources/app/bin
+
