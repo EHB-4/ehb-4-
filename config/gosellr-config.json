@@ -1,0 +1,442 @@
+{
+  "gosellr": {
+    "version": "1.0.0",
+    "name": "GoSellr - Decentralized E-commerce Platform",
+    "description": "A comprehensive blockchain-powered e-commerce platform with AI-driven trust scoring and escrow protection",
+
+    "api": {
+      "baseUrl": "http://localhost:3000/api/gosellr",
+      "version": "v1",
+      "timeout": 30000,
+      "retryAttempts": 3,
+      "rateLimit": {
+        "requests": 100,
+        "window": 60000
+      }
+    },
+
+    "blockchain": {
+      "networks": {
+        "ethereum": {
+          "name": "Ethereum Mainnet",
+          "rpcUrl": "https://mainnet.infura.io/v3/YOUR_INFURA_KEY",
+          "chainId": 1,
+          "explorer": "https://etherscan.io",
+          "nativeCurrency": {
+            "name": "Ether",
+            "symbol": "ETH",
+            "decimals": 18
+          }
+        },
+        "polygon": {
+          "name": "Polygon Mainnet",
+          "rpcUrl": "https://polygon-rpc.com",
+          "chainId": 137,
+          "explorer": "https://polygonscan.com",
+          "nativeCurrency": {
+            "name": "MATIC",
+            "symbol": "MATIC",
+            "decimals": 18
+          }
+        },
+        "binance": {
+          "name": "BNB Smart Chain",
+          "rpcUrl": "https://bsc-dataseed.binance.org",
+          "chainId": 56,
+          "explorer": "https://bscscan.com",
+          "nativeCurrency": {
+            "name": "BNB",
+            "symbol": "BNB",
+            "decimals": 18
+          }
+        }
+      },
+      "contracts": {
+        "escrow": {
+          "ethereum": "0x1234567890123456789012345678901234567890",
+          "polygon": "0x1234567890123456789012345678901234567890",
+          "binance": "0x1234567890123456789012345678901234567890"
+        },
+        "marketplace": {
+          "ethereum": "0x1234567890123456789012345678901234567890",
+          "polygon": "0x1234567890123456789012345678901234567890",
+          "binance": "0x1234567890123456789012345678901234567890"
+        },
+        "nft": {
+          "ethereum": "0x1234567890123456789012345678901234567890",
+          "polygon": "0x1234567890123456789012345678901234567890",
+          "binance": "0x1234567890123456789012345678901234567890"
+        }
+      },
+      "gasSettings": {
+        "defaultGasLimit": 300000,
+        "maxGasLimit": 500000,
+        "gasMultiplier": 1.1,
+        "maxPriorityFee": "2",
+        "maxFeePerGas": "50"
+      }
+    },
+
+    "ai": {
+      "trustScoring": {
+        "enabled": true,
+        "model": "gpt-4",
+        "factors": [
+          "transaction_history",
+          "user_behavior",
+          "social_proof",
+          "kyc_verification",
+          "dispute_history",
+          "response_time",
+          "product_quality",
+          "delivery_performance"
+        ],
+        "weights": {
+          "transaction_history": 0.25,
+          "user_behavior": 0.2,
+          "social_proof": 0.15,
+          "kyc_verification": 0.15,
+          "dispute_history": 0.1,
+          "response_time": 0.05,
+          "product_quality": 0.05,
+          "delivery_performance": 0.05
+        },
+        "thresholds": {
+          "high_risk": 30,
+          "medium_risk": 60,
+          "low_risk": 90
+        }
+      },
+      "fraudDetection": {
+        "enabled": true,
+        "models": ["anomaly_detection", "pattern_recognition", "behavioral_analysis"],
+        "sensitivity": 0.8
+      },
+      "recommendationEngine": {
+        "enabled": true,
+        "algorithm": "collaborative_filtering",
+        "factors": [
+          "purchase_history",
+          "browsing_behavior",
+          "similar_users",
+          "product_attributes",
+          "seasonal_trends"
+        ]
+      }
+    },
+
+    "kyc": {
+      "required": true,
+      "providers": ["jumio", "onfido", "veriff"],
+      "documents": ["passport", "drivers_license", "national_id", "ssn"],
+      "verificationLevels": {
+        "basic": {
+          "required": ["email", "phone"],
+          "limits": {
+            "daily_transaction": 100,
+            "monthly_transaction": 1000
+          }
+        },
+        "enhanced": {
+          "required": ["email", "phone", "identity_document"],
+          "limits": {
+            "daily_transaction": 1000,
+            "monthly_transaction": 10000
+          }
+        },
+        "premium": {
+          "required": ["email", "phone", "identity_document", "proof_of_address"],
+          "limits": {
+            "daily_transaction": 10000,
+            "monthly_transaction": 100000
+          }
+        }
+      }
+    },
+
+    "payments": {
+      "methods": {
+        "escrow": {
+          "enabled": true,
+          "fee": 2.5,
+          "timeout": 30,
+          "autoRelease": false
+        },
+        "direct": {
+          "enabled": true,
+          "fee": 1.5,
+          "instant": true
+        },
+        "crypto": {
+          "enabled": true,
+          "supported": ["ETH", "MATIC", "BNB", "USDT", "USDC"],
+          "fee": 1.0
+        },
+        "credit_card": {
+          "enabled": false,
+          "fee": 3.0,
+          "provider": "stripe"
+        }
+      },
+      "currencies": {
+        "supported": ["USD", "EUR", "GBP", "CAD"],
+        "default": "USD",
+        "exchangeRates": {
+          "provider": "coinbase",
+          "updateInterval": 3600000
+        }
+      }
+    },
+
+    "shipping": {
+      "providers": ["fedex", "ups", "usps", "dhl"],
+      "defaultOptions": {
+        "standard": {
+          "cost": 9.99,
+          "days": "3-5",
+          "tracking": true
+        },
+        "express": {
+          "cost": 19.99,
+          "days": "1-2",
+          "tracking": true
+        },
+        "overnight": {
+          "cost": 29.99,
+          "days": "1",
+          "tracking": true
+        }
+      },
+      "freeShippingThreshold": 50.0
+    },
+
+    "security": {
+      "authentication": {
+        "methods": ["wallet", "email", "phone"],
+        "twoFactor": {
+          "enabled": true,
+          "methods": ["authenticator", "sms", "email"]
+        },
+        "sessionTimeout": 3600000,
+        "maxLoginAttempts": 5,
+        "lockoutDuration": 900000
+      },
+      "encryption": {
+        "algorithm": "AES-256-GCM",
+        "keyRotation": 2592000000
+      },
+      "rateLimiting": {
+        "api": {
+          "requests": 100,
+          "window": 60000
+        },
+        "auth": {
+          "requests": 5,
+          "window": 300000
+        }
+      }
+    },
+
+    "notifications": {
+      "channels": {
+        "email": {
+          "enabled": true,
+          "provider": "sendgrid",
+          "templates": {
+            "order_confirmation": "template_id_1",
+            "shipping_update": "template_id_2",
+            "payment_received": "template_id_3",
+            "dispute_created": "template_id_4"
+          }
+        },
+        "sms": {
+          "enabled": true,
+          "provider": "twilio",
+          "templates": {
+            "order_confirmation": "template_id_1",
+            "shipping_update": "template_id_2"
+          }
+        },
+        "push": {
+          "enabled": true,
+          "provider": "firebase"
+        },
+        "in_app": {
+          "enabled": true,
+          "retention": 30
+        }
+      },
+      "events": [
+        "order_created",
+        "payment_received",
+        "order_shipped",
+        "order_delivered",
+        "dispute_created",
+        "dispute_resolved",
+        "kyc_approved",
+        "kyc_rejected"
+      ]
+    },
+
+    "analytics": {
+      "enabled": true,
+      "providers": ["google_analytics", "mixpanel", "amplitude"],
+      "metrics": [
+        "user_engagement",
+        "conversion_rate",
+        "average_order_value",
+        "customer_lifetime_value",
+        "dispute_rate",
+        "trust_score_distribution"
+      ],
+      "retention": {
+        "user_data": 2555,
+        "analytics_data": 365
+      }
+    },
+
+    "compliance": {
+      "gdpr": {
+        "enabled": true,
+        "dataRetention": {
+          "user_data": 2555,
+          "transaction_data": 2555,
+          "kyc_data": 2555
+        },
+        "rights": ["access", "rectification", "erasure", "portability", "objection"]
+      },
+      "aml": {
+        "enabled": true,
+        "thresholds": {
+          "daily": 10000,
+          "monthly": 100000
+        },
+        "reporting": {
+          "suspicious_activity": true,
+          "large_transactions": true
+        }
+      },
+      "kyc": {
+        "required": true,
+        "verification_levels": ["basic", "enhanced", "premium"],
+        "document_types": ["passport", "drivers_license", "national_id"]
+      }
+    },
+
+    "features": {
+      "nft": {
+        "enabled": true,
+        "standards": ["ERC-721", "ERC-1155"],
+        "marketplace": true,
+        "royalties": true
+      },
+      "loyalty": {
+        "enabled": true,
+        "points_system": true,
+        "rewards": true,
+        "tiers": ["bronze", "silver", "gold", "platinum"]
+      },
+      "affiliate": {
+        "enabled": true,
+        "commission_rate": 5.0,
+        "referral_bonus": 10.0
+      },
+      "subscription": {
+        "enabled": true,
+        "plans": [
+          {
+            "name": "basic",
+            "price": 9.99,
+            "features": ["basic_analytics", "email_support"]
+          },
+          {
+            "name": "pro",
+            "price": 29.99,
+            "features": ["advanced_analytics", "priority_support", "custom_domain"]
+          },
+          {
+            "name": "enterprise",
+            "price": 99.99,
+            "features": ["all_features", "dedicated_support", "api_access"]
+          }
+        ]
+      }
+    },
+
+    "performance": {
+      "caching": {
+        "enabled": true,
+        "strategy": "redis",
+        "ttl": {
+          "products": 3600,
+          "user_data": 1800,
+          "analytics": 300
+        }
+      },
+      "cdn": {
+        "enabled": true,
+        "provider": "cloudflare",
+        "domains": ["images.gosellr.com", "assets.gosellr.com"]
+      },
+      "database": {
+        "type": "postgresql",
+        "connection_pool": {
+          "min": 5,
+          "max": 20
+        },
+        "read_replicas": 2
+      }
+    },
+
+    "monitoring": {
+      "enabled": true,
+      "providers": ["sentry", "datadog", "new_relic"],
+      "alerts": {
+        "error_rate": {
+          "threshold": 5.0,
+          "window": 300
+        },
+        "response_time": {
+          "threshold": 2000,
+          "window": 300
+        },
+        "blockchain_transactions": {
+          "threshold": 100,
+          "window": 3600
+        }
+      },
+      "logging": {
+        "level": "info",
+        "retention": 30,
+        "format": "json"
+      }
+    },
+
+    "deployment": {
+      "environments": {
+        "development": {
+          "url": "http://localhost:3000",
+          "database": "gosellr_dev",
+          "blockchain": "testnet"
+        },
+        "staging": {
+          "url": "https://staging.gosellr.com",
+          "database": "gosellr_staging",
+          "blockchain": "testnet"
+        },
+        "production": {
+          "url": "https://gosellr.com",
+          "database": "gosellr_prod",
+          "blockchain": "mainnet"
+        }
+      },
+      "scaling": {
+        "auto_scaling": true,
+        "min_instances": 2,
+        "max_instances": 10,
+        "cpu_threshold": 70,
+        "memory_threshold": 80
+      }
+    }
+  }
+}

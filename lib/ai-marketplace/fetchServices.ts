@@ -1,95 +1,52 @@
-import { Service } from '@/types/marketplace';
+export interface AIService {
+  id: string;
+  name: string;
+  description: string;
+  category: string;
+  provider: string;
+  pricing: {
+    type: 'free' | 'pay-per-use' | 'subscription';
+    price?: number;
+    currency?: string;
+  };
+  rating: number;
+  usageCount: number;
+  isAvailable: boolean;
+}
 
-const mockServices: Service[] = [
-  {
-    id: 'hps',
-    name: 'HPS – Education',
-    description: 'Education, Courses, Exams',
-    icon: '📚',
-    status: 'live',
-    sqlLevel: 'basic',
-    region: 'global',
-    features: ['Course Catalog', 'Exam Platform', 'Progress Tracking'],
-  },
-  {
-    id: 'wms',
-    name: 'WMS – Health',
-    description: 'Doctor Booking & Medical Flow',
-    icon: '🏥',
-    status: 'upcoming',
-    sqlLevel: 'normal',
-    region: 'global',
-    features: ['Doctor Profiles', 'Appointment Booking', 'Medical Records'],
-  },
-  {
-    id: 'ols',
-    name: 'OLS – Law',
-    description: 'Lawyer Hiring & Legal Consultations',
-    icon: '⚖️',
-    status: 'live',
-    sqlLevel: 'high',
-    region: 'global',
-    features: ['Lawyer Profiles', 'Case Management', 'Document Upload'],
-  },
-  {
-    id: 'gosellr',
-    name: 'GoSellr – E-Commerce',
-    description: 'E-Commerce & Delivery Flow',
-    icon: '🛒',
-    status: 'live',
-    sqlLevel: 'vip',
-    region: 'global',
-    features: ['Product Management', 'Order Processing', 'Delivery Tracking'],
-  },
-  {
-    id: 'ehb-tube',
-    name: 'EHB Tube – Media',
-    description: 'Video Content Platform',
-    icon: '📺',
-    status: 'upcoming',
-    sqlLevel: 'basic',
-    region: 'global',
-    features: ['Video Upload', 'Content Creation', 'Monetization'],
-  },
-  {
-    id: 'ehb-ads',
-    name: 'EHB Ads – Classifieds',
-    description: 'Advertisement Platform',
-    icon: '📰',
-    status: 'live',
-    sqlLevel: 'normal',
-    region: 'global',
-    features: ['Ad Creation', 'Targeting', 'Analytics'],
-  },
-];
-
-export async function fetchServices(params: {
-  region?: string;
-  sqlLevel?: string;
-  search?: string;
-}): Promise<Service[]> {
-  // Simulate API delay
-  await new Promise(resolve => setTimeout(resolve, 1000));
-
-  let filteredServices = [...mockServices];
-
-  // Apply filters
-  if (params.region) {
-    filteredServices = filteredServices.filter(service => service.region === params.region);
+export async function fetchServices(): Promise<AIService[]> {
+  try {
+    const response = await fetch('/api/ai-marketplace/services');
+    if (!response.ok) {
+      throw new Error('Failed to fetch services');
+    }
+    return await response.json();
+  } catch (error) {
+    console.error('Error fetching AI services:', error);
+    // Return mock data for development
+    return [
+      {
+        id: '1',
+        name: 'Text Generation AI',
+        description: 'Advanced text generation and content creation',
+        category: 'text',
+        provider: 'OpenAI',
+        pricing: { type: 'pay-per-use', price: 0.02, currency: 'USD' },
+        rating: 4.5,
+        usageCount: 1500,
+        isAvailable: true,
+      },
+      {
+        id: '2',
+        name: 'Image Recognition',
+        description: 'Computer vision and image analysis',
+        category: 'vision',
+        provider: 'Google',
+        pricing: { type: 'subscription', price: 50, currency: 'USD' },
+        rating: 4.2,
+        usageCount: 800,
+        isAvailable: true,
+      },
+    ];
   }
-
-  if (params.sqlLevel) {
-    filteredServices = filteredServices.filter(service => service.sqlLevel === params.sqlLevel);
-  }
-
-  if (params.search) {
-    const searchLower = params.search.toLowerCase();
-    filteredServices = filteredServices.filter(
-      service =>
-        service.name.toLowerCase().includes(searchLower) ||
-        service.description.toLowerCase().includes(searchLower)
-    );
-  }
-
-  return filteredServices;
 }

@@ -18,6 +18,10 @@ import {
   FaHome,
   FaTachometerAlt,
   FaRoute,
+  FaCrown,
+  FaFlag,
+  FaCalendar,
+  FaBrain,
 } from 'react-icons/fa';
 
 export default function DevelopmentPortalPage() {
@@ -104,20 +108,38 @@ export default function DevelopmentPortalPage() {
       bgColor: 'bg-indigo-50',
       href: '/development/ai',
     },
+    {
+      icon: FaCrown,
+      title: 'SCO Management',
+      description: 'Service Level Agreement management with progress tracking.',
+      color: 'text-pink-600',
+      bgColor: 'bg-pink-50',
+      href: '/development/sco',
+      new: true,
+    },
+    {
+      icon: FaFlag,
+      title: 'Project Tracker',
+      description: 'Real-time project monitoring and milestone tracking.',
+      color: 'text-violet-600',
+      bgColor: 'bg-violet-50',
+      href: '/development/project-tracker',
+      new: true,
+    },
   ];
 
   const stats = [
-    { label: 'Projects Completed', value: '150+', icon: FaRocket },
+    { label: 'Projects Completed', value: '150+', icon: FaTools },
     { label: 'Happy Clients', value: '50+', icon: FaUsers },
-    { label: 'Success Rate', value: '98%', icon: FaChartLine },
-    { label: 'Team Members', value: '25+', icon: FaCode },
+    { label: 'Success Rate', value: '98%', icon: FaRocket },
+    { label: 'Team Members', value: '25+', icon: FaUsers },
   ];
 
   const features = [
     {
       title: 'Modern Tech Stack',
       description: 'Latest technologies and frameworks for optimal performance',
-      icon: FaTools,
+      icon: FaCode,
     },
     {
       title: 'Scalable Architecture',
@@ -147,7 +169,7 @@ export default function DevelopmentPortalPage() {
             className="text-center"
           >
             <div className="flex items-center justify-center space-x-3 mb-6">
-              <FaCode className="w-12 h-12" />
+              <FaRocket className="w-12 h-12" />
               <h1 className="text-5xl font-bold">EHB Development Portal</h1>
             </div>
             <p className="text-xl text-blue-100 max-w-3xl mx-auto mb-8">
@@ -210,18 +232,25 @@ export default function DevelopmentPortalPage() {
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {services.map(service => (
+            {services.map((service, index) => (
               <motion.div
                 key={service.title}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.1 * services.indexOf(service) }}
+                transition={{ delay: 0.1 * index }}
                 className="group"
               >
                 <Link href={service.href}>
                   <div
-                    className={`${service.bgColor} p-6 rounded-xl hover:shadow-xl transition-all duration-300 group-hover:scale-105 h-full flex flex-col`}
+                    className={`${service.bgColor} p-6 rounded-xl hover:shadow-xl transition-all duration-300 group-hover:scale-105 h-full flex flex-col relative`}
                   >
+                    {service.new && (
+                      <div className="absolute top-4 right-4">
+                        <span className="bg-red-500 text-white px-2 py-1 rounded-full text-xs font-semibold">
+                          NEW
+                        </span>
+                      </div>
+                    )}
                     <div className={`${service.color} mb-4`}>
                       <service.icon className="w-12 h-12" />
                     </div>
@@ -267,7 +296,7 @@ export default function DevelopmentPortalPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {features.map((feature, index) => (
               <motion.div
-                key={index}
+                key={feature.title}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.1 * index }}

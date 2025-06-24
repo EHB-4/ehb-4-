@@ -1,7 +1,4 @@
 import { ethers } from 'ethers';
-import { getSession } from 'next-auth/react';
-
-import config from '@/config/env';
 
 // Add type declaration for window.ethereum
 declare global {
@@ -10,50 +7,43 @@ declare global {
   }
 }
 
-// Contract ABI - replace with your actual contract ABI
+// Contract ABI - Basic interface for token lock functionality
 const CONTRACT_ABI = [
-  'function lock(uint256 amount, uint256 duration) external',
-  'function unlock(uint256 amount) external',
-  'function claimReward() external',
+  'function getLockInfo(address user) external view returns (uint256 amount, uint256 lockStartTime, uint256 lockEndTime, bool isActive)',
   'function getPendingRewards() external view returns (uint256)',
-  'function balanceOf(address account) external view returns (uint256)',
-  'function lockedBalanceOf(address account) external view returns (uint256)',
-  'function getLockInfo(address account) external view returns (uint256 amount, uint256 unlockTime)',
+  'function lockTokens(uint256 amount, uint256 duration) external',
+  'function unlockTokens() external',
+  'function claimRewards() external',
 ];
 
-export async function getContract() {
-  try {
-    if (typeof window === 'undefined' || !window.ethereum) {
-      throw new Error('Ethereum provider not found');
+// Contract address - Replace with actual contract address
+const CONTRACT_ADDRESS =
+  process.env.NEXT_PUBLIC_CONTRACT_ADDRESS || '0x0000000000000000000000000000000000000000';
+
+let provider: ethers.BrowserProvider | null = null;
+let contract: ethers.Contract | null = null;
+
+export async function getProvider(): Promise<ethers.BrowserProvider> {
+  if (!provider) {
+    if (typeof window !== 'undefined' && window.ethereum) {
+      provider = new ethers.BrowserProvider(window.ethereum);
+    } else {
+      throw new Error('No Ethereum provider found');
     }
-
-    // Get the provider
-    const provider = new ethers.BrowserProvider(window.ethereum);
-
-    // Get the signer
-    const signer = await provider.getSigner();
-
-    // Create and return the contract instance
-    return new ethers.Contract(config.contractAddress, CONTRACT_ABI, signer);
-  } catch (error) {
-    console.error('Error getting contract:', error);
-    throw new Error('Failed to initialize contract');
   }
+  return provider;
 }
 
-export async function getContractReadOnly() {
-  try {
-    if (typeof window === 'undefined' || !window.ethereum) {
-      throw new Error('Ethereum provider not found');
-    }
-
-    // Get the provider
-    const provider = new ethers.BrowserProvider(window.ethereum);
-
-    // Create and return the contract instance without a signer
-    return new ethers.Contract(config.contractAddress, CONTRACT_ABI, provider);
-  } catch (error) {
-    console.error('Error getting read-only contract:', error);
-    throw new Error('Failed to initialize read-only contract');
+export async function getContractReadOnly(): Promise<ethers.Contract> {
+  if (!contract) {
+    const provider = await getProvider();
+    contract = new ethers.Contract(CONTRACT_ADDRESS, CONTRACT_ABI, provider);
   }
+  return contract;
+}
+
+export async function getContractWithSigner(): Promise<ethers.Contract> {
+  const provider = await getProvider();
+  const signer = await provider.getSigner();
+  return new ethers.Contract(CONTRACT_ADDRESS, CONTRACT_ABI, signer);
 }

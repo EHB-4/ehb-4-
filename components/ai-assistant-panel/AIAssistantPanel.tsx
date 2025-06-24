@@ -1,120 +1,146 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
-import { motion } from 'framer-motion';
-import { FiChevronsLeft, FiChevronsRight, FiSend, FiMessageSquare } from 'react-icons/fi';
-import { Button } from '../ui/button';
-import { Input } from '../ui/input';
-import { ScrollArea } from '../ui/scroll-area';
-import { useAIChat } from '../layout/AIChatProvider';
-import { cn } from '@/lib/utils';
+import React, { useState } from 'react';
+import { FaRobot, FaPaperPlane, FaTimes, FaCog } from 'react-icons/fa';
+
+interface Message {
+  id: string;
+  text: string;
+  isUser: boolean;
+  timestamp: Date;
+}
 
 export default function AIAssistantPanel() {
-  const [isOpen, setIsOpen] = useState(true);
-  const { messages, isLoading, sendMessage } = useAIChat();
-  const [input, setInput] = useState('');
-  const scrollRef = useRef<HTMLDivElement>(null);
+  const [isOpen, setIsOpen] = useState(false);
+  const [messages, setMessages] = useState<Message[]>([
+    {
+      id: '1',
+      text: "Hello! I'm your AI assistant. How can I help you today?",
+      isUser: false,
+      timestamp: new Date(),
+    },
+  ]);
+  const [inputText, setInputText] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
-  useEffect(() => {
-    if (scrollRef.current) {
-      scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
+  const handleSendMessage = async () => {
+    if (!inputText.trim()) return;
+
+    const userMessage: Message = {
+      id: Date.now().toString(),
+      text: inputText,
+      isUser: true,
+      timestamp: new Date(),
+    };
+
+    setMessages(prev => [...prev, userMessage]);
+    setInputText('');
+    setIsLoading(true);
+
+    // Simulate AI response
+    setTimeout(() => {
+      const aiMessage: Message = {
+        id: (Date.now() + 1).toString(),
+        text: `I understand you're asking about "${inputText}". This is a simulated response. In a real implementation, this would connect to an AI service.`,
+        isUser: false,
+        timestamp: new Date(),
+      };
+      setMessages(prev => [...prev, aiMessage]);
+      setIsLoading(false);
+    }, 1000);
+  };
+
+  const handleKeyPress = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      handleSendMessage();
     }
-  }, [messages]);
-
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    if (!input.trim() || isLoading) return;
-
-    const message = input.trim();
-    setInput('');
-    await sendMessage(message);
   };
 
-  const sidebarVariants = {
-    open: { x: 0 },
-    closed: { x: 'calc(100% - 48px)' },
-  };
+  if (!isOpen) {
+    return (
+      <button
+        onClick={() => setIsOpen(true)}
+        className="fixed bottom-6 right-6 bg-blue-600 text-white p-4 rounded-full shadow-lg hover:bg-blue-700 transition-colors z-50"
+      >
+        <FaRobot className="w-6 h-6" />
+      </button>
+    );
+  }
 
   return (
-    <motion.div
-      variants={sidebarVariants}
-      initial="open"
-      animate={isOpen ? 'open' : 'closed'}
-      transition={{ type: 'spring', stiffness: 400, damping: 40 }}
-      className="fixed top-0 right-0 h-full w-96 bg-slate-900 text-white shadow-2xl z-50 flex flex-col font-sans"
-    >
-      <div className="absolute top-1/2 -translate-y-1/2 -left-12">
-        <Button onClick={() => setIsOpen(!isOpen)} size="icon" className="rounded-r-none shadow-lg">
-          {isOpen ? (
-            <FiChevronsRight className="h-5 w-5" />
-          ) : (
-            <FiChevronsLeft className="h-5 w-5" />
-          )}
-        </Button>
-      </div>
-
-      <div className="p-4 flex flex-col h-full overflow-hidden">
-        <div className="flex items-center justify-between pb-4 border-b border-slate-700 flex-shrink-0">
-          <h2 className="text-lg font-bold flex items-center">
-            <FiMessageSquare className="mr-2" /> AI Assistant
-          </h2>
+    <div className="fixed bottom-6 right-6 w-80 h-96 bg-white rounded-lg shadow-xl border border-gray-200 z-50">
+      {/* Header */}
+      <div className="bg-blue-600 text-white p-4 rounded-t-lg flex items-center justify-between">
+        <div className="flex items-center">
+          <FaRobot className="w-5 h-5 mr-2" />
+          <span className="font-semibold">AI Assistant</span>
         </div>
-
-        <ScrollArea ref={scrollRef} className="flex-1 my-4">
-          <div className="space-y-4 pr-4">
-            {messages.map(message => (
-              <div
-                key={message.id}
-                className={cn(
-                  'flex flex-col space-y-2',
-                  message.role === 'user' ? 'items-end' : 'items-start'
-                )}
-              >
-                <div
-                  className={cn(
-                    'rounded-lg px-4 py-2 max-w-[90%]',
-                    message.role === 'user'
-                      ? 'bg-blue-600 text-white'
-                      : 'bg-slate-700 text-slate-200'
-                  )}
-                >
-                  <p className="text-sm">{message.content}</p>
-                </div>
-                <span className="text-xs text-slate-400">
-                  {new Date(message.timestamp).toLocaleTimeString()}
-                </span>
-              </div>
-            ))}
-            {isLoading && (
-              <div className="flex items-start space-x-2 text-slate-400">
-                <div className="w-2 h-2 bg-current rounded-full animate-bounce" />
-                <div className="w-2 h-2 bg-current rounded-full animate-bounce delay-100" />
-                <div className="w-2 h-2 bg-current rounded-full animate-bounce delay-200" />
-              </div>
-            )}
-          </div>
-        </ScrollArea>
-
-        <form onSubmit={handleSubmit} className="border-t border-slate-700 pt-4">
-          <div className="flex space-x-2">
-            <Input
-              value={input}
-              onChange={e => setInput(e.target.value)}
-              placeholder="Ask the AI assistant..."
-              disabled={isLoading}
-              className="flex-1 bg-slate-800 border-slate-600 text-white placeholder-slate-400"
-            />
-            <Button
-              type="submit"
-              disabled={isLoading || !input.trim()}
-              size="icon"
-              className="bg-blue-600 hover:bg-blue-700"
-            >
-              <FiSend className="h-5 w-5" />
-            </Button>
-          </div>
-        </form>
+        <button
+          onClick={() => setIsOpen(false)}
+          className="text-white hover:text-gray-200 transition-colors"
+        >
+          <FaTimes className="w-4 h-4" />
+        </button>
       </div>
-    </motion.div>
+
+      {/* Messages */}
+      <div className="h-64 overflow-y-auto p-4 space-y-3">
+        {messages.map(message => (
+          <div
+            key={message.id}
+            className={`flex ${message.isUser ? 'justify-end' : 'justify-start'}`}
+          >
+            <div
+              className={`max-w-xs px-3 py-2 rounded-lg ${
+                message.isUser ? 'bg-blue-600 text-white' : 'bg-gray-100 text-gray-800'
+              }`}
+            >
+              <p className="text-sm">{message.text}</p>
+              <p className="text-xs opacity-70 mt-1">{message.timestamp.toLocaleTimeString()}</p>
+            </div>
+          </div>
+        ))}
+        {isLoading && (
+          <div className="flex justify-start">
+            <div className="bg-gray-100 text-gray-800 max-w-xs px-3 py-2 rounded-lg">
+              <div className="flex space-x-1">
+                <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></div>
+                <div
+                  className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"
+                  style={{ animationDelay: '0.1s' }}
+                ></div>
+                <div
+                  className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"
+                  style={{ animationDelay: '0.2s' }}
+                ></div>
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
+
+      {/* Input */}
+      <div className="p-4 border-t border-gray-200">
+        <div className="flex space-x-2">
+          <input
+            type="text"
+            value={inputText}
+            onChange={e => setInputText(e.target.value)}
+            onKeyPress={handleKeyPress}
+            placeholder="Type your message..."
+            className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            disabled={isLoading}
+          />
+          <button
+            onClick={handleSendMessage}
+            disabled={!inputText.trim() || isLoading}
+            className="bg-blue-600 text-white px-3 py-2 rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            <FaPaperPlane className="w-4 h-4" />
+          </button>
+        </div>
+      </div>
+    </div>
   );
 }

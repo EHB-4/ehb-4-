@@ -1,0 +1,55 @@
+{
+  "autoDev": {
+    "enabled": true,
+    "autoRestart": true,
+    "autoInstall": true,
+    "autoClean": true,
+    "fileWatcher": true,
+    "hotReload": true,
+    "port": 3000,
+    "host": "localhost",
+    "watchDirs": ["app", "components", "lib", "styles", "pages", "public"],
+    "ignoreDirs": ["node_modules", ".next", ".git", "logs"],
+    "commands": {
+      "dev": "npm run dev",
+      "build": "npm run build",
+      "test": "npm test",
+      "lint": "npm run lint",
+      "install": "npm install",
+      "clean": "rm -rf .next"
+    },
+    "notifications": {
+      "enabled": true,
+      "sound": true,
+      "desktop": true
+    },
+    "performance": {
+      "maxMemory": "2GB",
+      "cpuLimit": 80,
+      "autoOptimize": true
+    },
+    "backup": {
+      "enabled": true,
+      "interval": 300000,
+      "maxBackups": 5
+    }
+  },
+  "shortcuts": {
+    "dev": "npm run dev",
+    "dev:auto": "npm run auto-dev",
+    "dev:clean": "npm run dev:clean",
+    "dev:fast": "npm run dev:fast",
+    "build": "npm run build",
+    "test": "npm test",
+    "lint": "npm run lint",
+    "install": "npm install"
+  },
+  "scripts": {
+    "auto-dev": "node scripts/auto-dev.js",
+    "auto-start": "node scripts/auto-dev.js start",
+    "auto-restart": "node scripts/auto-dev.js restart",
+    "auto-clean": "node scripts/auto-dev.js clean",
+    "auto-build": "node scripts/auto-dev.js build",
+    "auto-test": "node scripts/auto-dev.js test"
+  }
+}

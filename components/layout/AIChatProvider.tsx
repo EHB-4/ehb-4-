@@ -8,16 +8,29 @@ import AIChatWidget from '@/components/ai/AIChatWidget';
 
 interface Message {
   id: string;
-  content: string;
-  role: 'user' | 'assistant';
+  text: string;
+  isUser: boolean;
   timestamp: Date;
+  type: 'text' | 'file' | 'image';
+}
+
+interface ChatSession {
+  id: string;
+  title: string;
+  messages: Message[];
+  createdAt: Date;
+  updatedAt: Date;
 }
 
 interface AIChatContextType {
-  messages: Message[];
+  sessions: ChatSession[];
+  currentSession: ChatSession | null;
   isLoading: boolean;
-  sendMessage: (content: string) => Promise<void>;
-  clearMessages: () => void;
+  createSession: (title?: string) => void;
+  sendMessage: (text: string, sessionId?: string) => Promise<void>;
+  deleteSession: (sessionId: string) => void;
+  setCurrentSession: (sessionId: string) => void;
+  clearCurrentSession: () => void;
 }
 
 const AIChatContext = createContext<AIChatContextType | undefined>(undefined);
@@ -28,75 +41,168 @@ interface AIChatProviderProps {
 
 export function AIChatProvider({ children }: AIChatProviderProps) {
   const { data: session } = useSession();
-  const [messages, setMessages] = useState<Message[]>([]);
+  const [sessions, setSessions] = useState<ChatSession[]>([]);
+  const [currentSession, setCurrentSessionState] = useState<ChatSession | null>(null);
   const [isLoading, setIsLoading] = useState(false);
 
-  const sendMessage = useCallback(
-    async (content: string) => {
-      if (!session?.user) return;
-
-      const newMessage: Message = {
+  const createSession = useCallback(
+    (title?: string) => {
+      const newSession: ChatSession = {
         id: Date.now().toString(),
-        content,
-        role: 'user',
-        timestamp: new Date(),
+        title: title || `Chat ${sessions.length + 1}`,
+        messages: [],
+        createdAt: new Date(),
+        updatedAt: new Date(),
       };
 
-      setMessages(prev => [...prev, newMessage]);
+      setSessions(prev => [...prev, newSession]);
+      setCurrentSessionState(newSession);
+    },
+    [sessions.length]
+  );
+
+  const sendMessage = useCallback(
+    async (text: string, sessionId?: string) => {
       setIsLoading(true);
 
+      const targetSessionId = sessionId || currentSession?.id;
+      if (!targetSessionId) {
+        createSession();
+        return;
+      }
+
+      const userMessage: Message = {
+        id: Date.now().toString(),
+        text,
+        isUser: true,
+        timestamp: new Date(),
+        type: 'text',
+      };
+
+      // Update sessions with user message
+      setSessions(prev =>
+        prev.map(session => {
+          if (session.id === targetSessionId) {
+            return {
+              ...session,
+              messages: [...session.messages, userMessage],
+              updatedAt: new Date(),
+            };
+          }
+          return session;
+        })
+      );
+
+      // Update current session if it's the active one
+      if (currentSession?.id === targetSessionId) {
+        setCurrentSessionState(prev =>
+          prev
+            ? {
+                ...prev,
+                messages: [...prev.messages, userMessage],
+                updatedAt: new Date(),
+              }
+            : null
+        );
+      }
+
       try {
-        const response = await fetch('/api/chat', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            message: content,
-            userId: session.user.id,
-          }),
-        });
+        // Simulate AI response
+        await new Promise(resolve => setTimeout(resolve, 1000));
 
-        if (!response.ok) {
-          throw new Error('Failed to send message');
+        const aiMessage: Message = {
+          id: (Date.now() + 1).toString(),
+          text: generateAIResponse(text),
+          isUser: false,
+          timestamp: new Date(),
+          type: 'text',
+        };
+
+        // Update sessions with AI response
+        setSessions(prev =>
+          prev.map(session => {
+            if (session.id === targetSessionId) {
+              return {
+                ...session,
+                messages: [...session.messages, aiMessage],
+                updatedAt: new Date(),
+              };
+            }
+            return session;
+          })
+        );
+
+        // Update current session if it's the active one
+        if (currentSession?.id === targetSessionId) {
+          setCurrentSessionState(prev =>
+            prev
+              ? {
+                  ...prev,
+                  messages: [...prev.messages, aiMessage],
+                  updatedAt: new Date(),
+                }
+              : null
+          );
         }
-
-        const data = await response.json();
-
-        const assistantMessage: Message = {
-          id: Date.now().toString(),
-          content: data.response,
-          role: 'assistant',
-          timestamp: new Date(),
-        };
-
-        setMessages(prev => [...prev, assistantMessage]);
       } catch (error) {
-        console.error('Error sending message:', error);
-        // Add error message to chat
-        const errorMessage: Message = {
-          id: Date.now().toString(),
-          content: 'Sorry, there was an error processing your message.',
-          role: 'assistant',
-          timestamp: new Date(),
-        };
-        setMessages(prev => [...prev, errorMessage]);
+        console.error('Failed to send message:', error);
       } finally {
         setIsLoading(false);
       }
     },
-    [session]
+    [currentSession, createSession]
   );
 
-  const clearMessages = useCallback(() => {
-    setMessages([]);
+  const deleteSession = useCallback(
+    (sessionId: string) => {
+      setSessions(prev => prev.filter(session => session.id !== sessionId));
+
+      if (currentSession?.id === sessionId) {
+        setCurrentSessionState(null);
+      }
+    },
+    [currentSession]
+  );
+
+  const setCurrentSession = useCallback(
+    (sessionId: string) => {
+      const session = sessions.find(s => s.id === sessionId);
+      if (session) {
+        setCurrentSessionState(session);
+      }
+    },
+    [sessions]
+  );
+
+  const clearCurrentSession = useCallback(() => {
+    setCurrentSessionState(null);
   }, []);
 
-  const value = {
-    messages,
+  // Simple AI response generator
+  const generateAIResponse = (userMessage: string): string => {
+    const responses = [
+      'I understand your question about development. Let me help you with that.',
+      "That's an interesting point about software development. Here's what I think...",
+      "For your development needs, I'd recommend considering the following approach...",
+      'Based on your query, here are some best practices you should consider...',
+      'I can help you with that development challenge. Let me break it down...',
+      "That's a common development scenario. Here's how we typically handle it...",
+      'For optimal results in development, I suggest the following strategy...',
+      "I see you're working on a development project. Here are some insights...",
+    ];
+
+    return responses[Math.floor(Math.random() * responses.length)];
+  };
+
+  const value: AIChatContextType = {
+    sessions,
+    currentSession,
     isLoading,
+    createSession,
     sendMessage,
-    clearMessages,
+    deleteSession,
+    setCurrentSession,
+    clearCurrentSession,
   };
 
   return <AIChatContext.Provider value={value}>{children}</AIChatContext.Provider>;
