@@ -1,558 +1,618 @@
-# 💻 SOT — Services of Technology (AI-Powered Tech Services Marketplace)
+# 🛠️ SOT — Services of Technology (Advanced AI-Based Tech Services Platform)
 
-## 🧭 Core Objective
+## 🎯 Core Mission
 
-SOT is an **AI-powered technology services marketplace** connecting verified IT professionals, developers, freelancers, and tech companies with global clients. It features **advanced skill verification, AI-powered matching, blockchain-backed credentials**, and **SQL-based trust framework** to ensure only **verified, high-quality technology services**.
+SOT is EHB's core platform for technology services, including machinery, hardware, software, IT support, and developer-based services. It connects service providers, vendors, and customers via a **decentralized, AI-supported infrastructure** with **verified professionals, automated task management, and blockchain-backed rewards**.
 
-## 🧰 Core Features
+---
 
-### 1. 🔐 Verified Tech Professional System
+## 🔧 Core Mission of SOT
 
-| Feature                   | Description                                                               |
-| ------------------------- | ------------------------------------------------------------------------- |
-| PSS-Based Verification    | All tech professionals must be **PSS-verified** with background checks    |
-| Skill Assessment Platform | AI-powered coding tests, technical interviews, and portfolio verification |
-| SQL Level Enforcement     | Tech skills rated from Free to VIP based on expertise and track record    |
-| Blockchain Credentials    | Immutable skill badges, certifications, and work history on blockchain    |
-| AI Skill Matching         | Intelligent matching of tech skills with project requirements             |
+| Goal                                 | Details                                                                                               |
+| ------------------------------------ | ----------------------------------------------------------------------------------------------------- |
+| ✅ **Verified Technology Providers** | Connect users with verified service providers (repair, installation, programming, etc.)               |
+| ✅ **Digital + Physical Service**    | On-site, remote, and hybrid IT & hardware services                                                    |
+| ✅ **Developer Marketplace**         | Hire developers, IT teams, or technical support (freelance or full-time)                              |
+| ✅ **Franchise-Based Tech Hub**      | Each region/city has its own tech franchise for traffic control, verification, and complaint handling |
+| ✅ **Service Category Control**      | All categories follow SQL levels (Free → VIP) with progressive feature unlock                         |
 
-### 2. 🧠 AI-Powered Service Categories
+---
 
-| Category           | Services Offered                                     | AI Features                              |
-| ------------------ | ---------------------------------------------------- | ---------------------------------------- |
-| Web Development    | Frontend, Backend, Full-stack, CMS, E-commerce       | Code quality analysis, auto-testing      |
-| Mobile Development | iOS, Android, React Native, Flutter, Cross-platform  | App performance optimization             |
-| AI/ML Services     | Machine Learning, Data Science, NLP, Computer Vision | Model validation, performance metrics    |
-| DevOps & Cloud     | AWS, Azure, GCP, Docker, Kubernetes, CI/CD           | Infrastructure monitoring, auto-scaling  |
-| Cybersecurity      | Penetration testing, Security audits, Compliance     | Threat detection, vulnerability scanning |
-| Blockchain         | Smart contracts, DApps, DeFi, NFT development        | Contract verification, security analysis |
-| Data Services      | Database design, Data migration, Analytics, BI       | Data quality assessment, optimization    |
+## 🧩 Main Modules & Features (AI Enhanced)
 
-### 3. 🧠 Advanced AI Matching Engine
+### A. User & Service Provider Registration
 
-| Feature                    | Description                                                                  |
-| -------------------------- | ---------------------------------------------------------------------------- |
-| Project-Skill Matching     | AI analyzes project requirements and matches with verified professionals     |
-| Code Quality Assessment    | Automated code review, performance analysis, and security scanning           |
-| Portfolio Analysis         | AI evaluates past projects, client feedback, and technical capabilities      |
-| Real-time Collaboration    | AI-powered project management, communication, and progress tracking          |
-| Predictive Project Success | AI predicts project success based on team composition and project complexity |
+- KYC (PSS) + Skill Verification (EDR)
+- AI skill test: hardware, software, code-based, or tool-specific
+- Profile badge: based on SQL + client feedback
+- Auto-upgrade suggestions from AI (skill, behavior, rating, earnings)
 
-### 4. 💰 Monetization & Payment System
+### B. Tech Service Listings
 
-| Feature                 | Description                                            |
-| ----------------------- | ------------------------------------------------------ |
-| Escrow Payment System   | Secure payment escrow with milestone-based releases    |
-| Smart Contract Payments | Automated payments via blockchain smart contracts      |
-| Commission Structure    | Platform fees based on SQL level (2-10%)               |
-| Bonus Rewards           | Performance-based bonuses for high-quality work        |
-| Subscription Models     | Monthly/yearly subscriptions for ongoing tech services |
+- Hardware Services: printer, CCTV, laptops, solar, machinery
+- Software Services: app dev, web dev, debugging, automation
+- Specialized: Robotics, IoT, Blockchain Dev, AI/ML Tasks
 
-### 5. 🧩 Ecosystem Integration
+### C. AI-Based Smart Matching
 
-- **JPS**: Tech job opportunities and recruitment
-- **GoSellr**: Tech product sales and software licensing
-- **EHB AI Marketplace**: AI model development and deployment
-- **WAPOS**: Payment processing and financial management
-- **Affiliate Program**: Referral-based tech service commissions
+- AI detects client need → matches best-suited providers
+- Suggests nearby franchise or expert with SQL badge
+- Price estimator using category, area, and demand index
 
-### 6. 🛡️ Quality Assurance & Security
+### D. Order & Task Management
 
-| Feature                | Description                                    |
-| ---------------------- | ---------------------------------------------- |
-| Code Review System     | Automated and manual code review processes     |
-| Security Auditing      | AI-powered security vulnerability detection    |
-| Performance Testing    | Automated performance and load testing         |
-| Client Feedback System | Real-time feedback and rating system           |
-| Dispute Resolution     | AI-assisted dispute resolution and arbitration |
+- Booking dashboard for clients & providers
+- Auto-scheduling with calendar sync
+- Video calls or physical visit system
+- AI logs issue, outcome, time taken → trust score updated
 
-## 👥 User Types & Access
+### E. Complaint & Rating Engine
 
-| User Type         | Permissions                                              |
-| ----------------- | -------------------------------------------------------- |
-| Tech Professional | Profile creation, skill verification, project bidding    |
-| Client            | Project posting, professional hiring, payment management |
-| Tech Company      | Team management, bulk hiring, enterprise solutions       |
-| Admin/Franchise   | Quality control, dispute resolution, platform management |
+- 1–5 star rating → impacts SQL level
+- Complaint auto-routing (Sub → Master → Corporate)
+- Fraud detection (ghost service, fake receipts, etc.)
+- Franchise fines triggered by AI (delay, fraud, negligence)
 
-## 🎛️ Dashboard Modules
+### F. Developer/Remote Tech Hiring
 
-### For Tech Professionals:
+- Post requirement (tech stack, budget, duration)
+- AI scans profiles, resumes, GitHub, LinkedIn links
+- Auto-contract, smart invoice, payment via EHB wallet
+- SQL lock-in: Higher level = better payout and priority
 
-- **Skill Verification Panel**: Take tests, upload certifications, build portfolio
-- **Project Matching**: AI-suggested projects based on skills and availability
-- **Earnings Dashboard**: Track income, bonuses, and payment history
-- **Client Management**: Communication tools and project tracking
+---
 
-### For Clients:
+## 🛠️ SOT Service Categories (Sample)
 
-- **Project Creation**: AI-assisted project requirement definition
-- **Professional Matching**: AI-recommended professionals for projects
-- **Project Management**: Real-time collaboration and progress tracking
-- **Payment Management**: Escrow system and milestone payments
+| Category          | Examples                                                         |
+| ----------------- | ---------------------------------------------------------------- |
+| ⚙️ Hardware       | Printer Repair, CCTV Setup, Solar Panel, UPS, Industrial Machine |
+| 💻 Software       | Website, App, Custom ERP, POS                                    |
+| 🧠 AI/ML          | Custom Model Training, Automation Scripts                        |
+| 🕹️ IoT & Robotics | Arduino, Raspberry Pi, Sensors, Drone                            |
+| 🌐 Networking     | WiFi, Routers, Firewall, IP Setup                                |
+| 🧰 Others         | Maintenance, Consultancy, Full Project Delivery                  |
 
-### For Admin/Franchise:
+---
 
-- **Quality Control**: Monitor project quality and professional performance
-- **Dispute Resolution**: Handle conflicts and ensure fair resolution
-- **Analytics Dashboard**: Platform performance and revenue analytics
-- **Compliance Management**: Ensure legal and regulatory compliance
+## 🏢 Franchise System Integration
 
-## 🔧 Technical Implementation
+- City/District-based franchise = control order & service flow
+- Franchise dashboards show:
+  - Ongoing services in area
+  - Complaint status
+  - Performance rating
+  - Area income
+- Delayed resolution auto-escalates (via AI timer)
 
-### AI Skill Assessment System
+---
 
-```typescript
-interface SkillAssessment {
-  professionalId: string;
-  skillCategory: string;
-  assessmentType: 'coding' | 'interview' | 'portfolio' | 'certification';
-  questions: AssessmentQuestion[];
-  timeLimit: number;
-  passingScore: number;
-  sqlLevel: string;
-}
+## 🏆 SQL Level Rules in SOT
 
-interface AssessmentQuestion {
-  id: string;
-  type: 'multiple-choice' | 'coding' | 'system-design' | 'behavioral';
-  question: string;
-  options?: string[];
-  correctAnswer?: string;
-  codeTemplate?: string;
-  testCases?: TestCase[];
-  points: number;
-}
+| Level  | Limitations                    | Privileges                        |
+| ------ | ------------------------------ | --------------------------------- |
+| Free   | Limited tools, no verification | View basic jobs                   |
+| Basic  | Basic KYC, no EDR              | Can apply to normal services      |
+| Normal | EDR + PSS required             | Get listed in suggestions         |
+| High   | Verified jobs/projects only    | AI auto-match priority            |
+| VIP    | Verified + High Trust Score    | Top visibility + priority payouts |
 
-interface TestCase {
-  input: string;
-  expectedOutput: string;
-  description: string;
-}
+---
 
-class SOTAI {
-  async assessSkill(assessment: SkillAssessment): Promise<AssessmentResult> {
-    const results: QuestionResult[] = [];
+## 🔗 Integration with Other Systems
 
-    for (const question of assessment.questions) {
-      const result = await this.evaluateQuestion(question);
-      results.push(result);
-    }
+- 🧠 AI Marketplace: Sell tech scripts, apps, models
+- 📚 OBS: Add tech training/courses
+- 💼 JPS: Convert gig to long-term job
+- 💰 Wallet: Auto-payment + affiliate system
+- 🧾 Franchise: Regional profit share, fines, upgrades
 
-    const totalScore = results.reduce((sum, result) => sum + result.score, 0);
-    const maxScore = assessment.questions.reduce((sum, q) => sum + q.points, 0);
-    const percentage = (totalScore / maxScore) * 100;
+---
 
-    const passed = percentage >= assessment.passingScore;
+## 🤖 EHB AI Agent System for SOT
 
-    // Update SQL level based on performance
-    const newSQLLevel = this.calculateNewSQLLevel(percentage, assessment.sqlLevel);
+### 🎯 Core Objective
 
-    return {
-      professionalId: assessment.professionalId,
-      skillCategory: assessment.skillCategory,
-      totalScore,
-      maxScore,
-      percentage,
-      passed,
-      newSQLLevel,
-      detailedResults: results,
-      timestamp: new Date(),
-    };
-  }
+Automate the full lifecycle of developer registration, task management, SQL-level control, and fraud/security analysis **without manual intervention**, using intelligent agents.
 
-  private async evaluateQuestion(question: AssessmentQuestion): Promise<QuestionResult> {
-    switch (question.type) {
-      case 'coding':
-        return await this.evaluateCodingQuestion(question);
-      case 'system-design':
-        return await this.evaluateSystemDesignQuestion(question);
-      case 'behavioral':
-        return await this.evaluateBehavioralQuestion(question);
-      default:
-        return await this.evaluateMultipleChoiceQuestion(question);
-    }
-  }
+### 🧠 AI Agent Roles inside SOT
 
-  private async evaluateCodingQuestion(question: AssessmentQuestion): Promise<QuestionResult> {
-    // Execute code against test cases
-    const testResults = [];
+| Agent Name        | Role Description                                                                        |
+| ----------------- | --------------------------------------------------------------------------------------- |
+| `OnboardAgent`    | Handles developer registration, PSS KYC, and EDR testing workflow                       |
+| `TaskAssignBot`   | Matches tasks to developers based on skillset, history, and availability                |
+| `CodeCheckAgent`  | Reviews submitted tasks for plagiarism, AI-generated code, and skill rating             |
+| `SQLAuditAgent`   | Calculates performance-based SQL upgrades or downgrades                                 |
+| `ComplaintAgent`  | Processes voice/video/text complaints, auto-categorizes, and routes to proper franchise |
+| `FraudDetectBot`  | Scans for fake profiles, duplicate accounts, and abnormal login patterns                |
+| `RewardAgent`     | Distributes EHBGC rewards based on validator rules, performance, and stake level        |
+| `WalletLockAgent` | Locks/unlocks wallet balance based on SQL requirements, fines, and franchise rules      |
 
-    for (const testCase of question.testCases || []) {
-      try {
-        const output = await this.executeCode(question.codeTemplate || '', testCase.input);
-        const passed = output === testCase.expectedOutput;
-        testResults.push({
-          passed,
-          input: testCase.input,
-          expected: testCase.expectedOutput,
-          actual: output,
-        });
-      } catch (error) {
-        testResults.push({
-          passed: false,
-          input: testCase.input,
-          expected: testCase.expectedOutput,
-          actual: error.message,
-        });
-      }
-    }
+### 📈 AI-Based Automation Workflows
 
-    const passedTests = testResults.filter(r => r.passed).length;
-    const totalTests = testResults.length;
-    const score = (passedTests / totalTests) * question.points;
+#### 🟢 Developer Onboarding
 
-    return {
-      questionId: question.id,
-      score,
-      maxScore: question.points,
-      passed: passedTests === totalTests,
-      details: { testResults },
-    };
-  }
+- AI checks KYC via PSS (face + ID match)
+- Auto-verifies documents or flags for manual check
+- Assigns Free SQL Level by default
+- AI schedules EDR test (MCQ, project, code)
+- EDR result → SQL badge auto-issued
 
-  private calculateNewSQLLevel(percentage: number, currentLevel: string): string {
-    const levels = ['Free', 'Basic', 'Normal', 'High', 'VIP'];
-    const currentIndex = levels.indexOf(currentLevel);
+#### 🟡 Task Lifecycle (Auto Flow)
 
-    if (percentage >= 90) return levels[Math.min(currentIndex + 1, 4)];
-    if (percentage >= 80) return levels[currentIndex];
-    if (percentage < 60) return levels[Math.max(currentIndex - 1, 0)];
+1. `TaskAssignBot` → Assigns task with deadline & estimated reward
+2. Developer submits → `CodeCheckAgent` runs analysis:
+   - Code quality
+   - Efficiency
+   - Time used vs. allowed
+   - AI-detection (e.g., GPT-generated warning)
+3. Score sent to `SQLAuditAgent`:
+   - SQL Score ↑ if passed well
+   - SQL Score ↓ if failed or delayed
+4. `RewardAgent` pays based on score + locked wallet ratio
 
-    return currentLevel;
-  }
-}
+#### 🧠 Complaint Handling (Voice, Video, Text)
+
+- User records issue (voice/video/text)
+- `ComplaintAgent` runs AI transcription (whisper, NLP)
+- Detects:
+  - Topic (task, payment, fraud, delay)
+  - Sentiment (angry, neutral, frustrated)
+  - Urgency (auto-priority flag)
+- Routes to correct franchise level
+- `SQLAuditAgent` marks dispute record in profile
+
+### 🏆 SQL Level AI Score Breakdown
+
+Each user has a **Trust Index**, **Performance Index**, and **Complaint Index**. AI calculates score on:
+
+| Metric                 | Weight |
+| ---------------------- | ------ |
+| Task Completion Rate   | 30%    |
+| AI Skill Check Score   | 20%    |
+| Complaint Flags        | -20%   |
+| Peer Review / Feedback | 10%    |
+| Wallet Lock (EHBGC)    | 10%    |
+| Login Activity         | 10%    |
+
+SQL upgrade thresholds:
+
+- Free → Basic: 50+
+- Basic → Normal: 70+
+- Normal → High: 85+
+- High → VIP: 95+
+
+### 🔐 Security AI Modules
+
+| Threat                 | Detection Mechanism                      |
+| ---------------------- | ---------------------------------------- |
+| Multi-accounting       | IP/device/browser fingerprint AI model   |
+| Plagiarized Code       | Code similarity graph (AST-based check)  |
+| Fake Tasks/Submissions | Pattern match + time anomaly             |
+| Login Fraud/VPN Use    | Location inference + VPN DB comparison   |
+| Complaint Misuse       | Voice tone + frequency + abuse detection |
+
+---
+
+## 🖼️ UI/UX Structure (Advanced AI-Based)
+
+### 🎯 Objective
+
+To allow global developers, tech companies, and clients to **easily connect, verify, assign, and manage** software and tech service tasks.
+
+### 🖼️ A. Landing Page UI Layout
+
+| Section            | Details                                                                                |
+| ------------------ | -------------------------------------------------------------------------------------- |
+| Hero Banner        | "Connect with Verified Developers Worldwide" — CTA: [Get Started] [Become a Developer] |
+| Service Categories | Web Dev, Mobile App, AI/ML, IoT, Blockchain, Repair Services, etc.                     |
+| AI Highlights      | "Powered by AI Agents" — Task Matching, KYC, SQL Rating, Auto Payment                  |
+| Live Counters      | Tasks completed, Developers registered, Countries served                               |
+| Top Profiles       | Verified top developers with SQL badges                                                |
+| Footer             | About, Policies, Contact, Download App, Social links                                   |
+
+### 🧑‍💻 B. User Dashboard (Developer View)
+
+| Section          | Description                                                         |
+| ---------------- | ------------------------------------------------------------------- |
+| Profile Card     | Picture, SQL Level, Wallet Status, Trust Score                      |
+| Task Board       | - Available Tasks (with AI match %)<br>- In Progress<br>- Completed |
+| Skill Upgrade    | - EDR Practice <br>- Scheduled Tests                                |
+| AI Agent Chat    | Ask questions, get job insights, or file complaints                 |
+| Complaint Center | Submit voice/text/video issue                                       |
+| Affiliate Tab    | Invite link, stats, earnings                                        |
+
+### 🧑‍💼 C. Client Dashboard (Task Giver View)
+
+| Section          | Description                                |
+| ---------------- | ------------------------------------------ |
+| Post New Task    | AI helps draft task + budget + timeline    |
+| Active Tasks     | See matched devs, progress, reports        |
+| History          | Completed tasks, payment logs              |
+| Fraud Check      | Flagged devs, trust analytics              |
+| Franchise Rating | How many devs from which area perform best |
+
+### 🧭 Dashboard Layout
+
+| Section            | Components                                                                                     |
+| ------------------ | ---------------------------------------------------------------------------------------------- |
+| **Top Navigation** | Logo, Wallet Status, Notifications, Language Switcher                                          |
+| **Left Sidebar**   | Home, My Projects, AI Commands, Skill Tests, Tasks, Complaints, Wallet, Profile & SQL, Support |
+| **Main Panel**     | Context-sensitive display (AI output, code editor, logs, suggestions, etc.)                    |
+| **Right Sidebar**  | AI Suggestions, Project Status, Warnings & Logs, Tips / Recommended SDKs                       |
+
+### 🧩 Component-Level UI Breakdown
+
+#### A. AI Command Panel
+
+- Prompt input (chat + voice)
+- Suggested actions ("Build login system", "Connect MongoDB", etc.)
+- Quick copy/export buttons
+- "Explain this code" button for AI breakdown
+
+#### B. Code Workspace
+
+- Language tabs (React, Python, Solidity, etc.)
+- Live preview
+- Error highlighter (red underline)
+- Test result view
+
+#### C. Task Manager
+
+- Milestone list
+- Status: Not started / In Progress / Done
+- Estimated time remaining
+- AI Notes per task
+
+#### D. Wallet & Rewards
+
+- Locked EHBGC balance
+- Earned tokens today/week/month
+- Loyalty reward progress bar
+- Upgrade to unlock advanced AI button
+
+#### E. Voice Assistant (Floating Mic)
+
+- Tap to speak: "Make REST API in Node.js"
+- Converts to command + executes
+- Logs stored under interaction history
+
+### 💬 Modal Windows (Popups)
+
+| Modal                | Purpose                            |
+| -------------------- | ---------------------------------- |
+| KYC Upload           | PSS + EDR document, face scan      |
+| Skill Test Window    | Time-bound challenge with AI check |
+| Complaint Submission | Record voice/video or type         |
+| Payment Breakdown    | Task-level reward & penalty report |
+| Code Export          | GitHub, Replit, ZIP, Clipboard     |
+
+### 📱 Mobile Optimization (Essential Panels Only)
+
+- Projects
+- AI Chat
+- Wallet
+- Tasks
+- Voice Command
+- Notifications
+
+### 🧠 AI-Specific Enhancements
+
+| Feature           | Function                               |
+| ----------------- | -------------------------------------- |
+| Smart History     | Auto-save every session with summary   |
+| Resume Builder    | Auto-generate resume from project logs |
+| Code Clarity Mode | Simplified explanation of current file |
+| Dark/Light Toggle | Code-optimized visual theme switch     |
+
+---
+
+## 🧠 Backend Logic Flow
+
+### 🧱 Tech Stack
+
+- **Backend**: Node.js + Express
+- **Database**: MongoDB (Developer DB, Tasks DB, Complaint DB, Logs DB)
+- **Blockchain**: Moonbeam (EHBGC wallet tracking + reward payout)
+- **Authentication**: JWT + OTP + Face Scan
+- **AI Agent Layer**: Python microservices + LangChain
+
+### 🗃️ Core Backend Modules
+
+| Module               | Functions                                      |
+| -------------------- | ---------------------------------------------- |
+| KYC Module           | Selfie, Document Scan, PSS Integration         |
+| EDR Module           | Skill Testing, Scoring, Scheduling             |
+| Task Matching Engine | Skill match %, availability logic              |
+| Reward Engine        | Based on task quality + SQL level + EHBGC lock |
+| Complaint System     | AI transcription, routing, escalation logic    |
+| Fraud Watch          | Monitoring, warnings, automated flags          |
+| Affiliate Manager    | Tree structure, earnings, coin payouts         |
+
+### 🔌 Main API Endpoints
+
+#### 📁 1. User & Session
+
+| Method | Endpoint            | Description                       |
+| ------ | ------------------- | --------------------------------- |
+| `POST` | `/api/sot/register` | Developer registration (with SQL) |
+| `POST` | `/api/sot/login`    | Login + 2FA (Trusty Wallet check) |
+| `GET`  | `/api/sot/profile`  | Fetch developer profile           |
+| `POST` | `/api/sot/logout`   | End session securely              |
+
+#### ⚙️ 2. AI Task System
+
+| Method | Endpoint                         | Description                             |
+| ------ | -------------------------------- | --------------------------------------- |
+| `POST` | `/api/sot/ai-agent/ask`          | Send prompt or code for AI response     |
+| `POST` | `/api/sot/ai-agent/voice-upload` | Upload voice → AI converts to text/code |
+| `POST` | `/api/sot/ai-agent/ui-builder`   | Send layout prompt → UI HTML/React      |
+| `GET`  | `/api/sot/ai-agent/history`      | View task logs & outputs                |
+| `POST` | `/api/sot/ai-agent/feedback`     | Submit stars & comment                  |
+
+#### 💼 3. Job Board / Project Flow
+
+| Method | Endpoint                        | Description                     |
+| ------ | ------------------------------- | ------------------------------- |
+| `GET`  | `/api/sot/projects/list`        | List of available SOT jobs      |
+| `POST` | `/api/sot/projects/apply`       | Apply to a project              |
+| `GET`  | `/api/sot/projects/track`       | See application status          |
+| `POST` | `/api/sot/projects/upload-task` | Submit final work for client    |
+| `POST` | `/api/sot/projects/reward`      | Trigger reward in Trusty Wallet |
+
+#### 🧪 4. EDR Integration for Skill Tests
+
+| Method | Endpoint                   | Description                     |
+| ------ | -------------------------- | ------------------------------- |
+| `POST` | `/api/sot/edr/quiz/start`  | Start skill-based quiz          |
+| `POST` | `/api/sot/edr/quiz/submit` | Submit quiz for AI grading      |
+| `GET`  | `/api/sot/edr/status`      | View SQL level upgrade progress |
+
+#### 🛡️ 5. Security, Abuse & Fraud Detection
+
+| Feature             | Logic                                    |
+| ------------------- | ---------------------------------------- |
+| SQL-Based Access    | SQL level checks per API access          |
+| Token Throttling    | Limit requests for low-tier users        |
+| Multi-Device Lock   | Notify + auto-disable if misuse detected |
+| AI Misuse Flags     | Track toxic inputs / copy-paste abuse    |
+| Voice Scan Security | Match uploaded voice vs. KYC voice print |
+
+### 📦 Database Collections
+
+- `users`
+- `sot_ai_tasks`
+- `ai_feedback`
+- `project_applications`
+- `wallet_rewards`
+- `edr_scores`
+- `fraud_flags`
+
+### 📍 Microservices (Optional Expansion)
+
+- 🔄 **AI Caching Layer** for recent prompts/responses
+- 🎙 **Voice Processing Microservice**
+- 📈 **SQL Analytics Tracker**
+- 💼 **Job Matcher Service (AI ranking engine)**
+
+---
+
+## 🛠️ Admin Panel (Company View)
+
+### 🧭 Admin Panel Structure
+
+| Module                        | Description                                                                  |
+| ----------------------------- | ---------------------------------------------------------------------------- |
+| **Dashboard**                 | Shows total developers, projects, completed tasks, and active AI sessions    |
+| **Franchise Overview**        | Tracks area-wise developers, pending KYC, SQL progress                       |
+| **AI Usage Logs**             | Logs every AI prompt used by each developer, response time, quality          |
+| **Verification Panel**        | Manual/AI-based review of submitted tasks and developer re-verifications     |
+| **Income Distribution**       | Displays rewards paid, pending coins, franchise earnings per area            |
+| **Complaint & Fraud Monitor** | Detects abuse (e.g., prompt abuse, fake task submissions), routes complaints |
+
+### 📊 SOT Analytics & KPIs
+
+| Metric                     | Description                                 |
+| -------------------------- | ------------------------------------------- |
+| AI Prompt Quality Score    | Based on developer feedback + output usage  |
+| Developer Skill Growth     | Tracks test history, re-scores via EDR      |
+| SQL Upgrade Rate           | How many developers advanced per week/month |
+| Task Completion Time       | Avg time per job, per SQL level             |
+| Franchise Activity Heatmap | Shows active/inactive developer zones       |
+
+### 🧾 Admin Controls
+
+| Control                    | Function                                                  |
+| -------------------------- | --------------------------------------------------------- |
+| 🚫 Ban Developer           | Manual/AI-triggered ban from panel                        |
+| 🟢 Approve Re-verification | Check EDR + task submission → approve SQL                 |
+| 💸 Release Payment         | Coin distribution with bonus if locked balance maintained |
+| 🛠️ Assign Tasks            | Assign tasks directly to VIP/High SQL devs                |
+| ⚠️ Warn Franchise          | If franchise is inactive or poor performance logged       |
+
+### 🧑‍💻 Franchise Role in Admin Panel
+
+| Feature                 | Franchise View                      |
+| ----------------------- | ----------------------------------- |
+| Developers by Area      | List of all devs under their region |
+| Task Monitoring         | See ongoing/pending task status     |
+| Complaint Resolution    | Handle low-tier support issues      |
+| Re-verification Request | Approve/disapprove SQL movement     |
+| Reward Split            | View % of income from dev activity  |
+
+### 🔐 Admin Security & Logs
+
+- **All actions recorded on blockchain log** (coin distribution, SQL change)
+- **Admin-only dashboard uses MFA login + Trusty Wallet verification**
+- **Smart Audit Trail**: Flags abnormal activity or SQL jumps
+- **Data residency enforced**: Each admin sees only their country/region unless global HQ
+
+---
+
+## 🔁 User Flow (SQL-Based AI System)
+
+### 🧑 Developer:
+
+1. Register → KYC via PSS → SQL assigned
+2. EDR Test (AI-checked) → Upgrade eligibility
+3. Get tasks via AI (Skill match + past performance)
+4. Submit → AI check (code quality, time)
+5. Reward → EHBGC wallet (based on SQL + review)
+6. SQL auto-upgrade → Badge earned
+7. Daily login → Activity score tracked
+8. Complaint or issue? → AI routes to right franchise
+
+### 🧑 Franchise:
+
+1. View all area developers
+2. Approve/reject PSS complaints
+3. Respond to escalated cases
+4. Analyze area health → dead zone alerts
+5. Get reward if zone performance improves
+
+### 🧭 Developer Workflow (AI-Based Process)
+
+| Step | Action                         | Description                                                              |
+| ---- | ------------------------------ | ------------------------------------------------------------------------ |
+| 1️⃣   | **Login + KYC Verification**   | Secure login, Trusty Wallet check, and PSS-based verification            |
+| 2️⃣   | **Skill Validation via EDR**   | Practical test (coding, UI/UX, logic tasks); score used for SQL          |
+| 3️⃣   | **Profile Building**           | Developer fills bio, languages, skills; AI gives optimization tips       |
+| 4️⃣   | **Project Application**        | Apply to open SOT projects or receive direct invites                     |
+| 5️⃣   | **AI Agent Access**            | Ask questions, generate code/UI/data, get guidance                       |
+| 6️⃣   | **Voice or Video Prompting**   | Submit audio/video ideas; AI generates complete module or code           |
+| 7️⃣   | **Task Submission & Feedback** | Upload work, receive AI or client feedback                               |
+| 8️⃣   | **Reward Distribution**        | On approval, coin released to Trusty Wallet (with bonus if SQL > Normal) |
+| 9️⃣   | **SQL Upgrade Triggered**      | Based on performance, re-verification, or franchise referral             |
+| 🔁   | **Continuous Feedback Loop**   | AI tracks learning curve, suggests trainings, awards loyalty bonuses     |
+
+### 🏅 SQL-Level Based Access (SOT Developer)
+
+| SQL Level  | AI Access               | Voice Tools    | Job Access                   | Bonus % | UI Tools          | Feedback Reports |
+| ---------- | ----------------------- | -------------- | ---------------------------- | ------- | ----------------- | ---------------- |
+| **Free**   | Only 5 daily AI queries | ❌             | Basic gigs only              | 0%      | ❌                | ❌               |
+| **Basic**  | 20 daily queries        | 🎙 Audio-only  | Verified projects            | 2%      | HTML generator    | Manual only      |
+| **Normal** | 100 daily queries       | 🎙 Video+Audio | Medium-level jobs            | 5%      | HTML + React      | Auto + Manual    |
+| **High**   | Unlimited AI            | 🎙 Full        | Premium & franchise projects | 8%      | UI/UX AI wizard   | AI-scored        |
+| **VIP**    | Unlimited + Priority    | 🎙🎥 Real-time | Direct client access         | 12%     | Full-stack AI IDE | Smart reports    |
+
+### 🧠 Advanced AI Capabilities for Developers
+
+- **AI Code Fixer**: Paste code, get bug-fixed version
+- **Smart UI Builder**: Describe layout → get HTML/CSS/React
+- **Voice-to-Code**: Speak logic → generate backend/frontend script
+- **Resume & GitHub Analyzer**: AI recommends project matches
+- **Dev Wallet Tracker**: See pending payments, EHBGC reward level
+
+### 🚫 AI Agent Misuse Detection (Auto System)
+
+- Detects: ✖️ Copy-paste abuse, 🚫 repeated irrelevant prompts, 🔁 bot-like behavior
+- Action: ⚠️ Warning → ❌ SQL Downgrade → 🔒 Temp Ban
+- Franchise gets notified for manual review
+
+---
+
+## 🔐 Security & Compliance
+
+- JWT for session security
+- Blockchain logs for SQL history
+- Encrypted KYC storage
+- AI monitors copy-paste, multi-login, VPN misuse
+- Data residency enforced by parachain → Corporate only sees allowed fields
+- Auto-ban on repeated suspicious flags
+
+---
+
+## 🧭 Agent Integration Flow in SOT
+
+```mermaid
+graph LR
+A[Task Posted] --> B{DevMatchAgent}
+B --> C(Developer Assigned)
+
+C --> D[Code Submitted]
+D --> E{CodeCheckAgent}
+E --> F{Pass?}
+F -- Yes --> G{RewardAgent}
+F -- No --> H(Send Back)
+
+G --> I(Reward to Wallet)
+H --> J(Feedback to Dev)
+
+C --> K{SchedulerAgent} --> L(Deadline Check)
+C --> M{ComplaintBot} --> N(Franchise/Support)
+
+C --> O{FraudWatchAgent}
+O --> P(Suspend if Needed)
+
+ALL --> Q(SQLScoreAgent)
 ```
 
-### Smart Contract for Project Management
+---
 
-```solidity
-contract SOT {
-    struct Project {
-        address client;
-        address professional;
-        string title;
-        string description;
-        uint256 budget;
-        uint256 deposit;
-        uint8 sqlLevel;
-        ProjectStatus status;
-        uint256 startDate;
-        uint256 endDate;
-        string projectDetails;
-        uint256 timestamp;
-    }
+## 🔐 Data Security & Audit
 
-    struct Milestone {
-        bytes32 projectId;
-        string description;
-        uint256 amount;
-        bool completed;
-        bool approved;
-        uint256 dueDate;
-        string deliverables;
-    }
+- **Every agent's action is logged with timestamp**
+- **All SQL changes, fraud warnings, and rewards are saved on-chain**
+- **Agents cannot manipulate final SQL manually – they only recommend**
+- **Admin can only override via multi-signature approval system**
 
-    enum ProjectStatus { Created, InProgress, MilestoneCompleted, Completed, Disputed, Cancelled }
+---
 
-    mapping(bytes32 => Project) public projects;
-    mapping(bytes32 => Milestone[]) public projectMilestones;
-    mapping(address => bytes32[]) public clientProjects;
-    mapping(address => bytes32[]) public professionalProjects;
+## 🛠️ Agent Tech Stack Summary
 
-    event ProjectCreated(bytes32 indexed projectId, address indexed client, address indexed professional, uint256 budget);
-    event MilestoneCompleted(bytes32 indexed projectId, uint256 milestoneIndex);
-    event ProjectCompleted(bytes32 indexed projectId);
-    event DisputeRaised(bytes32 indexed projectId, address indexed disputer, string reason);
+| Agent | Backend          | AI/ML Model           | Storage/Memory       |
+| ----- | ---------------- | --------------------- | -------------------- |
+| All   | Node.js + Python | GPT-4, Codex, Whisper | MongoDB, Redis, IPFS |
 
-    function createProject(
-        address professional,
-        string memory title,
-        string memory description,
-        uint256 budget,
-        uint256 startDate,
-        uint256 endDate,
-        string memory projectDetails
-    ) external payable returns (bytes32) {
-        require(msg.value >= budget * 20 / 100, "20% deposit required");
-        require(professional != address(0), "Invalid professional");
+---
 
-        bytes32 projectId = keccak256(abi.encodePacked(
-            msg.sender, professional, title, block.timestamp
-        ));
+## ✅ SOT System Summary
 
-        uint8 sqlLevel = getProfessionalSQLLevel(professional);
+| Layer       | Tech/Feature                                 |
+| ----------- | -------------------------------------------- |
+| Frontend    | React + Tailwind + AI Chat UI                |
+| Backend     | Node.js + MongoDB + AI Verification Layer    |
+| Admin Panel | Franchise-based + Analytics + Complaint mgmt |
+| AI Layer    | Task assignment, fraud detection, grading    |
+| Security    | Blockchain logs + SQL rules + Parachain      |
 
-        projects[projectId] = Project({
-            client: msg.sender,
-            professional: professional,
-            title: title,
-            description: description,
-            budget: budget,
-            deposit: budget * 20 / 100,
-            sqlLevel: sqlLevel,
-            status: ProjectStatus.Created,
-            startDate: startDate,
-            endDate: endDate,
-            projectDetails: projectDetails,
-            timestamp: block.timestamp
-        });
+---
 
-        clientProjects[msg.sender].push(projectId);
-        professionalProjects[professional].push(projectId);
+## 🚀 Future Expansion Plans
 
-        emit ProjectCreated(projectId, msg.sender, professional, budget);
+- **SOT Project Marketplace** (freelance + company biddings)
+- **Developer Ranking System** (Global Leaderboard + XP)
+- **SOT API Generator** (AI builds SDKs based on user idea)
+- **Integration with GitHub Copilot, Replit AI, and Blockchain SDKs**
+- **Multi-language AI Assistant with auto-translation**
+- **Auto-node setup via Cursor AI Agent (validator-as-a-service)**
+- **Validator NFT badges (proof of reputation)**
+- **Geo-validator network (Asia, Africa, EU, etc.)**
+- **Carbon-neutral validator certification**
+- **Validator DAO formation (governance, proposal voting)**
 
-        return projectId;
-    }
+---
 
-    function addMilestone(
-        bytes32 projectId,
-        string memory description,
-        uint256 amount,
-        uint256 dueDate,
-        string memory deliverables
-    ) external {
-        require(projects[projectId].client == msg.sender, "Only client can add milestones");
-        require(projects[projectId].status == ProjectStatus.Created, "Project not in created state");
+## 📌 Integration with EHB Ecosystem
 
-        projectMilestones[projectId].push(Milestone({
-            projectId: projectId,
-            description: description,
-            amount: amount,
-            completed: false,
-            approved: false,
-            dueDate: dueDate,
-            deliverables: deliverables
-        }));
-    }
+- 🧠 **AI Marketplace**: Sell tech scripts, apps, models
+- 📚 **OBS**: Add tech training/courses
+- 💼 **JPS**: Convert gig to long-term job
+- 💰 **Wallet**: Auto-payment + affiliate system
+- 🧾 **Franchise**: Regional profit share, fines, upgrades
+- 🛒 **GoSellr**: Tech product sales and software licensing
+- 📊 **WAPOS**: Payment processing and financial management
+- 🔗 **Affiliate Program**: Referral-based tech service commissions
 
-    function completeMilestone(bytes32 projectId, uint256 milestoneIndex) external {
-        require(projects[projectId].professional == msg.sender, "Only professional can complete milestone");
-        require(milestoneIndex < projectMilestones[projectId].length, "Invalid milestone");
+---
 
-        Milestone storage milestone = projectMilestones[projectId][milestoneIndex];
-        require(!milestone.completed, "Milestone already completed");
+## 🎯 Conclusion
 
-        milestone.completed = true;
-        projects[projectId].status = ProjectStatus.MilestoneCompleted;
+The **EHB AI Agent under SOT** is one of the most advanced AI models in the entire ecosystem. It can function as:
 
-        emit MilestoneCompleted(projectId, milestoneIndex);
-    }
+- 💡 Developer IDE + PM + Trainer
+- 🔍 QA Tester + Deployment Tool
+- 🧠 Career Advisor + Code Teacher
+- 🔗 Blockchain Verifier + Reward Distributor
 
-    function approveMilestone(bytes32 projectId, uint256 milestoneIndex) external {
-        require(projects[projectId].client == msg.sender, "Only client can approve milestone");
-        require(milestoneIndex < projectMilestones[projectId].length, "Invalid milestone");
-
-        Milestone storage milestone = projectMilestones[projectId][milestoneIndex];
-        require(milestone.completed && !milestone.approved, "Milestone not completed or already approved");
-
-        milestone.approved = true;
-
-        // Release payment to professional
-        payable(projects[projectId].professional).transfer(milestone.amount);
-
-        // Check if all milestones are approved
-        bool allApproved = true;
-        for (uint256 i = 0; i < projectMilestones[projectId].length; i++) {
-            if (!projectMilestones[projectId][i].approved) {
-                allApproved = false;
-                break;
-            }
-        }
-
-        if (allApproved) {
-            projects[projectId].status = ProjectStatus.Completed;
-            emit ProjectCompleted(projectId);
-        }
-    }
-
-    function raiseDispute(bytes32 projectId, string memory reason) external {
-        require(
-            projects[projectId].client == msg.sender ||
-            projects[projectId].professional == msg.sender,
-            "Not authorized"
-        );
-        require(projects[projectId].status != ProjectStatus.Completed, "Project already completed");
-
-        projects[projectId].status = ProjectStatus.Disputed;
-
-        emit DisputeRaised(projectId, msg.sender, reason);
-    }
-}
-```
-
-### Database Schema
-
-```sql
--- Tech Professionals
-CREATE TABLE tech_professionals (
-  id UUID PRIMARY KEY,
-  user_id UUID REFERENCES users(id),
-  sql_level VARCHAR(10) DEFAULT 'Free',
-  skills JSONB,
-  certifications JSONB,
-  portfolio_urls TEXT[],
-  hourly_rate DECIMAL,
-  availability_status VARCHAR(20) DEFAULT 'available',
-  total_projects INTEGER DEFAULT 0,
-  completed_projects INTEGER DEFAULT 0,
-  average_rating DECIMAL DEFAULT 0,
-  total_earnings DECIMAL DEFAULT 0,
-  blockchain_hash VARCHAR(255),
-  created_at TIMESTAMP,
-  updated_at TIMESTAMP
-);
-
--- Skill Assessments
-CREATE TABLE skill_assessments (
-  id UUID PRIMARY KEY,
-  professional_id UUID REFERENCES tech_professionals(id),
-  skill_category VARCHAR(50),
-  assessment_type VARCHAR(20),
-  questions JSONB,
-  answers JSONB,
-  score INTEGER,
-  max_score INTEGER,
-  percentage DECIMAL,
-  passed BOOLEAN,
-  new_sql_level VARCHAR(10),
-  assessed_at TIMESTAMP,
-  created_at TIMESTAMP
-);
-
--- Projects
-CREATE TABLE projects (
-  id UUID PRIMARY KEY,
-  project_hash VARCHAR(255) UNIQUE,
-  client_id UUID REFERENCES users(id),
-  professional_id UUID REFERENCES tech_professionals(id),
-  title VARCHAR(255) NOT NULL,
-  description TEXT,
-  category VARCHAR(50),
-  budget DECIMAL NOT NULL,
-  deposit DECIMAL NOT NULL,
-  sql_level VARCHAR(10),
-  status VARCHAR(20) DEFAULT 'created',
-  start_date TIMESTAMP,
-  end_date TIMESTAMP,
-  project_details JSONB,
-  blockchain_hash VARCHAR(255),
-  created_at TIMESTAMP,
-  updated_at TIMESTAMP
-);
-
--- Project Milestones
-CREATE TABLE project_milestones (
-  id UUID PRIMARY KEY,
-  project_id UUID REFERENCES projects(id),
-  description TEXT,
-  amount DECIMAL,
-  completed BOOLEAN DEFAULT FALSE,
-  approved BOOLEAN DEFAULT FALSE,
-  due_date TIMESTAMP,
-  deliverables TEXT,
-  completed_at TIMESTAMP,
-  approved_at TIMESTAMP,
-  created_at TIMESTAMP
-);
-
--- Project Analytics
-CREATE TABLE project_analytics (
-  id UUID PRIMARY KEY,
-  project_id UUID REFERENCES projects(id),
-  client_id UUID REFERENCES users(id),
-  professional_id UUID REFERENCES tech_professionals(id),
-  action VARCHAR(20), -- 'view', 'bid', 'award', 'complete'
-  amount DECIMAL,
-  rating INTEGER,
-  feedback TEXT,
-  created_at TIMESTAMP
-);
-
--- Disputes
-CREATE TABLE disputes (
-  id UUID PRIMARY KEY,
-  project_id UUID REFERENCES projects(id),
-  disputer_id UUID REFERENCES users(id),
-  dispute_type VARCHAR(50),
-  description TEXT,
-  evidence JSONB,
-  status VARCHAR(20) DEFAULT 'open',
-  resolution TEXT,
-  resolved_at TIMESTAMP,
-  created_at TIMESTAMP
-);
-```
-
-### API Endpoints
-
-```typescript
-// Professional Management
-POST /api/sot/professional/register
-GET /api/sot/professional/:professionalId
-PUT /api/sot/professional/:professionalId
-GET /api/sot/professionals/search
-
-// Skill Assessment
-POST /api/sot/assessment/start/:professionalId
-POST /api/sot/assessment/submit/:assessmentId
-GET /api/sot/assessment/results/:assessmentId
-GET /api/sot/assessment/history/:professionalId
-
-// Project Management
-POST /api/sot/project/create
-GET /api/sot/project/:projectId
-PUT /api/sot/project/:projectId
-GET /api/sot/projects/client/:clientId
-GET /api/sot/projects/professional/:professionalId
-
-// Milestone Management
-POST /api/sot/milestone/add/:projectId
-PUT /api/sot/milestone/complete/:milestoneId
-PUT /api/sot/milestone/approve/:milestoneId
-GET /api/sot/milestones/:projectId
-
-// AI Features
-GET /api/sot/ai/match/:projectId
-POST /api/sot/ai/assess-code
-GET /api/sot/ai/skill-recommendations/:professionalId
-POST /api/sot/ai/project-estimation
-
-// Dispute Resolution
-POST /api/sot/dispute/raise/:projectId
-GET /api/sot/disputes/:projectId
-PUT /api/sot/dispute/resolve/:disputeId
-
-// Analytics
-GET /api/sot/analytics/professional/:professionalId
-GET /api/sot/analytics/client/:clientId
-GET /api/admin/sot/analytics/overview
-GET /api/admin/sot/analytics/quality-metrics
-```
-
-### Performance Metrics
-
-- **Skill Assessment**: <30 minutes per assessment
-- **Project Matching**: <5 seconds response time
-- **Code Execution**: <10 seconds for test cases
-- **Payment Processing**: <2 seconds
-- **System Uptime**: 99.9%
-
-### Security Features
-
-- **Code Sandboxing**: Secure execution environment for assessments
-- **Intellectual Property Protection**: NDA and IP protection mechanisms
-- **Payment Security**: Escrow system with milestone-based releases
-- **Data Encryption**: End-to-end encryption for sensitive project data
-- **Access Control**: Role-based permissions and SQL level restrictions
-
-### Integration Points
-
-- **JPS**: Tech job opportunities and recruitment
-- **GoSellr**: Software products and licensing
-- **EHB AI Marketplace**: AI model development services
-- **WAPOS**: Payment processing and financial management
-- **Affiliate Program**: Tech service referral commissions
-- **Search Hub**: Tech service discovery and search
-- **Franchise System**: Local tech service management
+**SOT** is a unique, AI-first, blockchain-secured tech service platform — combining local physical services with global-level software and AI development — all powered by **verified tech experts, regional franchises, and token-based loyalty.**
