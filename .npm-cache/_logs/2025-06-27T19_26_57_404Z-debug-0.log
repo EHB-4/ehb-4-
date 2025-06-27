@@ -12,3 +12,120 @@
 11 silly logfile start cleaning logs, removing 1 files
 12 silly packumentCache heap:4496293888 maxSize:1124073472 maxEntrySize:562036736
 13 silly logfile done cleaning log files
+14 silly idealTree buildDeps
+15 silly fetch manifest swiper@*
+16 silly packumentCache full:https://registry.npmjs.org/swiper cache-miss
+17 http fetch GET 200 https://registry.npmjs.org/swiper 666ms (cache miss)
+18 silly packumentCache full:https://registry.npmjs.org/swiper set size:undefined disposed:false
+19 silly fetch manifest react-horizontal-scrolling-menu@*
+20 silly packumentCache full:https://registry.npmjs.org/react-horizontal-scrolling-menu cache-miss
+21 http fetch GET 200 https://registry.npmjs.org/react-horizontal-scrolling-menu 944ms (cache miss)
+22 silly packumentCache full:https://registry.npmjs.org/react-horizontal-scrolling-menu set size:undefined disposed:false
+23 silly fetch manifest fuse.js@*
+24 silly packumentCache full:https://registry.npmjs.org/fuse.js cache-miss
+25 http fetch GET 200 https://registry.npmjs.org/fuse.js 2030ms (cache miss)
+26 silly packumentCache full:https://registry.npmjs.org/fuse.js set size:undefined disposed:false
+27 silly fetch manifest react-player@*
+28 silly packumentCache full:https://registry.npmjs.org/react-player cache-miss
+29 http fetch GET 200 https://registry.npmjs.org/react-player 1311ms (cache miss)
+30 silly packumentCache full:https://registry.npmjs.org/react-player set size:undefined disposed:false
+31 silly fetch manifest react-lazyload@*
+32 silly packumentCache full:https://registry.npmjs.org/react-lazyload cache-miss
+33 http fetch GET 200 https://registry.npmjs.org/react-lazyload 1382ms (cache miss)
+34 silly packumentCache full:https://registry.npmjs.org/react-lazyload set size:undefined disposed:false
+35 silly fetch manifest socket.io-client@*
+36 silly packumentCache full:https://registry.npmjs.org/socket.io-client cache-miss
+37 http fetch GET 200 https://registry.npmjs.org/socket.io-client 1122ms (cache miss)
+38 silly packumentCache full:https://registry.npmjs.org/socket.io-client set size:undefined disposed:false
+39 silly fetch manifest canva-embed-sdk@*
+40 silly packumentCache full:https://registry.npmjs.org/canva-embed-sdk cache-miss
+41 http fetch GET 404 https://registry.npmjs.org/canva-embed-sdk 1201ms (cache skip)
+42 silly fetch manifest @openai/speech-to-text@*
+43 silly packumentCache full:https://registry.npmjs.org/@openai%2fspeech-to-text cache-miss
+44 http fetch GET 404 https://registry.npmjs.org/@openai%2fspeech-to-text 1174ms (cache skip)
+45 silly placeDep ROOT @openai/speech-to-text@ OK for: ehb-next-js-04@0.1.0 want: *
+46 silly placeDep ROOT canva-embed-sdk@ OK for: ehb-next-js-04@0.1.0 want: *
+47 silly placeDep ROOT fuse.js@7.1.0 OK for: ehb-next-js-04@0.1.0 want: *
+48 silly placeDep ROOT react-horizontal-scrolling-menu@8.2.0 OK for: ehb-next-js-04@0.1.0 want: *
+49 silly placeDep ROOT react-lazyload@3.2.1 OK for: ehb-next-js-04@0.1.0 want: *
+50 silly placeDep ROOT react-player@3.0.0 OK for: ehb-next-js-04@0.1.0 want: *
+51 silly placeDep ROOT socket.io-client@4.8.1 REPLACE for: ehb-next-js-04@0.1.0 want: *
+52 silly placeDep ROOT swiper@11.2.9 OK for: ehb-next-js-04@0.1.0 want: *
+53 silly fetch manifest smooth-scroll-into-view-if-needed@^2.0.2
+54 silly packumentCache full:https://registry.npmjs.org/smooth-scroll-into-view-if-needed cache-miss
+55 silly fetch manifest @mux/mux-player-react@^3.5.0
+56 silly packumentCache full:https://registry.npmjs.org/@mux%2fmux-player-react cache-miss
+57 silly fetch manifest cloudflare-video-element@^1.3.2
+58 silly packumentCache full:https://registry.npmjs.org/cloudflare-video-element cache-miss
+59 silly fetch manifest dash-video-element@^0.1.5
+60 silly packumentCache full:https://registry.npmjs.org/dash-video-element cache-miss
+61 silly fetch manifest hls-video-element@^1.5.5
+62 silly packumentCache full:https://registry.npmjs.org/hls-video-element cache-miss
+63 silly fetch manifest vimeo-video-element@^1.5.1
+64 silly packumentCache full:https://registry.npmjs.org/vimeo-video-element cache-miss
+65 silly fetch manifest wistia-video-element@^1.3.2
+66 silly packumentCache full:https://registry.npmjs.org/wistia-video-element cache-miss
+67 silly fetch manifest youtube-video-element@^1.5.3
+68 silly packumentCache full:https://registry.npmjs.org/youtube-video-element cache-miss
+69 http fetch GET 200 https://registry.npmjs.org/smooth-scroll-into-view-if-needed 544ms (cache miss)
+70 silly packumentCache full:https://registry.npmjs.org/smooth-scroll-into-view-if-needed set size:undefined disposed:false
+71 http fetch GET 200 https://registry.npmjs.org/dash-video-element 1248ms (cache miss)
+72 silly packumentCache full:https://registry.npmjs.org/dash-video-element set size:undefined disposed:false
+73 http fetch GET 200 https://registry.npmjs.org/wistia-video-element 1257ms (cache miss)
+74 silly packumentCache full:https://registry.npmjs.org/wistia-video-element set size:undefined disposed:false
+75 http fetch GET 200 https://registry.npmjs.org/youtube-video-element 1302ms (cache miss)
+76 silly packumentCache full:https://registry.npmjs.org/youtube-video-element set size:undefined disposed:false
+77 http fetch GET 200 https://registry.npmjs.org/vimeo-video-element 1323ms (cache miss)
+78 silly packumentCache full:https://registry.npmjs.org/vimeo-video-element set size:undefined disposed:false
+79 http fetch GET 200 https://registry.npmjs.org/cloudflare-video-element 1326ms (cache miss)
+80 silly packumentCache full:https://registry.npmjs.org/cloudflare-video-element set size:undefined disposed:false
+81 http fetch GET 200 https://registry.npmjs.org/hls-video-element 1328ms (cache miss)
+82 silly packumentCache full:https://registry.npmjs.org/hls-video-element set size:undefined disposed:false
+83 http fetch GET 200 https://registry.npmjs.org/@mux%2fmux-player-react 2462ms (cache miss)
+84 silly packumentCache full:https://registry.npmjs.org/@mux%2fmux-player-react set size:undefined disposed:false
+85 silly placeDep ROOT smooth-scroll-into-view-if-needed@2.0.2 OK for: react-horizontal-scrolling-menu@8.2.0 want: ^2.0.2
+86 silly fetch manifest scroll-into-view-if-needed@^3.1.0
+87 silly packumentCache full:https://registry.npmjs.org/scroll-into-view-if-needed cache-miss
+88 http fetch GET 200 https://registry.npmjs.org/scroll-into-view-if-needed 499ms (cache miss)
+89 silly packumentCache full:https://registry.npmjs.org/scroll-into-view-if-needed set size:undefined disposed:false
+90 silly placeDep ROOT @mux/mux-player-react@3.5.0 OK for: react-player@3.0.0 want: ^3.5.0
+91 silly placeDep ROOT cloudflare-video-element@1.3.2 OK for: react-player@3.0.0 want: ^1.3.2
+92 silly placeDep ROOT dash-video-element@0.1.5 OK for: react-player@3.0.0 want: ^0.1.5
+93 silly placeDep ROOT hls-video-element@1.5.5 OK for: react-player@3.0.0 want: ^1.5.5
+94 silly placeDep ROOT vimeo-video-element@1.5.1 OK for: react-player@3.0.0 want: ^1.5.1
+95 silly placeDep ROOT wistia-video-element@1.3.2 OK for: react-player@3.0.0 want: ^1.3.2
+96 silly placeDep ROOT youtube-video-element@1.5.3 OK for: react-player@3.0.0 want: ^1.5.3
+97 silly fetch manifest @mux/mux-player@3.5.0
+98 silly packumentCache full:https://registry.npmjs.org/@mux%2fmux-player cache-miss
+99 silly fetch manifest @mux/playback-core@0.30.0
+100 silly packumentCache full:https://registry.npmjs.org/@mux%2fplayback-core cache-miss
+101 silly fetch manifest custom-media-element@^1.4.5
+102 silly packumentCache full:https://registry.npmjs.org/custom-media-element cache-miss
+103 silly fetch manifest dashjs@^5.0.3
+104 silly packumentCache full:https://registry.npmjs.org/dashjs cache-miss
+105 silly fetch manifest custom-media-element@^1.4.5
+106 silly packumentCache full:https://registry.npmjs.org/custom-media-element cache-miss
+107 silly fetch manifest hls.js@^1.6.5
+108 silly packumentCache full:https://registry.npmjs.org/hls.js cache-miss
+109 silly fetch manifest media-tracks@^0.3.3
+110 silly packumentCache full:https://registry.npmjs.org/media-tracks cache-miss
+111 silly fetch manifest @vimeo/player@2.29.0
+112 silly packumentCache full:https://registry.npmjs.org/@vimeo%2fplayer cache-miss
+113 silly fetch manifest super-media-element@~1.4.2
+114 silly packumentCache full:https://registry.npmjs.org/super-media-element cache-miss
+115 http fetch GET 200 https://registry.npmjs.org/custom-media-element 444ms (cache miss)
+116 silly packumentCache full:https://registry.npmjs.org/custom-media-element set size:undefined disposed:false
+117 http fetch GET 200 https://registry.npmjs.org/custom-media-element 455ms (cache miss)
+118 silly packumentCache full:https://registry.npmjs.org/custom-media-element set size:undefined disposed:false
+119 http fetch GET 200 https://registry.npmjs.org/media-tracks 463ms (cache miss)
+120 silly packumentCache full:https://registry.npmjs.org/media-tracks set size:undefined disposed:false
+121 http fetch GET 200 https://registry.npmjs.org/dashjs 1065ms (cache miss)
+122 silly packumentCache full:https://registry.npmjs.org/dashjs set size:undefined disposed:false
+123 http fetch GET 200 https://registry.npmjs.org/super-media-element 1290ms (cache miss)
+124 silly packumentCache full:https://registry.npmjs.org/super-media-element set size:undefined disposed:false
+125 http fetch GET 200 https://registry.npmjs.org/@mux%2fplayback-core 1814ms (cache miss)
+126 silly packumentCache full:https://registry.npmjs.org/@mux%2fplayback-core set size:undefined disposed:false
+127 http fetch GET 200 https://registry.npmjs.org/@mux%2fmux-player 2341ms (cache miss)
+128 silly packumentCache full:https://registry.npmjs.org/@mux%2fmux-player set size:undefined disposed:false
+129 http fetch GET 200 https://registry.npmjs.org/@vimeo%2fplayer 2546ms (cache miss)
+130 silly packumentCache full:https://registry.npmjs.org/@vimeo%2fplayer set size:undefined disposed:false
