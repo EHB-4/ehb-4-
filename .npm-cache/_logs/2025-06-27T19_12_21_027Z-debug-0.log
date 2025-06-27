@@ -1,0 +1,48 @@
+0 verbose cli C:\Program Files\nodejs\node.exe C:\Users\PC\AppData\Roaming\npm\node_modules\npm\bin\npm-cli.js
+1 info using npm@11.4.2
+2 info using node@v24.2.0
+3 silly config load:file:C:\Users\PC\AppData\Roaming\npm\node_modules\npm\npmrc
+4 silly config load:file:F:\ehb next.js 04\.npmrc
+5 silly config load:file:C:\Users\PC\.npmrc
+6 silly config load:file:C:\Users\PC\AppData\Roaming\npm\etc\npmrc
+7 verbose title npm install bannerbear-sdk
+8 verbose argv "install" "bannerbear-sdk"
+9 verbose logfile logs-max:10 dir:F:\ehb next.js 04\.npm-cache\_logs\2025-06-27T19_12_21_027Z-
+10 verbose logfile F:\ehb next.js 04\.npm-cache\_logs\2025-06-27T19_12_21_027Z-debug-0.log
+11 silly logfile start cleaning logs, removing 1 files
+12 silly packumentCache heap:4496293888 maxSize:1124073472 maxEntrySize:562036736
+13 silly logfile done cleaning log files
+14 silly idealTree buildDeps
+15 silly fetch manifest bannerbear-sdk@*
+16 silly packumentCache full:https://registry.npmjs.org/bannerbear-sdk cache-miss
+17 http fetch GET 404 https://registry.npmjs.org/bannerbear-sdk 468ms (cache skip)
+18 silly placeDep ROOT bannerbear-sdk@ OK for: ehb-next-js-04@0.1.0 want: *
+19 verbose stack HttpErrorGeneral: 404 Not Found - GET https://registry.npmjs.org/bannerbear-sdk - Not found
+19 verbose stack     at C:\Users\PC\AppData\Roaming\npm\node_modules\npm\node_modules\npm-registry-fetch\lib\check-response.js:103:15
+19 verbose stack     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+19 verbose stack     at async RegistryFetcher.packument (C:\Users\PC\AppData\Roaming\npm\node_modules\npm\node_modules\pacote\lib\registry.js:90:19)
+19 verbose stack     at async RegistryFetcher.manifest (C:\Users\PC\AppData\Roaming\npm\node_modules\npm\node_modules\pacote\lib\registry.js:128:23)
+19 verbose stack     at async #fetchManifest (C:\Users\PC\AppData\Roaming\npm\node_modules\npm\node_modules\@npmcli\arborist\lib\arborist\build-ideal-tree.js:1213:20)
+19 verbose stack     at async #nodeFromEdge (C:\Users\PC\AppData\Roaming\npm\node_modules\npm\node_modules\@npmcli\arborist\lib\arborist\build-ideal-tree.js:1051:19)
+19 verbose stack     at async #buildDepStep (C:\Users\PC\AppData\Roaming\npm\node_modules\npm\node_modules\@npmcli\arborist\lib\arborist\build-ideal-tree.js:915:11)
+19 verbose stack     at async Arborist.buildIdealTree (C:\Users\PC\AppData\Roaming\npm\node_modules\npm\node_modules\@npmcli\arborist\lib\arborist\build-ideal-tree.js:182:7)
+19 verbose stack     at async Promise.all (index 1)
+19 verbose stack     at async Arborist.reify (C:\Users\PC\AppData\Roaming\npm\node_modules\npm\node_modules\@npmcli\arborist\lib\arborist\reify.js:131:5)
+20 verbose statusCode 404
+21 verbose pkgid bannerbear-sdk@*
+22 error code E404
+23 error 404 Not Found - GET https://registry.npmjs.org/bannerbear-sdk - Not found
+24 error 404
+25 error 404  'bannerbear-sdk@*' is not in this registry.
+26 error 404
+27 error 404 Note that you can also install from a
+28 error 404 tarball, folder, http url, or git url.
+29 silly unfinished npm timer reify 1751051541434
+30 silly unfinished npm timer reify:loadTrees 1751051541434
+31 verbose cwd F:\ehb next.js 04
+32 verbose os Windows_NT 10.0.26100
+33 verbose node v24.2.0
+34 verbose npm  v11.4.2
+35 verbose exit 1
+36 verbose code 1
+37 error A complete log of this run can be found in: F:\ehb next.js 04\.npm-cache\_logs\2025-06-27T19_12_21_027Z-debug-0.log
