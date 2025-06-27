@@ -5,9 +5,10 @@
 4 silly config load:file:F:\ehb next.js 04\.npmrc
 5 silly config load:file:C:\Users\PC\.npmrc
 6 silly config load:file:C:\Users\PC\AppData\Roaming\npm\etc\npmrc
-7 verbose title npm run github-simple:start
-8 verbose argv "run" "github-simple:start"
-9 verbose logfile logs-max:10 dir:F:\ehb next.js 04\.npm-cache\_logs\2025-06-27T19_00_26_192Z-
-10 verbose logfile F:\ehb next.js 04\.npm-cache\_logs\2025-06-27T19_00_26_192Z-debug-0.log
+7 verbose title npm install pexels-api-wrapper @canva/platform
+8 verbose argv "install" "pexels-api-wrapper" "@canva/platform"
+9 verbose logfile logs-max:10 dir:F:\ehb next.js 04\.npm-cache\_logs\2025-06-27T19_14_12_866Z-
+10 verbose logfile F:\ehb next.js 04\.npm-cache\_logs\2025-06-27T19_14_12_866Z-debug-0.log
 11 silly logfile start cleaning logs, removing 1 files
-12 silly logfile done cleaning log files
+12 silly packumentCache heap:4496293888 maxSize:1124073472 maxEntrySize:562036736
+13 silly logfile done cleaning log files
