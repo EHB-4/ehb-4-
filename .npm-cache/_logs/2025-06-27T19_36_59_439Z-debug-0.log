@@ -404,3 +404,58 @@
 403 http fetch GET 200 https://registry.npmjs.org/dashjs/-/dashjs-5.0.3.tgz 7308ms (cache miss)
 404 http fetch GET 200 https://registry.npmjs.org/hls.js/-/hls.js-1.6.5.tgz 8611ms (cache miss)
 405 http fetch GET 200 https://registry.npmjs.org/player.style/-/player.style-0.1.9.tgz 8799ms (cache miss)
+406 http fetch GET 200 https://registry.npmjs.org/@mux/mux-player/-/mux-player-3.5.0.tgz 9017ms (cache miss)
+407 http fetch GET 200 https://registry.npmjs.org/@mux/mux-video/-/mux-video-0.26.0.tgz 9044ms (cache miss)
+408 silly ADD node_modules/super-media-element
+409 silly ADD node_modules/weakmap-polyfill
+410 silly ADD node_modules/native-promise-only
+411 silly ADD node_modules/@vimeo/player
+412 silly ADD node_modules/compute-scroll-into-view
+413 silly ADD node_modules/scroll-into-view-if-needed
+414 silly ADD node_modules/ce-la-react
+415 silly ADD node_modules/@vercel/edge
+416 silly ADD node_modules/immediate
+417 silly ADD node_modules/lie
+418 silly ADD node_modules/sax
+419 silly ADD node_modules/is-decimal
+420 silly ADD node_modules/is-alphanumerical
+421 silly ADD node_modules/is-alphabetical
+422 silly ADD node_modules/bcp-47
+423 silly ADD node_modules/localforage
+424 silly ADD node_modules/imsc
+425 silly ADD node_modules/codem-isoboxer
+426 silly ADD node_modules/bcp-47-normalize
+427 silly ADD node_modules/bcp-47-match
+428 silly ADD node_modules/@svta/common-media-library
+429 silly ADD node_modules/dashjs
+430 silly ADD node_modules/hls.js
+431 silly ADD node_modules/mux-embed
+432 silly ADD node_modules/media-tracks
+433 silly ADD node_modules/custom-media-element
+434 silly ADD node_modules/castable-video
+435 silly ADD node_modules/@mux/mux-data-google-ima
+436 silly ADD node_modules/player.style
+437 silly ADD node_modules/media-chrome
+438 silly ADD node_modules/@mux/mux-video
+439 silly ADD node_modules/@mux/playback-core
+440 silly ADD node_modules/@mux/mux-player
+441 silly ADD node_modules/youtube-video-element
+442 silly ADD node_modules/wistia-video-element
+443 silly ADD node_modules/vimeo-video-element
+444 silly ADD node_modules/hls-video-element
+445 silly ADD node_modules/hls-video-element/node_modules/hls.js
+446 silly ADD node_modules/dash-video-element
+447 silly ADD node_modules/cloudflare-video-element
+448 silly ADD node_modules/@mux/mux-player-react
+449 silly ADD node_modules/smooth-scroll-into-view-if-needed
+450 silly ADD node_modules/swiper
+451 silly ADD node_modules/react-player
+452 silly ADD node_modules/react-lazyload
+453 silly ADD node_modules/react-horizontal-scrolling-menu
+454 silly ADD node_modules/fuse.js
+455 verbose cwd F:\ehb next.js 04
+456 verbose os Windows_NT 10.0.26100
+457 verbose node v24.2.0
+458 verbose npm  v11.4.2
+459 verbose exit 0
+460 info ok
