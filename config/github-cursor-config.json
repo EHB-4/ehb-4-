@@ -1,0 +1,54 @@
+{
+  "watchPath": ".",
+  "pushInterval": 30000,
+  "pullInterval": 60000,
+  "commitMessage": "EHB Auto-Push to Cursor",
+  "branch": "main",
+  "autoOpenCursor": true,
+  "excludePatterns": [
+    "node_modules/**",
+    ".git/**",
+    ".next/**",
+    "dist/**",
+    "build/**",
+    "*.log",
+    "temp-backup/**",
+    "logs/**",
+    "cypress/videos/**",
+    "cypress/screenshots/**",
+    "playwright-report/**",
+    "test-results/**",
+    ".cursor/**",
+    ".vscode/**"
+  ],
+  "criticalFiles": [
+    "package.json",
+    "next.config.js",
+    "tailwind.config.js",
+    "tsconfig.json",
+    "app/**/*.tsx",
+    "app/**/*.ts",
+    "components/**/*.tsx",
+    "components/**/*.ts",
+    "lib/**/*.ts",
+    "hooks/**/*.ts",
+    "scripts/**/*.js",
+    "scripts/**/*.ts"
+  ],
+  "cursorPaths": [
+    "cursor",
+    "Cursor",
+    "C:\\Users\\%USERNAME%\\AppData\\Local\\Programs\\Cursor\\Cursor.exe",
+    "C:\\Users\\%USERNAME%\\AppData\\Roaming\\Cursor\\Cursor.exe"
+  ],
+  "notifications": {
+    "enabled": true,
+    "showDesktopNotification": true,
+    "logToFile": true
+  },
+  "sync": {
+    "autoResolveConflicts": true,
+    "backupBeforeSync": true,
+    "maxRetries": 3
+  }
+}
