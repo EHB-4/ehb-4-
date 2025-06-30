@@ -795,13 +795,13 @@ export class AIScoringEngine {
     const riskScore = this.calculateRiskScore({
       financialScore,
       securityScore,
-      features.riskIndicators,
+      features.riskIndicators
     });
     
     const fraudScore = this.calculateFraudScore({
       behavioralScore,
       securityScore,
-      features.riskIndicators,
+      features.riskIndicators
     });
     
     const reliabilityScore = this.calculateReliabilityScore({

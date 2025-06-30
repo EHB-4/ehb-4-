@@ -1,0 +1,29 @@
+{
+  "services": [
+    {
+      "id": "pss",
+      "name": "PSS",
+      "fullName": "Personal Security System",
+      "port": 4001,
+      "status": "working",
+      "autoStart": true
+    },
+    {
+      "id": "edr",
+      "name": "EDR",
+      "fullName": "Emergency Decision Registration",
+      "port": 4002,
+      "status": "working",
+      "autoStart": true
+    },
+    {
+      "id": "blockchain",
+      "name": "EHB BLOCKCHAIN",
+      "fullName": "EHB Blockchain Infrastructure",
+      "port": 5007,
+      "status": "working",
+      "autoStart": true
+    }
+  ],
+  "lastUpdated": "2025-06-29T15:46:06.926Z"
+}

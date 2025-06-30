@@ -1,0 +1,288 @@
+{
+  "projectName": "EHB Technologies",
+  "version": "1.0.0",
+  "description": "EHB Complete Port Structure Configuration",
+  "lastUpdated": "2024-01-25",
+
+  "mainApplication": {
+    "description": "Primary application ports",
+    "ports": {
+      "3001": {
+        "service": "EHB Main App",
+        "purpose": "Primary Next.js application",
+        "autoLaunch": true,
+        "browserUrl": "http://localhost:3001",
+        "status": "active",
+        "pages": ["home", "dashboard", "profile", "auth", "services-overview"]
+      },
+      "3002": {
+        "service": "EHB Admin Panel",
+        "purpose": "Administrative dashboard",
+        "autoLaunch": true,
+        "browserUrl": "http://localhost:3002",
+        "status": "active",
+        "pages": [
+          "admin-dashboard",
+          "user-management",
+          "system-monitoring",
+          "content-management",
+          "security-controls"
+        ]
+      },
+      "3003": {
+        "service": "EHB Development Portal",
+        "purpose": "Developer resources and documentation",
+        "autoLaunch": true,
+        "browserUrl": "http://localhost:3003",
+        "status": "active",
+        "pages": [
+          "api-documentation",
+          "developer-tools",
+          "code-examples",
+          "integration-guides",
+          "roadmap"
+        ]
+      },
+      "3004": {
+        "service": "EHB Analytics",
+        "purpose": "Real-time analytics and reporting",
+        "autoLaunch": true,
+        "browserUrl": "http://localhost:3004",
+        "status": "active",
+        "pages": [
+          "analytics-dashboard",
+          "data-visualization",
+          "performance-metrics",
+          "user-behavior",
+          "business-intelligence"
+        ]
+      },
+      "3005": {
+        "service": "EHB AI Marketplace",
+        "purpose": "AI services marketplace",
+        "autoLaunch": true,
+        "browserUrl": "http://localhost:3005",
+        "status": "under-development",
+        "pages": ["ai-services", "agent-management", "service-delivery", "performance-monitoring"]
+      }
+    }
+  },
+
+  "serviceModules": {
+    "description": "Service-specific application ports",
+    "ports": {
+      "4001": {
+        "service": "PSS (Personal Security System)",
+        "purpose": "Identity verification and security management",
+        "status": "working",
+        "progress": 75,
+        "priority": "high",
+        "pages": ["kyc-verification", "document-validation", "fraud-prevention", "trust-scoring"],
+        "team": ["Security Team", "AI Team"],
+        "dependencies": ["auth", "wallet"]
+      },
+      "4002": {
+        "service": "EDR (Exam Decision Registration)",
+        "purpose": "AI-powered skill verification and examination",
+        "status": "working",
+        "progress": 60,
+        "priority": "high",
+        "pages": ["ai-exam-generation", "proctoring-system", "skill-assessment", "certification"],
+        "team": ["AI Team", "Education Team"],
+        "dependencies": ["pss", "ai-agents"]
+      },
+      "4003": {
+        "service": "EMO (EHB Management Organization)",
+        "purpose": "Central management and user dashboard",
+        "status": "working",
+        "progress": 80,
+        "priority": "high",
+        "pages": ["user-dashboard", "profile-management", "service-integration", "notifications"],
+        "team": ["UI/UX Team", "Backend Team"],
+        "dependencies": ["auth", "analytics"]
+      },
+      "4004": {
+        "service": "GoSellr",
+        "purpose": "Global e-commerce platform",
+        "status": "under-development",
+        "progress": 40,
+        "priority": "high",
+        "pages": [
+          "product-listing",
+          "vendor-management",
+          "order-processing",
+          "payment-integration"
+        ],
+        "team": ["E-commerce Team", "Payment Team"],
+        "dependencies": ["pss", "edr", "wallet"]
+      },
+      "4005": {
+        "service": "JPS (Job Placement System)",
+        "purpose": "AI-powered job matching and placement",
+        "status": "not-started",
+        "progress": 0,
+        "priority": "medium",
+        "pages": ["job-matching", "skill-assessment", "interview-scheduling", "placement-tracking"],
+        "team": ["HR Team", "AI Team"],
+        "dependencies": ["edr", "pss", "ai-agents"]
+      },
+      "4006": {
+        "service": "Franchise System",
+        "purpose": "Franchise management and expansion",
+        "status": "not-started",
+        "progress": 0,
+        "priority": "medium",
+        "pages": [
+          "franchise-registration",
+          "territory-management",
+          "performance-analytics",
+          "compliance"
+        ],
+        "team": ["Business Team", "Legal Team"],
+        "dependencies": ["emo", "analytics"]
+      },
+      "4007": {
+        "service": "AI Agents",
+        "purpose": "AI agents for automation and assistance",
+        "status": "working",
+        "progress": 65,
+        "priority": "high",
+        "pages": [
+          "automated-tasks",
+          "smart-assistance",
+          "process-automation",
+          "intelligent-routing"
+        ],
+        "team": ["AI Team", "Automation Team"],
+        "dependencies": ["ai-marketplace"]
+      }
+    }
+  },
+
+  "supportServices": {
+    "description": "Support and infrastructure services",
+    "ports": {
+      "5001": {
+        "service": "Wallet System",
+        "purpose": "Digital wallet and payment processing",
+        "status": "completed",
+        "progress": 100,
+        "pages": ["payment-processing", "transaction-history", "security", "multi-currency-support"]
+      },
+      "5002": {
+        "service": "Analytics Engine",
+        "purpose": "Comprehensive analytics and reporting",
+        "status": "working",
+        "progress": 70,
+        "pages": ["data-analysis", "reporting", "insights", "performance-monitoring"]
+      },
+      "5003": {
+        "service": "Search Hub",
+        "purpose": "Universal multi-mode search system",
+        "status": "working",
+        "progress": 80,
+        "pages": ["voice-search", "image-search", "text-search", "document-search"]
+      },
+      "5004": {
+        "service": "Notification System",
+        "purpose": "Real-time notifications and alerts",
+        "status": "working",
+        "progress": 85,
+        "pages": [
+          "real-time-notifications",
+          "alert-management",
+          "notification-preferences",
+          "delivery-status"
+        ]
+      },
+      "5005": {
+        "service": "Documentation",
+        "purpose": "API documentation and guides",
+        "status": "working",
+        "progress": 90,
+        "pages": ["api-docs", "integration-guides", "code-examples", "tutorials"]
+      }
+    }
+  },
+
+  "developmentTools": {
+    "description": "Development and testing tools",
+    "ports": {
+      "6001": {
+        "service": "Storybook",
+        "purpose": "Component development and testing",
+        "autoLaunch": true,
+        "browserUrl": "http://localhost:6001",
+        "status": "active"
+      },
+      "6002": {
+        "service": "Testing Dashboard",
+        "purpose": "Test results and coverage",
+        "autoLaunch": true,
+        "browserUrl": "http://localhost:6002",
+        "status": "active"
+      },
+      "6003": {
+        "service": "Performance Monitor",
+        "purpose": "Performance metrics and monitoring",
+        "autoLaunch": true,
+        "browserUrl": "http://localhost:6003",
+        "status": "active"
+      },
+      "6004": {
+        "service": "Accessibility Checker",
+        "purpose": "A11y testing and compliance",
+        "autoLaunch": true,
+        "browserUrl": "http://localhost:6004",
+        "status": "active"
+      },
+      "6005": {
+        "service": "Code Quality",
+        "purpose": "Linting, formatting, and quality checks",
+        "autoLaunch": true,
+        "browserUrl": "http://localhost:6005",
+        "status": "active"
+      }
+    }
+  },
+
+  "autoManagement": {
+    "enabled": true,
+    "autoLaunch": true,
+    "portDetection": true,
+    "fallbackPorts": [3000, 3002, 3003, 3004, 3005],
+    "restartOnError": true,
+    "maxRestarts": 10,
+    "restartDelay": 3000,
+    "monitoring": {
+      "enabled": true,
+      "interval": 5000,
+      "healthCheck": true,
+      "logging": true
+    }
+  },
+
+  "deployment": {
+    "production": {
+      "mainPort": 3000,
+      "adminPort": 3002,
+      "apiPort": 8000,
+      "databasePort": 5432,
+      "redisPort": 6379
+    },
+    "staging": {
+      "mainPort": 3001,
+      "adminPort": 3003,
+      "apiPort": 8001,
+      "databasePort": 5433,
+      "redisPort": 6380
+    },
+    "development": {
+      "mainPort": 3001,
+      "adminPort": 3002,
+      "apiPort": 8000,
+      "databasePort": 5432,
+      "redisPort": 6379
+    }
+  }
+}

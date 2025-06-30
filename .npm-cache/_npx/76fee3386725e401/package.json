@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "open-cli": "^8.0.0"
+  },
+  "_npx": {
+    "packages": [
+      "open-cli"
+    ]
+  }
+}

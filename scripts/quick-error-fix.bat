@@ -53,4 +53,8 @@ echo.
 echo 🌐 http://localhost:3001
 echo 🔄 http://localhost:3000
 echo.
+
+echo Running ESLint quick fix...
+npx eslint . --fix
+
 pause 

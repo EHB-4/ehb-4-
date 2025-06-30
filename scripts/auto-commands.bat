@@ -149,4 +149,9 @@ echo   test       - Run tests
 echo   install    - Install dependencies
 echo   lint       - Run linting
 echo   auto       - Start auto development mode
-goto :eof 
+goto :eof
+
+echo Running all auto commands...
+call fix-all-errors.bat
+call auto-push.bat
+pause 

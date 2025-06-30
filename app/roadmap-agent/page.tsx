@@ -1,543 +1,364 @@
 'use client';
 
-import {
-  ehbModules,
-  ehbServices,
-  getOverallProgress,
-  getModulesByStatus,
-  getModulesByPriority,
-} from '../roadmap/data/enhancedRoadmapData';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
-import { Input } from '@/components/ui/input';
-import { Button } from '@/components/ui/button';
-import {
-  Activity,
-  Box,
-  CheckCircle,
-  Clock,
-  Cpu,
-  Zap,
-  Briefcase,
-  Target,
-  Building,
-  Users,
-  Code,
-  Globe,
-  TrendingUp,
-  Shield,
-  BookOpen,
-  Heart,
-  Gavel,
-  Plane,
-  Store,
-  Wallet,
-  MessageSquare,
-  Send,
-  AlertCircle,
-  Play,
-  Pause,
-  CheckSquare,
-  Square,
-  BarChart3,
-  Settings,
-  FileText,
-  Database,
-  Server,
-  Smartphone,
-  Monitor,
-  Cloud,
-  Lock,
-  Eye,
-  Search,
-  Filter,
-  RefreshCw,
-} from 'lucide-react';
-import { useState, useEffect } from 'react';
-import Link from 'next/link';
-import { Tabs, TabsList, TabsContent, TabsTrigger } from '@/components/ui/tabs';
-
-interface Message {
-  sender: 'user' | 'agent';
-  text: string;
-  timestamp: Date;
-}
-
-const getStatusIcon = (status: string) => {
-  switch (status.toLowerCase()) {
-    case 'completed':
-    case 'done':
-      return <CheckCircle className="h-5 w-5 text-green-500" />;
-    case 'working':
-    case 'in progress':
-      return <Activity className="h-5 w-5 text-blue-500" />;
-    case 'under development':
-      return <Clock className="h-5 w-5 text-yellow-500" />;
-    case 'not started':
-    case 'planned':
-      return <Square className="h-5 w-5 text-gray-500" />;
-    default:
-      return <AlertCircle className="h-5 w-5 text-red-500" />;
-  }
-};
-
-const getStatusColor = (status: string) => {
-  switch (status.toLowerCase()) {
-    case 'completed':
-      return 'bg-green-100 text-green-800 border-green-200';
-    case 'working':
-      return 'bg-blue-100 text-blue-800 border-blue-200';
-    case 'under development':
-      return 'bg-yellow-100 text-yellow-800 border-yellow-200';
-    case 'not started':
-      return 'bg-gray-100 text-gray-800 border-gray-200';
-    default:
-      return 'bg-red-100 text-red-800 border-red-200';
-  }
-};
-
-const getPriorityColor = (priority: string) => {
-  switch (priority.toLowerCase()) {
-    case 'high':
-      return 'bg-red-100 text-red-800';
-    case 'medium':
-      return 'bg-yellow-100 text-yellow-800';
-    case 'low':
-      return 'bg-green-100 text-green-800';
-    default:
-      return 'bg-gray-100 text-gray-800';
-  }
-};
-
-const ProgressBar = ({ progress }: { progress: number }) => (
-  <div className="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
-    <div
-      className={`h-2.5 rounded-full transition-all duration-300 ${
-        progress >= 80
-          ? 'bg-green-600'
-          : progress >= 60
-            ? 'bg-blue-600'
-            : progress >= 40
-              ? 'bg-yellow-600'
-              : progress >= 20
-                ? 'bg-orange-600'
-                : 'bg-red-600'
-      }`}
-      style={{ width: `${progress}%` }}
-    ></div>
-  </div>
-);
-
-const getModuleIcon = (moduleName: string) => {
-  const iconMap: { [key: string]: any } = {
-    pss: Shield,
-    edr: BookOpen,
-    emo: Building,
-    gosellr: Store,
-    jps: Users,
-    franchise: Globe,
-    'ai-marketplace': Cpu,
-    wallet: Wallet,
-    analytics: BarChart3,
-    'admin-panel': Settings,
-    roadmap: Target,
-    'roadmap-agent': Cpu,
-    'development-portal': Code,
-    'ai-agents': Cpu,
-    'ehb-dashboard': Monitor,
-    'ehb-home-page': Globe,
-  };
-  return iconMap[moduleName] || Building;
-};
+import React, { useState } from 'react';
+import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
+import LanguageSelector from '../../components/ui/LanguageSelector';
+import { getAggregatedEHBData } from '../../lib/utils/ehbDataPage';
 
 export default function RoadmapAgentPage() {
-  const [activeTab, setActiveTab] = useState('overview');
-  const [messages, setMessages] = useState<Message[]>([
-    {
-      sender: 'agent',
-      text: 'Hello! I am your EHB Roadmap AI Agent. I can help you track all modules, services, and development progress. How can I assist you today?',
-      timestamp: new Date(),
-    },
-  ]);
-  const [input, setInput] = useState('');
-  const [searchTerm, setSearchTerm] = useState('');
-  const [statusFilter, setStatusFilter] = useState('all');
-  const [priorityFilter, setPriorityFilter] = useState('all');
+  const { t } = useTranslation();
+  // Get all aggregated EHB data
+  const { companyInfo, modules, services, roadmapData, servicesOverviewMarkdown } =
+    getAggregatedEHBData();
 
-  // Calculate overall progress
-  const overallProgress = getOverallProgress();
-  const workingModules = getModulesByStatus('Working');
-  const underDevelopmentModules = getModulesByStatus('Under Development');
-  const notStartedModules = getModulesByStatus('Not Started');
-  const completedModules = getModulesByStatus('Completed');
+  const [selectedStatus, setSelectedStatus] = useState<string>('all');
+  const [showInstructions, setShowInstructions] = useState(true);
 
-  // Filter modules based on search and filters
-  const filteredModules = ehbModules.filter(module => {
-    const matchesSearch =
-      module.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      module.title.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesStatus = statusFilter === 'all' || module.status.toLowerCase() === statusFilter;
-    const matchesPriority =
-      priorityFilter === 'all' || module.priority.toLowerCase() === priorityFilter;
-    return matchesSearch && matchesStatus && matchesPriority;
-  });
+  // Calculate progress and filter modules by status
+  const overallProgress = Math.round(
+    modules.reduce((acc, m) => acc + (m.progress || 0), 0) / modules.length
+  );
+  const completedModules = modules.filter(m => m.status === 'Completed');
+  const workingModules = modules.filter(m => m.status === 'Working');
+  const underDevelopmentModules = modules.filter(m => m.status === 'Under Development');
+  const notStartedModules = modules.filter(m => m.status === 'Not Started');
+  const upcomingModules = [...underDevelopmentModules, ...notStartedModules];
 
-  const handleSendMessage = () => {
-    if (input.trim() === '') return;
-
-    const newMessage: Message = {
-      sender: 'user',
-      text: input,
-      timestamp: new Date(),
-    };
-    setMessages(prev => [...prev, newMessage]);
-
-    // Simulate agent response based on input
-    setTimeout(() => {
-      let response = '';
-      const lowerInput = input.toLowerCase();
-
-      if (lowerInput.includes('progress') || lowerInput.includes('status')) {
-        response = `Overall project progress is ${overallProgress}%. We have ${completedModules.length} completed, ${workingModules.length} working, ${underDevelopmentModules.length} under development, and ${notStartedModules.length} not started modules.`;
-      } else if (lowerInput.includes('module') || lowerInput.includes('service')) {
-        response = `We have ${ehbModules.length} modules across ${ehbServices.length} service categories. You can view detailed information in the modules tab.`;
-      } else if (lowerInput.includes('help') || lowerInput.includes('assist')) {
-        response =
-          'I can help you with: checking module status, viewing progress, finding specific modules, and getting development insights. Just ask!';
-      } else {
-        response = `I've processed your query: "${input}". I can provide information about module status, progress, dependencies, and development insights. What specific information would you like?`;
-      }
-
-      const agentMessage: Message = {
-        sender: 'agent',
-        text: response,
-        timestamp: new Date(),
-      };
-      setMessages(prev => [...prev, agentMessage]);
-    }, 1000);
-
-    setInput('');
-  };
-
-  const handleKeyPress = (e: React.KeyboardEvent) => {
-    if (e.key === 'Enter' && !e.shiftKey) {
-      e.preventDefault();
-      handleSendMessage();
-    }
-  };
+  const filteredModules =
+    selectedStatus === 'all' ? modules : modules.filter(module => module.status === selectedStatus);
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 p-4 sm:p-6 lg:p-8 text-gray-900 dark:text-gray-100">
-      <div className="max-w-7xl mx-auto">
-        <header className="mb-8">
-          <div className="flex items-center justify-between">
-            <div>
-              <h1 className="text-4xl font-bold tracking-tight text-gray-900 dark:text-white">
-                EHB Development Roadmap Agent
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50">
+      {/* Header */}
+      <header className="bg-white shadow-md sticky top-0 z-20">
+        <div className="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center mb-4">
+            <div className="flex items-center">
+              <div className="h-10 w-10 bg-blue-600 rounded-lg flex items-center justify-center mr-3">
+                <span className="text-white font-bold text-lg">🤖</span>
+              </div>
+              <h1 className="text-3xl font-bold text-gray-900">
+                {t('companyName')} {t('overview')}
               </h1>
-              <p className="mt-2 text-lg text-gray-600 dark:text-gray-400">
-                AI-powered roadmap management and real-time project tracking
-              </p>
             </div>
-            <div className="flex items-center space-x-4">
-              <Badge variant="outline" className="text-sm">
-                Overall Progress: {overallProgress}%
-              </Badge>
-              <Badge variant="outline" className="text-sm">
-                {ehbModules.length} Modules
-              </Badge>
+            <div className="flex items-center gap-4">
+              <LanguageSelector />
+              <button
+                onClick={() => setShowInstructions(!showInstructions)}
+                className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+              >
+                {showInstructions ? t('hide') : t('show')} Agent Instructions
+              </button>
             </div>
           </div>
-        </header>
 
-        <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-6">
-          <TabsList className="grid w-full grid-cols-4">
-            <TabsTrigger value="overview">Overview</TabsTrigger>
-            <TabsTrigger value="modules">Modules</TabsTrigger>
-            <TabsTrigger value="services">Services</TabsTrigger>
-            <TabsTrigger value="chat">AI Chat</TabsTrigger>
-          </TabsList>
+          {/* Status Bar */}
+          <div className="flex items-center justify-between text-sm">
+            <div className="flex space-x-6">
+              <span className="text-gray-600">
+                {t('overallProgress')}:{' '}
+                <span className="font-semibold text-blue-600">{overallProgress}%</span>
+              </span>
+              <span className="text-gray-600">
+                {t('completed')}:{' '}
+                <span className="font-semibold text-green-600">{completedModules.length}</span>
+              </span>
+              <span className="text-gray-600">
+                {t('working')}:{' '}
+                <span className="font-semibold text-blue-600">{workingModules.length}</span>
+              </span>
+              <span className="text-gray-600">
+                {t('underDevelopment')}:{' '}
+                <span className="font-semibold text-yellow-600">
+                  {underDevelopmentModules.length}
+                </span>
+              </span>
+              <span className="text-gray-600">
+                {t('notStarted')}:{' '}
+                <span className="font-semibold text-gray-600">{notStartedModules.length}</span>
+              </span>
+            </div>
+            <span className="text-gray-500">
+              {t('lastUpdated')}: {new Date().toLocaleDateString()}
+            </span>
+          </div>
+        </div>
+      </header>
 
-          <TabsContent value="overview" className="space-y-6">
-            {/* Overall Progress */}
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <BarChart3 className="h-6 w-6" />
-                  Overall Project Progress
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-4">
-                  <div className="flex items-center justify-between">
-                    <span className="text-lg font-medium">Project Completion</span>
-                    <span className="text-2xl font-bold text-blue-600">{overallProgress}%</span>
-                  </div>
-                  <ProgressBar progress={overallProgress} />
+      <main className="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
+        {/* Roadmap Page Link Card */}
+        <section className="mb-8">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="bg-gradient-to-r from-blue-500 to-indigo-600 rounded-xl shadow-lg p-6 text-white flex items-center justify-between"
+          >
+            <div>
+              <h2 className="text-2xl font-bold mb-1">{t('companyName')} Roadmap</h2>
+              <p className="text-sm">See the full company roadmap, rules, and all services.</p>
+            </div>
+            <a
+              href="/roadmap"
+              className="bg-white text-blue-600 px-6 py-2 rounded-lg font-semibold shadow hover:bg-blue-100 transition-colors"
+            >
+              View Roadmap
+            </a>
+          </motion.div>
+        </section>
 
-                  <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-6">
-                    <div className="text-center p-4 bg-green-50 rounded-lg">
-                      <div className="text-2xl font-bold text-green-600">
-                        {completedModules.length}
-                      </div>
-                      <div className="text-sm text-green-700">Completed</div>
-                    </div>
-                    <div className="text-center p-4 bg-blue-50 rounded-lg">
-                      <div className="text-2xl font-bold text-blue-600">
-                        {workingModules.length}
-                      </div>
-                      <div className="text-sm text-blue-700">Working</div>
-                    </div>
-                    <div className="text-center p-4 bg-yellow-50 rounded-lg">
-                      <div className="text-2xl font-bold text-yellow-600">
-                        {underDevelopmentModules.length}
-                      </div>
-                      <div className="text-sm text-yellow-700">In Development</div>
-                    </div>
-                    <div className="text-center p-4 bg-gray-50 rounded-lg">
-                      <div className="text-2xl font-bold text-gray-600">
-                        {notStartedModules.length}
-                      </div>
-                      <div className="text-sm text-gray-700">Not Started</div>
-                    </div>
-                  </div>
+        {/* Launched Projects Section */}
+        <section className="mb-12">
+          <h2 className="text-2xl font-bold text-green-700 mb-4">Launched Projects</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {completedModules.map((module, index) => (
+              <motion.div
+                key={module.id}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.05 }}
+                className="bg-white rounded-xl shadow-lg p-6 border-l-4 border-green-500"
+              >
+                <h3 className="text-xl font-bold text-gray-900 mb-2">{module.name}</h3>
+                <p className="text-gray-600 mb-2">{module.description}</p>
+                <div className="mb-2 flex items-center gap-2">
+                  <span className="text-green-600 font-semibold">{module.progress}% Ready</span>
+                  <span className="text-gray-400">|</span>
+                  <span className="text-gray-500">{100 - module.progress}% Remaining</span>
                 </div>
-              </CardContent>
-            </Card>
+                <div className="w-full bg-gray-200 rounded-full h-2 mb-2">
+                  <div
+                    className="h-2 rounded-full bg-green-500"
+                    style={{ width: `${module.progress}%` }}
+                  ></div>
+                </div>
+                <a
+                  href={module.path}
+                  className="text-blue-600 underline text-sm font-medium"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {t('viewDetails')}
+                </a>
+              </motion.div>
+            ))}
+          </div>
+        </section>
 
-            {/* Service Categories */}
-            <div className="grid md:grid-cols-2 gap-6">
-              {ehbServices.map(service => (
-                <Card key={service.id}>
-                  <CardHeader>
-                    <CardTitle className="flex items-center gap-2">
-                      {service.category === 'Core' && <Shield className="h-5 w-5" />}
-                      {service.category === 'Marketplace' && <Store className="h-5 w-5" />}
-                      {service.category === 'Support' && <Settings className="h-5 w-5" />}
-                      {service.category === 'Analytics' && <BarChart3 className="h-5 w-5" />}
-                      {service.name}
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="space-y-2">
-                      <Badge variant="outline">{service.status}</Badge>
-                      <p className="text-sm text-gray-600 dark:text-gray-400">
-                        {service.modules.length} modules
-                      </p>
-                      <div className="flex flex-wrap gap-1">
-                        {service.modules.slice(0, 3).map(module => (
-                          <Badge key={module.id} variant="secondary" className="text-xs">
-                            {module.name}
-                          </Badge>
-                        ))}
-                        {service.modules.length > 3 && (
-                          <Badge variant="secondary" className="text-xs">
-                            +{service.modules.length - 3} more
-                          </Badge>
-                        )}
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
+        {/* Upcoming Projects Section */}
+        <section className="mb-12">
+          <h2 className="text-2xl font-bold text-yellow-700 mb-4">Upcoming Projects</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {upcomingModules.map((module, index) => (
+              <motion.div
+                key={module.id}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.05 }}
+                className="bg-white rounded-xl shadow-lg p-6 border-l-4 border-yellow-500"
+              >
+                <h3 className="text-xl font-bold text-gray-900 mb-2">{module.name}</h3>
+                <p className="text-gray-600 mb-2">{module.description}</p>
+                <div className="mb-2 flex items-center gap-2">
+                  <span className="text-yellow-600 font-semibold">{module.progress}% Ready</span>
+                  <span className="text-gray-400">|</span>
+                  <span className="text-gray-500">{100 - module.progress}% Remaining</span>
+                </div>
+                <div className="w-full bg-gray-200 rounded-full h-2 mb-2">
+                  <div
+                    className="h-2 rounded-full bg-yellow-500"
+                    style={{ width: `${module.progress}%` }}
+                  ></div>
+                </div>
+                <a
+                  href={module.path}
+                  className="text-blue-600 underline text-sm font-medium"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {t('viewDetails')}
+                </a>
+              </motion.div>
+            ))}
+          </div>
+        </section>
+
+        {/* Agent Instructions */}
+        {showInstructions && (
+          <motion.section
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            className="mb-8"
+          >
+            <div className="bg-gradient-to-r from-blue-600 to-indigo-700 rounded-xl shadow-lg p-6 text-white">
+              <div className="flex items-center mb-4">
+                <span className="text-2xl mr-3">📋</span>
+                <h2 className="text-2xl font-bold">AI Agent Instructions</h2>
+              </div>
+              <div className="bg-white/10 rounded-lg p-4 backdrop-blur-sm">
+                <pre className="text-sm leading-relaxed whitespace-pre-wrap font-mono">
+                  {companyInfo.mission}
+                </pre>
+              </div>
+            </div>
+          </motion.section>
+        )}
+
+        {/* Service Filter */}
+        <section className="mb-8">
+          <div className="bg-white rounded-xl shadow-lg p-6">
+            <h2 className="text-2xl font-bold text-gray-900 mb-4">
+              {t('filter')} {t('modules')}
+            </h2>
+            <div className="flex flex-wrap gap-2">
+              {[
+                { value: 'all', label: t('modules'), color: 'bg-gray-500' },
+                { value: 'Completed', label: t('completed'), color: 'bg-green-500' },
+                { value: 'Working', label: t('working'), color: 'bg-blue-500' },
+                {
+                  value: 'Under Development',
+                  label: t('underDevelopment'),
+                  color: 'bg-yellow-500',
+                },
+                { value: 'Not Started', label: t('notStarted'), color: 'bg-red-500' },
+              ].map(filter => (
+                <button
+                  key={filter.value}
+                  onClick={() => setSelectedStatus(filter.value)}
+                  className={`px-4 py-2 rounded-lg text-white font-medium transition-all ${
+                    selectedStatus === filter.value
+                      ? `${filter.color} shadow-lg`
+                      : 'bg-gray-300 hover:bg-gray-400'
+                  }`}
+                >
+                  {filter.label}
+                </button>
               ))}
             </div>
-          </TabsContent>
+          </div>
+        </section>
 
-          <TabsContent value="modules" className="space-y-6">
-            {/* Search and Filters */}
-            <Card>
-              <CardContent className="pt-6">
-                <div className="flex flex-col sm:flex-row gap-4">
-                  <div className="flex-1">
-                    <div className="relative">
-                      <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
-                      <Input
-                        placeholder="Search modules..."
-                        value={searchTerm}
-                        onChange={e => setSearchTerm(e.target.value)}
-                        className="pl-10"
-                      />
-                    </div>
+        {/* Modules Grid */}
+        <section className="mb-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {filteredModules.map((module, index) => (
+              <motion.div
+                key={module.id}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.1 }}
+                className="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-all duration-300 border-l-4 border-blue-500"
+              >
+                {/* Module Header */}
+                <div className="flex items-center justify-between mb-4">
+                  <div>
+                    <h3 className="text-xl font-bold text-gray-900">{module.name}</h3>
+                    <p className="text-sm text-gray-600">{module.title}</p>
                   </div>
-                  <div className="flex gap-2">
-                    <select
-                      value={statusFilter}
-                      onChange={e => setStatusFilter(e.target.value)}
-                      className="px-3 py-2 border border-gray-300 rounded-md text-sm"
-                    >
-                      <option value="all">All Status</option>
-                      <option value="completed">Completed</option>
-                      <option value="working">Working</option>
-                      <option value="under development">Under Development</option>
-                      <option value="not started">Not Started</option>
-                    </select>
-                    <select
-                      value={priorityFilter}
-                      onChange={e => setPriorityFilter(e.target.value)}
-                      className="px-3 py-2 border border-gray-300 rounded-md text-sm"
-                    >
-                      <option value="all">All Priority</option>
-                      <option value="high">High</option>
-                      <option value="medium">Medium</option>
-                      <option value="low">Low</option>
-                    </select>
+                  <span
+                    className={`px-3 py-1 rounded-full text-xs font-semibold ${
+                      module.status === 'Completed'
+                        ? 'bg-green-100 text-green-800'
+                        : module.status === 'Working'
+                        ? 'bg-blue-100 text-blue-800'
+                        : module.status === 'Under Development'
+                        ? 'bg-yellow-100 text-yellow-800'
+                        : 'bg-gray-100 text-gray-800'
+                    }`}
+                  >
+                    {t(module.status.toLowerCase())}
+                  </span>
+                </div>
+
+                {/* Module Description */}
+                <p className="text-gray-700 mb-4">{module.description}</p>
+
+                {/* Progress Bar */}
+                <div className="mb-4">
+                  <div className="flex justify-between text-sm text-gray-600 mb-1">
+                    <span>{t('progress')}</span>
+                    <span>{module.progress}%</span>
+                  </div>
+                  <div className="w-full bg-gray-200 rounded-full h-3">
+                    <div
+                      className={`h-3 rounded-full transition-all duration-500 ${
+                        module.progress >= 80
+                          ? 'bg-green-500'
+                          : module.progress >= 60
+                          ? 'bg-blue-500'
+                          : module.progress >= 40
+                          ? 'bg-yellow-500'
+                          : 'bg-red-500'
+                      }`}
+                      style={{ width: `${module.progress}%` }}
+                    ></div>
                   </div>
                 </div>
-              </CardContent>
-            </Card>
 
-            {/* Modules Grid */}
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {filteredModules.map(module => {
-                const IconComponent = getModuleIcon(module.id);
-                return (
-                  <Card key={module.id} className="hover:shadow-lg transition-shadow">
-                    <CardHeader>
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-2">
-                          <IconComponent className="h-5 w-5 text-blue-600" />
-                          <CardTitle className="text-lg">{module.name}</CardTitle>
-                        </div>
-                        {getStatusIcon(module.status)}
-                      </div>
-                      <p className="text-sm text-gray-600 dark:text-gray-400">{module.title}</p>
-                    </CardHeader>
-                    <CardContent className="space-y-4">
-                      <div className="flex items-center justify-between">
-                        <span className="text-sm font-medium">Progress</span>
-                        <span className="text-sm font-bold">{module.progress}%</span>
-                      </div>
-                      <ProgressBar progress={module.progress} />
-
-                      <div className="flex flex-wrap gap-2">
-                        <Badge className={getStatusColor(module.status)}>{module.status}</Badge>
-                        <Badge className={getPriorityColor(module.priority)}>
-                          {module.priority}
-                        </Badge>
-                      </div>
-
-                      <div className="space-y-2">
-                        <div className="text-xs text-gray-500">Features:</div>
-                        <div className="flex flex-wrap gap-1">
-                          {module.features.slice(0, 2).map((feature, index) => (
-                            <Badge key={index} variant="outline" className="text-xs">
-                              {feature}
-                            </Badge>
-                          ))}
-                          {module.features.length > 2 && (
-                            <Badge variant="outline" className="text-xs">
-                              +{module.features.length - 2} more
-                            </Badge>
-                          )}
-                        </div>
-                      </div>
-
-                      <div className="flex items-center justify-between text-xs text-gray-500">
-                        <span>Updated: {module.lastUpdated}</span>
-                        <Link href={module.path} className="text-blue-600 hover:underline">
-                          View →
-                        </Link>
-                      </div>
-                    </CardContent>
-                  </Card>
-                );
-              })}
-            </div>
-          </TabsContent>
-
-          <TabsContent value="services" className="space-y-6">
-            {ehbServices.map(service => (
-              <Card key={service.id}>
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2">
-                    {service.category === 'Core' && <Shield className="h-6 w-6" />}
-                    {service.category === 'Marketplace' && <Store className="h-6 w-6" />}
-                    {service.category === 'Support' && <Settings className="h-6 w-6" />}
-                    {service.category === 'Analytics' && <BarChart3 className="h-6 w-6" />}
-                    {service.name}
-                  </CardTitle>
-                  <Badge variant="outline">{service.status}</Badge>
-                </CardHeader>
-                <CardContent>
-                  <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-                    {service.modules.map(module => {
-                      const IconComponent = getModuleIcon(module.id);
-                      return (
-                        <div key={module.id} className="p-4 border rounded-lg">
-                          <div className="flex items-center gap-2 mb-2">
-                            <IconComponent className="h-4 w-4 text-blue-600" />
-                            <span className="font-medium">{module.name}</span>
-                          </div>
-                          <div className="space-y-2">
-                            <ProgressBar progress={module.progress} />
-                            <div className="flex justify-between text-xs">
-                              <span>{module.progress}%</span>
-                              <Badge className={getStatusColor(module.status)}>
-                                {module.status}
-                              </Badge>
-                            </div>
-                          </div>
-                        </div>
-                      );
-                    })}
+                {/* Module Details */}
+                <div className="space-y-3">
+                  {/* Team */}
+                  <div>
+                    <h4 className="text-sm font-semibold text-gray-900 mb-1">Team:</h4>
+                    <p className="text-sm text-gray-600">{module.team?.join(', ')}</p>
                   </div>
-                </CardContent>
-              </Card>
+                  {/* Features */}
+                  <div>
+                    <h4 className="text-sm font-semibold text-gray-900 mb-1">Features:</h4>
+                    <ul className="list-disc ml-5 text-sm text-gray-600">
+                      {module.features?.map((f, i) => (
+                        <li key={i}>{f}</li>
+                      ))}
+                    </ul>
+                  </div>
+                  {/* Dependencies */}
+                  <div>
+                    <h4 className="text-sm font-semibold text-gray-900 mb-1">Dependencies:</h4>
+                    <p className="text-sm text-gray-600">{module.dependencies?.join(', ')}</p>
+                  </div>
+                  {/* Last Updated */}
+                  <div>
+                    <h4 className="text-sm font-semibold text-gray-900 mb-1">
+                      {t('lastUpdated')}:
+                    </h4>
+                    <p className="text-sm text-gray-600">{module.lastUpdated}</p>
+                  </div>
+                  {/* Card with URL */}
+                  <div>
+                    <a
+                      href={module.path}
+                      className="text-blue-600 underline text-sm font-medium"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {t('viewDetails')}
+                    </a>
+                  </div>
+                </div>
+              </motion.div>
             ))}
-          </TabsContent>
+          </div>
+        </section>
 
-          <TabsContent value="chat" className="space-y-6">
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <MessageSquare className="h-6 w-6" />
-                  AI Assistant Chat
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-4">
-                  {/* Messages */}
-                  <div className="h-96 overflow-y-auto space-y-4 p-4 bg-gray-50 dark:bg-gray-800 rounded-lg">
-                    {messages.map((message, index) => (
-                      <div
-                        key={index}
-                        className={`flex ${message.sender === 'user' ? 'justify-end' : 'justify-start'}`}
-                      >
-                        <div
-                          className={`max-w-xs lg:max-w-md px-4 py-2 rounded-lg ${
-                            message.sender === 'user'
-                              ? 'bg-blue-600 text-white'
-                              : 'bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100'
-                          }`}
-                        >
-                          <p className="text-sm">{message.text}</p>
-                          <p className="text-xs opacity-70 mt-1">
-                            {message.timestamp.toLocaleTimeString()}
-                          </p>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-
-                  {/* Input */}
-                  <div className="flex gap-2">
-                    <Input
-                      placeholder="Ask about modules, progress, or development status..."
-                      value={input}
-                      onChange={e => setInput(e.target.value)}
-                      onKeyPress={handleKeyPress}
-                      className="flex-1"
-                    />
-                    <Button onClick={handleSendMessage} disabled={!input.trim()}>
-                      <Send className="h-4 w-4" />
-                    </Button>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          </TabsContent>
-        </Tabs>
-      </div>
+        {/* Markdown Overview Section */}
+        <section className="mb-16">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.4 }}
+            className="bg-white rounded-xl shadow-lg p-8"
+          >
+            <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">
+              {t('ehbServicesOverview')}
+            </h2>
+            {/* For now, render markdown as plain text. In future, use a markdown renderer. */}
+            <pre className="whitespace-pre-wrap text-gray-700 text-sm overflow-x-auto">
+              {servicesOverviewMarkdown}
+            </pre>
+          </motion.div>
+        </section>
+      </main>
     </div>
   );
 }

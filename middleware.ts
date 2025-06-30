@@ -1,41 +1,32 @@
-import { NextResponse } from 'next/server';
-import type { NextRequest } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 
 export function middleware(request: NextRequest) {
-  const response = NextResponse.next();
+  const { pathname, host } = request.nextUrl;
 
-  // Security headers
-  response.headers.set('X-Content-Type-Options', 'nosniff');
-  response.headers.set('X-Frame-Options', 'DENY');
-  response.headers.set('X-XSS-Protection', '1; mode=block');
-  response.headers.set('Referrer-Policy', 'strict-origin-when-cross-origin');
-  response.headers.set('Permissions-Policy', 'camera=(), microphone=(), geolocation=()');
+  // Only apply to root path
+  if (pathname === '/') {
+    // Port 8080 -> Development Portal
+    if (host.includes(':8080')) {
+      console.log('Redirecting port 8080 to /development-portal');
+      return NextResponse.redirect(new URL('/development-portal', request.url));
+    }
 
-  // Content Security Policy
-  response.headers.set(
-    'Content-Security-Policy',
-    "default-src 'self'; script-src 'self' 'unsafe-eval' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https:; frame-ancestors 'none';"
-  );
+    // Port 5000 -> Admin Panel
+    if (host.includes(':5000')) {
+      console.log('Redirecting port 5000 to /admin-panel');
+      return NextResponse.redirect(new URL('/admin-panel', request.url));
+    }
 
-  // Rate limiting
-  const ip = request.ip || request.headers.get('x-forwarded-for') || 'unknown';
-  const rateLimitKey = `rate_limit_${ip}`;
+    // Port 3000 -> Home page (default)
+    if (host.includes(':3000') || host === 'localhost') {
+      console.log('Port 3000 - staying on home page');
+      return NextResponse.next();
+    }
+  }
 
-  // Add rate limiting logic here
-  // This is a simplified version - implement proper rate limiting
-
-  return response;
+  return NextResponse.next();
 }
 
 export const config = {
-  matcher: [
-    /*
-     * Match all request paths except for the ones starting with:
-     * - api (API routes)
-     * - _next/static (static files)
-     * - _next/image (image optimization files)
-     * - favicon.ico (favicon file)
-     */
-    '/((?!api|_next/static|_next/image|favicon.ico).*)',
-  ],
+  matcher: ['/'],
 };

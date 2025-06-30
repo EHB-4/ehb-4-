@@ -1,0 +1,24 @@
+off
+echo
+Setting
+up
+EHB
+Auto
+System
+for
+Windows
+Startup...
+copy
+scripts\ehb-windows-startup.bat
+%APPDATA%\Microsoft\Windows\Start Menu\Programs\Startup\
+echo
+EHB
+Auto
+System
+has
+been
+added
+to
+Windows
+Startup!
+pause

@@ -1,0 +1,426 @@
+[2025-06-30T07:23:16.556Z] Checking EHB services status...
+[2025-06-30T07:23:16.593Z] EHB Home (Port 3000): 🔴 STOPPED
+[2025-06-30T07:23:16.597Z] EHB Backend (Port 8000): 🔴 STOPPED
+[2025-06-30T07:23:16.597Z] Development Portal (Port 8080): 🔴 STOPPED
+[2025-06-30T07:23:16.606Z] Admin Panel (Port 5000): 🔴 STOPPED
+[2025-06-30T07:23:25.979Z] Starting all EHB services...
+[2025-06-30T07:23:25.982Z] All services started. Opening browsers...
+[2025-06-30T07:23:25.983Z] Starting EHB Home on port 3000...
+[2025-06-30T07:23:26.253Z] [EHB Home] > ehb-next-js-frontend-clean@1.0.0 dev:home
+> next dev --port 3000
+[2025-06-30T07:23:26.996Z] Starting EHB Backend on port 8000...
+[2025-06-30T07:23:27.181Z] [EHB Home] ▲ Next.js 15.3.4
+[2025-06-30T07:23:27.182Z] [EHB Home] - Local:        http://localhost:3000
+   - Network:      http://172.31.144.1:3000
+   - Environments: .env.local, .env.development, .env
+   - Experiments (use with caution):
+     ✓ optimizeCss
+
+ ✓ Starting...
+[2025-06-30T07:23:27.268Z] [EHB Backend] > ehb-next-js-frontend-clean@1.0.0 dev:backend
+> node scripts/ehb-backend-server.js --port 8000
+[2025-06-30T07:23:27.543Z] [EHB Backend] ERROR: F:\ehb next.js 04\node_modules\path-to-regexp\dist\index.js:73
+            throw new TypeError(`Missing parameter name at ${i}: ${DEBUG_URL}`);
+            ^
+
+TypeError: Missing parameter name at 1: https://git.new/pathToRegexpError
+    at name (F:\ehb next.js 04\node_modules\path-to-regexp\dist\index.js:73:19)
+    at lexer (F:\ehb next.js 04\node_modules\path-to-regexp\dist\index.js:91:27)
+    at lexer.next (<anonymous>)
+    at Iter.peek (F:\ehb next.js 04\node_modules\path-to-regexp\dist\index.js:106:38)
+    at Iter.tryConsume (F:\ehb next.js 04\node_modules\path-to-regexp\dist\index.js:112:28)
+    at Iter.text (F:\ehb next.js 04\node_modules\path-to-regexp\dist\index.js:128:30)
+    at consume (F:\ehb next.js 04\node_modules\path-to-regexp\dist\index.js:152:29)
+    at parse (F:\ehb next.js 04\node_modules\path-to-regexp\dist\index.js:183:20)
+    at F:\ehb next.js 04\node_modules\path-to-regexp\dist\index.js:294:74
+    at Array.map (<anonymous>)
+
+Node.js v24.2.0
+[2025-06-30T07:23:27.580Z] EHB Backend process exited with code 1
+[2025-06-30T07:23:27.985Z] Starting Development Portal on port 8080...
+[2025-06-30T07:23:28.417Z] [Development Portal] > ehb-next-js-frontend-clean@1.0.0 dev:portal
+> next dev --port 8080
+[2025-06-30T07:23:28.989Z] Starting Admin Panel on port 5000...
+[2025-06-30T07:23:29.671Z] [Admin Panel] > ehb-next-js-frontend-clean@1.0.0 dev:admin
+> next dev --port 5000
+[2025-06-30T07:23:29.883Z] [EHB Home] ✓ Ready in 2.9s
+[2025-06-30T07:23:30.139Z] [Development Portal] ▲ Next.js 15.3.4
+[2025-06-30T07:23:30.140Z] [Development Portal] - Local:        http://localhost:8080
+   - Network:      http://172.31.144.1:8080
+   - Environments: .env.local, .env.development, .env
+   - Experiments (use with caution):
+     ✓ optimizeCss
+
+ ✓ Starting...
+[2025-06-30T07:23:30.757Z] [Admin Panel] ▲ Next.js 15.3.4
+[2025-06-30T07:23:30.758Z] [Admin Panel] - Local:        http://localhost:5000
+   - Network:      http://172.31.144.1:5000
+   - Environments: .env.local, .env.development, .env
+   - Experiments (use with caution):
+     ✓ optimizeCss
+[2025-06-30T07:23:30.758Z] [Admin Panel] ✓ Starting...
+[2025-06-30T07:23:33.127Z] [Development Portal] ✓ Ready in 3.2s
+[2025-06-30T07:23:33.305Z] [EHB Home] ✓ Compiled /middleware in 339ms (108 modules)
+[2025-06-30T07:23:33.376Z] [Admin Panel] ✓ Ready in 2.8s
+[2025-06-30T07:23:33.976Z] [EHB Home] ○ Compiling / ...
+[2025-06-30T07:23:35.367Z] [Development Portal] ✓ Compiled /middleware in 465ms (108 modules)
+[2025-06-30T07:23:36.000Z] [Development Portal] ○ Compiling / ...
+[2025-06-30T07:23:36.386Z] [Admin Panel] ✓ Compiled /middleware in 415ms (108 modules)
+[2025-06-30T07:23:37.212Z] [Admin Panel] ○ Compiling / ...
+[2025-06-30T07:23:37.577Z] [EHB Home] ✓ Compiled / in 4.1s (1479 modules)
+[2025-06-30T07:23:38.142Z] [Admin Panel] ERROR: <w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: ENOENT: no such file or directory, rename 'F:\ehb next.js 04\.next\cache\webpack\edge-server-development\2.pack.gz_' -> 'F:\ehb next.js 04\.next\cache\webpack\edge-server-development\2.pack.gz'
+[2025-06-30T07:23:38.269Z] [EHB Home] ○ Compiling /_not-found ...
+[2025-06-30T07:23:38.721Z] [EHB Home] ✓ Compiled /_not-found in 952ms (1480 modules)
+[2025-06-30T07:23:39.034Z] [EHB Home] GET / 404 in 5578ms
+[2025-06-30T07:23:39.795Z] [Development Portal] ✓ Compiled / in 4.3s (1479 modules)
+[2025-06-30T07:23:40.570Z] [Development Portal] GET / 200 in 5091ms
+[2025-06-30T07:23:40.964Z] [Admin Panel] ✓ Compiled / in 4.4s (1479 modules)
+[2025-06-30T07:23:41.670Z] [Admin Panel] GET / 200 in 5129ms
+[2025-06-30T07:23:42.422Z] [Admin Panel] ERROR: <w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: ENOENT: no such file or directory, rename 'F:\ehb next.js 04\.next\cache\webpack\server-development\17.pack.gz_' -> 'F:\ehb next.js 04\.next\cache\webpack\server-development\17.pack.gz'
+[2025-06-30T07:24:38.756Z] [EHB Home] ERROR: <w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: incorrect header check
+[2025-06-30T07:38:38.151Z] Checking EHB services status...
+[2025-06-30T07:38:38.237Z] EHB Home (Port 3000): 🔴 STOPPED
+[2025-06-30T07:38:38.238Z] Development Portal (Port 8080): 🔴 STOPPED
+[2025-06-30T07:38:38.263Z] Admin Panel (Port 5000): 🔴 STOPPED
+[2025-06-30T07:38:38.287Z] EHB Backend (Port 8000): 🔴 STOPPED
+[2025-06-30T07:48:48.331Z] Checking EHB services status...
+[2025-06-30T07:48:48.374Z] EHB Backend (Port 8000): 🔴 STOPPED
+[2025-06-30T07:48:48.374Z] EHB Home (Port 3000): 🟢 RUNNING
+[2025-06-30T07:48:48.385Z] Admin Panel (Port 5000): 🟢 RUNNING
+[2025-06-30T07:48:48.387Z] Development Portal (Port 8080): 🟢 RUNNING
+[2025-06-30T07:53:30.289Z] Stopping all EHB services...
+[2025-06-30T07:53:30.323Z] All services stopped.
+[2025-06-30T07:53:30.562Z] Killed process 9384 on port 3000
+[2025-06-30T07:53:30.565Z] Killed process 17080 on port 8080
+[2025-06-30T07:53:30.601Z] Killed process 1892 on port 5000
+[2025-06-30T07:53:42.040Z] Starting all EHB services...
+[2025-06-30T07:53:42.043Z] All services started. Opening browsers...
+[2025-06-30T07:53:42.052Z] Starting EHB Home on port 3000...
+[2025-06-30T07:53:42.315Z] [EHB Home] > ehb-next-js-frontend-clean@1.0.0 dev:home
+> next dev --port 3000
+[2025-06-30T07:53:43.051Z] Starting EHB Backend on port 8000...
+[2025-06-30T07:53:43.186Z] [EHB Home] ▲ Next.js 15.3.4
+[2025-06-30T07:53:43.187Z] [EHB Home] - Local:        http://localhost:3000
+   - Network:      http://172.31.144.1:3000
+   - Environments: .env.local, .env.development, .env
+   - Experiments (use with caution):
+     ✓ optimizeCss
+
+ ✓ Starting...
+[2025-06-30T07:53:43.318Z] [EHB Backend] > ehb-next-js-frontend-clean@1.0.0 dev:backend
+> node scripts/ehb-backend-server.js --port 8000
+[2025-06-30T07:53:43.506Z] [EHB Backend] ERROR: F:\ehb next.js 04\node_modules\router\node_modules\path-to-regexp\dist\index.js:73
+            throw new TypeError(`Missing parameter name at ${i}: ${DEBUG_URL}`);
+            ^
+
+TypeError: Missing parameter name at 1: https://git.new/pathToRegexpError
+    at name (F:\ehb next.js 04\node_modules\router\node_modules\path-to-regexp\dist\index.js:73:19)
+    at lexer (F:\ehb next.js 04\node_modules\router\node_modules\path-to-regexp\dist\index.js:91:27)
+    at lexer.next (<anonymous>)
+    at Iter.peek (F:\ehb next.js 04\node_modules\router\node_modules\path-to-regexp\dist\index.js:106:38)
+    at Iter.tryConsume (F:\ehb next.js 04\node_modules\router\node_modules\path-to-regexp\dist\index.js:112:28)
+    at Iter.text (F:\ehb next.js 04\node_modules\router\node_modules\path-to-regexp\dist\index.js:128:30)
+    at consume (F:\ehb next.js 04\node_modules\router\node_modules\path-to-regexp\dist\index.js:152:29)
+    at parse (F:\ehb next.js 04\node_modules\router\node_modules\path-to-regexp\dist\index.js:183:20)
+    at F:\ehb next.js 04\node_modules\router\node_modules\path-to-regexp\dist\index.js:294:74
+    at Array.map (<anonymous>)
+
+Node.js v24.2.0
+[2025-06-30T07:53:43.536Z] EHB Backend process exited with code 1
+[2025-06-30T07:53:44.052Z] Starting Development Portal on port 8080...
+[2025-06-30T07:53:44.313Z] [Development Portal] > ehb-next-js-frontend-clean@1.0.0 dev:portal
+> next dev --port 8080
+[2025-06-30T07:53:45.051Z] Starting Admin Panel on port 5000...
+[2025-06-30T07:53:45.258Z] [Development Portal] ▲ Next.js 15.3.4
+[2025-06-30T07:53:45.259Z] [Development Portal] - Local:        http://localhost:8080
+   - Network:      http://172.31.144.1:8080
+   - Environments: .env.local, .env.development, .env
+   - Experiments (use with caution):
+     ✓ optimizeCss
+
+ ✓ Starting...
+[2025-06-30T07:53:45.315Z] [Admin Panel] > ehb-next-js-frontend-clean@1.0.0 dev:admin
+> next dev --port 5000
+[2025-06-30T07:53:45.409Z] [EHB Home] ✓ Ready in 2.4s
+[2025-06-30T07:53:46.374Z] [Admin Panel] ▲ Next.js 15.3.4
+[2025-06-30T07:53:46.374Z] [Admin Panel] - Local:        http://localhost:5000
+   - Network:      http://172.31.144.1:5000
+   - Environments: .env.local, .env.development, .env
+   - Experiments (use with caution):
+     ✓ optimizeCss
+
+ ✓ Starting...
+[2025-06-30T07:53:47.710Z] [Development Portal] ✓ Ready in 2.6s
+[2025-06-30T07:53:48.476Z] [EHB Home] ✓ Compiled /middleware in 205ms (108 modules)
+[2025-06-30T07:53:49.083Z] [EHB Home] ○ Compiling / ...
+[2025-06-30T07:53:49.877Z] [Admin Panel] ✓ Ready in 3.7s
+[2025-06-30T07:53:50.468Z] [EHB Home] ✓ Compiled / in 1889ms (1479 modules)
+[2025-06-30T07:53:50.740Z] [Development Portal] ✓ Compiled /middleware in 185ms (108 modules)
+[2025-06-30T07:53:50.823Z] [EHB Home] ✓ Compiled /_not-found in 296ms (1480 modules)
+[2025-06-30T07:53:51.335Z] [EHB Home] ○ Compiling /_error ...
+[2025-06-30T07:53:51.370Z] [Development Portal] ○ Compiling / ...
+[2025-06-30T07:53:51.747Z] [Admin Panel] ✓ Compiled /middleware in 194ms (108 modules)
+[2025-06-30T07:53:52.409Z] [Admin Panel] ○ Compiling / ...
+[2025-06-30T07:53:52.502Z] [EHB Home] 
+[2025-06-30T07:53:52.547Z] [EHB Home] Source path: F:\ehb next.js 04\app\globals.css
+[2025-06-30T07:53:52.548Z] [EHB Home] Setting up new context...
+[2025-06-30T07:53:52.654Z] [EHB Home] Finding changed files: 30.996ms
+[2025-06-30T07:53:52.820Z] [Development Portal] ✓ Compiled / in 1952ms (1479 modules)
+[2025-06-30T07:53:53.370Z] [EHB Home] Reading changed files: 714.881ms
+[2025-06-30T07:53:53.394Z] [EHB Home] Sorting candidates: 24.084ms
+[2025-06-30T07:53:53.416Z] [Development Portal] GET / 200 in 2559ms
+[2025-06-30T07:53:53.654Z] [Admin Panel] ✓ Compiled / in 1746ms (1479 modules)
+[2025-06-30T07:53:53.778Z] [EHB Home] Generate rules: 407.748ms
+[2025-06-30T07:53:53.782Z] [EHB Home] Build stylesheet: 4.344ms
+[2025-06-30T07:53:53.800Z] [EHB Home] Potential classes:  26936
+[2025-06-30T07:53:53.801Z] [EHB Home] Active contexts:  1
+[2025-06-30T07:53:53.818Z] [EHB Home] JIT TOTAL: 1.315s
+[2025-06-30T07:53:53.819Z] [EHB Home] 
+[2025-06-30T07:53:54.294Z] [Admin Panel] GET / 200 in 2400ms
+[2025-06-30T07:53:54.804Z] [Admin Panel] ERROR: <w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: ENOENT: no such file or directory, rename 'F:\ehb next.js 04\.next\cache\webpack\server-development\1.pack.gz_' -> 'F:\ehb next.js 04\.next\cache\webpack\server-development\1.pack.gz'
+[2025-06-30T07:53:54.937Z] [EHB Home] ✓ Compiled /_error in 4.1s (1864 modules)
+[2025-06-30T07:53:55.366Z] [EHB Home] Time 3.6671
+[2025-06-30T07:53:55.455Z] [EHB Home] GET / 404 in 6883ms
+[2025-06-30T07:58:39.803Z] [EHB Home] 
+[2025-06-30T07:58:39.808Z] [EHB Home] Source path: F:\ehb next.js 04\app\globals.css
+[2025-06-30T07:58:39.880Z] [EHB Home] Finding changed files: 65.944ms
+[2025-06-30T07:58:39.924Z] [EHB Home] Reading changed files: 42.812ms
+[2025-06-30T07:58:39.924Z] [EHB Home] Sorting candidates: 0.008ms
+Generate rules: 0.195ms
+Build stylesheet: 0.006ms
+[2025-06-30T07:58:39.947Z] [EHB Home] Potential classes:  1
+[2025-06-30T07:58:39.948Z] [EHB Home] Active contexts:  1
+[2025-06-30T07:58:39.991Z] [EHB Home] JIT TOTAL: 187.286ms
+[2025-06-30T07:58:39.991Z] [EHB Home] 
+[2025-06-30T07:58:40.123Z] [EHB Home] 
+[2025-06-30T07:58:40.124Z] [EHB Home] Source path: F:\ehb next.js 04\app\globals.css
+[2025-06-30T07:58:40.158Z] [EHB Home] Finding changed files: 32.847ms
+[2025-06-30T07:58:40.158Z] [EHB Home] Reading changed files: 0.008ms
+Sorting candidates: 0.01ms
+Generate rules: 0.062ms
+Build stylesheet: 0.002ms
+[2025-06-30T07:58:40.187Z] [EHB Home] Potential classes:  1
+[2025-06-30T07:58:40.189Z] [EHB Home] Active contexts:  1
+[2025-06-30T07:58:40.208Z] [EHB Home] JIT TOTAL: 85.503ms
+[2025-06-30T07:58:40.209Z] [EHB Home] 
+[2025-06-30T07:58:40.349Z] [Development Portal] 
+[2025-06-30T07:58:40.376Z] [Admin Panel] 
+[2025-06-30T07:58:40.409Z] [Development Portal] Source path: F:\ehb next.js 04\app\globals.css
+[2025-06-30T07:58:40.410Z] [Development Portal] Setting up new context...
+[2025-06-30T07:58:40.423Z] [EHB Home] ✓ Compiled in 778ms (993 modules)
+[2025-06-30T07:58:40.445Z] [Admin Panel] Source path: F:\ehb next.js 04\app\globals.css
+[2025-06-30T07:58:40.447Z] [Admin Panel] Setting up new context...
+[2025-06-30T07:58:40.474Z] [EHB Home] 
+[2025-06-30T07:58:40.474Z] [EHB Home] Source path: F:\ehb next.js 04\app\globals.css
+[2025-06-30T07:58:40.499Z] [EHB Home] Finding changed files: 24.233ms
+[2025-06-30T07:58:40.500Z] [EHB Home] Reading changed files: 0.004ms
+Sorting candidates: 0.004ms
+Generate rules: 0.038ms
+Build stylesheet: 0.001ms
+[2025-06-30T07:58:40.508Z] [EHB Home] Potential classes:  1
+[2025-06-30T07:58:40.509Z] [EHB Home] Active contexts:  1
+[2025-06-30T07:58:40.513Z] [EHB Home] 
+[2025-06-30T07:58:40.514Z] [EHB Home] Source path: F:\ehb next.js 04\app\globals.css
+[2025-06-30T07:58:40.536Z] [Development Portal] Finding changed files: 31.132ms
+[2025-06-30T07:58:40.537Z] [EHB Home] Finding changed files: 21.752ms
+[2025-06-30T07:58:40.537Z] [EHB Home] Reading changed files: 0.003ms
+Sorting candidates: 0.002ms
+Generate rules: 0.026ms
+Build stylesheet: 0.001ms
+[2025-06-30T07:58:40.546Z] [EHB Home] Potential classes:  1
+[2025-06-30T07:58:40.547Z] [EHB Home] Active contexts:  1
+[2025-06-30T07:58:40.567Z] [Admin Panel] Finding changed files: 31.978ms
+[2025-06-30T07:58:40.568Z] [EHB Home] JIT TOTAL: 94.519ms
+[2025-06-30T07:58:40.569Z] [EHB Home] 
+[2025-06-30T07:58:40.588Z] [EHB Home] 
+[2025-06-30T07:58:40.680Z] [EHB Home] ERROR: (node:29472) Warning: Label 'JIT TOTAL' already exists for console.time()
+(Use `node --trace-warnings ...` to show where the warning was created)
+[2025-06-30T07:58:40.681Z] [EHB Home] ERROR: (node:29472) Warning: No such label 'JIT TOTAL' for console.timeEnd()
+[2025-06-30T07:58:40.757Z] [EHB Home] ✓ Compiled in 328ms (993 modules)
+[2025-06-30T07:58:41.183Z] [Development Portal] Reading changed files: 645.744ms
+[2025-06-30T07:58:41.185Z] [Admin Panel] Reading changed files: 615.816ms
+[2025-06-30T07:58:41.202Z] [Development Portal] Sorting candidates: 19.08ms
+[2025-06-30T07:58:41.204Z] [Admin Panel] Sorting candidates: 19.088ms
+[2025-06-30T07:58:41.466Z] [Admin Panel] Generate rules: 281.209ms
+[2025-06-30T07:58:41.470Z] [Admin Panel] Build stylesheet: 3.664ms
+[2025-06-30T07:58:41.474Z] [Development Portal] Generate rules: 291.293ms
+[2025-06-30T07:58:41.479Z] [Development Portal] Build stylesheet: 4.974ms
+[2025-06-30T07:58:41.481Z] [Admin Panel] Potential classes:  26936
+[2025-06-30T07:58:41.481Z] [Admin Panel] Active contexts:  1
+[2025-06-30T07:58:41.488Z] [Development Portal] Potential classes:  26936
+[2025-06-30T07:58:41.488Z] [Development Portal] Active contexts:  1
+[2025-06-30T07:58:41.496Z] [Admin Panel] JIT TOTAL: 1.120s
+[2025-06-30T07:58:41.497Z] [Admin Panel] 
+[2025-06-30T07:58:41.505Z] [Development Portal] JIT TOTAL: 1.156s
+[2025-06-30T07:58:41.506Z] [Development Portal] 
+[2025-06-30T07:58:41.810Z] [Admin Panel] ✓ Compiled in 2.2s (701 modules)
+[2025-06-30T07:58:41.890Z] [Development Portal] ✓ Compiled in 2.2s (701 modules)
+[2025-06-30T07:58:41.901Z] [Admin Panel] 
+[2025-06-30T07:58:41.902Z] [Admin Panel] Source path: F:\ehb next.js 04\app\globals.css
+[2025-06-30T07:58:41.940Z] [Development Portal] 
+[2025-06-30T07:58:41.941Z] [Development Portal] Source path: F:\ehb next.js 04\app\globals.css
+[2025-06-30T07:58:41.951Z] [Admin Panel] Finding changed files: 46.487ms
+[2025-06-30T07:58:41.952Z] [Admin Panel] Reading changed files: 0.024ms
+[2025-06-30T07:58:41.952Z] [Admin Panel] Sorting candidates: 0.007ms
+Generate rules: 0.32ms
+Build stylesheet: 0.006ms
+[2025-06-30T07:58:41.967Z] [Admin Panel] Potential classes:  1
+[2025-06-30T07:58:41.967Z] [Admin Panel] Active contexts:  1
+[2025-06-30T07:58:41.975Z] [Development Portal] Finding changed files: 33.105ms
+[2025-06-30T07:58:41.976Z] [Development Portal] Reading changed files: 0.023ms
+[2025-06-30T07:58:41.976Z] [Development Portal] Sorting candidates: 0.01ms
+Generate rules: 0.125ms
+Build stylesheet: 0.006ms
+[2025-06-30T07:58:41.989Z] [Development Portal] Potential classes:  1
+[2025-06-30T07:58:41.990Z] [Development Portal] Active contexts:  1
+[2025-06-30T07:58:41.991Z] [Admin Panel] JIT TOTAL: 89.393ms
+[2025-06-30T07:58:42.011Z] [Development Portal] JIT TOTAL: 70.812ms
+[2025-06-30T07:58:42.012Z] [Development Portal] 
+[2025-06-30T07:58:42.159Z] [Admin Panel] ✓ Compiled in 342ms (701 modules)
+[2025-06-30T07:58:42.206Z] [Development Portal] ✓ Compiled in 310ms (701 modules)
+[2025-06-30T07:58:42.234Z] [Admin Panel] GET / 200 in 147ms
+[2025-06-30T07:58:42.302Z] [Development Portal] GET / 200 in 117ms
+[2025-06-30T07:58:42.399Z] [Development Portal] GET / 200 in 22ms
+[2025-06-30T07:58:42.826Z] [Admin Panel] ○ Compiling /_not-found ...
+[2025-06-30T07:58:42.946Z] [Admin Panel] ✓ Compiled /_not-found in 697ms (1480 modules)
+[2025-06-30T07:58:43.073Z] [Development Portal] ✓ Compiled /_not-found in 496ms (1480 modules)
+[2025-06-30T07:58:43.135Z] [Admin Panel] ERROR: ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[2025-06-30T07:58:43.166Z] [Admin Panel] GET / 200 in 884ms
+[2025-06-30T07:58:43.170Z] [Admin Panel] GET /_next/static/webpack/efe03bfb6f0f8fe4.webpack.hot-update.json 404 in 944ms
+[2025-06-30T07:58:43.275Z] [Development Portal] ERROR: ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[2025-06-30T07:58:43.277Z] [Development Portal] GET /_next/static/webpack/efe03bfb6f0f8fe4.webpack.hot-update.json 404 in 703ms
+[2025-06-30T07:58:43.307Z] [Admin Panel] GET / 200 in 129ms
+[2025-06-30T07:58:43.472Z] [Development Portal] GET / 200 in 178ms
+[2025-06-30T07:58:44.967Z] [Development Portal] ERROR: <w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: ENOENT: no such file or directory, rename 'F:\ehb next.js 04\.next\cache\webpack\client-development\3.pack.gz_' -> 'F:\ehb next.js 04\.next\cache\webpack\client-development\3.pack.gz'
+[2025-06-30T07:58:45.097Z] [Admin Panel] 
+[2025-06-30T07:58:45.099Z] [Development Portal] 
+[2025-06-30T07:58:45.099Z] [Admin Panel] Source path: F:\ehb next.js 04\app\globals.css
+[2025-06-30T07:58:45.100Z] [Development Portal] Source path: F:\ehb next.js 04\app\globals.css
+[2025-06-30T07:58:45.108Z] [EHB Home] 
+[2025-06-30T07:58:45.109Z] [EHB Home] Source path: F:\ehb next.js 04\app\globals.css
+[2025-06-30T07:58:45.129Z] [Development Portal] Finding changed files: 28.66ms
+[2025-06-30T07:58:45.129Z] [Admin Panel] Finding changed files: 30.308ms
+[2025-06-30T07:58:45.144Z] [EHB Home] Finding changed files: 33.866ms
+[2025-06-30T07:58:45.145Z] [Development Portal] Reading changed files: 16.07ms
+[2025-06-30T07:58:45.146Z] [EHB Home] 
+[2025-06-30T07:58:45.146Z] [Development Portal] Sorting candidates: 0.702ms
+[2025-06-30T07:58:45.147Z] [EHB Home] Source path: F:\ehb next.js 04\app\globals.css
+[2025-06-30T07:58:45.147Z] [Admin Panel] Reading changed files: 17.127ms
+[2025-06-30T07:58:45.148Z] [Admin Panel] Sorting candidates: 0.752ms
+[2025-06-30T07:58:45.152Z] [Development Portal] Generate rules: 6.931ms
+[2025-06-30T07:58:45.153Z] [Admin Panel] Generate rules: 6.03ms
+[2025-06-30T07:58:45.157Z] [Development Portal] Build stylesheet: 4.197ms
+[2025-06-30T07:58:45.157Z] [Admin Panel] Build stylesheet: 4.176ms
+[2025-06-30T07:58:45.169Z] [Development Portal] Potential classes:  938
+[2025-06-30T07:58:45.169Z] [Admin Panel] Potential classes:  938
+Active contexts:  1
+[2025-06-30T07:58:45.170Z] [Development Portal] Active contexts:  1
+[2025-06-30T07:58:45.178Z] [EHB Home] Finding changed files: 30.13ms
+[2025-06-30T07:58:45.179Z] [EHB Home] ERROR: (node:29472) Warning: Label 'JIT TOTAL' already exists for console.time()
+(node:29472) Warning: Label 'Reading changed files' already exists for console.time()
+[2025-06-30T07:58:45.191Z] [Development Portal] JIT TOTAL: 93.129ms
+[2025-06-30T07:58:45.195Z] [Admin Panel] JIT TOTAL: 98.098ms
+[2025-06-30T07:58:45.196Z] [Admin Panel] 
+[2025-06-30T07:58:45.210Z] [EHB Home] Reading changed files: 66.57ms
+[2025-06-30T07:58:45.212Z] [EHB Home] Sorting candidates: 0.851ms
+[2025-06-30T07:58:45.218Z] [EHB Home] Generate rules: 7.153ms
+[2025-06-30T07:58:45.222Z] [EHB Home] Build stylesheet: 4.301ms
+[2025-06-30T07:58:45.251Z] [EHB Home] Potential classes:  938
+[2025-06-30T07:58:45.252Z] [EHB Home] Active contexts:  1
+[2025-06-30T07:58:45.274Z] [EHB Home] JIT TOTAL: 166.161ms
+[2025-06-30T07:58:45.275Z] [EHB Home] 
+[2025-06-30T07:58:45.400Z] [EHB Home] Sorting candidates: 0.661ms
+[2025-06-30T07:58:45.404Z] [EHB Home] Generate rules: 4.925ms
+[2025-06-30T07:58:45.404Z] [EHB Home] Build stylesheet: 0.004ms
+[2025-06-30T07:58:45.410Z] [Development Portal] ✓ Compiled in 353ms (701 modules)
+[2025-06-30T07:58:45.419Z] [EHB Home] Potential classes:  938
+[2025-06-30T07:58:45.420Z] [EHB Home] Active contexts:  1
+[2025-06-30T07:58:45.426Z] [Admin Panel] ✓ Compiled in 370ms (701 modules)
+[2025-06-30T07:58:45.438Z] [EHB Home] 
+[2025-06-30T07:58:45.477Z] [Development Portal] GET / 200 in 32ms
+[2025-06-30T07:58:45.513Z] [EHB Home] ERROR: (node:29472) Warning: No such label 'Reading changed files' for console.timeEnd()
+[2025-06-30T07:58:45.514Z] [EHB Home] ERROR: (node:29472) Warning: No such label 'JIT TOTAL' for console.timeEnd()
+[2025-06-30T07:58:45.515Z] [Admin Panel] GET / 200 in 57ms
+[2025-06-30T07:58:45.554Z] [Admin Panel] ERROR: ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[2025-06-30T07:58:45.557Z] [Admin Panel] GET /_next/static/webpack/4c1f9a9d4568f1aa.webpack.hot-update.json 404 in 47ms
+[2025-06-30T07:58:45.621Z] [EHB Home] ✓ Compiled in 564ms (993 modules)
+[2025-06-30T07:58:45.645Z] [Admin Panel] GET / 200 in 65ms
+[2025-06-30T07:59:43.761Z] [Development Portal] ERROR: <w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: ENOENT: no such file or directory, rename 'F:\ehb next.js 04\.next\cache\webpack\server-development\4.pack.gz_' -> 'F:\ehb next.js 04\.next\cache\webpack\server-development\4.pack.gz'
+[2025-06-30T07:59:45.539Z] [Admin Panel] ERROR: <w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: ENOENT: no such file or directory, rename 'F:\ehb next.js 04\.next\cache\webpack\client-development\0.pack.gz_' -> 'F:\ehb next.js 04\.next\cache\webpack\client-development\0.pack.gz'
+[2025-06-30T08:00:14.076Z] [Admin Panel] 
+[2025-06-30T08:00:14.078Z] [Admin Panel] Source path: F:\ehb next.js 04\app\globals.css
+[2025-06-30T08:00:14.084Z] [Development Portal] 
+[2025-06-30T08:00:14.085Z] [EHB Home] 
+[2025-06-30T08:00:14.085Z] [EHB Home] Source path: F:\ehb next.js 04\app\globals.css
+[2025-06-30T08:00:14.086Z] [Development Portal] Source path: F:\ehb next.js 04\app\globals.css
+[2025-06-30T08:00:14.107Z] [EHB Home] Finding changed files: 21.737ms
+[2025-06-30T08:00:14.108Z] [Admin Panel] Finding changed files: 27.994ms
+[2025-06-30T08:00:14.108Z] [EHB Home] Source path: F:\ehb next.js 04\app\globals.css
+[2025-06-30T08:00:14.119Z] [Development Portal] Finding changed files: 32.45ms
+[2025-06-30T08:00:14.123Z] [Admin Panel] Reading changed files: 14.748ms
+[2025-06-30T08:00:14.124Z] [Admin Panel] Sorting candidates: 0.832ms
+[2025-06-30T08:00:14.129Z] [Admin Panel] Generate rules: 5.375ms
+[2025-06-30T08:00:14.129Z] [Admin Panel] Build stylesheet: 0.004ms
+[2025-06-30T08:00:14.134Z] [EHB Home] Finding changed files: 25.702ms
+[2025-06-30T08:00:14.135Z] [EHB Home] ERROR: (node:29472) Warning: Label 'JIT TOTAL' already exists for console.time()
+(node:29472) Warning: Label 'Reading changed files' already exists for console.time()
+[2025-06-30T08:00:14.138Z] [Development Portal] Reading changed files: 17.903ms
+[2025-06-30T08:00:14.139Z] [Development Portal] Sorting candidates: 0.538ms
+[2025-06-30T08:00:14.141Z] [Admin Panel] Potential classes:  938
+[2025-06-30T08:00:14.142Z] [Admin Panel] Active contexts:  1
+[2025-06-30T08:00:14.144Z] [Development Portal] Generate rules: 5.85ms
+[2025-06-30T08:00:14.145Z] [Development Portal] Build stylesheet: 0.004ms
+[2025-06-30T08:00:14.154Z] [EHB Home] Reading changed files: 47.033ms
+[2025-06-30T08:00:14.155Z] [EHB Home] Sorting candidates: 0.65ms
+[2025-06-30T08:00:14.156Z] [Development Portal] Potential classes:  938
+[2025-06-30T08:00:14.156Z] [Development Portal] Active contexts:  1
+[2025-06-30T08:00:14.159Z] [EHB Home] Generate rules: 4.143ms
+[2025-06-30T08:00:14.159Z] [EHB Home] Build stylesheet: 0.003ms
+[2025-06-30T08:00:14.163Z] [Admin Panel] JIT TOTAL: 86.962ms
+[2025-06-30T08:00:14.164Z] [Admin Panel] 
+[2025-06-30T08:00:14.170Z] [EHB Home] Potential classes:  938
+[2025-06-30T08:00:14.170Z] [EHB Home] Active contexts:  1
+[2025-06-30T08:00:14.175Z] [Development Portal] JIT TOTAL: 91.286ms
+[2025-06-30T08:00:14.185Z] [EHB Home] JIT TOTAL: 101.094ms
+[2025-06-30T08:00:14.266Z] [EHB Home] Sorting candidates: 0.504ms
+[2025-06-30T08:00:14.270Z] [EHB Home] Generate rules: 5.128ms
+[2025-06-30T08:00:14.271Z] [EHB Home] Build stylesheet: 0.003ms
+[2025-06-30T08:00:14.282Z] [EHB Home] Potential classes:  938
+Active contexts:  1
+[2025-06-30T08:00:14.301Z] [EHB Home] 
+[2025-06-30T08:00:14.471Z] [Admin Panel] ✓ Compiled in 445ms (701 modules)
+[2025-06-30T08:00:14.485Z] [EHB Home] ERROR: (node:29472) Warning: No such label 'Reading changed files' for console.timeEnd()
+[2025-06-30T08:00:14.489Z] [EHB Home] ERROR: (node:29472) Warning: No such label 'JIT TOTAL' for console.timeEnd()
+[2025-06-30T08:00:14.537Z] [Development Portal] ✓ Compiled in 511ms (701 modules)
+[2025-06-30T08:00:14.611Z] [Admin Panel] ERROR: ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[2025-06-30T08:00:14.627Z] [Development Portal] GET / 200 in 49ms
+[2025-06-30T08:00:14.641Z] [Admin Panel] GET / 200 in 134ms
+[2025-06-30T08:00:14.647Z] [Admin Panel] GET /_next/static/webpack/6beed137bab5d5c1.webpack.hot-update.json 404 in 130ms
+[2025-06-30T08:00:14.657Z] [EHB Home] ✓ Compiled in 631ms (993 modules)
+[2025-06-30T08:00:14.718Z] [Admin Panel] GET / 200 in 71ms
+[2025-06-30T08:00:25.020Z] [Admin Panel] ✓ Compiled in 97ms (687 modules)
+[2025-06-30T08:00:25.025Z] [Development Portal] ✓ Compiled in 102ms (687 modules)
+[2025-06-30T08:00:25.086Z] [Admin Panel] ERROR: ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[2025-06-30T08:00:25.089Z] [Admin Panel] GET /_next/static/webpack/0aa6770660ab20ed.webpack.hot-update.json 404 in 56ms
+[2025-06-30T08:00:25.118Z] [EHB Home] ✓ Compiled in 195ms (1036 modules)
+[2025-06-30T08:00:25.636Z] [Admin Panel] ○ Compiling /_error ...
+[2025-06-30T08:00:25.913Z] [Admin Panel] 
+[2025-06-30T08:00:25.913Z] [Admin Panel] Source path: F:\ehb next.js 04\app\globals.css
+[2025-06-30T08:00:25.938Z] [Admin Panel] Finding changed files: 24.124ms
+[2025-06-30T08:00:25.939Z] [Admin Panel] Reading changed files: 0.009ms
+Sorting candidates: 0.005ms
+Generate rules: 0.052ms
+Build stylesheet: 0.001ms
+[2025-06-30T08:00:25.946Z] [Admin Panel] Potential classes:  1
+Active contexts:  1
+[2025-06-30T08:00:25.960Z] [Admin Panel] JIT TOTAL: 47.229ms
+[2025-06-30T08:00:26.924Z] [Admin Panel] ✓ Compiled /_error in 1806ms (1864 modules)
+[2025-06-30T08:00:27.282Z] [Admin Panel] ERROR: ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[2025-06-30T08:00:27.298Z] [Admin Panel] GET / 200 in 756ms
+[2025-06-30T08:00:27.299Z] [Admin Panel] GET /_next/static/webpack/0aa6770660ab20ed.webpack.hot-update.json 404 in 737ms
+[2025-06-30T08:00:27.470Z] [Admin Panel] Time 6.4003
+[2025-06-30T08:00:27.473Z] [Admin Panel] GET / 404 in 2370ms
+[2025-06-30T08:00:28.370Z] [Admin Panel] ○ Compiling /api/auth/[...nextauth] ...
+[2025-06-30T08:00:29.797Z] [Admin Panel] ✓ Compiled /api/auth/[...nextauth] in 1979ms (2099 modules)
+[2025-06-30T08:00:30.777Z] [Admin Panel] GET /api/auth/session 200 in 2963ms
+[2025-06-30T08:01:25.167Z] [EHB Home] ERROR: <w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: ENOENT: no such file or directory, rename 'F:\ehb next.js 04\.next\cache\webpack\client-development\1.pack.gz_' -> 'F:\ehb next.js 04\.next\cache\webpack\client-development\1.pack.gz'

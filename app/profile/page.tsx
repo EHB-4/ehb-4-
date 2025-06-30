@@ -1,454 +1,711 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Alert, AlertDescription } from '@/components/ui/alert';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import React, { useState } from 'react';
+import { motion } from 'framer-motion';
 import {
   User,
   Mail,
   Phone,
-  Building,
+  MapPin,
+  Calendar,
+  Edit,
+  Save,
+  X,
+  Camera,
   Shield,
-  Key,
   Bell,
   Globe,
-  Camera,
-  Save,
-  AlertCircle,
-  CheckCircle,
-  Loader2,
+  Palette,
+  Download,
+  Trash2,
+  Eye,
+  EyeOff,
+  Check,
+  Star,
+  Activity,
+  ShoppingCart,
+  Heart,
+  Bookmark,
+  Settings,
+  LogOut,
+  Plus,
+  Minus,
 } from 'lucide-react';
+import Link from 'next/link';
 
-interface UserProfile {
-  id: string;
-  firstName: string;
-  lastName: string;
-  email: string;
-  phone: string;
-  company: string;
-  role: string;
-  isVerified: boolean;
-  subscribeNewsletter: boolean;
-  avatar?: string;
-  createdAt: string;
-}
-
+/**
+ * EHB User Profile Page - Comprehensive user profile with settings and activity
+ * @returns {JSX.Element} The user profile component
+ */
 export default function ProfilePage() {
-  const [profile, setProfile] = useState<UserProfile>({
-    id: '1',
+  const [activeTab, setActiveTab] = useState('profile');
+  const [isEditing, setIsEditing] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+
+  // Mock user data
+  const [userData, setUserData] = useState({
     firstName: 'John',
     lastName: 'Doe',
     email: 'john.doe@example.com',
     phone: '+1 (555) 123-4567',
-    company: 'EHB Corporation',
-    role: 'user',
-    isVerified: true,
-    subscribeNewsletter: true,
-    createdAt: '2024-01-15T10:30:00Z',
+    location: 'New York, NY',
+    bio: 'Digital entrepreneur and tech enthusiast. Building the future of e-commerce and AI.',
+    avatar: '/api/placeholder/150/150',
+    joinDate: '2023-01-15',
+    verified: true,
+    preferences: {
+      theme: 'system',
+      language: 'en',
+      notifications: {
+        email: true,
+        push: true,
+        sms: false,
+      },
+      privacy: {
+        profileVisibility: 'public',
+        showEmail: false,
+        showPhone: false,
+      },
+    },
   });
 
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
-  const [success, setSuccess] = useState('');
-  const [activeTab, setActiveTab] = useState('profile');
+  const [formData, setFormData] = useState(userData);
 
-  const handleProfileUpdate = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setLoading(true);
-    setError('');
-    setSuccess('');
+  // Mock activity data
+  const activities = [
+    {
+      id: 1,
+      type: 'login',
+      description: 'Logged in from New York',
+      timestamp: '2024-01-15T10:30:00Z',
+      icon: Activity,
+      color: 'text-blue-500',
+    },
+    {
+      id: 2,
+      type: 'purchase',
+      description: 'Purchased GoSellr Premium Plan',
+      timestamp: '2024-01-14T15:45:00Z',
+      icon: ShoppingCart,
+      color: 'text-green-500',
+    },
+    {
+      id: 3,
+      type: 'favorite',
+      description: 'Added WMS to favorites',
+      timestamp: '2024-01-13T09:20:00Z',
+      icon: Heart,
+      color: 'text-red-500',
+    },
+    {
+      id: 4,
+      type: 'bookmark',
+      description: 'Bookmarked AI Marketplace tutorial',
+      timestamp: '2024-01-12T14:15:00Z',
+      icon: Bookmark,
+      color: 'text-purple-500',
+    },
+  ];
 
-    try {
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1500));
-      setSuccess('Profile updated successfully!');
-    } catch (err) {
-      setError('Failed to update profile. Please try again.');
-    } finally {
-      setLoading(false);
-    }
+  const stats = [
+    { label: 'Services Used', value: '8', icon: Star },
+    { label: 'Total Orders', value: '24', icon: ShoppingCart },
+    { label: 'Favorites', value: '12', icon: Heart },
+    { label: 'Reviews', value: '6', icon: Star },
+  ];
+
+  const tabs = [
+    { id: 'profile', name: 'Profile', icon: User },
+    { id: 'activity', name: 'Activity', icon: Activity },
+    { id: 'preferences', name: 'Preferences', icon: Settings },
+    { id: 'security', name: 'Security', icon: Shield },
+  ];
+
+  const handleSave = async () => {
+    setIsLoading(true);
+    // Simulate API call
+    await new Promise(resolve => setTimeout(resolve, 1000));
+    setUserData(formData);
+    setIsEditing(false);
+    setIsLoading(false);
   };
 
-  const handlePasswordChange = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setLoading(true);
-    setError('');
-    setSuccess('');
-
-    try {
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1500));
-      setSuccess('Password changed successfully!');
-      // Clear password fields
-      const form = e.target as HTMLFormElement;
-      form.reset();
-    } catch (err) {
-      setError('Failed to change password. Please try again.');
-    } finally {
-      setLoading(false);
-    }
+  const handleCancel = () => {
+    setFormData(userData);
+    setIsEditing(false);
   };
 
-  const handleNotificationSettings = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setLoading(true);
-    setError('');
-    setSuccess('');
+  const formatDate = (dateString: string) => {
+    return new Date(dateString).toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+    });
+  };
 
-    try {
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      setSuccess('Notification settings updated successfully!');
-    } catch (err) {
-      setError('Failed to update notification settings. Please try again.');
-    } finally {
-      setLoading(false);
-    }
+  const formatTime = (dateString: string) => {
+    return new Date(dateString).toLocaleTimeString('en-US', {
+      hour: '2-digit',
+      minute: '2-digit',
+    });
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8">
-      <div className="max-w-4xl mx-auto px-4">
-        {/* Header */}
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900">Profile Settings</h1>
-          <p className="text-gray-600 mt-2">Manage your account settings and preferences</p>
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+      {/* Header */}
+      <header className="bg-white dark:bg-gray-800 shadow-sm border-b border-gray-200 dark:border-gray-700">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="py-6">
+            <h1 className="text-3xl font-bold text-gray-900 dark:text-white">Profile</h1>
+            <p className="text-gray-600 dark:text-gray-400 mt-2">
+              Manage your account settings and preferences
+            </p>
+          </div>
         </div>
+      </header>
 
-        {/* Alerts */}
-        {error && (
-          <Alert variant="destructive" className="mb-6">
-            <AlertCircle className="h-4 w-4" />
-            <AlertDescription>{error}</AlertDescription>
-          </Alert>
-        )}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div className="flex flex-col lg:flex-row gap-8">
+          {/* Sidebar */}
+          <div className="lg:w-80 flex-shrink-0">
+            <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 sticky top-8">
+              {/* Profile Card */}
+              <div className="text-center mb-6">
+                <div className="relative inline-block mb-4">
+                  <div className="w-24 h-24 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-white text-2xl font-bold">
+                    {userData.firstName[0]}
+                    {userData.lastName[0]}
+                  </div>
+                  <button className="absolute bottom-0 right-0 bg-white dark:bg-gray-700 p-2 rounded-full shadow-lg border border-gray-200 dark:border-gray-600">
+                    <Camera className="w-4 h-4 text-gray-600 dark:text-gray-400" />
+                  </button>
+                </div>
+                <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
+                  {userData.firstName} {userData.lastName}
+                </h2>
+                <p className="text-gray-600 dark:text-gray-400 text-sm">{userData.email}</p>
+                {userData.verified && (
+                  <div className="inline-flex items-center gap-1 mt-2 px-2 py-1 bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 rounded-full text-xs">
+                    <Check className="w-3 h-3" />
+                    Verified
+                  </div>
+                )}
+              </div>
 
-        {success && (
-          <Alert className="mb-6 border-green-200 bg-green-50">
-            <CheckCircle className="h-4 w-4 text-green-600" />
-            <AlertDescription className="text-green-800">{success}</AlertDescription>
-          </Alert>
-        )}
+              {/* Stats */}
+              <div className="grid grid-cols-2 gap-4 mb-6">
+                {stats.map((stat, index) => (
+                  <motion.div
+                    key={stat.label}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: index * 0.1 }}
+                    className="text-center p-3 bg-gray-50 dark:bg-gray-700 rounded-lg"
+                  >
+                    <stat.icon className="w-5 h-5 text-blue-500 mx-auto mb-1" />
+                    <div className="text-lg font-semibold text-gray-900 dark:text-white">
+                      {stat.value}
+                    </div>
+                    <div className="text-xs text-gray-600 dark:text-gray-400">{stat.label}</div>
+                  </motion.div>
+                ))}
+              </div>
 
-        {/* Profile Tabs */}
-        <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-6">
-          <TabsList className="grid w-full grid-cols-4">
-            <TabsTrigger value="profile" className="flex items-center gap-2">
-              <User className="h-4 w-4" />
-              Profile
-            </TabsTrigger>
-            <TabsTrigger value="security" className="flex items-center gap-2">
-              <Shield className="h-4 w-4" />
-              Security
-            </TabsTrigger>
-            <TabsTrigger value="notifications" className="flex items-center gap-2">
-              <Bell className="h-4 w-4" />
-              Notifications
-            </TabsTrigger>
-            <TabsTrigger value="preferences" className="flex items-center gap-2">
-              <Globe className="h-4 w-4" />
-              Preferences
-            </TabsTrigger>
-          </TabsList>
+              {/* Navigation Tabs */}
+              <nav className="space-y-1">
+                {tabs.map(tab => (
+                  <button
+                    key={tab.id}
+                    onClick={() => setActiveTab(tab.id)}
+                    className={`w-full flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
+                      activeTab === tab.id
+                        ? 'bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300'
+                        : 'text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700'
+                    }`}
+                  >
+                    <tab.icon className="w-4 h-4" />
+                    {tab.name}
+                  </button>
+                ))}
+              </nav>
 
-          {/* Profile Tab */}
-          <TabsContent value="profile" className="space-y-6">
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <User className="h-5 w-5" />
-                  Personal Information
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <form onSubmit={handleProfileUpdate} className="space-y-6">
-                  {/* Avatar Section */}
-                  <div className="flex items-center space-x-6">
-                    <div className="relative">
-                      <div className="h-20 w-20 rounded-full bg-gray-200 flex items-center justify-center">
-                        {profile.avatar ? (
-                          <img
-                            src={profile.avatar}
-                            alt="Profile"
-                            className="h-20 w-20 rounded-full object-cover"
-                          />
-                        ) : (
-                          <User className="h-10 w-10 text-gray-400" />
-                        )}
-                      </div>
-                      <Button
-                        type="button"
-                        size="sm"
-                        variant="outline"
-                        className="absolute -bottom-2 -right-2 h-8 w-8 rounded-full p-0"
+              {/* Logout Button */}
+              <button className="w-full mt-6 flex items-center justify-center gap-2 px-4 py-2 text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition-colors">
+                <LogOut className="w-4 h-4" />
+                Sign Out
+              </button>
+            </div>
+          </div>
+
+          {/* Main Content */}
+          <div className="flex-1">
+            {/* Profile Tab */}
+            {activeTab === 'profile' && (
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6"
+              >
+                <div className="flex items-center justify-between mb-6">
+                  <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
+                    Personal Information
+                  </h3>
+                  {!isEditing ? (
+                    <button
+                      onClick={() => setIsEditing(true)}
+                      className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+                    >
+                      <Edit className="w-4 h-4" />
+                      Edit Profile
+                    </button>
+                  ) : (
+                    <div className="flex items-center gap-2">
+                      <button
+                        onClick={handleSave}
+                        disabled={isLoading}
+                        className="flex items-center gap-2 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors disabled:opacity-50"
                       >
-                        <Camera className="h-4 w-4" />
-                      </Button>
+                        {isLoading ? (
+                          <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                        ) : (
+                          <Save className="w-4 h-4" />
+                        )}
+                        Save
+                      </button>
+                      <button
+                        onClick={handleCancel}
+                        className="flex items-center gap-2 px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors"
+                      >
+                        <X className="w-4 h-4" />
+                        Cancel
+                      </button>
                     </div>
-                    <div>
-                      <h3 className="text-lg font-medium">Profile Photo</h3>
-                      <p className="text-sm text-gray-500">Upload a new profile photo</p>
-                    </div>
-                  </div>
+                  )}
+                </div>
 
-                  {/* Name Fields */}
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div className="space-y-2">
-                      <Label htmlFor="firstName">First Name</Label>
-                      <Input
-                        id="firstName"
-                        value={profile.firstName}
-                        onChange={e => setProfile({ ...profile, firstName: e.target.value })}
-                        required
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="lastName">Last Name</Label>
-                      <Input
-                        id="lastName"
-                        value={profile.lastName}
-                        onChange={e => setProfile({ ...profile, lastName: e.target.value })}
-                        required
-                      />
-                    </div>
-                  </div>
-
-                  {/* Contact Information */}
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div className="space-y-2">
-                      <Label htmlFor="email">Email Address</Label>
-                      <div className="relative">
-                        <Mail className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
-                        <Input
-                          id="email"
-                          type="email"
-                          value={profile.email}
-                          onChange={e => setProfile({ ...profile, email: e.target.value })}
-                          className="pl-10"
-                          required
-                        />
-                      </div>
-                      {profile.isVerified && (
-                        <p className="text-xs text-green-600 flex items-center gap-1">
-                          <CheckCircle className="h-3 w-3" />
-                          Email verified
-                        </p>
-                      )}
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="phone">Phone Number</Label>
-                      <div className="relative">
-                        <Phone className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
-                        <Input
-                          id="phone"
-                          type="tel"
-                          value={profile.phone}
-                          onChange={e => setProfile({ ...profile, phone: e.target.value })}
-                          className="pl-10"
-                        />
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Company */}
-                  <div className="space-y-2">
-                    <Label htmlFor="company">Company/Organization</Label>
-                    <div className="relative">
-                      <Building className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
-                      <Input
-                        id="company"
-                        value={profile.company}
-                        onChange={e => setProfile({ ...profile, company: e.target.value })}
-                        className="pl-10"
-                      />
-                    </div>
-                  </div>
-
-                  <Button type="submit" disabled={loading}>
-                    {loading ? (
-                      <>
-                        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                        Saving...
-                      </>
-                    ) : (
-                      <>
-                        <Save className="mr-2 h-4 w-4" />
-                        Save Changes
-                      </>
-                    )}
-                  </Button>
-                </form>
-              </CardContent>
-            </Card>
-          </TabsContent>
-
-          {/* Security Tab */}
-          <TabsContent value="security" className="space-y-6">
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <Shield className="h-5 w-5" />
-                  Security Settings
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <form onSubmit={handlePasswordChange} className="space-y-6">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div className="space-y-2">
-                      <Label htmlFor="currentPassword">Current Password</Label>
-                      <div className="relative">
-                        <Key className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
-                        <Input id="currentPassword" type="password" className="pl-10" required />
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div className="space-y-2">
-                      <Label htmlFor="newPassword">New Password</Label>
-                      <div className="relative">
-                        <Key className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
-                        <Input id="newPassword" type="password" className="pl-10" required />
-                      </div>
-                      <p className="text-xs text-gray-500">Must be at least 8 characters long</p>
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="confirmPassword">Confirm New Password</Label>
-                      <div className="relative">
-                        <Key className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
-                        <Input id="confirmPassword" type="password" className="pl-10" required />
-                      </div>
-                    </div>
-                  </div>
-
-                  <Button type="submit" disabled={loading}>
-                    {loading ? (
-                      <>
-                        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                        Updating...
-                      </>
-                    ) : (
-                      'Change Password'
-                    )}
-                  </Button>
-                </form>
-              </CardContent>
-            </Card>
-          </TabsContent>
-
-          {/* Notifications Tab */}
-          <TabsContent value="notifications" className="space-y-6">
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <Bell className="h-5 w-5" />
-                  Notification Preferences
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <form onSubmit={handleNotificationSettings} className="space-y-6">
-                  <div className="space-y-4">
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <h4 className="font-medium">Email Notifications</h4>
-                        <p className="text-sm text-gray-500">Receive updates via email</p>
-                      </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  {/* First Name */}
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                      First Name
+                    </label>
+                    {isEditing ? (
                       <input
-                        type="checkbox"
-                        checked={profile.subscribeNewsletter}
-                        onChange={e =>
-                          setProfile({ ...profile, subscribeNewsletter: e.target.checked })
-                        }
-                        className="rounded border-gray-300"
+                        type="text"
+                        value={formData.firstName}
+                        onChange={e => setFormData({ ...formData, firstName: e.target.value })}
+                        className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                       />
-                    </div>
+                    ) : (
+                      <p className="text-gray-900 dark:text-white">{userData.firstName}</p>
+                    )}
+                  </div>
 
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <h4 className="font-medium">Push Notifications</h4>
-                        <p className="text-sm text-gray-500">
-                          Receive push notifications in browser
+                  {/* Last Name */}
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                      Last Name
+                    </label>
+                    {isEditing ? (
+                      <input
+                        type="text"
+                        value={formData.lastName}
+                        onChange={e => setFormData({ ...formData, lastName: e.target.value })}
+                        className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      />
+                    ) : (
+                      <p className="text-gray-900 dark:text-white">{userData.lastName}</p>
+                    )}
+                  </div>
+
+                  {/* Email */}
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                      Email Address
+                    </label>
+                    {isEditing ? (
+                      <input
+                        type="email"
+                        value={formData.email}
+                        onChange={e => setFormData({ ...formData, email: e.target.value })}
+                        className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      />
+                    ) : (
+                      <p className="text-gray-900 dark:text-white">{userData.email}</p>
+                    )}
+                  </div>
+
+                  {/* Phone */}
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                      Phone Number
+                    </label>
+                    {isEditing ? (
+                      <input
+                        type="tel"
+                        value={formData.phone}
+                        onChange={e => setFormData({ ...formData, phone: e.target.value })}
+                        className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      />
+                    ) : (
+                      <p className="text-gray-900 dark:text-white">{userData.phone}</p>
+                    )}
+                  </div>
+
+                  {/* Location */}
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                      Location
+                    </label>
+                    {isEditing ? (
+                      <input
+                        type="text"
+                        value={formData.location}
+                        onChange={e => setFormData({ ...formData, location: e.target.value })}
+                        className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      />
+                    ) : (
+                      <p className="text-gray-900 dark:text-white">{userData.location}</p>
+                    )}
+                  </div>
+
+                  {/* Join Date */}
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                      Member Since
+                    </label>
+                    <p className="text-gray-900 dark:text-white">{formatDate(userData.joinDate)}</p>
+                  </div>
+                </div>
+
+                {/* Bio */}
+                <div className="mt-6">
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                    Bio
+                  </label>
+                  {isEditing ? (
+                    <textarea
+                      value={formData.bio}
+                      onChange={e => setFormData({ ...formData, bio: e.target.value })}
+                      rows={4}
+                      className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    />
+                  ) : (
+                    <p className="text-gray-900 dark:text-white">{userData.bio}</p>
+                  )}
+                </div>
+              </motion.div>
+            )}
+
+            {/* Activity Tab */}
+            {activeTab === 'activity' && (
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6"
+              >
+                <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-6">
+                  Recent Activity
+                </h3>
+                <div className="space-y-4">
+                  {activities.map((activity, index) => (
+                    <motion.div
+                      key={activity.id}
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: index * 0.1 }}
+                      className="flex items-center gap-4 p-4 bg-gray-50 dark:bg-gray-700 rounded-lg"
+                    >
+                      <div className={`${activity.color} p-2 rounded-lg bg-white dark:bg-gray-600`}>
+                        <activity.icon className="w-5 h-5" />
+                      </div>
+                      <div className="flex-1">
+                        <p className="text-gray-900 dark:text-white font-medium">
+                          {activity.description}
+                        </p>
+                        <p className="text-sm text-gray-600 dark:text-gray-400">
+                          {formatDate(activity.timestamp)} at {formatTime(activity.timestamp)}
                         </p>
                       </div>
-                      <input type="checkbox" defaultChecked className="rounded border-gray-300" />
-                    </div>
+                    </motion.div>
+                  ))}
+                </div>
+              </motion.div>
+            )}
 
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <h4 className="font-medium">SMS Notifications</h4>
-                        <p className="text-sm text-gray-500">Receive important updates via SMS</p>
-                      </div>
-                      <input type="checkbox" className="rounded border-gray-300" />
-                    </div>
+            {/* Preferences Tab */}
+            {activeTab === 'preferences' && (
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6"
+              >
+                <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-6">
+                  Preferences
+                </h3>
+
+                {/* Theme */}
+                <div className="mb-6">
+                  <h4 className="text-lg font-medium text-gray-900 dark:text-white mb-4">Theme</h4>
+                  <div className="flex gap-4">
+                    {['light', 'dark', 'system'].map(theme => (
+                      <label key={theme} className="flex items-center gap-2 cursor-pointer">
+                        <input
+                          type="radio"
+                          name="theme"
+                          value={theme}
+                          checked={userData.preferences.theme === theme}
+                          onChange={() =>
+                            setUserData({
+                              ...userData,
+                              preferences: { ...userData.preferences, theme },
+                            })
+                          }
+                          className="w-4 h-4 text-blue-600 border-gray-300 focus:ring-blue-500"
+                        />
+                        <span className="text-gray-700 dark:text-gray-300 capitalize">{theme}</span>
+                      </label>
+                    ))}
                   </div>
+                </div>
 
-                  <Button type="submit" disabled={loading}>
-                    {loading ? (
-                      <>
-                        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                        Saving...
-                      </>
-                    ) : (
-                      'Save Preferences'
-                    )}
-                  </Button>
-                </form>
-              </CardContent>
-            </Card>
-          </TabsContent>
+                {/* Language */}
+                <div className="mb-6">
+                  <h4 className="text-lg font-medium text-gray-900 dark:text-white mb-4">
+                    Language
+                  </h4>
+                  <select
+                    value={userData.preferences.language}
+                    onChange={e =>
+                      setUserData({
+                        ...userData,
+                        preferences: { ...userData.preferences, language: e.target.value },
+                      })
+                    }
+                    className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  >
+                    <option value="en">English</option>
+                    <option value="es">Spanish</option>
+                    <option value="fr">French</option>
+                    <option value="de">German</option>
+                  </select>
+                </div>
 
-          {/* Preferences Tab */}
-          <TabsContent value="preferences" className="space-y-6">
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <Globe className="h-5 w-5" />
-                  Account Preferences
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-6">
-                  <div>
-                    <h4 className="font-medium mb-2">Account Information</h4>
-                    <div className="bg-gray-50 p-4 rounded-lg space-y-2">
-                      <div className="flex justify-between">
-                        <span className="text-sm text-gray-600">Account ID:</span>
-                        <span className="text-sm font-medium">{profile.id}</span>
-                      </div>
-                      <div className="flex justify-between">
-                        <span className="text-sm text-gray-600">Role:</span>
-                        <span className="text-sm font-medium capitalize">{profile.role}</span>
-                      </div>
-                      <div className="flex justify-between">
-                        <span className="text-sm text-gray-600">Member Since:</span>
-                        <span className="text-sm font-medium">
-                          {new Date(profile.createdAt).toLocaleDateString()}
+                {/* Notifications */}
+                <div className="mb-6">
+                  <h4 className="text-lg font-medium text-gray-900 dark:text-white mb-4">
+                    Notifications
+                  </h4>
+                  <div className="space-y-3">
+                    {Object.entries(userData.preferences.notifications).map(([key, value]) => (
+                      <label key={key} className="flex items-center justify-between cursor-pointer">
+                        <span className="text-gray-700 dark:text-gray-300 capitalize">
+                          {key} notifications
                         </span>
-                      </div>
-                    </div>
+                        <input
+                          type="checkbox"
+                          checked={value}
+                          onChange={e =>
+                            setUserData({
+                              ...userData,
+                              preferences: {
+                                ...userData.preferences,
+                                notifications: {
+                                  ...userData.preferences.notifications,
+                                  [key]: e.target.checked,
+                                },
+                              },
+                            })
+                          }
+                          className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+                        />
+                      </label>
+                    ))}
                   </div>
+                </div>
 
-                  <div>
-                    <h4 className="font-medium mb-2">Danger Zone</h4>
-                    <div className="border border-red-200 rounded-lg p-4">
-                      <h5 className="font-medium text-red-800 mb-2">Delete Account</h5>
-                      <p className="text-sm text-gray-600 mb-4">
-                        Once you delete your account, there is no going back. Please be certain.
-                      </p>
-                      <Button variant="destructive" size="sm">
-                        Delete Account
-                      </Button>
+                {/* Privacy */}
+                <div>
+                  <h4 className="text-lg font-medium text-gray-900 dark:text-white mb-4">
+                    Privacy
+                  </h4>
+                  <div className="space-y-4">
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                        Profile Visibility
+                      </label>
+                      <select
+                        value={userData.preferences.privacy.profileVisibility}
+                        onChange={e =>
+                          setUserData({
+                            ...userData,
+                            preferences: {
+                              ...userData.preferences,
+                              privacy: {
+                                ...userData.preferences.privacy,
+                                profileVisibility: e.target.value,
+                              },
+                            },
+                          })
+                        }
+                        className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      >
+                        <option value="public">Public</option>
+                        <option value="private">Private</option>
+                        <option value="friends">Friends Only</option>
+                      </select>
+                    </div>
+                    <div className="space-y-3">
+                      {Object.entries(userData.preferences.privacy)
+                        .slice(1)
+                        .map(([key, value]) => (
+                          <label
+                            key={key}
+                            className="flex items-center justify-between cursor-pointer"
+                          >
+                            <span className="text-gray-700 dark:text-gray-300">
+                              Show {key.replace(/([A-Z])/g, ' $1').toLowerCase()}
+                            </span>
+                            <input
+                              type="checkbox"
+                              checked={value}
+                              onChange={e =>
+                                setUserData({
+                                  ...userData,
+                                  preferences: {
+                                    ...userData.preferences,
+                                    privacy: {
+                                      ...userData.preferences.privacy,
+                                      [key]: e.target.checked,
+                                    },
+                                  },
+                                })
+                              }
+                              className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+                            />
+                          </label>
+                        ))}
                     </div>
                   </div>
                 </div>
-              </CardContent>
-            </Card>
-          </TabsContent>
-        </Tabs>
+              </motion.div>
+            )}
+
+            {/* Security Tab */}
+            {activeTab === 'security' && (
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6"
+              >
+                <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-6">
+                  Security Settings
+                </h3>
+
+                {/* Change Password */}
+                <div className="mb-8">
+                  <h4 className="text-lg font-medium text-gray-900 dark:text-white mb-4">
+                    Change Password
+                  </h4>
+                  <div className="space-y-4">
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                        Current Password
+                      </label>
+                      <div className="relative">
+                        <input
+                          type={showPassword ? 'text' : 'password'}
+                          className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent pr-10"
+                        />
+                        <button
+                          onClick={() => setShowPassword(!showPassword)}
+                          className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                        >
+                          {showPassword ? (
+                            <EyeOff className="w-4 h-4" />
+                          ) : (
+                            <Eye className="w-4 h-4" />
+                          )}
+                        </button>
+                      </div>
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                        New Password
+                      </label>
+                      <input
+                        type="password"
+                        className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                        Confirm New Password
+                      </label>
+                      <input
+                        type="password"
+                        className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      />
+                    </div>
+                    <button className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+                      Update Password
+                    </button>
+                  </div>
+                </div>
+
+                {/* Two-Factor Authentication */}
+                <div className="mb-8">
+                  <h4 className="text-lg font-medium text-gray-900 dark:text-white mb-4">
+                    Two-Factor Authentication
+                  </h4>
+                  <div className="flex items-center justify-between p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                    <div>
+                      <p className="text-gray-900 dark:text-white font-medium">2FA is disabled</p>
+                      <p className="text-sm text-gray-600 dark:text-gray-400">
+                        Add an extra layer of security to your account
+                      </p>
+                    </div>
+                    <button className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+                      Enable 2FA
+                    </button>
+                  </div>
+                </div>
+
+                {/* Account Actions */}
+                <div>
+                  <h4 className="text-lg font-medium text-gray-900 dark:text-white mb-4">
+                    Account Actions
+                  </h4>
+                  <div className="space-y-3">
+                    <button className="w-full flex items-center justify-between p-4 bg-gray-50 dark:bg-gray-700 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors">
+                      <div className="flex items-center gap-3">
+                        <Download className="w-5 h-5 text-gray-600 dark:text-gray-400" />
+                        <div className="text-left">
+                          <p className="text-gray-900 dark:text-white font-medium">Download Data</p>
+                          <p className="text-sm text-gray-600 dark:text-gray-400">
+                            Export your personal data
+                          </p>
+                        </div>
+                      </div>
+                      <ArrowRight className="w-4 h-4 text-gray-400" />
+                    </button>
+                    <button className="w-full flex items-center justify-between p-4 bg-red-50 dark:bg-red-900/20 rounded-lg hover:bg-red-100 dark:hover:bg-red-900/30 transition-colors">
+                      <div className="flex items-center gap-3">
+                        <Trash2 className="w-5 h-5 text-red-600" />
+                        <div className="text-left">
+                          <p className="text-red-600 font-medium">Delete Account</p>
+                          <p className="text-sm text-red-500">Permanently delete your account</p>
+                        </div>
+                      </div>
+                      <ArrowRight className="w-4 h-4 text-red-400" />
+                    </button>
+                  </div>
+                </div>
+              </motion.div>
+            )}
+          </div>
+        </div>
       </div>
     </div>
   );

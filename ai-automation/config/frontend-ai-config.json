@@ -3,8 +3,17 @@
   "mode": "frontend-only",
   "automation": {
     "enabled": true,
-    "agents": ["code-review", "test-generator", "component-generator", "ui-optimizer"],
-    "triggers": ["file-change", "component-create", "style-change"],
+    "agents": [
+      "code-review",
+      "test-generator",
+      "component-generator",
+      "ui-optimizer"
+    ],
+    "triggers": [
+      "file-change",
+      "component-create",
+      "style-change"
+    ],
     "backendDisabled": true
   },
   "cursor": {

@@ -100,7 +100,7 @@ export default function AdminDashboard() {
           lastUpdated: '2024-01-15 14:25',
         },
         {
-          name: 'EDR (Education & Development)',
+          name: 'EDR (Emergency Decision Registration)',
           status: 'active',
           users: 3456,
           performance: 92,
@@ -429,8 +429,8 @@ export default function AdminDashboard() {
                                   module.performance >= 90
                                     ? 'bg-green-500'
                                     : module.performance >= 70
-                                      ? 'bg-yellow-500'
-                                      : 'bg-red-500'
+                                    ? 'bg-yellow-500'
+                                    : 'bg-red-500'
                                 }`}
                                 style={{ width: `${module.performance}%` }}
                               ></div>
@@ -475,8 +475,8 @@ export default function AdminDashboard() {
                         activity.severity === 'high'
                           ? 'bg-red-100'
                           : activity.severity === 'medium'
-                            ? 'bg-yellow-100'
-                            : 'bg-green-100'
+                          ? 'bg-yellow-100'
+                          : 'bg-green-100'
                       }`}
                     >
                       {getActivityIcon(activity.type)}

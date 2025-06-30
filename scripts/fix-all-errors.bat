@@ -199,4 +199,8 @@ echo 🎤 Voice Assistant: Active
 echo.
 echo 🎯 ALL errors have been fixed!
 echo.
+
+echo Running TypeScript and ESLint fix...
+npx tsc --noEmit
+npx eslint . --fix
 pause 

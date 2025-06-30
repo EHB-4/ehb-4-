@@ -58,6 +58,13 @@ const services = [
   'jps',
 ];
 
+const roadmapAgentCard = {
+  name: 'Roadmap Agent',
+  path: '/roadmap-agent',
+  description: 'AI-powered roadmap management and project tracking for EHB ecosystem.',
+  icon: <FaRobot className="text-indigo-400 w-5 h-5" />,
+};
+
 export default function DevelopmentPortal() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800 py-10 px-4">
@@ -119,7 +126,11 @@ export default function DevelopmentPortal() {
               <div className="text-lg text-white font-semibold">{agent.name}</div>
               <div className="text-gray-400 text-sm">{agent.role}</div>
               <div
-                className={`mt-2 px-2 py-1 rounded-full text-xs font-bold ${agent.status === 'Active' ? 'bg-green-600 text-white' : 'bg-gray-600 text-gray-200'}`}
+                className={`mt-2 px-2 py-1 rounded-full text-xs font-bold ${
+                  agent.status === 'Active'
+                    ? 'bg-green-600 text-white'
+                    : 'bg-gray-600 text-gray-200'
+                }`}
               >
                 {agent.status}
               </div>
@@ -139,6 +150,16 @@ export default function DevelopmentPortal() {
           <h2 className="text-2xl font-bold text-white">All Project Services & Components</h2>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+          {/* Roadmap Agent Card */}
+          <a href={roadmapAgentCard.path} target="_blank" rel="noopener noreferrer">
+            <div className="bg-gray-900 hover:bg-indigo-900 transition rounded-lg p-4 cursor-pointer flex flex-col items-start space-y-2 border-l-4 border-indigo-500">
+              {roadmapAgentCard.icon}
+              <span className="text-white font-medium text-lg">{roadmapAgentCard.name}</span>
+              <span className="text-gray-400 text-sm">{roadmapAgentCard.description}</span>
+              <span className="text-indigo-300 text-xs mt-2">View Details →</span>
+            </div>
+          </a>
+          {/* Existing service cards */}
           {services.map(service => (
             <Link key={service} href={`/${service}`}>
               <div className="bg-gray-900 hover:bg-blue-900 transition rounded-lg p-4 cursor-pointer flex items-center space-x-3">

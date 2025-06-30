@@ -94,11 +94,13 @@ export default function DevelopmentPortalPage() {
     },
     {
       icon: FaShieldAlt,
-      title: 'Security & Testing',
-      description: 'Security audits, penetration testing, and QA.',
+      title: 'EDR Emergency Response',
+      description:
+        'Emergency Decision Registration system for police, fire, and ambulance services.',
       color: 'text-red-600',
       bgColor: 'bg-red-50',
-      href: '/development/security',
+      href: '/edr',
+      progress: 85,
     },
     {
       icon: FaLightbulb,

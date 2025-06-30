@@ -32,7 +32,7 @@ const companyInfo = {
   ],
   services: [
     'GoSellr (E-commerce)',
-    'EDR (Education & Digital Resources)',
+    'EDR (Emergency Decision Registration)',
     'EMO (Health & Medical Services)',
     'JPS (Justice & Public Services)',
     'PSS (Public Safety System)',

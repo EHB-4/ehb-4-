@@ -549,3 +549,412 @@ up to date in 3s
 up to date in 3s
 
 [2025-06-21T17:31:50.401Z] Running: npm install typescript Installing typescript
+[2025-06-28T11:59:04.750Z] 🚀 Starting Auto Port Manager...
+[2025-06-28T11:59:04.760Z] Cleaning up ports...
+[2025-06-28T11:59:05.039Z] Installing dependencies...
+[2025-06-28T11:59:05.039Z] Running: npm install critters Installing critters
+[2025-06-28T11:59:05.771Z] [Installing critters] added 29 packages in 546ms
+[2025-06-28T11:59:05.784Z] Output: 
+added 29 packages in 546ms
+
+[2025-06-28T11:59:05.784Z] Running: npm install next Installing next
+[2025-06-28T11:59:06.739Z] [Installing next] up to date in 753ms
+[2025-06-28T11:59:06.773Z] Output: 
+up to date in 753ms
+
+[2025-06-28T11:59:06.773Z] Running: npm install react Installing react
+[2025-06-28T11:59:07.564Z] [Installing react] up to date in 599ms
+[2025-06-28T11:59:07.580Z] Output: 
+up to date in 599ms
+
+[2025-06-28T11:59:07.580Z] Running: npm install react-dom Installing react-dom
+[2025-06-28T11:59:08.304Z] [Installing react-dom] up to date in 519ms
+[2025-06-28T11:59:08.318Z] Output: 
+up to date in 519ms
+
+[2025-06-28T11:59:08.318Z] Running: npm install typescript Installing typescript
+[2025-06-28T11:59:09.025Z] [Installing typescript] up to date in 528ms
+[2025-06-28T11:59:09.042Z] Output: 
+up to date in 528ms
+
+[2025-06-28T11:59:09.042Z] Running: npm install @types/node Installing @types/node
+[2025-06-28T11:59:09.739Z] [Installing @types/node] up to date in 520ms
+[2025-06-28T11:59:09.755Z] Output: 
+up to date in 520ms
+
+[2025-06-28T11:59:09.755Z] Running: npm install @types/react Installing @types/react
+[2025-06-28T11:59:10.404Z] [Installing @types/react] up to date in 475ms
+[2025-06-28T11:59:10.417Z] Output: 
+up to date in 475ms
+
+[2025-06-28T11:59:10.417Z] Running: npm install tailwindcss Installing tailwindcss
+[2025-06-28T11:59:11.135Z] [Installing tailwindcss] up to date in 530ms
+[2025-06-28T11:59:11.153Z] Output: 
+up to date in 530ms
+
+[2025-06-28T11:59:11.154Z] Running: npm install autoprefixer Installing autoprefixer
+[2025-06-28T11:59:11.781Z] [Installing autoprefixer] up to date in 439ms
+[2025-06-28T11:59:11.794Z] Output: 
+up to date in 439ms
+
+[2025-06-28T11:59:11.794Z] Running: npm install postcss Installing postcss
+[2025-06-28T11:59:12.450Z] [Installing postcss] up to date in 482ms
+[2025-06-28T11:59:12.468Z] Output: 
+up to date in 482ms
+
+[2025-06-28T11:59:12.468Z] Checking database connection...
+[2025-06-28T11:59:12.469Z] Database check completed
+[2025-06-28T11:59:12.472Z] Starting Backend on port 5000
+[2025-06-28T11:59:12.483Z] Starting Next.js on port 3000
+[2025-06-28T11:59:12.746Z] [Next.js] > ehb-next-js-frontend-clean@1.0.0 dev
+> next dev --port 3001
+[2025-06-28T11:59:12.751Z] [Backend] > ehb-backend@1.0.0 start
+> node server.js
+[2025-06-28T11:59:12.937Z] [Backend] 🚀 EHB Backend Server running on http://localhost:5000
+[2025-06-28T11:59:12.937Z] [Backend] ✅ Server Status: ACTIVE
+📊 Environment: development
+[2025-06-28T11:59:13.486Z] [Next.js] ▲ Next.js 15.3.4
+[2025-06-28T11:59:13.486Z] [Next.js] - Local:        http://localhost:3001
+   - Network:      http://172.23.240.1:3001
+   - Environments: .env.local, .env.development, .env
+   - Experiments (use with caution):
+     ✓ optimizeCss
+
+ ✓ Starting...
+[2025-06-28T11:59:14.623Z] [Next.js ERROR] ⚠ Found lockfile missing swc dependencies, patching...
+[2025-06-28T11:59:15.341Z] [Next.js] ✓ Ready in 1989ms
+[2025-06-28T11:59:16.659Z] [Next.js ERROR] ⚠ Lockfile was successfully patched, please run "npm install" to ensure @next/swc dependencies are downloaded
+[2025-06-28T11:59:17.495Z] Performing health check...
+[2025-06-28T11:59:17.496Z] ✅ backend is running on port 5000
+[2025-06-28T11:59:17.497Z] ❌ nextjs is not responding on port 3000
+[2025-06-28T11:59:17.497Z] ✅ All services started successfully!
+[2025-06-28T11:59:17.497Z] 📊 Monitoring active processes...
+[2025-06-28T13:30:11.324Z] [Next.js ERROR] ⨯ Module not found: Error: Can't resolve 'next-middleware-loader' in 'F:\ehb next.js 04'
+[2025-06-28T13:30:11.414Z] [Next.js ERROR] [Error: Cannot find module 'next/dist/compiled/json5'
+Require stack:
+- F:\ehb next.js 04\node_modules\next\dist\build\load-jsconfig.js
+- F:\ehb next.js 04\node_modules\next\dist\build\next-config-ts\transpile-config.js
+- F:\ehb next.js 04\node_modules\next\dist\server\config.js
+- F:\ehb next.js 04\node_modules\next\dist\server\next.js
+- F:\ehb next.js 04\node_modules\next\dist\server\lib\start-server.js] {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [Array]
+}
+[2025-06-28T13:30:11.465Z] [Next.js ERROR] [Error: Cannot find module 'next/dist/compiled/json5'
+Require stack:
+- F:\ehb next.js 04\node_modules\next\dist\build\load-jsconfig.js
+- F:\ehb next.js 04\node_modules\next\dist\build\next-config-ts\transpile-config.js
+- F:\ehb next.js 04\node_modules\next\dist\server\config.js
+- F:\ehb next.js 04\node_modules\next\dist\server\next.js
+- F:\ehb next.js 04\node_modules\next\dist\server\lib\start-server.js] {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [Array]
+}
+[2025-06-28T13:30:11.494Z] [Next.js ERROR] [Error: Cannot find module 'next/dist/compiled/json5'
+Require stack:
+- F:\ehb next.js 04\node_modules\next\dist\build\load-jsconfig.js
+- F:\ehb next.js 04\node_modules\next\dist\build\next-config-ts\transpile-config.js
+- F:\ehb next.js 04\node_modules\next\dist\server\config.js
+- F:\ehb next.js 04\node_modules\next\dist\server\next.js
+- F:\ehb next.js 04\node_modules\next\dist\server\lib\start-server.js] {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [Array]
+}
+[2025-06-28T13:30:11.748Z] [Next.js] ○ Compiling /middleware ...
+[2025-06-28T13:33:49.384Z] [Next.js] 
+[2025-06-28T13:33:49.429Z] [Next.js] Source path: F:\ehb next.js 04\app\globals.css
+[2025-06-28T13:33:49.431Z] [Next.js] Setting up new context...
+[2025-06-28T13:33:49.525Z] [Next.js] Finding changed files: 29.035ms
+[2025-06-28T13:33:50.158Z] [Next.js] Reading changed files: 632.278ms
+[2025-06-28T13:33:50.172Z] [Next.js] Sorting candidates: 13.723ms
+[2025-06-28T13:33:50.360Z] [Next.js] Generate rules: 201.605ms
+[2025-06-28T13:33:50.369Z] [Next.js] Build stylesheet: 8.588ms
+[2025-06-28T13:33:50.378Z] [Next.js] Potential classes:  20934
+[2025-06-28T13:33:50.378Z] [Next.js] Active contexts:  1
+[2025-06-28T13:33:50.392Z] [Next.js] JIT TOTAL: 1.008s
+[2025-06-28T13:33:51.281Z] [Next.js] ✓ Compiled /_error in 2.6s (419 modules)
+[2025-06-28T13:33:51.551Z] [Next.js] Time 4.7728
+[2025-06-28T13:33:51.558Z] [Next.js] GET /ehb-home-page 404 in 4ms
+[2025-06-28T13:33:52.066Z] [Next.js] ○ Compiling /_not-found ...
+[2025-06-28T13:33:52.716Z] [Next.js] 
+[2025-06-28T13:33:52.717Z] [Next.js] Source path: F:\ehb next.js 04\app\globals.css
+[2025-06-28T13:33:52.739Z] [Next.js] Finding changed files: 20.958ms
+[2025-06-28T13:33:52.739Z] [Next.js] Reading changed files: 0.048ms
+Sorting candidates: 0.035ms
+[2025-06-28T13:33:52.740Z] [Next.js] Generate rules: 0.231ms
+Build stylesheet: 0.005ms
+[2025-06-28T13:33:52.745Z] [Next.js] Potential classes:  1
+Active contexts:  1
+[2025-06-28T13:33:52.758Z] [Next.js] JIT TOTAL: 41.635ms
+[2025-06-28T13:33:52.758Z] [Next.js] 
+[2025-06-28T13:33:53.366Z] [Next.js] 
+[2025-06-28T13:33:53.367Z] [Next.js] Source path: F:\ehb next.js 04\app\globals.css
+[2025-06-28T13:33:53.390Z] [Next.js] Finding changed files: 22.604ms
+[2025-06-28T13:33:53.391Z] [Next.js] Reading changed files: 0.003ms
+Sorting candidates: 0.004ms
+Generate rules: 0.04ms
+Build stylesheet: 0.001ms
+[2025-06-28T13:33:53.396Z] [Next.js] Potential classes:  1
+[2025-06-28T13:33:53.397Z] [Next.js] Active contexts:  1
+[2025-06-28T13:33:53.410Z] [Next.js] JIT TOTAL: 43.811ms
+[2025-06-28T13:33:53.411Z] [Next.js] 
+[2025-06-28T13:33:53.930Z] [Next.js ERROR] ⨯ ./app/layout.tsx:3:1
+Module not found: Can't resolve 'geist/font/sans'
+  1 | import type { Metadata } from 'next';
+  2 | import './globals.css';
+> 3 | import { GeistSans } from 'geist/font/sans';
+    | ^
+  4 | import { Toaster } from 'sonner';
+  5 | import { ThemeProvider } from 'next-themes';
+  6 |
+
+https://nextjs.org/docs/messages/module-not-found
+[2025-06-28T13:35:55.989Z] [Next.js] Time 2.225
+[2025-06-28T13:35:55.993Z] [Next.js] GET /ehb-home-page 404 in 2ms
+[2025-06-28T13:39:22.693Z] [Next.js] Time 0.5226
+[2025-06-28T13:39:22.698Z] [Next.js] GET /_next/static/webpack/10119809b855b022.webpack.hot-update.json 500 in 21ms
+[2025-06-28T13:39:22.699Z] [Next.js ERROR] ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[2025-06-28T13:39:22.755Z] [Next.js] Time 0.6485
+[2025-06-28T13:39:22.757Z] [Next.js] GET /_next/static/webpack/10119809b855b022.webpack.hot-update.json 500 in 36ms
+[2025-06-28T13:39:22.760Z] [Next.js ERROR] ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[2025-06-28T13:39:23.387Z] [Next.js ERROR] ⨯ ./app/layout.tsx:3:1
+Module not found: Can't resolve 'geist/font/sans'
+  1 | import type { Metadata } from 'next';
+  2 | import './globals.css';
+> 3 | import { GeistSans } from 'geist/font/sans';
+    | ^
+  4 | import { Toaster } from 'sonner';
+  5 | import { ThemeProvider } from 'next-themes';
+  6 |
+
+https://nextjs.org/docs/messages/module-not-found
+[2025-06-28T13:39:25.411Z] [Next.js] 
+[2025-06-28T13:39:25.413Z] [Next.js] Source path: F:\ehb next.js 04\node_modules\swiper\swiper.css
+[2025-06-28T13:39:25.414Z] [Next.js] 
+[2025-06-28T13:39:25.414Z] [Next.js] Source path: F:\ehb next.js 04\node_modules\swiper\modules\navigation.css
+[2025-06-28T13:39:25.414Z] [Next.js] 
+[2025-06-28T13:39:25.415Z] [Next.js] Source path: F:\ehb next.js 04\node_modules\swiper\modules\pagination.css
+[2025-06-28T13:39:25.415Z] [Next.js] 
+[2025-06-28T13:39:25.416Z] [Next.js] Source path: F:\ehb next.js 04\node_modules\swiper\modules\effect-fade.css
+[2025-06-28T13:39:25.418Z] [Next.js] JIT TOTAL: 7.534ms
+[2025-06-28T13:39:25.421Z] [Next.js] 
+[2025-06-28T13:39:25.422Z] [Next.js] 
+[2025-06-28T13:39:25.423Z] [Next.js] 
+[2025-06-28T13:39:25.438Z] [Next.js ERROR] (node:32304) Warning: Label 'JIT TOTAL' already exists for console.time()
+(Use `node --trace-warnings ...` to show where the warning was created)
+[2025-06-28T13:39:25.439Z] [Next.js ERROR] (node:32304) Warning: Label 'JIT TOTAL' already exists for console.time()
+(node:32304) Warning: Label 'JIT TOTAL' already exists for console.time()
+(node:32304) Warning: No such label 'JIT TOTAL' for console.timeEnd()
+(node:32304) Warning: No such label 'JIT TOTAL' for console.timeEnd()
+(node:32304) Warning: No such label 'JIT TOTAL' for console.timeEnd()
+[2025-06-28T13:39:25.791Z] [Next.js ERROR] ⨯ ./app/layout.tsx:3:1
+Module not found: Can't resolve 'geist/font/sans'
+  1 | import type { Metadata } from 'next';
+  2 | import './globals.css';
+> 3 | import { GeistSans } from 'geist/font/sans';
+    | ^
+  4 | import { Toaster } from 'sonner';
+  5 | import { ThemeProvider } from 'next-themes';
+  6 |
+
+https://nextjs.org/docs/messages/module-not-found
+[2025-06-28T13:39:25.808Z] [Next.js] Time 0.4048
+[2025-06-28T13:39:25.809Z] [Next.js] GET /ehb-home-page 500 in 2348ms
+[2025-06-28T13:39:26.090Z] [Next.js] Time 0.7851
+[2025-06-28T13:39:26.092Z] [Next.js] GET /ehb-home-page 500 in 270ms
+[2025-06-28T13:40:35.028Z] [Next.js] Time 1.0729
+[2025-06-28T13:40:35.029Z] [Next.js] GET /ehb-home-page 500 in 17ms
+[2025-06-28T13:40:36.043Z] [Next.js] Time 0.5346
+[2025-06-28T13:40:36.044Z] [Next.js] GET /ehb-home-page 500 in 18ms
+[2025-06-28T13:40:36.859Z] [Next.js] Time 0.4449
+[2025-06-28T13:40:36.860Z] [Next.js] GET /ehb-home-page 500 in 15ms
+[2025-06-28T13:40:37.489Z] [Next.js] Time 0.4602
+[2025-06-28T13:40:37.490Z] [Next.js] GET /ehb-home-page 500 in 14ms
+[2025-06-28T13:40:38.143Z] [Next.js] Time 0.4743
+[2025-06-28T13:40:38.144Z] [Next.js] GET /ehb-home-page 500 in 20ms
+[2025-06-28T13:40:38.474Z] [Next.js] Time 0.4932
+[2025-06-28T13:40:38.475Z] [Next.js] GET /ehb-home-page 500 in 15ms
+[2025-06-28T13:40:38.790Z] [Next.js] Time 0.3444
+[2025-06-28T13:40:38.791Z] [Next.js] GET /ehb-home-page 500 in 16ms
+[2025-06-28T13:41:04.409Z] [Next.js ERROR] ⨯ ./app/layout.tsx:3:1
+Module not found: Can't resolve 'geist/font/sans'
+  1 | import type { Metadata } from 'next';
+  2 | import './globals.css';
+> 3 | import { GeistSans } from 'geist/font/sans';
+    | ^
+  4 | import { Toaster } from 'sonner';
+  5 | import { ThemeProvider } from 'next-themes';
+  6 |
+
+https://nextjs.org/docs/messages/module-not-found
+[2025-06-28T13:41:04.421Z] [Next.js] Time 0.4557
+[2025-06-28T13:41:04.422Z] [Next.js] GET /_next/static/webpack/10119809b855b022.webpack.hot-update.json 500 in 565ms
+[2025-06-28T13:41:04.424Z] [Next.js ERROR] ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[2025-06-28T13:41:04.437Z] [Next.js] Time 0.4971
+[2025-06-28T13:41:04.439Z] [Next.js] GET /_next/static/webpack/10119809b855b022.webpack.hot-update.json 500 in 12ms
+[2025-06-28T13:41:04.441Z] [Next.js ERROR] ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[2025-06-28T13:41:04.463Z] [Next.js] Time 0.4038
+[2025-06-28T13:41:04.463Z] [Next.js] GET /ehb-home-page 500 in 18ms
+[2025-06-28T13:41:04.492Z] [Next.js] Time 0.4487
+[2025-06-28T13:41:04.494Z] [Next.js] GET /ehb-home-page 500 in 22ms
+[2025-06-28T13:41:04.520Z] [Next.js] Time 1.169
+[2025-06-28T13:41:04.521Z] [Next.js] Time 0.8754
+Time 0.5861
+[2025-06-28T13:41:04.522Z] [Next.js] GET /_next/static/chunks/fallback/webpack.js 500 in 25ms
+[2025-06-28T13:41:04.522Z] [Next.js] GET /_next/static/chunks/fallback/react-refresh.js 500 in 24ms
+ GET /_next/static/chunks/fallback/main.js 500 in 24ms
+[2025-06-28T13:41:04.550Z] [Next.js] Time 1.574
+[2025-06-28T13:41:04.551Z] [Next.js] Time 1.1309
+Time 0.6171
+[2025-06-28T13:41:04.552Z] [Next.js] GET /_next/static/chunks/fallback/webpack.js 500 in 25ms
+[2025-06-28T13:41:04.552Z] [Next.js] GET /_next/static/chunks/fallback/react-refresh.js 500 in 25ms
+ GET /_next/static/chunks/fallback/main.js 500 in 24ms
+[2025-06-28T13:41:04.628Z] [Next.js] Time 0.8142
+[2025-06-28T13:41:04.629Z] [Next.js] Time 0.4854
+[2025-06-28T13:41:04.629Z] [Next.js] GET /_next/static/chunks/fallback/pages/_error.js 500 in 13ms
+[2025-06-28T13:41:04.630Z] [Next.js] GET /_next/static/chunks/fallback/pages/_app.js 500 in 14ms
+[2025-06-28T13:41:04.785Z] [Next.js] Time 0.8406
+[2025-06-28T13:41:04.786Z] [Next.js] Time 0.4749
+[2025-06-28T13:41:04.786Z] [Next.js] GET /_next/static/chunks/fallback/pages/_app.js 500 in 18ms
+[2025-06-28T13:41:04.787Z] [Next.js] GET /_next/static/chunks/fallback/pages/_error.js 500 in 17ms
+[2025-06-28T13:41:11.165Z] [Next.js] 
+[2025-06-28T13:41:11.168Z] [Next.js] Source path: F:\ehb next.js 04\app\globals.css
+[2025-06-28T13:41:11.198Z] [Next.js] Finding changed files: 29.147ms
+[2025-06-28T13:41:11.204Z] [Next.js] 
+[2025-06-28T13:41:11.204Z] [Next.js] Source path: F:\ehb next.js 04\app\globals.css
+[2025-06-28T13:41:11.229Z] [Next.js] Finding changed files: 23.417ms
+[2025-06-28T13:41:11.230Z] [Next.js ERROR] (node:32304) Warning: Label 'JIT TOTAL' already exists for console.time()
+[2025-06-28T13:41:11.230Z] [Next.js ERROR] (node:32304) Warning: Label 'Reading changed files' already exists for console.time()
+[2025-06-28T13:41:11.245Z] [Next.js] Reading changed files: 46.047ms
+[2025-06-28T13:41:11.245Z] [Next.js] Sorting candidates: 0.042ms
+Generate rules: 0.373ms
+Build stylesheet: 0.002ms
+[2025-06-28T13:41:11.270Z] [Next.js] Potential classes:  56
+[2025-06-28T13:41:11.271Z] [Next.js] Active contexts:  1
+[2025-06-28T13:41:11.295Z] [Next.js] JIT TOTAL: 129.429ms
+[2025-06-28T13:41:11.402Z] [Next.js] Sorting candidates: 0.018ms
+Generate rules: 0.137ms
+[2025-06-28T13:41:11.402Z] [Next.js] Build stylesheet: 0.001ms
+[2025-06-28T13:41:11.407Z] [Next.js] Potential classes:  56
+Active contexts:  1
+[2025-06-28T13:41:11.414Z] [Next.js] 
+[2025-06-28T13:41:11.454Z] [Next.js ERROR] (node:32304) Warning: No such label 'Reading changed files' for console.timeEnd()
+[2025-06-28T13:41:11.454Z] [Next.js ERROR] (node:32304) Warning: No such label 'JIT TOTAL' for console.timeEnd()
+[2025-06-28T13:41:11.552Z] [Next.js ERROR] ⨯ ./app/layout.tsx:3:1
+Module not found: Can't resolve 'sonner'
+  1 | import type { Metadata } from 'next';
+  2 | import './globals.css';
+> 3 | import { Toaster } from 'sonner';
+    | ^
+  4 | import { ThemeProvider } from 'next-themes';
+  5 |
+  6 | export const metadata: Metadata = {
+
+https://nextjs.org/docs/messages/module-not-found
+[2025-06-28T13:41:11.575Z] [Next.js] Time 0.3728
+[2025-06-28T13:41:11.575Z] [Next.js] GET /ehb-home-page 500 in 30ms
+[2025-06-28T13:41:17.087Z] [Next.js] 
+[2025-06-28T13:41:17.088Z] [Next.js] Source path: F:\ehb next.js 04\app\globals.css
+[2025-06-28T13:41:17.114Z] [Next.js] Finding changed files: 24.993ms
+[2025-06-28T13:41:17.114Z] [Next.js] 
+[2025-06-28T13:41:17.115Z] [Next.js] Source path: F:\ehb next.js 04\app\globals.css
+[2025-06-28T13:41:17.135Z] [Next.js] Finding changed files: 19.986ms
+[2025-06-28T13:41:17.135Z] [Next.js ERROR] (node:32304) Warning: Label 'JIT TOTAL' already exists for console.time()
+(node:32304) Warning: Label 'Reading changed files' already exists for console.time()
+[2025-06-28T13:41:17.142Z] [Next.js] Reading changed files: 27.894ms
+[2025-06-28T13:41:17.142Z] [Next.js] Sorting candidates: 0.018ms
+Generate rules: 0.093ms
+Build stylesheet: 0.001ms
+[2025-06-28T13:41:17.148Z] [Next.js] Potential classes:  55
+Active contexts:  1
+[2025-06-28T13:41:17.156Z] [Next.js] JIT TOTAL: 68.492ms
+[2025-06-28T13:41:17.156Z] [Next.js] 
+[2025-06-28T13:41:17.195Z] [Next.js] Sorting candidates: 0.027ms
+[2025-06-28T13:41:17.196Z] [Next.js] Generate rules: 0.196ms
+Build stylesheet: 0.004ms
+[2025-06-28T13:41:17.205Z] [Next.js] Potential classes:  55
+Active contexts:  1
+[2025-06-28T13:41:17.213Z] [Next.js] 
+[2025-06-28T13:41:17.245Z] [Next.js ERROR] (node:32304) Warning: No such label 'Reading changed files' for console.timeEnd()
+[2025-06-28T13:41:17.246Z] [Next.js ERROR] (node:32304) Warning: No such label 'JIT TOTAL' for console.timeEnd()
+[2025-06-28T13:41:17.496Z] [Next.js ERROR] ⨯ ./app/layout.tsx:3:1
+Module not found: Can't resolve 'sonner'
+  1 | import type { Metadata } from 'next';
+  2 | import './globals.css';
+> 3 | import { Toaster } from 'sonner';
+    | ^
+  4 | import { ThemeProvider } from 'next-themes';
+  5 |
+  6 | export const metadata: Metadata = {
+
+https://nextjs.org/docs/messages/module-not-found
+[2025-06-28T13:41:19.538Z] [Next.js] ✓ Compiled /ehb-home-page in 469ms (2052 modules)
+[2025-06-28T13:41:27.183Z] [Next.js] 
+[2025-06-28T13:41:27.184Z] [Next.js] Source path: F:\ehb next.js 04\app\globals.css
+[2025-06-28T13:41:27.212Z] [Next.js] Finding changed files: 27.345ms
+[2025-06-28T13:41:27.221Z] [Next.js] Reading changed files: 8.233ms
+[2025-06-28T13:41:27.221Z] [Next.js] Sorting candidates: 0.024ms
+Generate rules: 0.123ms
+Build stylesheet: 0.001ms
+[2025-06-28T13:41:27.229Z] [Next.js] Potential classes:  55
+Active contexts:  1
+[2025-06-28T13:41:27.238Z] [Next.js] JIT TOTAL: 55.176ms
+[2025-06-28T13:41:27.239Z] [Next.js] 
+[2025-06-28T13:41:27.300Z] [Next.js] 
+[2025-06-28T13:41:27.300Z] [Next.js] Source path: F:\ehb next.js 04\app\globals.css
+[2025-06-28T13:41:27.319Z] [Next.js] Finding changed files: 18.424ms
+[2025-06-28T13:41:27.320Z] [Next.js] Reading changed files: 0.011ms
+Sorting candidates: 0.004ms
+Generate rules: 0.038ms
+Build stylesheet: 0.001ms
+[2025-06-28T13:41:27.328Z] [Next.js] Potential classes:  1
+Active contexts:  1
+[2025-06-28T13:41:27.334Z] [Next.js] JIT TOTAL: 34.293ms
+[2025-06-28T13:41:27.605Z] [Next.js] ✓ Compiled in 474ms (2066 modules)
+[2025-06-28T13:48:30.169Z] [Next.js] GET /ehb-home-page 200 in 453ms
+[2025-06-28T13:48:30.276Z] [Next.js] GET /_next/static/css/app/layout.css?v=1751118509885 404 in 84ms
+[2025-06-28T13:48:30.276Z] [Next.js] GET /_next/static/css/app/ehb-home-page/page.css?v=1751118509885 404 in 79ms
+[2025-06-28T13:48:30.420Z] [Next.js] GET /_next/static/chunks/main-app.js?v=1751118509885 404 in 44ms
+[2025-06-28T13:48:30.534Z] [Next.js] GET /_next/static/chunks/app/error.js 404 in 119ms
+[2025-06-28T13:48:30.535Z] [Next.js] GET /_next/static/chunks/app-pages-internals.js 404 in 120ms
+[2025-06-28T13:48:30.536Z] [Next.js] GET /_next/static/chunks/app/ehb-home-page/page.js 404 in 118ms
+[2025-06-28T13:48:30.536Z] [Next.js] GET /_next/static/chunks/app/not-found.js 404 in 119ms
+[2025-06-28T13:48:30.563Z] [Next.js] GET /_next/static/chunks/app/global-error.js 404 in 26ms
+[2025-06-28T13:48:37.152Z] [Next.js] GET /ehb-home-page 200 in 181ms
+[2025-06-28T13:48:37.205Z] [Next.js] GET /_next/static/css/app/layout.css?v=1751118516979 404 in 35ms
+[2025-06-28T13:48:37.231Z] [Next.js] GET /_next/static/css/app/ehb-home-page/page.css?v=1751118516979 404 in 28ms
+[2025-06-28T13:48:37.275Z] [Next.js] GET /_next/static/chunks/main-app.js?v=1751118516979 404 in 37ms
+[2025-06-28T13:48:37.308Z] [Next.js] GET /_next/static/chunks/app-pages-internals.js 404 in 67ms
+[2025-06-28T13:48:37.382Z] [Next.js] GET /_next/static/chunks/app/error.js 404 in 102ms
+[2025-06-28T13:48:37.384Z] [Next.js] GET /_next/static/chunks/app/ehb-home-page/page.js 404 in 103ms
+[2025-06-28T13:48:37.385Z] [Next.js] GET /_next/static/chunks/app/not-found.js 404 in 104ms
+[2025-06-28T13:48:37.410Z] [Next.js] GET /_next/static/chunks/app/global-error.js 404 in 100ms
+[2025-06-28T13:50:58.272Z] [Next.js] GET /ehb-home-page 200 in 194ms
+[2025-06-28T13:50:58.357Z] [Next.js] GET /_next/static/css/app/ehb-home-page/page.css?v=1751118658086 404 in 64ms
+[2025-06-28T13:50:58.358Z] [Next.js] GET /_next/static/css/app/layout.css?v=1751118658086 404 in 66ms
+[2025-06-28T13:50:58.405Z] [Next.js] GET /_next/static/chunks/main-app.js?v=1751118658086 404 in 40ms
+[2025-06-28T13:50:58.509Z] [Next.js] GET /_next/static/chunks/app/error.js 404 in 135ms
+[2025-06-28T13:50:58.510Z] [Next.js] GET /_next/static/chunks/app-pages-internals.js 404 in 139ms
+[2025-06-28T13:50:58.511Z] [Next.js] GET /_next/static/chunks/app/ehb-home-page/page.js 404 in 135ms
+[2025-06-28T13:50:58.512Z] [Next.js] GET /_next/static/chunks/app/not-found.js 404 in 135ms
+[2025-06-28T13:50:58.545Z] [Next.js] GET /_next/static/chunks/app/global-error.js 404 in 35ms
+[2025-06-28T14:21:37.413Z] [Next.js] GET /ehb-home-page 200 in 218ms
+[2025-06-28T14:21:37.486Z] [Next.js] GET /_next/static/css/app/layout.css?v=1751120497208 404 in 50ms
+[2025-06-28T14:21:37.486Z] [Next.js] GET /_next/static/css/app/ehb-home-page/page.css?v=1751120497208 404 in 49ms
+[2025-06-28T14:21:37.628Z] [Next.js] GET /_next/static/chunks/main-app.js?v=1751120497208 404 in 36ms
+[2025-06-28T14:21:37.756Z] [Next.js] GET /_next/static/chunks/app/not-found.js 404 in 124ms
+[2025-06-28T14:21:37.757Z] [Next.js] GET /_next/static/chunks/app/error.js 404 in 124ms
+ GET /_next/static/chunks/app-pages-internals.js 404 in 125ms
+[2025-06-28T14:21:37.757Z] [Next.js] GET /_next/static/chunks/app/global-error.js 404 in 122ms
+[2025-06-28T14:21:37.758Z] [Next.js] GET /_next/static/chunks/app/ehb-home-page/page.js 404 in 124ms
+[2025-06-28T14:21:40.137Z] [Next.js] GET /ehb-home-page 200 in 200ms
+[2025-06-28T14:21:40.213Z] [Next.js] GET /_next/static/css/app/ehb-home-page/page.css?v=1751120499946 404 in 50ms
+[2025-06-28T14:21:40.213Z] [Next.js] GET /_next/static/css/app/layout.css?v=1751120499946 404 in 53ms
+[2025-06-28T14:21:40.256Z] [Next.js] GET /_next/static/chunks/main-app.js?v=1751120499946 404 in 36ms
+[2025-06-28T14:21:40.284Z] [Next.js] GET /_next/static/chunks/app-pages-internals.js 404 in 61ms
+[2025-06-28T14:21:40.360Z] [Next.js] GET /_next/static/chunks/app/ehb-home-page/page.js 404 in 101ms
+[2025-06-28T14:21:40.361Z] [Next.js] GET /_next/static/chunks/app/not-found.js 404 in 102ms
+ GET /_next/static/chunks/app/error.js 404 in 103ms
+[2025-06-28T14:21:40.393Z] [Next.js] GET /_next/static/chunks/app/global-error.js 404 in 108ms
+[2025-06-28T14:25:23.429Z] [Next.js] [?25h
+[2025-06-28T14:25:23.486Z] Next.js process exited with code 0

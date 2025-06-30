@@ -135,4 +135,7 @@ echo 🎤 Voice Assistant: Active
 echo.
 echo 🎯 Instant error fixing successful!
 echo.
+
+echo Running ESLint quick fix...
+npx eslint . --fix
 pause 

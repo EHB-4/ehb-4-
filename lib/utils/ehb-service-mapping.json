@@ -1,0 +1,72 @@
+[
+  {
+    "id": "pss",
+    "name": "PSS",
+    "port": 4001,
+    "status": "working",
+    "autoStart": true
+  },
+  {
+    "id": "edr",
+    "name": "EDR",
+    "port": 4002,
+    "status": "working",
+    "autoStart": true
+  },
+  {
+    "id": "emo",
+    "name": "EMO",
+    "port": 4003,
+    "status": "working",
+    "autoStart": true
+  },
+  {
+    "id": "gosellr",
+    "name": "GoSellr",
+    "port": 4004,
+    "status": "under-dev",
+    "autoStart": false
+  },
+  {
+    "id": "wallet",
+    "name": "Wallet",
+    "port": 5001,
+    "status": "complete",
+    "autoStart": true
+  },
+  {
+    "id": "blockchain",
+    "name": "EHB BLOCKCHAIN",
+    "port": 5007,
+    "status": "working",
+    "autoStart": true
+  },
+  {
+    "id": "sql-level",
+    "name": "EHB SQL Level System",
+    "port": 4014,
+    "status": "complete",
+    "autoStart": true
+  },
+  {
+    "id": "admin-panel",
+    "name": "Admin Panel",
+    "port": 3002,
+    "status": "working",
+    "autoStart": true
+  },
+  {
+    "id": "ehb-dashboard",
+    "name": "EHB Dashboard",
+    "port": 3001,
+    "status": "working",
+    "autoStart": true
+  },
+  {
+    "id": "test-service",
+    "name": "Test Service",
+    "port": 7001,
+    "status": "not-started",
+    "autoStart": true
+  }
+]

@@ -1,0 +1,46 @@
+{
+  "portAllocation": {
+    "home": {
+      "port": 3000,
+      "name": "EHB Home",
+      "description": "Main frontend application",
+      "url": "http://localhost:3000",
+      "script": "dev:home"
+    },
+    "backend": {
+      "port": 8000,
+      "name": "EHB Backend",
+      "description": "Backend API server",
+      "url": "http://localhost:8000",
+      "script": "dev:backend"
+    },
+    "portal": {
+      "port": 8080,
+      "name": "Development Portal",
+      "description": "Development and testing portal",
+      "url": "http://localhost:8080",
+      "script": "dev:portal"
+    },
+    "admin": {
+      "port": 5000,
+      "name": "Admin Panel",
+      "description": "Administrative dashboard",
+      "url": "http://localhost:5000",
+      "script": "dev:admin"
+    }
+  },
+  "quickStart": {
+    "startAll": "npm run dev:all",
+    "startIndividual": "npm run dev:home|backend|portal|admin",
+    "openBrowsers": "npm run open:home|backend|portal|admin",
+    "monitor": "npm run ehb:monitor",
+    "status": "npm run ehb:status"
+  },
+  "management": {
+    "start": "npm run ehb:start",
+    "stop": "npm run ehb:stop",
+    "restart": "npm run ehb:restart",
+    "status": "npm run ehb:status",
+    "monitor": "npm run ehb:monitor"
+  }
+}

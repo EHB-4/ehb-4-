@@ -183,7 +183,7 @@ export class ComplaintBot {
 
     const resolutionId = `resolution_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
 
-    let action: Resolution['action'] = 'auto_resolve';
+    const action: Resolution['action'] = 'auto_resolve';
     let description = '';
     let result: Resolution['result'] = 'success';
     let followUpRequired = false;

@@ -1,18 +1,36 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
+import { motion } from 'framer-motion';
 import {
-  SearchIcon,
-  FilterIcon,
-  ShoppingCartIcon,
-  HeartIcon,
-  StarIcon,
-  ShieldCheckIcon,
-  CurrencyDollarIcon,
-  TruckIcon,
-  UserIcon,
-  CogIcon,
-} from '@heroicons/react/outline';
+  Search,
+  Filter,
+  ShoppingCart,
+  Heart,
+  Star,
+  Eye,
+  Share2,
+  MapPin,
+  Clock,
+  Shield,
+  CheckCircle,
+  TrendingUp,
+  Users,
+  DollarSign,
+  Package,
+  Truck,
+  CreditCard,
+  ArrowRight,
+  Grid3X3,
+  List,
+  SortAsc,
+  SortDesc,
+  Filter as FilterIcon,
+  X,
+  Plus,
+  Minus,
+} from 'lucide-react';
+import Link from 'next/link';
 
 // ========================================
 // 1. MAIN GOSELLR MARKETPLACE PAGE
@@ -24,10 +42,12 @@ export default function GoSellrMarketplace() {
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('all');
-  const [priceRange, setPriceRange] = useState({ min: 0, max: 1000 });
-  const [sortBy, setSortBy] = useState('relevance');
-  const [cart, setCart] = useState<CartItem[]>([]);
-  const [wishlist, setWishlist] = useState<string[]>([]);
+  const [priceRange, setPriceRange] = useState([0, 1000]);
+  const [sortBy, setSortBy] = useState('popular');
+  const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
+  const [showFilters, setShowFilters] = useState(false);
+  const [cartItems, setCartItems] = useState(0);
+  const [wishlistItems, setWishlistItems] = useState(0);
   const [user, setUser] = useState<User | null>(null);
 
   // ========================================
@@ -56,10 +76,10 @@ export default function GoSellrMarketplace() {
 
       // Load cart and wishlist
       const cartData = await loadCart();
-      setCart(cartData);
+      setCartItems(cartData.length);
 
       const wishlistData = await loadWishlist();
-      setWishlist(wishlistData);
+      setWishlistItems(wishlistData.length);
     } catch (error) {
       console.error('Error initializing GoSellr:', error);
     } finally {
@@ -129,6 +149,7 @@ export default function GoSellrMarketplace() {
           riskScore: 8,
           recommendationScore: 95,
         },
+        trending: true,
       },
       {
         id: 'prod-2',
@@ -171,6 +192,7 @@ export default function GoSellrMarketplace() {
           riskScore: 12,
           recommendationScore: 87,
         },
+        trending: false,
       },
       {
         id: 'prod-3',
@@ -213,6 +235,7 @@ export default function GoSellrMarketplace() {
           riskScore: 15,
           recommendationScore: 82,
         },
+        trending: false,
       },
     ];
   };
@@ -234,7 +257,7 @@ export default function GoSellrMarketplace() {
   // ========================================
 
   const filterAndSortProducts = () => {
-    let filtered = products.filter(product => {
+    const filtered = products.filter(product => {
       // Search filter
       const matchesSearch =
         product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -245,7 +268,7 @@ export default function GoSellrMarketplace() {
       const matchesCategory = selectedCategory === 'all' || product.category === selectedCategory;
 
       // Price filter
-      const matchesPrice = product.price >= priceRange.min && product.price <= priceRange.max;
+      const matchesPrice = product.price >= priceRange[0] && product.price <= priceRange[1];
 
       return matchesSearch && matchesCategory && matchesPrice;
     });
@@ -279,46 +302,31 @@ export default function GoSellrMarketplace() {
   // 5. CART AND WISHLIST FUNCTIONS
   // ========================================
 
-  const addToCart = (product: Product) => {
-    const existingItem = cart.find(item => item.productId === product.id);
+  const addToCart = (productId: string) => {
+    const existingItem = products.find(product => product.id === productId);
 
     if (existingItem) {
-      setCart(
-        cart.map(item =>
-          item.productId === product.id ? { ...item, quantity: item.quantity + 1 } : item
-        )
-      );
-    } else {
-      setCart([
-        ...cart,
-        {
-          productId: product.id,
-          name: product.name,
-          price: product.price,
-          image: product.images[0],
-          quantity: 1,
-          sellerId: product.seller.id,
-        },
-      ]);
+      setCartItems(prev => prev + 1);
+      // In a real app, this would add to cart state
     }
 
     // Save to localStorage
-    localStorage.setItem('gosellr-cart', JSON.stringify(cart));
+    localStorage.setItem('gosellr-cart', JSON.stringify(products.filter(p => p.id === productId)));
 
     // Show notification
     showNotification('Product added to cart!', 'success');
   };
 
   const toggleWishlist = (productId: string) => {
-    const newWishlist = wishlist.includes(productId)
-      ? wishlist.filter(id => id !== productId)
-      : [...wishlist, productId];
+    const newWishlist = wishlistItems.includes(productId)
+      ? wishlistItems.filter(id => id !== productId)
+      : [...wishlistItems, productId];
 
-    setWishlist(newWishlist);
+    setWishlistItems(newWishlist);
     localStorage.setItem('gosellr-wishlist', JSON.stringify(newWishlist));
 
     showNotification(
-      wishlist.includes(productId) ? 'Removed from wishlist' : 'Added to wishlist',
+      wishlistItems.includes(productId) ? 'Removed from wishlist' : 'Added to wishlist',
       'info'
     );
   };
@@ -360,63 +368,507 @@ export default function GoSellrMarketplace() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
       {/* Header */}
-      <GoSellrHeader
-        user={user}
-        cartCount={cart.length}
-        onSearch={setSearchTerm}
-        searchTerm={searchTerm}
-      />
+      <header className="bg-white dark:bg-gray-800 shadow-sm border-b border-gray-200 dark:border-gray-700">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="py-6">
+            <div className="flex items-center justify-between mb-6">
+              <div>
+                <h1 className="text-3xl font-bold text-gray-900 dark:text-white">GoSellr</h1>
+                <p className="text-gray-600 dark:text-gray-400 mt-2">
+                  Global e-commerce platform with verified sellers and secure transactions
+                </p>
+              </div>
+              <div className="flex items-center gap-4">
+                <Link href="/cart">
+                  <button className="relative p-2 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white">
+                    <ShoppingCart className="w-6 h-6" />
+                    {cartItems > 0 && (
+                      <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+                        {cartItems}
+                      </span>
+                    )}
+                  </button>
+                </Link>
+                <Link href="/wishlist">
+                  <button className="relative p-2 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white">
+                    <Heart className="w-6 h-6" />
+                    {wishlistItems > 0 && (
+                      <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+                        {wishlistItems}
+                      </span>
+                    )}
+                  </button>
+                </Link>
+              </div>
+            </div>
+
+            {/* Search and Filters */}
+            <div className="flex flex-col lg:flex-row gap-4 items-center justify-between">
+              <div className="relative flex-1 max-w-md">
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+                <input
+                  type="text"
+                  placeholder="Search products, sellers, or categories..."
+                  value={searchTerm}
+                  onChange={e => setSearchTerm(e.target.value)}
+                  className="w-full pl-10 pr-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                />
+              </div>
+
+              <div className="flex items-center gap-4">
+                <select
+                  value={sortBy}
+                  onChange={e => setSortBy(e.target.value)}
+                  className="px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                >
+                  <option value="popular">Most Popular</option>
+                  <option value="price-low">Price: Low to High</option>
+                  <option value="price-high">Price: High to Low</option>
+                  <option value="newest">Newest First</option>
+                  <option value="reviews">Most Reviews</option>
+                </select>
+
+                <div className="flex items-center bg-white dark:bg-gray-700 rounded-lg border border-gray-300 dark:border-gray-600">
+                  <button
+                    onClick={() => setViewMode('grid')}
+                    className={`p-3 rounded-l-lg transition-colors ${
+                      viewMode === 'grid'
+                        ? 'bg-blue-500 text-white'
+                        : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white'
+                    }`}
+                  >
+                    <Grid3X3 className="w-5 h-5" />
+                  </button>
+                  <button
+                    onClick={() => setViewMode('list')}
+                    className={`p-3 rounded-r-lg transition-colors ${
+                      viewMode === 'list'
+                        ? 'bg-blue-500 text-white'
+                        : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white'
+                    }`}
+                  >
+                    <List className="w-5 h-5" />
+                  </button>
+                </div>
+
+                <button
+                  onClick={() => setShowFilters(!showFilters)}
+                  className={`px-4 py-3 rounded-lg border transition-colors ${
+                    showFilters
+                      ? 'bg-blue-500 text-white border-blue-500'
+                      : 'bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-300 border-gray-300 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-600'
+                  }`}
+                >
+                  <FilterIcon className="w-5 h-5" />
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {/* Filters and Search */}
-        <div className="bg-white rounded-lg shadow-sm p-6 mb-8">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-            <CategoryFilter
-              categories={getCategories()}
-              selectedCategory={selectedCategory}
-              onCategoryChange={setSelectedCategory}
-            />
-            <PriceFilter priceRange={priceRange} onPriceChange={setPriceRange} />
-            <RatingFilter />
-            <SortOptions sortBy={sortBy} onSortChange={setSortBy} />
+        <div className="flex flex-col lg:flex-row gap-8">
+          {/* Filters Sidebar */}
+          {showFilters && (
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -20 }}
+              className="lg:w-80 flex-shrink-0"
+            >
+              <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 sticky top-8">
+                <div className="flex items-center justify-between mb-6">
+                  <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Filters</h3>
+                  <button
+                    onClick={() => setShowFilters(false)}
+                    className="lg:hidden p-2 text-gray-400 hover:text-gray-600"
+                  >
+                    <X className="w-5 h-5" />
+                  </button>
+                </div>
+
+                {/* Categories */}
+                <div className="mb-6">
+                  <h4 className="text-sm font-medium text-gray-900 dark:text-white mb-3">
+                    Categories
+                  </h4>
+                  <div className="space-y-2">
+                    {getCategories().map(category => (
+                      <label key={category} className="flex items-center gap-2 cursor-pointer">
+                        <input
+                          type="radio"
+                          name="category"
+                          value={category}
+                          checked={selectedCategory === category}
+                          onChange={e => setSelectedCategory(e.target.value)}
+                          className="w-4 h-4 text-blue-600 border-gray-300 focus:ring-blue-500"
+                        />
+                        <span className="text-sm text-gray-700 dark:text-gray-300">
+                          {category.charAt(0).toUpperCase() + category.slice(1)}
+                        </span>
+                      </label>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Price Range */}
+                <div className="mb-6">
+                  <h4 className="text-sm font-medium text-gray-900 dark:text-white mb-3">
+                    Price Range
+                  </h4>
+                  <div className="space-y-4">
+                    <div className="flex items-center gap-2">
+                      <input
+                        type="number"
+                        placeholder="Min"
+                        value={priceRange[0]}
+                        onChange={e =>
+                          setPriceRange([parseInt(e.target.value) || 0, priceRange[1]])
+                        }
+                        className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      />
+                      <span className="text-gray-500">-</span>
+                      <input
+                        type="number"
+                        placeholder="Max"
+                        value={priceRange[1]}
+                        onChange={e =>
+                          setPriceRange([priceRange[0], parseInt(e.target.value) || 1000])
+                        }
+                        className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                {/* Additional Filters */}
+                <div className="space-y-4">
+                  <label className="flex items-center gap-2 cursor-pointer">
+                    <input
+                      type="checkbox"
+                      className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+                    />
+                    <span className="text-sm text-gray-700 dark:text-gray-300">
+                      Verified Sellers Only
+                    </span>
+                  </label>
+                  <label className="flex items-center gap-2 cursor-pointer">
+                    <input
+                      type="checkbox"
+                      className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+                    />
+                    <span className="text-sm text-gray-700 dark:text-gray-300">Fast Shipping</span>
+                  </label>
+                  <label className="flex items-center gap-2 cursor-pointer">
+                    <input
+                      type="checkbox"
+                      className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+                    />
+                    <span className="text-sm text-gray-700 dark:text-gray-300">In Stock Only</span>
+                  </label>
+                </div>
+              </div>
+            </motion.div>
+          )}
+
+          {/* Main Content */}
+          <div className="flex-1">
+            {/* Stats */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+              {stats.map((stat, index) => (
+                <motion.div
+                  key={stat.label}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: index * 0.1 }}
+                  className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-4"
+                >
+                  <div className="flex items-center gap-3">
+                    <stat.icon className="w-8 h-8 text-blue-600" />
+                    <div>
+                      <p className="text-2xl font-bold text-gray-900 dark:text-white">
+                        {stat.value}
+                      </p>
+                      <p className="text-sm text-gray-600 dark:text-gray-400">{stat.label}</p>
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+
+            {/* Products Grid */}
+            <div>
+              <div className="flex items-center justify-between mb-6">
+                <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
+                  Products ({filteredProducts.length})
+                </h2>
+                <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400">
+                  <Shield className="w-4 h-4" />
+                  <span>Secure Shopping</span>
+                </div>
+              </div>
+
+              {viewMode === 'grid' ? (
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                  {filteredProducts.map((product, index) => (
+                    <motion.div
+                      key={product.id}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: index * 0.05 }}
+                      className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden hover:shadow-lg transition-all"
+                    >
+                      {/* Product Image */}
+                      <div className="relative aspect-square bg-gray-100 dark:bg-gray-700">
+                        <div className="w-full h-full bg-gradient-to-br from-blue-100 to-purple-100 dark:from-blue-900 dark:to-purple-900 flex items-center justify-center">
+                          <Package className="w-16 h-16 text-gray-400" />
+                        </div>
+                        {product.trending && (
+                          <div className="absolute top-2 left-2 bg-orange-500 text-white px-2 py-1 rounded-full text-xs font-medium flex items-center gap-1">
+                            <TrendingUp className="w-3 h-3" />
+                            Trending
+                          </div>
+                        )}
+                        {product.originalPrice > product.price && (
+                          <div className="absolute top-2 right-2 bg-red-500 text-white px-2 py-1 rounded-full text-xs font-medium">
+                            -{getDiscountPercentage(product.originalPrice, product.price)}%
+                          </div>
+                        )}
+                        <div className="absolute bottom-2 right-2 flex gap-1">
+                          <button
+                            onClick={() => toggleWishlist(product.id)}
+                            className={`p-2 bg-white dark:bg-gray-800 rounded-full shadow-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors ${
+                              wishlistItems.includes(product.id)
+                                ? 'bg-red-500 text-white'
+                                : 'text-gray-600 dark:text-gray-400'
+                            }`}
+                          >
+                            <Heart className="w-4 h-4" />
+                          </button>
+                          <button className="p-2 bg-white dark:bg-gray-800 rounded-full shadow-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+                            <Share2 className="w-4 h-4 text-gray-600" />
+                          </button>
+                        </div>
+                      </div>
+
+                      {/* Product Info */}
+                      <div className="p-4">
+                        <div className="flex items-center gap-2 mb-2">
+                          <span className="text-sm text-gray-600 dark:text-gray-400">
+                            {product.category}
+                          </span>
+                          {product.seller.verified && (
+                            <CheckCircle className="w-4 h-4 text-green-600" />
+                          )}
+                        </div>
+                        <h3 className="font-semibold text-gray-900 dark:text-white mb-2 line-clamp-2">
+                          {product.name}
+                        </h3>
+                        <p className="text-sm text-gray-600 dark:text-gray-400 mb-3 line-clamp-2">
+                          {product.description}
+                        </p>
+
+                        {/* Price */}
+                        <div className="flex items-center gap-2 mb-3">
+                          <span className="text-xl font-bold text-gray-900 dark:text-white">
+                            {formatPrice(product.price, product.currency)}
+                          </span>
+                          {product.originalPrice > product.price && (
+                            <span className="text-sm text-gray-500 line-through">
+                              {formatPrice(product.originalPrice, product.currency)}
+                            </span>
+                          )}
+                        </div>
+
+                        {/* Rating and Reviews */}
+                        <div className="flex items-center gap-2 mb-3">
+                          <div className="flex items-center gap-1">
+                            <Star className="w-4 h-4 text-yellow-500 fill-current" />
+                            <span className="text-sm font-medium text-gray-900 dark:text-white">
+                              {product.rating}
+                            </span>
+                          </div>
+                          <span className="text-sm text-gray-600 dark:text-gray-400">
+                            ({product.reviewCount} reviews)
+                          </span>
+                        </div>
+
+                        {/* Seller Info */}
+                        <div className="flex items-center justify-between mb-4">
+                          <div className="flex items-center gap-2">
+                            <span className="text-sm text-gray-600 dark:text-gray-400">by</span>
+                            <span className="text-sm font-medium text-gray-900 dark:text-white">
+                              {product.seller.name}
+                            </span>
+                            <div className="flex items-center gap-1">
+                              <Star className="w-3 h-3 text-yellow-500 fill-current" />
+                              <span className="text-xs text-gray-600 dark:text-gray-400">
+                                {product.seller.rating}
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+
+                        {/* Features */}
+                        <div className="flex flex-wrap gap-1 mb-4">
+                          {product.features.slice(0, 2).map((feature, idx) => (
+                            <span
+                              key={idx}
+                              className="px-2 py-1 bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-400 rounded text-xs"
+                            >
+                              {feature}
+                            </span>
+                          ))}
+                        </div>
+
+                        {/* Actions */}
+                        <div className="flex items-center gap-2">
+                          <button
+                            onClick={() => addToCart(product.id)}
+                            disabled={!product.stock}
+                            className="flex-1 flex items-center justify-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                          >
+                            <ShoppingCart className="w-4 h-4" />
+                            {product.stock ? 'Add to Cart' : 'Out of Stock'}
+                          </button>
+                          <button className="p-2 border border-gray-300 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+                            <Eye className="w-4 h-4 text-gray-600" />
+                          </button>
+                        </div>
+
+                        {/* Shipping Info */}
+                        {product.shipping.free && (
+                          <div className="flex items-center gap-1 mt-2 text-xs text-green-600">
+                            <Truck className="w-3 h-3" />
+                            <span>Free Shipping</span>
+                          </div>
+                        )}
+                      </div>
+                    </motion.div>
+                  ))}
+                </div>
+              ) : (
+                <div className="space-y-4">
+                  {filteredProducts.map((product, index) => (
+                    <motion.div
+                      key={product.id}
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: index * 0.05 }}
+                      className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6"
+                    >
+                      <div className="flex items-center gap-6">
+                        {/* Product Image */}
+                        <div className="relative w-24 h-24 bg-gray-100 dark:bg-gray-700 rounded-lg flex-shrink-0">
+                          <div className="w-full h-full bg-gradient-to-br from-blue-100 to-purple-100 dark:from-blue-900 dark:to-purple-900 rounded-lg flex items-center justify-center">
+                            <Package className="w-8 h-8 text-gray-400" />
+                          </div>
+                          {product.trending && (
+                            <div className="absolute -top-1 -left-1 bg-orange-500 text-white px-1 py-0.5 rounded text-xs">
+                              Hot
+                            </div>
+                          )}
+                        </div>
+
+                        {/* Product Details */}
+                        <div className="flex-1 min-w-0">
+                          <div className="flex items-start justify-between mb-2">
+                            <div>
+                              <h3 className="font-semibold text-gray-900 dark:text-white mb-1">
+                                {product.name}
+                              </h3>
+                              <p className="text-sm text-gray-600 dark:text-gray-400 line-clamp-2">
+                                {product.description}
+                              </p>
+                            </div>
+                            <div className="text-right">
+                              <div className="flex items-center gap-2 mb-1">
+                                <span className="text-xl font-bold text-gray-900 dark:text-white">
+                                  {formatPrice(product.price, product.currency)}
+                                </span>
+                                {product.originalPrice > product.price && (
+                                  <span className="text-sm text-gray-500 line-through">
+                                    {formatPrice(product.originalPrice, product.currency)}
+                                  </span>
+                                )}
+                              </div>
+                              <div className="flex items-center gap-2">
+                                <div className="flex items-center gap-1">
+                                  <Star className="w-4 h-4 text-yellow-500 fill-current" />
+                                  <span className="text-sm font-medium">{product.rating}</span>
+                                </div>
+                                <span className="text-sm text-gray-600 dark:text-gray-400">
+                                  ({product.reviewCount})
+                                </span>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div className="flex items-center justify-between">
+                            <div className="flex items-center gap-4 text-sm text-gray-600 dark:text-gray-400">
+                              <span>by {product.seller.name}</span>
+                              {product.seller.verified && (
+                                <div className="flex items-center gap-1">
+                                  <CheckCircle className="w-4 h-4 text-green-600" />
+                                  <span>Verified</span>
+                                </div>
+                              )}
+                              {product.shipping.free && (
+                                <div className="flex items-center gap-1">
+                                  <Truck className="w-4 h-4" />
+                                  <span>Free Shipping</span>
+                                </div>
+                              )}
+                            </div>
+
+                            <div className="flex items-center gap-2">
+                              <button
+                                onClick={() => toggleWishlist(product.id)}
+                                className="p-2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
+                              >
+                                <Heart className="w-4 h-4" />
+                              </button>
+                              <button className="p-2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300">
+                                <Share2 className="w-4 h-4" />
+                              </button>
+                              <button
+                                onClick={() => addToCart(product.id)}
+                                disabled={!product.stock}
+                                className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50"
+                              >
+                                <ShoppingCart className="w-4 h-4" />
+                                {product.stock ? 'Add to Cart' : 'Out of Stock'}
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </motion.div>
+                  ))}
+                </div>
+              )}
+
+              {/* Empty State */}
+              {filteredProducts.length === 0 && (
+                <div className="text-center py-12">
+                  <div className="w-16 h-16 bg-gray-100 dark:bg-gray-800 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <Search className="w-8 h-8 text-gray-400" />
+                  </div>
+                  <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">
+                    No products found
+                  </h3>
+                  <p className="text-gray-600 dark:text-gray-400">
+                    Try adjusting your search terms or filters to find what you're looking for.
+                  </p>
+                </div>
+              )}
+            </div>
           </div>
         </div>
-
-        {/* Products Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-          {filteredProducts.map(product => (
-            <ProductCard
-              key={product.id}
-              product={product}
-              onAddToCart={addToCart}
-              onToggleWishlist={toggleWishlist}
-              isInWishlist={wishlist.includes(product.id)}
-              formatPrice={formatPrice}
-            />
-          ))}
-        </div>
-
-        {/* Empty State */}
-        {filteredProducts.length === 0 && !loading && (
-          <div className="text-center py-12">
-            <div className="text-gray-400 text-6xl mb-4">🔍</div>
-            <h3 className="text-lg font-medium text-gray-900 mb-2">No products found</h3>
-            <p className="text-gray-500">Try adjusting your search or filter criteria</p>
-          </div>
-        )}
-
-        {/* Pagination */}
-        {filteredProducts.length > 0 && (
-          <div className="mt-8 flex justify-center">
-            <Pagination />
-          </div>
-        )}
       </div>
-
-      {/* Mobile Navigation */}
-      <MobileNavigation />
     </div>
   );
 }
@@ -458,7 +910,7 @@ function GoSellrHeader({
                 className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
               />
               <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                <SearchIcon className="h-5 w-5 text-gray-400" />
+                <Search className="h-5 w-5 text-gray-400" />
               </div>
             </div>
           </div>
@@ -475,7 +927,7 @@ function GoSellrHeader({
                   <img src={user.avatar} alt={user.name} className="w-8 h-8 rounded-full" />
                 </div>
                 <button className="relative p-2 text-gray-400 hover:text-gray-600">
-                  <ShoppingCartIcon className="w-6 h-6" />
+                  <ShoppingCart className="w-6 h-6" />
                   {cartCount > 0 && (
                     <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
                       {cartCount}
@@ -504,7 +956,7 @@ function ProductCard({
   formatPrice,
 }: {
   product: Product;
-  onAddToCart: (product: Product) => void;
+  onAddToCart: (productId: string) => void;
   onToggleWishlist: (productId: string) => void;
   isInWishlist: boolean;
   formatPrice: (price: number, currency: string) => string;
@@ -520,11 +972,11 @@ function ProductCard({
             isInWishlist ? 'bg-red-500 text-white' : 'bg-white text-gray-400 hover:text-red-500'
           }`}
         >
-          <HeartIcon className="w-5 h-5" />
+          <Heart className="w-5 h-5" />
         </button>
         {product.blockchain.escrowEnabled && (
           <div className="absolute top-2 left-2 bg-green-500 text-white text-xs px-2 py-1 rounded">
-            <ShieldCheckIcon className="w-3 h-3 inline mr-1" />
+            <Shield className="w-3 h-3 inline mr-1" />
             Escrow
           </div>
         )}
@@ -547,7 +999,7 @@ function ProductCard({
           </div>
 
           <div className="flex items-center">
-            <StarIcon className="w-4 h-4 text-yellow-400 fill-current" />
+            <Star className="w-4 h-4 text-yellow-400 fill-current" />
             <span className="ml-1 text-sm text-gray-500">
               {product.rating} ({product.reviewCount})
             </span>
@@ -576,13 +1028,13 @@ function ProductCard({
         {/* Action Buttons */}
         <div className="mt-3 flex space-x-2">
           <button
-            onClick={() => onAddToCart(product)}
+            onClick={() => onAddToCart(product.id)}
             className="flex-1 bg-blue-600 text-white py-2 px-3 rounded-md text-sm font-medium hover:bg-blue-700"
           >
             Add to Cart
           </button>
           <button className="p-2 text-gray-400 hover:text-gray-600 border border-gray-300 rounded-md">
-            <TruckIcon className="w-4 h-4" />
+            <Truck className="w-4 h-4" />
           </button>
         </div>
       </div>
@@ -622,8 +1074,8 @@ function PriceFilter({
   priceRange,
   onPriceChange,
 }: {
-  priceRange: { min: number; max: number };
-  onPriceChange: (range: { min: number; max: number }) => void;
+  priceRange: [number, number];
+  onPriceChange: (range: [number, number]) => void;
 }) {
   return (
     <div>
@@ -632,15 +1084,15 @@ function PriceFilter({
         <input
           type="number"
           placeholder="Min"
-          value={priceRange.min}
-          onChange={e => onPriceChange({ ...priceRange, min: Number(e.target.value) })}
+          value={priceRange[0]}
+          onChange={e => onPriceChange([parseInt(e.target.value) || 0, priceRange[1]])}
           className="w-1/2 border border-gray-300 rounded-md px-3 py-2 focus:ring-blue-500 focus:border-blue-500"
         />
         <input
           type="number"
           placeholder="Max"
-          value={priceRange.max}
-          onChange={e => onPriceChange({ ...priceRange, max: Number(e.target.value) })}
+          value={priceRange[1]}
+          onChange={e => onPriceChange([priceRange[0], parseInt(e.target.value) || 1000])}
           className="w-1/2 border border-gray-300 rounded-md px-3 py-2 focus:ring-blue-500 focus:border-blue-500"
         />
       </div>
@@ -715,19 +1167,19 @@ function MobileNavigation() {
     <nav className="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200">
       <div className="flex justify-around py-2">
         <button className="flex flex-col items-center text-xs text-blue-600">
-          <SearchIcon className="w-5 h-5 mb-1" />
+          <Search className="w-5 h-5 mb-1" />
           Search
         </button>
         <button className="flex flex-col items-center text-xs text-gray-600">
-          <HeartIcon className="w-5 h-5 mb-1" />
+          <Heart className="w-5 h-5 mb-1" />
           Wishlist
         </button>
         <button className="flex flex-col items-center text-xs text-gray-600">
-          <ShoppingCartIcon className="w-5 h-5 mb-1" />
+          <ShoppingCart className="w-5 h-5 mb-1" />
           Cart
         </button>
         <button className="flex flex-col items-center text-xs text-gray-600">
-          <UserIcon className="w-5 h-5 mb-1" />
+          <User className="w-5 h-5 mb-1" />
           Profile
         </button>
       </div>
@@ -771,6 +1223,7 @@ interface Product {
   blockchain: BlockchainInfo;
   aiScore: AIScore;
   createdAt: string;
+  trending: boolean;
 }
 
 interface Seller {
