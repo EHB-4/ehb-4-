@@ -1,0 +1,13 @@
+{
+  "welcome": "Welcome to our eCommerce store!",
+  "login": "Login",
+  "signup": "Signup",
+  "checkout": "Checkout",
+  "payment": "Payment",
+  "language": "Language",
+  "english": "English",
+  "urdu": "Urdu"
+}
+
+// AI Guidance: This file contains English translations for common UI elements.
+// You can add more translations here as needed. 

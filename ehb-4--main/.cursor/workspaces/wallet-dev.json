@@ -1,0 +1,5 @@
+{
+  "name": "wallet-dev",
+  "include": ["api/wallet/**/*"],
+  "exclude": [".next/**/*", "node_modules/**/*", ".git/**/*"]
+} 

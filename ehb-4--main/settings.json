@@ -1,0 +1,16 @@
+{
+    "git.openRepositoryInParentFolders": "always",
+    "cursor.cpp.disabledLanguages": [
+        "plaintext",
+        "markdown",
+        "scminput"
+    ],
+    "workbench.colorTheme": "Kali Terminal Dark",
+    "livePreview.debugOnExternalPreview": true,
+    "workbench.settings.applyToAllProfiles": [
+        "livePreview.defaultPreviewPath"
+    ],
+    "livePreview.httpHeaders": {
+        "Accept-Ranges": "bytes"
+    }
+} 

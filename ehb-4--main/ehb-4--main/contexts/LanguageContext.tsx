@@ -1,0 +1,1 @@
+// Wrap your app with <LanguageProvider> in layout.tsx. 
