@@ -1,202 +1,183 @@
-import { BrowserProvider } from 'ethers';
-import Link from 'next/link';
-import { useRouter, usePathname } from 'next/navigation';
-import { useSession, signOut } from 'next-auth/react';
+'use client';
+
 import React, { useState } from 'react';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import {
+  Home,
+  Settings,
+  BarChart3,
+  Shield,
+  MessageSquare,
+  FileText,
+  Users,
+  Target,
+  Menu,
+  X,
+  ChevronDown,
+} from 'lucide-react';
+
+const navigation = [
+  { name: 'Dashboard', href: '/dashboard', icon: Home },
+  { name: 'Development Portal', href: '/development-portal', icon: Settings },
+  { name: 'Project Tracker', href: '/project-tracker', icon: BarChart3 },
+  { name: 'SLA Management', href: '/sco', icon: Shield },
+  { name: 'Contact', href: '/contact', icon: MessageSquare },
+  { name: 'Portfolio', href: '/portfolio', icon: FileText },
+  { name: 'Consultation', href: '/consultation', icon: Users },
+];
+
+const secondaryNavigation = [
+  { name: 'AI Agents', href: '/ai-agents' },
+  { name: 'Analytics', href: '/analytics' },
+  { name: 'Settings', href: '/settings' },
+];
 
 export default function Navigation() {
-  const router = useRouter();
+  const [isOpen, setIsOpen] = useState(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const pathname = usePathname();
-  const { data: session } = useSession();
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [walletAddress, setWalletAddress] = useState<string>('');
-  const [isConnecting, setIsConnecting] = useState(false);
-
-  const connectWallet = async () => {
-    try {
-      setIsConnecting(true);
-      if (typeof window !== 'undefined' && window.ethereum) {
-        const provider = new BrowserProvider(window.ethereum);
-        const signer = await provider.getSigner();
-        const address = await signer.getAddress();
-        setWalletAddress(address);
-      }
-    } catch (error) {
-      console.error('Failed to connect wallet:', error);
-    } finally {
-      setIsConnecting(false);
-    }
-  };
-
-  const navigation = [
-    { name: 'Dashboard', href: '/' },
-    { name: 'Token Operations', href: '/token/operations' },
-    { name: 'Transactions', href: '/transactions' },
-    { name: 'Analytics', href: '/analytics' },
-  ];
 
   return (
-    <nav className="bg-white shadow">
+    <nav className="bg-white shadow-sm border-b">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16">
-          <div className="flex">
-            {/* Logo */}
+          {/* Logo and primary navigation */}
+          <div className="flex items-center">
             <div className="flex-shrink-0 flex items-center">
               <Link href="/" className="text-xl font-bold text-blue-600">
-                EHB
+                EHB Dev
               </Link>
             </div>
 
-            {/* Desktop Navigation */}
-            <div className="hidden sm:ml-6 sm:flex sm:space-x-8">
-              {navigation.map(item => (
-                <Link
-                  key={item.name}
-                  href={item.href}
-                  className={`${
-                    pathname === item.href
-                      ? 'border-blue-500 text-gray-900'
-                      : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'
-                  } inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium`}
-                >
-                  {item.name}
-                </Link>
-              ))}
+            {/* Desktop navigation */}
+            <div className="hidden md:ml-6 md:flex md:space-x-8">
+              {navigation.map(item => {
+                const isActive = pathname === item.href;
+                return (
+                  <Link
+                    key={item.name}
+                    href={item.href}
+                    className={`inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium transition-colors ${
+                      isActive
+                        ? 'border-blue-500 text-gray-900'
+                        : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'
+                    }`}
+                  >
+                    <item.icon className="w-4 h-4 mr-2" />
+                    {item.name}
+                  </Link>
+                );
+              })}
             </div>
           </div>
 
-          {/* Right side buttons */}
-          <div className="hidden sm:ml-6 sm:flex sm:items-center sm:space-x-4">
-            {/* Wallet Connection */}
-            {!walletAddress ? (
+          {/* Right side navigation */}
+          <div className="hidden md:flex md:items-center md:space-x-4">
+            {/* More dropdown */}
+            <div className="relative">
               <button
-                onClick={connectWallet}
-                disabled={isConnecting}
-                className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50"
+                onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                className="inline-flex items-center px-3 py-2 border border-transparent text-sm font-medium rounded-md text-gray-500 hover:text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
               >
-                {isConnecting ? 'Connecting...' : 'Connect Wallet'}
+                More
+                <ChevronDown className="ml-1 h-4 w-4" />
               </button>
-            ) : (
-              <div className="text-sm text-gray-500">
-                {walletAddress.slice(0, 6)}...{walletAddress.slice(-4)}
-              </div>
-            )}
 
-            {/* User Menu */}
-            {session ? (
-              <div className="relative">
-                <button
-                  onClick={() => signOut()}
-                  className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-gray-700 bg-gray-100 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
-                >
-                  Sign Out
-                </button>
+              {isDropdownOpen && (
+                <div className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-50">
+                  <div className="py-1">
+                    {secondaryNavigation.map(item => (
+                      <Link
+                        key={item.name}
+                        href={item.href}
+                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+                        onClick={() => setIsDropdownOpen(false)}
+                      >
+                        {item.name}
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
+
+            {/* Profile dropdown */}
+            <div className="ml-3 relative">
+              <div className="flex items-center space-x-3">
+                <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center">
+                  <span className="text-white text-sm font-medium">JD</span>
+                </div>
+                <span className="text-sm font-medium text-gray-700">John Doe</span>
               </div>
-            ) : (
-              <Link
-                href="/auth/signin"
-                className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
-              >
-                Sign In
-              </Link>
-            )}
+            </div>
           </div>
 
           {/* Mobile menu button */}
-          <div className="flex items-center sm:hidden">
+          <div className="md:hidden flex items-center">
             <button
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              onClick={() => setIsOpen(!isOpen)}
               className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500"
             >
-              <span className="sr-only">Open main menu</span>
-              {/* Menu icon */}
-              <svg
-                className={`${isMenuOpen ? 'hidden' : 'block'} h-6 w-6`}
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M4 6h16M4 12h16M4 18h16"
-                />
-              </svg>
-              {/* Close icon */}
-              <svg
-                className={`${isMenuOpen ? 'block' : 'hidden'} h-6 w-6`}
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M6 18L18 6M6 6l12 12"
-                />
-              </svg>
+              {isOpen ? <X className="block h-6 w-6" /> : <Menu className="block h-6 w-6" />}
             </button>
           </div>
         </div>
       </div>
 
       {/* Mobile menu */}
-      <div className={`${isMenuOpen ? 'block' : 'hidden'} sm:hidden`}>
-        <div className="pt-2 pb-3 space-y-1">
-          {navigation.map(item => (
-            <Link
-              key={item.name}
-              href={item.href}
-              className={`${
-                pathname === item.href
-                  ? 'bg-blue-50 border-blue-500 text-blue-700'
-                  : 'border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700'
-              } block pl-3 pr-4 py-2 border-l-4 text-base font-medium`}
-            >
-              {item.name}
-            </Link>
-          ))}
-        </div>
+      {isOpen && (
+        <div className="md:hidden">
+          <div className="pt-2 pb-3 space-y-1">
+            {navigation.map(item => {
+              const isActive = pathname === item.href;
+              return (
+                <Link
+                  key={item.name}
+                  href={item.href}
+                  className={`block pl-3 pr-4 py-2 border-l-4 text-base font-medium transition-colors ${
+                    isActive
+                      ? 'bg-blue-50 border-blue-500 text-blue-700'
+                      : 'border-transparent text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800'
+                  }`}
+                  onClick={() => setIsOpen(false)}
+                >
+                  <div className="flex items-center">
+                    <item.icon className="w-5 h-5 mr-3" />
+                    {item.name}
+                  </div>
+                </Link>
+              );
+            })}
+          </div>
 
-        {/* Mobile wallet and auth buttons */}
-        <div className="pt-4 pb-3 border-t border-gray-200">
-          <div className="flex items-center px-4 space-x-4">
-            {!walletAddress ? (
-              <button
-                onClick={connectWallet}
-                disabled={isConnecting}
-                className="w-full inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50"
-              >
-                {isConnecting ? 'Connecting...' : 'Connect Wallet'}
-              </button>
-            ) : (
-              <div className="text-sm text-gray-500">
-                {walletAddress.slice(0, 6)}...{walletAddress.slice(-4)}
+          <div className="pt-4 pb-3 border-t border-gray-200">
+            <div className="flex items-center px-4">
+              <div className="flex-shrink-0">
+                <div className="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center">
+                  <span className="text-white text-sm font-medium">JD</span>
+                </div>
               </div>
-            )}
-
-            {session ? (
-              <button
-                onClick={() => signOut()}
-                className="w-full inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-gray-700 bg-gray-100 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
-              >
-                Sign Out
-              </button>
-            ) : (
-              <Link
-                href="/auth/signin"
-                className="w-full inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
-              >
-                Sign In
-              </Link>
-            )}
+              <div className="ml-3">
+                <div className="text-base font-medium text-gray-800">John Doe</div>
+                <div className="text-sm font-medium text-gray-500">john@example.com</div>
+              </div>
+            </div>
+            <div className="mt-3 space-y-1">
+              {secondaryNavigation.map(item => (
+                <Link
+                  key={item.name}
+                  href={item.href}
+                  className="block px-4 py-2 text-base font-medium text-gray-500 hover:text-gray-800 hover:bg-gray-100"
+                  onClick={() => setIsOpen(false)}
+                >
+                  {item.name}
+                </Link>
+              ))}
+            </div>
           </div>
         </div>
-      </div>
+      )}
     </nav>
   );
 }

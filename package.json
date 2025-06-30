@@ -44,7 +44,11 @@
     "auto:gosellr": "powershell -ExecutionPolicy Bypass -File scripts/ehb-auto-launch.ps1 gosellr",
     "auto:all": "powershell -ExecutionPolicy Bypass -File scripts/ehb-auto-launch.ps1 all",
     "open:gosellr": "powershell -Command \"Start-Process 'http://localhost:4000'\"",
-    "open:dev-portal": "powershell -Command \"Start-Process 'http://localhost:8080'\""
+    "open:dev-portal": "powershell -Command \"Start-Process 'http://localhost:8080'\"",
+    "quick:open": "node scripts/auto-open-browser.js",
+    "quick:open:win": "scripts\\quick-open.bat",
+    "quick:open:ps": "powershell -ExecutionPolicy Bypass -File scripts/quick-open.ps1",
+    "open:all": "powershell -Command \"Start-Process 'http://localhost:3000'; Start-Process 'http://localhost:5000'; Start-Process 'http://localhost:8080'; Start-Process 'http://localhost:4000'\""
   },
   "dependencies": {
     "@auth/prisma-adapter": "^2.10.0",
