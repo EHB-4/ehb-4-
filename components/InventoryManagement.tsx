@@ -101,9 +101,11 @@ export default function InventoryManagement({
                   type="number"
                   id="quantity"
                   value={newProduct.quantity}
-                  onChange={e =>
-                    setNewProduct({ ...newProduct, quantity: parseInt(e.target.value) })
-                  }
+                  onChange={e => {
+                    const value = parseInt(e.target.value);
+                    setNewProduct({ ...newProduct, quantity: isNaN(value) || value < 0 ? 0 : value });
+                  }}
+                  min="0"
                   className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
                   required
                 />
@@ -116,9 +118,12 @@ export default function InventoryManagement({
                   type="number"
                   id="price"
                   value={newProduct.price}
-                  onChange={e =>
-                    setNewProduct({ ...newProduct, price: parseFloat(e.target.value) })
-                  }
+                  onChange={e => {
+                    const value = parseFloat(e.target.value);
+                    setNewProduct({ ...newProduct, price: isNaN(value) || value < 0 ? 0 : value });
+                  }}
+                  min="0"
+                  step="0.01"
                   className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
                   required
                 />
@@ -191,7 +196,13 @@ export default function InventoryManagement({
                   <input
                     type="number"
                     value={product.quantity}
-                    onChange={e => handleQuantityChange(product.id, parseInt(e.target.value))}
+                    onChange={e => {
+                      const value = parseInt(e.target.value);
+                      if (!isNaN(value) && value >= 0) {
+                        handleQuantityChange(product.id, value);
+                      }
+                    }}
+                    min="0"
                     className="w-20 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
                   />
                 </td>
