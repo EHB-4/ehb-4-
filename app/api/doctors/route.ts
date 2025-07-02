@@ -1,40 +1,52 @@
-import { ObjectId } from 'mongodb';
 import { NextResponse } from 'next/server';
-import { getServerSession } from 'next-auth';
 
-import { authOptions } from '@/lib/authOptions';
-import { Doctor } from '@/lib/models/Doctor';
-import clientPromise from '@/lib/mongodb';
+// Mock doctors data
+const mockDoctors = [
+  {
+    _id: 'doc1',
+    name: 'Dr. Sarah Johnson',
+    specialization: 'Cardiology',
+    experience: '15 years',
+    fee: 150,
+    rating: 4.8,
+    patients: 1250,
+    image: '/doctors/sarah-johnson.jpg',
+    available: true,
+  },
+  {
+    _id: 'doc2',
+    name: 'Dr. Michael Chen',
+    specialization: 'Dermatology',
+    experience: '12 years',
+    fee: 120,
+    rating: 4.7,
+    patients: 980,
+    image: '/doctors/michael-chen.jpg',
+    available: true,
+  },
+  {
+    _id: 'doc3',
+    name: 'Dr. Emily Davis',
+    specialization: 'Pediatrics',
+    experience: '10 years',
+    fee: 100,
+    rating: 4.9,
+    patients: 2100,
+    image: '/doctors/emily-davis.jpg',
+    available: true,
+  },
+];
 
-// GET /api/doctors?city=xxx&specialty=yyy&hospital=zzz&minSqlLevel=3
 export async function GET(request: Request) {
   try {
-    const session = await getServerSession(authOptions);
-    if (!session?.user?.id) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
-    }
-
     const { searchParams } = new URL(request.url);
-    const city = searchParams.get('city');
-    const specialty = searchParams.get('specialty');
-    const hospital = searchParams.get('hospital');
-    const minSqlLevel = searchParams.get('minSqlLevel');
+    const specialization = searchParams.get('specialization');
 
-    const client = await clientPromise;
-    const db = client.db();
+    let doctors = mockDoctors;
 
-    // Build query
-    const query: any = {};
-    if (city) query.city = city;
-    if (specialty) query.specialty = specialty;
-    if (hospital) query.hospital = hospital;
-    if (minSqlLevel) query.sqlLevel = { $gte: parseInt(minSqlLevel) };
-
-    const doctors = await db
-      .collection('doctors')
-      .find(query)
-      .sort({ sqlLevel: -1, name: 1 })
-      .toArray();
+    if (specialization) {
+      doctors = doctors.filter(doctor => doctor.specialization === specialization);
+    }
 
     return NextResponse.json({ doctors });
   } catch (error) {
@@ -43,56 +55,30 @@ export async function GET(request: Request) {
   }
 }
 
-// POST /api/doctors
 export async function POST(request: Request) {
   try {
-    const session = await getServerSession(authOptions);
-    if (!session?.user?.id) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
-    }
-
     const body = await request.json();
-    const { name, city, specialty, hospital, fee } = body;
+    const { name, specialization, experience, fee } = body;
 
-    if (!name || !city || !specialty || !hospital || !fee) {
+    if (!name || !specialization || !experience || !fee) {
       return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
     }
 
-    const client = await clientPromise;
-    const db = client.db();
-
-    // Check if user already has a doctor profile
-    const existingDoctor = await db.collection('doctors').findOne({ userId: session.user.id });
-
-    if (existingDoctor) {
-      return NextResponse.json({ error: 'Doctor profile already exists' }, { status: 400 });
-    }
-
-    // Get user's SQL level from wallet
-    const wallet = await db.collection('wallets').findOne({ userId: session.user.id });
-
-    if (!wallet || wallet.sqlLevel < 3) {
-      return NextResponse.json({ error: 'Insufficient SQL level. Required: 3' }, { status: 403 });
-    }
-
-    // Create doctor profile
-    const doctor: Doctor = {
-      _id: new ObjectId(),
-      userId: session.user.id,
+    const newDoctor = {
+      _id: `doc${Date.now()}`,
       name,
-      city,
-      specialty,
-      hospital,
+      specialization,
+      experience,
       fee,
-      sqlLevel: wallet.sqlLevel,
       rating: 0,
-      createdAt: new Date(),
-      updatedAt: new Date(),
+      patients: 0,
+      image: '/doctors/default.jpg',
+      available: true,
     };
 
-    await db.collection('doctors').insertOne(doctor);
+    mockDoctors.push(newDoctor);
 
-    return NextResponse.json({ doctor });
+    return NextResponse.json({ doctor: newDoctor });
   } catch (error) {
     console.error('Error creating doctor:', error);
     return NextResponse.json({ error: 'Failed to create doctor' }, { status: 500 });

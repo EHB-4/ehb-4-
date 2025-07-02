@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useState } from 'react';
 import { FiSend, FiClock, FiCalendar, FiCheck } from 'react-icons/fi';
 

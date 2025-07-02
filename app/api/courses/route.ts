@@ -1,36 +1,63 @@
-import { ObjectId } from 'mongodb';
 import { NextResponse } from 'next/server';
-import { getServerSession } from 'next-auth';
 
-import { authOptions } from '@/lib/authOptions';
-import { Course } from '@/lib/models/Course';
-import clientPromise from '@/lib/mongodb';
+// Mock courses data
+const mockCourses = [
+  {
+    _id: '1',
+    title: 'Introduction to Web Development',
+    description: 'Learn the basics of HTML, CSS, and JavaScript',
+    instructor: 'Prof. John Smith',
+    duration: '8 weeks',
+    price: 299,
+    category: 'Programming',
+    level: 'Beginner',
+    enrolledStudents: 1250,
+    rating: 4.8,
+    image: '/courses/web-dev.jpg',
+  },
+  {
+    _id: '2',
+    title: 'Advanced React Development',
+    description: 'Master React hooks, context, and advanced patterns',
+    instructor: 'Prof. Sarah Johnson',
+    duration: '10 weeks',
+    price: 399,
+    category: 'Programming',
+    level: 'Advanced',
+    enrolledStudents: 890,
+    rating: 4.9,
+    image: '/courses/react.jpg',
+  },
+  {
+    _id: '3',
+    title: 'Data Science Fundamentals',
+    description: 'Learn Python, statistics, and machine learning basics',
+    instructor: 'Prof. Michael Chen',
+    duration: '12 weeks',
+    price: 499,
+    category: 'Data Science',
+    level: 'Intermediate',
+    enrolledStudents: 2100,
+    rating: 4.7,
+    image: '/courses/data-science.jpg',
+  },
+];
 
-// GET /api/courses?subject=xxx&city=yyy&mode=zzz&maxFee=1000
 export async function GET(request: Request) {
   try {
-    const session = await getServerSession(authOptions);
-    if (!session?.user?.id) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    const { searchParams } = new URL(request.url);
+    const category = searchParams.get('category');
+    const level = searchParams.get('level');
+
+    let courses = mockCourses;
+
+    if (category) {
+      courses = courses.filter(course => course.category === category);
     }
 
-    const { searchParams } = new URL(request.url);
-    const subject = searchParams.get('subject');
-    const city = searchParams.get('city');
-    const mode = searchParams.get('mode');
-    const maxFee = searchParams.get('maxFee');
-
-    const client = await clientPromise;
-    const db = client.db();
-
-    // Build query
-    const query: any = {};
-    if (subject) query.subject = subject;
-    if (city) query.city = city;
-    if (mode) query.mode = mode;
-    if (maxFee) query.price = { $lte: parseInt(maxFee) };
-
-    const courses = await db.collection('courses').find(query).sort({ createdAt: -1 }).toArray();
+    if (level) {
+      courses = courses.filter(course => course.level === level);
+    }
 
     return NextResponse.json({ courses });
   } catch (error) {
@@ -39,52 +66,32 @@ export async function GET(request: Request) {
   }
 }
 
-// POST /api/courses
 export async function POST(request: Request) {
   try {
-    const session = await getServerSession(authOptions);
-    if (!session?.user?.id) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
-    }
-
     const body = await request.json();
-    const { title, description, subject, price, schedule, city, mode } = body;
+    const { title, description, instructor, duration, price, category, level } = body;
 
-    if (!title || !description || !subject || !price || !schedule || !city || !mode) {
+    if (!title || !description || !instructor || !duration || !price || !category || !level) {
       return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
     }
 
-    const client = await clientPromise;
-    const db = client.db();
-
-    // Check if user is a verified tutor
-    const tutor = await db.collection('tutors').findOne({ userId: session.user.id });
-
-    if (!tutor || tutor.sqlLevel < 3) {
-      return NextResponse.json(
-        { error: 'Only verified tutors (SQL level 3+) can create courses' },
-        { status: 403 }
-      );
-    }
-
-    // Create course
-    const course: Course = {
-      _id: new ObjectId(),
-      tutorId: tutor._id,
+    const newCourse = {
+      _id: Date.now().toString(),
       title,
       description,
-      subject,
+      instructor,
+      duration,
       price,
-      schedule,
-      city,
-      mode,
-      createdAt: new Date(),
-      updatedAt: new Date(),
+      category,
+      level,
+      enrolledStudents: 0,
+      rating: 0,
+      image: '/courses/default.jpg',
     };
 
-    await db.collection('courses').insertOne(course);
+    mockCourses.push(newCourse);
 
-    return NextResponse.json({ course });
+    return NextResponse.json({ course: newCourse });
   } catch (error) {
     console.error('Error creating course:', error);
     return NextResponse.json({ error: 'Failed to create course' }, { status: 500 });

@@ -1,3 +1,4 @@
+export const runtime = "nodejs";
 import axios from 'axios';
 import { NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth/next';

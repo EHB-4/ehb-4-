@@ -1,0 +1,37 @@
+{
+  "totalFiles": 36,
+  "duplicates": [],
+  "merged": [
+    {
+      "type": "similar_name",
+      "files": [
+        "app\\franchise\\apply\\page.tsx",
+        "app\\franchise\\books\\page.tsx",
+        "app\\franchise\\education\\page.tsx",
+        "app\\franchise\\gosellr\\page.tsx",
+        "app\\franchise\\health\\page.tsx",
+        "app\\franchise\\law\\page.tsx",
+        "app\\franchise\\page.tsx",
+        "app\\franchise\\status\\page.tsx",
+        "app\\franchise\\travel\\page.tsx",
+        "temp-backup\\ehb-franchise\\books\\page.tsx",
+        "temp-backup\\ehb-franchise\\development\\page.tsx",
+        "temp-backup\\ehb-franchise\\education\\page.tsx",
+        "temp-backup\\ehb-franchise\\gosellr\\booking\\page.tsx",
+        "temp-backup\\ehb-franchise\\gosellr\\page.tsx",
+        "temp-backup\\ehb-franchise\\health\\page.tsx",
+        "temp-backup\\ehb-franchise\\law\\page.tsx",
+        "temp-backup\\ehb-franchise\\page.tsx",
+        "temp-backup\\ehb-franchise\\travel\\page.tsx"
+      ],
+      "fileName": "page.tsx"
+    }
+  ],
+  "errors": [],
+  "lastScan": "2025-07-02T09:57:24.409Z",
+  "performance": {
+    "scanTime": 3,
+    "mergeTime": 53,
+    "backupTime": 0
+  }
+}

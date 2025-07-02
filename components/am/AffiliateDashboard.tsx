@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useState } from 'react';
 import { FiUsers, FiLink, FiCopy, FiCheck, FiAlertCircle } from 'react-icons/fi';
 

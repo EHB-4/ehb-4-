@@ -1,0 +1,73 @@
+{
+  "timestamp": "2025-07-02T15:58:35.001Z",
+  "summary": {
+    "totalFiles": 53,
+    "duplicatesFound": 1,
+    "filesMerged": 2,
+    "errors": 0
+  },
+  "performance": {
+    "scanTime": 234,
+    "mergeTime": 225,
+    "backupTime": 18
+  },
+  "details": {
+    "duplicates": [
+      {
+        "type": "similar_name",
+        "files": [
+          "app\\franchise\\ai-insights\\page.tsx",
+          "app\\franchise\\analytics-advanced\\page.tsx",
+          "app\\franchise\\api-docs\\page.tsx",
+          "app\\franchise\\apply\\page.tsx",
+          "app\\franchise\\books\\page.tsx",
+          "app\\franchise\\dashboard\\page.tsx",
+          "app\\franchise\\education\\page.tsx",
+          "app\\franchise\\health\\page.tsx",
+          "app\\franchise\\hierarchy\\page.tsx",
+          "app\\franchise\\integration\\page.tsx",
+          "app\\franchise\\law\\page.tsx",
+          "app\\franchise\\management\\page.tsx",
+          "app\\franchise\\notifications\\page.tsx",
+          "app\\franchise\\page.tsx",
+          "app\\franchise\\reports\\page.tsx",
+          "app\\franchise\\travel\\page.tsx"
+        ],
+        "fileName": "page.tsx"
+      }
+    ],
+    "merged": [
+      {
+        "type": "similar_name",
+        "files": [
+          "app\\franchise\\apply\\page.tsx",
+          "app\\franchise\\status\\page.tsx"
+        ],
+        "fileName": "page.tsx"
+      },
+      {
+        "type": "similar_name",
+        "files": [
+          "app\\franchise\\ai-insights\\page.tsx",
+          "app\\franchise\\analytics-advanced\\page.tsx",
+          "app\\franchise\\api-docs\\page.tsx",
+          "app\\franchise\\apply\\page.tsx",
+          "app\\franchise\\books\\page.tsx",
+          "app\\franchise\\dashboard\\page.tsx",
+          "app\\franchise\\education\\page.tsx",
+          "app\\franchise\\health\\page.tsx",
+          "app\\franchise\\hierarchy\\page.tsx",
+          "app\\franchise\\integration\\page.tsx",
+          "app\\franchise\\law\\page.tsx",
+          "app\\franchise\\management\\page.tsx",
+          "app\\franchise\\notifications\\page.tsx",
+          "app\\franchise\\page.tsx",
+          "app\\franchise\\reports\\page.tsx",
+          "app\\franchise\\travel\\page.tsx"
+        ],
+        "fileName": "page.tsx"
+      }
+    ],
+    "errors": []
+  }
+}

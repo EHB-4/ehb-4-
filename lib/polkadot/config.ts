@@ -175,3 +175,22 @@ export const POLKADOT_CONFIG = {
     // Add custom types if needed
   },
 };
+
+// Mock Polkadot configuration for frontend development
+export const polkadotConfig = {
+  rpcUrl: 'wss://rpc.polkadot.io',
+  chainId: 0,
+  name: 'Polkadot',
+  currency: 'DOT',
+};
+
+export const getPolkadotApi = async () => {
+  // Mock API
+  return {
+    rpc: {
+      system: {
+        chain: () => Promise.resolve('Polkadot'),
+      },
+    },
+  };
+};

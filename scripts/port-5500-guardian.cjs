@@ -62,8 +62,8 @@ class Port5500Guardian {
       // Kill any existing process on the port
       await this.killPort();
 
-      // Start the development server
-      this.process = spawn('npm', ['run', 'dev:5500'], {
+      // Start the development server using port-fix script
+      this.process = spawn('npm', ['run', 'port-fix'], {
         cwd: this.projectRoot,
         stdio: 'pipe',
         shell: true,

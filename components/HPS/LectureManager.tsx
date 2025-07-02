@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useState } from 'react';
 import { FiUpload, FiVideo, FiMic, FiMessageSquare } from 'react-icons/fi';
 

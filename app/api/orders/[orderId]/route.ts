@@ -1,92 +1,72 @@
-import { ObjectId } from 'mongodb';
 import { NextResponse } from 'next/server';
-import { getServerSession } from 'next-auth';
 
-import { authOptions } from '@/lib/auth';
-import clientPromise from '@/lib/mongodb';
-
-export async function PATCH(request: Request, { params }: { params: { orderId: string } }) {
-  try {
-    const session = await getServerSession(authOptions);
-    if (!session) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
-    }
-
-    const { orderId } = params;
-    const { status } = await request.json();
-
-    if (!status) {
-      return NextResponse.json({ error: 'Status is required' }, { status: 400 });
-    }
-
-    const client = await clientPromise;
-    const db = client.db();
-
-    // Get the order
-    const order = await db.collection('orders').findOne({
-      _id: new ObjectId(orderId),
-    });
-
-    if (!order) {
-      return NextResponse.json({ error: 'Order not found' }, { status: 404 });
-    }
-
-    // Check if user is authorized to update this order
-    if (order.userId !== session.user.id) {
-      return NextResponse.json({ error: 'Not authorized to update this order' }, { status: 403 });
-    }
-
-    // Update order status
-    const result = await db.collection('orders').updateOne(
-      { _id: new ObjectId(orderId) },
+// Mock orders data
+const mockOrders = [
+  {
+    _id: 'order1',
+    userId: 'user123',
+    items: [
       {
-        $set: {
-          status,
-          updatedAt: new Date(),
-        },
-      }
-    );
-
-    if (result.matchedCount === 0) {
-      return NextResponse.json({ error: 'Order not found' }, { status: 404 });
-    }
-
-    return NextResponse.json({
-      message: 'Order updated successfully',
-    });
-  } catch (error) {
-    console.error('Error updating order:', error);
-    return NextResponse.json({ error: 'Failed to update order' }, { status: 500 });
-  }
-}
+        productId: 'prod1',
+        name: 'Premium Course Package',
+        price: 299,
+        quantity: 1,
+      },
+    ],
+    total: 299,
+    status: 'completed',
+    createdAt: '2024-01-15',
+    paymentMethod: 'credit_card',
+  },
+  {
+    _id: 'order2',
+    userId: 'user123',
+    items: [
+      {
+        productId: 'prod2',
+        name: 'Consultation Session',
+        price: 150,
+        quantity: 1,
+      },
+    ],
+    total: 150,
+    status: 'pending',
+    createdAt: '2024-01-20',
+    paymentMethod: 'wallet',
+  },
+];
 
 export async function GET(request: Request, { params }: { params: { orderId: string } }) {
   try {
-    const session = await getServerSession(authOptions);
-    if (!session) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
-    }
-
-    const { orderId } = params;
-    const client = await clientPromise;
-    const db = client.db();
-
-    const order = await db.collection('orders').findOne({
-      _id: new ObjectId(orderId),
-    });
+    const order = mockOrders.find(o => o._id === params.orderId);
 
     if (!order) {
       return NextResponse.json({ error: 'Order not found' }, { status: 404 });
     }
 
-    // Check if user is authorized to view this order
-    if (order.userId !== session.user.id) {
-      return NextResponse.json({ error: 'Not authorized to view this order' }, { status: 403 });
-    }
-
-    return NextResponse.json(order);
+    return NextResponse.json({ order });
   } catch (error) {
     console.error('Error fetching order:', error);
     return NextResponse.json({ error: 'Failed to fetch order' }, { status: 500 });
+  }
+}
+
+export async function PATCH(request: Request, { params }: { params: { orderId: string } }) {
+  try {
+    const body = await request.json();
+    const { status } = body;
+
+    const orderIndex = mockOrders.findIndex(o => o._id === params.orderId);
+
+    if (orderIndex === -1) {
+      return NextResponse.json({ error: 'Order not found' }, { status: 404 });
+    }
+
+    mockOrders[orderIndex].status = status;
+
+    return NextResponse.json({ order: mockOrders[orderIndex] });
+  } catch (error) {
+    console.error('Error updating order:', error);
+    return NextResponse.json({ error: 'Failed to update order' }, { status: 500 });
   }
 }

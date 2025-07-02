@@ -1,3 +1,5 @@
+"use client";
+
 import { useState } from 'react';
 import { FiUpload, FiAlertCircle } from 'react-icons/fi';
 

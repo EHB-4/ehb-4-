@@ -1,10 +1,48 @@
 'use client';
 
+'use client';
+
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { FiCreditCard, FiLock, FiTruck, FiMapPin, FiUser, FiPhone, FiMail } from 'react-icons/fi';
+import {
+  CreditCardIcon,
+  LockClosedIcon,
+  ShieldCheckIcon,
+  TruckIcon,
+  CurrencyDollarIcon,
+  CheckCircleIcon,
+  ExclamationTriangleIcon,
+  InformationCircleIcon,
+  EyeIcon,
+  EyeOffIcon,
+  UserIcon,
+  LocationMarkerIcon,
+  PhoneIcon,
+  MailIcon,
+  KeyIcon,
+  FingerPrintIcon,
+  GlobeAltIcon,
+  SparklesIcon,
+  CogIcon,
+  BellIcon,
+  TagIcon,
+  CameraIcon,
+  DownloadIcon,
+  UploadIcon,
+  ArchiveIcon,
+  XIcon,
+  PlusIcon,
+  MinusIcon,
+  ArrowRightIcon,
+  DocumentTextIcon,
+  ChartBarIcon,
+  CalendarIcon,
+  ClockIcon,
+  RefreshIcon,
+} from '@heroicons/react/outline';
 
 const checkoutSchema = z.object({
   // Customer Information

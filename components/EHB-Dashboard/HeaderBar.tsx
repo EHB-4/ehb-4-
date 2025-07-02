@@ -1,3 +1,5 @@
+"use client";
+
 import { ThemeSwitcher } from '@/components/ui/ThemeSwitcher';
 import { ThemeSwitcher } from '@/components/ui/ThemeSwitcher';
 import { motion } from 'framer-motion';

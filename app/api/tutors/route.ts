@@ -1,29 +1,57 @@
-import { ObjectId } from 'mongodb';
 import { NextResponse } from 'next/server';
-import { getServerSession } from 'next-auth';
 
-import { authOptions } from '@/lib/auth';
-import { Course } from '@/lib/models/Course';
-import { Tutor } from '@/lib/models/Tutor';
-import { Wallet } from '@/lib/models/Wallet';
-import clientPromise from '@/lib/mongodb';
+// Mock tutors data
+const mockTutors = [
+  {
+    _id: 'tutor1',
+    name: 'Dr. Sarah Johnson',
+    specialization: 'Mathematics',
+    experience: '8 years',
+    rating: 4.9,
+    hourlyRate: 75,
+    available: true,
+    subjects: ['Algebra', 'Calculus', 'Statistics'],
+    image: '/tutors/sarah-johnson.jpg',
+  },
+  {
+    _id: 'tutor2',
+    name: 'Prof. Michael Chen',
+    specialization: 'Physics',
+    experience: '12 years',
+    rating: 4.8,
+    hourlyRate: 85,
+    available: true,
+    subjects: ['Mechanics', 'Thermodynamics', 'Quantum Physics'],
+    image: '/tutors/michael-chen.jpg',
+  },
+  {
+    _id: 'tutor3',
+    name: 'Ms. Emily Davis',
+    specialization: 'English Literature',
+    experience: '6 years',
+    rating: 4.7,
+    hourlyRate: 60,
+    available: false,
+    subjects: ['Creative Writing', 'Poetry', 'Shakespeare'],
+    image: '/tutors/emily-davis.jpg',
+  },
+];
 
-// GET /api/tutors - Get all verified tutors (SQL level 3+)
-export async function GET() {
+export async function GET(request: Request) {
   try {
-    const session = await getServerSession(authOptions);
-    if (!session?.user) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    const { searchParams } = new URL(request.url);
+    const specialization = searchParams.get('specialization');
+    const subject = searchParams.get('subject');
+
+    let tutors = mockTutors;
+
+    if (specialization) {
+      tutors = tutors.filter(tutor => tutor.specialization === specialization);
     }
 
-    const client = await clientPromise;
-    const db = client.db();
-
-    const tutors = await db
-      .collection('tutors')
-      .find({ sqlLevel: { $gte: 3 } })
-      .sort({ sqlLevel: -1, createdAt: -1 })
-      .toArray();
+    if (subject) {
+      tutors = tutors.filter(tutor => tutor.subjects.includes(subject));
+    }
 
     return NextResponse.json({ tutors });
   } catch (error) {
@@ -32,59 +60,33 @@ export async function GET() {
   }
 }
 
-// POST /api/tutors - Create a new tutor profile
 export async function POST(request: Request) {
   try {
-    const session = await getServerSession(authOptions);
-    if (!session?.user) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
-    }
-
     const body = await request.json();
-    const { name, email, subjects, experience, education, bio } = body;
+    const { name, specialization, experience, hourlyRate, subjects } = body;
 
-    const client = await clientPromise;
-    const db = client.db();
-
-    // Check if user already has a tutor profile
-    const existingTutor = await db.collection('tutors').findOne({ userId: session.user.id });
-    if (existingTutor) {
-      return NextResponse.json({ error: 'Tutor profile already exists' }, { status: 400 });
+    if (!name || !specialization || !experience || !hourlyRate || !subjects) {
+      return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
     }
 
-    // Check user's SQL level from wallet
-    const wallet = await db.collection('wallets').findOne({ userId: session.user.id });
-    if (!wallet || wallet.sqlLevel < 3) {
-      return NextResponse.json(
-        { error: 'SQL level 3 or higher required to become a tutor' },
-        { status: 403 }
-      );
-    }
-
-    // Create tutor profile
-    const tutor = {
-      _id: new ObjectId(),
-      userId: session.user.id,
+    const newTutor = {
+      _id: `tutor${Date.now()}`,
       name,
-      email,
-      subjects,
+      specialization,
       experience,
-      education,
-      bio,
-      sqlLevel: wallet.sqlLevel,
       rating: 0,
-      totalStudents: 0,
-      totalCourses: 0,
-      createdAt: new Date(),
-      updatedAt: new Date(),
+      hourlyRate,
+      available: true,
+      subjects,
+      image: '/tutors/default.jpg',
     };
 
-    await db.collection('tutors').insertOne(tutor);
+    mockTutors.push(newTutor);
 
-    return NextResponse.json({ tutor });
+    return NextResponse.json({ tutor: newTutor });
   } catch (error) {
     console.error('Error creating tutor:', error);
-    return NextResponse.json({ error: 'Failed to create tutor profile' }, { status: 500 });
+    return NextResponse.json({ error: 'Failed to create tutor' }, { status: 500 });
   }
 }
 

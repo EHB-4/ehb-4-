@@ -1,0 +1,12 @@
+{
+  "totalFiles": 36,
+  "duplicates": [],
+  "merged": [],
+  "errors": [],
+  "lastScan": "2025-07-02T10:02:25.052Z",
+  "performance": {
+    "scanTime": 3,
+    "mergeTime": 0,
+    "backupTime": 17
+  }
+}

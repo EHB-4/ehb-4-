@@ -1,5 +1,0 @@
-{
-  "name": "api-dev",
-  "include": ["api/**/*"],
-  "exclude": [".next/**/*", "node_modules/**/*", ".git/**/*"]
-} 

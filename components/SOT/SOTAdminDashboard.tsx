@@ -1,3 +1,5 @@
+"use client";
+
 /**
  * SOT Admin Dashboard - Administrative interface for SOT system management
  *

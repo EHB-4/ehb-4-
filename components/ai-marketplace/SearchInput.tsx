@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useState, useRef } from 'react';
 import { FiSearch, FiMic, FiUpload, FiFilter, FiX } from 'react-icons/fi';
 

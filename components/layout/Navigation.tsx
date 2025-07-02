@@ -1,3 +1,5 @@
+"use client";
+
 'use client';
 
 import React, { useState } from 'react';
@@ -15,6 +17,7 @@ import {
   Menu,
   X,
   ChevronDown,
+  Bot,
 } from 'lucide-react';
 
 const navigation = [
@@ -22,15 +25,18 @@ const navigation = [
   { name: 'Development Portal', href: '/development-portal', icon: Settings },
   { name: 'Project Tracker', href: '/project-tracker', icon: BarChart3 },
   { name: 'SLA Management', href: '/sco', icon: Shield },
+  { name: 'Analytics', href: '/analytics', icon: BarChart3 },
+  { name: 'AI Agents', href: '/ai-agents', icon: Bot },
   { name: 'Contact', href: '/contact', icon: MessageSquare },
   { name: 'Portfolio', href: '/portfolio', icon: FileText },
   { name: 'Consultation', href: '/consultation', icon: Users },
 ];
 
 const secondaryNavigation = [
-  { name: 'AI Agents', href: '/ai-agents' },
-  { name: 'Analytics', href: '/analytics' },
   { name: 'Settings', href: '/settings' },
+  { name: 'Profile', href: '/profile' },
+  { name: 'Documentation', href: '/docs' },
+  { name: 'Support', href: '/support' },
 ];
 
 export default function Navigation() {
@@ -108,7 +114,10 @@ export default function Navigation() {
                 <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center">
                   <span className="text-white text-sm font-medium">JD</span>
                 </div>
-                <span className="text-sm font-medium text-gray-700">John Doe</span>
+                <div className="hidden md:block">
+                  <span className="text-sm font-medium text-gray-700">John Doe</span>
+                  <p className="text-xs text-gray-500">john@example.com</p>
+                </div>
               </div>
             </div>
           </div>

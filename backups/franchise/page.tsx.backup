@@ -1,0 +1,370 @@
+import React from 'react';
+import Link from 'next/link';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
+import {
+  Plane,
+  MapPin,
+  Users,
+  TrendingUp,
+  DollarSign,
+  Calendar,
+  Star,
+  CheckCircle,
+  ArrowRight,
+  Globe,
+  Hotel,
+  Car,
+  Camera,
+} from 'lucide-react';
+
+const travelServices = [
+  {
+    id: 'domestic-travel',
+    title: 'Domestic Travel',
+    description: 'Local travel packages and tours within Pakistan',
+    icon: MapPin,
+    investment: '$20K - $50K',
+    earnings: '$2K - $8K/month',
+    features: ['Local tour packages', 'Transportation services', 'Hotel bookings'],
+  },
+  {
+    id: 'international-travel',
+    title: 'International Travel',
+    description: 'International travel and visa services',
+    icon: Globe,
+    investment: '$50K - $150K',
+    earnings: '$5K - $15K/month',
+    features: ['Visa processing', 'International packages', 'Flight bookings'],
+  },
+  {
+    id: 'hotel-booking',
+    title: 'Hotel & Accommodation',
+    description: 'Hotel booking and accommodation services',
+    icon: Hotel,
+    investment: '$30K - $80K',
+    earnings: '$3K - $10K/month',
+    features: ['Hotel partnerships', 'Booking management', 'Customer support'],
+  },
+  {
+    id: 'transportation',
+    title: 'Transportation Services',
+    description: 'Car rental and transportation solutions',
+    icon: Car,
+    investment: '$40K - $100K',
+    earnings: '$4K - $12K/month',
+    features: ['Car rental', 'Airport transfers', 'Tour transportation'],
+  },
+  {
+    id: 'adventure-tours',
+    title: 'Adventure & Eco Tours',
+    description: 'Adventure tourism and eco-friendly tours',
+    icon: Camera,
+    investment: '$25K - $60K',
+    earnings: '$2.5K - $8K/month',
+    features: ['Adventure packages', 'Eco-tourism', 'Photography tours'],
+  },
+];
+
+const travelBenefits = [
+  {
+    title: 'Growing Market',
+    description: "Pakistan's tourism industry is rapidly expanding",
+    icon: TrendingUp,
+  },
+  {
+    title: 'Digital Integration',
+    description: 'Modern booking systems and online presence',
+    icon: Globe,
+  },
+  {
+    title: 'Local Expertise',
+    description: 'Deep knowledge of local destinations and culture',
+    icon: MapPin,
+  },
+  {
+    title: 'Flexible Operations',
+    description: 'Scalable business model with seasonal opportunities',
+    icon: Calendar,
+  },
+];
+
+const travelStats = [
+  { label: 'Tourist Arrivals', value: '2.5M+', icon: Users },
+  { label: 'Revenue Growth', value: '25%', icon: TrendingUp },
+  { label: 'Destinations', value: '50+', icon: MapPin },
+  { label: 'Partner Hotels', value: '200+', icon: Hotel },
+];
+
+const requirements = [
+  'Travel industry experience preferred',
+  'Strong customer service skills',
+  'Network of local contacts',
+  'Understanding of visa processes',
+  'Marketing and sales capabilities',
+  'Technology proficiency',
+];
+
+const investmentDetails = [
+  {
+    level: 'Starter',
+    investment: '$20K - $50K',
+    features: ['Basic booking system', 'Local partnerships', 'Marketing support'],
+  },
+  {
+    level: 'Professional',
+    investment: '$50K - $100K',
+    features: ['Advanced booking platform', 'International partnerships', 'Full marketing package'],
+  },
+  {
+    level: 'Premium',
+    investment: '$100K - $200K',
+    features: ['Custom booking system', 'Exclusive partnerships', 'Dedicated support team'],
+  },
+];
+
+export default function TravelFranchisePage() {
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800">
+      {/* Hero Section */}
+      <section className="relative py-20 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center">
+            <div className="flex justify-center mb-6">
+              <div className="text-6xl">✈️</div>
+            </div>
+            <h1 className="text-4xl md:text-6xl font-bold text-gray-900 dark:text-white mb-6">
+              Travel & Tourism
+              <span className="text-blue-600 dark:text-blue-400"> Franchise</span>
+            </h1>
+            <p className="text-xl text-gray-600 dark:text-gray-300 mb-8 max-w-3xl mx-auto">
+              Explore the world of travel and tourism with EHB's comprehensive franchise
+              opportunities. From domestic tours to international adventures, build your travel
+              empire.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link href="/franchise/apply">
+                <Button size="lg" className="bg-blue-600 hover:bg-blue-700">
+                  Apply Now
+                  <ArrowRight className="ml-2 h-5 w-5" />
+                </Button>
+              </Link>
+              <Link href="/franchise/dashboard">
+                <Button variant="outline" size="lg">
+                  View Dashboard
+                </Button>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Stats Section */}
+      <section className="py-16 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+            {travelStats.map((stat, index) => (
+              <div key={index} className="text-center">
+                <div className="flex justify-center mb-4">
+                  <stat.icon className="h-12 w-12 text-blue-600 dark:text-blue-400" />
+                </div>
+                <div className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
+                  {stat.value}
+                </div>
+                <div className="text-gray-600 dark:text-gray-400">{stat.label}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Services Section */}
+      <section className="py-16 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
+              Travel Services
+            </h2>
+            <p className="text-lg text-gray-600 dark:text-gray-300">
+              Choose from our diverse range of travel and tourism services
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {travelServices.map(service => (
+              <Card key={service.id} className="hover:shadow-lg transition-shadow">
+                <CardHeader>
+                  <div className="flex items-center justify-between">
+                    <service.icon className="h-8 w-8 text-blue-600 dark:text-blue-400" />
+                    <Badge variant="outline">Active</Badge>
+                  </div>
+                  <CardTitle className="text-xl">{service.title}</CardTitle>
+                  <CardDescription>{service.description}</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-3">
+                    <div className="flex items-center text-sm text-gray-600 dark:text-gray-400">
+                      <DollarSign className="h-4 w-4 mr-2" />
+                      Investment: {service.investment}
+                    </div>
+                    <div className="flex items-center text-sm text-gray-600 dark:text-gray-400">
+                      <TrendingUp className="h-4 w-4 mr-2" />
+                      Earnings: {service.earnings}
+                    </div>
+                    <div className="space-y-2">
+                      <p className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                        Features:
+                      </p>
+                      <ul className="space-y-1">
+                        {service.features.map((feature, index) => (
+                          <li
+                            key={index}
+                            className="flex items-center text-sm text-gray-600 dark:text-gray-400"
+                          >
+                            <CheckCircle className="h-3 w-3 mr-2 text-green-500" />
+                            {feature}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+
+                  <div className="mt-6">
+                    <Link href="/franchise/apply">
+                      <Button className="w-full">
+                        Apply for {service.title}
+                        <ArrowRight className="ml-2 h-4 w-4" />
+                      </Button>
+                    </Link>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Investment Levels */}
+      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-white dark:bg-gray-900">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
+              Investment Levels
+            </h2>
+            <p className="text-lg text-gray-600 dark:text-gray-300">
+              Choose the investment level that fits your goals and budget
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {investmentDetails.map((level, index) => (
+              <Card key={index} className={`${index === 1 ? 'ring-2 ring-blue-500' : ''}`}>
+                <CardHeader>
+                  <CardTitle className="text-center">{level.level}</CardTitle>
+                  <div className="text-center">
+                    <div className="text-2xl font-bold text-blue-600 dark:text-blue-400">
+                      {level.investment}
+                    </div>
+                  </div>
+                </CardHeader>
+                <CardContent>
+                  <ul className="space-y-3">
+                    {level.features.map((feature, featureIndex) => (
+                      <li key={featureIndex} className="flex items-center text-sm">
+                        <CheckCircle className="h-4 w-4 mr-2 text-green-500" />
+                        {feature}
+                      </li>
+                    ))}
+                  </ul>
+                  <div className="mt-6">
+                    <Link href="/franchise/apply">
+                      <Button className="w-full" variant={index === 1 ? 'default' : 'outline'}>
+                        Choose {level.level}
+                      </Button>
+                    </Link>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Benefits Section */}
+      <section className="py-16 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
+              Why Choose Travel & Tourism?
+            </h2>
+            <p className="text-lg text-gray-600 dark:text-gray-300">
+              Discover the advantages of the travel industry
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {travelBenefits.map((benefit, index) => (
+              <div key={index} className="text-center">
+                <div className="flex justify-center mb-4">
+                  <benefit.icon className="h-12 w-12 text-blue-600 dark:text-blue-400" />
+                </div>
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
+                  {benefit.title}
+                </h3>
+                <p className="text-gray-600 dark:text-gray-400">{benefit.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Requirements Section */}
+      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-white dark:bg-gray-900">
+        <div className="max-w-4xl mx-auto">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">Requirements</h2>
+            <p className="text-lg text-gray-600 dark:text-gray-300">
+              What you need to succeed in the travel industry
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {requirements.map((requirement, index) => (
+              <div key={index} className="flex items-start">
+                <CheckCircle className="h-5 w-5 text-green-500 mr-3 mt-0.5" />
+                <span className="text-gray-700 dark:text-gray-300">{requirement}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="py-16 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-4xl mx-auto text-center">
+          <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
+            Ready to Start Your Travel Business?
+          </h2>
+          <p className="text-lg text-gray-600 dark:text-gray-300 mb-8">
+            Join the growing travel industry and help people explore the world with EHB
+            Technologies.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Link href="/franchise/apply">
+              <Button size="lg" className="bg-blue-600 hover:bg-blue-700">
+                Apply for Travel Franchise
+                <ArrowRight className="ml-2 h-5 w-5" />
+              </Button>
+            </Link>
+            <Link href="/franchise">
+              <Button variant="outline" size="lg">
+                View All Categories
+              </Button>
+            </Link>
+          </div>
+        </div>
+      </section>
+    </div>
+  );
+}

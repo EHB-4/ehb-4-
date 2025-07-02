@@ -1,6 +1,8 @@
+"use client";
+
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import {
   TrendingUp,
@@ -25,6 +27,9 @@ import {
   Smartphone,
   Monitor,
   X,
+  CheckCircle,
+  AlertTriangle,
+  XCircle,
 } from 'lucide-react';
 
 /**
@@ -34,6 +39,9 @@ import {
 export default function AnalyticsPage() {
   const [timeRange, setTimeRange] = useState('30d');
   const [isLoading, setIsLoading] = useState(false);
+  const [activeTab, setActiveTab] = useState<'overview' | 'projects' | 'performance' | 'revenue'>(
+    'overview'
+  );
 
   // Mock analytics data
   const overviewStats = [
@@ -205,6 +213,163 @@ export default function AnalyticsPage() {
     return changeType === 'positive' ? 'text-green-600' : 'text-red-600';
   };
 
+  const mockAnalyticsData = {
+    projects: {
+      total: 24,
+      active: 18,
+      completed: 5,
+      delayed: 1,
+    },
+    performance: {
+      uptime: 99.8,
+      responseTime: 2.3,
+      slaCompliance: 96.5,
+      customerSatisfaction: 94.2,
+    },
+    revenue: {
+      current: 125000,
+      previous: 98000,
+      growth: 27.6,
+    },
+    team: {
+      total: 24,
+      active: 22,
+      productivity: 87.5,
+    },
+  };
+
+  const projectStatusData = {
+    labels: ['Active', 'Completed', 'Delayed'],
+    datasets: [
+      {
+        label: 'Projects',
+        data: [18, 5, 1],
+        backgroundColor: ['#10B981', '#3B82F6', '#EF4444'],
+        borderColor: ['#10B981', '#3B82F6', '#EF4444'],
+      },
+    ],
+  };
+
+  const monthlyRevenueData = {
+    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+    datasets: [
+      {
+        label: 'Revenue',
+        data: [85000, 92000, 105000, 98000, 112000, 125000],
+        borderColor: '#3B82F6',
+        backgroundColor: 'rgba(59, 130, 246, 0.1)',
+        tension: 0.4,
+      },
+    ],
+  };
+
+  const MetricCard: React.FC<{
+    title: string;
+    value: string | number;
+    change: number;
+    icon: React.ReactNode;
+    color: string;
+  }> = ({ title, value, change, icon, color }) => (
+        <div className="bg-white rounded-lg shadow p-6">
+      <div className="flex items-center justify-between">
+        <div>
+          <p className="text-sm font-medium text-gray-600">{title}</p>
+          <p className="text-2xl font-bold text-gray-900">{value}</p>
+          <div className="flex items-center mt-2">
+            {change >= 0 ? (
+              <TrendingUp className="w-4 h-4 text-green-500" />
+            ) : (
+              <TrendingDown className="w-4 h-4 text-red-500" />
+            )}
+            <span
+              className={`text-sm font-medium ml-1 ${
+                change >= 0 ? 'text-green-600' : 'text-red-600'
+              }`}
+            >
+              {change >= 0 ? '+' : ''}
+              {change.toFixed(1)}%
+            </span>
+            <span className="text-sm text-gray-500 ml-1">from last month</span>
+          </div>
+        </div>
+        <div className={color}>{icon}</div>
+        </div>
+        </div>
+  );
+
+  const ProgressRing: React.FC<{
+    value: number;
+    size?: number;
+    strokeWidth?: number;
+    color?: string;
+  }> = ({ value, size = 120, strokeWidth = 8, color = '#3B82F6' }) => {
+    const radius = (size - strokeWidth) / 2;
+    const circumference = radius * 2 * Math.PI;
+    const strokeDasharray = circumference;
+    const strokeDashoffset = circumference - (value / 100) * circumference;
+
+    return (
+      <div className="relative inline-block">
+        <svg width={size} height={size} className="transform -rotate-90">
+          <circle
+            cx={size / 2}
+            cy={size / 2}
+            r={radius}
+            stroke="#E5E7EB"
+            strokeWidth={strokeWidth}
+            fill="transparent"
+          />
+          <circle
+            cx={size / 2}
+            cy={size / 2}
+            r={radius}
+            stroke={color}
+            strokeWidth={strokeWidth}
+            fill="transparent"
+            strokeDasharray={strokeDasharray}
+            strokeDashoffset={strokeDashoffset}
+            strokeLinecap="round"
+            className="transition-all duration-1000 ease-out"
+          />
+        </svg>
+        <div className="absolute inset-0 flex items-center justify-center">
+          <span className="text-lg font-bold text-gray-900">{value.toFixed(1)}%</span>
+        </div>
+      </div>
+    );
+  };
+
+  const [data, setData] = useState(mockAnalyticsData);
+
+  useEffect(() => {
+    // Simulate real-time data updates
+    const interval = setInterval(() => {
+      setData(prev => ({
+        ...prev,
+        performance: {
+          uptime: Math.max(
+            99.5,
+            Math.min(100, prev.performance.uptime + (Math.random() - 0.5) * 0.1)
+          ),
+          responseTime: Math.max(
+            1.5,
+            Math.min(4, prev.performance.responseTime + (Math.random() - 0.5) * 0.2)
+          ),
+          slaCompliance: Math.max(
+            90,
+            Math.min(100, prev.performance.slaCompliance + (Math.random() - 0.5) * 2)
+          ),
+          customerSatisfaction: Math.max(
+            85,
+            Math.min(98, prev.customerSatisfaction + (Math.random() - 0.5) * 1)
+          ),
+        },
+      }));
+    }, 5000);
+
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
       {/* Header */}
@@ -251,241 +416,248 @@ export default function AnalyticsPage() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Overview Stats */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-          {overviewStats.map((stat, index) => (
-            <motion.div
-              key={stat.title}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.1 }}
-              className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6"
-            >
-              <div className="flex items-center justify-between mb-4">
-                <div className={`${stat.bgColor} p-3 rounded-lg`}>
-                  <stat.icon className={`w-6 h-6 ${stat.color}`} />
-                </div>
-                <div className="flex items-center gap-1">
-                  {getChangeIcon(stat.changeType)}
-                  <span className={`text-sm font-medium ${getChangeColor(stat.changeType)}`}>
-                    {stat.change}
-                  </span>
-                </div>
-              </div>
-              <div>
-                <p className="text-sm font-medium text-gray-600 dark:text-gray-400">{stat.title}</p>
-                <p className="text-2xl font-bold text-gray-900 dark:text-white">{stat.value}</p>
-              </div>
-            </motion.div>
-          ))}
+          <MetricCard
+            title="Total Projects"
+            value={data.projects.total}
+            change={12.5}
+            icon={<Target className="w-6 h-6" />}
+            color="text-blue-600"
+          />
+          <MetricCard
+            title="Active Projects"
+            value={data.projects.active}
+            change={8.2}
+            icon={<Activity className="w-6 h-6" />}
+            color="text-green-600"
+          />
+          <MetricCard
+            title="Revenue"
+            value={`$${(data.revenue.current / 1000).toFixed(0)}k`}
+            change={data.revenue.growth}
+            icon={<DollarSign className="w-6 h-6" />}
+            color="text-purple-600"
+          />
+          <MetricCard
+            title="Team Productivity"
+            value={`${data.team.productivity}%`}
+            change={5.3}
+            icon={<Users className="w-6 h-6" />}
+            color="text-orange-600"
+          />
         </div>
 
-        {/* Charts Section */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
-          {/* Revenue Chart */}
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6"
-          >
-            <div className="flex items-center justify-between mb-6">
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Revenue Trend</h3>
-              <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400">
-                <div className="w-3 h-3 bg-blue-500 rounded-full"></div>
-                Monthly Revenue
-              </div>
-            </div>
-            <div className="h-64 flex items-end justify-between gap-2">
-              {chartData.revenue.map((item, index) => (
-                <div key={index} className="flex-1 flex flex-col items-center">
-                  <div
-                    className="w-full bg-blue-500 rounded-t"
-                    style={{
-                      height: `${
-                        (item.value / Math.max(...chartData.revenue.map(d => d.value))) * 200
-                      }px`,
-                    }}
-                  ></div>
-                  <span className="text-xs text-gray-600 dark:text-gray-400 mt-2">
-                    {item.month}
-                  </span>
-                </div>
-              ))}
-            </div>
-          </motion.div>
-
-          {/* Users Chart */}
-          <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6"
-          >
-            <div className="flex items-center justify-between mb-6">
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-white">User Growth</h3>
-              <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400">
-                <div className="w-3 h-3 bg-green-500 rounded-full"></div>
-                Active Users
-              </div>
-            </div>
-            <div className="h-64 flex items-end justify-between gap-2">
-              {chartData.users.map((item, index) => (
-                <div key={index} className="flex-1 flex flex-col items-center">
-                  <div
-                    className="w-full bg-green-500 rounded-t"
-                    style={{
-                      height: `${
-                        (item.value / Math.max(...chartData.users.map(d => d.value))) * 200
-                      }px`,
-                    }}
-                  ></div>
-                  <span className="text-xs text-gray-600 dark:text-gray-400 mt-2">
-                    {item.month}
-                  </span>
-                </div>
-              ))}
-            </div>
-          </motion.div>
-        </div>
-
-        {/* Top Services & Demographics */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8">
-          {/* Top Services */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="lg:col-span-2 bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6"
-          >
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-6">
-              Top Performing Services
-            </h3>
-            <div className="space-y-4">
-              {topServices.map((service, index) => (
-                <div
-                  key={service.name}
-                  className="flex items-center justify-between p-4 bg-gray-50 dark:bg-gray-700 rounded-lg"
+        {/* Tabs */}
+        <div className="bg-white rounded-lg shadow mb-8">
+          <div className="border-b">
+            <nav className="flex space-x-8 px-6">
+              {[
+                { id: 'overview', label: 'Overview', icon: BarChart3 },
+                { id: 'projects', label: 'Projects', icon: Target },
+                { id: 'performance', label: 'Performance', icon: Activity },
+                { id: 'revenue', label: 'Revenue', icon: DollarSign },
+              ].map(tab => (
+                <button
+                  key={tab.id}
+                  onClick={() => setActiveTab(tab.id as any)}
+                  className={`flex items-center gap-2 py-4 px-1 border-b-2 font-medium text-sm transition-colors ${
+                    activeTab === tab.id
+                      ? 'border-blue-500 text-blue-600'
+                      : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                  }`}
                 >
-                  <div className="flex items-center gap-4">
-                    <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center text-white font-semibold">
-                      {index + 1}
+                  <tab.icon className="w-4 h-4" />
+                  {tab.label}
+                </button>
+              ))}
+            </nav>
+          </div>
+
+          <div className="p-6">
+            {activeTab === 'overview' && (
+              <div className="grid lg:grid-cols-2 gap-8">
+                {/* Performance Overview */}
+                <div>
+                  <h3 className="text-lg font-semibold text-gray-900 mb-6">Performance Overview</h3>
+                  <div className="grid grid-cols-2 gap-6">
+                    <div className="text-center">
+                      <ProgressRing value={data.performance.uptime} color="#10B981" />
+                      <p className="text-sm font-medium text-gray-700 mt-2">Uptime</p>
                     </div>
-                    <div>
-                      <h4 className="font-semibold text-gray-900 dark:text-white">
-                        {service.name}
-                      </h4>
-                      <p className="text-sm text-gray-600 dark:text-gray-400">{service.category}</p>
+                    <div className="text-center">
+                      <ProgressRing value={data.performance.slaCompliance} color="#3B82F6" />
+                      <p className="text-sm font-medium text-gray-700 mt-2">SLA Compliance</p>
                     </div>
-                  </div>
-                  <div className="text-right">
-                    <p className="font-semibold text-gray-900 dark:text-white">{service.revenue}</p>
-                    <p className="text-sm text-gray-600 dark:text-gray-400">
-                      {service.users} users
-                    </p>
-                    <p className="text-sm text-green-600">{service.growth}</p>
+                    <div className="text-center">
+                      <ProgressRing value={data.performance.customerSatisfaction} color="#8B5CF6" />
+                      <p className="text-sm font-medium text-gray-700 mt-2">
+                        Customer Satisfaction
+                      </p>
+                    </div>
+                    <div className="text-center">
+                      <ProgressRing value={data.team.productivity} color="#F59E0B" />
+                      <p className="text-sm font-medium text-gray-700 mt-2">Team Productivity</p>
+                    </div>
                   </div>
                 </div>
-              ))}
-            </div>
-          </motion.div>
 
-          {/* Demographics */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6"
-          >
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-6">
-              User Demographics
-            </h3>
-            <div className="space-y-4">
-              {userDemographics.map((demo, index) => (
-                <div key={demo.age} className="flex items-center justify-between">
-                  <span className="text-sm text-gray-700 dark:text-gray-300">{demo.age}</span>
-                  <div className="flex items-center gap-2">
-                    <div className="w-24 bg-gray-200 dark:bg-gray-600 rounded-full h-2">
-                      <div
-                        className="bg-blue-500 h-2 rounded-full"
-                        style={{ width: `${demo.percentage}%` }}
-                      ></div>
-                    </div>
-                    <span className="text-sm font-medium text-gray-900 dark:text-white w-8">
-                      {demo.percentage}%
-                    </span>
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            <div className="mt-6 pt-6 border-t border-gray-200 dark:border-gray-600">
-              <h4 className="text-sm font-medium text-gray-900 dark:text-white mb-4">
-                Device Usage
-              </h4>
-              <div className="space-y-3">
-                {deviceUsage.map(device => (
-                  <div key={device.device} className="flex items-center justify-between">
-                    <div className="flex items-center gap-2">
-                      {device.device === 'Desktop' && <Monitor className="w-4 h-4 text-gray-400" />}
-                      {device.device === 'Mobile' && (
-                        <Smartphone className="w-4 h-4 text-gray-400" />
-                      )}
-                      {device.device === 'Tablet' && <Globe className="w-4 h-4 text-gray-400" />}
-                      <span className="text-sm text-gray-700 dark:text-gray-300">
-                        {device.device}
+                {/* Project Status */}
+                <div>
+                  <h3 className="text-lg font-semibold text-gray-900 mb-6">
+                    Project Status Distribution
+                  </h3>
+                  <div className="space-y-4">
+                    <div className="flex items-center justify-between p-4 bg-green-50 rounded-lg">
+                      <div className="flex items-center gap-3">
+                        <CheckCircle className="w-5 h-5 text-green-500" />
+                        <span className="font-medium text-green-800">Active Projects</span>
+                      </div>
+                      <span className="text-2xl font-bold text-green-600">
+                        {data.projects.active}
                       </span>
                     </div>
-                    <span className="text-sm font-medium text-gray-900 dark:text-white">
-                      {device.percentage}%
-                    </span>
+                    <div className="flex items-center justify-between p-4 bg-blue-50 rounded-lg">
+                      <div className="flex items-center gap-3">
+                        <CheckCircle className="w-5 h-5 text-blue-500" />
+                        <span className="font-medium text-blue-800">Completed Projects</span>
+                      </div>
+                      <span className="text-2xl font-bold text-blue-600">
+                        {data.projects.completed}
+                      </span>
+                    </div>
+                    <div className="flex items-center justify-between p-4 bg-red-50 rounded-lg">
+                      <div className="flex items-center gap-3">
+                        <XCircle className="w-5 h-5 text-red-500" />
+                        <span className="font-medium text-red-800">Delayed Projects</span>
+                      </div>
+                      <span className="text-2xl font-bold text-red-600">
+                        {data.projects.delayed}
+                      </span>
+                    </div>
                   </div>
-                ))}
+                </div>
               </div>
-            </div>
-          </motion.div>
-        </div>
+            )}
 
-        {/* Recent Activity */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6"
-        >
-          <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-6">
-            Recent Activity
-          </h3>
-          <div className="space-y-4">
-            {recentActivity.map(activity => (
-              <div
-                key={activity.id}
-                className="flex items-center justify-between p-4 bg-gray-50 dark:bg-gray-700 rounded-lg"
-              >
-                <div className="flex items-center gap-4">
-                  <div
-                    className={`w-8 h-8 rounded-full flex items-center justify-center ${
-                      activity.type === 'purchase'
-                        ? 'bg-green-100 text-green-600'
-                        : activity.type === 'registration'
-                        ? 'bg-blue-100 text-blue-600'
-                        : 'bg-red-100 text-red-600'
-                    }`}
-                  >
-                    {activity.type === 'purchase' && <ShoppingCart className="w-4 h-4" />}
-                    {activity.type === 'registration' && <Users className="w-4 h-4" />}
-                    {activity.type === 'cancellation' && <X className="w-4 h-4" />}
+            {activeTab === 'projects' && (
+              <div>
+                <h3 className="text-lg font-semibold text-gray-900 mb-6">Project Analytics</h3>
+                <div className="grid md:grid-cols-3 gap-6">
+                  <div className="bg-gray-50 rounded-lg p-6">
+                    <h4 className="font-medium text-gray-900 mb-4">Project Completion Rate</h4>
+                    <div className="text-center">
+                      <ProgressRing
+                        value={(data.projects.completed / data.projects.total) * 100}
+                        size={100}
+                      />
+                    </div>
+                  </div>
+                  <div className="bg-gray-50 rounded-lg p-6">
+                    <h4 className="font-medium text-gray-900 mb-4">Average Project Duration</h4>
+                    <div className="text-center">
+                      <div className="text-3xl font-bold text-gray-900 mb-2">45 days</div>
+                      <p className="text-sm text-gray-600">From start to completion</p>
+                    </div>
+                  </div>
+                  <div className="bg-gray-50 rounded-lg p-6">
+                    <h4 className="font-medium text-gray-900 mb-4">Risk Level</h4>
+                    <div className="text-center">
+                      <div className="text-3xl font-bold text-yellow-600 mb-2">Low</div>
+                      <p className="text-sm text-gray-600">Based on current metrics</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {activeTab === 'performance' && (
+              <div>
+                <h3 className="text-lg font-semibold text-gray-900 mb-6">Performance Metrics</h3>
+                <div className="grid md:grid-cols-2 gap-8">
+                  <div>
+                    <h4 className="font-medium text-gray-900 mb-4">Response Time Trends</h4>
+                    <div className="bg-gray-50 rounded-lg p-6">
+                      <div className="text-3xl font-bold text-gray-900 mb-2">
+                        {data.performance.responseTime}h
+                      </div>
+                      <p className="text-sm text-gray-600">Average response time</p>
+                      <div className="mt-4">
+                        <div className="flex items-center gap-2">
+                          <TrendingDown className="w-4 h-4 text-green-500" />
+                          <span className="text-sm text-green-600">15% improvement</span>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                   <div>
-                    <p className="font-medium text-gray-900 dark:text-white">
-                      {activity.description}
-                    </p>
-                    <p className="text-sm text-gray-600 dark:text-gray-400">{activity.user}</p>
+                    <h4 className="font-medium text-gray-900 mb-4">SLA Compliance History</h4>
+                    <div className="bg-gray-50 rounded-lg p-6">
+                      <div className="text-3xl font-bold text-gray-900 mb-2">
+                        {data.performance.slaCompliance}%
+                      </div>
+                      <p className="text-sm text-gray-600">Current compliance rate</p>
+                      <div className="mt-4">
+                        <div className="w-full bg-gray-200 rounded-full h-2">
+                          <div
+                            className="bg-green-500 h-2 rounded-full transition-all duration-1000"
+                            style={{ width: `${data.performance.slaCompliance}%` }}
+                          />
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
-                <div className="text-right">
-                  {activity.amount && (
-                    <p className="font-semibold text-gray-900 dark:text-white">{activity.amount}</p>
-                  )}
-                  <p className="text-sm text-gray-600 dark:text-gray-400">{activity.timestamp}</p>
+              </div>
+            )}
+
+            {activeTab === 'revenue' && (
+              <div>
+                <h3 className="text-lg font-semibold text-gray-900 mb-6">Revenue Analytics</h3>
+                <div className="grid md:grid-cols-2 gap-8">
+                  <div>
+                    <h4 className="font-medium text-gray-900 mb-4">Monthly Revenue</h4>
+                    <div className="bg-gray-50 rounded-lg p-6">
+                      <div className="text-3xl font-bold text-gray-900 mb-2">
+                        ${(data.revenue.current / 1000).toFixed(0)}k
+                      </div>
+                      <p className="text-sm text-gray-600">Current month revenue</p>
+                      <div className="mt-4">
+                        <div className="flex items-center gap-2">
+                          <TrendingUp className="w-4 h-4 text-green-500" />
+                          <span className="text-sm text-green-600">
+                            +{data.revenue.growth}% from last month
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div>
+                    <h4 className="font-medium text-gray-900 mb-4">Revenue Growth</h4>
+                    <div className="bg-gray-50 rounded-lg p-6">
+                      <div className="space-y-3">
+                        <div className="flex justify-between">
+                          <span className="text-sm text-gray-600">Q1 2024</span>
+                          <span className="text-sm font-medium">$285k</span>
+                        </div>
+                        <div className="flex justify-between">
+                          <span className="text-sm text-gray-600">Q2 2024</span>
+                          <span className="text-sm font-medium">$315k</span>
+                        </div>
+                        <div className="flex justify-between">
+                          <span className="text-sm text-gray-600">Q3 2024</span>
+                          <span className="text-sm font-medium">$375k</span>
+                        </div>
+                        <div className="flex justify-between">
+                          <span className="text-sm text-gray-600">Q4 2024</span>
+                          <span className="text-sm font-medium text-green-600">$425k (est.)</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
-            ))}
+            )}
           </div>
-        </motion.div>
+        </div>
       </div>
     </div>
   );

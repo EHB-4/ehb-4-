@@ -1,3 +1,5 @@
+"use client";
+
 import { motion } from 'framer-motion';
 import React, { useState } from 'react';
 import { FiShoppingCart, FiPackage, FiTruck, FiCheckCircle } from 'react-icons/fi';

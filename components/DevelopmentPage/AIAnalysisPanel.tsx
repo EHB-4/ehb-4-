@@ -1,3 +1,5 @@
+"use client";
+
 import React from 'react';
 import { FiAlertCircle, FiCheckCircle, FiInfo } from 'react-icons/fi';
 

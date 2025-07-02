@@ -1,3 +1,5 @@
+"use client";
+
 import { motion, AnimatePresence } from 'framer-motion';
 import React, { useState } from 'react';
 import { FiX, FiUpload, FiCheck, FiAlertCircle } from 'react-icons/fi';

@@ -1,38 +1,23 @@
+export const runtime = "nodejs";
 import { NextRequest, NextResponse } from 'next/server';
-import bcrypt from 'bcryptjs';
-import jwt from 'jsonwebtoken';
-
-// Mock user database - in production, this would be a real database
-const users: any[] = [
-  {
-    id: '1',
-    email: 'admin@ehb.com',
-    password: '$2a$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi',
-    firstName: 'Admin',
-    lastName: 'User',
-    role: 'admin',
-    isVerified: true
-  }
-];
-
-const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key';
+import { authService } from '@/lib/auth';
+import { emailService } from '@/lib/email';
+import { db } from '@/lib/database';
 
 export async function POST(request: NextRequest) {
   try {
-    const {
-      firstName,
-      lastName,
-      email,
-      phone,
-      company,
-      password,
-      subscribeNewsletter
-    } = await request.json();
+    const body = await request.json();
+    const { firstName, lastName, email, password, confirmPassword, agreeToTerms } = body;
 
     // Validate required fields
-    if (!firstName || !lastName || !email || !password) {
+    if (!firstName || !lastName || !email || !password || !confirmPassword) {
+      return NextResponse.json({ error: 'All fields are required' }, { status: 400 });
+    }
+
+    // Validate terms agreement
+    if (!agreeToTerms) {
       return NextResponse.json(
-        { error: 'First name, last name, email, and password are required' },
+        { error: 'You must agree to the terms and conditions' },
         { status: 400 }
       );
     }
@@ -40,106 +25,97 @@ export async function POST(request: NextRequest) {
     // Validate email format
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
-      return NextResponse.json(
-        { error: 'Please enter a valid email address' },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: 'Please enter a valid email address' }, { status: 400 });
     }
 
     // Validate password strength
-    if (password.length < 8) {
+    const passwordValidation = authService.validatePasswordStrength(password);
+    if (!passwordValidation.isValid) {
       return NextResponse.json(
-        { error: 'Password must be at least 8 characters long' },
+        { error: 'Password does not meet requirements', details: passwordValidation.errors },
         { status: 400 }
       );
     }
 
+    // Validate password confirmation
+    if (password !== confirmPassword) {
+      return NextResponse.json({ error: 'Passwords do not match' }, { status: 400 });
+    }
+
     // Check if user already exists
-    const existingUser = users.find(u => u.email === email);
+    const existingUser = await db.users.findByEmail(email);
     if (existingUser) {
       return NextResponse.json(
-        { error: 'User with this email already exists' },
+        { error: 'An account with this email already exists' },
         { status: 409 }
       );
     }
 
-    // Hash password
-    const saltRounds = 12;
-    const hashedPassword = await bcrypt.hash(password, saltRounds);
-
-    // Create new user
-    const newUser = {
-      id: (users.length + 1).toString(),
-      email,
-      password: hashedPassword,
+    // Register user
+    const { user, tokens } = await authService.register({
       firstName,
       lastName,
-      phone: phone || null,
-      company: company || null,
-      role: 'user',
-      isVerified: false,
-      subscribeNewsletter: subscribeNewsletter || false,
-      createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString()
-    };
+      email,
+      password,
+    });
 
-    // Add user to database
-    users.push(newUser);
-
-    // Generate verification token
-    const verificationToken = jwt.sign(
-      { userId: newUser.id, email: newUser.email },
-      JWT_SECRET,
-      { expiresIn: '24h' }
-    );
-
-    // In production, send verification email here
-    console.log('Verification email would be sent to:', email);
-    console.log('Verification token:', verificationToken);
-
-    // Generate JWT token for immediate login (optional)
-    const loginToken = jwt.sign(
-      {
-        userId: newUser.id,
-        email: newUser.email,
-        role: newUser.role,
-        firstName: newUser.firstName,
-        lastName: newUser.lastName
-      },
-      JWT_SECRET,
-      { expiresIn: '24h' }
-    );
+    // Send welcome email
+    try {
+      await emailService.sendWelcomeEmail(email, firstName);
+    } catch (emailError) {
+      console.error('Failed to send welcome email:', emailError);
+      // Don't fail registration if email fails
+    }
 
     // Create response
     const response = NextResponse.json({
       success: true,
-      message: 'Registration successful. Please check your email to verify your account.',
+      message: 'Registration successful',
       user: {
-        id: newUser.id,
-        email: newUser.email,
-        firstName: newUser.firstName,
-        lastName: newUser.lastName,
-        role: newUser.role,
-        isVerified: newUser.isVerified
+        id: user.id,
+        email: user.email,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        role: user.role,
+        verified: user.verified,
       },
-      token: loginToken
+      tokens: {
+        accessToken: tokens.accessToken,
+        expiresIn: tokens.expiresIn,
+      },
     });
 
-    // Set HTTP-only cookie
-    response.cookies.set('auth-token', loginToken, {
+    // Set HTTP-only cookies
+    const cookieOptions = {
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
-      sameSite: 'strict',
-      maxAge: 24 * 60 * 60 // 24 hours
-    });
+      sameSite: 'lax' as const,
+      maxAge: 7 * 24 * 60 * 60, // 7 days
+    };
+
+    response.cookies.set('accessToken', tokens.accessToken, cookieOptions);
+    response.cookies.set('refreshToken', tokens.refreshToken, cookieOptions);
+
+    // Log successful registration
+    console.log(`✅ New user registered: ${user.email}`);
 
     return response;
+  } catch (error: any) {
+    console.error('❌ Registration failed:', error);
 
-  } catch (error) {
-    console.error('Registration error:', error);
-    return NextResponse.json(
-      { error: 'Internal server error' },
-      { status: 500 }
-    );
+    // Handle specific errors
+    if (error.message === 'User already exists with this email') {
+      return NextResponse.json(
+        { error: 'An account with this email already exists' },
+        { status: 409 }
+      );
+    }
+
+    // Generic error response
+    return NextResponse.json({ error: 'Registration failed. Please try again.' }, { status: 500 });
   }
+}
+
+export async function GET() {
+  return NextResponse.json({ error: 'Method not allowed' }, { status: 405 });
 }

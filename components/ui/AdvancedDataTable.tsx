@@ -297,8 +297,8 @@ export function AdvancedDataTable<T extends Record<string, any>>({
                       column.align === 'center'
                         ? 'justify-center'
                         : column.align === 'right'
-                        ? 'justify-end'
-                        : 'justify-start'
+                          ? 'justify-end'
+                          : 'justify-start'
                     }`}
                   >
                     {column.header}
@@ -381,8 +381,8 @@ export function AdvancedDataTable<T extends Record<string, any>>({
                         column.align === 'center'
                           ? 'text-center'
                           : column.align === 'right'
-                          ? 'text-right'
-                          : 'text-left'
+                            ? 'text-right'
+                            : 'text-left'
                       }`}
                     >
                       {column.render ? column.render(row[column.key], row) : row[column.key]}

@@ -1,5 +1,7 @@
 'use client';
 
+'use client';
+
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import {
@@ -40,193 +42,189 @@ import {
   Lock,
   Unlock,
 } from 'lucide-react';
+import {
+  UserGroupIcon,
+  ChartBarIcon,
+  CogIcon,
+  ShieldCheckIcon,
+  ExclamationTriangleIcon,
+  CheckCircleIcon,
+  ClockIcon,
+  CurrencyDollarIcon,
+  GlobeAltIcon,
+  ServerIcon,
+  CircleStackIcon,
+  BellIcon,
+  PlusIcon,
+  MagnifyingGlassIcon,
+  FunnelIcon,
+} from '@heroicons/react/24/outline';
+
+interface User {
+  id: string;
+  name: string;
+  email: string;
+  role: 'admin' | 'moderator' | 'user';
+  status: 'active' | 'suspended' | 'pending';
+  joinDate: string;
+  lastLogin: string;
+  avatar: string;
+  department: string;
+}
+
+interface SystemMetric {
+  name: string;
+  value: string;
+  change: number;
+  trend: 'up' | 'down' | 'stable';
+  icon: React.ComponentType<any>;
+}
+
+interface Alert {
+  id: string;
+  type: 'error' | 'warning' | 'info' | 'success';
+  title: string;
+  message: string;
+  timestamp: string;
+  priority: 'low' | 'medium' | 'high' | 'critical';
+}
+
+const mockUsers: User[] = [
+  {
+    id: '1',
+    name: 'Admin User',
+    email: 'admin@ehb.com',
+    role: 'admin',
+    status: 'active',
+    joinDate: '2023-01-01',
+    lastLogin: '2023-12-01T10:30:00Z',
+    avatar: '/api/placeholder/40/40',
+    department: 'Administration',
+  },
+  {
+    id: '2',
+    name: 'Moderator One',
+    email: 'mod1@ehb.com',
+    role: 'moderator',
+    status: 'active',
+    joinDate: '2023-02-15',
+    lastLogin: '2023-12-01T09:15:00Z',
+    avatar: '/api/placeholder/40/40',
+    department: 'Content',
+  },
+  {
+    id: '3',
+    name: 'Regular User',
+    email: 'user@ehb.com',
+    role: 'user',
+    status: 'active',
+    joinDate: '2023-03-20',
+    lastLogin: '2023-12-01T08:45:00Z',
+    avatar: '/api/placeholder/40/40',
+    department: 'General',
+  },
+  {
+    id: '4',
+    name: 'Suspended User',
+    email: 'suspended@ehb.com',
+    role: 'user',
+    status: 'suspended',
+    joinDate: '2023-04-10',
+    lastLogin: '2023-11-28T14:20:00Z',
+    avatar: '/api/placeholder/40/40',
+    department: 'General',
+  },
+];
+
+const mockSystemMetrics: SystemMetric[] = [
+  {
+    name: 'Total Users',
+    value: '12,847',
+    change: 12.5,
+    trend: 'up',
+    icon: UserGroupIcon,
+  },
+  {
+    name: 'Active Sessions',
+    value: '2,341',
+    change: -3.2,
+    trend: 'down',
+    icon: GlobeAltIcon,
+  },
+  {
+    name: 'Revenue (Monthly)',
+    value: '$45,230',
+    change: 8.7,
+    trend: 'up',
+    icon: CurrencyDollarIcon,
+  },
+  {
+    name: 'System Uptime',
+    value: '99.9%',
+    change: 0.1,
+    trend: 'up',
+    icon: ServerIcon,
+  },
+  {
+    name: 'Database Size',
+    value: '2.4 TB',
+    change: 15.3,
+    trend: 'up',
+    icon: CircleStackIcon,
+  },
+  {
+    name: 'Security Score',
+    value: 'A+',
+    change: 0,
+    trend: 'stable',
+    icon: ShieldCheckIcon,
+  },
+];
+
+const mockAlerts: Alert[] = [
+  {
+    id: '1',
+    type: 'warning',
+    title: 'High CPU Usage',
+    message: 'Server CPU usage is at 85% for the last 10 minutes',
+    timestamp: '2023-12-01T10:30:00Z',
+    priority: 'medium',
+  },
+  {
+    id: '2',
+    type: 'info',
+    title: 'New User Registration',
+    message: '50 new users registered in the last hour',
+    timestamp: '2023-12-01T10:25:00Z',
+    priority: 'low',
+  },
+  {
+    id: '3',
+    type: 'success',
+    title: 'Backup Completed',
+    message: 'Daily backup completed successfully',
+    timestamp: '2023-12-01T10:20:00Z',
+    priority: 'low',
+  },
+  {
+    id: '4',
+    type: 'error',
+    title: 'Database Connection Error',
+    message: 'Failed to connect to primary database',
+    timestamp: '2023-12-01T10:15:00Z',
+    priority: 'critical',
+  },
+];
 
 /**
  * EHB Admin Panel - Comprehensive administrative interface
  * @returns {JSX.Element} The admin panel component
  */
 export default function AdminPage() {
-  const [activeTab, setActiveTab] = useState('overview');
-  const [isLoading, setIsLoading] = useState(false);
+  const [activeTab, setActiveTab] = useState('dashboard');
   const [searchTerm, setSearchTerm] = useState('');
-
-  // Mock admin data
-  const systemStats = [
-    {
-      title: 'Total Users',
-      value: '45,231',
-      change: '+12.5%',
-      changeType: 'positive',
-      icon: Users,
-      color: 'text-blue-600',
-      bgColor: 'bg-blue-100',
-    },
-    {
-      title: 'Active Sessions',
-      value: '2,847',
-      change: '+8.2%',
-      changeType: 'positive',
-      icon: Activity,
-      color: 'text-green-600',
-      bgColor: 'bg-green-100',
-    },
-    {
-      title: 'System Health',
-      value: '99.9%',
-      change: '+0.1%',
-      changeType: 'positive',
-      icon: CheckCircle,
-      color: 'text-green-600',
-      bgColor: 'bg-green-100',
-    },
-    {
-      title: 'Pending Actions',
-      value: '23',
-      change: '-5',
-      changeType: 'negative',
-      icon: AlertTriangle,
-      color: 'text-orange-600',
-      bgColor: 'bg-orange-100',
-    },
-  ];
-
-  const recentUsers = [
-    {
-      id: 1,
-      name: 'John Doe',
-      email: 'john.doe@example.com',
-      role: 'user',
-      status: 'active',
-      joinDate: '2024-01-15',
-      lastLogin: '2 hours ago',
-      verified: true,
-    },
-    {
-      id: 2,
-      name: 'Jane Smith',
-      email: 'jane.smith@example.com',
-      role: 'admin',
-      status: 'active',
-      joinDate: '2024-01-14',
-      lastLogin: '1 hour ago',
-      verified: true,
-    },
-    {
-      id: 3,
-      name: 'Mike Wilson',
-      email: 'mike.wilson@example.com',
-      role: 'user',
-      status: 'suspended',
-      joinDate: '2024-01-13',
-      lastLogin: '3 days ago',
-      verified: false,
-    },
-    {
-      id: 4,
-      name: 'Sarah Jones',
-      email: 'sarah.jones@example.com',
-      role: 'moderator',
-      status: 'active',
-      joinDate: '2024-01-12',
-      lastLogin: '30 minutes ago',
-      verified: true,
-    },
-    {
-      id: 5,
-      name: 'David Brown',
-      email: 'david.brown@example.com',
-      role: 'user',
-      status: 'pending',
-      joinDate: '2024-01-11',
-      lastLogin: 'Never',
-      verified: false,
-    },
-  ];
-
-  const systemAlerts = [
-    {
-      id: 1,
-      type: 'warning',
-      title: 'High CPU Usage',
-      description: 'Server CPU usage is at 85%',
-      timestamp: '5 minutes ago',
-      severity: 'medium',
-    },
-    {
-      id: 2,
-      type: 'error',
-      title: 'Database Connection Issue',
-      description: 'Failed to connect to primary database',
-      timestamp: '15 minutes ago',
-      severity: 'high',
-    },
-    {
-      id: 3,
-      type: 'info',
-      title: 'Backup Completed',
-      description: 'Daily backup completed successfully',
-      timestamp: '1 hour ago',
-      severity: 'low',
-    },
-    {
-      id: 4,
-      type: 'success',
-      title: 'Security Update',
-      description: 'Latest security patches installed',
-      timestamp: '2 hours ago',
-      severity: 'low',
-    },
-  ];
-
-  const serviceMetrics = [
-    {
-      name: 'GoSellr',
-      status: 'healthy',
-      uptime: '99.9%',
-      responseTime: '120ms',
-      users: '12.5K',
-      errors: '0.1%',
-    },
-    {
-      name: 'WMS',
-      status: 'warning',
-      uptime: '98.5%',
-      responseTime: '250ms',
-      users: '8.2K',
-      errors: '2.3%',
-    },
-    {
-      name: 'AI Marketplace',
-      status: 'healthy',
-      uptime: '99.7%',
-      responseTime: '180ms',
-      users: '15.3K',
-      errors: '0.5%',
-    },
-    {
-      name: 'PSS',
-      status: 'healthy',
-      uptime: '99.8%',
-      responseTime: '150ms',
-      users: '5.1K',
-      errors: '0.8%',
-    },
-  ];
-
-  const tabs = [
-    { id: 'overview', name: 'Overview', icon: BarChart3 },
-    { id: 'users', name: 'User Management', icon: Users },
-    { id: 'system', name: 'System Monitor', icon: Server },
-    { id: 'security', name: 'Security', icon: Shield },
-    { id: 'settings', name: 'Settings', icon: Settings },
-  ];
-
-  const refreshData = async () => {
-    setIsLoading(true);
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    setIsLoading(false);
-  };
+  const [roleFilter, setRoleFilter] = useState('all');
+  const [statusFilter, setStatusFilter] = useState('all');
 
   const getStatusColor = (status: string) => {
     switch (status) {
@@ -241,39 +239,69 @@ export default function AdminPage() {
     }
   };
 
-  const getAlertIcon = (type: string) => {
-    switch (type) {
-      case 'warning':
-        return <AlertTriangle className="w-5 h-5 text-yellow-600" />;
-      case 'error':
-        return <XCircle className="w-5 h-5 text-red-600" />;
-      case 'info':
-        return <Clock className="w-5 h-5 text-blue-600" />;
-      case 'success':
-        return <CheckCircle className="w-5 h-5 text-green-600" />;
-      default:
-        return <Activity className="w-5 h-5 text-gray-600" />;
-    }
-  };
-
-  const getServiceStatusColor = (status: string) => {
-    switch (status) {
-      case 'healthy':
-        return 'text-green-600 bg-green-100';
-      case 'warning':
-        return 'text-yellow-600 bg-yellow-100';
-      case 'error':
-        return 'text-red-600 bg-red-100';
+  const getRoleColor = (role: string) => {
+    switch (role) {
+      case 'admin':
+        return 'text-purple-600 bg-purple-100';
+      case 'moderator':
+        return 'text-blue-600 bg-blue-100';
+      case 'user':
+        return 'text-gray-600 bg-gray-100';
       default:
         return 'text-gray-600 bg-gray-100';
     }
   };
 
-  const filteredUsers = recentUsers.filter(
-    user =>
+  const getAlertColor = (type: string) => {
+    switch (type) {
+      case 'error':
+        return 'text-red-600 bg-red-100 border-red-200';
+      case 'warning':
+        return 'text-yellow-600 bg-yellow-100 border-yellow-200';
+      case 'info':
+        return 'text-blue-600 bg-blue-100 border-blue-200';
+      case 'success':
+        return 'text-green-600 bg-green-100 border-green-200';
+      default:
+        return 'text-gray-600 bg-gray-100 border-gray-200';
+    }
+  };
+
+  const getTrendIcon = (trend: string) => {
+    switch (trend) {
+      case 'up':
+        return '↗';
+      case 'down':
+        return '↘';
+      case 'stable':
+        return '→';
+      default:
+        return '→';
+    }
+  };
+
+  const getTrendColor = (trend: string) => {
+    switch (trend) {
+      case 'up':
+        return 'text-green-600';
+      case 'down':
+        return 'text-red-600';
+      case 'stable':
+        return 'text-gray-600';
+      default:
+        return 'text-gray-600';
+    }
+  };
+
+  const filteredUsers = mockUsers.filter(user => {
+    const matchesSearch =
       user.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      user.email.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+      user.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      user.department.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesRole = roleFilter === 'all' || user.role === roleFilter;
+    const matchesStatus = statusFilter === 'all' || user.status === statusFilter;
+    return matchesSearch && matchesRole && matchesStatus;
+  });
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
@@ -288,16 +316,8 @@ export default function AdminPage() {
               </p>
             </div>
             <div className="flex items-center gap-4">
-              <button
-                onClick={refreshData}
-                disabled={isLoading}
-                className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50"
-              >
-                {isLoading ? (
-                  <RefreshCw className="w-4 h-4 animate-spin" />
-                ) : (
-                  <RefreshCw className="w-4 h-4" />
-                )}
+              <button className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50">
+                <RefreshCw className="w-4 h-4" />
                 Refresh
               </button>
             </div>
@@ -311,7 +331,13 @@ export default function AdminPage() {
           <div className="lg:w-64 flex-shrink-0">
             <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 sticky top-8">
               <nav className="space-y-2">
-                {tabs.map(tab => (
+                {[
+                  { id: 'dashboard', name: 'Dashboard', icon: ChartBarIcon },
+                  { id: 'users', name: 'User Management', icon: UserGroupIcon },
+                  { id: 'alerts', name: 'System Alerts', icon: BellIcon },
+                  { id: 'security', name: 'Security', icon: ShieldCheckIcon },
+                  { id: 'settings', name: 'Settings', icon: CogIcon },
+                ].map(tab => (
                   <button
                     key={tab.id}
                     onClick={() => setActiveTab(tab.id)}
@@ -331,508 +357,333 @@ export default function AdminPage() {
 
           {/* Main Content */}
           <div className="flex-1">
-            {/* Overview Tab */}
-            {activeTab === 'overview' && (
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                className="space-y-8"
-              >
-                {/* System Stats */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                  {systemStats.map((stat, index) => (
-                    <motion.div
-                      key={stat.title}
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: index * 0.1 }}
-                      className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6"
-                    >
-                      <div className="flex items-center justify-between mb-4">
-                        <div className={`${stat.bgColor} p-3 rounded-lg`}>
-                          <stat.icon className={`w-6 h-6 ${stat.color}`} />
-                        </div>
-                        <div className="flex items-center gap-1">
-                          {stat.changeType === 'positive' ? (
-                            <TrendingUp className="w-4 h-4 text-green-600" />
-                          ) : (
-                            <TrendingDown className="w-4 h-4 text-red-600" />
-                          )}
-                          <span
-                            className={`text-sm font-medium ${
-                              stat.changeType === 'positive' ? 'text-green-600' : 'text-red-600'
-                            }`}
-                          >
-                            {stat.change}
-                          </span>
-                        </div>
-                      </div>
-                      <div>
-                        <p className="text-sm font-medium text-gray-600 dark:text-gray-400">
-                          {stat.title}
-                        </p>
-                        <p className="text-2xl font-bold text-gray-900 dark:text-white">
-                          {stat.value}
-                        </p>
-                      </div>
-                    </motion.div>
-                  ))}
-                </div>
-
-                {/* System Alerts & Service Metrics */}
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                  {/* System Alerts */}
-                  <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6">
-                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-6">
-                      System Alerts
-                    </h3>
-                    <div className="space-y-4">
-                      {systemAlerts.map(alert => (
-                        <div
-                          key={alert.id}
-                          className="flex items-start gap-4 p-4 bg-gray-50 dark:bg-gray-700 rounded-lg"
-                        >
-                          {getAlertIcon(alert.type)}
-                          <div className="flex-1">
-                            <h4 className="font-medium text-gray-900 dark:text-white">
-                              {alert.title}
-                            </h4>
-                            <p className="text-sm text-gray-600 dark:text-gray-400">
-                              {alert.description}
-                            </p>
-                            <p className="text-xs text-gray-500 dark:text-gray-500 mt-1">
-                              {alert.timestamp}
-                            </p>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* Service Metrics */}
-                  <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6">
-                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-6">
-                      Service Health
-                    </h3>
-                    <div className="space-y-4">
-                      {serviceMetrics.map(service => (
-                        <div
-                          key={service.name}
-                          className="flex items-center justify-between p-4 bg-gray-50 dark:bg-gray-700 rounded-lg"
-                        >
-                          <div className="flex items-center gap-4">
-                            <div
-                              className={`px-2 py-1 rounded-full text-xs font-medium ${getServiceStatusColor(
-                                service.status
-                              )}`}
-                            >
-                              {service.status}
-                            </div>
-                            <div>
-                              <h4 className="font-medium text-gray-900 dark:text-white">
-                                {service.name}
-                              </h4>
-                              <p className="text-sm text-gray-600 dark:text-gray-400">
-                                {service.users} users
-                              </p>
-                            </div>
-                          </div>
-                          <div className="text-right">
-                            <p className="text-sm font-medium text-gray-900 dark:text-white">
-                              {service.uptime}
-                            </p>
-                            <p className="text-xs text-gray-600 dark:text-gray-400">
-                              {service.responseTime}
-                            </p>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
-            )}
-
-            {/* User Management Tab */}
+            {/* Search and Filters */}
             {activeTab === 'users' && (
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6"
-              >
-                <div className="flex items-center justify-between mb-6">
-                  <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
-                    User Management
-                  </h3>
-                  <div className="flex items-center gap-4">
-                    <div className="relative">
-                      <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
-                      <input
-                        type="text"
-                        placeholder="Search users..."
-                        value={searchTerm}
-                        onChange={e => setSearchTerm(e.target.value)}
-                        className="pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                      />
-                    </div>
-                    <button className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
-                      <Plus className="w-4 h-4" />
-                      Add User
-                    </button>
-                  </div>
-                </div>
-
-                <div className="overflow-x-auto">
-                  <table className="w-full">
-                    <thead>
-                      <tr className="border-b border-gray-200 dark:border-gray-600">
-                        <th className="text-left py-3 px-4 font-medium text-gray-900 dark:text-white">
-                          User
-                        </th>
-                        <th className="text-left py-3 px-4 font-medium text-gray-900 dark:text-white">
-                          Role
-                        </th>
-                        <th className="text-left py-3 px-4 font-medium text-gray-900 dark:text-white">
-                          Status
-                        </th>
-                        <th className="text-left py-3 px-4 font-medium text-gray-900 dark:text-white">
-                          Verified
-                        </th>
-                        <th className="text-left py-3 px-4 font-medium text-gray-900 dark:text-white">
-                          Last Login
-                        </th>
-                        <th className="text-left py-3 px-4 font-medium text-gray-900 dark:text-white">
-                          Actions
-                        </th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {filteredUsers.map(user => (
-                        <tr key={user.id} className="border-b border-gray-100 dark:border-gray-700">
-                          <td className="py-3 px-4">
-                            <div>
-                              <p className="font-medium text-gray-900 dark:text-white">
-                                {user.name}
-                              </p>
-                              <p className="text-sm text-gray-600 dark:text-gray-400">
-                                {user.email}
-                              </p>
-                            </div>
-                          </td>
-                          <td className="py-3 px-4">
-                            <span className="px-2 py-1 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-full text-xs font-medium">
-                              {user.role}
-                            </span>
-                          </td>
-                          <td className="py-3 px-4">
-                            <span
-                              className={`px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(
-                                user.status
-                              )}`}
-                            >
-                              {user.status}
-                            </span>
-                          </td>
-                          <td className="py-3 px-4">
-                            {user.verified ? (
-                              <CheckCircle className="w-5 h-5 text-green-600" />
-                            ) : (
-                              <XCircle className="w-5 h-5 text-red-600" />
-                            )}
-                          </td>
-                          <td className="py-3 px-4 text-sm text-gray-600 dark:text-gray-400">
-                            {user.lastLogin}
-                          </td>
-                          <td className="py-3 px-4">
-                            <div className="flex items-center gap-2">
-                              <button
-                                className="p-1 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
-                                title="View user details"
-                                aria-label="View user details"
-                              >
-                                <Eye className="w-4 h-4" />
-                              </button>
-                              <button
-                                className="p-1 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
-                                title="Edit user"
-                                aria-label="Edit user"
-                              >
-                                <Edit className="w-4 h-4" />
-                              </button>
-                              <button
-                                className="p-1 text-gray-400 hover:text-red-600"
-                                title="Delete user"
-                                aria-label="Delete user"
-                              >
-                                <Trash2 className="w-4 h-4" />
-                              </button>
-                            </div>
-                          </td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
-              </motion.div>
-            )}
-
-            {/* System Monitor Tab */}
-            {activeTab === 'system' && (
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                className="space-y-8"
-              >
-                {/* System Resources */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                  <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6">
-                    <div className="flex items-center gap-4">
-                      <Server className="w-8 h-8 text-blue-600" />
-                      <div>
-                        <p className="text-sm text-gray-600 dark:text-gray-400">CPU Usage</p>
-                        <p className="text-2xl font-bold text-gray-900 dark:text-white">85%</p>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6">
-                    <div className="flex items-center gap-4">
-                      <Database className="w-8 h-8 text-green-600" />
-                      <div>
-                        <p className="text-sm text-gray-600 dark:text-gray-400">Memory Usage</p>
-                        <p className="text-2xl font-bold text-gray-900 dark:text-white">72%</p>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6">
-                    <div className="flex items-center gap-4">
-                      <Globe className="w-8 h-8 text-purple-600" />
-                      <div>
-                        <p className="text-sm text-gray-600 dark:text-gray-400">Network</p>
-                        <p className="text-2xl font-bold text-gray-900 dark:text-white">1.2GB/s</p>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6">
-                    <div className="flex items-center gap-4">
-                      <Monitor className="w-8 h-8 text-orange-600" />
-                      <div>
-                        <p className="text-sm text-gray-600 dark:text-gray-400">Disk Usage</p>
-                        <p className="text-2xl font-bold text-gray-900 dark:text-white">45%</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Service Health */}
-                <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6">
-                  <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-6">
-                    Service Health
-                  </h3>
-                  <div className="space-y-4">
-                    {serviceMetrics.map(service => (
-                      <div
-                        key={service.name}
-                        className="flex items-center justify-between p-4 bg-gray-50 dark:bg-gray-700 rounded-lg"
-                      >
-                        <div className="flex items-center gap-4">
-                          <div
-                            className={`px-2 py-1 rounded-full text-xs font-medium ${getServiceStatusColor(
-                              service.status
-                            )}`}
-                          >
-                            {service.status}
-                          </div>
-                          <div>
-                            <h4 className="font-medium text-gray-900 dark:text-white">
-                              {service.name}
-                            </h4>
-                            <p className="text-sm text-gray-600 dark:text-gray-400">
-                              Uptime: {service.uptime}
-                            </p>
-                          </div>
-                        </div>
-                        <div className="text-right">
-                          <p className="text-sm font-medium text-gray-900 dark:text-white">
-                            {service.responseTime}
-                          </p>
-                          <p className="text-xs text-gray-600 dark:text-gray-400">
-                            Error Rate: {service.errors}
-                          </p>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </motion.div>
-            )}
-
-            {/* Security Tab */}
-            {activeTab === 'security' && (
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                className="space-y-8"
-              >
-                {/* Security Overview */}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                  <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6">
-                    <div className="flex items-center gap-4">
-                      <Shield className="w-8 h-8 text-green-600" />
-                      <div>
-                        <p className="text-sm text-gray-600 dark:text-gray-400">Security Score</p>
-                        <p className="text-2xl font-bold text-gray-900 dark:text-white">95/100</p>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6">
-                    <div className="flex items-center gap-4">
-                      <Lock className="w-8 h-8 text-blue-600" />
-                      <div>
-                        <p className="text-sm text-gray-600 dark:text-gray-400">Active Sessions</p>
-                        <p className="text-2xl font-bold text-gray-900 dark:text-white">2,847</p>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6">
-                    <div className="flex items-center gap-4">
-                      <AlertTriangle className="w-8 h-8 text-orange-600" />
-                      <div>
-                        <p className="text-sm text-gray-600 dark:text-gray-400">Threats Blocked</p>
-                        <p className="text-2xl font-bold text-gray-900 dark:text-white">156</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Security Settings */}
-                <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6">
-                  <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-6">
-                    Security Settings
-                  </h3>
-                  <div className="space-y-6">
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <h4 className="font-medium text-gray-900 dark:text-white">
-                          Two-Factor Authentication
-                        </h4>
-                        <p className="text-sm text-gray-600 dark:text-gray-400">
-                          Require 2FA for all users
-                        </p>
-                      </div>
-                      <button className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
-                        Enable
-                      </button>
-                    </div>
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <h4 className="font-medium text-gray-900 dark:text-white">
-                          Session Timeout
-                        </h4>
-                        <p className="text-sm text-gray-600 dark:text-gray-400">
-                          Auto-logout after inactivity
-                        </p>
-                      </div>
-                      <select
-                        className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
-                        aria-label="Select session timeout duration"
-                      >
-                        <option>30 minutes</option>
-                        <option>1 hour</option>
-                        <option>2 hours</option>
-                        <option>Never</option>
-                      </select>
-                    </div>
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <h4 className="font-medium text-gray-900 dark:text-white">IP Whitelist</h4>
-                        <p className="text-sm text-gray-600 dark:text-gray-400">
-                          Restrict access to specific IPs
-                        </p>
-                      </div>
-                      <button className="px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors">
-                        Configure
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
-            )}
-
-            {/* Settings Tab */}
-            {activeTab === 'settings' && (
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6"
-              >
-                <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-6">
-                  System Settings
-                </h3>
-                <div className="space-y-6">
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                      Site Name
-                    </label>
+              <div className="mb-6 flex flex-col sm:flex-row gap-4">
+                <div className="flex-1">
+                  <div className="relative">
+                    <MagnifyingGlassIcon className="h-5 w-5 absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
                     <input
                       type="text"
-                      defaultValue="EHB Platform"
-                      className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      placeholder="Search users..."
+                      value={searchTerm}
+                      onChange={e => setSearchTerm(e.target.value)}
+                      className="pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     />
                   </div>
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                      Default Language
-                    </label>
-                    <select
-                      className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                      aria-label="Select default language"
-                    >
-                      <option>English</option>
-                      <option>Spanish</option>
-                      <option>French</option>
-                      <option>German</option>
-                    </select>
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                      Time Zone
-                    </label>
-                    <select
-                      className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                      aria-label="Select time zone"
-                    >
-                      <option>UTC</option>
-                      <option>EST</option>
-                      <option>PST</option>
-                      <option>GMT</option>
-                    </select>
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <h4 className="font-medium text-gray-900 dark:text-white">
-                        Maintenance Mode
-                      </h4>
-                      <p className="text-sm text-gray-600 dark:text-gray-400">
-                        Temporarily disable the site
-                      </p>
+                </div>
+                <div className="flex gap-2">
+                  <select
+                    value={roleFilter}
+                    onChange={e => setRoleFilter(e.target.value)}
+                    className="block px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
+                    aria-label="Filter by role"
+                  >
+                    <option value="all">All Roles</option>
+                    <option value="admin">Admin</option>
+                    <option value="moderator">Moderator</option>
+                    <option value="user">User</option>
+                  </select>
+                  <select
+                    value={statusFilter}
+                    onChange={e => setStatusFilter(e.target.value)}
+                    className="block px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
+                    aria-label="Filter by status"
+                  >
+                    <option value="all">All Status</option>
+                    <option value="active">Active</option>
+                    <option value="suspended">Suspended</option>
+                    <option value="pending">Pending</option>
+                  </select>
+                </div>
+              </div>
+            )}
+
+            {/* Tab Content */}
+            {activeTab === 'dashboard' && (
+              <div className="space-y-6">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                  {/* Recent Activity */}
+                  <div className="bg-gray-50 rounded-lg p-6">
+                    <h3 className="text-lg font-medium text-gray-900 mb-4">Recent Activity</h3>
+                    <div className="space-y-4">
+                      <div className="flex items-center space-x-3">
+                        <div className="flex-shrink-0">
+                          <div className="h-8 w-8 bg-blue-100 rounded-full flex items-center justify-center">
+                            <UserGroupIcon className="h-4 w-4 text-blue-600" />
+                          </div>
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <p className="text-sm font-medium text-gray-900">New user registration</p>
+                          <p className="text-sm text-gray-500">
+                            john.doe@example.com joined the platform
+                          </p>
+                        </div>
+                        <div className="text-sm text-gray-500">2 min ago</div>
+                      </div>
+                      <div className="flex items-center space-x-3">
+                        <div className="flex-shrink-0">
+                          <div className="h-8 w-8 bg-green-100 rounded-full flex items-center justify-center">
+                            <CheckCircleIcon className="h-4 w-4 text-green-600" />
+                          </div>
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <p className="text-sm font-medium text-gray-900">
+                            System backup completed
+                          </p>
+                          <p className="text-sm text-gray-500">
+                            Daily backup completed successfully
+                          </p>
+                        </div>
+                        <div className="text-sm text-gray-500">15 min ago</div>
+                      </div>
+                      <div className="flex items-center space-x-3">
+                        <div className="flex-shrink-0">
+                          <div className="h-8 w-8 bg-yellow-100 rounded-full flex items-center justify-center">
+                            <ExclamationTriangleIcon className="h-4 w-4 text-yellow-600" />
+                          </div>
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <p className="text-sm font-medium text-gray-900">
+                            High CPU usage detected
+                          </p>
+                          <p className="text-sm text-gray-500">Server CPU usage at 85%</p>
+                        </div>
+                        <div className="text-sm text-gray-500">1 hour ago</div>
+                      </div>
                     </div>
-                    <button className="px-4 py-2 bg-orange-600 text-white rounded-lg hover:bg-orange-700 transition-colors">
-                      Enable
-                    </button>
                   </div>
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <h4 className="font-medium text-gray-900 dark:text-white">Auto Updates</h4>
-                      <p className="text-sm text-gray-600 dark:text-gray-400">
-                        Automatically install updates
-                      </p>
+
+                  {/* Quick Actions */}
+                  <div className="bg-gray-50 rounded-lg p-6">
+                    <h3 className="text-lg font-medium text-gray-900 mb-4">Quick Actions</h3>
+                    <div className="grid grid-cols-2 gap-4">
+                      <button className="p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow">
+                        <UserGroupIcon className="h-6 w-6 text-blue-600 mb-2" />
+                        <p className="text-sm font-medium text-gray-900">Add User</p>
+                      </button>
+                      <button className="p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow">
+                        <ShieldCheckIcon className="h-6 w-6 text-green-600 mb-2" />
+                        <p className="text-sm font-medium text-gray-900">Security Scan</p>
+                      </button>
+                      <button className="p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow">
+                        <CircleStackIcon className="h-6 w-6 text-purple-600 mb-2" />
+                        <p className="text-sm font-medium text-gray-900">Backup Now</p>
+                      </button>
+                      <button className="p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow">
+                        <CogIcon className="h-6 w-6 text-gray-600 mb-2" />
+                        <p className="text-sm font-medium text-gray-900">System Settings</p>
+                      </button>
                     </div>
-                    <button className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors">
-                      Enable
-                    </button>
                   </div>
                 </div>
-              </motion.div>
+              </div>
+            )}
+
+            {activeTab === 'users' && (
+              <div className="overflow-x-auto">
+                <table className="min-w-full divide-y divide-gray-200">
+                  <thead className="bg-gray-50">
+                    <tr>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        User
+                      </th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        Role
+                      </th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        Status
+                      </th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        Department
+                      </th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        Last Login
+                      </th>
+                      <th className="relative px-6 py-3">
+                        <span className="sr-only">Actions</span>
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody className="bg-white divide-y divide-gray-200">
+                    {filteredUsers.map(user => (
+                      <tr key={user.id} className="hover:bg-gray-50">
+                        <td className="px-6 py-4 whitespace-nowrap">
+                          <div className="flex items-center">
+                            <div className="flex-shrink-0 h-10 w-10">
+                              <img
+                                className="h-10 w-10 rounded-full"
+                                src={user.avatar}
+                                alt={user.name}
+                              />
+                            </div>
+                            <div className="ml-4">
+                              <div className="text-sm font-medium text-gray-900">{user.name}</div>
+                              <div className="text-sm text-gray-500">{user.email}</div>
+                            </div>
+                          </div>
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap">
+                          <span
+                            className={`px-2 py-1 text-xs font-medium rounded-full ${getRoleColor(user.role)}`}
+                          >
+                            {user.role}
+                          </span>
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap">
+                          <span
+                            className={`px-2 py-1 text-xs font-medium rounded-full ${getStatusColor(user.status)}`}
+                          >
+                            {user.status}
+                          </span>
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                          {user.department}
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                          {new Date(user.lastLogin).toLocaleString()}
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                          <div className="flex space-x-2">
+                            <button className="text-blue-600 hover:text-blue-900">Edit</button>
+                            <button className="text-red-600 hover:text-red-900">Suspend</button>
+                          </div>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            )}
+
+            {activeTab === 'alerts' && (
+              <div className="space-y-4">
+                {mockAlerts.map(alert => (
+                  <div
+                    key={alert.id}
+                    className={`border rounded-lg p-4 ${getAlertColor(alert.type)}`}
+                  >
+                    <div className="flex justify-between items-start">
+                      <div className="flex-1">
+                        <h4 className="text-sm font-medium">{alert.title}</h4>
+                        <p className="text-sm mt-1">{alert.message}</p>
+                        <p className="text-xs mt-2 opacity-75">
+                          {new Date(alert.timestamp).toLocaleString()}
+                        </p>
+                      </div>
+                      <div className="flex space-x-2">
+                        <span
+                          className={`px-2 py-1 text-xs font-medium rounded-full ${
+                            alert.priority === 'critical'
+                              ? 'bg-red-200 text-red-800'
+                              : alert.priority === 'high'
+                                ? 'bg-orange-200 text-orange-800'
+                                : alert.priority === 'medium'
+                                  ? 'bg-yellow-200 text-yellow-800'
+                                  : 'bg-gray-200 text-gray-800'
+                          }`}
+                        >
+                          {alert.priority}
+                        </span>
+                        <button className="text-sm hover:underline">Dismiss</button>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+
+            {activeTab === 'security' && (
+              <div className="space-y-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div className="bg-white border border-gray-200 rounded-lg p-6">
+                    <h3 className="text-lg font-medium text-gray-900 mb-4">Security Overview</h3>
+                    <div className="space-y-4">
+                      <div className="flex justify-between items-center">
+                        <span className="text-sm text-gray-600">Firewall Status</span>
+                        <span className="text-sm font-medium text-green-600">Active</span>
+                      </div>
+                      <div className="flex justify-between items-center">
+                        <span className="text-sm text-gray-600">SSL Certificate</span>
+                        <span className="text-sm font-medium text-green-600">Valid</span>
+                      </div>
+                      <div className="flex justify-between items-center">
+                        <span className="text-sm text-gray-600">Last Security Scan</span>
+                        <span className="text-sm font-medium text-gray-900">2 hours ago</span>
+                      </div>
+                      <div className="flex justify-between items-center">
+                        <span className="text-sm text-gray-600">Vulnerabilities</span>
+                        <span className="text-sm font-medium text-green-600">0 Found</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="bg-white border border-gray-200 rounded-lg p-6">
+                    <h3 className="text-lg font-medium text-gray-900 mb-4">Access Logs</h3>
+                    <div className="space-y-3">
+                      <div className="flex justify-between text-sm">
+                        <span className="text-gray-600">Failed Login Attempts</span>
+                        <span className="font-medium text-red-600">3 (last 24h)</span>
+                      </div>
+                      <div className="flex justify-between text-sm">
+                        <span className="text-gray-600">Suspicious IPs</span>
+                        <span className="font-medium text-yellow-600">1 Blocked</span>
+                      </div>
+                      <div className="flex justify-between text-sm">
+                        <span className="text-gray-600">Admin Logins</span>
+                        <span className="font-medium text-gray-900">12 (last 24h)</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {activeTab === 'settings' && (
+              <div className="space-y-6">
+                <div className="bg-white border border-gray-200 rounded-lg p-6">
+                  <h3 className="text-lg font-medium text-gray-900 mb-4">System Settings</h3>
+                  <div className="space-y-4">
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700">
+                        Maintenance Mode
+                      </label>
+                      <div className="mt-1">
+                        <label className="inline-flex items-center">
+                          <input
+                            type="checkbox"
+                            className="rounded border-gray-300 text-blue-600 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
+                          />
+                          <span className="ml-2 text-sm text-gray-900">
+                            Enable maintenance mode
+                          </span>
+                        </label>
+                      </div>
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700">Auto Backup</label>
+                      <select
+                        className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+                        aria-label="Select backup frequency"
+                      >
+                        <option>Daily</option>
+                        <option>Weekly</option>
+                        <option>Monthly</option>
+                      </select>
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700">
+                        Session Timeout
+                      </label>
+                      <input
+                        type="number"
+                        className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                        placeholder="30"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
             )}
           </div>
         </div>

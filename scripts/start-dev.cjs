@@ -57,14 +57,13 @@ class DevServerManager {
     process.env.NODE_ENV = 'development';
     process.env.NEXT_TELEMETRY_DISABLED = '1';
 
-    // Start the server
-    this.process = spawn('npm', ['run', 'dev:5500'], {
+    // Start the server using port-fix script
+    this.process = spawn('npm', ['run', 'port-fix'], {
       cwd: this.projectRoot,
       stdio: 'inherit',
       shell: true,
       env: {
         ...process.env,
-        PORT: this.port.toString(),
         NODE_ENV: 'development',
         NEXT_TELEMETRY_DISABLED: '1',
       },

@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useState } from 'react';
 import { FiDollarSign, FiTrendingUp, FiTrendingDown, FiCalendar } from 'react-icons/fi';
 

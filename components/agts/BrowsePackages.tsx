@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useState } from 'react';
 import { FiFilter, FiStar, FiMapPin, FiDollarSign } from 'react-icons/fi';
 

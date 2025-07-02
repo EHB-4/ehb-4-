@@ -1,3 +1,4 @@
+export const runtime = "nodejs";
 import { NextRequest, NextResponse } from 'next/server';
 
 import { ServiceCategory } from '@/components/EHB-Franchise/FranchiseUtils/FranchiseTypes';

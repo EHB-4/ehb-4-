@@ -1,3 +1,4 @@
+export const runtime = "nodejs";
 import { NextRequest, NextResponse } from 'next/server';
 
 export async function POST(request: NextRequest) {
@@ -8,25 +9,32 @@ export async function POST(request: NextRequest) {
       message: 'Logout successful',
     });
 
-    // Clear authentication cookie
-    response.cookies.set('auth-token', '', {
+    // Clear authentication cookies
+    response.cookies.set('accessToken', '', {
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
-      sameSite: 'strict',
+      sameSite: 'lax',
       maxAge: 0, // Expire immediately
     });
 
-    // Clear any other auth-related cookies
-    response.cookies.set('refresh-token', '', {
+    response.cookies.set('refreshToken', '', {
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
-      sameSite: 'strict',
-      maxAge: 0,
+      sameSite: 'lax',
+      maxAge: 0, // Expire immediately
     });
+
+    // Log logout
+    console.log('✅ User logged out successfully');
 
     return response;
   } catch (error) {
-    console.error('Logout error:', error);
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
+    console.error('❌ Logout failed:', error);
+
+    return NextResponse.json({ error: 'Logout failed' }, { status: 500 });
   }
+}
+
+export async function GET() {
+  return NextResponse.json({ error: 'Method not allowed' }, { status: 405 });
 }

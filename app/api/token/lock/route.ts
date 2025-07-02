@@ -1,3 +1,4 @@
+export const runtime = "nodejs";
 import { ethers } from 'ethers';
 import { NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth';

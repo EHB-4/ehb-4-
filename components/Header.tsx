@@ -1,3 +1,5 @@
+"use client";
+
 import { useState, useEffect } from 'react';
 import { Dialog } from '@headlessui/react';
 import { Mic, Bell, ShoppingCart, User, Menu } from 'lucide-react';

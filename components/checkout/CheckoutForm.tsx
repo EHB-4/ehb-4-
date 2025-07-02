@@ -1,3 +1,5 @@
+"use client";
+
 import { CreditCard, Paypal } from 'lucide-react';
 import React from 'react';
 

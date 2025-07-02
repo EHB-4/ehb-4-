@@ -1,0 +1,29 @@
+{
+  "totalFiles": 36,
+  "duplicates": [],
+  "merged": [
+    {
+      "type": "similar_name",
+      "files": [
+        "app\\franchise\\health\\page.tsx",
+        "app\\franchise\\page.tsx"
+      ],
+      "fileName": "page.tsx"
+    },
+    {
+      "type": "similar_name",
+      "files": [
+        "app\\franchise\\health\\page.tsx",
+        "app\\franchise\\page.tsx"
+      ],
+      "fileName": "page.tsx"
+    }
+  ],
+  "errors": [],
+  "lastScan": "2025-07-02T09:57:26.434Z",
+  "performance": {
+    "scanTime": 4,
+    "mergeTime": 19,
+    "backupTime": 0
+  }
+}

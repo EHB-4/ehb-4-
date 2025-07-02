@@ -1,9 +1,9 @@
 # EHB Next.js 04 - Ultra Fast Setup Report
 
 ## Setup Summary
-- **Duration**: 25.89 seconds
+- **Duration**: 17.30 seconds
 - **Status**: ✅ Complete
-- **Timestamp**: 2025-06-20T16:44:33.776Z
+- **Timestamp**: 2025-06-30T20:16:49.614Z
 
 ## What was configured:
 ✅ MongoDB with Docker
@@ -29,88 +29,78 @@
 - `npm run mongo-fast` - Fast MongoDB testing
 
 ## Setup Log:
-[2025-06-20T16:44:07.887Z] INFO: 🚀 Starting EHB Next.js 04 Ultra Fast Setup...
-[2025-06-20T16:44:07.891Z] INFO: 🔍 Checking prerequisites...
-[2025-06-20T16:44:07.891Z] INFO: Running: node --version
-[2025-06-20T16:44:07.924Z] SUCCESS: ✅ Success: node --version
-[2025-06-20T16:44:07.925Z] INFO: ✅ Node.js is installed
-[2025-06-20T16:44:07.925Z] INFO: Running: npm --version
-[2025-06-20T16:44:08.159Z] SUCCESS: ✅ Success: npm --version
-[2025-06-20T16:44:08.159Z] INFO: ✅ npm is installed
-[2025-06-20T16:44:08.159Z] INFO: Running: git --version
-[2025-06-20T16:44:08.200Z] SUCCESS: ✅ Success: git --version
-[2025-06-20T16:44:08.200Z] INFO: ✅ Git is installed
-[2025-06-20T16:44:08.200Z] INFO: 🗄️  Setting up MongoDB with Docker...
-[2025-06-20T16:44:08.201Z] INFO: ✅ Docker Compose file created
-[2025-06-20T16:44:08.201Z] INFO: Running: docker-compose up -d mongodb
-[2025-06-20T16:44:08.364Z] SUCCESS: ✅ Success: docker-compose up -d mongodb
-[2025-06-20T16:44:08.364Z] INFO: ✅ MongoDB container started
-[2025-06-20T16:44:08.364Z] INFO: ⏳ Waiting for MongoDB to be ready...
-[2025-06-20T16:44:18.371Z] INFO: 🔧 Setting up Prisma...
-[2025-06-20T16:44:18.371Z] INFO: ✅ Prisma schema created
-[2025-06-20T16:44:18.371Z] INFO: Running: npm install prisma @prisma/client
-[2025-06-20T16:44:24.786Z] SUCCESS: ✅ Success: npm install prisma @prisma/client
-[2025-06-20T16:44:24.787Z] INFO: Running: npx prisma generate
-[2025-06-20T16:44:25.791Z] ERROR: ❌ Error: npx prisma generate - Command failed: npx prisma generate
-Error: Prisma schema validation - (get-dmmf wasm)
-Error code: P1012
-[1;91merror[0m: [1mError validating: Implicit many-to-many relations are not supported on MongoDB. Please use the syntax defined in https://pris.ly/d/document-database-many-to-many[0m
-  [1;94m-->[0m  [4mprisma\schema.prisma:65[0m
-[1;94m   | [0m
-[1;94m64 | [0m  cartItems   CartItem[]
-[1;94m65 | [0m  [1;91mwishlist    User[][0m
-[1;94m66 | [0m  orders      OrderItem[]
-[1;94m   | [0m
-[1;91merror[0m: [1mError validating: Implicit many-to-many relations are not supported on MongoDB. Please use the syntax defined in https://pris.ly/d/document-database-many-to-many[0m
-  [1;94m-->[0m  [4mprisma\schema.prisma:25[0m
-[1;94m   | [0m
-[1;94m24 | [0m  reviews    Review[]
-[1;94m25 | [0m  [1;91mwishlist   Product[][0m
-[1;94m26 | [0m  cart       CartItem[]
-[1;94m   | [0m
+[2025-06-30T20:16:32.316Z] INFO: 🚀 Starting EHB Next.js 04 Ultra Fast Setup...
+[2025-06-30T20:16:32.319Z] INFO: 🔍 Checking prerequisites...
+[2025-06-30T20:16:32.319Z] INFO: Running: node --version
+[2025-06-30T20:16:32.351Z] SUCCESS: ✅ Success: node --version
+[2025-06-30T20:16:32.351Z] INFO: ✅ Node.js is installed
+[2025-06-30T20:16:32.351Z] INFO: Running: npm --version
+[2025-06-30T20:16:32.568Z] SUCCESS: ✅ Success: npm --version
+[2025-06-30T20:16:32.568Z] INFO: ✅ npm is installed
+[2025-06-30T20:16:32.569Z] INFO: Running: git --version
+[2025-06-30T20:16:32.615Z] SUCCESS: ✅ Success: git --version
+[2025-06-30T20:16:32.615Z] INFO: ✅ Git is installed
+[2025-06-30T20:16:32.615Z] INFO: 🗄️  Setting up MongoDB with Docker...
+[2025-06-30T20:16:32.616Z] INFO: ✅ Docker Compose file created
+[2025-06-30T20:16:32.616Z] INFO: Running: docker-compose up -d mongodb
+[2025-06-30T20:16:32.937Z] SUCCESS: ✅ Success: docker-compose up -d mongodb
+[2025-06-30T20:16:32.937Z] INFO: ✅ MongoDB container started
+[2025-06-30T20:16:32.937Z] INFO: ⏳ Waiting for MongoDB to be ready...
+[2025-06-30T20:16:42.945Z] INFO: 🔧 Setting up Prisma...
+[2025-06-30T20:16:42.946Z] INFO: ✅ Prisma schema created
+[2025-06-30T20:16:42.947Z] INFO: Running: npm install prisma @prisma/client
+[2025-06-30T20:16:45.787Z] ERROR: ❌ Error: npm install prisma @prisma/client - Command failed: npm install prisma @prisma/client
+npm error code ETARGET
+npm error notarget No matching version found for rate-limiter-flexible@^3.0.8.
+npm error notarget In most cases you or one of your dependencies are requesting
+npm error notarget a package version that doesn't exist.
+npm error A complete log of this run can be found in: F:\ehb next.js 04\.npm-cache\_logs\2025-06-30T20_16_43_115Z-debug-0.log
 
-Validation Error Count: 2
-[Context: getDmmf]
+[2025-06-30T20:16:45.787Z] ERROR: ❌ Prisma setup failed: Command failed: npm install prisma @prisma/client
+npm error code ETARGET
+npm error notarget No matching version found for rate-limiter-flexible@^3.0.8.
+npm error notarget In most cases you or one of your dependencies are requesting
+npm error notarget a package version that doesn't exist.
+npm error A complete log of this run can be found in: F:\ehb next.js 04\.npm-cache\_logs\2025-06-30T20_16_43_115Z-debug-0.log
 
-Prisma CLI Version : 5.22.0
+[2025-06-30T20:16:45.787Z] INFO: 🔐 Setting up environment variables...
+[2025-06-30T20:16:45.788Z] INFO: ✅ Environment variables configured
+[2025-06-30T20:16:45.788Z] INFO: 🤖 Setting up AI automation...
+[2025-06-30T20:16:45.790Z] INFO: ✅ AI automation scripts created
+[2025-06-30T20:16:45.790Z] INFO: 🧪 Setting up testing environment...
+[2025-06-30T20:16:45.790Z] INFO: Running: npm install --save-dev jest @testing-library/react @testing-library/jest-dom cypress
+[2025-06-30T20:16:47.763Z] ERROR: ❌ Error: npm install --save-dev jest @testing-library/react @testing-library/jest-dom cypress - Command failed: npm install --save-dev jest @testing-library/react @testing-library/jest-dom cypress
+npm error code ETARGET
+npm error notarget No matching version found for rate-limiter-flexible@^3.0.8.
+npm error notarget In most cases you or one of your dependencies are requesting
+npm error notarget a package version that doesn't exist.
+npm error A complete log of this run can be found in: F:\ehb next.js 04\.npm-cache\_logs\2025-06-30T20_16_45_969Z-debug-0.log
 
-[2025-06-20T16:44:25.792Z] ERROR: ❌ Prisma setup failed: Command failed: npx prisma generate
-Error: Prisma schema validation - (get-dmmf wasm)
-Error code: P1012
-[1;91merror[0m: [1mError validating: Implicit many-to-many relations are not supported on MongoDB. Please use the syntax defined in https://pris.ly/d/document-database-many-to-many[0m
-  [1;94m-->[0m  [4mprisma\schema.prisma:65[0m
-[1;94m   | [0m
-[1;94m64 | [0m  cartItems   CartItem[]
-[1;94m65 | [0m  [1;91mwishlist    User[][0m
-[1;94m66 | [0m  orders      OrderItem[]
-[1;94m   | [0m
-[1;91merror[0m: [1mError validating: Implicit many-to-many relations are not supported on MongoDB. Please use the syntax defined in https://pris.ly/d/document-database-many-to-many[0m
-  [1;94m-->[0m  [4mprisma\schema.prisma:25[0m
-[1;94m   | [0m
-[1;94m24 | [0m  reviews    Review[]
-[1;94m25 | [0m  [1;91mwishlist   Product[][0m
-[1;94m26 | [0m  cart       CartItem[]
-[1;94m   | [0m
+[2025-06-30T20:16:47.763Z] ERROR: ❌ Testing setup failed: Command failed: npm install --save-dev jest @testing-library/react @testing-library/jest-dom cypress
+npm error code ETARGET
+npm error notarget No matching version found for rate-limiter-flexible@^3.0.8.
+npm error notarget In most cases you or one of your dependencies are requesting
+npm error notarget a package version that doesn't exist.
+npm error A complete log of this run can be found in: F:\ehb next.js 04\.npm-cache\_logs\2025-06-30T20_16_45_969Z-debug-0.log
 
-Validation Error Count: 2
-[Context: getDmmf]
+[2025-06-30T20:16:47.764Z] INFO: 🎯 Setting up Cursor AI configuration...
+[2025-06-30T20:16:47.764Z] INFO: ✅ Cursor AI configuration created
+[2025-06-30T20:16:47.764Z] INFO: 📦 Installing dependencies...
+[2025-06-30T20:16:47.764Z] INFO: Running: npm install
+[2025-06-30T20:16:49.614Z] ERROR: ❌ Error: npm install - Command failed: npm install
+npm error code ETARGET
+npm error notarget No matching version found for rate-limiter-flexible@^3.0.8.
+npm error notarget In most cases you or one of your dependencies are requesting
+npm error notarget a package version that doesn't exist.
+npm error A complete log of this run can be found in: F:\ehb next.js 04\.npm-cache\_logs\2025-06-30T20_16_47_952Z-debug-0.log
 
-Prisma CLI Version : 5.22.0
+[2025-06-30T20:16:49.614Z] ERROR: ❌ Dependency installation failed: Command failed: npm install
+npm error code ETARGET
+npm error notarget No matching version found for rate-limiter-flexible@^3.0.8.
+npm error notarget In most cases you or one of your dependencies are requesting
+npm error notarget a package version that doesn't exist.
+npm error A complete log of this run can be found in: F:\ehb next.js 04\.npm-cache\_logs\2025-06-30T20_16_47_952Z-debug-0.log
 
-[2025-06-20T16:44:25.792Z] INFO: 🔐 Setting up environment variables...
-[2025-06-20T16:44:25.793Z] INFO: ✅ Environment variables configured
-[2025-06-20T16:44:25.794Z] INFO: 🤖 Setting up AI automation...
-[2025-06-20T16:44:25.796Z] INFO: ✅ AI automation scripts created
-[2025-06-20T16:44:25.796Z] INFO: 🧪 Setting up testing environment...
-[2025-06-20T16:44:25.797Z] INFO: Running: npm install --save-dev jest @testing-library/react @testing-library/jest-dom cypress
-[2025-06-20T16:44:30.810Z] SUCCESS: ✅ Success: npm install --save-dev jest @testing-library/react @testing-library/jest-dom cypress
-[2025-06-20T16:44:30.811Z] INFO: ✅ Testing environment configured
-[2025-06-20T16:44:30.812Z] INFO: 🎯 Setting up Cursor AI configuration...
-[2025-06-20T16:44:30.813Z] INFO: ✅ Cursor AI configuration created
-[2025-06-20T16:44:30.813Z] INFO: 📦 Installing dependencies...
-[2025-06-20T16:44:30.813Z] INFO: Running: npm install
-[2025-06-20T16:44:33.776Z] SUCCESS: ✅ Success: npm install
-[2025-06-20T16:44:33.776Z] INFO: ✅ Dependencies installed
 
 ---
 Generated by EHB Ultra Fast Setup System

@@ -47,9 +47,9 @@ try {
   console.log('ℹ️ Port 5500 was not in use');
 }
 
-// Start server
+// Start server using port-fix script
 console.log('🚀 Starting server...');
-execSync('npm run dev:5500', {
+execSync('npm run port-fix', {
   stdio: 'inherit',
   detached: true,
 });
@@ -67,5 +67,5 @@ console.log(`
     "password": "123456"
 }
 
-To restart server: npm run dev:5500
+To restart server: npm run port-fix
 `);

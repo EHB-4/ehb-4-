@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useState } from 'react';
 
 // Placeholder notification data (in a real app, fetch from backend)

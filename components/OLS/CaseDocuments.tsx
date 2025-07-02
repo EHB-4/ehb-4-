@@ -1,3 +1,5 @@
+"use client";
+
 import { useState } from 'react';
 import { FiUpload, FiFile, FiDownload, FiTrash2, FiEye } from 'react-icons/fi';
 

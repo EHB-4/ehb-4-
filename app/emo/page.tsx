@@ -1,5 +1,7 @@
 'use client';
 
+'use client';
+
 import React, { useState, useMemo } from 'react';
 import { motion } from 'framer-motion';
 import {
@@ -47,813 +49,733 @@ import {
   Pause,
 } from 'lucide-react';
 import Link from 'next/link';
+import {
+  UserGroupIcon,
+  ChartBarIcon,
+  CogIcon,
+  DocumentTextIcon,
+  PlusIcon,
+  MagnifyingGlassIcon,
+  FunnelIcon,
+  CalendarIcon,
+  CheckCircleIcon,
+  ClockIcon,
+  ExclamationTriangleIcon,
+} from '@heroicons/react/24/outline';
+
+interface TeamMember {
+  id: string;
+  name: string;
+  role: string;
+  department: string;
+  email: string;
+  avatar: string;
+  status: 'active' | 'inactive' | 'pending';
+  joinDate: string;
+  projects: number;
+}
+
+interface Project {
+  id: string;
+  name: string;
+  description: string;
+  status: 'planning' | 'active' | 'completed' | 'on-hold';
+  priority: 'low' | 'medium' | 'high' | 'critical';
+  progress: number;
+  startDate: string;
+  endDate: string;
+  team: string[];
+  budget: number;
+  spent: number;
+}
+
+interface Department {
+  id: string;
+  name: string;
+  description: string;
+  head: string;
+  members: number;
+  projects: number;
+  budget: number;
+  status: 'active' | 'inactive';
+}
+
+const mockTeamMembers: TeamMember[] = [
+  {
+    id: '1',
+    name: 'Sarah Johnson',
+    role: 'CEO',
+    department: 'Executive',
+    email: 'sarah.johnson@ehb.com',
+    avatar: '/api/placeholder/40/40',
+    status: 'active',
+    joinDate: '2023-01-15',
+    projects: 5,
+  },
+  {
+    id: '2',
+    name: 'Michael Chen',
+    role: 'CTO',
+    department: 'Technology',
+    email: 'michael.chen@ehb.com',
+    avatar: '/api/placeholder/40/40',
+    status: 'active',
+    joinDate: '2023-02-20',
+    projects: 8,
+  },
+  {
+    id: '3',
+    name: 'Emily Rodriguez',
+    role: 'Head of Marketing',
+    department: 'Marketing',
+    email: 'emily.rodriguez@ehb.com',
+    avatar: '/api/placeholder/40/40',
+    status: 'active',
+    joinDate: '2023-03-10',
+    projects: 3,
+  },
+  {
+    id: '4',
+    name: 'David Kim',
+    role: 'Senior Developer',
+    department: 'Technology',
+    email: 'david.kim@ehb.com',
+    avatar: '/api/placeholder/40/40',
+    status: 'active',
+    joinDate: '2023-04-05',
+    projects: 6,
+  },
+  {
+    id: '5',
+    name: 'Lisa Wang',
+    role: 'Product Manager',
+    department: 'Product',
+    email: 'lisa.wang@ehb.com',
+    avatar: '/api/placeholder/40/40',
+    status: 'pending',
+    joinDate: '2023-05-12',
+    projects: 2,
+  },
+];
+
+const mockProjects: Project[] = [
+  {
+    id: '1',
+    name: 'EHB Platform v2.0',
+    description: 'Complete platform redesign with new features',
+    status: 'active',
+    priority: 'high',
+    progress: 75,
+    startDate: '2023-06-01',
+    endDate: '2023-12-31',
+    team: ['Sarah Johnson', 'Michael Chen', 'David Kim'],
+    budget: 500000,
+    spent: 375000,
+  },
+  {
+    id: '2',
+    name: 'GoSellr Integration',
+    description: 'Integrate GoSellr marketplace with main platform',
+    status: 'active',
+    priority: 'critical',
+    progress: 45,
+    startDate: '2023-07-15',
+    endDate: '2023-11-30',
+    team: ['Michael Chen', 'David Kim', 'Lisa Wang'],
+    budget: 200000,
+    spent: 90000,
+  },
+  {
+    id: '3',
+    name: 'Marketing Campaign Q4',
+    description: 'Q4 marketing campaign for platform launch',
+    status: 'planning',
+    priority: 'medium',
+    progress: 20,
+    startDate: '2023-10-01',
+    endDate: '2023-12-31',
+    team: ['Emily Rodriguez'],
+    budget: 100000,
+    spent: 20000,
+  },
+  {
+    id: '4',
+    name: 'Security Audit',
+    description: 'Comprehensive security audit of all systems',
+    status: 'completed',
+    priority: 'high',
+    progress: 100,
+    startDate: '2023-05-01',
+    endDate: '2023-08-31',
+    team: ['Michael Chen', 'David Kim'],
+    budget: 75000,
+    spent: 75000,
+  },
+];
+
+const mockDepartments: Department[] = [
+  {
+    id: '1',
+    name: 'Executive',
+    description: 'Executive leadership and strategic planning',
+    head: 'Sarah Johnson',
+    members: 3,
+    projects: 2,
+    budget: 1000000,
+    status: 'active',
+  },
+  {
+    id: '2',
+    name: 'Technology',
+    description: 'Software development and technical operations',
+    head: 'Michael Chen',
+    members: 12,
+    projects: 8,
+    budget: 800000,
+    status: 'active',
+  },
+  {
+    id: '3',
+    name: 'Marketing',
+    description: 'Marketing, branding, and customer acquisition',
+    head: 'Emily Rodriguez',
+    members: 6,
+    projects: 4,
+    budget: 300000,
+    status: 'active',
+  },
+  {
+    id: '4',
+    name: 'Product',
+    description: 'Product management and user experience',
+    head: 'Lisa Wang',
+    members: 4,
+    projects: 3,
+    budget: 200000,
+    status: 'active',
+  },
+];
 
 /**
  * EMO Entertainment Platform - Comprehensive entertainment system
  * @returns {JSX.Element} The EMO entertainment platform component
  */
 export default function EMOPage() {
+  const [activeTab, setActiveTab] = useState('overview');
   const [searchTerm, setSearchTerm] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState('all');
-  const [selectedGenre, setSelectedGenre] = useState('all');
-  const [sortBy, setSortBy] = useState('trending');
-  const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
-  const [showFilters, setShowFilters] = useState(false);
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [currentTrack, setCurrentTrack] = useState(null);
+  const [statusFilter, setStatusFilter] = useState('all');
+  const [departmentFilter, setDepartmentFilter] = useState('all');
 
-  // Mock entertainment content data
-  const content = [
-    {
-      id: 1,
-      title: 'The Future of AI',
-      type: 'video',
-      category: 'technology',
-      genre: 'documentary',
-      duration: '45:32',
-      rating: 4.8,
-      views: 1250000,
-      likes: 89000,
-      creator: 'Tech Insights',
-      creatorVerified: true,
-      creatorFollowers: 2500000,
-      thumbnail: '/api/placeholder/300/200',
-      description:
-        'Explore the latest developments in artificial intelligence and their impact on society',
-      tags: ['AI', 'Technology', 'Future', 'Innovation'],
-      trending: true,
-      premium: false,
-      releaseDate: '2024-01-15',
-      language: 'English',
-      subtitles: ['Spanish', 'French', 'German'],
-    },
-    {
-      id: 2,
-      title: 'Midnight Jazz Collection',
-      type: 'music',
-      category: 'music',
-      genre: 'jazz',
-      duration: '1:23:45',
-      rating: 4.6,
-      views: 890000,
-      likes: 67000,
-      creator: 'Jazz Masters',
-      creatorVerified: true,
-      creatorFollowers: 1800000,
-      thumbnail: '/api/placeholder/300/200',
-      description: 'Relaxing jazz melodies perfect for late-night listening',
-      tags: ['Jazz', 'Relaxing', 'Night', 'Smooth'],
-      trending: false,
-      premium: true,
-      releaseDate: '2024-01-10',
-      language: 'Instrumental',
-      subtitles: [],
-    },
-    {
-      id: 3,
-      title: 'Space Adventure VR',
-      type: 'game',
-      category: 'gaming',
-      genre: 'adventure',
-      duration: '2-4 hours',
-      rating: 4.9,
-      views: 2100000,
-      likes: 156000,
-      creator: 'VR Studios',
-      creatorVerified: true,
-      creatorFollowers: 3200000,
-      thumbnail: '/api/placeholder/300/200',
-      description: 'Immersive virtual reality space exploration game',
-      tags: ['VR', 'Space', 'Adventure', 'Immersive'],
-      trending: true,
-      premium: true,
-      releaseDate: '2024-01-12',
-      language: 'English',
-      subtitles: ['Spanish', 'Japanese'],
-    },
-    {
-      id: 4,
-      title: 'Cooking Masterclass',
-      type: 'video',
-      category: 'lifestyle',
-      genre: 'cooking',
-      duration: '32:15',
-      rating: 4.7,
-      views: 980000,
-      likes: 72000,
-      creator: 'Chef Maria',
-      creatorVerified: true,
-      creatorFollowers: 1500000,
-      thumbnail: '/api/placeholder/300/200',
-      description: 'Learn to cook authentic Italian pasta dishes from scratch',
-      tags: ['Cooking', 'Italian', 'Pasta', 'Tutorial'],
-      trending: false,
-      premium: false,
-      releaseDate: '2024-01-08',
-      language: 'English',
-      subtitles: ['Italian', 'Spanish'],
-    },
-    {
-      id: 5,
-      title: 'Mindful Meditation',
-      type: 'audio',
-      category: 'wellness',
-      genre: 'meditation',
-      duration: '28:45',
-      rating: 4.5,
-      views: 750000,
-      likes: 54000,
-      creator: 'Zen Master',
-      creatorVerified: false,
-      creatorFollowers: 890000,
-      thumbnail: '/api/placeholder/300/200',
-      description: 'Guided meditation for stress relief and mental clarity',
-      tags: ['Meditation', 'Wellness', 'Stress Relief', 'Mindfulness'],
-      trending: false,
-      premium: false,
-      releaseDate: '2024-01-05',
-      language: 'English',
-      subtitles: ['Spanish', 'French'],
-    },
-    {
-      id: 6,
-      title: 'Digital Art Workshop',
-      type: 'video',
-      category: 'education',
-      genre: 'art',
-      duration: '1:15:30',
-      rating: 4.4,
-      views: 650000,
-      likes: 48000,
-      creator: 'Art Academy',
-      creatorVerified: true,
-      creatorFollowers: 1200000,
-      thumbnail: '/api/placeholder/300/200',
-      description: 'Complete guide to digital painting and illustration',
-      tags: ['Digital Art', 'Painting', 'Illustration', 'Tutorial'],
-      trending: false,
-      premium: true,
-      releaseDate: '2024-01-03',
-      language: 'English',
-      subtitles: ['Spanish', 'Portuguese'],
-    },
-  ];
-
-  const categories = [
-    { id: 'all', name: 'All Categories', icon: Video, count: content.length },
-    {
-      id: 'video',
-      name: 'Videos',
-      icon: Video,
-      count: content.filter(c => c.type === 'video').length,
-    },
-    {
-      id: 'music',
-      name: 'Music',
-      icon: Music,
-      count: content.filter(c => c.type === 'music').length,
-    },
-    {
-      id: 'gaming',
-      name: 'Gaming',
-      icon: Gamepad2,
-      count: content.filter(c => c.type === 'game').length,
-    },
-    {
-      id: 'audio',
-      name: 'Audio',
-      icon: Headphones,
-      count: content.filter(c => c.type === 'audio').length,
-    },
-  ];
-
-  const genres = [
-    { id: 'all', name: 'All Genres', count: content.length },
-    {
-      id: 'documentary',
-      name: 'Documentary',
-      count: content.filter(c => c.genre === 'documentary').length,
-    },
-    { id: 'jazz', name: 'Jazz', count: content.filter(c => c.genre === 'jazz').length },
-    {
-      id: 'adventure',
-      name: 'Adventure',
-      count: content.filter(c => c.genre === 'adventure').length,
-    },
-    { id: 'cooking', name: 'Cooking', count: content.filter(c => c.genre === 'cooking').length },
-    {
-      id: 'meditation',
-      name: 'Meditation',
-      count: content.filter(c => c.genre === 'meditation').length,
-    },
-    { id: 'art', name: 'Art', count: content.filter(c => c.genre === 'art').length },
-  ];
-
-  const stats = [
-    { label: 'Active Users', value: '2.5M', icon: Users },
-    { label: 'Content Hours', value: '45.2K', icon: Clock },
-    { label: 'Premium Subscribers', value: '890K', icon: Star },
-    { label: 'Content Creators', value: '125K', icon: Camera },
-  ];
-
-  const filteredContent = useMemo(() => {
-    let filtered = content;
-
-    // Filter by search term
-    if (searchTerm) {
-      filtered = filtered.filter(
-        item =>
-          item.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          item.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          item.creator.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          item.tags.some(tag => tag.toLowerCase().includes(searchTerm.toLowerCase()))
-      );
-    }
-
-    // Filter by category
-    if (selectedCategory !== 'all') {
-      filtered = filtered.filter(item => item.type === selectedCategory);
-    }
-
-    // Filter by genre
-    if (selectedGenre !== 'all') {
-      filtered = filtered.filter(item => item.genre === selectedGenre);
-    }
-
-    // Sort content
-    switch (sortBy) {
-      case 'trending':
-        filtered.sort((a, b) => (b.trending ? 1 : 0) - (a.trending ? 1 : 0));
-        break;
-      case 'rating':
-        filtered.sort((a, b) => b.rating - a.rating);
-        break;
-      case 'views':
-        filtered.sort((a, b) => b.views - a.views);
-        break;
-      case 'newest':
-        filtered.sort(
-          (a, b) => new Date(b.releaseDate).getTime() - new Date(a.releaseDate).getTime()
-        );
-        break;
-      case 'likes':
-        filtered.sort((a, b) => b.likes - a.likes);
-        break;
-    }
-
-    return filtered;
-  }, [searchTerm, selectedCategory, selectedGenre, sortBy]);
-
-  const formatViews = (views: number) => {
-    if (views >= 1000000) {
-      return `${(views / 1000000).toFixed(1)}M`;
-    } else if (views >= 1000) {
-      return `${(views / 1000).toFixed(1)}K`;
-    }
-    return views.toString();
-  };
-
-  const formatDuration = (duration: string) => {
-    return duration;
-  };
-
-  const getContentIcon = (type: string) => {
-    switch (type) {
-      case 'video':
-        return Video;
-      case 'music':
-        return Music;
-      case 'game':
-        return Gamepad2;
-      case 'audio':
-        return Headphones;
+  const getStatusColor = (status: string) => {
+    switch (status) {
+      case 'active':
+      case 'completed':
+        return 'text-green-600 bg-green-100';
+      case 'pending':
+      case 'planning':
+        return 'text-yellow-600 bg-yellow-100';
+      case 'inactive':
+      case 'on-hold':
+        return 'text-gray-600 bg-gray-100';
+      case 'critical':
+        return 'text-red-600 bg-red-100';
       default:
-        return Video;
+        return 'text-blue-600 bg-blue-100';
     }
   };
 
-  const playContent = (item: any) => {
-    setCurrentTrack(item);
-    setIsPlaying(true);
-    // In a real app, this would start playing the content
+  const getPriorityColor = (priority: string) => {
+    switch (priority) {
+      case 'critical':
+        return 'text-red-600 bg-red-100';
+      case 'high':
+        return 'text-orange-600 bg-orange-100';
+      case 'medium':
+        return 'text-yellow-600 bg-yellow-100';
+      case 'low':
+        return 'text-green-600 bg-green-100';
+      default:
+        return 'text-blue-600 bg-blue-100';
+    }
   };
+
+  const filteredTeamMembers = mockTeamMembers.filter(member => {
+    const matchesSearch =
+      member.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      member.role.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      member.department.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesStatus = statusFilter === 'all' || member.status === statusFilter;
+    const matchesDepartment = departmentFilter === 'all' || member.department === departmentFilter;
+    return matchesSearch && matchesStatus && matchesDepartment;
+  });
+
+  const filteredProjects = mockProjects.filter(project => {
+    const matchesSearch =
+      project.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      project.description.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesStatus = statusFilter === 'all' || project.status === statusFilter;
+    return matchesSearch && matchesStatus;
+  });
+
+  const filteredDepartments = mockDepartments.filter(dept => {
+    const matchesSearch =
+      dept.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      dept.description.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesStatus = statusFilter === 'all' || dept.status === statusFilter;
+    return matchesSearch && matchesStatus;
+  });
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+    <div className="min-h-screen bg-gray-50">
       {/* Header */}
-      <header className="bg-white dark:bg-gray-800 shadow-sm border-b border-gray-200 dark:border-gray-700">
+      <div className="bg-white shadow">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="py-6">
-            <div className="flex items-center justify-between mb-6">
-              <div>
-                <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
-                  EMO Entertainment
-                </h1>
-                <p className="text-gray-600 dark:text-gray-400 mt-2">
-                  Discover, stream, and share amazing content across all entertainment categories
-                </p>
-              </div>
-              <div className="flex items-center gap-4">
-                <Link href="/subscription">
-                  <button className="flex items-center gap-2 px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors">
-                    <Star className="w-4 h-4" />
-                    Premium
-                  </button>
-                </Link>
-              </div>
+          <div className="flex justify-between items-center py-6">
+            <div>
+              <h1 className="text-3xl font-bold text-gray-900">EHB Management Organization</h1>
+              <p className="mt-1 text-sm text-gray-500">
+                Manage teams, projects, and organizational structure
+              </p>
             </div>
-
-            {/* Search and Filters */}
-            <div className="flex flex-col lg:flex-row gap-4 items-center justify-between">
-              <div className="relative flex-1 max-w-md">
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
-                <input
-                  type="text"
-                  placeholder="Search content, creators, or genres..."
-                  value={searchTerm}
-                  onChange={e => setSearchTerm(e.target.value)}
-                  className="w-full pl-10 pr-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-purple-500 focus:border-transparent"
-                />
-              </div>
-
-              <div className="flex items-center gap-4">
-                <select
-                  value={sortBy}
-                  onChange={e => setSortBy(e.target.value)}
-                  className="px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-purple-500 focus:border-transparent"
-                >
-                  <option value="trending">Trending</option>
-                  <option value="rating">Highest Rated</option>
-                  <option value="views">Most Viewed</option>
-                  <option value="newest">Newest First</option>
-                  <option value="likes">Most Liked</option>
-                </select>
-
-                <div className="flex items-center bg-white dark:bg-gray-700 rounded-lg border border-gray-300 dark:border-gray-600">
-                  <button
-                    onClick={() => setViewMode('grid')}
-                    className={`p-3 rounded-l-lg transition-colors ${
-                      viewMode === 'grid'
-                        ? 'bg-purple-500 text-white'
-                        : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white'
-                    }`}
-                  >
-                    <Grid3X3 className="w-5 h-5" />
-                  </button>
-                  <button
-                    onClick={() => setViewMode('list')}
-                    className={`p-3 rounded-r-lg transition-colors ${
-                      viewMode === 'list'
-                        ? 'bg-purple-500 text-white'
-                        : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white'
-                    }`}
-                  >
-                    <List className="w-5 h-5" />
-                  </button>
-                </div>
-
-                <button
-                  onClick={() => setShowFilters(!showFilters)}
-                  className={`px-4 py-3 rounded-lg border transition-colors ${
-                    showFilters
-                      ? 'bg-purple-500 text-white border-purple-500'
-                      : 'bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-300 border-gray-300 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-600'
-                  }`}
-                >
-                  <FilterIcon className="w-5 h-5" />
-                </button>
-              </div>
+            <div className="flex space-x-3">
+              <button className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700">
+                <PlusIcon className="h-4 w-4 mr-2" />
+                Add Member
+              </button>
+              <button className="inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">
+                <CogIcon className="h-4 w-4 mr-2" />
+                Settings
+              </button>
             </div>
           </div>
         </div>
-      </header>
-
-      {/* Now Playing Bar */}
-      {currentTrack && (
-        <div className="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 px-4 py-3">
-          <div className="max-w-7xl mx-auto flex items-center justify-between">
-            <div className="flex items-center gap-4">
-              <div className="w-12 h-12 bg-gradient-to-br from-purple-100 to-pink-100 dark:from-purple-900 dark:to-pink-900 rounded-lg flex items-center justify-center">
-                <Play className="w-6 h-6 text-purple-600" />
-              </div>
-              <div>
-                <h4 className="font-medium text-gray-900 dark:text-white">{currentTrack.title}</h4>
-                <p className="text-sm text-gray-600 dark:text-gray-400">{currentTrack.creator}</p>
-              </div>
-            </div>
-            <div className="flex items-center gap-4">
-              <button className="p-2 text-gray-400 hover:text-gray-600">
-                <SkipBack className="w-5 h-5" />
-              </button>
-              <button
-                onClick={() => setIsPlaying(!isPlaying)}
-                className="p-2 bg-purple-600 text-white rounded-full hover:bg-purple-700"
-              >
-                {isPlaying ? <Pause className="w-5 h-5" /> : <Play className="w-5 h-5" />}
-              </button>
-              <button className="p-2 text-gray-400 hover:text-gray-600">
-                <SkipForward className="w-5 h-5" />
-              </button>
-              <div className="w-32 h-1 bg-gray-200 dark:bg-gray-700 rounded-full">
-                <div className="w-1/3 h-full bg-purple-600 rounded-full"></div>
-              </div>
-              <span className="text-sm text-gray-600 dark:text-gray-400">1:23 / 4:56</span>
-            </div>
-          </div>
-        </div>
-      )}
+      </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="flex flex-col lg:flex-row gap-8">
-          {/* Filters Sidebar */}
-          {showFilters && (
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -20 }}
-              className="lg:w-80 flex-shrink-0"
-            >
-              <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 sticky top-8">
-                <div className="flex items-center justify-between mb-6">
-                  <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Filters</h3>
-                  <button
-                    onClick={() => setShowFilters(false)}
-                    className="lg:hidden p-2 text-gray-400 hover:text-gray-600"
-                  >
-                    <X className="w-5 h-5" />
-                  </button>
+        {/* Stats Overview */}
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+          <div className="bg-white overflow-hidden shadow rounded-lg">
+            <div className="p-5">
+              <div className="flex items-center">
+                <div className="flex-shrink-0">
+                  <UserGroupIcon className="h-6 w-6 text-gray-400" />
                 </div>
-
-                {/* Categories */}
-                <div className="mb-6">
-                  <h4 className="text-sm font-medium text-gray-900 dark:text-white mb-3">
-                    Categories
-                  </h4>
-                  <div className="space-y-2">
-                    {categories.map(category => (
-                      <label key={category.id} className="flex items-center gap-2 cursor-pointer">
-                        <input
-                          type="radio"
-                          name="category"
-                          value={category.id}
-                          checked={selectedCategory === category.id}
-                          onChange={e => setSelectedCategory(e.target.value)}
-                          className="w-4 h-4 text-purple-600 border-gray-300 focus:ring-purple-500"
-                        />
-                        <category.icon className="w-4 h-4 text-gray-600" />
-                        <span className="text-sm text-gray-700 dark:text-gray-300">
-                          {category.name} ({category.count})
-                        </span>
-                      </label>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Genres */}
-                <div className="mb-6">
-                  <h4 className="text-sm font-medium text-gray-900 dark:text-white mb-3">Genres</h4>
-                  <div className="space-y-2">
-                    {genres.map(genre => (
-                      <label key={genre.id} className="flex items-center gap-2 cursor-pointer">
-                        <input
-                          type="radio"
-                          name="genre"
-                          value={genre.id}
-                          checked={selectedGenre === genre.id}
-                          onChange={e => setSelectedGenre(e.target.value)}
-                          className="w-4 h-4 text-purple-600 border-gray-300 focus:ring-purple-500"
-                        />
-                        <span className="text-sm text-gray-700 dark:text-gray-300">
-                          {genre.name} ({genre.count})
-                        </span>
-                      </label>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Additional Filters */}
-                <div className="space-y-4">
-                  <label className="flex items-center gap-2 cursor-pointer">
-                    <input
-                      type="checkbox"
-                      className="w-4 h-4 text-purple-600 border-gray-300 rounded focus:ring-purple-500"
-                    />
-                    <span className="text-sm text-gray-700 dark:text-gray-300">Trending Only</span>
-                  </label>
-                  <label className="flex items-center gap-2 cursor-pointer">
-                    <input
-                      type="checkbox"
-                      className="w-4 h-4 text-purple-600 border-gray-300 rounded focus:ring-purple-500"
-                    />
-                    <span className="text-sm text-gray-700 dark:text-gray-300">
-                      Verified Creators
-                    </span>
-                  </label>
-                  <label className="flex items-center gap-2 cursor-pointer">
-                    <input
-                      type="checkbox"
-                      className="w-4 h-4 text-purple-600 border-gray-300 rounded focus:ring-purple-500"
-                    />
-                    <span className="text-sm text-gray-700 dark:text-gray-300">
-                      Premium Content
-                    </span>
-                  </label>
+                <div className="ml-5 w-0 flex-1">
+                  <dl>
+                    <dt className="text-sm font-medium text-gray-500 truncate">
+                      Total Team Members
+                    </dt>
+                    <dd className="text-lg font-medium text-gray-900">{mockTeamMembers.length}</dd>
+                  </dl>
                 </div>
               </div>
-            </motion.div>
-          )}
+            </div>
+          </div>
 
-          {/* Main Content */}
-          <div className="flex-1">
-            {/* Stats */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-              {stats.map((stat, index) => (
-                <motion.div
-                  key={stat.label}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: index * 0.1 }}
-                  className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-4"
+          <div className="bg-white overflow-hidden shadow rounded-lg">
+            <div className="p-5">
+              <div className="flex items-center">
+                <div className="flex-shrink-0">
+                  <DocumentTextIcon className="h-6 w-6 text-gray-400" />
+                </div>
+                <div className="ml-5 w-0 flex-1">
+                  <dl>
+                    <dt className="text-sm font-medium text-gray-500 truncate">Active Projects</dt>
+                    <dd className="text-lg font-medium text-gray-900">
+                      {mockProjects.filter(p => p.status === 'active').length}
+                    </dd>
+                  </dl>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="bg-white overflow-hidden shadow rounded-lg">
+            <div className="p-5">
+              <div className="flex items-center">
+                <div className="flex-shrink-0">
+                  <ChartBarIcon className="h-6 w-6 text-gray-400" />
+                </div>
+                <div className="ml-5 w-0 flex-1">
+                  <dl>
+                    <dt className="text-sm font-medium text-gray-500 truncate">Departments</dt>
+                    <dd className="text-lg font-medium text-gray-900">{mockDepartments.length}</dd>
+                  </dl>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="bg-white overflow-hidden shadow rounded-lg">
+            <div className="p-5">
+              <div className="flex items-center">
+                <div className="flex-shrink-0">
+                  <CalendarIcon className="h-6 w-6 text-gray-400" />
+                </div>
+                <div className="ml-5 w-0 flex-1">
+                  <dl>
+                    <dt className="text-sm font-medium text-gray-500 truncate">
+                      Avg Project Progress
+                    </dt>
+                    <dd className="text-lg font-medium text-gray-900">
+                      {Math.round(
+                        mockProjects.reduce((acc, p) => acc + p.progress, 0) / mockProjects.length
+                      )}
+                      %
+                    </dd>
+                  </dl>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Tabs */}
+        <div className="bg-white shadow rounded-lg">
+          <div className="border-b border-gray-200">
+            <nav className="-mb-px flex space-x-8 px-6">
+              {[
+                { id: 'overview', name: 'Overview', icon: ChartBarIcon },
+                { id: 'team', name: 'Team Management', icon: UserGroupIcon },
+                { id: 'projects', name: 'Projects', icon: DocumentTextIcon },
+                { id: 'departments', name: 'Departments', icon: CogIcon },
+              ].map(tab => (
+                <button
+                  key={tab.id}
+                  onClick={() => setActiveTab(tab.id)}
+                  className={`py-4 px-1 border-b-2 font-medium text-sm flex items-center ${
+                    activeTab === tab.id
+                      ? 'border-blue-500 text-blue-600'
+                      : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                  }`}
                 >
-                  <div className="flex items-center gap-3">
-                    <stat.icon className="w-8 h-8 text-purple-600" />
-                    <div>
-                      <p className="text-2xl font-bold text-gray-900 dark:text-white">
-                        {stat.value}
-                      </p>
-                      <p className="text-sm text-gray-600 dark:text-gray-400">{stat.label}</p>
+                  <tab.icon className="h-4 w-4 mr-2" />
+                  {tab.name}
+                </button>
+              ))}
+            </nav>
+          </div>
+
+          <div className="p-6">
+            {/* Search and Filters */}
+            <div className="mb-6 flex flex-col sm:flex-row gap-4">
+              <div className="flex-1">
+                <div className="relative">
+                  <MagnifyingGlassIcon className="h-5 w-5 absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+                  <input
+                    type="text"
+                    placeholder="Search..."
+                    value={searchTerm}
+                    onChange={e => setSearchTerm(e.target.value)}
+                    className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md leading-5 bg-white placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
+                  />
+                </div>
+              </div>
+              <div className="flex gap-2">
+                <select
+                  value={statusFilter}
+                  onChange={e => setStatusFilter(e.target.value)}
+                  className="block px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
+                  aria-label="Filter by status"
+                >
+                  <option value="all">All Status</option>
+                  <option value="active">Active</option>
+                  <option value="pending">Pending</option>
+                  <option value="inactive">Inactive</option>
+                  <option value="completed">Completed</option>
+                  <option value="planning">Planning</option>
+                  <option value="on-hold">On Hold</option>
+                </select>
+                {activeTab === 'team' && (
+                  <select
+                    value={departmentFilter}
+                    onChange={e => setDepartmentFilter(e.target.value)}
+                    className="block px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
+                    aria-label="Filter by department"
+                  >
+                    <option value="all">All Departments</option>
+                    {mockDepartments.map(dept => (
+                      <option key={dept.id} value={dept.name}>
+                        {dept.name}
+                      </option>
+                    ))}
+                  </select>
+                )}
+              </div>
+            </div>
+
+            {/* Tab Content */}
+            {activeTab === 'overview' && (
+              <div className="space-y-6">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                  {/* Recent Projects */}
+                  <div className="bg-gray-50 rounded-lg p-6">
+                    <h3 className="text-lg font-medium text-gray-900 mb-4">Recent Projects</h3>
+                    <div className="space-y-4">
+                      {mockProjects.slice(0, 3).map(project => (
+                        <div key={project.id} className="bg-white rounded-lg p-4 shadow-sm">
+                          <div className="flex justify-between items-start mb-2">
+                            <h4 className="font-medium text-gray-900">{project.name}</h4>
+                            <span
+                              className={`px-2 py-1 text-xs font-medium rounded-full ${getStatusColor(project.status)}`}
+                            >
+                              {project.status}
+                            </span>
+                          </div>
+                          <p className="text-sm text-gray-600 mb-3">{project.description}</p>
+                          <div className="flex justify-between items-center">
+                            <div className="flex-1 mr-4">
+                              <div className="flex justify-between text-sm text-gray-600 mb-1">
+                                <span>Progress</span>
+                                <span>{project.progress}%</span>
+                              </div>
+                              <div className="w-full bg-gray-200 rounded-full h-2">
+                                <div
+                                  className="bg-blue-600 h-2 rounded-full"
+                                  style={{ width: `${project.progress}%` }}
+                                />
+                              </div>
+                            </div>
+                            <span
+                              className={`px-2 py-1 text-xs font-medium rounded-full ${getPriorityColor(project.priority)}`}
+                            >
+                              {project.priority}
+                            </span>
+                          </div>
+                        </div>
+                      ))}
                     </div>
                   </div>
-                </motion.div>
-              ))}
-            </div>
 
-            {/* Content Grid */}
-            <div>
-              <div className="flex items-center justify-between mb-6">
-                <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
-                  Content ({filteredContent.length})
-                </h2>
-                <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400">
-                  <Shield className="w-4 h-4" />
-                  <span>Premium Entertainment</span>
+                  {/* Team Overview */}
+                  <div className="bg-gray-50 rounded-lg p-6">
+                    <h3 className="text-lg font-medium text-gray-900 mb-4">Team Overview</h3>
+                    <div className="space-y-4">
+                      {mockDepartments.map(dept => (
+                        <div key={dept.id} className="bg-white rounded-lg p-4 shadow-sm">
+                          <div className="flex justify-between items-center mb-2">
+                            <h4 className="font-medium text-gray-900">{dept.name}</h4>
+                            <span
+                              className={`px-2 py-1 text-xs font-medium rounded-full ${getStatusColor(dept.status)}`}
+                            >
+                              {dept.status}
+                            </span>
+                          </div>
+                          <p className="text-sm text-gray-600 mb-3">{dept.description}</p>
+                          <div className="flex justify-between text-sm text-gray-600">
+                            <span>Head: {dept.head}</span>
+                            <span>{dept.members} members</span>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
                 </div>
               </div>
+            )}
 
-              {viewMode === 'grid' ? (
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                  {filteredContent.map((item, index) => (
-                    <motion.div
-                      key={item.id}
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: index * 0.05 }}
-                      className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden hover:shadow-lg transition-all"
-                    >
-                      {/* Content Thumbnail */}
-                      <div className="relative aspect-video bg-gray-100 dark:bg-gray-700">
-                        <div className="w-full h-full bg-gradient-to-br from-purple-100 to-pink-100 dark:from-purple-900 dark:to-pink-900 flex items-center justify-center">
-                          {(() => {
-                            const Icon = getContentIcon(item.type);
-                            return <Icon className="w-12 h-12 text-gray-400" />;
-                          })()}
-                        </div>
-                        {item.trending && (
-                          <div className="absolute top-2 left-2 bg-orange-500 text-white px-2 py-1 rounded-full text-xs font-medium flex items-center gap-1">
-                            <TrendingUp className="w-3 h-3" />
-                            Trending
+            {activeTab === 'team' && (
+              <div className="overflow-x-auto">
+                <table className="min-w-full divide-y divide-gray-200">
+                  <thead className="bg-gray-50">
+                    <tr>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        Member
+                      </th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        Role
+                      </th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        Department
+                      </th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        Status
+                      </th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        Projects
+                      </th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        Join Date
+                      </th>
+                      <th className="relative px-6 py-3">
+                        <span className="sr-only">Actions</span>
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody className="bg-white divide-y divide-gray-200">
+                    {filteredTeamMembers.map(member => (
+                      <tr key={member.id} className="hover:bg-gray-50">
+                        <td className="px-6 py-4 whitespace-nowrap">
+                          <div className="flex items-center">
+                            <div className="flex-shrink-0 h-10 w-10">
+                              <img
+                                className="h-10 w-10 rounded-full"
+                                src={member.avatar}
+                                alt={member.name}
+                              />
+                            </div>
+                            <div className="ml-4">
+                              <div className="text-sm font-medium text-gray-900">{member.name}</div>
+                              <div className="text-sm text-gray-500">{member.email}</div>
+                            </div>
                           </div>
-                        )}
-                        {item.premium && (
-                          <div className="absolute top-2 right-2 bg-purple-500 text-white px-2 py-1 rounded-full text-xs font-medium">
-                            Premium
-                          </div>
-                        )}
-                        <div className="absolute inset-0 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity">
-                          <button
-                            onClick={() => playContent(item)}
-                            className="p-4 bg-black bg-opacity-50 text-white rounded-full hover:bg-opacity-70 transition-all"
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                          {member.role}
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                          {member.department}
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap">
+                          <span
+                            className={`px-2 py-1 text-xs font-medium rounded-full ${getStatusColor(member.status)}`}
                           >
-                            <Play className="w-8 h-8" />
-                          </button>
-                        </div>
-                        <div className="absolute bottom-2 right-2 bg-black bg-opacity-50 text-white px-2 py-1 rounded text-xs">
-                          {formatDuration(item.duration)}
-                        </div>
-                        <div className="absolute bottom-2 left-2 flex gap-1">
-                          <button className="p-2 bg-white dark:bg-gray-800 rounded-full shadow-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
-                            <Heart className="w-4 h-4 text-gray-600" />
-                          </button>
-                          <button className="p-2 bg-white dark:bg-gray-800 rounded-full shadow-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
-                            <Share2 className="w-4 h-4 text-gray-600" />
-                          </button>
+                            {member.status}
+                          </span>
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                          {member.projects}
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                          {new Date(member.joinDate).toLocaleDateString()}
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                          <button className="text-blue-600 hover:text-blue-900">Edit</button>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            )}
+
+            {activeTab === 'projects' && (
+              <div className="space-y-6">
+                {filteredProjects.map(project => (
+                  <div key={project.id} className="bg-white border border-gray-200 rounded-lg p-6">
+                    <div className="flex justify-between items-start mb-4">
+                      <div>
+                        <h3 className="text-lg font-medium text-gray-900">{project.name}</h3>
+                        <p className="text-sm text-gray-600 mt-1">{project.description}</p>
+                      </div>
+                      <div className="flex space-x-2">
+                        <span
+                          className={`px-2 py-1 text-xs font-medium rounded-full ${getStatusColor(project.status)}`}
+                        >
+                          {project.status}
+                        </span>
+                        <span
+                          className={`px-2 py-1 text-xs font-medium rounded-full ${getPriorityColor(project.priority)}`}
+                        >
+                          {project.priority}
+                        </span>
+                      </div>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+                      <div>
+                        <p className="text-sm text-gray-500">Progress</p>
+                        <div className="flex items-center mt-1">
+                          <div className="flex-1 mr-3">
+                            <div className="w-full bg-gray-200 rounded-full h-2">
+                              <div
+                                className="bg-blue-600 h-2 rounded-full"
+                                style={{ width: `${project.progress}%` }}
+                              />
+                            </div>
+                          </div>
+                          <span className="text-sm font-medium text-gray-900">
+                            {project.progress}%
+                          </span>
                         </div>
                       </div>
-
-                      {/* Content Info */}
-                      <div className="p-4">
-                        <div className="flex items-center gap-2 mb-2">
-                          <span className="text-sm text-gray-600 dark:text-gray-400">
-                            {item.category}
-                          </span>
-                          {item.creatorVerified && (
-                            <CheckCircle className="w-4 h-4 text-blue-600" />
-                          )}
-                        </div>
-                        <h3 className="font-semibold text-gray-900 dark:text-white mb-2 line-clamp-2">
-                          {item.title}
-                        </h3>
-                        <p className="text-sm text-gray-600 dark:text-gray-400 mb-3 line-clamp-2">
-                          {item.description}
+                      <div>
+                        <p className="text-sm text-gray-500">Budget</p>
+                        <p className="text-sm font-medium text-gray-900 mt-1">
+                          ${project.spent.toLocaleString()} / ${project.budget.toLocaleString()}
                         </p>
-
-                        {/* Rating and Views */}
-                        <div className="flex items-center gap-2 mb-3">
-                          <div className="flex items-center gap-1">
-                            <Star className="w-4 h-4 text-yellow-500 fill-current" />
-                            <span className="text-sm font-medium text-gray-900 dark:text-white">
-                              {item.rating}
-                            </span>
-                          </div>
-                          <span className="text-sm text-gray-600 dark:text-gray-400">
-                            ({formatViews(item.views)} views)
-                          </span>
-                        </div>
-
-                        {/* Creator Info */}
-                        <div className="flex items-center justify-between mb-4">
-                          <div className="flex items-center gap-2">
-                            <span className="text-sm text-gray-600 dark:text-gray-400">by</span>
-                            <span className="text-sm font-medium text-gray-900 dark:text-white">
-                              {item.creator}
-                            </span>
-                            <span className="text-sm text-gray-600 dark:text-gray-400">
-                              ({formatViews(item.creatorFollowers)})
-                            </span>
-                          </div>
-                        </div>
-
-                        {/* Tags */}
-                        <div className="flex flex-wrap gap-1 mb-4">
-                          {item.tags.slice(0, 2).map((tag, idx) => (
-                            <span
-                              key={idx}
-                              className="px-2 py-1 bg-purple-100 dark:bg-purple-900 text-purple-600 dark:text-purple-300 rounded text-xs"
-                            >
-                              {tag}
-                            </span>
-                          ))}
-                        </div>
-
-                        {/* Actions */}
-                        <div className="flex items-center gap-2">
-                          <button
-                            onClick={() => playContent(item)}
-                            className="flex-1 flex items-center justify-center gap-2 px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors"
-                          >
-                            <Play className="w-4 h-4" />
-                            Play Now
-                          </button>
-                          <button className="p-2 border border-gray-300 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
-                            <Eye className="w-4 h-4 text-gray-600" />
-                          </button>
-                        </div>
-
-                        {/* Language Info */}
-                        {item.subtitles.length > 0 && (
-                          <div className="flex items-center gap-1 mt-2 text-xs text-gray-600 dark:text-gray-400">
-                            <span>Subtitles: {item.subtitles.join(', ')}</span>
-                          </div>
-                        )}
                       </div>
-                    </motion.div>
-                  ))}
-                </div>
-              ) : (
-                <div className="space-y-4">
-                  {filteredContent.map((item, index) => (
-                    <motion.div
-                      key={item.id}
-                      initial={{ opacity: 0, x: -20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: index * 0.05 }}
-                      className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6"
-                    >
-                      <div className="flex items-center gap-6">
-                        {/* Content Thumbnail */}
-                        <div className="relative w-32 h-20 bg-gray-100 dark:bg-gray-700 rounded-lg flex-shrink-0">
-                          <div className="w-full h-full bg-gradient-to-br from-purple-100 to-pink-100 dark:from-purple-900 dark:to-pink-900 rounded-lg flex items-center justify-center">
-                            {(() => {
-                              const Icon = getContentIcon(item.type);
-                              return <Icon className="w-8 h-8 text-gray-400" />;
-                            })()}
-                          </div>
-                          {item.trending && (
-                            <div className="absolute -top-1 -left-1 bg-orange-500 text-white px-1 py-0.5 rounded text-xs">
-                              Hot
-                            </div>
-                          )}
-                          <div className="absolute inset-0 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity">
-                            <button
-                              onClick={() => playContent(item)}
-                              className="p-2 bg-black bg-opacity-50 text-white rounded-full hover:bg-opacity-70"
-                            >
-                              <Play className="w-4 h-4" />
-                            </button>
-                          </div>
-                        </div>
-
-                        {/* Content Details */}
-                        <div className="flex-1 min-w-0">
-                          <div className="flex items-start justify-between mb-2">
-                            <div>
-                              <h3 className="font-semibold text-gray-900 dark:text-white mb-1">
-                                {item.title}
-                              </h3>
-                              <p className="text-sm text-gray-600 dark:text-gray-400 line-clamp-2">
-                                {item.description}
-                              </p>
-                            </div>
-                            <div className="text-right">
-                              <div className="flex items-center gap-2 mb-1">
-                                <span className="text-sm text-gray-600 dark:text-gray-400">
-                                  {formatDuration(item.duration)}
-                                </span>
-                                {item.premium && (
-                                  <span className="px-2 py-1 bg-purple-500 text-white rounded text-xs">
-                                    Premium
-                                  </span>
-                                )}
-                              </div>
-                              <div className="flex items-center gap-2">
-                                <div className="flex items-center gap-1">
-                                  <Star className="w-4 h-4 text-yellow-500 fill-current" />
-                                  <span className="text-sm font-medium">{item.rating}</span>
-                                </div>
-                                <span className="text-sm text-gray-600 dark:text-gray-400">
-                                  ({formatViews(item.views)})
-                                </span>
-                              </div>
-                            </div>
-                          </div>
-
-                          <div className="flex items-center justify-between">
-                            <div className="flex items-center gap-4 text-sm text-gray-600 dark:text-gray-400">
-                              <div className="flex items-center gap-1">
-                                <User className="w-4 h-4" />
-                                <span>{item.creator}</span>
-                                {item.creatorVerified && (
-                                  <CheckCircle className="w-4 h-4 text-blue-600" />
-                                )}
-                              </div>
-                              <div className="flex items-center gap-1">
-                                <Eye className="w-4 h-4" />
-                                <span>{formatViews(item.views)} views</span>
-                              </div>
-                              <div className="flex items-center gap-1">
-                                <Heart className="w-4 h-4" />
-                                <span>{formatViews(item.likes)} likes</span>
-                              </div>
-                            </div>
-
-                            <div className="flex items-center gap-2">
-                              <button className="p-2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300">
-                                <Heart className="w-4 h-4" />
-                              </button>
-                              <button className="p-2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300">
-                                <Share2 className="w-4 h-4" />
-                              </button>
-                              <button
-                                onClick={() => playContent(item)}
-                                className="flex items-center gap-2 px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors"
-                              >
-                                <Play className="w-4 h-4" />
-                                Play
-                              </button>
-                            </div>
-                          </div>
-                        </div>
+                      <div>
+                        <p className="text-sm text-gray-500">Timeline</p>
+                        <p className="text-sm font-medium text-gray-900 mt-1">
+                          {new Date(project.startDate).toLocaleDateString()} -{' '}
+                          {new Date(project.endDate).toLocaleDateString()}
+                        </p>
                       </div>
-                    </motion.div>
-                  ))}
-                </div>
-              )}
+                    </div>
 
-              {/* Empty State */}
-              {filteredContent.length === 0 && (
-                <div className="text-center py-12">
-                  <div className="w-16 h-16 bg-gray-100 dark:bg-gray-800 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <Search className="w-8 h-8 text-gray-400" />
+                    <div className="flex justify-between items-center">
+                      <div>
+                        <p className="text-sm text-gray-500">Team</p>
+                        <p className="text-sm font-medium text-gray-900">
+                          {project.team.join(', ')}
+                        </p>
+                      </div>
+                      <div className="flex space-x-2">
+                        <button className="px-3 py-1 text-sm text-blue-600 hover:text-blue-900">
+                          View Details
+                        </button>
+                        <button className="px-3 py-1 text-sm text-gray-600 hover:text-gray-900">
+                          Edit
+                        </button>
+                      </div>
+                    </div>
                   </div>
-                  <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">
-                    No content found
-                  </h3>
-                  <p className="text-gray-600 dark:text-gray-400">
-                    Try adjusting your search terms or filters to find entertainment content.
-                  </p>
-                </div>
-              )}
-            </div>
+                ))}
+              </div>
+            )}
+
+            {activeTab === 'departments' && (
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {filteredDepartments.map(dept => (
+                  <div key={dept.id} className="bg-white border border-gray-200 rounded-lg p-6">
+                    <div className="flex justify-between items-start mb-4">
+                      <div>
+                        <h3 className="text-lg font-medium text-gray-900">{dept.name}</h3>
+                        <p className="text-sm text-gray-600 mt-1">{dept.description}</p>
+                      </div>
+                      <span
+                        className={`px-2 py-1 text-xs font-medium rounded-full ${getStatusColor(dept.status)}`}
+                      >
+                        {dept.status}
+                      </span>
+                    </div>
+
+                    <div className="space-y-3">
+                      <div className="flex justify-between text-sm">
+                        <span className="text-gray-500">Head:</span>
+                        <span className="font-medium text-gray-900">{dept.head}</span>
+                      </div>
+                      <div className="flex justify-between text-sm">
+                        <span className="text-gray-500">Members:</span>
+                        <span className="font-medium text-gray-900">{dept.members}</span>
+                      </div>
+                      <div className="flex justify-between text-sm">
+                        <span className="text-gray-500">Projects:</span>
+                        <span className="font-medium text-gray-900">{dept.projects}</span>
+                      </div>
+                      <div className="flex justify-between text-sm">
+                        <span className="text-gray-500">Budget:</span>
+                        <span className="font-medium text-gray-900">
+                          ${dept.budget.toLocaleString()}
+                        </span>
+                      </div>
+                    </div>
+
+                    <div className="mt-4 pt-4 border-t border-gray-200">
+                      <div className="flex space-x-2">
+                        <button className="flex-1 px-3 py-2 text-sm text-blue-600 hover:text-blue-900 border border-blue-600 rounded-md hover:bg-blue-50">
+                          View Members
+                        </button>
+                        <button className="flex-1 px-3 py-2 text-sm text-gray-600 hover:text-gray-900 border border-gray-300 rounded-md hover:bg-gray-50">
+                          Edit
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
         </div>
       </div>

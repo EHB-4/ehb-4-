@@ -1,3 +1,5 @@
+"use client";
+
 'use client';
 
 import React, { useState, useEffect } from 'react';
@@ -295,7 +297,7 @@ export default function GoSellrDashboard() {
       <DashboardHeader user={user} notifications={notifications} />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {/* Navigation Tabs */}
+      {/* Navigation Tabs */}
         <DashboardTabs activeTab={activeTab} onTabChange={setActiveTab} />
 
         {/* Main Content */}
@@ -347,7 +349,7 @@ function DashboardHeader({ user, notifications }: { user: User; notifications: N
           <div className="flex items-center">
             <div className="text-2xl font-bold text-blue-600">GoSellr</div>
             <div className="ml-4 text-lg font-medium text-gray-900">Seller Dashboard</div>
-          </div>
+        </div>
 
           {/* User Actions */}
           <div className="flex items-center space-x-4">
@@ -372,7 +374,7 @@ function DashboardHeader({ user, notifications }: { user: User; notifications: N
               <div className="text-right">
                 <div className="text-sm font-medium text-gray-900">{user.name}</div>
                 <div className="text-xs text-gray-500">Trust Score: {user.trustScore}</div>
-              </div>
+            </div>
               <img src={user.avatar} alt={user.name} className="w-8 h-8 rounded-full" />
             </div>
           </div>
@@ -398,7 +400,7 @@ function DashboardTabs({
     { id: 'settings', name: 'Settings', icon: CogIcon },
   ];
 
-  return (
+    return (
     <div className="border-b border-gray-200">
       <nav className="-mb-px flex space-x-8">
         {tabs.map(tab => {
@@ -415,13 +417,13 @@ function DashboardTabs({
             >
               <Icon className="w-5 h-5" />
               <span>{tab.name}</span>
-            </button>
+          </button>
           );
         })}
       </nav>
-    </div>
-  );
-}
+      </div>
+    );
+  }
 
 // Overview Tab Component
 function OverviewTab({
@@ -470,17 +472,17 @@ function OverviewTab({
           change="+3%"
           changeType="positive"
           icon={ShieldCheckIcon}
-        />
-      </div>
+          />
+        </div>
 
       {/* Blockchain Stats */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         <div className="bg-white rounded-lg shadow-sm p-6">
           <div className="flex items-center justify-between">
-            <div>
+          <div>
               <p className="text-sm font-medium text-gray-600">Blockchain Transactions</p>
               <p className="text-2xl font-bold text-gray-900">{stats.blockchainTransactions}</p>
-            </div>
+          </div>
             <div className="p-3 bg-blue-100 rounded-full">
               <ShieldCheckIcon className="w-6 h-6 text-blue-600" />
             </div>
@@ -489,30 +491,30 @@ function OverviewTab({
 
         <div className="bg-white rounded-lg shadow-sm p-6">
           <div className="flex items-center justify-between">
-            <div>
+        <div>
               <p className="text-sm font-medium text-gray-600">Escrow Funds</p>
               <p className="text-2xl font-bold text-gray-900">
                 {formatCurrency(stats.escrowFunds)}
               </p>
-            </div>
+        </div>
             <div className="p-3 bg-green-100 rounded-full">
               <WalletIcon className="w-6 h-6 text-green-600" />
-            </div>
-          </div>
         </div>
+    </div>
+      </div>
 
         <div className="bg-white rounded-lg shadow-sm p-6">
           <div className="flex items-center justify-between">
-            <div>
+              <div>
               <p className="text-sm font-medium text-gray-600">AI Risk Score</p>
               <p className="text-2xl font-bold text-gray-900">{stats.aiRiskScore}%</p>
-            </div>
+              </div>
             <div className="p-3 bg-yellow-100 rounded-full">
               <ExclamationTriangleIcon className="w-6 h-6 text-yellow-600" />
             </div>
           </div>
-        </div>
-      </div>
+              </div>
+            </div>
 
       {/* Recent Activity */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -520,18 +522,18 @@ function OverviewTab({
         <div className="bg-white rounded-lg shadow-sm">
           <div className="p-6 border-b border-gray-200">
             <h3 className="text-lg font-medium text-gray-900">Recent Orders</h3>
-          </div>
+              </div>
           <div className="p-6">
             <div className="space-y-4">
               {recentOrders.map(order => (
                 <div key={order.id} className="flex items-center justify-between">
                   <div className="flex items-center space-x-3">
                     <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
-                    <div>
+              <div>
                       <p className="text-sm font-medium text-gray-900">{order.customerName}</p>
                       <p className="text-xs text-gray-500">{order.productName}</p>
-                    </div>
-                  </div>
+              </div>
+              </div>
                   <div className="text-right">
                     <p className="text-sm font-medium text-gray-900">
                       {formatCurrency(order.amount)}
@@ -541,18 +543,18 @@ function OverviewTab({
                     >
                       {order.status}
                     </span>
-                  </div>
-                </div>
+            </div>
+            </div>
               ))}
             </div>
-          </div>
+        </div>
         </div>
 
         {/* Recent Products */}
         <div className="bg-white rounded-lg shadow-sm">
           <div className="p-6 border-b border-gray-200">
             <h3 className="text-lg font-medium text-gray-900">Product Performance</h3>
-          </div>
+              </div>
           <div className="p-6">
             <div className="space-y-4">
               {recentProducts.map(product => (
@@ -560,7 +562,7 @@ function OverviewTab({
                   <div>
                     <p className="text-sm font-medium text-gray-900">{product.name}</p>
                     <p className="text-xs text-gray-500">{product.sales} sales</p>
-                  </div>
+                </div>
                   <div className="text-right">
                     <p className="text-sm font-medium text-gray-900">
                       {formatCurrency(product.price)}
@@ -568,12 +570,12 @@ function OverviewTab({
                     <div className="flex items-center space-x-1">
                       <StarIcon className="w-3 h-3 text-yellow-400 fill-current" />
                       <span className="text-xs text-gray-500">{product.rating}</span>
-                    </div>
-                  </div>
-                </div>
-              ))}
+              </div>
             </div>
           </div>
+        ))}
+      </div>
+        </div>
         </div>
       </div>
     </div>
@@ -597,58 +599,58 @@ function OrdersTab({
       <div className="p-6 border-b border-gray-200">
         <h3 className="text-lg font-medium text-gray-900">All Orders</h3>
       </div>
-      <div className="overflow-x-auto">
-        <table className="min-w-full divide-y divide-gray-200">
-          <thead className="bg-gray-50">
-            <tr>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+        <div className="overflow-x-auto">
+          <table className="min-w-full divide-y divide-gray-200">
+            <thead className="bg-gray-50">
+              <tr>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Order
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Customer
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Product
               </th>
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Amount
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Status
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Date
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Status
+                </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Date
+                </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Payment
-              </th>
-            </tr>
-          </thead>
-          <tbody className="bg-white divide-y divide-gray-200">
-            {orders.map(order => (
-              <tr key={order.id}>
-                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                </th>
+              </tr>
+            </thead>
+            <tbody className="bg-white divide-y divide-gray-200">
+              {orders.map(order => (
+                <tr key={order.id}>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                   {order.id}
-                </td>
+                  </td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                   {order.customerName}
-                </td>
+                  </td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                   {order.productName}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                   {formatCurrency(order.amount)}
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap">
-                  <span
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    <span
                     className={`inline-flex px-2 py-1 text-xs font-medium rounded-full ${getStatusColor(order.status)}`}
-                  >
-                    {order.status}
-                  </span>
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    >
+                      {order.status}
+                    </span>
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                   {formatDate(order.date)}
-                </td>
+                  </td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                   <div>
                     <div className="font-medium">{order.paymentMethod}</div>
@@ -679,7 +681,7 @@ function ProductsTab({
           <h3 className="text-lg font-medium text-gray-900">All Products</h3>
           <button className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700">
             Add Product
-          </button>
+                    </button>
         </div>
       </div>
       <div className="overflow-x-auto">
@@ -746,13 +748,13 @@ function ProductsTab({
                 <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                   <button className="text-blue-600 hover:text-blue-900 mr-3">Edit</button>
                   <button className="text-red-600 hover:text-red-900">Delete</button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
-    </div>
   );
 }
 

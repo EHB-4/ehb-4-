@@ -1,32 +1,17 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { NextResponse } from 'next/server';
+import type { NextRequest } from 'next/server';
 
 export function middleware(request: NextRequest) {
-  const { pathname, host } = request.nextUrl;
+  const response = NextResponse.next();
 
-  // Only apply to root path
-  if (pathname === '/') {
-    // Port 8080 -> Development Portal
-    if (host.includes(':8080')) {
-      console.log('Redirecting port 8080 to /development-portal');
-      return NextResponse.redirect(new URL('/development-portal', request.url));
-    }
+  response.headers.set('X-Content-Type-Options', 'nosniff');
+  response.headers.set('X-Frame-Options', 'DENY');
+  response.headers.set('X-XSS-Protection', '1; mode=block');
+  response.headers.set('Referrer-Policy', 'strict-origin-when-cross-origin');
 
-    // Port 5000 -> Admin Panel
-    if (host.includes(':5000')) {
-      console.log('Redirecting port 5000 to /admin-panel');
-      return NextResponse.redirect(new URL('/admin-panel', request.url));
-    }
-
-    // Port 3000 -> Home page (default)
-    if (host.includes(':3000') || host === 'localhost') {
-      console.log('Port 3000 - staying on home page');
-      return NextResponse.next();
-    }
-  }
-
-  return NextResponse.next();
+  return response;
 }
 
 export const config = {
-  matcher: ['/'],
+  matcher: ['/((?!api|_next/static|_next/image|favicon.ico).*)'],
 };

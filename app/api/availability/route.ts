@@ -1,59 +1,32 @@
-import { ObjectId } from 'mongodb';
 import { NextResponse } from 'next/server';
-import { getServerSession } from 'next-auth';
 
-import { authOptions } from '@/lib/authOptions';
-import { Availability } from '@/lib/models/Availability';
-import clientPromise from '@/lib/mongodb';
+// Mock availability data
+const mockAvailability = {
+  doc1: {
+    '2024-01-15': ['09:00 AM', '10:00 AM', '11:00 AM', '02:00 PM', '03:00 PM'],
+    '2024-01-16': ['09:00 AM', '10:00 AM', '02:00 PM', '03:00 PM', '04:00 PM'],
+    '2024-01-17': ['09:00 AM', '11:00 AM', '02:00 PM', '04:00 PM'],
+  },
+  doc2: {
+    '2024-01-15': ['10:00 AM', '11:00 AM', '01:00 PM', '02:00 PM'],
+    '2024-01-16': ['09:00 AM', '10:00 AM', '03:00 PM', '04:00 PM'],
+    '2024-01-17': ['09:00 AM', '10:00 AM', '02:00 PM', '03:00 PM'],
+  },
+};
 
-// GET /api/availability?doctorId=xxx&date=yyyy-mm-dd
 export async function GET(request: Request) {
   try {
-    const session = await getServerSession(authOptions);
-    if (!session?.user?.id) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
-    }
-
     const { searchParams } = new URL(request.url);
     const doctorId = searchParams.get('doctorId');
     const date = searchParams.get('date');
 
     if (!doctorId || !date) {
-      return NextResponse.json({ error: 'Missing required parameters' }, { status: 400 });
+      return NextResponse.json({ error: 'Doctor ID and date are required' }, { status: 400 });
     }
 
-    const client = await clientPromise;
-    const db = client.db();
+    const availability = mockAvailability[doctorId as keyof typeof mockAvailability]?.[date] || [];
 
-    // Get doctor's availability
-    const availability = await db.collection('availability').findOne({
-      doctorId: new ObjectId(doctorId),
-      day: new Date(date).getDay(),
-    });
-
-    if (!availability) {
-      return NextResponse.json({ slots: [] });
-    }
-
-    // Get booked slots for the date
-    const bookedSlots = await db
-      .collection('appointments')
-      .find({
-        doctorId: new ObjectId(doctorId),
-        date,
-        status: { $ne: 'cancelled' },
-      })
-      .project({ timeSlot: 1 })
-      .toArray();
-
-    const bookedTimeSlots = bookedSlots.map((slot: { timeSlot: string }) => slot.timeSlot);
-
-    // Filter out booked slots
-    const availableSlots = availability.timeSlots.filter(
-      (slot: string) => !bookedTimeSlots.includes(slot)
-    );
-
-    return NextResponse.json({ slots: availableSlots });
+    return NextResponse.json({ availability });
   } catch (error) {
     console.error('Error fetching availability:', error);
     return NextResponse.json({ error: 'Failed to fetch availability' }, { status: 500 });

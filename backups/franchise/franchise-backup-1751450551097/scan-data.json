@@ -1,0 +1,37 @@
+{
+  "totalFiles": 36,
+  "duplicates": [],
+  "merged": [
+    {
+      "type": "similar_name",
+      "files": [
+        "app\\franchise\\health\\page.tsx",
+        "app\\franchise\\page.tsx"
+      ],
+      "fileName": "page.tsx"
+    },
+    {
+      "type": "similar_name",
+      "files": [
+        "app\\franchise\\health\\page.tsx",
+        "app\\franchise\\page.tsx"
+      ],
+      "fileName": "page.tsx"
+    },
+    {
+      "type": "similar_name",
+      "files": [
+        "app\\franchise\\education\\page.tsx",
+        "app\\franchise\\health\\page.tsx"
+      ],
+      "fileName": "page.tsx"
+    }
+  ],
+  "errors": [],
+  "lastScan": "2025-07-02T10:02:27.067Z",
+  "performance": {
+    "scanTime": 5,
+    "mergeTime": 5,
+    "backupTime": 20
+  }
+}

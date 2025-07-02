@@ -1,3 +1,5 @@
+"use client";
+
 import { motion } from 'framer-motion';
 import React from 'react';
 import { FiMoon, FiSun, FiGlobe, FiBell, FiLock, FiCreditCard, FiHelpCircle } from 'react-icons/fi';

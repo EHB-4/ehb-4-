@@ -1,3 +1,5 @@
+"use client";
+
 import { motion } from 'framer-motion';
 import { FaUser, FaEnvelope, FaGraduationCap, FaStar, FaCheck, FaTimes } from 'react-icons/fa';
 
