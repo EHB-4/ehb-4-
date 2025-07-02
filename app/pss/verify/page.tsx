@@ -31,6 +31,7 @@ import {
 import Link from 'next/link';
 import AIChatAssistant from '@/components/PSS/AIChatAssistant';
 import { submitVerificationRequest } from '@/lib/pss/api';
+import DocumentUpload from '@/components/PSS/DocumentUpload';
 
 const steps = [
   { id: '01', name: 'Select Your Role', fields: ['role'] },
@@ -213,6 +214,18 @@ export default function VerificationPage() {
     }
   };
 
+  const handleDocumentUpload = (files: any[]) => {
+    // Update form data with uploaded files
+    setFormData(prev => ({
+      ...prev,
+      documents: {
+        ...prev.documents,
+        idCard: files.find(f => f.name.toLowerCase().includes('id'))?.name || '',
+        license: files.find(f => f.name.toLowerCase().includes('license'))?.name || '',
+      },
+    }));
+  };
+
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 px-4 py-12 sm:px-6 lg:px-8">
       <div className="max-w-4xl mx-auto">
@@ -367,78 +380,25 @@ export default function VerificationPage() {
                   )}
                   {/* Step 3: Document Upload */}
                   {currentStep === 2 && (
-                    <div className="space-y-6 animate-in fade-in-50">
-                      <div>
-                        <Label htmlFor="idCard" className="text-lg font-semibold">
-                          National ID Card / CNIC
-                        </Label>
-                        <p className="text-sm text-gray-500 mb-2">
-                          Please upload a clear image of the front and back.
-                        </p>
-                        <div className="flex items-center justify-center w-full">
-                          <label
-                            htmlFor="idCard"
-                            className="flex flex-col items-center justify-center w-full h-32 border-2 border-dashed rounded-lg cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-800"
-                          >
-                            <div className="flex flex-col items-center justify-center pt-5 pb-6">
-                              <UploadCloud className="w-8 h-8 mb-2 text-gray-500" />
-                              <p className="mb-2 text-sm text-gray-500">
-                                <span className="font-semibold">Click to upload</span> or drag and
-                                drop
-                              </p>
-                              <p className="text-xs text-gray-500">PNG, JPG, or PDF (MAX. 5MB)</p>
-                            </div>
-                            <Input
-                              id="idCard"
-                              name="idCard"
-                              type="file"
-                              className="hidden"
-                              onChange={handleFileChange}
-                            />
-                          </label>
-                        </div>
-                        {formData.documents.idCard && (
-                          <p className="text-sm text-green-600 mt-2">
-                            File selected: {formData.documents.idCard.name}
-                          </p>
-                        )}
-                      </div>
-                      <div>
-                        <Label htmlFor="license" className="text-lg font-semibold">
-                          Professional License / Certificate
-                        </Label>
-                        <p className="text-sm text-gray-500 mb-2">
-                          Required for Doctors, Service Providers etc.
-                        </p>
-                        <div className="flex items-center justify-center w-full">
-                          <label
-                            htmlFor="license"
-                            className="flex flex-col items-center justify-center w-full h-32 border-2 border-dashed rounded-lg cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-800"
-                          >
-                            <div className="flex flex-col items-center justify-center pt-5 pb-6">
-                              <UploadCloud className="w-8 h-8 mb-2 text-gray-500" />
-                              <p className="mb-2 text-sm text-gray-500">
-                                <span className="font-semibold">Click to upload</span> or drag and
-                                drop
-                              </p>
-                              <p className="text-xs text-gray-500">PNG, JPG, or PDF (MAX. 5MB)</p>
-                            </div>
-                            <Input
-                              id="license"
-                              name="license"
-                              type="file"
-                              className="hidden"
-                              onChange={handleFileChange}
-                            />
-                          </label>
-                        </div>
-                        {formData.documents.license && (
-                          <p className="text-sm text-green-600 mt-2">
-                            File selected: {formData.documents.license.name}
-                          </p>
-                        )}
-                      </div>
-                    </div>
+                    <Card>
+                      <CardHeader>
+                        <CardTitle>3. Document Upload</CardTitle>
+                        <CardDescription>
+                          Upload your identification documents for verification
+                        </CardDescription>
+                      </CardHeader>
+                      <CardContent>
+                        <DocumentUpload
+                          onUploadComplete={handleDocumentUpload}
+                          maxFiles={3}
+                          maxSize={5 * 1024 * 1024} // 5MB
+                          acceptedTypes={['image/*', 'application/pdf']}
+                          title="Upload Verification Documents"
+                          description="Upload your ID card, license, or other identification documents"
+                          showPreview={true}
+                        />
+                      </CardContent>
+                    </Card>
                   )}
                   {/* Step 4: Liveness Check */}
                   {currentStep === 3 && (

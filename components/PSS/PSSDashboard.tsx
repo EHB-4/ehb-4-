@@ -16,6 +16,8 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { Users, Clock, CheckCircle, XCircle, AlertTriangle, Search, Filter } from 'lucide-react';
+import { usePSSWebSocket } from '@/hooks/usePSSWebSocket';
+import { Alert, AlertDescription } from '@/components/ui/alert';
 
 interface VerificationRequest {
   id: string;
@@ -47,6 +49,9 @@ export default function PSSDashboard() {
   const [searchTerm, setSearchTerm] = useState('');
   const [statusFilter, setStatusFilter] = useState('all');
   const [roleFilter, setRoleFilter] = useState('all');
+
+  // WebSocket for real-time updates
+  const { isConnected, lastMessage, error: wsError } = usePSSWebSocket();
 
   // Fetch dashboard data
   const fetchDashboardData = async () => {
@@ -113,6 +118,30 @@ export default function PSSDashboard() {
       console.error('Error updating request:', error);
     }
   };
+
+  // Handle real-time updates
+  useEffect(() => {
+    if (lastMessage) {
+      switch (lastMessage.type) {
+        case 'status_update':
+          // Update specific request status
+          setRequests(prev => prev.map(req => 
+            req.id === lastMessage.data.verificationId 
+              ? { ...req, status: lastMessage.data.status }
+              : req
+          ));
+          break;
+        case 'verification_complete':
+          // Refresh dashboard data
+          fetchDashboardData();
+          break;
+        case 'fraud_alert':
+          // Handle fraud alert
+          console.log('Fraud alert:', lastMessage.data);
+          break;
+      }
+    }
+  }, [lastMessage]);
 
   useEffect(() => {
     fetchDashboardData();
@@ -195,10 +224,29 @@ export default function PSSDashboard() {
           <h1 className="text-3xl font-bold text-gray-900">PSS Dashboard</h1>
           <p className="text-gray-600 mt-1">Professional Security Services Management</p>
         </div>
-        <Button type="button" onClick={fetchDashboardData} variant="outline">
-          Refresh
-        </Button>
+        <div className="flex items-center space-x-4">
+          {/* WebSocket Status */}
+          <div className="flex items-center space-x-2">
+            <div className={`w-2 h-2 rounded-full ${isConnected ? 'bg-green-500' : 'bg-red-500'}`} />
+            <span className="text-sm text-gray-600">
+              {isConnected ? 'Live Updates' : 'Offline'}
+            </span>
+          </div>
+          <Button type="button" onClick={fetchDashboardData} variant="outline">
+            Refresh
+          </Button>
+        </div>
       </div>
+
+      {/* WebSocket Error Alert */}
+      {wsError && (
+        <Alert variant="destructive">
+          <AlertTriangle className="h-4 w-4" />
+          <AlertDescription>
+            Real-time updates are unavailable: {wsError}
+          </AlertDescription>
+        </Alert>
+      )}
 
       {/* Stats Cards */}
       {stats && (
