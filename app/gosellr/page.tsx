@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 'use client';
 
@@ -51,6 +51,14 @@ export default function GoSellrMarketplace() {
   const [cartItems, setCartItems] = useState(0);
   const [wishlistItems, setWishlistItems] = useState(0);
   const [user, setUser] = useState<User | null>(null);
+
+  // --- STATS ARRAY FIX ---
+  const stats = [
+    { label: 'AI Products', value: products.length, icon: Package },
+    { label: 'Total Downloads', value: 89200, icon: Users },
+    { label: 'Avg Rating', value: 4.6, icon: Star },
+    { label: 'Active Users', value: 2400000, icon: Users },
+  ];
 
   // ========================================
   // 2. COMPONENT INITIALIZATION
@@ -384,7 +392,10 @@ export default function GoSellrMarketplace() {
               </div>
               <div className="flex items-center gap-4">
                 <Link href="/cart">
-                  <button className="relative p-2 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white">
+                  <button
+                    className="relative p-2 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white"
+                    title="Open Cart"
+                  >
                     <ShoppingCart className="w-6 h-6" />
                     {cartItems > 0 && (
                       <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
@@ -394,7 +405,10 @@ export default function GoSellrMarketplace() {
                   </button>
                 </Link>
                 <Link href="/wishlist">
-                  <button className="relative p-2 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white">
+                  <button
+                    className="relative p-2 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white"
+                    title="Open Wishlist"
+                  >
                     <Heart className="w-6 h-6" />
                     {wishlistItems > 0 && (
                       <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
@@ -647,10 +661,14 @@ export default function GoSellrMarketplace() {
                                 ? 'bg-red-500 text-white'
                                 : 'text-gray-600 dark:text-gray-400'
                             }`}
+                            title="Add to Wishlist"
                           >
                             <Heart className="w-4 h-4" />
                           </button>
-                          <button className="p-2 bg-white dark:bg-gray-800 rounded-full shadow-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+                          <button
+                            className="p-2 bg-white dark:bg-gray-800 rounded-full shadow-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+                            title="Share Product"
+                          >
                             <Share2 className="w-4 h-4 text-gray-600" />
                           </button>
                         </div>
@@ -732,11 +750,15 @@ export default function GoSellrMarketplace() {
                             onClick={() => addToCart(product.id)}
                             disabled={!product.stock}
                             className="flex-1 flex items-center justify-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                            title="Add to Cart"
                           >
                             <ShoppingCart className="w-4 h-4" />
                             {product.stock ? 'Add to Cart' : 'Out of Stock'}
                           </button>
-                          <button className="p-2 border border-gray-300 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+                          <button
+                            className="p-2 border border-gray-300 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+                            title="View Product"
+                          >
                             <Eye className="w-4 h-4 text-gray-600" />
                           </button>
                         </div>
@@ -830,16 +852,21 @@ export default function GoSellrMarketplace() {
                               <button
                                 onClick={() => toggleWishlist(product.id)}
                                 className="p-2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
+                                title="Add to Wishlist"
                               >
                                 <Heart className="w-4 h-4" />
                               </button>
-                              <button className="p-2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300">
+                              <button
+                                className="p-2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
+                                title="Share Product"
+                              >
                                 <Share2 className="w-4 h-4" />
                               </button>
                               <button
                                 onClick={() => addToCart(product.id)}
                                 disabled={!product.stock}
                                 className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50"
+                                title="Add to Cart"
                               >
                                 <ShoppingCart className="w-4 h-4" />
                                 {product.stock ? 'Add to Cart' : 'Out of Stock'}
@@ -892,7 +919,7 @@ function GoSellrHeader({
   searchTerm: string;
 }) {
   return (
-    <header className="bg-white shadow-sm border-b border-gray-200">
+    <header className="bg-white dark:bg-gray-800 shadow-sm border-b border-gray-200 dark:border-gray-700">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}

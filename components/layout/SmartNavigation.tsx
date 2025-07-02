@@ -56,7 +56,6 @@ export default function SmartNavigation({
 }: SmartNavigationProps) {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
-  const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [showQuickAccess, setShowQuickAccess] = useState(false);
 
@@ -101,16 +100,8 @@ export default function SmartNavigation({
     }
   };
 
-  // Filter services based on search and category
-  const filteredServices = getServicesByCategory(selectedCategory).filter(service => {
-    if (searchQuery) {
-      return (
-        service.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        service.fullName.toLowerCase().includes(searchQuery.toLowerCase())
-      );
-    }
-    return true;
-  });
+  // Filter services based on category only (searchQuery logic hata diya)
+  const filteredServices = getServicesByCategory(selectedCategory);
 
   return (
     <>
@@ -123,6 +114,7 @@ export default function SmartNavigation({
               <button
                 onClick={() => setIsOpen(!isOpen)}
                 className="lg:hidden p-2 rounded-md text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
+                title="Open Menu"
               >
                 {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
               </button>
@@ -147,20 +139,6 @@ export default function SmartNavigation({
                   </span>
                 </div>
               )}
-            </div>
-
-            {/* Search Bar */}
-            <div className="hidden md:flex flex-1 max-w-md mx-8">
-              <div className="relative w-full">
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
-                <input
-                  type="text"
-                  placeholder="Search services..."
-                  value={searchQuery}
-                  onChange={e => setSearchQuery(e.target.value)}
-                  className="w-full pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                />
-              </div>
             </div>
 
             {/* Navigation Actions */}
@@ -222,18 +200,6 @@ export default function SmartNavigation({
             className="lg:hidden bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700"
           >
             <div className="px-4 py-4 space-y-4">
-              {/* Mobile Search */}
-              <div className="relative">
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
-                <input
-                  type="text"
-                  placeholder="Search services..."
-                  value={searchQuery}
-                  onChange={e => setSearchQuery(e.target.value)}
-                  className="w-full pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
-                />
-              </div>
-
               {/* Mobile Navigation Links */}
               <nav className="space-y-2">
                 <Link
@@ -291,6 +257,7 @@ export default function SmartNavigation({
                   value={selectedCategory}
                   onChange={e => setSelectedCategory(e.target.value)}
                   className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm"
+                  title="Select Category"
                 >
                   <option value="all">All Services</option>
                   <option value="Core Services">Core Services</option>

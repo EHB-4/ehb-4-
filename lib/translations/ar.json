@@ -1,0 +1,161 @@
+{
+  "common": {
+    "loading": "جاري التحميل...",
+    "error": "خطأ",
+    "success": "نجح",
+    "cancel": "إلغاء",
+    "save": "حفظ",
+    "delete": "حذف",
+    "edit": "تعديل",
+    "view": "عرض",
+    "close": "إغلاق",
+    "back": "رجوع",
+    "next": "التالي",
+    "previous": "السابق",
+    "submit": "إرسال",
+    "upload": "رفع",
+    "download": "تحميل",
+    "search": "بحث",
+    "filter": "تصفية",
+    "refresh": "تحديث",
+    "settings": "الإعدادات",
+    "profile": "الملف الشخصي",
+    "logout": "تسجيل الخروج",
+    "login": "تسجيل الدخول",
+    "register": "تسجيل"
+  },
+  "pss": {
+    "title": "نظام الأمان الشخصي",
+    "description": "منصة متقدمة للتحقق من الهوية ومنع الاحتيال",
+    "dashboard": {
+      "title": "لوحة تحكم PSS",
+      "subtitle": "إدارة الخدمات الأمنية المهنية",
+      "stats": {
+        "total": "إجمالي الطلبات",
+        "pending": "قيد الانتظار",
+        "approved": "موافق عليه",
+        "rejected": "مرفوض",
+        "highRisk": "خطر عالي",
+        "verifiedUsers": "المستخدمون المؤكدون",
+        "verificationRate": "معدل التحقق",
+        "fraudPrevented": "حالات الاحتيال الممنوعة",
+        "systemUptime": "وقت تشغيل النظام"
+      },
+      "filters": {
+        "all": "الكل",
+        "status": "الحالة",
+        "role": "الدور",
+        "dateRange": "نطاق التاريخ"
+      },
+      "actions": {
+        "approve": "موافقة",
+        "reject": "رفض",
+        "review": "مراجعة",
+        "export": "تصدير"
+      }
+    },
+    "verification": {
+      "title": "التحقق من الهوية",
+      "subtitle": "أكمل عملية التحقق الخاصة بك",
+      "steps": {
+        "role": "اختر دورك",
+        "personalInfo": "المعلومات الشخصية",
+        "documents": "رفع المستندات",
+        "liveness": "فحص الحيوية",
+        "review": "المراجعة والدفع"
+      },
+      "roles": {
+        "patient": "مريض / مستخدم",
+        "doctor": "طبيب / محترف",
+        "business": "عمل / مزود خدمة",
+        "franchise": "امتياز"
+      },
+      "form": {
+        "fullName": "الاسم الكامل",
+        "contactNumber": "رقم الاتصال",
+        "dateOfBirth": "تاريخ الميلاد",
+        "address": "العنوان",
+        "idCard": "بطاقة الهوية الوطنية",
+        "license": "الترخيص المهني",
+        "selfie": "صورة شخصية / فحص الحيوية"
+      },
+      "validation": {
+        "required": "هذا الحقل مطلوب",
+        "invalidEmail": "عنوان البريد الإلكتروني غير صحيح",
+        "invalidPhone": "رقم الهاتف غير صحيح",
+        "minLength": "مطلوب {length} أحرف على الأقل",
+        "maxLength": "يُسمح بحد أقصى {length} حرف",
+        "fileSize": "يجب أن يكون حجم الملف أقل من {size} ميجابايت",
+        "fileType": "نوع ملف غير صحيح"
+      }
+    },
+    "upload": {
+      "title": "رفع المستندات",
+      "description": "ارفع مستندات التحقق الخاصة بك",
+      "dropZone": {
+        "title": "أسقط الملفات هنا",
+        "description": "أو انقر للتصفح",
+        "supportedFormats": "التنسيقات المدعومة: الصور، PDF، مستندات Word (الحد الأقصى {size} ميجابايت لكل ملف)"
+      },
+      "progress": {
+        "uploading": "جاري الرفع...",
+        "paused": "متوقف مؤقتاً",
+        "success": "اكتمل الرفع",
+        "error": "فشل الرفع",
+        "waiting": "في انتظار الرفع..."
+      },
+      "preview": {
+        "title": "معاينة الملف",
+        "download": "تحميل",
+        "zoomIn": "تكبير",
+        "zoomOut": "تصغير",
+        "rotate": "تدوير",
+        "reset": "إعادة تعيين"
+      }
+    },
+    "admin": {
+      "title": "لوحة تحكم PSS للمدير",
+      "subtitle": "مراجعة وإدارة جميع طلبات التحقق الواردة",
+      "stats": {
+        "pendingRequests": "الطلبات المعلقة",
+        "highRiskAlerts": "تنبيهات الخطر العالي",
+        "approvedToday": "تمت الموافقة اليوم",
+        "totalRequests": "إجمالي الطلبات"
+      },
+      "actions": {
+        "approve": "موافقة على الطلب",
+        "reject": "رفض الطلب",
+        "addNotes": "إضافة ملاحظات",
+        "viewDetails": "عرض التفاصيل"
+      }
+    },
+    "status": {
+      "pending": "قيد الانتظار",
+      "approved": "موافق عليه",
+      "rejected": "مرفوض",
+      "inProgress": "قيد التنفيذ"
+    },
+    "priority": {
+      "high": "عالي",
+      "medium": "متوسط",
+      "low": "منخفض"
+    },
+    "risk": {
+      "high": "خطر عالي",
+      "medium": "خطر متوسط",
+      "low": "خطر منخفض"
+    },
+    "notifications": {
+      "verificationComplete": "اكتمل التحقق بنجاح",
+      "verificationRejected": "تم رفض طلب التحقق",
+      "fraudAlert": "تم اكتشاف تنبيه احتيال",
+      "systemUpdate": "تحديث النظام متاح"
+    },
+    "errors": {
+      "uploadFailed": "فشل الرفع. يرجى المحاولة مرة أخرى.",
+      "networkError": "خطأ في الشبكة. يرجى التحقق من اتصالك.",
+      "validationError": "يرجى التحقق من إدخالك والمحاولة مرة أخرى.",
+      "serverError": "خطأ في الخادم. يرجى المحاولة مرة أخرى لاحقاً."
+    }
+  }
+} 

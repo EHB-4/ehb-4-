@@ -1,0 +1,161 @@
+{
+  "common": {
+    "loading": "لوڈ ہو رہا ہے...",
+    "error": "خرابی",
+    "success": "کامیاب",
+    "cancel": "منسوخ کریں",
+    "save": "محفوظ کریں",
+    "delete": "حذف کریں",
+    "edit": "ترمیم کریں",
+    "view": "دیکھیں",
+    "close": "بند کریں",
+    "back": "واپس",
+    "next": "اگلا",
+    "previous": "پچھلا",
+    "submit": "جمع کریں",
+    "upload": "اپ لوڈ کریں",
+    "download": "ڈاؤن لوڈ کریں",
+    "search": "تلاش کریں",
+    "filter": "فلٹر",
+    "refresh": "ریفریش",
+    "settings": "ترتیبات",
+    "profile": "پروفائل",
+    "logout": "لاگ آؤٹ",
+    "login": "لاگ ان",
+    "register": "رجسٹر"
+  },
+  "pss": {
+    "title": "ذاتی سیکیورٹی سسٹم",
+    "description": "اعلی درجے کی شناخت کی تصدیق اور دھوکہ دہی کی روک تھام کا پلیٹ فارم",
+    "dashboard": {
+      "title": "پی ایس ایس ڈیش بورڈ",
+      "subtitle": "پیشہ ورانہ سیکیورٹی خدمات کا انتظام",
+      "stats": {
+        "total": "کل درخواستیں",
+        "pending": "زیر التوا",
+        "approved": "منظور شدہ",
+        "rejected": "مسترد",
+        "highRisk": "اعلی خطرہ",
+        "verifiedUsers": "تصدیق شدہ صارفین",
+        "verificationRate": "تصدیق کی شرح",
+        "fraudPrevented": "دھوکہ دہی کے معاملات روکے گئے",
+        "systemUptime": "سسٹم اپ ٹائم"
+      },
+      "filters": {
+        "all": "سب",
+        "status": "حیثیت",
+        "role": "کردار",
+        "dateRange": "تاریخ کی حد"
+      },
+      "actions": {
+        "approve": "منظور کریں",
+        "reject": "مسترد کریں",
+        "review": "جائزہ لیں",
+        "export": "برآمد کریں"
+      }
+    },
+    "verification": {
+      "title": "شناخت کی تصدیق",
+      "subtitle": "اپنی تصدیق کا عمل مکمل کریں",
+      "steps": {
+        "role": "اپنا کردار منتخب کریں",
+        "personalInfo": "ذاتی معلومات",
+        "documents": "دستاویز اپ لوڈ",
+        "liveness": "زندگی کی جانچ",
+        "review": "جائزہ اور ادائیگی"
+      },
+      "roles": {
+        "patient": "مریض / صارف",
+        "doctor": "ڈاکٹر / پیشہ ور",
+        "business": "کاروبار / سروس فراہم کنندہ",
+        "franchise": "فرنچائز"
+      },
+      "form": {
+        "fullName": "پورا نام",
+        "contactNumber": "رابطہ نمبر",
+        "dateOfBirth": "تاریخ پیدائش",
+        "address": "پتہ",
+        "idCard": "قومی شناختی کارڈ",
+        "license": "پیشہ ورانہ لائسنس",
+        "selfie": "سیلفی / زندگی کی جانچ"
+      },
+      "validation": {
+        "required": "یہ فیلڈ درکار ہے",
+        "invalidEmail": "غلط ای میل پتہ",
+        "invalidPhone": "غلط فون نمبر",
+        "minLength": "کم از کم {length} حروف درکار ہیں",
+        "maxLength": "زیادہ سے زیادہ {length} حروف کی اجازت ہے",
+        "fileSize": "فائل کا سائز {size}MB سے کم ہونا چاہیے",
+        "fileType": "غلط فائل کی قسم"
+      }
+    },
+    "upload": {
+      "title": "دستاویز اپ لوڈ کریں",
+      "description": "اپنی تصدیق کے دستاویز اپ لوڈ کریں",
+      "dropZone": {
+        "title": "فائلیں یہاں ڈالیں",
+        "description": "یا براؤز کرنے کے لیے کلک کریں",
+        "supportedFormats": "مددگار فارمیٹس: تصاویر، پی ڈی ایف، ورڈ دستاویزات (زیادہ سے زیادہ {size}MB فی فائل)"
+      },
+      "progress": {
+        "uploading": "اپ لوڈ ہو رہا ہے...",
+        "paused": "روکا گیا",
+        "success": "اپ لوڈ مکمل",
+        "error": "اپ لوڈ ناکام",
+        "waiting": "اپ لوڈ کا انتظار..."
+      },
+      "preview": {
+        "title": "فائل کا پیش نظارہ",
+        "download": "ڈاؤن لوڈ",
+        "zoomIn": "بڑا کریں",
+        "zoomOut": "چھوٹا کریں",
+        "rotate": "گھمائیں",
+        "reset": "ری سیٹ"
+      }
+    },
+    "admin": {
+      "title": "پی ایس ایس ایڈمن ڈیش بورڈ",
+      "subtitle": "تمام آنے والی تصدیق کی درخواستوں کا جائزہ لیں اور انتظام کریں",
+      "stats": {
+        "pendingRequests": "زیر التوا درخواستیں",
+        "highRiskAlerts": "اعلی خطرہ کے انتباہات",
+        "approvedToday": "آج منظور شدہ",
+        "totalRequests": "کل درخواستیں"
+      },
+      "actions": {
+        "approve": "درخواست منظور کریں",
+        "reject": "درخواست مسترد کریں",
+        "addNotes": "نوٹس شامل کریں",
+        "viewDetails": "تفصیلات دیکھیں"
+      }
+    },
+    "status": {
+      "pending": "زیر التوا",
+      "approved": "منظور شدہ",
+      "rejected": "مسترد",
+      "inProgress": "جاری ہے"
+    },
+    "priority": {
+      "high": "اعلی",
+      "medium": "درمیانی",
+      "low": "کم"
+    },
+    "risk": {
+      "high": "اعلی خطرہ",
+      "medium": "درمیانی خطرہ",
+      "low": "کم خطرہ"
+    },
+    "notifications": {
+      "verificationComplete": "تصدیق کامیابی سے مکمل ہوئی",
+      "verificationRejected": "تصدیق کی درخواست مسترد کر دی گئی",
+      "fraudAlert": "دھوکہ دہی کا انتباہ دریافت ہوا",
+      "systemUpdate": "سسٹم اپ ڈیٹ دستیاب ہے"
+    },
+    "errors": {
+      "uploadFailed": "اپ لوڈ ناکام۔ دوبارہ کوشش کریں۔",
+      "networkError": "نیٹ ورک کی خرابی۔ اپنا کنکشن چیک کریں۔",
+      "validationError": "اپنا ان پٹ چیک کریں اور دوبارہ کوشش کریں۔",
+      "serverError": "سرور کی خرابی۔ بعد میں دوبارہ کوشش کریں۔"
+    }
+  }
+} 

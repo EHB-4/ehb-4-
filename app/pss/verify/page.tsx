@@ -32,6 +32,8 @@ import Link from 'next/link';
 import AIChatAssistant from '@/components/PSS/AIChatAssistant';
 import { submitVerificationRequest } from '@/lib/pss/api';
 import DocumentUpload from '@/components/PSS/DocumentUpload';
+import { useLanguage } from '@/contexts/LanguageContext';
+import { LanguageSwitcher } from '@/contexts/LanguageContext';
 
 const steps = [
   { id: '01', name: 'Select Your Role', fields: ['role'] },
@@ -90,6 +92,7 @@ interface FormData {
 }
 
 export default function VerificationPage() {
+  const { t } = useLanguage();
   const [currentStep, setCurrentStep] = useState(0);
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);

@@ -1,0 +1,171 @@
+{
+  "common": {
+    "loading": "Loading...",
+    "error": "Error",
+    "success": "Success",
+    "cancel": "Cancel",
+    "save": "Save",
+    "delete": "Delete",
+    "edit": "Edit",
+    "view": "View",
+    "close": "Close",
+    "back": "Back",
+    "next": "Next",
+    "previous": "Previous",
+    "submit": "Submit",
+    "upload": "Upload",
+    "download": "Download",
+    "search": "Search",
+    "filter": "Filter",
+    "refresh": "Refresh",
+    "settings": "Settings",
+    "profile": "Profile",
+    "logout": "Logout",
+    "login": "Login",
+    "register": "Register",
+    "connected": "Connected",
+    "disconnected": "Disconnected",
+    "overview": "Overview",
+    "analytics": "Analytics",
+    "actions": "Actions",
+    "submitted": "Submitted"
+  },
+  "pss": {
+    "title": "Personal Security System",
+    "description": "Advanced identity verification and fraud prevention platform",
+    "dashboard": {
+      "title": "PSS Dashboard",
+      "subtitle": "Professional Security Services Management",
+      "stats": {
+        "total": "Total Requests",
+        "pending": "Pending",
+        "approved": "Approved",
+        "rejected": "Rejected",
+        "highRisk": "High Risk",
+        "verifiedUsers": "Verified Users",
+        "verificationRate": "Verification Rate",
+        "fraudPrevented": "Fraud Cases Prevented",
+        "systemUptime": "System Uptime"
+      },
+      "filters": {
+        "all": "All",
+        "status": "Status",
+        "role": "Role",
+        "dateRange": "Date Range"
+      },
+      "actions": {
+        "approve": "Approve",
+        "reject": "Reject",
+        "review": "Review",
+        "export": "Export"
+      },
+      "requests": "Requests",
+      "analytics": {
+        "comingSoon": "Advanced analytics and reporting features will be implemented here."
+      }
+    },
+    "verification": {
+      "title": "Identity Verification",
+      "subtitle": "Complete your verification process",
+      "steps": {
+        "role": "Select Your Role",
+        "personalInfo": "Personal Information",
+        "documents": "Document Upload",
+        "liveness": "Liveness Check",
+        "review": "Review & Payment"
+      },
+      "roles": {
+        "patient": "Patient / User",
+        "doctor": "Doctor / Professional",
+        "business": "Business / Service Provider",
+        "franchise": "Franchise"
+      },
+      "form": {
+        "fullName": "Full Name",
+        "contactNumber": "Contact Number",
+        "dateOfBirth": "Date of Birth",
+        "address": "Address",
+        "idCard": "National ID Card",
+        "license": "Professional License",
+        "selfie": "Selfie / Liveness Check"
+      },
+      "validation": {
+        "required": "This field is required",
+        "invalidEmail": "Invalid email address",
+        "invalidPhone": "Invalid phone number",
+        "minLength": "Minimum {length} characters required",
+        "maxLength": "Maximum {length} characters allowed",
+        "fileSize": "File size must be less than {size}MB",
+        "fileType": "Invalid file type"
+      }
+    },
+    "upload": {
+      "title": "Upload Documents",
+      "description": "Upload your verification documents",
+      "dropZone": {
+        "title": "Drop files here",
+        "description": "or click to browse",
+        "supportedFormats": "Supported formats: Images, PDF, Word documents (Max {size}MB per file)"
+      },
+      "progress": {
+        "uploading": "Uploading...",
+        "paused": "Paused",
+        "success": "Upload complete",
+        "error": "Upload failed",
+        "waiting": "Waiting to upload..."
+      },
+      "preview": {
+        "title": "File Preview",
+        "download": "Download",
+        "zoomIn": "Zoom In",
+        "zoomOut": "Zoom Out",
+        "rotate": "Rotate",
+        "reset": "Reset"
+      }
+    },
+    "admin": {
+      "title": "PSS Admin Dashboard",
+      "subtitle": "Review and manage all incoming verification requests",
+      "stats": {
+        "pendingRequests": "Pending Requests",
+        "highRiskAlerts": "High Risk Alerts",
+        "approvedToday": "Approved Today",
+        "totalRequests": "Total Requests"
+      },
+      "actions": {
+        "approve": "Approve Request",
+        "reject": "Reject Request",
+        "addNotes": "Add Notes",
+        "viewDetails": "View Details"
+      }
+    },
+    "status": {
+      "pending": "Pending",
+      "approved": "Approved",
+      "rejected": "Rejected",
+      "inProgress": "In Progress"
+    },
+    "priority": {
+      "high": "High",
+      "medium": "Medium",
+      "low": "Low"
+    },
+    "risk": {
+      "high": "High Risk",
+      "medium": "Medium Risk",
+      "low": "Low Risk"
+    },
+    "notifications": {
+      "verificationComplete": "Verification completed successfully",
+      "verificationRejected": "Verification request rejected",
+      "fraudAlert": "Fraud alert detected",
+      "systemUpdate": "System update available"
+    },
+    "errors": {
+      "uploadFailed": "Upload failed. Please try again.",
+      "networkError": "Network error. Please check your connection.",
+      "validationError": "Please check your input and try again.",
+      "serverError": "Server error. Please try again later."
+    }
+  }
+} 

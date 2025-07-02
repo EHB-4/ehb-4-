@@ -425,7 +425,6 @@ const getPriorityColor = (priority: Service['priority']) => {
 export default function ServicesPage() {
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [selectedStatus, setSelectedStatus] = useState<string>('all');
-  const [searchQuery, setSearchQuery] = useState('');
 
   const categories = [
     { id: 'all', name: 'All Services', count: services.length },
@@ -475,11 +474,7 @@ export default function ServicesPage() {
   const filteredServices = services.filter(service => {
     const matchesCategory = selectedCategory === 'all' || service.category === selectedCategory;
     const matchesStatus = selectedStatus === 'all' || service.status === selectedStatus;
-    const matchesSearch =
-      service.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      service.description.toLowerCase().includes(searchQuery.toLowerCase());
-
-    return matchesCategory && matchesStatus && matchesSearch;
+    return matchesCategory && matchesStatus;
   });
 
   const stats = {
@@ -537,20 +532,6 @@ export default function ServicesPage() {
       <div className="bg-white border-b">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div className="flex flex-col md:flex-row gap-4">
-            {/* Search */}
-            <div className="flex-1">
-              <div className="relative">
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
-                <input
-                  type="text"
-                  placeholder="Search services..."
-                  value={searchQuery}
-                  onChange={e => setSearchQuery(e.target.value)}
-                  className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                />
-              </div>
-            </div>
-
             {/* Category Filter */}
             <div className="flex gap-2 overflow-x-auto">
               {categories.map(category => (

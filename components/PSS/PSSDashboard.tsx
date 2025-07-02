@@ -5,7 +5,7 @@
 import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
+import { Badge } from '@/components/ui/Badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Input } from '@/components/ui/input';
 import {
@@ -15,9 +15,11 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { Users, Clock, CheckCircle, XCircle, AlertTriangle, Search, Filter } from 'lucide-react';
+import { Users, Clock, CheckCircle, XCircle, AlertTriangle, Search, Filter, Download, Eye } from 'lucide-react';
 import { usePSSWebSocket } from '@/hooks/usePSSWebSocket';
 import { Alert, AlertDescription } from '@/components/ui/alert';
+import { useLanguage } from '@/contexts/LanguageContext';
+import { LanguageSwitcher } from '@/contexts/LanguageContext';
 
 interface VerificationRequest {
   id: string;
@@ -43,6 +45,7 @@ interface DashboardStats {
 }
 
 export default function PSSDashboard() {
+  const { t } = useLanguage();
   const [requests, setRequests] = useState<VerificationRequest[]>([]);
   const [stats, setStats] = useState<DashboardStats | null>(null);
   const [loading, setLoading] = useState(true);

@@ -3,6 +3,7 @@ import { Inter } from 'next/font/google';
 import './globals.css';
 import { Toaster } from 'sonner';
 import { ThemeProvider } from '@/components/providers/ThemeProvider';
+import { LanguageProvider } from '@/contexts/LanguageContext';
 import EHBNavigation from '@/components/layout/EHBNavigation';
 import SmartNavigation from '@/components/layout/SmartNavigation';
 import ServiceBreadcrumbs from '@/components/layout/SmartNavigation';
@@ -71,11 +72,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           enableSystem
           disableTransitionOnChange
         >
-          <EHBNavigation />
-          <SmartNavigation showAutoRedirect={true} />
-          <ServiceBreadcrumbs />
-          <ServiceAutoRedirect showNotification={true} autoRedirect={true} />
-          <main className="min-h-screen">{children}</main>
+          <LanguageProvider>
+            <EHBNavigation />
+            {/* <SmartNavigation showAutoRedirect={true} /> */}
+            {/* <ServiceBreadcrumbs /> */}
+            {/* <ServiceAutoRedirect showNotification={true} autoRedirect={true} /> */}
+            <main className="min-h-screen">{children}</main>
           <footer className="bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
               <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
@@ -171,6 +173,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             </div>
           </footer>
           <Toaster position="top-right" richColors closeButton duration={4000} />
+          </LanguageProvider>
         </ThemeProvider>
       </body>
     </html>
