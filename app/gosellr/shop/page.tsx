@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 'use client';
 
@@ -59,27 +59,221 @@ export default function ShopManagementPage() {
   }
 
   if (!shop) {
+    // Shop creation form
+    const [form, setForm] = React.useState({
+      name: '',
+      description: '',
+      category: '',
+      address: { street: '', city: '', state: '', zip: '' },
+      email: '',
+      phone: '',
+      logo: null as File | null,
+      banner: null as File | null,
+    });
+    const [formError, setFormError] = React.useState<string | null>(null);
+    const [formSuccess, setFormSuccess] = React.useState<string | null>(null);
+    const [submitting, setSubmitting] = React.useState(false);
+    const categories = [
+      'Electronics',
+      'Fashion',
+      'Home & Living',
+      'Beauty',
+      'Sports',
+      'Automotive',
+      'Other',
+    ];
+    const handleInput = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+      const { name, value } = e.target;
+      if (name.startsWith('address.')) {
+        setForm(f => ({ ...f, address: { ...f.address, [name.split('.')[1]]: value } }));
+      } else {
+        setForm(f => ({ ...f, [name]: value }));
+      }
+    };
+    const handleFile = (e: React.ChangeEvent<HTMLInputElement>) => {
+      const { name, files } = e.target;
+      if (files && files[0]) {
+        setForm(f => ({ ...f, [name]: files[0] }));
+      }
+    };
+    const handleSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
+      setForm(f => ({ ...f, category: e.target.value }));
+    };
+    const validate = () => {
+      if (!form.name.trim()) return 'Shop name is required.';
+      if (!form.email.trim() || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(form.email))
+        return 'Valid email is required.';
+      return null;
+    };
+    const handleSubmit = async (e: React.FormEvent) => {
+      e.preventDefault();
+      setFormError(null);
+      setFormSuccess(null);
+      const err = validate();
+      if (err) {
+        setFormError(err);
+        return;
+      }
+      setSubmitting(true);
+      // Simulate API call
+      setTimeout(() => {
+        setSubmitting(false);
+        setFormSuccess('Shop created successfully!');
+        setFormError(null);
+        setForm({
+          name: '',
+          description: '',
+          category: '',
+          address: { street: '', city: '', state: '', zip: '' },
+          email: '',
+          phone: '',
+          logo: null,
+          banner: null,
+        });
+      }, 1500);
+    };
     return (
-      <div className="max-w-4xl mx-auto p-6">
+      <div className="max-w-2xl mx-auto p-6">
         <h1 className="text-3xl font-bold mb-8">Create Your Shop</h1>
-        <motion.div
+        <motion.form
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="bg-white rounded-lg shadow-lg p-6"
+          className="bg-white rounded-lg shadow-lg p-6 space-y-6"
+          onSubmit={handleSubmit}
         >
-          <p className="text-gray-600 mb-6">
-            Start your business journey by creating your shop. You'll be able to add products and
-            start selling right away.
-          </p>
+          {formError && <div className="text-red-500 text-sm mb-2">{formError}</div>}
+          {formSuccess && <div className="text-green-600 text-sm mb-2">{formSuccess}</div>}
+          <div>
+            <label className="block text-sm font-medium mb-1">
+              Shop Name<span className="text-red-500">*</span>
+            </label>
+            <input
+              name="name"
+              value={form.name}
+              onChange={handleInput}
+              required
+              className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium mb-1">Description</label>
+            <textarea
+              name="description"
+              value={form.description}
+              onChange={handleInput}
+              rows={2}
+              className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium mb-1">Category</label>
+            <select
+              name="category"
+              value={form.category}
+              onChange={handleSelect}
+              className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
+            >
+              <option value="">Select category</option>
+              {categories.map(cat => (
+                <option key={cat} value={cat}>
+                  {cat}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label className="block text-sm font-medium mb-1">Street</label>
+              <input
+                name="address.street"
+                value={form.address.street}
+                onChange={handleInput}
+                className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium mb-1">City</label>
+              <input
+                name="address.city"
+                value={form.address.city}
+                onChange={handleInput}
+                className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium mb-1">State</label>
+              <input
+                name="address.state"
+                value={form.address.state}
+                onChange={handleInput}
+                className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium mb-1">Zip</label>
+              <input
+                name="address.zip"
+                value={form.address.zip}
+                onChange={handleInput}
+                className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
+              />
+            </div>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label className="block text-sm font-medium mb-1">
+                Contact Email<span className="text-red-500">*</span>
+              </label>
+              <input
+                name="email"
+                value={form.email}
+                onChange={handleInput}
+                type="email"
+                required
+                className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium mb-1">Contact Phone</label>
+              <input
+                name="phone"
+                value={form.phone}
+                onChange={handleInput}
+                type="tel"
+                className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
+              />
+            </div>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label className="block text-sm font-medium mb-1">Logo (optional)</label>
+              <input
+                name="logo"
+                type="file"
+                accept="image/*"
+                onChange={handleFile}
+                className="w-full"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium mb-1">Banner (optional)</label>
+              <input
+                name="banner"
+                type="file"
+                accept="image/*"
+                onChange={handleFile}
+                className="w-full"
+              />
+            </div>
+          </div>
           <button
-            onClick={() => {
-              /* TODO: Implement shop creation modal */
-            }}
-            className="bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600 transition-colors"
+            type="submit"
+            disabled={submitting}
+            className="w-full bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600 transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
           >
-            Create Shop
+            {submitting ? 'Creating Shop...' : 'Create Shop'}
           </button>
-        </motion.div>
+        </motion.form>
       </div>
     );
   }

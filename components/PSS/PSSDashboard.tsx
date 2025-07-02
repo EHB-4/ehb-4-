@@ -6,6 +6,7 @@ import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/Badge';
+import { Checkbox } from '@/components/ui/checkbox';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Input } from '@/components/ui/input';
 import {
@@ -20,6 +21,8 @@ import { usePSSWebSocket } from '@/hooks/usePSSWebSocket';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { LanguageSwitcher } from '@/contexts/LanguageContext';
+import AdvancedSearch from './AdvancedSearch';
+import BulkActions from './BulkActions';
 
 interface VerificationRequest {
   id: string;
@@ -36,6 +39,24 @@ interface VerificationRequest {
   updatedAt: string;
 }
 
+interface SearchFilters {
+  searchTerm: string;
+  status: string[];
+  role: string[];
+  priority: string[];
+  riskLevel: string[];
+  dateRange: {
+    from: Date | undefined;
+    to: Date | undefined;
+  };
+  hasDocuments: boolean;
+  hasNotes: boolean;
+  amountRange: {
+    min: number;
+    max: number;
+  };
+}
+
 interface DashboardStats {
   total: number;
   pending: number;
@@ -47,11 +68,27 @@ interface DashboardStats {
 export default function PSSDashboard() {
   const { t } = useLanguage();
   const [requests, setRequests] = useState<VerificationRequest[]>([]);
+  const [filteredRequests, setFilteredRequests] = useState<VerificationRequest[]>([]);
   const [stats, setStats] = useState<DashboardStats | null>(null);
   const [loading, setLoading] = useState(true);
-  const [searchTerm, setSearchTerm] = useState('');
-  const [statusFilter, setStatusFilter] = useState('all');
-  const [roleFilter, setRoleFilter] = useState('all');
+  const [searchFilters, setSearchFilters] = useState<SearchFilters>({
+    searchTerm: '',
+    status: [],
+    role: [],
+    priority: [],
+    riskLevel: [],
+    dateRange: {
+      from: undefined,
+      to: undefined
+    },
+    hasDocuments: false,
+    hasNotes: false,
+    amountRange: {
+      min: 0,
+      max: 10000
+    }
+  });
+  const [selectedItems, setSelectedItems] = useState<string[]>([]);
 
   // WebSocket for real-time updates
   const { isConnected, lastMessage, error: wsError } = usePSSWebSocket();
@@ -83,23 +120,170 @@ export default function PSSDashboard() {
     }
   };
 
-  // Fetch filtered requests
-  const fetchFilteredRequests = async () => {
+  // Apply advanced filters
+  const applyFilters = (requests: VerificationRequest[], filters: SearchFilters) => {
+    return requests.filter(request => {
+      // Search term filter
+      if (filters.searchTerm) {
+        const searchLower = filters.searchTerm.toLowerCase();
+        if (!request.fullName.toLowerCase().includes(searchLower) &&
+            !request.contactNumber.includes(searchLower) &&
+            !request.id.includes(searchLower)) {
+          return false;
+        }
+      }
+
+      // Status filter
+      if (filters.status.length > 0 && !filters.status.includes(request.status)) {
+        return false;
+      }
+
+      // Role filter
+      if (filters.role.length > 0 && !filters.role.includes(request.role)) {
+        return false;
+      }
+
+      // Risk level filter
+      if (filters.riskLevel.length > 0 && !filters.riskLevel.includes(request.risk)) {
+        return false;
+      }
+
+      // Date range filter
+      if (filters.dateRange.from || filters.dateRange.to) {
+        const requestDate = new Date(request.createdAt);
+        if (filters.dateRange.from && requestDate < filters.dateRange.from) {
+          return false;
+        }
+        if (filters.dateRange.to && requestDate > filters.dateRange.to) {
+          return false;
+        }
+      }
+
+      // Amount range filter
+      if (request.amount < filters.amountRange.min || request.amount > filters.amountRange.max) {
+        return false;
+      }
+
+      return true;
+    });
+  };
+
+  // Handle filter changes
+  const handleFiltersChange = (filters: SearchFilters) => {
+    setSearchFilters(filters);
+    const filtered = applyFilters(requests, filters);
+    setFilteredRequests(filtered);
+  };
+
+  // Handle export
+  const handleExport = async (format: 'csv' | 'excel' | 'pdf') => {
     try {
-      const params = new URLSearchParams();
-      if (searchTerm) params.append('search', searchTerm);
-      if (statusFilter !== 'all') params.append('status', statusFilter);
-      if (roleFilter !== 'all') params.append('role', roleFilter);
+      const data = filteredRequests.map(req => ({
+        ID: req.id,
+        Name: req.fullName,
+        Contact: req.contactNumber,
+        Role: req.role,
+        Status: req.status,
+        Risk: req.risk,
+        Amount: req.amount,
+        Created: new Date(req.createdAt).toLocaleDateString()
+      }));
 
-      const response = await fetch(`/api/pss/requests?${params}`);
-      const data = await response.json();
+      if (format === 'csv') {
+        const csvContent = [
+          Object.keys(data[0] || {}).join(','),
+          ...data.map(row => Object.values(row || {}).join(','))
+        ].join('\n');
 
-      if (data.success) {
-        setRequests(data.data);
+        const blob = new Blob([csvContent], { type: 'text/csv' });
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `pss-requests-${new Date().toISOString().split('T')[0]}.csv`;
+        a.click();
+        window.URL.revokeObjectURL(url);
+      } else if (format === 'excel') {
+        // Excel export logic would go here
+        console.log('Excel export:', data);
+      } else if (format === 'pdf') {
+        // PDF export logic would go here
+        console.log('PDF export:', data);
       }
     } catch (error) {
-      console.error('Error fetching filtered requests:', error);
+      console.error('Export error:', error);
     }
+  };
+
+  // Bulk actions handlers
+  const handleSelectAll = (checked: boolean) => {
+    if (checked) {
+      setSelectedItems(filteredRequests.map(req => req.id));
+    } else {
+      setSelectedItems([]);
+    }
+  };
+
+  const handleBulkApprove = async () => {
+    try {
+      for (const id of selectedItems) {
+        await updateRequestStatus(id, 'approved');
+      }
+      setSelectedItems([]);
+    } catch (error) {
+      console.error('Bulk approve error:', error);
+    }
+  };
+
+  const handleBulkReject = async () => {
+    try {
+      for (const id of selectedItems) {
+        await updateRequestStatus(id, 'rejected');
+      }
+      setSelectedItems([]);
+    } catch (error) {
+      console.error('Bulk reject error:', error);
+    }
+  };
+
+  const handleBulkExport = () => {
+    const selectedRequests = filteredRequests.filter(req => selectedItems.includes(req.id));
+    const data = selectedRequests.map(req => ({
+      ID: req.id,
+      Name: req.fullName,
+      Contact: req.contactNumber,
+      Role: req.role,
+      Status: req.status,
+      Risk: req.risk,
+      Amount: req.amount,
+      Created: new Date(req.createdAt).toLocaleDateString()
+    }));
+
+    const csvContent = [
+      Object.keys(data[0] || {}).join(','),
+      ...data.map(row => Object.values(row || {}).join(','))
+    ].join('\n');
+
+    const blob = new Blob([csvContent], { type: 'text/csv' });
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `pss-selected-requests-${new Date().toISOString().split('T')[0]}.csv`;
+    a.click();
+    window.URL.revokeObjectURL(url);
+  };
+
+  const handleBulkDelete = async () => {
+    try {
+      // In a real app, this would call the API to delete the requests
+      console.log('Deleting requests:', selectedItems);
+      setSelectedItems([]);
+    } catch (error) {
+      console.error('Bulk delete error:', error);
+    }
+  };
+
+  const handleViewSelected = () => {
+    console.log('Viewing selected requests:', selectedItems);
   };
 
   // Update request status
@@ -151,8 +335,9 @@ export default function PSSDashboard() {
   }, []);
 
   useEffect(() => {
-    fetchFilteredRequests();
-  }, [searchTerm, statusFilter, roleFilter]);
+    const filtered = applyFilters(requests, searchFilters);
+    setFilteredRequests(filtered);
+  }, [requests, searchFilters]);
 
   const getStatusBadge = (status: string) => {
     switch (status) {
@@ -306,61 +491,26 @@ export default function PSSDashboard() {
         </div>
       )}
 
-      {/* Filters */}
-      <Card>
-        <CardHeader>
-          <CardTitle>Filters</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="flex items-center space-x-2 mb-4">
-            <div className="relative flex-1">
-              <label htmlFor="pss-search" className="sr-only">
-                Search Applicants
-              </label>
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-              <Input
-                id="pss-search"
-                placeholder="Search by applicant..."
-                value={searchTerm}
-                onChange={e => setSearchTerm(e.target.value)}
-                className="pl-9"
-              />
-            </div>
-            <div>
-              <label htmlFor="pss-status-filter" className="sr-only">
-                Filter by status
-              </label>
-              <Select value={statusFilter} onValueChange={setStatusFilter}>
-                <SelectTrigger id="pss-status-filter" className="w-[180px]">
-                  <SelectValue placeholder="Filter by status" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="all">All Statuses</SelectItem>
-                  <SelectItem value="pending">Pending</SelectItem>
-                  <SelectItem value="approved">Approved</SelectItem>
-                  <SelectItem value="rejected">Rejected</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-            <div>
-              <label htmlFor="pss-role-filter" className="sr-only">
-                Filter by role
-              </label>
-              <Select value={roleFilter} onValueChange={setRoleFilter}>
-                <SelectTrigger id="pss-role-filter" className="w-[180px]">
-                  <SelectValue placeholder="Filter by role" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="all">All Roles</SelectItem>
-                  <SelectItem value="doctor">Doctor</SelectItem>
-                  <SelectItem value="franchise">Franchise</SelectItem>
-                  <SelectItem value="affiliate">Affiliate</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-          </div>
-        </CardContent>
-      </Card>
+      {/* Advanced Search */}
+      <AdvancedSearch
+        onFiltersChange={handleFiltersChange}
+        onExport={handleExport}
+        totalResults={filteredRequests.length}
+        loading={loading}
+      />
+
+      {/* Bulk Actions */}
+      <BulkActions
+        selectedItems={selectedItems}
+        totalItems={filteredRequests.length}
+        onSelectAll={handleSelectAll}
+        onBulkApprove={handleBulkApprove}
+        onBulkReject={handleBulkReject}
+        onBulkExport={handleBulkExport}
+        onBulkDelete={handleBulkDelete}
+        onViewSelected={handleViewSelected}
+        loading={loading}
+      />
 
       {/* Requests Table */}
       <Card>
@@ -372,6 +522,17 @@ export default function PSSDashboard() {
             <table className="w-full">
               <thead>
                 <tr className="border-b">
+                  <th className="text-left p-2 w-12">
+                    <Checkbox
+                      checked={selectedItems.length === filteredRequests.length && filteredRequests.length > 0}
+                      ref={(el: HTMLInputElement | null) => {
+                        if (el) {
+                          el.indeterminate = selectedItems.length > 0 && selectedItems.length < filteredRequests.length;
+                        }
+                      }}
+                      onCheckedChange={handleSelectAll}
+                    />
+                  </th>
                   <th className="text-left p-2">Applicant</th>
                   <th className="text-left p-2">Role</th>
                   <th className="text-left p-2">Status</th>
@@ -382,8 +543,20 @@ export default function PSSDashboard() {
                 </tr>
               </thead>
               <tbody>
-                {requests.map(request => (
+                {filteredRequests.map(request => (
                   <tr key={request.id} className="border-b hover:bg-gray-50">
+                    <td className="p-2">
+                      <Checkbox
+                        checked={selectedItems.includes(request.id)}
+                        onCheckedChange={(checked: boolean) => {
+                          if (checked) {
+                            setSelectedItems(prev => [...prev, request.id]);
+                          } else {
+                            setSelectedItems(prev => prev.filter(id => id !== request.id));
+                          }
+                        }}
+                      />
+                    </td>
                     <td className="p-2">
                       <div>
                         <div className="font-medium">{request.fullName}</div>
@@ -427,7 +600,7 @@ export default function PSSDashboard() {
               </tbody>
             </table>
 
-            {requests.length === 0 && (
+            {filteredRequests.length === 0 && (
               <div className="text-center py-8 text-gray-500">No verification requests found</div>
             )}
           </div>

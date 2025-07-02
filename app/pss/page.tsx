@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
+import { toast } from 'sonner';
 import {
   Shield,
   UserCheck,
@@ -24,8 +25,11 @@ import {
   Fingerprint,
   Camera,
   QrCode,
+  ArrowRight,
+  Star,
 } from 'lucide-react';
 
+// Roman Urdu: PSS verification ke liye interface
 interface VerificationItem {
   id: string;
   type: 'kyc' | 'document' | 'fraud' | 'trust';
@@ -36,54 +40,69 @@ interface VerificationItem {
   createdAt: string;
   updatedAt: string;
   score?: number;
+  sqlLevelRequired?: number; // SQL level requirement
 }
 
+// Roman Urdu: Mock data with SQL level integration
 const mockVerifications: VerificationItem[] = [
   {
     id: '1',
     type: 'kyc',
-    title: 'Identity Verification',
-    description: 'National ID card verification for John Doe',
+    title: 'Identity Verification (KYC)',
+    description: 'National ID card verification - Required for SQL Basic Level',
     status: 'approved',
     priority: 'high',
     createdAt: '2024-01-20T10:30:00Z',
     updatedAt: '2024-01-20T11:15:00Z',
     score: 95,
+    sqlLevelRequired: 1,
   },
   {
     id: '2',
     type: 'document',
     title: 'Address Verification',
-    description: 'Utility bill verification for residential address',
+    description: 'Utility bill verification - Required for SQL Normal Level',
     status: 'pending',
     priority: 'medium',
     createdAt: '2024-01-21T09:00:00Z',
     updatedAt: '2024-01-21T09:00:00Z',
     score: 75,
+    sqlLevelRequired: 2,
   },
   {
     id: '3',
     type: 'fraud',
-    title: 'Fraud Detection Alert',
-    description: 'Suspicious activity detected in account',
+    title: 'Fraud Detection Check',
+    description: 'Suspicious activity verification - Required for SQL High Level',
     status: 'in-progress',
     priority: 'high',
     createdAt: '2024-01-21T14:20:00Z',
     updatedAt: '2024-01-21T15:30:00Z',
     score: 30,
+    sqlLevelRequired: 3,
   },
   {
     id: '4',
     type: 'trust',
     title: 'Trust Score Assessment',
-    description: 'Comprehensive trust score evaluation',
+    description: 'Comprehensive trust evaluation - Required for SQL VIP Level',
     status: 'approved',
     priority: 'medium',
     createdAt: '2024-01-19T16:45:00Z',
     updatedAt: '2024-01-19T17:20:00Z',
     score: 88,
+    sqlLevelRequired: 4,
   },
 ];
+
+// Roman Urdu: SQL Level configuration
+const sqlLevelConfig = {
+  0: { name: 'Free', color: 'gray', description: 'No verification required' },
+  1: { name: 'Basic', color: 'blue', description: 'PSS (KYC + Documents) verified' },
+  2: { name: 'Normal', color: 'yellow', description: 'PSS + EDR (Skill Test) verified' },
+  3: { name: 'High', color: 'orange', description: 'Normal + EMO/Live Check verified' },
+  4: { name: 'VIP', color: 'green', description: 'Full chain + income/trust verified' },
+};
 
 const getStatusColor = (status: VerificationItem['status']) => {
   switch (status) {
@@ -149,7 +168,9 @@ export default function PSSPage() {
   const [selectedType, setSelectedType] = useState<string>('all');
   const [searchQuery, setSearchQuery] = useState('');
   const [showUploadModal, setShowUploadModal] = useState(false);
+  const [currentSQLLevel, setCurrentSQLLevel] = useState(1); // Mock current SQL level
 
+  // Roman Urdu: Statistics calculation
   const stats = {
     total: verifications.length,
     approved: verifications.filter(v => v.status === 'approved').length,
@@ -157,6 +178,9 @@ export default function PSSPage() {
     rejected: verifications.filter(v => v.status === 'rejected').length,
     inProgress: verifications.filter(v => v.status === 'in-progress').length,
   };
+
+  // Roman Urdu: PSS completion percentage for SQL upgrade
+  const pssCompletionPercentage = Math.round((stats.approved / stats.total) * 100);
 
   const filteredVerifications = verifications.filter(verification => {
     const matchesStatus = selectedStatus === 'all' || verification.status === selectedStatus;
@@ -168,13 +192,23 @@ export default function PSSPage() {
     return matchesStatus && matchesType && matchesSearch;
   });
 
+  // Roman Urdu: Document upload handler with notification
   const handleUploadDocument = () => {
     setShowUploadModal(true);
+    toast.info('Document upload modal khul gaya hai');
+  };
+
+  // Roman Urdu: Verification status update handler
+  const handleStatusUpdate = (id: string, newStatus: VerificationItem['status']) => {
+    setVerifications(prev => 
+      prev.map(v => v.id === id ? { ...v, status: newStatus } : v)
+    );
+    toast.success(`Verification status update ho gaya hai: ${newStatus}`);
   };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-50 to-indigo-100">
-      {/* Header */}
+      {/* Header with SQL Level Integration */}
       <div className="bg-white shadow-lg border-b">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center py-6">
@@ -185,16 +219,59 @@ export default function PSSPage() {
               <div>
                 <h1 className="text-3xl font-bold text-gray-900">PSS</h1>
                 <p className="text-purple-600 font-medium">Personal Security System</p>
+                <p className="text-sm text-gray-500">SQL Level {currentSQLLevel} - {sqlLevelConfig[currentSQLLevel as keyof typeof sqlLevelConfig]?.name}</p>
               </div>
             </div>
             <div className="flex items-center space-x-4">
               <div className="flex items-center space-x-2">
                 <Clock className="h-5 w-5 text-orange-500" />
-                <span className="text-orange-600 font-medium">75% Complete</span>
+                <span className="text-orange-600 font-medium">{pssCompletionPercentage}% Complete</span>
               </div>
               <div className="bg-orange-100 px-3 py-1 rounded-full">
-                <span className="text-orange-800 text-sm font-medium">In Progress</span>
+                <span className="text-orange-800 text-sm font-medium">SQL Upgrade Ready</span>
               </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* SQL Level Progress Section */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+        <div className="bg-white rounded-lg shadow-md p-6 mb-6">
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="text-xl font-semibold text-gray-900">SQL Level Progress</h2>
+            <Link href="/sql" className="flex items-center space-x-2 text-blue-600 hover:text-blue-700">
+              <span>View SQL Dashboard</span>
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="bg-blue-50 p-4 rounded-lg">
+              <div className="flex items-center space-x-2 mb-2">
+                <Star className="w-5 h-5 text-blue-600" />
+                <span className="font-medium text-blue-900">Current Level</span>
+              </div>
+              <p className="text-2xl font-bold text-blue-600">{sqlLevelConfig[currentSQLLevel as keyof typeof sqlLevelConfig]?.name}</p>
+              <p className="text-sm text-blue-700">{sqlLevelConfig[currentSQLLevel as keyof typeof sqlLevelConfig]?.description}</p>
+            </div>
+            
+            <div className="bg-green-50 p-4 rounded-lg">
+              <div className="flex items-center space-x-2 mb-2">
+                <CheckCircle className="w-5 h-5 text-green-600" />
+                <span className="font-medium text-green-900">PSS Completion</span>
+              </div>
+              <p className="text-2xl font-bold text-green-600">{pssCompletionPercentage}%</p>
+              <p className="text-sm text-green-700">{stats.approved} of {stats.total} verifications complete</p>
+            </div>
+            
+            <div className="bg-purple-50 p-4 rounded-lg">
+              <div className="flex items-center space-x-2 mb-2">
+                <ArrowRight className="w-5 h-5 text-purple-600" />
+                <span className="font-medium text-purple-900">Next Level</span>
+              </div>
+              <p className="text-2xl font-bold text-purple-600">{sqlLevelConfig[(currentSQLLevel + 1) as keyof typeof sqlLevelConfig]?.name || 'Max Level'}</p>
+              <p className="text-sm text-purple-700">Complete EDR for upgrade</p>
             </div>
           </div>
         </div>

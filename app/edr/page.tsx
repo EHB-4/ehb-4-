@@ -4,6 +4,8 @@
 
 import React, { useState, useMemo } from 'react';
 import { motion } from 'framer-motion';
+import { toast } from 'sonner';
+import Link from 'next/link';
 import {
   Search,
   Filter,
@@ -59,8 +61,8 @@ import {
   Monitor,
   Settings,
 } from 'lucide-react';
-import Link from 'next/link';
 
+// Roman Urdu: EDR skill testing ke liye interface
 interface Exam {
   id: string;
   title: string;
@@ -73,47 +75,65 @@ interface Exam {
   participants: number;
   passRate: number;
   aiGenerated: boolean;
+  sqlLevelRequired?: number; // SQL level requirement
+  sqlLevelUnlocked?: number; // SQL level unlocked after completion
 }
 
+// Roman Urdu: SQL Level configuration
+const sqlLevelConfig = {
+  0: { name: 'Free', color: 'gray', description: 'No verification required' },
+  1: { name: 'Basic', color: 'blue', description: 'PSS (KYC + Documents) verified' },
+  2: { name: 'Normal', color: 'yellow', description: 'PSS + EDR (Skill Test) verified' },
+  3: { name: 'High', color: 'orange', description: 'Normal + EMO/Live Check verified' },
+  4: { name: 'VIP', color: 'green', description: 'Full chain + income/trust verified' },
+};
+
+// Roman Urdu: Mock data with SQL level integration
 const mockExams: Exam[] = [
   {
     id: '1',
-    title: 'JavaScript Fundamentals Assessment',
-    description: 'Comprehensive evaluation of JavaScript programming skills',
+    title: 'Basic Skill Assessment (MCQ)',
+    description: 'Fundamental knowledge test - Required for SQL Normal Level',
     type: 'skill-assessment',
     status: 'active',
-    duration: 60,
-    questions: 25,
-    difficulty: 'intermediate',
+    duration: 30,
+    questions: 20,
+    difficulty: 'beginner',
     participants: 45,
     passRate: 78,
     aiGenerated: true,
+    sqlLevelRequired: 1,
+    sqlLevelUnlocked: 2,
   },
   {
     id: '2',
-    title: 'React Development Certification',
-    description: 'Advanced React.js development skills certification',
+    title: 'Advanced Skill Certification',
+    description: 'Professional skill evaluation - Required for SQL High Level',
     type: 'certification',
     status: 'active',
-    duration: 90,
+    duration: 60,
     questions: 40,
     difficulty: 'advanced',
     participants: 32,
     passRate: 65,
     aiGenerated: true,
+    sqlLevelRequired: 2,
+    sqlLevelUnlocked: 3,
   },
   {
     id: '3',
-    title: 'Data Science Proctored Exam',
-    description: 'Proctored examination for data science professionals',
+    title: 'Expert Level Proctored Exam',
+    description: 'Live proctored examination - Required for SQL VIP Level',
     type: 'proctored',
     status: 'active',
-    duration: 120,
+    duration: 90,
     questions: 50,
     difficulty: 'expert',
     participants: 18,
     passRate: 72,
     aiGenerated: false,
+    sqlLevelRequired: 3,
+    sqlLevelUnlocked: 4,
   },
 ];
 
@@ -163,21 +183,28 @@ const getTypeIcon = (type: Exam['type']) => {
 };
 
 /**
- * EDR Emergency Response System - Comprehensive emergency services platform
- * @returns {JSX.Element} The EDR emergency response system component
+ * EDR (Education & Development Records) - Skill Testing System
+ * SQL Level System ke sath integrated skill assessment platform
+ * @returns {JSX.Element} The EDR skill testing system component
  */
 export default function EDRPage() {
   const [exams, setExams] = useState<Exam[]>(mockExams);
   const [selectedStatus, setSelectedStatus] = useState<string>('all');
   const [selectedType, setSelectedType] = useState<string>('all');
   const [searchQuery, setSearchQuery] = useState('');
+  const [currentSQLLevel, setCurrentSQLLevel] = useState(1); // Mock current SQL level
 
+  // Roman Urdu: Statistics calculation
   const stats = {
     totalExams: exams.length,
     activeExams: exams.filter(e => e.status === 'active').length,
     totalParticipants: exams.reduce((sum, exam) => sum + exam.participants, 0),
     averagePassRate: Math.round(exams.reduce((sum, exam) => sum + exam.passRate, 0) / exams.length),
+    completedExams: exams.filter(e => e.status === 'completed').length,
   };
+
+  // Roman Urdu: EDR completion percentage for SQL upgrade
+  const edrCompletionPercentage = Math.round((stats.completedExams / stats.totalExams) * 100);
 
   const filteredExams = exams.filter(exam => {
     const matchesStatus = selectedStatus === 'all' || exam.status === selectedStatus;
@@ -189,9 +216,23 @@ export default function EDRPage() {
     return matchesStatus && matchesType && matchesSearch;
   });
 
+  // Roman Urdu: Exam start handler with notification
+  const handleStartExam = (examId: string) => {
+    toast.info('Exam start ho raha hai...');
+    // TODO: Navigate to exam interface
+  };
+
+  // Roman Urdu: Exam completion handler
+  const handleExamComplete = (examId: string) => {
+    setExams(prev => 
+      prev.map(e => e.id === examId ? { ...e, status: 'completed' as const } : e)
+    );
+    toast.success('Exam successfully complete ho gaya hai!');
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
-      {/* Header */}
+      {/* Header with SQL Level Integration */}
       <div className="bg-white shadow-lg border-b">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center py-6">
@@ -201,17 +242,60 @@ export default function EDRPage() {
               </div>
               <div>
                 <h1 className="text-3xl font-bold text-gray-900">EDR</h1>
-                <p className="text-blue-600 font-medium">Emergency Decision Registration</p>
+                <p className="text-blue-600 font-medium">Education & Development Records</p>
+                <p className="text-sm text-gray-500">SQL Level {currentSQLLevel} - {sqlLevelConfig[currentSQLLevel as keyof typeof sqlLevelConfig]?.name}</p>
               </div>
             </div>
             <div className="flex items-center space-x-4">
               <div className="flex items-center space-x-2">
-                <Clock className="h-5 w-5 text-orange-500" />
-                <span className="text-orange-600 font-medium">60% Complete</span>
+                <Clock className="h-5 w-5 text-blue-500" />
+                <span className="text-blue-600 font-medium">{edrCompletionPercentage}% Complete</span>
               </div>
-              <div className="bg-orange-100 px-3 py-1 rounded-full">
-                <span className="text-orange-800 text-sm font-medium">In Progress</span>
+              <div className="bg-blue-100 px-3 py-1 rounded-full">
+                <span className="text-blue-800 text-sm font-medium">Skill Testing</span>
               </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* SQL Level Progress Section */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+        <div className="bg-white rounded-lg shadow-md p-6 mb-6">
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="text-xl font-semibold text-gray-900">SQL Level Skill Requirements</h2>
+            <Link href="/sql" className="flex items-center space-x-2 text-blue-600 hover:text-blue-700">
+              <span>View SQL Dashboard</span>
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="bg-blue-50 p-4 rounded-lg">
+              <div className="flex items-center space-x-2 mb-2">
+                <Brain className="w-5 h-5 text-blue-600" />
+                <span className="font-medium text-blue-900">Current Level</span>
+              </div>
+              <p className="text-2xl font-bold text-blue-600">{sqlLevelConfig[currentSQLLevel as keyof typeof sqlLevelConfig]?.name}</p>
+              <p className="text-sm text-blue-700">{sqlLevelConfig[currentSQLLevel as keyof typeof sqlLevelConfig]?.description}</p>
+            </div>
+            
+            <div className="bg-green-50 p-4 rounded-lg">
+              <div className="flex items-center space-x-2 mb-2">
+                <CheckCircle className="w-5 h-5 text-green-600" />
+                <span className="font-medium text-green-900">EDR Completion</span>
+              </div>
+              <p className="text-2xl font-bold text-green-600">{edrCompletionPercentage}%</p>
+              <p className="text-sm text-green-700">{stats.completedExams} of {stats.totalExams} tests complete</p>
+            </div>
+            
+            <div className="bg-purple-50 p-4 rounded-lg">
+              <div className="flex items-center space-x-2 mb-2">
+                <ArrowRight className="w-5 h-5 text-purple-600" />
+                <span className="font-medium text-purple-900">Next Level</span>
+              </div>
+              <p className="text-2xl font-bold text-purple-600">{sqlLevelConfig[(currentSQLLevel + 1) as keyof typeof sqlLevelConfig]?.name || 'Max Level'}</p>
+              <p className="text-sm text-purple-700">Complete EMO for upgrade</p>
             </div>
           </div>
         </div>
@@ -545,12 +629,16 @@ export default function EDRPage() {
 
                   {/* Actions */}
                   <div className="flex space-x-2">
-                    <button className="flex-1 px-3 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm">
-                      Edit Exam
+                    <button
+                      className="flex-1 px-3 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm"
+                      onClick={() => handleStartExam(exam.id)}
+                    >
+                      Start Exam
                     </button>
                     <button
                       className="px-3 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors"
                       title="View Analytics"
+                      onClick={() => handleExamComplete(exam.id)}
                     >
                       <BarChart3 className="w-4 h-4" />
                     </button>
