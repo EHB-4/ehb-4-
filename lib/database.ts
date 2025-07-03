@@ -56,49 +56,48 @@ export const db = {
     },
   },
 
-  // Project operations
-  projects: {
+  // Product operations
+  products: {
     async create(data: any) {
-      return await prisma.project.create({ data });
+      return await prisma.product.create({ data });
     },
     async findById(id: string) {
-      return await prisma.project.findUnique({
+      return await prisma.product.findUnique({
         where: { id },
-        include: { milestones: true, risks: true },
+        include: { reviews: true },
       });
     },
     async update(id: string, data: any) {
-      return await prisma.project.update({ where: { id }, data });
+      return await prisma.product.update({ where: { id }, data });
     },
     async delete(id: string) {
-      return await prisma.project.delete({ where: { id } });
+      return await prisma.product.delete({ where: { id } });
     },
     async findAll() {
-      return await prisma.project.findMany({
-        include: { milestones: true, risks: true },
+      return await prisma.product.findMany({
+        include: { reviews: true },
       });
     },
-    async findByStatus(status: string) {
-      return await prisma.project.findMany({
-        where: { status },
-        include: { milestones: true, risks: true },
+    async findByCategory(category: string) {
+      return await prisma.product.findMany({
+        where: { category },
+        include: { reviews: true },
       });
     },
   },
 
   // Analytics operations
   analytics: {
-    async getProjectStats() {
-      const total = await prisma.project.count();
-      const active = await prisma.project.count({ where: { status: 'active' } });
-      const completed = await prisma.project.count({ where: { status: 'completed' } });
-      const delayed = await prisma.project.count({ where: { status: 'delayed' } });
+    async getProductStats() {
+      const total = await prisma.product.count();
+      const active = await prisma.product.count({ where: { isActive: true } });
+      const outOfStock = await prisma.product.count({ where: { stock: 0 } });
 
-      return { total, active, completed, delayed };
+      return { total, active, outOfStock };
     },
     async getUserStats() {
       const total = await prisma.user.count();
-      const active = await prisma.user.count({ where: { status: 'active' } });
+      const active = await prisma.user.count({ where: { role: 'USER' } });
       const newThisMonth = await prisma.user.count({
         where: {
           createdAt: {
@@ -111,44 +110,27 @@ export const db = {
     },
   },
 
-  // SLA operations
-  sla: {
+  // Order operations
+  orders: {
     async create(data: any) {
-      return await prisma.sLA.create({ data });
+      return await prisma.order.create({ data });
     },
     async findById(id: string) {
-      return await prisma.sLA.findUnique({ where: { id } });
+      return await prisma.order.findUnique({ 
+        where: { id },
+        include: { items: true, user: true }
+      });
     },
     async update(id: string, data: any) {
-      return await prisma.sLA.update({ where: { id }, data });
+      return await prisma.order.update({ where: { id }, data });
     },
     async delete(id: string) {
-      return await prisma.sLA.delete({ where: { id } });
+      return await prisma.order.delete({ where: { id } });
     },
     async findAll() {
-      return await prisma.sLA.findMany();
-    },
-  },
-
-  // AI Agent operations
-  aiAgents: {
-    async create(data: any) {
-      return await prisma.aIAgent.create({ data });
-    },
-    async findById(id: string) {
-      return await prisma.aIAgent.findUnique({ where: { id } });
-    },
-    async update(id: string, data: any) {
-      return await prisma.aIAgent.update({ where: { id }, data });
-    },
-    async delete(id: string) {
-      return await prisma.aIAgent.delete({ where: { id } });
-    },
-    async findAll() {
-      return await prisma.aIAgent.findMany();
-    },
-    async findByStatus(status: string) {
-      return await prisma.aIAgent.findMany({ where: { status } });
+      return await prisma.order.findMany({
+        include: { items: true, user: true }
+      });
     },
   },
 };

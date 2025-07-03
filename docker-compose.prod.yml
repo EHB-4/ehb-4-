@@ -1,42 +1,66 @@
 version: '3.8'
 
 services:
-  app:
-    build: .
+  gosellr-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
     ports:
-      - "3000:3000"
+      - '3000:3000'
     environment:
       - NODE_ENV=production
-      - DATABASE_URL=mongodb://mongodb:27017/ehb_database
+      - DATABASE_URL=${DATABASE_URL}
+      - NEXTAUTH_URL=${NEXTAUTH_URL}
+      - NEXTAUTH_SECRET=${NEXTAUTH_SECRET}
     depends_on:
-      - mongodb
+      - postgres
+      - redis
     restart: unless-stopped
+    networks:
+      - gosellr-network
 
-  mongodb:
-    image: mongo:latest
-    container_name: ehb-mongodb-prod
-    restart: always
+  postgres:
+    image: postgres:15-alpine
     environment:
-      MONGO_INITDB_ROOT_USERNAME: admin
-      MONGO_INITDB_ROOT_PASSWORD: ehb123456
-      MONGO_INITDB_DATABASE: ehb_database
+      - POSTGRES_DB=gosellr
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
     volumes:
-      - mongodb_data:/data/db
+      - postgres_data:/var/lib/postgresql/data
     ports:
-      - "27017:27017"
+      - '5432:5432'
+    restart: unless-stopped
+    networks:
+      - gosellr-network
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - '6379:6379'
+    volumes:
+      - redis_data:/data
+    restart: unless-stopped
+    networks:
+      - gosellr-network
 
   nginx:
     image: nginx:alpine
-    container_name: ehb-nginx
     ports:
-      - "80:80"
-      - "443:443"
+      - '80:80'
+      - '443:443'
     volumes:
-      - ./nginx.conf:/etc/nginx/nginx.conf
-      - ./ssl:/etc/nginx/ssl
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./nginx/ssl:/etc/nginx/ssl
     depends_on:
-      - app
+      - gosellr-app
     restart: unless-stopped
+    networks:
+      - gosellr-network
 
 volumes:
-  mongodb_data:
+  postgres_data:
+  redis_data:
+
+networks:
+  gosellr-network:
+    driver: bridge

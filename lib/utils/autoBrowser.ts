@@ -136,7 +136,7 @@ class AutoBrowserManager {
     try {
       // For Node.js environment, use child_process to open browser
       if (typeof window === 'undefined') {
-        const { exec } = require('child_process');
+        const { exec } = await import('child_process');
 
         let command = '';
         switch (this.config.defaultBrowser) {

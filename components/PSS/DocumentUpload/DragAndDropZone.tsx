@@ -150,7 +150,15 @@ export default function DragAndDropZone({
               className="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-800 rounded-lg"
             >
               <div className="flex items-center space-x-3">
-                {getFileIcon(file)}
+                {file.preview ? (
+                  <img 
+                    src={file.preview} 
+                    alt={`Preview of ${file.name}`}
+                    className="w-8 h-8 object-cover rounded"
+                  />
+                ) : (
+                  getFileIcon(file)
+                )}
                 <div className="flex-1 min-w-0">
                   <p className="text-sm font-medium text-gray-900 dark:text-white truncate">
                     {file.name}

@@ -19,35 +19,132 @@ model User {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
+  // SQL Level System
+  sqlLevel       Int       @default(0)
+  sqlStatus      SQLStatus @default(FREE)
+  sqlIssuedBy    String?
+  sqlVerifiedAt  DateTime?
+  sqlExpiryDate  DateTime?
+  aiScore        Int       @default(0)
+  fraudScore     Float     @default(0)
+  complaintCount Int       @default(0)
+  badgeNftHash   String?
+
   // Relations
-  orders     Order[]
-  reviews    Review[]
-  wishlist   Product[]
-  cart       CartItem[]
-  wallet     Wallet?
-  profile    Profile?
-  kyc        KYC?
-  
+  orders   Order[]
+  reviews  Review[]
+  wishlist Product[]
+  cart     CartItem[]
+  wallet   Wallet?
+  profile  Profile?
+  kyc      KYC?
+
+  // SQL Level Relations
+  sqlProfile      SQLProfile?
+  sqlHistory      SQLHistory[]
+  skillTests      SkillTest[]
+  coinLocks       CoinLock[]
+  upgradeRequests SQLUpgradeRequest[]
+
   // Franchise relationships
   franchiseApplications FranchiseApplication[]
   ownedFranchises       Franchise[]
-  
+
   @@map("users")
 }
 
+// SQL Level System Models
+model SQLProfile {
+  id           String   @id @default(cuid())
+  userId       String   @unique
+  level        Int      @default(0)
+  isActive     Boolean  @default(true)
+  benefits     String[]
+  restrictions String[]
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("sql_profiles")
+}
+
+model SQLHistory {
+  id             String   @id @default(cuid())
+  userId         String
+  oldLevel       Int
+  newLevel       Int
+  reason         String
+  aiScore        Int
+  blockchainHash String?
+  createdAt      DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("sql_history")
+}
+
+model SkillTest {
+  id        String        @id @default(cuid())
+  userId    String
+  testType  SkillTestType
+  score     Int
+  passed    Boolean
+  testData  Json?
+  createdAt DateTime      @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("skill_tests")
+}
+
+model CoinLock {
+  id        String         @id @default(cuid())
+  userId    String
+  amount    Float
+  duration  Int // months
+  startDate DateTime       @default(now())
+  endDate   DateTime
+  status    CoinLockStatus @default(ACTIVE)
+  createdAt DateTime       @default(now())
+  updatedAt DateTime       @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("coin_locks")
+}
+
+model SQLUpgradeRequest {
+  id         String               @id @default(cuid())
+  userId     String
+  fromLevel  Int
+  toLevel    Int
+  status     UpgradeRequestStatus @default(PENDING)
+  documents  Json?
+  notes      String?
+  reviewedBy String?
+  reviewedAt DateTime?
+  createdAt  DateTime             @default(now())
+  updatedAt  DateTime             @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("sql_upgrade_requests")
+}
+
 model Profile {
-  id          String  @id @default(cuid())
-  userId      String  @unique
-  avatar      String?
-  phone       String?
-  address     String?
-  city        String?
-  country     String?
-  postalCode  String?
-  bio         String?
-  
-  user        User    @relation(fields: [userId], references: [id], onDelete: Cascade)
-  
+  id         String  @id @default(cuid())
+  userId     String  @unique
+  avatar     String?
+  phone      String?
+  address    String?
+  city       String?
+  country    String?
+  postalCode String?
+  bio        String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
   @@map("profiles")
 }
 
@@ -64,11 +161,11 @@ model Product {
   updatedAt   DateTime @updatedAt
 
   // Relations
-  reviews     Review[]
-  cartItems   CartItem[]
-  wishlist    User[]
-  orders      OrderItem[]
-  
+  reviews   Review[]
+  cartItems CartItem[]
+  wishlist  User[]
+  orders    OrderItem[]
+
   @@map("products")
 }
 
@@ -81,9 +178,9 @@ model Order {
   updatedAt DateTime    @updatedAt
 
   // Relations
-  user      User        @relation(fields: [userId], references: [id])
-  items     OrderItem[]
-  
+  user  User        @relation(fields: [userId], references: [id])
+  items OrderItem[]
+
   @@map("orders")
 }
 
@@ -95,9 +192,9 @@ model OrderItem {
   price     Float
 
   // Relations
-  order     Order   @relation(fields: [orderId], references: [id], onDelete: Cascade)
-  product   Product @relation(fields: [productId], references: [id])
-  
+  order   Order   @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  product Product @relation(fields: [productId], references: [id])
+
   @@map("order_items")
 }
 
@@ -108,9 +205,9 @@ model CartItem {
   quantity  Int    @default(1)
 
   // Relations
-  user      User    @relation(fields: [userId], references: [id], onDelete: Cascade)
-  product   Product @relation(fields: [productId], references: [id], onDelete: Cascade)
-  
+  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+
   @@map("cart_items")
 }
 
@@ -123,75 +220,75 @@ model Review {
   createdAt DateTime @default(now())
 
   // Relations
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
-  
+  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+
   @@map("reviews")
 }
 
 model Wallet {
-  id      String  @id @default(cuid())
-  userId  String  @unique
-  balance Float   @default(0)
-  
-  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
-  
+  id      String @id @default(cuid())
+  userId  String @unique
+  balance Float  @default(0)
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
   @@map("wallets")
 }
 
 model KYC {
-  id          String   @id @default(cuid())
-  userId      String   @unique
-  status      KYCStatus @default(PENDING)
-  documents   String[]
-  verifiedAt  DateTime?
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-  
-  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  
+  id         String    @id @default(cuid())
+  userId     String    @unique
+  status     KYCStatus @default(PENDING)
+  documents  String[]
+  verifiedAt DateTime?
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
   @@map("kyc")
 }
 
 model Franchise {
   id           String   @id @default(cuid())
   name         String
-  category     String   // health, education, law, travel, books
-  level        String   // Corporate, Master, Sub
+  category     String // health, education, law, travel, books
+  level        String // Corporate, Master, Sub
   investment   Float
   description  String?
   requirements String[] // Array of requirements
-  roi          Float    // Return on Investment percentage
-  popularity   Int      // Popularity score (0-100)
+  roi          Float // Return on Investment percentage
+  popularity   Int // Popularity score (0-100)
   status       String   @default("ACTIVE") // ACTIVE, INACTIVE, SUSPENDED
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
 
   // Relationships
   ownerId      String?
-  owner        User?    @relation(fields: [ownerId], references: [id])
+  owner        User?                  @relation(fields: [ownerId], references: [id])
   applications FranchiseApplication[]
 
   @@map("franchises")
 }
 
 model FranchiseApplication {
-  id               String   @id @default(cuid())
-  franchiseId      String
-  userId           String
-  personalInfo     Json     // Personal information object
-  businessPlan     String?  // Business plan text
-  financialInfo    Json     // Financial information object
-  experience       String?  // Previous experience
-  investmentAmount Float
+  id                String    @id @default(cuid())
+  franchiseId       String
+  userId            String
+  personalInfo      Json // Personal information object
+  businessPlan      String? // Business plan text
+  financialInfo     Json // Financial information object
+  experience        String? // Previous experience
+  investmentAmount  Float
   preferredLocation String?
-  status           String   @default("PENDING") // PENDING, APPROVED, REJECTED, UNDER_REVIEW
-  submittedAt      DateTime @default(now())
-  reviewedAt       DateTime?
-  reviewedBy       String?
-  notes            String?  // Review notes
-  createdAt        DateTime @default(now())
-  updatedAt        DateTime @updatedAt
+  status            String    @default("PENDING") // PENDING, APPROVED, REJECTED, UNDER_REVIEW
+  submittedAt       DateTime  @default(now())
+  reviewedAt        DateTime?
+  reviewedBy        String?
+  notes             String? // Review notes
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
 
   // Relationships
   franchise Franchise @relation(fields: [franchiseId], references: [id])
@@ -200,10 +297,38 @@ model FranchiseApplication {
   @@map("franchise_applications")
 }
 
+// Enums
 enum Role {
   USER
   ADMIN
   FRANCHISE_OWNER
+}
+
+enum SQLStatus {
+  FREE
+  BASIC
+  NORMAL
+  HIGH
+  VIP
+}
+
+enum SkillTestType {
+  MCQ
+  PRACTICAL
+  VIDEO_INTERVIEW
+}
+
+enum CoinLockStatus {
+  ACTIVE
+  EXPIRED
+  CANCELLED
+}
+
+enum UpgradeRequestStatus {
+  PENDING
+  APPROVED
+  REJECTED
+  UNDER_REVIEW
 }
 
 enum OrderStatus {

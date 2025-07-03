@@ -23,8 +23,14 @@ import {
   FaCalendar,
   FaBrain,
 } from 'react-icons/fa';
+import { useEffect, useState } from 'react';
 
 export default function DevelopmentPortalPage() {
+  const [isClient, setIsClient] = useState(false);
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
   const services = [
     {
       icon: FaHome,
@@ -165,78 +171,84 @@ export default function DevelopmentPortalPage() {
       {/* Hero Section */}
       <div className="bg-gradient-to-r from-blue-600 to-indigo-700 text-white">
         <div className="max-w-7xl mx-auto px-4 py-16">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="text-center"
-          >
-            <div className="flex items-center justify-center space-x-3 mb-6">
-              <FaRocket className="w-12 h-12" />
-              <h1 className="text-5xl font-bold">EHB Development Portal</h1>
-            </div>
-            <p className="text-xl text-blue-100 max-w-3xl mx-auto mb-8">
-              Your gateway to world-class software development services. From concept to deployment,
-              we build solutions that drive success.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link
-                href="/development/contact"
-                className="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-blue-50 transition-colors"
-              >
-                Start Your Project
-              </Link>
-              <Link
-                href="/development/portfolio"
-                className="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-blue-600 transition-colors"
-              >
-                View Portfolio
-              </Link>
-            </div>
-          </motion.div>
+          {isClient && (
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="text-center"
+            >
+              <div className="flex items-center justify-center space-x-3 mb-6">
+                <FaRocket className="w-12 h-12" />
+                <h1 className="text-5xl font-bold">EHB Development Portal</h1>
+              </div>
+              <p className="text-xl text-blue-100 max-w-3xl mx-auto mb-8">
+                Your gateway to world-class software development services. From concept to deployment,
+                we build solutions that drive success.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <Link
+                  href="/development/contact"
+                  className="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-blue-50 transition-colors"
+                >
+                  Start Your Project
+                </Link>
+                <Link
+                  href="/development/portfolio"
+                  className="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-blue-600 transition-colors"
+                >
+                  View Portfolio
+                </Link>
+              </div>
+            </motion.div>
+          )}
         </div>
       </div>
 
       {/* Stats Section */}
       <div className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-            className="grid grid-cols-2 md:grid-cols-4 gap-8"
-          >
-            {stats.map(stat => (
-              <div key={stat.label} className="text-center">
-                <div className="flex justify-center mb-4">
-                  <stat.icon className="w-8 h-8 text-blue-600" />
+          {isClient && (
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
+              className="grid grid-cols-2 md:grid-cols-4 gap-8"
+            >
+              {stats.map((stat, index) => (
+                <div key={`${stat.label}-${index}`} className="text-center">
+                  <div className="flex justify-center mb-4">
+                    <stat.icon className="w-8 h-8 text-blue-600" />
+                  </div>
+                  <div className="text-3xl font-bold text-gray-900 mb-2">{stat.value}</div>
+                  <div className="text-gray-600">{stat.label}</div>
                 </div>
-                <div className="text-3xl font-bold text-gray-900 mb-2">{stat.value}</div>
-                <div className="text-gray-600">{stat.label}</div>
-              </div>
-            ))}
-          </motion.div>
+              ))}
+            </motion.div>
+          )}
         </div>
       </div>
 
       {/* Services Section */}
       <div className="py-16">
         <div className="max-w-7xl mx-auto px-4">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3 }}
-            className="text-center mb-12"
-          >
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">Our Services</h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Comprehensive development solutions tailored to your business needs
-            </p>
-          </motion.div>
+          {isClient && (
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3 }}
+              className="text-center mb-12"
+            >
+              <h2 className="text-4xl font-bold text-gray-900 mb-4">Our Services</h2>
+              <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+                Comprehensive development solutions tailored to your business needs
+              </p>
+            </motion.div>
+          )}
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {services.map((service, index) => (
+            {isClient && services.map((service, index) => (
               <motion.div
-                key={service.title}
+                key={`${service.title}-${index}`}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.1 * index }}
@@ -283,22 +295,24 @@ export default function DevelopmentPortalPage() {
       {/* Features Section */}
       <div className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4 }}
-            className="text-center mb-12"
-          >
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">Why Choose EHB Development?</h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              We deliver excellence through innovation, expertise, and dedication
-            </p>
-          </motion.div>
+          {isClient && (
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4 }}
+              className="text-center mb-12"
+            >
+              <h2 className="text-4xl font-bold text-gray-900 mb-4">Why Choose EHB Development?</h2>
+              <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+                We deliver excellence through innovation, expertise, and dedication
+              </p>
+            </motion.div>
+          )}
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {features.map((feature, index) => (
+            {isClient && features.map((feature, index) => (
               <motion.div
-                key={feature.title}
+                key={`${feature.title}-${index}`}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.1 * index }}
@@ -318,32 +332,34 @@ export default function DevelopmentPortalPage() {
       {/* CTA Section */}
       <div className="py-16 bg-gradient-to-r from-blue-600 to-indigo-700">
         <div className="max-w-4xl mx-auto px-4 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.5 }}
-          >
-            <h2 className="text-3xl font-bold text-white mb-4">
-              Ready to Build Something Amazing?
-            </h2>
-            <p className="text-xl text-blue-100 mb-8">
-              Let's discuss your project and turn your vision into reality
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link
-                href="/development/contact"
-                className="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-blue-50 transition-colors"
-              >
-                Get Started Today
-              </Link>
-              <Link
-                href="/development/consultation"
-                className="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-blue-600 transition-colors"
-              >
-                Free Consultation
-              </Link>
-            </div>
-          </motion.div>
+          {isClient && (
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.5 }}
+            >
+              <h2 className="text-3xl font-bold text-white mb-4">
+                Ready to Build Something Amazing?
+              </h2>
+              <p className="text-xl text-blue-100 mb-8">
+                Let's discuss your project and turn your vision into reality
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <Link
+                  href="/development/contact"
+                  className="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-blue-50 transition-colors"
+                >
+                  Get Started Today
+                </Link>
+                <Link
+                  href="/development/consultation"
+                  className="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-blue-600 transition-colors"
+                >
+                  Free Consultation
+                </Link>
+              </div>
+            </motion.div>
+          )}
         </div>
       </div>
 

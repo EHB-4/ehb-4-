@@ -4,7 +4,7 @@ import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
 // Mock database for franchise data
-let franchises = [
+const franchises = [
   {
     id: 'FR001',
     name: 'Ahmed Khan',

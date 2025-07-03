@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "npm-why": "^5.0.1"
+  },
+  "_npx": {
+    "packages": [
+      "npm-why"
+    ]
+  }
+}

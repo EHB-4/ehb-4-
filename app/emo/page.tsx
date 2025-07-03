@@ -4,6 +4,8 @@
 
 import React, { useState, useMemo } from 'react';
 import { motion } from 'framer-motion';
+import { toast } from 'sonner';
+import Link from 'next/link';
 import {
   Search,
   Filter,
@@ -47,8 +49,15 @@ import {
   Repeat,
   Shuffle,
   Pause,
+  Phone,
+  MessageCircle,
+  Calendar,
+  UserCheck,
+  Zap,
+  Activity,
+  Bell,
+  Award,
 } from 'lucide-react';
-import Link from 'next/link';
 import {
   UserGroupIcon,
   ChartBarIcon,
@@ -99,6 +108,28 @@ interface Department {
   budget: number;
   status: 'active' | 'inactive';
 }
+
+interface VerificationSession {
+  id: string;
+  title: string;
+  description: string;
+  type: 'video-call' | 'voice-call' | 'document-review' | 'live-interview';
+  status: 'scheduled' | 'in-progress' | 'completed' | 'cancelled';
+  priority: 'low' | 'medium' | 'high' | 'critical';
+  scheduledDate: string;
+  duration: number;
+  verifier: string;
+  sqlLevelRequired?: number;
+  sqlLevelUnlocked?: number;
+}
+
+const sqlLevelConfig = {
+  0: { name: 'Free', color: 'gray', description: 'No verification required' },
+  1: { name: 'Basic', color: 'blue', description: 'PSS (KYC + Documents) verified' },
+  2: { name: 'Normal', color: 'yellow', description: 'PSS + EDR (Skill Test) verified' },
+  3: { name: 'High', color: 'orange', description: 'Normal + EMO/Live Check verified' },
+  4: { name: 'VIP', color: 'green', description: 'Full chain + income/trust verified' },
+};
 
 const mockTeamMembers: TeamMember[] = [
   {
@@ -256,15 +287,62 @@ const mockDepartments: Department[] = [
   },
 ];
 
+const mockVerificationSessions: VerificationSession[] = [
+  {
+    id: '1',
+    title: 'Basic Identity Verification Call',
+    description: 'Video call verification - Required for SQL High Level',
+    type: 'video-call',
+    status: 'scheduled',
+    priority: 'high',
+    scheduledDate: '2024-01-25T10:00:00Z',
+    duration: 15,
+    verifier: 'Sarah Johnson',
+    sqlLevelRequired: 2,
+    sqlLevelUnlocked: 3,
+  },
+  {
+    id: '2',
+    title: 'Advanced Business Verification',
+    description: 'Document review and interview - Required for SQL VIP Level',
+    type: 'live-interview',
+    status: 'in-progress',
+    priority: 'critical',
+    scheduledDate: '2024-01-26T14:00:00Z',
+    duration: 30,
+    verifier: 'Michael Chen',
+    sqlLevelRequired: 3,
+    sqlLevelUnlocked: 4,
+  },
+  {
+    id: '3',
+    title: 'Voice Verification Session',
+    description: 'Voice-based identity verification',
+    type: 'voice-call',
+    status: 'completed',
+    priority: 'medium',
+    scheduledDate: '2024-01-24T09:00:00Z',
+    duration: 10,
+    verifier: 'Emily Rodriguez',
+    sqlLevelRequired: 2,
+    sqlLevelUnlocked: 3,
+  },
+];
+
 /**
- * EMO Entertainment Platform - Comprehensive entertainment system
- * @returns {JSX.Element} The EMO entertainment platform component
+ * EMO (Emotional & Mental Operations) - Live Verification System
+ * SQL Level System ke sath integrated live verification platform
+ * @returns {JSX.Element} The EMO live verification system component
  */
 export default function EMOPage() {
   const [activeTab, setActiveTab] = useState('overview');
   const [searchTerm, setSearchTerm] = useState('');
   const [statusFilter, setStatusFilter] = useState('all');
   const [departmentFilter, setDepartmentFilter] = useState('all');
+  const [verificationSessions, setVerificationSessions] = useState<VerificationSession[]>(mockVerificationSessions);
+  const [selectedStatus, setSelectedStatus] = useState<string>('all');
+  const [selectedType, setSelectedType] = useState<string>('all');
+  const [currentSQLLevel, setCurrentSQLLevel] = useState(2);
 
   const getStatusColor = (status: string) => {
     switch (status) {
@@ -299,53 +377,111 @@ export default function EMOPage() {
     }
   };
 
-  const filteredTeamMembers = mockTeamMembers.filter(member => {
+  const stats = {
+    totalSessions: verificationSessions.length,
+    completedSessions: verificationSessions.filter(v => v.status === 'completed').length,
+    scheduledSessions: verificationSessions.filter(v => v.status === 'scheduled').length,
+    inProgressSessions: verificationSessions.filter(v => v.status === 'in-progress').length,
+  };
+
+  const emoCompletionPercentage = Math.round((stats.completedSessions / stats.totalSessions) * 100);
+
+  const filteredSessions = verificationSessions.filter(session => {
+    const matchesStatus = selectedStatus === 'all' || session.status === selectedStatus;
+    const matchesType = selectedType === 'all' || session.type === selectedType;
     const matchesSearch =
-      member.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      member.role.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      member.department.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesStatus = statusFilter === 'all' || member.status === statusFilter;
-    const matchesDepartment = departmentFilter === 'all' || member.department === departmentFilter;
-    return matchesSearch && matchesStatus && matchesDepartment;
+      session.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      session.description.toLowerCase().includes(searchTerm.toLowerCase());
+
+    return matchesStatus && matchesType && matchesSearch;
   });
 
-  const filteredProjects = mockProjects.filter(project => {
-    const matchesSearch =
-      project.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      project.description.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesStatus = statusFilter === 'all' || project.status === statusFilter;
-    return matchesSearch && matchesStatus;
-  });
+  const handleStartSession = (sessionId: string) => {
+    toast.info('Live verification session start ho raha hai...');
+  };
 
-  const filteredDepartments = mockDepartments.filter(dept => {
-    const matchesSearch =
-      dept.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      dept.description.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesStatus = statusFilter === 'all' || dept.status === statusFilter;
-    return matchesSearch && matchesStatus;
-  });
+  const handleSessionComplete = (sessionId: string) => {
+    setVerificationSessions(prev => 
+      prev.map(s => s.id === sessionId ? { ...s, status: 'completed' as const } : s)
+    );
+    toast.success('Live verification successfully complete ho gaya hai!');
+  };
+
+  const handleSQLLevelUpgrade = () => {
+    if (emoCompletionPercentage >= 100) {
+      setCurrentSQLLevel(prev => Math.min(prev + 1, 4));
+      toast.success('SQL level upgrade ho gaya hai!');
+    } else {
+      toast.error('EMO completion 100% honi chahiye SQL level upgrade ke liye');
+    }
+  };
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      {/* Header */}
-      <div className="bg-white shadow">
+    <div className="min-h-screen bg-gradient-to-br from-green-50 to-emerald-100">
+      {/* Header with SQL Level Integration */}
+      <div className="bg-white shadow-lg border-b">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center py-6">
-            <div>
-              <h1 className="text-3xl font-bold text-gray-900">EHB Management Organization</h1>
-              <p className="mt-1 text-sm text-gray-500">
-                Manage teams, projects, and organizational structure
-              </p>
+            <div className="flex items-center space-x-3">
+              <div className="p-2 bg-green-500 rounded-lg">
+                <UserCheck className="h-8 w-8 text-white" />
+              </div>
+              <div>
+                <h1 className="text-3xl font-bold text-gray-900">EMO</h1>
+                <p className="text-green-600 font-medium">Emotional & Mental Operations</p>
+                <p className="text-sm text-gray-500">SQL Level {currentSQLLevel} - {sqlLevelConfig[currentSQLLevel as keyof typeof sqlLevelConfig]?.name}</p>
+              </div>
             </div>
-            <div className="flex space-x-3">
-              <button className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700">
-                <PlusIcon className="h-4 w-4 mr-2" />
-                Add Member
-              </button>
-              <button className="inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">
-                <CogIcon className="h-4 w-4 mr-2" />
-                Settings
-              </button>
+            <div className="flex items-center space-x-4">
+              <div className="flex items-center space-x-2">
+                <Clock className="h-5 w-5 text-green-500" />
+                <span className="text-green-600 font-medium">{emoCompletionPercentage}% Complete</span>
+              </div>
+              <div className="bg-green-100 px-3 py-1 rounded-full">
+                <span className="text-green-800 text-sm font-medium">Live Verification</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* SQL Level Progress Section */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+        <div className="bg-white rounded-lg shadow-md p-6 mb-6">
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="text-xl font-semibold text-gray-900">SQL Level Live Verification</h2>
+            <Link href="/sql" className="flex items-center space-x-2 text-green-600 hover:text-green-700">
+              <span>View SQL Dashboard</span>
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="bg-green-50 p-4 rounded-lg">
+              <div className="flex items-center space-x-2 mb-2">
+                <UserCheck className="w-5 h-5 text-green-600" />
+                <span className="font-medium text-green-900">Current Level</span>
+              </div>
+              <p className="text-2xl font-bold text-green-600">{sqlLevelConfig[currentSQLLevel as keyof typeof sqlLevelConfig]?.name}</p>
+              <p className="text-sm text-green-700">{sqlLevelConfig[currentSQLLevel as keyof typeof sqlLevelConfig]?.description}</p>
+            </div>
+            
+            <div className="bg-blue-50 p-4 rounded-lg">
+              <div className="flex items-center space-x-2 mb-2">
+                <CheckCircle className="w-5 h-5 text-blue-600" />
+                <span className="font-medium text-blue-900">EMO Completion</span>
+              </div>
+              <p className="text-2xl font-bold text-blue-600">{emoCompletionPercentage}%</p>
+              <p className="text-sm text-blue-700">{stats.completedSessions} of {stats.totalSessions} sessions complete</p>
+            </div>
+            
+            <div className="bg-purple-50 p-4 rounded-lg">
+              <div className="flex items-center space-x-2 mb-2">
+                <ArrowRight className="w-5 h-5 text-purple-600" />
+                <span className="font-medium text-purple-900">Next Level</span>
+              </div>
+              <p className="text-2xl font-bold text-purple-600">{sqlLevelConfig[(currentSQLLevel + 1) as keyof typeof sqlLevelConfig]?.name || 'Max Level'}</p>
+              <p className="text-sm text-purple-700">Complete all verifications for VIP</p>
             </div>
           </div>
         </div>
@@ -603,7 +739,7 @@ export default function EMOPage() {
                     </tr>
                   </thead>
                   <tbody className="bg-white divide-y divide-gray-200">
-                    {filteredTeamMembers.map(member => (
+                    {mockTeamMembers.map(member => (
                       <tr key={member.id} className="hover:bg-gray-50">
                         <td className="px-6 py-4 whitespace-nowrap">
                           <div className="flex items-center">
@@ -651,7 +787,7 @@ export default function EMOPage() {
 
             {activeTab === 'projects' && (
               <div className="space-y-6">
-                {filteredProjects.map(project => (
+                {mockProjects.map(project => (
                   <div key={project.id} className="bg-white border border-gray-200 rounded-lg p-6">
                     <div className="flex justify-between items-start mb-4">
                       <div>
@@ -727,7 +863,7 @@ export default function EMOPage() {
 
             {activeTab === 'departments' && (
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {filteredDepartments.map(dept => (
+                {mockDepartments.map(dept => (
                   <div key={dept.id} className="bg-white border border-gray-200 rounded-lg p-6">
                     <div className="flex justify-between items-start mb-4">
                       <div>

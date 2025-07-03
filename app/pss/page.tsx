@@ -27,7 +27,9 @@ import {
   QrCode,
   ArrowRight,
   Star,
+  Calendar,
 } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 // Roman Urdu: PSS verification ke liye interface
 interface VerificationItem {
@@ -198,12 +200,22 @@ export default function PSSPage() {
     toast.info('Document upload modal khul gaya hai');
   };
 
-  // Roman Urdu: Verification status update handler
+  // Roman Urdu: Status update handler
   const handleStatusUpdate = (id: string, newStatus: VerificationItem['status']) => {
-    setVerifications(prev => 
-      prev.map(v => v.id === id ? { ...v, status: newStatus } : v)
-    );
-    toast.success(`Verification status update ho gaya hai: ${newStatus}`);
+    setVerifications(prev => prev.map(v => 
+      v.id === id ? { ...v, status: newStatus, updatedAt: new Date().toISOString() } : v
+    ));
+    toast.success('Status update ho gaya hai!');
+  };
+
+  // Roman Urdu: SQL level upgrade handler
+  const handleSQLLevelUpgrade = () => {
+    if (pssCompletionPercentage >= 100) {
+      setCurrentSQLLevel(prev => Math.min(prev + 1, 4));
+      toast.success('SQL level upgrade ho gaya hai!');
+    } else {
+      toast.error('PSS completion 100% honi chahiye SQL level upgrade ke liye');
+    }
   };
 
   return (
@@ -224,11 +236,11 @@ export default function PSSPage() {
             </div>
             <div className="flex items-center space-x-4">
               <div className="flex items-center space-x-2">
-                <Clock className="h-5 w-5 text-orange-500" />
-                <span className="text-orange-600 font-medium">{pssCompletionPercentage}% Complete</span>
+                <CheckCircle className="h-5 w-5 text-green-500" />
+                <span className="text-green-600 font-medium">{pssCompletionPercentage}% Complete</span>
               </div>
-              <div className="bg-orange-100 px-3 py-1 rounded-full">
-                <span className="text-orange-800 text-sm font-medium">SQL Upgrade Ready</span>
+              <div className="bg-purple-100 px-3 py-1 rounded-full">
+                <span className="text-purple-800 text-sm font-medium">Active</span>
               </div>
             </div>
           </div>
@@ -280,405 +292,366 @@ export default function PSSPage() {
       {/* Main Content */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Hero Section */}
-        <div className="bg-white rounded-xl shadow-lg p-8 mb-8">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="bg-white rounded-xl shadow-lg p-8 mb-8"
+        >
           <div className="text-center">
             <h2 className="text-4xl font-bold text-gray-900 mb-4">
-              Identity Verification & Fraud Prevention System
+              Identity Verification & Security Management
             </h2>
             <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
-              Advanced personal security platform providing identity verification, KYC services, and
-              comprehensive fraud prevention measures to protect users and businesses.
+              Comprehensive KYC verification, document validation, fraud prevention, and trust scoring system.
+              SQL Level System ke sath integrated security platform.
             </p>
             <div className="flex justify-center space-x-4">
-              <div className="flex items-center space-x-2 text-orange-600">
-                <Clock className="h-5 w-5" />
-                <span>75% Complete</span>
-              </div>
-              <div className="flex items-center space-x-2 text-blue-600">
-                <TrendingUp className="h-5 w-5" />
-                <span>Port 4001</span>
+              <div className="flex items-center space-x-2 text-green-600">
+                <CheckCircle className="h-5 w-5" />
+                <span>{pssCompletionPercentage}% Complete</span>
               </div>
               <div className="flex items-center space-x-2 text-purple-600">
+                <Clock className="h-5 w-5" />
+                <span>Port 4001</span>
+              </div>
+              <div className="flex items-center space-x-2 text-blue-600">
                 <Shield className="h-5 w-5" />
                 <span>Security Team</span>
               </div>
             </div>
           </div>
-        </div>
+        </motion.div>
 
-        {/* Progress Bar */}
-        <div className="bg-white rounded-xl shadow-lg p-6 mb-8">
-          <div className="flex justify-between items-center mb-4">
-            <h3 className="text-xl font-bold text-gray-900">Development Progress</h3>
-            <span className="text-2xl font-bold text-purple-600">75%</span>
-          </div>
-          <div className="w-full bg-gray-200 rounded-full h-4">
-            <div className="bg-purple-600 h-4 rounded-full" style={{ width: '75%' }}></div>
-          </div>
-          <div className="mt-4 text-sm text-gray-600">
-            <div className="flex justify-between">
-              <span>✅ Identity Verification</span>
-              <span>✅ KYC Services</span>
-              <span>🔄 Fraud Prevention</span>
-              <span>⏳ Admin Panel</span>
+        {/* SQL Level Integration */}
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.1 }}
+          className="bg-white rounded-xl shadow-lg p-6 mb-8"
+        >
+          <div className="flex items-center justify-between mb-4">
+            <h3 className="text-xl font-bold text-gray-900">SQL Level Integration</h3>
+            <div className="flex items-center space-x-2">
+              <Shield className="h-5 w-5 text-purple-500" />
+              <span className="text-purple-600 font-medium">Current Level: {sqlLevelConfig[currentSQLLevel as keyof typeof sqlLevelConfig]?.name}</span>
             </div>
           </div>
-        </div>
-
-        {/* Features Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
-          <div className="bg-white rounded-lg shadow-md p-6">
-            <div className="flex items-center space-x-3 mb-4">
-              <div className="p-2 bg-purple-100 rounded-lg">
-                <UserCheck className="h-6 w-6 text-purple-600" />
-              </div>
-              <h3 className="text-lg font-semibold text-gray-900">Identity Verification</h3>
-            </div>
-            <p className="text-gray-600 mb-4">
-              Multi-factor identity verification with document validation and biometric checks.
-            </p>
-            <Link href="/pss/verify" className="text-purple-600 hover:text-purple-800 font-medium">
-              Verify Identity →
-            </Link>
-          </div>
-
-          <div className="bg-white rounded-lg shadow-md p-6">
-            <div className="flex items-center space-x-3 mb-4">
-              <div className="p-2 bg-blue-100 rounded-lg">
-                <FileText className="h-6 w-6 text-blue-600" />
-              </div>
-              <h3 className="text-lg font-semibold text-gray-900">KYC Services</h3>
-            </div>
-            <p className="text-gray-600 mb-4">
-              Know Your Customer verification with automated document processing and validation.
-            </p>
-            <Link href="/pss/kyc" className="text-blue-600 hover:text-blue-800 font-medium">
-              Complete KYC →
-            </Link>
-          </div>
-
-          <div className="bg-white rounded-lg shadow-md p-6">
-            <div className="flex items-center space-x-3 mb-4">
-              <div className="p-2 bg-green-100 rounded-lg">
-                <BarChart3 className="h-6 w-6 text-green-600" />
-              </div>
-              <h3 className="text-lg font-semibold text-gray-900">Trust Score</h3>
-            </div>
-            <p className="text-gray-600 mb-4">
-              AI-powered trust scoring system based on verification history and behavior analysis.
-            </p>
-            <Link
-              href="/pss/trust-score"
-              className="text-green-600 hover:text-green-800 font-medium"
-            >
-              Check Score →
-            </Link>
-          </div>
-
-          <div className="bg-white rounded-lg shadow-md p-6">
-            <div className="flex items-center space-x-3 mb-4">
-              <div className="p-2 bg-red-100 rounded-lg">
-                <AlertTriangle className="h-6 w-6 text-red-600" />
-              </div>
-              <h3 className="text-lg font-semibold text-gray-900">Fraud Prevention</h3>
-            </div>
-            <p className="text-gray-600 mb-4">
-              Advanced fraud detection algorithms and real-time threat monitoring system.
-            </p>
-            <Link
-              href="/pss/fraud-prevention"
-              className="text-red-600 hover:text-red-800 font-medium"
-            >
-              Learn More →
-            </Link>
-          </div>
-
-          <div className="bg-white rounded-lg shadow-md p-6">
-            <div className="flex items-center space-x-3 mb-4">
-              <div className="p-2 bg-orange-100 rounded-lg">
-                <Lock className="h-6 w-6 text-orange-600" />
-              </div>
-              <h3 className="text-lg font-semibold text-gray-900">Security Settings</h3>
-            </div>
-            <p className="text-gray-600 mb-4">
-              Configure security preferences, privacy settings, and access controls.
-            </p>
-            <Link
-              href="/pss/security"
-              className="text-orange-600 hover:text-orange-800 font-medium"
-            >
-              Security Settings →
-            </Link>
-          </div>
-
-          <div className="bg-white rounded-lg shadow-md p-6">
-            <div className="flex items-center space-x-3 mb-4">
-              <div className="p-2 bg-gray-100 rounded-lg">
-                <Settings className="h-6 w-6 text-gray-600" />
-              </div>
-              <h3 className="text-lg font-semibold text-gray-900">Admin Panel</h3>
-            </div>
-            <p className="text-gray-600 mb-4">
-              Administrative tools for managing verifications, monitoring system health, and
-              generating reports.
-            </p>
-            <Link href="/pss/admin" className="text-gray-600 hover:text-gray-800 font-medium">
-              Admin Access →
-            </Link>
-          </div>
-        </div>
-
-        {/* Quick Stats */}
-        <div className="bg-white rounded-xl shadow-lg p-6 mb-8">
-          <h3 className="text-2xl font-bold text-gray-900 mb-6">Security Statistics</h3>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            <div className="text-center">
-              <div className="text-3xl font-bold text-purple-600">45.2K</div>
-              <div className="text-gray-600">Verified Users</div>
-            </div>
-            <div className="text-center">
-              <div className="text-3xl font-bold text-blue-600">98.7%</div>
-              <div className="text-gray-600">Verification Rate</div>
-            </div>
-            <div className="text-center">
-              <div className="text-3xl font-bold text-green-600">1,247</div>
-              <div className="text-gray-600">Fraud Cases Prevented</div>
-            </div>
-            <div className="text-center">
-              <div className="text-3xl font-bold text-orange-600">99.9%</div>
-              <div className="text-gray-600">System Uptime</div>
-            </div>
-          </div>
-        </div>
-
-        {/* Navigation Links */}
-        <div className="bg-white rounded-xl shadow-lg p-6">
-          <h3 className="text-2xl font-bold text-gray-900 mb-6">Quick Navigation</h3>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <Link
-              href="/pss/verify"
-              className="p-4 bg-purple-50 rounded-lg hover:bg-purple-100 transition-colors"
-            >
-              <div className="text-purple-600 font-medium">Verify</div>
-            </Link>
-            <Link
-              href="/pss/kyc"
-              className="p-4 bg-blue-50 rounded-lg hover:bg-blue-100 transition-colors"
-            >
-              <div className="text-blue-600 font-medium">KYC</div>
-            </Link>
-            <Link
-              href="/pss/trust-score"
-              className="p-4 bg-green-50 rounded-lg hover:bg-green-100 transition-colors"
-            >
-              <div className="text-green-600 font-medium">Trust Score</div>
-            </Link>
-            <Link
-              href="/pss/admin"
-              className="p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors"
-            >
-              <div className="text-gray-600 font-medium">Admin</div>
-            </Link>
-          </div>
-        </div>
-
-        {/* Filters */}
-        <div className="bg-white border-b">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-            <div className="flex flex-col md:flex-row gap-4">
-              {/* Search */}
-              <div className="flex-1">
-                <div className="relative">
-                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
-                  <input
-                    type="text"
-                    placeholder="Search verifications..."
-                    value={searchQuery}
-                    onChange={e => setSearchQuery(e.target.value)}
-                    className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                  />
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+            {Object.entries(sqlLevelConfig).map(([level, config]) => (
+              <div 
+                key={level}
+                className={`p-4 rounded-lg border-2 ${
+                  parseInt(level) <= currentSQLLevel 
+                    ? 'border-green-500 bg-green-50' 
+                    : 'border-gray-200 bg-gray-50'
+                }`}
+              >
+                <div className="flex items-center justify-between mb-2">
+                  <span className={`font-semibold ${
+                    parseInt(level) <= currentSQLLevel ? 'text-green-700' : 'text-gray-500'
+                  }`}>
+                    {config.name}
+                  </span>
+                  {parseInt(level) <= currentSQLLevel && (
+                    <CheckCircle className="h-4 w-4 text-green-500" />
+                  )}
                 </div>
+                <p className={`text-sm ${
+                  parseInt(level) <= currentSQLLevel ? 'text-green-600' : 'text-gray-400'
+                }`}>
+                  {config.description}
+                </p>
               </div>
-
-              {/* Status Filter */}
-              <div className="flex gap-2">
-                {[
-                  { id: 'all', name: 'All Status', count: verifications.length },
-                  { id: 'approved', name: 'Approved', count: stats.approved },
-                  { id: 'pending', name: 'Pending', count: stats.pending },
-                  { id: 'rejected', name: 'Rejected', count: stats.rejected },
-                  { id: 'in-progress', name: 'In Progress', count: stats.inProgress },
-                ].map(status => (
-                  <button
-                    key={status.id}
-                    onClick={() => setSelectedStatus(status.id)}
-                    className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
-                      selectedStatus === status.id
-                        ? 'bg-blue-600 text-white'
-                        : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                    }`}
-                  >
-                    {status.name} ({status.count})
-                  </button>
-                ))}
-              </div>
-
-              {/* Type Filter */}
-              <div className="flex gap-2">
-                {[
-                  { id: 'all', name: 'All Types', count: verifications.length },
-                  {
-                    id: 'kyc',
-                    name: 'KYC',
-                    count: verifications.filter(v => v.type === 'kyc').length,
-                  },
-                  {
-                    id: 'document',
-                    name: 'Document',
-                    count: verifications.filter(v => v.type === 'document').length,
-                  },
-                  {
-                    id: 'fraud',
-                    name: 'Fraud',
-                    count: verifications.filter(v => v.type === 'fraud').length,
-                  },
-                  {
-                    id: 'trust',
-                    name: 'Trust',
-                    count: verifications.filter(v => v.type === 'trust').length,
-                  },
-                ].map(type => (
-                  <button
-                    key={type.id}
-                    onClick={() => setSelectedType(type.id)}
-                    className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
-                      selectedType === type.id
-                        ? 'bg-blue-600 text-white'
-                        : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                    }`}
-                  >
-                    {type.name} ({type.count})
-                  </button>
-                ))}
-              </div>
-            </div>
+            ))}
           </div>
-        </div>
-
-        {/* Verifications List */}
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          <div className="bg-white rounded-lg shadow">
-            <div className="px-6 py-4 border-b border-gray-200">
-              <h2 className="text-lg font-semibold text-gray-900">Verification Requests</h2>
-            </div>
-            <div className="divide-y divide-gray-200">
-              {filteredVerifications.map(verification => (
-                <div key={verification.id} className="p-6 hover:bg-gray-50 transition-colors">
-                  <div className="flex items-start justify-between">
-                    <div className="flex items-start space-x-4">
-                      <div className="p-2 bg-gray-100 rounded-lg">
-                        {getTypeIcon(verification.type)}
-                      </div>
-                      <div className="flex-1">
-                        <div className="flex items-center space-x-2 mb-2">
-                          <h3 className="text-lg font-medium text-gray-900">
-                            {verification.title}
-                          </h3>
-                          <span
-                            className={`px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(verification.status)}`}
-                          >
-                            {verification.status}
-                          </span>
-                          <span
-                            className={`px-2 py-1 rounded-full text-xs font-medium ${getPriorityColor(verification.priority)}`}
-                          >
-                            {verification.priority}
-                          </span>
-                        </div>
-                        <p className="text-gray-600 mb-2">{verification.description}</p>
-                        <div className="flex items-center space-x-4 text-sm text-gray-500">
-                          <span>
-                            Created: {new Date(verification.createdAt).toLocaleDateString()}
-                          </span>
-                          <span>
-                            Updated: {new Date(verification.updatedAt).toLocaleDateString()}
-                          </span>
-                          {verification.score && (
-                            <span className="font-medium text-blue-600">
-                              Score: {verification.score}%
-                            </span>
-                          )}
-                        </div>
-                      </div>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <button className="p-2 text-gray-400 hover:text-gray-600">
-                        <Eye className="w-4 h-4" />
-                      </button>
-                      <button className="p-2 text-gray-400 hover:text-gray-600">
-                        <Download className="w-4 h-4" />
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* No Results */}
-          {filteredVerifications.length === 0 && (
-            <div className="text-center py-12">
-              <Shield className="w-12 h-12 text-gray-400 mx-auto mb-4" />
-              <h3 className="text-lg font-medium text-gray-900 mb-2">No verifications found</h3>
-              <p className="text-gray-600">Try adjusting your search or filter criteria.</p>
+          {pssCompletionPercentage >= 100 && currentSQLLevel < 4 && (
+            <div className="mt-4 text-center">
+              <button
+                onClick={handleSQLLevelUpgrade}
+                className="bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700 transition-colors"
+              >
+                Upgrade SQL Level
+              </button>
             </div>
           )}
-        </div>
+        </motion.div>
 
-        {/* Upload Modal */}
-        {showUploadModal && (
-          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-            <div className="bg-white rounded-lg p-6 w-full max-w-md">
-              <h3 className="text-lg font-semibold text-gray-900 mb-4">Upload Document</h3>
-              <div className="space-y-4">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Document Type
-                  </label>
-                  <select className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-                    <option>National ID</option>
-                    <option>Passport</option>
-                    <option>Driver's License</option>
-                    <option>Utility Bill</option>
-                    <option>Bank Statement</option>
-                  </select>
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Upload File
-                  </label>
-                  <div className="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center">
-                    <Upload className="w-8 h-8 text-gray-400 mx-auto mb-2" />
-                    <p className="text-sm text-gray-600">Click to upload or drag and drop</p>
-                    <p className="text-xs text-gray-500 mt-1">PDF, JPG, PNG up to 10MB</p>
-                  </div>
-                </div>
-                <div className="flex space-x-3">
-                  <button
-                    onClick={() => setShowUploadModal(false)}
-                    className="flex-1 px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50"
-                  >
-                    Cancel
-                  </button>
-                  <button className="flex-1 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
-                    Upload
-                  </button>
-                </div>
+        {/* Statistics Cards */}
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2 }}
+          className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8"
+        >
+          <div className="bg-white rounded-lg shadow-md p-6">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-gray-600 text-sm font-medium">Total Verifications</p>
+                <p className="text-2xl font-bold text-gray-900">{stats.total}</p>
+              </div>
+              <div className="p-2 bg-blue-100 rounded-lg">
+                <Shield className="h-6 w-6 text-blue-600" />
               </div>
             </div>
           </div>
-        )}
+          <div className="bg-white rounded-lg shadow-md p-6">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-gray-600 text-sm font-medium">Approved</p>
+                <p className="text-2xl font-bold text-green-600">{stats.approved}</p>
+              </div>
+              <div className="p-2 bg-green-100 rounded-lg">
+                <CheckCircle className="h-6 w-6 text-green-600" />
+              </div>
+            </div>
+          </div>
+          <div className="bg-white rounded-lg shadow-md p-6">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-gray-600 text-sm font-medium">Pending</p>
+                <p className="text-2xl font-bold text-yellow-600">{stats.pending}</p>
+              </div>
+              <div className="p-2 bg-yellow-100 rounded-lg">
+                <Clock className="h-6 w-6 text-yellow-600" />
+              </div>
+            </div>
+          </div>
+          <div className="bg-white rounded-lg shadow-md p-6">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-gray-600 text-sm font-medium">In Progress</p>
+                <p className="text-2xl font-bold text-blue-600">{stats.inProgress}</p>
+              </div>
+              <div className="p-2 bg-blue-100 rounded-lg">
+                <BarChart3 className="h-6 w-6 text-blue-600" />
+              </div>
+            </div>
+          </div>
+        </motion.div>
+
+        {/* Filters and Search */}
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.3 }}
+          className="bg-white rounded-xl shadow-lg p-6 mb-8"
+        >
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-center space-y-4 md:space-y-0 md:space-x-4">
+            <div className="flex-1">
+              <div className="relative">
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
+                <input
+                  type="text"
+                  placeholder="Search verifications..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                />
+              </div>
+            </div>
+            <div className="flex space-x-4">
+              <select
+                value={selectedStatus}
+                onChange={(e) => setSelectedStatus(e.target.value)}
+                className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                aria-label="Filter by status"
+              >
+                <option value="all">All Status</option>
+                <option value="pending">Pending</option>
+                <option value="approved">Approved</option>
+                <option value="rejected">Rejected</option>
+                <option value="in-progress">In Progress</option>
+              </select>
+              <select
+                value={selectedType}
+                onChange={(e) => setSelectedType(e.target.value)}
+                className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                aria-label="Filter by type"
+              >
+                <option value="all">All Types</option>
+                <option value="kyc">KYC</option>
+                <option value="document">Document</option>
+                <option value="fraud">Fraud</option>
+                <option value="trust">Trust</option>
+              </select>
+              <button
+                onClick={handleUploadDocument}
+                className="bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition-colors flex items-center space-x-2"
+              >
+                <Upload className="h-4 w-4" />
+                <span>Upload Document</span>
+              </button>
+            </div>
+          </div>
+        </motion.div>
+
+        {/* Verifications List */}
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.4 }}
+          className="bg-white rounded-xl shadow-lg p-6"
+        >
+          <h3 className="text-2xl font-bold text-gray-900 mb-6">Verification Requests</h3>
+          
+          <div className="grid gap-6">
+            {filteredVerifications.map((verification) => (
+              <motion.div
+                key={verification.id}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="border border-gray-200 rounded-lg p-6 hover:shadow-md transition-shadow"
+              >
+                <div className="flex justify-between items-start mb-4">
+                  <div className="flex items-start space-x-4">
+                    <div className="p-2 bg-purple-100 rounded-lg">
+                      {getTypeIcon(verification.type)}
+                    </div>
+                    <div>
+                      <h4 className="text-xl font-semibold text-gray-900 mb-2">{verification.title}</h4>
+                      <p className="text-gray-600 mb-2">{verification.description}</p>
+                      <div className="flex items-center space-x-4 text-sm text-gray-500">
+                        <div className="flex items-center space-x-1">
+                          <Calendar className="h-4 w-4" />
+                          <span>Created: {new Date(verification.createdAt).toLocaleDateString()}</span>
+                        </div>
+                        <div className="flex items-center space-x-1">
+                          <Clock className="h-4 w-4" />
+                          <span>Updated: {new Date(verification.updatedAt).toLocaleDateString()}</span>
+                        </div>
+                        {verification.sqlLevelRequired && (
+                          <div className="flex items-center space-x-1">
+                            <Shield className="h-4 w-4" />
+                            <span>SQL Level {verification.sqlLevelRequired}+ required</span>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <span className={`px-3 py-1 rounded-full text-sm font-medium ${getStatusColor(verification.status)}`}>
+                      {verification.status}
+                    </span>
+                    <span className={`px-3 py-1 rounded-full text-sm font-medium ${getPriorityColor(verification.priority)}`}>
+                      {verification.priority}
+                    </span>
+                  </div>
+                </div>
+
+                {verification.score && (
+                  <div className="mb-4">
+                    <div className="flex items-center justify-between mb-2">
+                      <span className="text-sm font-medium text-gray-700">Verification Score</span>
+                      <span className="text-sm font-medium text-gray-900">{verification.score}%</span>
+                    </div>
+                    <div className="w-full bg-gray-200 rounded-full h-2">
+                      <div 
+                        className="bg-green-600 h-2 rounded-full transition-all duration-300"
+                        style={{ width: `${verification.score}%` }}
+                      ></div>
+                    </div>
+                  </div>
+                )}
+
+                <div className="flex justify-between items-center">
+                  <div className="flex space-x-2">
+                    {verification.status === 'pending' && (
+                      <>
+                        <button
+                          onClick={() => handleStatusUpdate(verification.id, 'approved')}
+                          className="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors"
+                        >
+                          Approve
+                        </button>
+                        <button
+                          onClick={() => handleStatusUpdate(verification.id, 'rejected')}
+                          className="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition-colors"
+                        >
+                          Reject
+                        </button>
+                      </>
+                    )}
+                    {verification.status === 'in-progress' && (
+                      <button
+                        onClick={() => handleStatusUpdate(verification.id, 'approved')}
+                        className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors"
+                      >
+                        Complete Review
+                      </button>
+                    )}
+                  </div>
+                  <div className="flex space-x-2">
+                    <button className="bg-gray-100 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-200 transition-colors">
+                      View Details
+                    </button>
+                    <button className="bg-purple-100 text-purple-700 px-4 py-2 rounded-lg hover:bg-purple-200 transition-colors">
+                      Edit
+                    </button>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+
+          {filteredVerifications.length === 0 && (
+            <div className="text-center py-12">
+              <Shield className="h-12 w-12 text-gray-400 mx-auto mb-4" />
+              <h3 className="text-lg font-medium text-gray-900 mb-2">No verifications found</h3>
+              <p className="text-gray-500">Try adjusting your search or filter criteria.</p>
+            </div>
+          )}
+        </motion.div>
       </div>
+
+      {/* Upload Modal */}
+      {showUploadModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white rounded-lg p-6 w-full max-w-md">
+            <h3 className="text-lg font-semibold text-gray-900 mb-4">Upload Document</h3>
+            <div className="space-y-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Document Type
+                </label>
+                <select className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+                  <option>National ID Card</option>
+                  <option>Passport</option>
+                  <option>Utility Bill</option>
+                  <option>Bank Statement</option>
+                  <option>Other</option>
+                </select>
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Upload File
+                </label>
+                <div className="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center">
+                  <Upload className="h-8 w-8 text-gray-400 mx-auto mb-2" />
+                  <p className="text-gray-600">Click to upload or drag and drop</p>
+                  <p className="text-sm text-gray-500">PDF, JPG, PNG up to 10MB</p>
+                </div>
+              </div>
+              <div className="flex space-x-3">
+                <button
+                  onClick={() => setShowUploadModal(false)}
+                  className="flex-1 bg-gray-100 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-200 transition-colors"
+                >
+                  Cancel
+                </button>
+                <button
+                  onClick={() => {
+                    setShowUploadModal(false);
+                    toast.success('Document upload ho gaya hai!');
+                  }}
+                  className="flex-1 bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition-colors"
+                >
+                  Upload
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
