@@ -1,6 +1,9 @@
 import mongoose from 'mongoose';
 import { ObjectId } from 'mongodb';
 import { Product } from './Product';
+import { connectDB } from '../dbConnect';
+
+(async () => { await connectDB(); })();
 
 const OrderSchema = new mongoose.Schema({
   userId: { type: String, required: true },

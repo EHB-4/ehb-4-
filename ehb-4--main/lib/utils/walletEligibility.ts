@@ -1,6 +1,7 @@
 import { Wallet } from '@/lib/models/Wallet';
 import dbConnect from '@/lib/mongodb';
 import Wallet from '@/lib/models/Wallet';
+import { connectDB } from '@/lib/dbConnect';
 
 export interface EligibilityCheck {
   isEligible: boolean;
@@ -107,3 +108,5 @@ export function checkSqlLevel(wallet: Wallet, requiredLevel: string): boolean {
   const requiredLevelIndex = levels.indexOf(requiredLevel);
   return walletLevelIndex >= requiredLevelIndex;
 }
+
+(async () => { await connectDB(); })();

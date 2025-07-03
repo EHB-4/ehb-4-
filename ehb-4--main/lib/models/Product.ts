@@ -1,4 +1,7 @@
 import mongoose from 'mongoose';
+import { connectDB } from '../dbConnect';
+
+(async () => { await connectDB(); })();
 
 const ProductSchema = new mongoose.Schema({
   name: String,
@@ -12,7 +15,7 @@ const ProductSchema = new mongoose.Schema({
 export default mongoose.models.Product || mongoose.model('Product', ProductSchema);
 
 export interface Product {
-  _id: string;
+  _id?: string;
   name: string;
   description: string;
   price: number;

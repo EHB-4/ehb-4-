@@ -1,5 +1,8 @@
 import mongoose from 'mongoose';
 import { ObjectId } from 'mongodb';
+import { connectDB } from '../dbConnect';
+
+(async () => { await connectDB(); })();
 
 const WalletSchema = new mongoose.Schema({
   userId: { type: String, required: true, unique: true },

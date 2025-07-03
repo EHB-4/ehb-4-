@@ -1,5 +1,4 @@
-import './globals.css'
-import { Providers } from "./providers/SessionProvider"
+import './globals.css';
 
 export const metadata = {
   title: 'EHB Technologies',
@@ -9,11 +8,7 @@ export const metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body>
-        <Providers>
-          {children}
-        </Providers>
-      </body>
+      <body>{children}</body>
     </html>
   );
-} 
+}
