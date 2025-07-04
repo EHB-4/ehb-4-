@@ -5,7 +5,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Search, X, Filter, TrendingUp, Clock, Star } from 'lucide-react';
-import { Badge } from '@/components/ui/Badge';
+import { Badge } from '@/components/ui/badge';
 
 /**
  * Enhanced Search Component with autocomplete and advanced filtering
