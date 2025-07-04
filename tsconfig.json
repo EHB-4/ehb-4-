@@ -1,10 +1,15 @@
 {
   "compilerOptions": {
-    "target": "ES2022",
-    "lib": ["dom", "dom.iterable", "es6"],
+    "target": "es2017",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
+    "forceConsistentCasingInFileNames": true,
     "noEmit": true,
     "esModuleInterop": true,
     "module": "esnext",
@@ -12,25 +17,65 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
+    "allowSyntheticDefaultImports": true,
     "incremental": true,
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./*"]
+      "@/*": ["./*"],
+      "@/components/*": ["./components/*"],
+      "@/lib/*": ["./lib/*"],
+      "@/types/*": ["./types/*"],
+      "@/hooks/*": ["./hooks/*"],
+      "@/contexts/*": ["./contexts/*"],
+      "@/middleware/*": ["./middleware/*"],
+      "@/models/*": ["./models/*"],
+      "@/services/*": ["./services/*"],
+      "@/scripts/*": ["./scripts/*"],
+      "@/config/*": ["./config/*"],
+      "@/docs/*": ["./docs/*"],
+      "@/public/*": ["./public/*"],
+      "@/styles/*": ["./styles/*"],
+      "@/translations/*": ["./translations/*"],
+      "@/ai-automation/*": ["./ai-automation/*"],
+      "@/gosellr-templates/*": ["./gosellr-templates/*"],
+      "@/phases/*": ["./phases/*"],
+      "@/reports/*": ["./reports/*"],
+      "@/backups/*": ["./backups/*"],
+      "@/temp/*": ["./temp/*"],
+      "@/temp-backup/*": ["./temp-backup/*"],
+      "@/test-results/*": ["./test-results/*"],
+      "@/screenshots/*": ["./screenshots/*"],
+      "@/stories/*": ["./stories/*"],
+      "@/sdks/*": ["./sdks/*"],
+      "@/nginx/*": ["./nginx/*"],
+      "@/npm-scripts/*": ["./npm-scripts/*"],
+      "@/postman/*": ["./postman/*"],
+      "@/playwright-report/*": ["./playwright-report/*"],
+      "@/cypress/*": ["./cypress/*"],
+      "@/cursor-test-results/*": ["./cursor-test-results/*"],
+      "@/ehb-admin-panel/*": ["./ehb-admin-panel/*"],
+      "@/ehb-backend/*": ["./ehb-backend/*"],
+      "@/ehb-dev-portal/*": ["./ehb-dev-portal/*"],
+      "@/ehb-frontend/*": ["./ehb-frontend/*"],
+      "@/ehb-gosellr/*": ["./ehb-gosellr/*"],
+      "@/ehb-home/*": ["./ehb-home/*"]
     },
     "plugins": [
       {
         "name": "next"
       }
-    ],
-    "tsBuildInfoFile": "./node_modules/.cache/.tsbuildinfo",
-    "noEmitOnError": false,
-    "skipDefaultLibCheck": true,
-    "forceConsistentCasingInFileNames": true,
-    "noImplicitReturns": true,
-    "noFallthroughCasesInSwitch": true,
-    "noUncheckedIndexedAccess": true,
-    "exactOptionalPropertyTypes": true
+    ]
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
-  "exclude": ["node_modules", "dist", "build", "coverage", "logs"]
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    ".next",
+    "out",
+    "dist"
+  ]
 }

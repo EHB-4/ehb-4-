@@ -1,572 +1,491 @@
+"use client";
+
 /**
- * SOT Marketplace Page
- *
- * Main marketplace for AI tools, services, and developers
- *
+ * SOT Marketplace - Enhanced Version
+ * 
+ * Real-time marketplace with products, AI agents, and services
+ * Integrated with EHBMainAgent for live status updates
+ * 
  * @author EHB AI System
- * @version 1.0.0
+ * @version 2.0.0
  */
 
 import React, { useState, useEffect } from 'react';
-import Link from 'next/link';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select';
-import { Progress } from '@/components/ui/progress';
 import {
   Search,
   Filter,
-  Plus,
   Star,
-  Clock,
-  Users,
-  TrendingUp,
-  Shield,
-  Code,
-  MessageSquare,
-  Calendar,
-  AlertTriangle,
-  Globe,
-  Brain,
-  Zap,
-  ArrowRight,
-  Download,
-  Eye,
+  ShoppingCart,
   Heart,
-  Share2,
+  Eye,
+  Download,
+  Play,
+  Pause,
+  RefreshCw,
+  Brain,
+  Code,
+  Shield,
+  Globe,
+  Smartphone,
+  Database,
+  Server,
+  Lock,
+  Activity,
+  CheckCircle2,
+  XCircle,
+  AlertCircle,
+  Clock,
+  TrendingUp,
+  Users,
+  Zap,
+  Settings,
+  BarChart3,
+  MessageSquare,
+  Star as StarIcon
 } from 'lucide-react';
+import { ehbMainAgent, AgentStatus } from '@/lib/ai/EHBMainAgent';
 
-interface Tool {
+interface MarketplaceItem {
   id: string;
   name: string;
   description: string;
-  category: string;
-  developer: {
-    id: string;
-    name: string;
-    sqlLevel: 'Free' | 'Basic' | 'Normal' | 'High' | 'VIP';
-    rating: number;
-  };
+  category: 'ai-agent' | 'service' | 'product' | 'template';
   price: number;
+  currency: string;
   rating: number;
-  downloads: number;
+  reviews: number;
+  status: 'available' | 'in-use' | 'maintenance';
+  agentId?: string;
+  features: string[];
   tags: string[];
-  sqlRequired: 'Free' | 'Basic' | 'Normal' | 'High' | 'VIP';
-  verified: boolean;
-  aiPowered: boolean;
-  featured: boolean;
+  image?: string;
+  downloads?: number;
+  lastUpdated: Date;
 }
 
-interface Task {
-  id: string;
-  title: string;
-  description: string;
-  category: string;
-  budget: number;
-  deadline: Date;
-  status: 'open' | 'in_progress' | 'completed' | 'cancelled';
-  assignedDeveloper?: {
-    id: string;
-    name: string;
-    sqlLevel: string;
-  };
-  applicants: number;
-  complexity: 'basic' | 'intermediate' | 'advanced' | 'expert';
-}
-
-interface Developer {
-  id: string;
-  name: string;
-  email: string;
-  sqlLevel: 'Free' | 'Basic' | 'Normal' | 'High' | 'VIP';
-  rating: number;
-  completedTasks: number;
-  skills: string[];
-  hourlyRate: number;
-  availability: boolean;
-  verified: boolean;
-  location: string;
-  featured: boolean;
-}
-
-export default function SOTMarketplacePage() {
-  const [activeTab, setActiveTab] = useState('tools');
+export default function SOTMarketplace() {
   const [searchQuery, setSearchQuery] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState('all');
-  const [selectedSQL, setSelectedSQL] = useState('all');
-  const [tools, setTools] = useState<Tool[]>([]);
-  const [tasks, setTasks] = useState<Task[]>([]);
-  const [developers, setDevelopers] = useState<Developer[]>([]);
-  const [loading, setLoading] = useState(false);
-  const [userSQL, setUserSQL] = useState<'Free' | 'Basic' | 'Normal' | 'High' | 'VIP'>('Normal');
+  const [selectedCategory, setSelectedCategory] = useState<string>('all');
+  const [selectedStatus, setSelectedStatus] = useState<string>('all');
+  const [sortBy, setSortBy] = useState<string>('name');
+  const [activeTab, setActiveTab] = useState('all');
+  const [agentsStatus, setAgentsStatus] = useState<AgentStatus[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
 
-  // Mock data - in real implementation, this would come from API
+  // Mock marketplace data
+  const [marketplaceItems] = useState<MarketplaceItem[]>([
+    {
+      id: 'monitoring-agent',
+      name: 'EHB Monitoring Agent',
+      description: 'Advanced 24/7 system monitoring with real-time alerts and performance optimization',
+      category: 'ai-agent',
+      price: 99.99,
+      currency: 'USD',
+      rating: 4.8,
+      reviews: 156,
+      status: 'available',
+      agentId: 'monitoring',
+      features: ['Real-time monitoring', 'Performance alerts', 'Auto-scaling', 'Health checks'],
+      tags: ['monitoring', 'performance', 'automation'],
+      downloads: 1247,
+      lastUpdated: new Date('2024-01-15')
+    },
+    {
+      id: 'deployment-agent',
+      name: 'EHB Deployment Agent',
+      description: 'Automated CI/CD pipeline management with rollback capabilities',
+      category: 'ai-agent',
+      price: 149.99,
+      currency: 'USD',
+      rating: 4.9,
+      reviews: 89,
+      status: 'available',
+      agentId: 'deployment',
+      features: ['Auto-deployment', 'Rollback support', 'Environment management', 'Version control'],
+      tags: ['deployment', 'ci-cd', 'automation'],
+      downloads: 892,
+      lastUpdated: new Date('2024-01-10')
+    },
+    {
+      id: 'fixer-agent',
+      name: 'EHB Fixer Agent',
+      description: 'Intelligent bug detection and automatic code fixing',
+      category: 'ai-agent',
+      price: 199.99,
+      currency: 'USD',
+      rating: 4.7,
+      reviews: 203,
+      status: 'available',
+      agentId: 'fixer',
+      features: ['Bug detection', 'Auto-fixing', 'Code optimization', 'Security scanning'],
+      tags: ['bug-fixing', 'optimization', 'security'],
+      downloads: 1567,
+      lastUpdated: new Date('2024-01-12')
+    },
+    {
+      id: 'franchise-agent',
+      name: 'EHB Franchise Agent',
+      description: 'Comprehensive franchise management and expansion analysis',
+      category: 'ai-agent',
+      price: 299.99,
+      currency: 'USD',
+      rating: 4.6,
+      reviews: 67,
+      status: 'available',
+      agentId: 'franchise',
+      features: ['Location analysis', 'Growth planning', 'Market research', 'Performance tracking'],
+      tags: ['franchise', 'business', 'analytics'],
+      downloads: 445,
+      lastUpdated: new Date('2024-01-08')
+    },
+    {
+      id: 'seo-agent',
+      name: 'EHB SEO Agent',
+      description: 'Advanced SEO optimization and content management',
+      category: 'ai-agent',
+      price: 179.99,
+      currency: 'USD',
+      rating: 4.8,
+      reviews: 134,
+      status: 'available',
+      agentId: 'seo',
+      features: ['Keyword research', 'Content optimization', 'Ranking tracking', 'Competitor analysis'],
+      tags: ['seo', 'marketing', 'content'],
+      downloads: 1123,
+      lastUpdated: new Date('2024-01-14')
+    },
+    {
+      id: 'development-agent',
+      name: 'EHB AI DEV Agent',
+      description: 'Real-time coding assistant with project management',
+      category: 'ai-agent',
+      price: 399.99,
+      currency: 'USD',
+      rating: 4.9,
+      reviews: 278,
+      status: 'available',
+      agentId: 'development',
+      features: ['Real-time coding', 'Project management', 'Code review', 'Testing automation'],
+      tags: ['development', 'coding', 'project-management'],
+      downloads: 2034,
+      lastUpdated: new Date('2024-01-16')
+    },
+    {
+      id: 'web-template',
+      name: 'Modern Web Template',
+      description: 'Responsive web template with modern UI/UX design',
+      category: 'template',
+      price: 49.99,
+      currency: 'USD',
+      rating: 4.5,
+      reviews: 89,
+      status: 'available',
+      features: ['Responsive design', 'Modern UI', 'SEO optimized', 'Fast loading'],
+      tags: ['template', 'web', 'ui-ux'],
+      downloads: 567,
+      lastUpdated: new Date('2024-01-05')
+    },
+    {
+      id: 'api-service',
+      name: 'EHB API Service',
+      description: 'High-performance API service with authentication and rate limiting',
+      category: 'service',
+      price: 79.99,
+      currency: 'USD',
+      rating: 4.7,
+      reviews: 112,
+      status: 'available',
+      features: ['Authentication', 'Rate limiting', 'Documentation', 'Analytics'],
+      tags: ['api', 'service', 'backend'],
+      downloads: 789,
+      lastUpdated: new Date('2024-01-11')
+    }
+  ]);
+
+  // Load agent status
   useEffect(() => {
-    setTools([
-      {
-        id: 'tool_1',
-        name: 'AI Resume Builder',
-        description: 'Intelligent resume builder with AI-powered suggestions and templates',
-        category: 'productivity',
-        developer: {
-          id: 'dev_1',
-          name: 'Ahmed Khan',
-          sqlLevel: 'High',
-          rating: 4.8,
-        },
-        price: 25,
-        rating: 4.7,
-        downloads: 1250,
-        tags: ['AI', 'Resume', 'Productivity'],
-        sqlRequired: 'Basic',
-        verified: true,
-        aiPowered: true,
-        featured: true,
-      },
-      {
-        id: 'tool_2',
-        name: 'Voice-to-Text Converter',
-        description: 'Advanced speech recognition tool with multi-language support',
-        category: 'ai',
-        developer: {
-          id: 'dev_2',
-          name: 'Sarah Chen',
-          sqlLevel: 'VIP',
-          rating: 4.9,
-        },
-        price: 50,
-        rating: 4.8,
-        downloads: 890,
-        tags: ['Voice', 'AI', 'Translation'],
-        sqlRequired: 'Normal',
-        verified: true,
-        aiPowered: true,
-        featured: false,
-      },
-      {
-        id: 'tool_3',
-        name: 'Code Quality Analyzer',
-        description: 'Automated code review and quality assessment tool',
-        category: 'development',
-        developer: {
-          id: 'dev_3',
-          name: 'Muhammad Ali',
-          sqlLevel: 'High',
-          rating: 4.6,
-        },
-        price: 75,
-        rating: 4.5,
-        downloads: 567,
-        tags: ['Code', 'Quality', 'Review'],
-        sqlRequired: 'Normal',
-        verified: true,
-        aiPowered: true,
-        featured: true,
-      },
-    ]);
-
-    setTasks([
-      {
-        id: 'task_1',
-        title: 'E-commerce Website Development',
-        description: 'Need a modern e-commerce website with payment integration',
-        category: 'web-development',
-        budget: 500,
-        deadline: new Date(Date.now() + 14 * 24 * 60 * 60 * 1000),
-        status: 'open',
-        applicants: 8,
-        complexity: 'advanced',
-      },
-      {
-        id: 'task_2',
-        title: 'Mobile App UI Design',
-        description: 'Design user interface for a fitness tracking mobile app',
-        category: 'design',
-        budget: 300,
-        deadline: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
-        status: 'open',
-        applicants: 12,
-        complexity: 'intermediate',
-      },
-      {
-        id: 'task_3',
-        title: 'AI Chatbot Integration',
-        description: 'Integrate AI chatbot into existing customer support system',
-        category: 'ai',
-        budget: 800,
-        deadline: new Date(Date.now() + 21 * 24 * 60 * 60 * 1000),
-        status: 'open',
-        applicants: 5,
-        complexity: 'expert',
-      },
-    ]);
-
-    setDevelopers([
-      {
-        id: 'dev_1',
-        name: 'Ahmed Khan',
-        email: 'ahmed@ehb.dev',
-        sqlLevel: 'High',
-        rating: 4.8,
-        completedTasks: 127,
-        skills: ['React', 'Node.js', 'Python', 'AI/ML'],
-        hourlyRate: 50,
-        availability: true,
-        verified: true,
-        location: 'Karachi, Pakistan',
-        featured: true,
-      },
-      {
-        id: 'dev_2',
-        name: 'Sarah Chen',
-        email: 'sarah@ehb.dev',
-        sqlLevel: 'VIP',
-        rating: 4.9,
-        completedTasks: 89,
-        skills: ['Vue.js', 'PHP', 'DevOps', 'Mobile'],
-        hourlyRate: 35,
-        availability: true,
-        verified: true,
-        location: 'Lahore, Pakistan',
-        featured: false,
-      },
-      {
-        id: 'dev_3',
-        name: 'Muhammad Ali',
-        email: 'ali@ehb.dev',
-        sqlLevel: 'High',
-        rating: 4.6,
-        completedTasks: 156,
-        skills: ['Angular', 'Java', 'Spring Boot', 'Microservices'],
-        hourlyRate: 45,
-        availability: false,
-        verified: true,
-        location: 'Islamabad, Pakistan',
-        featured: true,
-      },
-    ]);
+    loadAgentStatus();
+    const interval = setInterval(loadAgentStatus, 10000); // Update every 10 seconds
+    return () => clearInterval(interval);
   }, []);
 
-  const getSQLBadgeColor = (sqlLevel: string) => {
-    switch (sqlLevel) {
-      case 'Free': return 'bg-gray-100 text-gray-800';
-      case 'Basic': return 'bg-yellow-100 text-yellow-800';
-      case 'Normal': return 'bg-green-100 text-green-800';
-      case 'High': return 'bg-blue-100 text-blue-800';
-      case 'VIP': return 'bg-purple-100 text-purple-800';
-      default: return 'bg-gray-100 text-gray-800';
+  const loadAgentStatus = () => {
+    setAgentsStatus(ehbMainAgent.getAllAgentsStatus());
+  };
+
+  const getAgentStatus = (agentId: string) => {
+    return agentsStatus.find(agent => agent.id === agentId);
+  };
+
+  const getStatusIcon = (status: string) => {
+    switch (status) {
+      case 'running': return <CheckCircle2 className="w-4 h-4 text-green-500" />;
+      case 'stopped': return <XCircle className="w-4 h-4 text-red-500" />;
+      case 'error': return <AlertCircle className="w-4 h-4 text-yellow-500" />;
+      case 'idle': return <Clock className="w-4 h-4 text-gray-500" />;
+      default: return <Clock className="w-4 h-4 text-gray-500" />;
     }
   };
 
-  const getComplexityColor = (complexity: string) => {
-    switch (complexity) {
-      case 'basic': return 'bg-green-100 text-green-800';
-      case 'intermediate': return 'bg-yellow-100 text-yellow-800';
-      case 'advanced': return 'bg-orange-100 text-orange-800';
-      case 'expert': return 'bg-red-100 text-red-800';
-      default: return 'bg-gray-100 text-gray-800';
+  const getCategoryIcon = (category: string) => {
+    switch (category) {
+      case 'ai-agent': return <Brain className="w-5 h-5" />;
+      case 'service': return <Server className="w-5 h-5" />;
+      case 'product': return <Smartphone className="w-5 h-5" />;
+      case 'template': return <Code className="w-5 h-5" />;
+      default: return <Globe className="w-5 h-5" />;
     }
   };
 
-  const filteredTools = tools.filter(tool => {
-    const matchesSearch = tool.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                         tool.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                         tool.tags.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase()));
-    const matchesCategory = selectedCategory === 'all' || tool.category === selectedCategory;
-    const matchesSQL = selectedSQL === 'all' || tool.sqlRequired === selectedSQL;
-    return matchesSearch && matchesCategory && matchesSQL;
+  const filteredItems = marketplaceItems.filter(item => {
+    const matchesSearch = item.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                         item.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                         item.tags.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase()));
+    
+    const matchesCategory = selectedCategory === 'all' || item.category === selectedCategory;
+    const matchesStatus = selectedStatus === 'all' || item.status === selectedStatus;
+    
+    return matchesSearch && matchesCategory && matchesStatus;
   });
 
-  const filteredTasks = tasks.filter(task => {
-    const matchesSearch = task.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                         task.description.toLowerCase().includes(searchQuery.toLowerCase());
-    const matchesCategory = selectedCategory === 'all' || task.category === selectedCategory;
-    return matchesSearch && matchesCategory;
+  const sortedItems = [...filteredItems].sort((a, b) => {
+    switch (sortBy) {
+      case 'name':
+        return a.name.localeCompare(b.name);
+      case 'price-low':
+        return a.price - b.price;
+      case 'price-high':
+        return b.price - a.price;
+      case 'rating':
+        return b.rating - a.rating;
+      case 'downloads':
+        return (b.downloads || 0) - (a.downloads || 0);
+      case 'recent':
+        return new Date(b.lastUpdated).getTime() - new Date(a.lastUpdated).getTime();
+      default:
+        return 0;
+    }
   });
 
-  const filteredDevelopers = developers.filter(developer => {
-    const matchesSearch = developer.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                         developer.skills.some(skill => skill.toLowerCase().includes(searchQuery.toLowerCase()));
-    const matchesSQL = selectedSQL === 'all' || developer.sqlLevel === selectedSQL;
-    return matchesSearch && matchesSQL;
-  });
+  const handlePurchase = (item: MarketplaceItem) => {
+    setIsLoading(true);
+    // Simulate purchase process
+    setTimeout(() => {
+      alert(`Purchase successful! ${item.name} has been added to your account.`);
+      setIsLoading(false);
+    }, 2000);
+  };
+
+  const handleDownload = (item: MarketplaceItem) => {
+    setIsLoading(true);
+    // Simulate download process
+    setTimeout(() => {
+      alert(`Download started for ${item.name}`);
+      setIsLoading(false);
+    }, 1500);
+  };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">
       {/* Header */}
-      <div className="bg-white border-b">
-        <div className="container mx-auto px-4 py-8">
-          <div className="flex items-center justify-between mb-6">
-            <div>
-              <h1 className="text-3xl font-bold text-gray-900">SOT Marketplace</h1>
-              <p className="text-gray-600">Discover AI tools, services, and connect with verified developers</p>
+      <div className="bg-white shadow-sm border-b">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center py-6">
+            <div className="flex items-center space-x-4">
+              <div className="flex items-center space-x-2">
+                <Globe className="w-8 h-8 text-blue-600" />
+                <h1 className="text-2xl font-bold text-gray-900">SOT Marketplace</h1>
+              </div>
+              <Badge variant="default">
+                {filteredItems.length} items available
+              </Badge>
             </div>
-            <Link href="/sot">
-              <Button variant="outline">
-                Back to SOT
-                <ArrowRight className="ml-2 h-4 w-4" />
+            
+            <div className="flex items-center space-x-4">
+              <Button variant="outline" onClick={loadAgentStatus}>
+                <RefreshCw className="w-4 h-4 mr-2" />
+                Refresh
               </Button>
-            </Link>
-          </div>
-
-          {/* Search and Filters */}
-          <div className="flex flex-col lg:flex-row gap-4">
-            <div className="flex-1 relative">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
-              <Input
-                placeholder="Search for tools, tasks, or developers..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="pl-10 pr-4 py-3"
-              />
-            </div>
-            <div className="flex gap-2">
-              <Select value={selectedCategory} onValueChange={setSelectedCategory}>
-                <SelectTrigger className="w-40">
-                  <SelectValue placeholder="Category" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="all">All Categories</SelectItem>
-                  <SelectItem value="ai">AI & ML</SelectItem>
-                  <SelectItem value="development">Development</SelectItem>
-                  <SelectItem value="design">Design</SelectItem>
-                  <SelectItem value="productivity">Productivity</SelectItem>
-                  <SelectItem value="web-development">Web Development</SelectItem>
-                </SelectContent>
-              </Select>
-              <Select value={selectedSQL} onValueChange={setSelectedSQL}>
-                <SelectTrigger className="w-32">
-                  <SelectValue placeholder="SQL" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="all">All SQL</SelectItem>
-                  <SelectItem value="Free">Free</SelectItem>
-                  <SelectItem value="Basic">Basic</SelectItem>
-                  <SelectItem value="Normal">Normal</SelectItem>
-                  <SelectItem value="High">High</SelectItem>
-                  <SelectItem value="VIP">VIP</SelectItem>
-                </SelectContent>
-              </Select>
             </div>
           </div>
         </div>
       </div>
 
       {/* Main Content */}
-      <div className="container mx-auto px-4 py-8">
-        <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-          <TabsList className="grid w-full grid-cols-3 mb-8">
-            <TabsTrigger value="tools">AI Tools & Services</TabsTrigger>
-            <TabsTrigger value="tasks">Development Tasks</TabsTrigger>
-            <TabsTrigger value="developers">Developers</TabsTrigger>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-6">
+          <TabsList className="grid w-full grid-cols-4">
+            <TabsTrigger value="all">All Items</TabsTrigger>
+            <TabsTrigger value="ai-agents">AI Agents</TabsTrigger>
+            <TabsTrigger value="services">Services</TabsTrigger>
+            <TabsTrigger value="templates">Templates</TabsTrigger>
           </TabsList>
 
-          {/* Tools Tab */}
-          <TabsContent value="tools" className="space-y-6">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {filteredTools.map((tool) => (
-                <Card key={tool.id} className="hover:shadow-lg transition-shadow">
+          {/* Search and Filters */}
+          <div className="bg-white rounded-lg shadow-sm border p-6">
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+              <div className="relative">
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
+                <Input
+                  placeholder="Search items..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="pl-10"
+                />
+              </div>
+              
+              <Select value={selectedCategory} onValueChange={setSelectedCategory}>
+                <SelectTrigger>
+                  <SelectValue placeholder="Category" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="all">All Categories</SelectItem>
+                  <SelectItem value="ai-agent">AI Agents</SelectItem>
+                  <SelectItem value="service">Services</SelectItem>
+                  <SelectItem value="product">Products</SelectItem>
+                  <SelectItem value="template">Templates</SelectItem>
+                </SelectContent>
+              </Select>
+              
+              <Select value={selectedStatus} onValueChange={setSelectedStatus}>
+                <SelectTrigger>
+                  <SelectValue placeholder="Status" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="all">All Status</SelectItem>
+                  <SelectItem value="available">Available</SelectItem>
+                  <SelectItem value="in-use">In Use</SelectItem>
+                  <SelectItem value="maintenance">Maintenance</SelectItem>
+                </SelectContent>
+              </Select>
+              
+              <Select value={sortBy} onValueChange={setSortBy}>
+                <SelectTrigger>
+                  <SelectValue placeholder="Sort by" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="name">Name</SelectItem>
+                  <SelectItem value="price-low">Price: Low to High</SelectItem>
+                  <SelectItem value="price-high">Price: High to Low</SelectItem>
+                  <SelectItem value="rating">Rating</SelectItem>
+                  <SelectItem value="downloads">Downloads</SelectItem>
+                  <SelectItem value="recent">Recently Updated</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+          </div>
+
+          {/* Items Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            {sortedItems.map((item) => {
+              const agentStatus = item.agentId ? getAgentStatus(item.agentId) : null;
+              
+              return (
+                <Card key={item.id} className="hover:shadow-lg transition-shadow">
                   <CardHeader>
-                    <div className="flex items-start justify-between">
-                      <div className="flex-1">
-                        <div className="flex items-center gap-2 mb-2">
-                          <CardTitle className="text-lg">{tool.name}</CardTitle>
-                          {tool.featured && (
-                            <Badge className="bg-gradient-to-r from-yellow-400 to-orange-500 text-white">
-                              Featured
-                            </Badge>
-                          )}
-                        </div>
-                        <p className="text-sm text-gray-600 mb-3">{tool.description}</p>
-                        <div className="flex items-center gap-2 mb-3">
-                          <Badge className={getSQLBadgeColor(tool.sqlRequired)}>
-                            {tool.sqlRequired}
-                          </Badge>
-                          {tool.verified && (
-                            <Badge className="bg-green-100 text-green-800">
-                              <Shield className="h-3 w-3 mr-1" />
-                              Verified
-                            </Badge>
-                          )}
-                          {tool.aiPowered && (
-                            <Badge className="bg-purple-100 text-purple-800">
-                              <Brain className="h-3 w-3 mr-1" />
-                              AI Powered
-                            </Badge>
-                          )}
-                        </div>
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center space-x-2">
+                        {getCategoryIcon(item.category)}
+                        <CardTitle className="text-lg">{item.name}</CardTitle>
                       </div>
+                      {agentStatus && getStatusIcon(agentStatus.status)}
                     </div>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="flex items-center justify-between mb-4">
-                      <div className="flex items-center gap-1">
-                        <Star className="h-4 w-4 text-yellow-500 fill-current" />
-                        <span className="text-sm font-medium">{tool.rating}</span>
-                        <span className="text-sm text-gray-500">({tool.downloads} downloads)</span>
+                    <div className="flex items-center space-x-2">
+                      <div className="flex items-center space-x-1">
+                        <Star className="w-4 h-4 text-yellow-500 fill-current" />
+                        <span className="text-sm font-medium">{item.rating}</span>
+                        <span className="text-sm text-gray-500">({item.reviews})</span>
                       </div>
-                      <div className="text-lg font-bold text-green-600">${tool.price}</div>
-                    </div>
-                    <div className="flex items-center justify-between mb-4">
-                      <div className="text-sm text-gray-500">
-                        by {tool.developer.name}
-                      </div>
-                      <Badge className={getSQLBadgeColor(tool.developer.sqlLevel)}>
-                        {tool.developer.sqlLevel}
+                      <Badge variant={item.status === 'available' ? 'default' : 'secondary'}>
+                        {item.status}
                       </Badge>
                     </div>
-                    <div className="flex gap-2 mb-4">
-                      {tool.tags.map((tag, index) => (
-                        <Badge key={index} variant="outline" className="text-xs">
-                          {tag}
-                        </Badge>
-                      ))}
-                    </div>
-                    <div className="flex gap-2">
-                      <Button className="flex-1" size="sm">
-                        <Download className="h-4 w-4 mr-2" />
-                        Get Tool
-                      </Button>
-                      <Button variant="outline" size="sm">
-                        <Eye className="h-4 w-4" />
-                      </Button>
-                      <Button variant="outline" size="sm">
-                        <Heart className="h-4 w-4" />
-                      </Button>
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-          </TabsContent>
-
-          {/* Tasks Tab */}
-          <TabsContent value="tasks" className="space-y-6">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {filteredTasks.map((task) => (
-                <Card key={task.id} className="hover:shadow-lg transition-shadow">
-                  <CardHeader>
-                    <div className="flex items-start justify-between">
-                      <div className="flex-1">
-                        <CardTitle className="text-lg mb-2">{task.title}</CardTitle>
-                        <p className="text-sm text-gray-600 mb-3">{task.description}</p>
-                        <div className="flex items-center gap-2 mb-3">
-                          <Badge className={getComplexityColor(task.complexity)}>
-                            {task.complexity}
-                          </Badge>
-                          <Badge variant="outline">
-                            {task.applicants} applicants
-                          </Badge>
-                        </div>
-                      </div>
-                    </div>
                   </CardHeader>
+                  
                   <CardContent>
-                    <div className="flex items-center justify-between mb-4">
-                      <div className="text-lg font-bold text-green-600">${task.budget}</div>
-                      <div className="text-sm text-gray-500">
-                        Due: {task.deadline.toLocaleDateString()}
+                    <p className="text-gray-600 text-sm mb-4">{item.description}</p>
+                    
+                    <div className="space-y-3">
+                      <div className="flex justify-between items-center">
+                        <span className="text-lg font-bold">
+                          {item.currency} {item.price}
+                        </span>
+                        {item.downloads && (
+                          <span className="text-sm text-gray-500">
+                            {item.downloads} downloads
+                          </span>
+                        )}
                       </div>
-                    </div>
-                    <div className="flex gap-2">
-                      <Button className="flex-1" size="sm">
-                        <MessageSquare className="h-4 w-4 mr-2" />
-                        Apply Now
-                      </Button>
-                      <Button variant="outline" size="sm">
-                        <Eye className="h-4 w-4" />
-                      </Button>
-                      <Button variant="outline" size="sm">
-                        <Share2 className="h-4 w-4" />
-                      </Button>
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-          </TabsContent>
-
-          {/* Developers Tab */}
-          <TabsContent value="developers" className="space-y-6">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {filteredDevelopers.map((developer) => (
-                <Card key={developer.id} className="hover:shadow-lg transition-shadow">
-                  <CardHeader>
-                    <div className="flex items-start justify-between">
-                      <div className="flex-1">
-                        <div className="flex items-center gap-2 mb-2">
-                          <CardTitle className="text-lg">{developer.name}</CardTitle>
-                          {developer.featured && (
-                            <Badge className="bg-gradient-to-r from-yellow-400 to-orange-500 text-white">
-                              Featured
-                            </Badge>
-                          )}
-                        </div>
-                        <p className="text-sm text-gray-600 mb-3">{developer.location}</p>
-                        <div className="flex items-center gap-2 mb-3">
-                          <Badge className={getSQLBadgeColor(developer.sqlLevel)}>
-                            {developer.sqlLevel}
+                      
+                      <div className="flex flex-wrap gap-1">
+                        {item.tags.slice(0, 3).map((tag) => (
+                          <Badge key={tag} variant="outline" className="text-xs">
+                            {tag}
                           </Badge>
-                          {developer.verified && (
-                            <Badge className="bg-green-100 text-green-800">
-                              <Shield className="h-3 w-3 mr-1" />
-                              Verified
-                            </Badge>
-                          )}
-                          <Badge variant={developer.availability ? "default" : "secondary"}>
-                            {developer.availability ? 'Available' : 'Busy'}
-                          </Badge>
+                        ))}
+                      </div>
+                      
+                      {agentStatus && (
+                        <div className="bg-gray-50 rounded p-2 text-xs">
+                          <div className="flex items-center justify-between">
+                            <span>Agent Status:</span>
+                            <span className={`font-medium ${
+                              agentStatus.status === 'running' ? 'text-green-600' :
+                              agentStatus.status === 'stopped' ? 'text-red-600' :
+                              'text-gray-600'
+                            }`}>
+                              {agentStatus.status}
+                            </span>
+                          </div>
+                          <div className="flex items-center justify-between mt-1">
+                            <span>Tasks:</span>
+                            <span className="font-medium">
+                              {agentStatus.tasks.completed} completed, {agentStatus.tasks.pending} pending
+                            </span>
+                          </div>
                         </div>
-                      </div>
-                    </div>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="flex items-center justify-between mb-4">
-                      <div className="flex items-center gap-1">
-                        <Star className="h-4 w-4 text-yellow-500 fill-current" />
-                        <span className="text-sm font-medium">{developer.rating}</span>
-                        <span className="text-sm text-gray-500">({developer.completedTasks} tasks)</span>
-                      </div>
-                      <div className="text-lg font-bold text-green-600">${developer.hourlyRate}/hr</div>
-                    </div>
-                    <div className="flex flex-wrap gap-1 mb-4">
-                      {developer.skills.slice(0, 3).map((skill, index) => (
-                        <Badge key={index} variant="outline" className="text-xs">
-                          {skill}
-                        </Badge>
-                      ))}
-                      {developer.skills.length > 3 && (
-                        <Badge variant="outline" className="text-xs">
-                          +{developer.skills.length - 3} more
-                        </Badge>
                       )}
-                    </div>
-                    <div className="flex gap-2">
-                      <Button className="flex-1" size="sm">
-                        <MessageSquare className="h-4 w-4 mr-2" />
-                        Hire Now
-                      </Button>
-                      <Button variant="outline" size="sm">
-                        <Eye className="h-4 w-4" />
-                      </Button>
-                      <Button variant="outline" size="sm">
-                        <Heart className="h-4 w-4" />
-                      </Button>
+                      
+                      <div className="flex space-x-2">
+                        <Button
+                          onClick={() => handlePurchase(item)}
+                          disabled={isLoading || item.status !== 'available'}
+                          className="flex-1"
+                        >
+                          <ShoppingCart className="w-4 h-4 mr-1" />
+                          Purchase
+                        </Button>
+                        <Button
+                          variant="outline"
+                          onClick={() => handleDownload(item)}
+                          disabled={isLoading}
+                        >
+                          <Download className="w-4 h-4" />
+                        </Button>
+                        <Button variant="outline" size="sm">
+                          <Heart className="w-4 h-4" />
+                        </Button>
+                      </div>
                     </div>
                   </CardContent>
                 </Card>
-              ))}
+              );
+            })}
+          </div>
+
+          {sortedItems.length === 0 && (
+            <div className="text-center py-12">
+              <Globe className="w-16 h-16 text-gray-400 mx-auto mb-4" />
+              <h3 className="text-lg font-medium text-gray-900 mb-2">No items found</h3>
+              <p className="text-gray-600">Try adjusting your search or filter criteria.</p>
             </div>
-          </TabsContent>
+          )}
         </Tabs>
       </div>
     </div>

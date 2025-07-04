@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "task-master-ai": "^0.18.0"
+  },
+  "_npx": {
+    "packages": [
+      "task-master-ai"
+    ]
+  }
+}

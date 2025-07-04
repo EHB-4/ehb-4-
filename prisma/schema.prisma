@@ -1,6 +1,9 @@
 // This is your Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
+// Roman Urdu: JPS System Database Schema
+// Prisma schema for Job Placement System
+
 generator client {
   provider = "prisma-client-js"
 }
@@ -10,12 +13,12 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+// Roman Urdu: User model for authentication
 model User {
   id        String   @id @default(cuid())
   email     String   @unique
-  name      String?
-  password  String
-  role      Role     @default(USER)
+  name      String
+  role      UserRole @default(USER)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
@@ -31,13 +34,11 @@ model User {
   badgeNftHash   String?
 
   // Relations
-  orders   Order[]
-  reviews  Review[]
-  wishlist Product[]
-  cart     CartItem[]
-  wallet   Wallet?
-  profile  Profile?
-  kyc      KYC?
+  jobs          Job[]
+  candidates    Candidate[]
+  placements    Placement[]
+  payments      Payment[]
+  notifications Notification[]
 
   // SQL Level Relations
   sqlProfile      SQLProfile?
@@ -49,101 +50,444 @@ model User {
   // Franchise relationships
   franchiseApplications FranchiseApplication[]
   ownedFranchises       Franchise[]
+  Profile               Profile?
+  Product               Product?               @relation(fields: [productId], references: [id])
+  productId             String?
+  Order                 Order[]
+  CartItem              CartItem[]
+  Review                Review[]
+  Wallet                Wallet?
+  KYC                   KYC?
 
   @@map("users")
 }
 
+// Roman Urdu: User roles
+enum UserRole {
+  ADMIN
+  MANAGER
+  USER
+}
+
+// Roman Urdu: Job model
+model Job {
+  id           String    @id @default(cuid())
+  title        String
+  company      String
+  location     String
+  salary       Float
+  description  String
+  requirements String[] // Array of requirements
+  skills       String[] // Array of required skills
+  status       JobStatus @default(ACTIVE)
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+
+  // Roman Urdu: Relations
+  userId       String
+  user         User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  placements   Placement[]
+  applications Application[]
+
+  @@index([userId], name: "idx_jobs_user_id")
+  @@index([status], name: "idx_jobs_status")
+  @@index([company], name: "idx_jobs_company")
+  @@index([location], name: "idx_jobs_location")
+  @@map("jobs")
+}
+
+// Roman Urdu: Job status
+enum JobStatus {
+  ACTIVE
+  INACTIVE
+  FILLED
+  EXPIRED
+}
+
+// Roman Urdu: Candidate model
+model Candidate {
+  id                String          @id @default(cuid())
+  name              String
+  email             String          @unique
+  phone             String
+  sqlLevel          Int             @default(0) // 0-4 SQL proficiency levels
+  experience        Int // Years of experience
+  skills            String[] // Array of skills
+  preferredLocation String?
+  expectedSalary    Float?
+  status            CandidateStatus @default(ACTIVE)
+  createdAt         DateTime        @default(now())
+  updatedAt         DateTime        @updatedAt
+
+  // Roman Urdu: Relations
+  userId       String
+  user         User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  placements   Placement[]
+  applications Application[]
+  payments     Payment[]
+
+  @@index([userId], name: "idx_candidates_user_id")
+  @@index([status], name: "idx_candidates_status")
+  @@index([sqlLevel], name: "idx_candidates_sql_level")
+  @@index([email], name: "idx_candidates_email")
+  @@map("candidates")
+}
+
+// Roman Urdu: Candidate status
+enum CandidateStatus {
+  ACTIVE
+  INACTIVE
+  PLACED
+  BLACKLISTED
+}
+
+// Roman Urdu: Placement model
+model Placement {
+  id            String          @id @default(cuid())
+  jobId         String
+  candidateId   String
+  jobTitle      String
+  candidateName String
+  company       String
+  salary        Float
+  status        PlacementStatus @default(PENDING)
+  placementDate DateTime?
+  startDate     DateTime?
+  endDate       DateTime?
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime        @updatedAt
+
+  // Roman Urdu: Relations
+  userId     String
+  user       User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  job        Job         @relation(fields: [jobId], references: [id], onDelete: Cascade)
+  candidate  Candidate   @relation(fields: [candidateId], references: [id], onDelete: Cascade)
+  payments   Payment[]
+  interviews Interview[]
+
+  @@index([userId], name: "idx_placements_user_id")
+  @@index([status], name: "idx_placements_status")
+  @@index([placementDate], name: "idx_placements_date")
+  @@index([jobId], name: "idx_placements_job_id")
+  @@index([candidateId], name: "idx_placements_candidate_id")
+  @@map("placements")
+}
+
+// Roman Urdu: Placement status
+enum PlacementStatus {
+  PENDING
+  IN_PROGRESS
+  COMPLETED
+  CANCELLED
+  FAILED
+}
+
+// Roman Urdu: Application model for job applications
+model Application {
+  id          String            @id @default(cuid())
+  jobId       String
+  candidateId String
+  status      ApplicationStatus @default(PENDING)
+  appliedAt   DateTime          @default(now())
+  reviewedAt  DateTime?
+  notes       String?
+  createdAt   DateTime          @default(now())
+  updatedAt   DateTime          @updatedAt
+
+  // Roman Urdu: Relations
+  job       Job       @relation(fields: [jobId], references: [id], onDelete: Cascade)
+  candidate Candidate @relation(fields: [candidateId], references: [id], onDelete: Cascade)
+
+  @@unique([jobId, candidateId])
+  @@index([status], name: "idx_applications_status")
+  @@index([jobId], name: "idx_applications_job_id")
+  @@index([candidateId], name: "idx_applications_candidate_id")
+  @@map("applications")
+}
+
+// Roman Urdu: Application status
+enum ApplicationStatus {
+  PENDING
+  REVIEWING
+  SHORTLISTED
+  REJECTED
+  ACCEPTED
+}
+
+// Roman Urdu: Interview model
+model Interview {
+  id            String          @id @default(cuid())
+  placementId   String
+  candidateId   String
+  jobId         String
+  interviewDate DateTime
+  interviewTime String
+  location      String
+  type          InterviewType
+  status        InterviewStatus @default(SCHEDULED)
+  notes         String?
+  feedback      String?
+  score         Int? // Interview score 1-10
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime        @updatedAt
+
+  // Roman Urdu: Relations
+  placement Placement @relation(fields: [placementId], references: [id], onDelete: Cascade)
+
+  @@index([placementId], name: "idx_interviews_placement_id")
+  @@index([interviewDate], name: "idx_interviews_date")
+  @@index([status], name: "idx_interviews_status")
+  @@map("interviews")
+}
+
+// Roman Urdu: Interview types
+enum InterviewType {
+  PHONE
+  VIDEO
+  IN_PERSON
+  TECHNICAL
+  HR
+}
+
+// Roman Urdu: Interview status
+enum InterviewStatus {
+  SCHEDULED
+  CONFIRMED
+  COMPLETED
+  CANCELLED
+  NO_SHOW
+}
+
+// Roman Urdu: Payment model
+model Payment {
+  id             String        @id @default(cuid())
+  placementId    String
+  candidateId    String
+  jobId          String
+  amount         Float
+  commissionRate Float
+  paymentMethod  PaymentMethod
+  status         PaymentStatus @default(PENDING)
+  paymentDate    DateTime?
+  transactionId  String?
+  description    String?
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+
+  // Roman Urdu: Relations
+  userId    String
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  placement Placement @relation(fields: [placementId], references: [id], onDelete: Cascade)
+  candidate Candidate @relation(fields: [candidateId], references: [id], onDelete: Cascade)
+
+  @@index([userId], name: "idx_payments_user_id")
+  @@index([status], name: "idx_payments_status")
+  @@index([paymentDate], name: "idx_payments_date")
+  @@index([placementId], name: "idx_payments_placement_id")
+  @@map("payments")
+}
+
+// Roman Urdu: Payment methods
+enum PaymentMethod {
+  BANK_TRANSFER
+  CASH
+  CHECK
+  ONLINE
+  CREDIT_CARD
+}
+
+// Roman Urdu: Payment status
+enum PaymentStatus {
+  PENDING
+  PROCESSING
+  COMPLETED
+  FAILED
+  CANCELLED
+  REFUNDED
+}
+
+// Roman Urdu: Notification model
+model Notification {
+  id        String             @id @default(cuid())
+  type      NotificationType
+  recipient String // Email or phone number
+  subject   String?
+  message   String
+  status    NotificationStatus @default(PENDING)
+  sentAt    DateTime?
+  readAt    DateTime?
+  metadata  Json? // Additional data like template, data, etc.
+  createdAt DateTime           @default(now())
+  updatedAt DateTime           @updatedAt
+
+  // Roman Urdu: Relations
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId], name: "idx_notifications_user_id")
+  @@index([type], name: "idx_notifications_type")
+  @@index([status], name: "idx_notifications_status")
+  @@index([sentAt], name: "idx_notifications_sent_at")
+  @@map("notifications")
+}
+
+// Roman Urdu: Notification types
+enum NotificationType {
+  EMAIL
+  SMS
+  PUSH
+  INTERVIEW_INVITATION
+  PLACEMENT_CONFIRMATION
+  APPLICATION_STATUS
+  PAYMENT_CONFIRMATION
+}
+
+// Roman Urdu: Notification status
+enum NotificationStatus {
+  PENDING
+  SENT
+  DELIVERED
+  READ
+  FAILED
+}
+
+// Roman Urdu: AI Matching History model
+model AIMatchingHistory {
+  id              String   @id @default(cuid())
+  jobId           String
+  candidateId     String
+  overallScore    Float
+  skillsScore     Float
+  experienceScore Float
+  locationScore   Float
+  salaryScore     Float
+  sqlLevelScore   Float
+  matchingSkills  String[]
+  missingSkills   String[]
+  recommendations String[]
+  createdAt       DateTime @default(now())
+
+  @@index([jobId], name: "idx_ai_matching_job_id")
+  @@index([candidateId], name: "idx_ai_matching_candidate_id")
+  @@index([overallScore], name: "idx_ai_matching_score")
+  @@index([createdAt], name: "idx_ai_matching_created_at")
+  @@map("ai_matching_history")
+}
+
+// Roman Urdu: System Settings model
+model SystemSettings {
+  id          String   @id @default(cuid())
+  key         String   @unique
+  value       String
+  description String?
+  category    String?
+  isPublic    Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("system_settings")
+}
+
+// Roman Urdu: Audit Log model for tracking changes
+model AuditLog {
+  id        String   @id @default(cuid())
+  userId    String?
+  action    String // CREATE, UPDATE, DELETE
+  tableName String // Table name
+  recordId  String // Record ID
+  oldValues Json? // Previous values
+  newValues Json? // New values
+  ipAddress String?
+  userAgent String?
+  createdAt DateTime @default(now())
+
+  @@index([userId], name: "idx_audit_logs_user_id")
+  @@index([action], name: "idx_audit_logs_action")
+  @@index([tableName], name: "idx_audit_logs_table")
+  @@index([createdAt], name: "idx_audit_logs_created_at")
+  @@map("audit_logs")
+}
+
 // SQL Level System Models
 model SQLProfile {
-  id           String   @id @default(cuid())
-  userId       String   @unique
-  level        Int      @default(0)
-  isActive     Boolean  @default(true)
-  benefits     String[]
-  restrictions String[]
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
-
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  id             String   @id @default(cuid())
+  userId         String   @unique
+  user           User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  level          Int      @default(0)
+  experience     Int      @default(0)
+  skills         String[]
+  certifications String[]
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
 
   @@map("sql_profiles")
 }
 
 model SQLHistory {
-  id             String   @id @default(cuid())
-  userId         String
-  oldLevel       Int
-  newLevel       Int
-  reason         String
-  aiScore        Int
-  blockchainHash String?
-  createdAt      DateTime @default(now())
-
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  action    String
+  details   Json?
+  timestamp DateTime @default(now())
 
   @@map("sql_history")
 }
 
 model SkillTest {
-  id        String        @id @default(cuid())
-  userId    String
-  testType  SkillTestType
-  score     Int
-  passed    Boolean
-  testData  Json?
-  createdAt DateTime      @default(now())
-
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  id      String        @id @default(cuid())
+  userId  String
+  user    User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  type    SkillTestType
+  score   Int
+  passed  Boolean
+  takenAt DateTime      @default(now())
 
   @@map("skill_tests")
 }
 
 model CoinLock {
-  id        String         @id @default(cuid())
-  userId    String
-  amount    Float
-  duration  Int // months
-  startDate DateTime       @default(now())
-  endDate   DateTime
-  status    CoinLockStatus @default(ACTIVE)
-  createdAt DateTime       @default(now())
-  updatedAt DateTime       @updatedAt
-
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  id         String         @id @default(cuid())
+  userId     String
+  user       User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  amount     Float
+  status     CoinLockStatus @default(LOCKED)
+  lockedAt   DateTime       @default(now())
+  unlockedAt DateTime?
 
   @@map("coin_locks")
 }
 
 model SQLUpgradeRequest {
-  id         String               @id @default(cuid())
-  userId     String
-  fromLevel  Int
-  toLevel    Int
-  status     UpgradeRequestStatus @default(PENDING)
-  documents  Json?
-  notes      String?
-  reviewedBy String?
-  reviewedAt DateTime?
-  createdAt  DateTime             @default(now())
-  updatedAt  DateTime             @updatedAt
-
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  id             String               @id @default(cuid())
+  userId         String
+  user           User                 @relation(fields: [userId], references: [id], onDelete: Cascade)
+  currentLevel   Int
+  requestedLevel Int
+  status         UpgradeRequestStatus @default(PENDING)
+  reason         String?
+  approvedBy     String?
+  approvedAt     DateTime?
+  createdAt      DateTime             @default(now())
 
   @@map("sql_upgrade_requests")
 }
 
+// E-commerce Models
 model Profile {
-  id         String  @id @default(cuid())
-  userId     String  @unique
-  avatar     String?
-  phone      String?
-  address    String?
-  city       String?
-  country    String?
-  postalCode String?
-  bio        String?
-
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  id        String   @id @default(cuid())
+  userId    String   @unique
+  firstName String?
+  lastName  String?
+  phone     String?
+  address   String?
+  city      String?
+  state     String?
+  zipCode   String?
+  country   String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@map("profiles")
 }
@@ -151,10 +495,10 @@ model Profile {
 model Product {
   id          String   @id @default(cuid())
   name        String
-  description String
+  description String?
   price       Float
-  images      String[]
-  category    String
+  image       String?
+  category    String?
   stock       Int      @default(0)
   isActive    Boolean  @default(true)
   createdAt   DateTime @default(now())
@@ -199,10 +543,11 @@ model OrderItem {
 }
 
 model CartItem {
-  id        String @id @default(cuid())
+  id        String   @id @default(cuid())
   userId    String
   productId String
-  quantity  Int    @default(1)
+  quantity  Int
+  createdAt DateTime @default(now())
 
   // Relations
   user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
@@ -240,7 +585,7 @@ model KYC {
   id         String    @id @default(cuid())
   userId     String    @unique
   status     KYCStatus @default(PENDING)
-  documents  String[]
+  documents  Json?
   verifiedAt DateTime?
   createdAt  DateTime  @default(now())
   updatedAt  DateTime  @updatedAt
@@ -250,85 +595,60 @@ model KYC {
   @@map("kyc")
 }
 
+// Franchise Models
 model Franchise {
-  id           String   @id @default(cuid())
-  name         String
-  category     String // health, education, law, travel, books
-  level        String // Corporate, Master, Sub
-  investment   Float
-  description  String?
-  requirements String[] // Array of requirements
-  roi          Float // Return on Investment percentage
-  popularity   Int // Popularity score (0-100)
-  status       String   @default("ACTIVE") // ACTIVE, INACTIVE, SUSPENDED
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
-
-  // Relationships
-  ownerId      String?
-  owner        User?                  @relation(fields: [ownerId], references: [id])
-  applications FranchiseApplication[]
+  id          String   @id @default(cuid())
+  name        String
+  ownerId     String
+  owner       User     @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+  location    String
+  status      String   @default("ACTIVE")
+  description String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 
   @@map("franchises")
 }
 
 model FranchiseApplication {
-  id                String    @id @default(cuid())
-  franchiseId       String
-  userId            String
-  personalInfo      Json // Personal information object
-  businessPlan      String? // Business plan text
-  financialInfo     Json // Financial information object
-  experience        String? // Previous experience
-  investmentAmount  Float
-  preferredLocation String?
-  status            String    @default("PENDING") // PENDING, APPROVED, REJECTED, UNDER_REVIEW
-  submittedAt       DateTime  @default(now())
-  reviewedAt        DateTime?
-  reviewedBy        String?
-  notes             String? // Review notes
-  createdAt         DateTime  @default(now())
-  updatedAt         DateTime  @updatedAt
-
-  // Relationships
-  franchise Franchise @relation(fields: [franchiseId], references: [id])
-  user      User      @relation(fields: [userId], references: [id])
+  id          String    @id @default(cuid())
+  userId      String
+  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  franchiseId String
+  status      String    @default("PENDING")
+  reason      String?
+  approvedAt  DateTime?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
 
   @@map("franchise_applications")
 }
 
 // Enums
-enum Role {
-  USER
-  ADMIN
-  FRANCHISE_OWNER
-}
-
 enum SQLStatus {
   FREE
-  BASIC
-  NORMAL
-  HIGH
+  PAID
+  PREMIUM
   VIP
 }
 
 enum SkillTestType {
-  MCQ
-  PRACTICAL
-  VIDEO_INTERVIEW
+  SQL_BASIC
+  SQL_INTERMEDIATE
+  SQL_ADVANCED
+  SQL_EXPERT
 }
 
 enum CoinLockStatus {
-  ACTIVE
+  LOCKED
+  UNLOCKED
   EXPIRED
-  CANCELLED
 }
 
 enum UpgradeRequestStatus {
   PENDING
   APPROVED
   REJECTED
-  UNDER_REVIEW
 }
 
 enum OrderStatus {

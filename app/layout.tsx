@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
 import { Toaster } from 'sonner';
-import { ThemeProvider } from '@/components/providers/ThemeProvider';
+import { ThemeProvider } from '../components/providers/ThemeProvider';
 import { LanguageProvider } from '@/contexts/LanguageContext';
 import EHBNavigation from '@/components/layout/EHBNavigation';
 import SmartNavigation from '@/components/layout/SmartNavigation';
