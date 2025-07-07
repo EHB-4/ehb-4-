@@ -19,5 +19,15 @@ services:
     volumes:
       - mongo_data:/data/db
 
+  web:
+    build: .
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/app
+    command: npm run dev
+    env_file:
+      - .env.production
+
 volumes:
   mongo_data:

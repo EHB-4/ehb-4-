@@ -1,13 +1,6 @@
-FROM node:18-alpine AS base
+FROM node:18-alpine
 WORKDIR /app
-
-COPY package.json package-lock.json* ./
-RUN npm ci --only=production
-
 COPY . .
-
-RUN npm run build
-
+RUN npm install
 EXPOSE 3000
-
-CMD ["npm", "start"]
+CMD ["npm", "run", "dev"]
