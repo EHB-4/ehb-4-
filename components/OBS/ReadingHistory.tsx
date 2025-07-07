@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import { useState } from 'react';
 import { FiBook, FiClock, FiBookmark, FiTrendingUp } from 'react-icons/fi';

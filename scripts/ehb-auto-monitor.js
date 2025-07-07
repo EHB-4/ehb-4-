@@ -17,7 +17,7 @@ class EHBAutoMonitor {
   }
 
   async checkPort(port) {
-    return new Promise((resolve) => {
+    return new Promise(resolve => {
       exec(`netstat -ano | findstr :${port}`, (error, stdout) => {
         resolve(!error && stdout.trim() !== '');
       });
@@ -26,7 +26,7 @@ class EHBAutoMonitor {
 
   async monitorPorts() {
     this.log('🔍 Checking port status...');
-    
+
     for (const port of this.ports) {
       const isActive = await this.checkPort(port);
       const status = isActive ? '✅ Active' : '❌ Inactive';
@@ -37,7 +37,7 @@ class EHBAutoMonitor {
   start() {
     this.isMonitoring = true;
     this.log('🚀 Starting EHB Auto Monitor...');
-    
+
     setInterval(() => {
       if (this.isMonitoring) {
         this.monitorPorts();

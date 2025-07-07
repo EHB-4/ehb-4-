@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 /**
  * SOT Marketplace - Main interface for Services of Technology marketplace

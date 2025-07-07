@@ -18,10 +18,7 @@ interface LanguageProviderProps {
   defaultLanguage?: Language;
 }
 
-export function LanguageProvider({ 
-  children, 
-  defaultLanguage = 'en' 
-}: LanguageProviderProps) {
+export function LanguageProvider({ children, defaultLanguage = 'en' }: LanguageProviderProps) {
   const [language, setLanguageState] = useState<Language>(defaultLanguage);
   const [translations, setTranslations] = useState<Record<string, any>>({});
 
@@ -46,7 +43,7 @@ export function LanguageProvider({
   const setLanguage = (lang: Language) => {
     setLanguageState(lang);
     localStorage.setItem('pss-language', lang);
-    
+
     // Update document direction for RTL languages
     if (lang === 'ar' || lang === 'ur') {
       document.documentElement.dir = 'rtl';
@@ -106,11 +103,7 @@ export function LanguageProvider({
     isRTL,
   };
 
-  return (
-    <LanguageContext.Provider value={value}>
-      {children}
-    </LanguageContext.Provider>
-  );
+  return <LanguageContext.Provider value={value}>{children}</LanguageContext.Provider>;
 }
 
 // Custom hook to use language context
@@ -134,7 +127,7 @@ export function LanguageSwitcher() {
 
   return (
     <div className="flex items-center space-x-2">
-      {languages.map((lang) => (
+      {languages.map(lang => (
         <button
           key={lang.code}
           onClick={() => setLanguage(lang.code)}

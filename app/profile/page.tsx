@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 'use client';
 
@@ -353,30 +353,30 @@ export default function ProfilePage() {
                   </div>
 
                   {/* Last Name */}
-          <div>
+                  <div>
                     <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                       Last Name
                     </label>
                     {isEditing ? (
-            <input
-              type="text"
+                      <input
+                        type="text"
                         value={editData.lastName}
                         onChange={e => setEditData(prev => ({ ...prev, lastName: e.target.value }))}
                         className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-            />
+                      />
                     ) : (
                       <p className="text-gray-900 dark:text-white">{profile.lastName}</p>
                     )}
-          </div>
+                  </div>
 
                   {/* Email */}
-          <div>
+                  <div>
                     <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                       Email Address
                     </label>
                     {isEditing ? (
-            <input
-              type="email"
+                      <input
+                        type="email"
                         value={editData.email}
                         onChange={e => setEditData(prev => ({ ...prev, email: e.target.value }))}
                         className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent"
@@ -513,8 +513,8 @@ export default function ProfilePage() {
                               <div
                                 className="bg-blue-500 h-2 rounded-full"
                                 style={{ width: `${85 + Math.random() * 15}%` }}
-            />
-          </div>
+                              />
+                            </div>
                             <span className="text-sm text-gray-500">Expert</span>
                           </div>
                         </div>
@@ -565,7 +565,7 @@ export default function ProfilePage() {
                           type={showPassword ? 'text' : 'password'}
                           className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent pr-10"
                         />
-          <button
+                        <button
                           onClick={() => setShowPassword(!showPassword)}
                           className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
                         >
@@ -646,7 +646,7 @@ export default function ProfilePage() {
                         </div>
                       </div>
                       <ArrowRight className="w-4 h-4 text-red-400" />
-          </button>
+                    </button>
                   </div>
                 </div>
               </motion.div>

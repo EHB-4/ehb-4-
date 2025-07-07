@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 'use client';
 
@@ -431,8 +431,8 @@ export default function AdminDashboard() {
                                   module.performance >= 90
                                     ? 'bg-green-500'
                                     : module.performance >= 70
-                                    ? 'bg-yellow-500'
-                                    : 'bg-red-500'
+                                      ? 'bg-yellow-500'
+                                      : 'bg-red-500'
                                 }`}
                                 style={{ width: `${module.performance}%` }}
                               ></div>
@@ -477,8 +477,8 @@ export default function AdminDashboard() {
                         activity.severity === 'high'
                           ? 'bg-red-100'
                           : activity.severity === 'medium'
-                          ? 'bg-yellow-100'
-                          : 'bg-green-100'
+                            ? 'bg-yellow-100'
+                            : 'bg-green-100'
                       }`}
                     >
                       {getActivityIcon(activity.type)}

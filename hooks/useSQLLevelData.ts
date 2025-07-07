@@ -82,4 +82,4 @@ export function useSQLLevelData() {
   return { data, loading, error };
 }
 
-export default useSQLLevelData; 
+export default useSQLLevelData;

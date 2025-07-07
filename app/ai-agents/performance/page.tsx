@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 'use client';
 
@@ -325,8 +325,8 @@ export default function AIAgentPerformancePage() {
                                 agent.cpu > 80
                                   ? 'bg-red-600'
                                   : agent.cpu > 60
-                                  ? 'bg-yellow-600'
-                                  : 'bg-green-600'
+                                    ? 'bg-yellow-600'
+                                    : 'bg-green-600'
                               }`}
                               style={{ width: `${agent.cpu}%` }}
                             />
@@ -345,8 +345,8 @@ export default function AIAgentPerformancePage() {
                                 agent.memory > 80
                                   ? 'bg-red-600'
                                   : agent.memory > 60
-                                  ? 'bg-yellow-600'
-                                  : 'bg-green-600'
+                                    ? 'bg-yellow-600'
+                                    : 'bg-green-600'
                               }`}
                               style={{ width: `${agent.memory}%` }}
                             />
@@ -434,8 +434,8 @@ export default function AIAgentPerformancePage() {
                         optimization.impact === 'high'
                           ? 'text-red-600 bg-red-100 dark:bg-red-900 dark:text-red-300'
                           : optimization.impact === 'medium'
-                          ? 'text-yellow-600 bg-yellow-100 dark:bg-yellow-900 dark:text-yellow-300'
-                          : 'text-green-600 bg-green-100 dark:bg-green-900 dark:text-green-300'
+                            ? 'text-yellow-600 bg-yellow-100 dark:bg-yellow-900 dark:text-yellow-300'
+                            : 'text-green-600 bg-green-100 dark:bg-green-900 dark:text-green-300'
                       }`}
                     >
                       {optimization.impact}
@@ -458,8 +458,8 @@ export default function AIAgentPerformancePage() {
                           optimization.status === 'completed'
                             ? 'text-green-600'
                             : optimization.status === 'in-progress'
-                            ? 'text-blue-600'
-                            : 'text-yellow-600'
+                              ? 'text-blue-600'
+                              : 'text-yellow-600'
                         }`}
                       >
                         {optimization.status}

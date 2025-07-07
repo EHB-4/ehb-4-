@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 'use client';
 
@@ -16,7 +16,17 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { Users, Clock, CheckCircle, XCircle, AlertTriangle, Search, Filter, Download, Eye } from 'lucide-react';
+import {
+  Users,
+  Clock,
+  CheckCircle,
+  XCircle,
+  AlertTriangle,
+  Search,
+  Filter,
+  Download,
+  Eye,
+} from 'lucide-react';
 import { usePSSWebSocket } from '@/hooks/usePSSWebSocket';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { useLanguage } from '@/contexts/LanguageContext';
@@ -79,14 +89,14 @@ export default function PSSDashboard() {
     riskLevel: [],
     dateRange: {
       from: undefined,
-      to: undefined
+      to: undefined,
     },
     hasDocuments: false,
     hasNotes: false,
     amountRange: {
       min: 0,
-      max: 10000
-    }
+      max: 10000,
+    },
   });
   const [selectedItems, setSelectedItems] = useState<string[]>([]);
 
@@ -126,9 +136,11 @@ export default function PSSDashboard() {
       // Search term filter
       if (filters.searchTerm) {
         const searchLower = filters.searchTerm.toLowerCase();
-        if (!request.fullName.toLowerCase().includes(searchLower) &&
-            !request.contactNumber.includes(searchLower) &&
-            !request.id.includes(searchLower)) {
+        if (
+          !request.fullName.toLowerCase().includes(searchLower) &&
+          !request.contactNumber.includes(searchLower) &&
+          !request.id.includes(searchLower)
+        ) {
           return false;
         }
       }
@@ -186,13 +198,13 @@ export default function PSSDashboard() {
         Status: req.status,
         Risk: req.risk,
         Amount: req.amount,
-        Created: new Date(req.createdAt).toLocaleDateString()
+        Created: new Date(req.createdAt).toLocaleDateString(),
       }));
 
       if (format === 'csv') {
         const csvContent = [
           Object.keys(data[0] || {}).join(','),
-          ...data.map(row => Object.values(row || {}).join(','))
+          ...data.map(row => Object.values(row || {}).join(',')),
         ].join('\n');
 
         const blob = new Blob([csvContent], { type: 'text/csv' });
@@ -255,12 +267,12 @@ export default function PSSDashboard() {
       Status: req.status,
       Risk: req.risk,
       Amount: req.amount,
-      Created: new Date(req.createdAt).toLocaleDateString()
+      Created: new Date(req.createdAt).toLocaleDateString(),
     }));
 
     const csvContent = [
       Object.keys(data[0] || {}).join(','),
-      ...data.map(row => Object.values(row || {}).join(','))
+      ...data.map(row => Object.values(row || {}).join(',')),
     ].join('\n');
 
     const blob = new Blob([csvContent], { type: 'text/csv' });
@@ -312,11 +324,13 @@ export default function PSSDashboard() {
       switch (lastMessage.type) {
         case 'status_update':
           // Update specific request status
-          setRequests(prev => prev.map(req => 
-            req.id === lastMessage.data.verificationId 
-              ? { ...req, status: lastMessage.data.status }
-              : req
-          ));
+          setRequests(prev =>
+            prev.map(req =>
+              req.id === lastMessage.data.verificationId
+                ? { ...req, status: lastMessage.data.status }
+                : req
+            )
+          );
           break;
         case 'verification_complete':
           // Refresh dashboard data
@@ -415,7 +429,9 @@ export default function PSSDashboard() {
         <div className="flex items-center space-x-4">
           {/* WebSocket Status */}
           <div className="flex items-center space-x-2">
-            <div className={`w-2 h-2 rounded-full ${isConnected ? 'bg-green-500' : 'bg-red-500'}`} />
+            <div
+              className={`w-2 h-2 rounded-full ${isConnected ? 'bg-green-500' : 'bg-red-500'}`}
+            />
             <span className="text-sm text-gray-600">
               {isConnected ? 'Live Updates' : 'Offline'}
             </span>
@@ -430,9 +446,7 @@ export default function PSSDashboard() {
       {wsError && (
         <Alert variant="destructive">
           <AlertTriangle className="h-4 w-4" />
-          <AlertDescription>
-            Real-time updates are unavailable: {wsError}
-          </AlertDescription>
+          <AlertDescription>Real-time updates are unavailable: {wsError}</AlertDescription>
         </Alert>
       )}
 
@@ -524,10 +538,15 @@ export default function PSSDashboard() {
                 <tr className="border-b">
                   <th className="text-left p-2 w-12">
                     <Checkbox
-                      checked={selectedItems.length === filteredRequests.length && filteredRequests.length > 0}
+                      checked={
+                        selectedItems.length === filteredRequests.length &&
+                        filteredRequests.length > 0
+                      }
                       ref={(el: HTMLInputElement | null) => {
                         if (el) {
-                          el.indeterminate = selectedItems.length > 0 && selectedItems.length < filteredRequests.length;
+                          el.indeterminate =
+                            selectedItems.length > 0 &&
+                            selectedItems.length < filteredRequests.length;
                         }
                       }}
                       onCheckedChange={handleSelectAll}

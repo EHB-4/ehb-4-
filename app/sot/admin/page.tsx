@@ -217,40 +217,59 @@ export default function SOTAdminDashboardPage() {
 
   const getStatusColor = (status: string) => {
     switch (status) {
-      case 'online': return 'text-green-600';
-      case 'offline': return 'text-red-600';
-      case 'error': return 'text-orange-600';
-      default: return 'text-gray-600';
+      case 'online':
+        return 'text-green-600';
+      case 'offline':
+        return 'text-red-600';
+      case 'error':
+        return 'text-orange-600';
+      default:
+        return 'text-gray-600';
     }
   };
 
   const getSeverityColor = (severity: string) => {
     switch (severity) {
-      case 'low': return 'bg-green-100 text-green-800';
-      case 'medium': return 'bg-yellow-100 text-yellow-800';
-      case 'high': return 'bg-orange-100 text-orange-800';
-      case 'critical': return 'bg-red-100 text-red-800';
-      default: return 'bg-gray-100 text-gray-800';
+      case 'low':
+        return 'bg-green-100 text-green-800';
+      case 'medium':
+        return 'bg-yellow-100 text-yellow-800';
+      case 'high':
+        return 'bg-orange-100 text-orange-800';
+      case 'critical':
+        return 'bg-red-100 text-red-800';
+      default:
+        return 'bg-gray-100 text-gray-800';
     }
   };
 
   const getPriorityColor = (priority: string) => {
     switch (priority) {
-      case 'low': return 'bg-green-100 text-green-800';
-      case 'medium': return 'bg-yellow-100 text-yellow-800';
-      case 'high': return 'bg-orange-100 text-orange-800';
-      case 'urgent': return 'bg-red-100 text-red-800';
-      default: return 'bg-gray-100 text-gray-800';
+      case 'low':
+        return 'bg-green-100 text-green-800';
+      case 'medium':
+        return 'bg-yellow-100 text-yellow-800';
+      case 'high':
+        return 'bg-orange-100 text-orange-800';
+      case 'urgent':
+        return 'bg-red-100 text-red-800';
+      default:
+        return 'bg-gray-100 text-gray-800';
     }
   };
 
   const getSystemHealthColor = (health: string) => {
     switch (health) {
-      case 'excellent': return 'text-green-600';
-      case 'good': return 'text-blue-600';
-      case 'fair': return 'text-yellow-600';
-      case 'poor': return 'text-red-600';
-      default: return 'text-gray-600';
+      case 'excellent':
+        return 'text-green-600';
+      case 'good':
+        return 'text-blue-600';
+      case 'fair':
+        return 'text-yellow-600';
+      case 'poor':
+        return 'text-red-600';
+      default:
+        return 'text-gray-600';
     }
   };
 
@@ -262,7 +281,9 @@ export default function SOTAdminDashboardPage() {
           <div className="flex items-center justify-between mb-6">
             <div>
               <h1 className="text-3xl font-bold text-gray-900">SOT Admin Dashboard</h1>
-              <p className="text-gray-600">Monitor AI agents, system performance, and manage escalations</p>
+              <p className="text-gray-600">
+                Monitor AI agents, system performance, and manage escalations
+              </p>
             </div>
             <Link href="/sot">
               <Button variant="outline">
@@ -282,7 +303,9 @@ export default function SOTAdminDashboardPage() {
                   </div>
                   <div>
                     <p className="text-sm text-gray-500">System Health</p>
-                    <p className={`text-lg font-bold ${getSystemHealthColor(systemMetrics.systemHealth)}`}>
+                    <p
+                      className={`text-lg font-bold ${getSystemHealthColor(systemMetrics.systemHealth)}`}
+                    >
                       {systemMetrics.systemHealth}
                     </p>
                   </div>
@@ -297,7 +320,9 @@ export default function SOTAdminDashboardPage() {
                   </div>
                   <div>
                     <p className="text-sm text-gray-500">Active Users</p>
-                    <p className="text-lg font-bold text-gray-900">{systemMetrics.activeUsers.toLocaleString()}</p>
+                    <p className="text-lg font-bold text-gray-900">
+                      {systemMetrics.activeUsers.toLocaleString()}
+                    </p>
                   </div>
                 </div>
               </CardContent>
@@ -353,7 +378,9 @@ export default function SOTAdminDashboardPage() {
                       <Users className="h-6 w-6 text-blue-600" />
                     </div>
                     <div>
-                      <p className="text-2xl font-bold text-gray-900">{systemMetrics.totalUsers.toLocaleString()}</p>
+                      <p className="text-2xl font-bold text-gray-900">
+                        {systemMetrics.totalUsers.toLocaleString()}
+                      </p>
                       <p className="text-sm text-gray-500">Total Users</p>
                     </div>
                   </div>
@@ -366,7 +393,9 @@ export default function SOTAdminDashboardPage() {
                       <CheckCircle className="h-6 w-6 text-green-600" />
                     </div>
                     <div>
-                      <p className="text-2xl font-bold text-gray-900">{systemMetrics.completedTasks.toLocaleString()}</p>
+                      <p className="text-2xl font-bold text-gray-900">
+                        {systemMetrics.completedTasks.toLocaleString()}
+                      </p>
                       <p className="text-sm text-gray-500">Completed Tasks</p>
                     </div>
                   </div>
@@ -392,7 +421,9 @@ export default function SOTAdminDashboardPage() {
                       <Zap className="h-6 w-6 text-orange-600" />
                     </div>
                     <div>
-                      <p className="text-2xl font-bold text-gray-900">{systemMetrics.averageResponseTime}s</p>
+                      <p className="text-2xl font-bold text-gray-900">
+                        {systemMetrics.averageResponseTime}s
+                      </p>
                       <p className="text-sm text-gray-500">Avg Response</p>
                     </div>
                   </div>
@@ -408,11 +439,18 @@ export default function SOTAdminDashboardPage() {
               <CardContent>
                 <div className="space-y-4">
                   {agentMetrics.slice(0, 3).map((agent, index) => (
-                    <div key={index} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                    <div
+                      key={index}
+                      className="flex items-center justify-between p-3 bg-gray-50 rounded-lg"
+                    >
                       <div className="flex items-center space-x-3">
-                        <div className={`h-3 w-3 rounded-full ${agent.status === 'online' ? 'bg-green-500' : 'bg-red-500'}`}></div>
+                        <div
+                          className={`h-3 w-3 rounded-full ${agent.status === 'online' ? 'bg-green-500' : 'bg-red-500'}`}
+                        ></div>
                         <span className="font-medium">{agent.name}</span>
-                        <span className="text-sm text-gray-500">processed {agent.tasksProcessed} tasks</span>
+                        <span className="text-sm text-gray-500">
+                          processed {agent.tasksProcessed} tasks
+                        </span>
                       </div>
                       <div className="text-sm text-gray-500">
                         {agent.lastActivity.toLocaleTimeString()}
@@ -435,7 +473,9 @@ export default function SOTAdminDashboardPage() {
                         <CardTitle className="text-lg">{agent.name}</CardTitle>
                         <p className="text-sm text-gray-500">AI Agent</p>
                       </div>
-                      <div className={`h-3 w-3 rounded-full ${agent.status === 'online' ? 'bg-green-500' : 'bg-red-500'}`}></div>
+                      <div
+                        className={`h-3 w-3 rounded-full ${agent.status === 'online' ? 'bg-green-500' : 'bg-red-500'}`}
+                      ></div>
                     </div>
                   </CardHeader>
                   <CardContent>
@@ -489,8 +529,11 @@ export default function SOTAdminDashboardPage() {
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
-                  {fraudSignals.map((signal) => (
-                    <div key={signal.id} className="flex items-center justify-between p-4 border rounded-lg">
+                  {fraudSignals.map(signal => (
+                    <div
+                      key={signal.id}
+                      className="flex items-center justify-between p-4 border rounded-lg"
+                    >
                       <div className="flex items-center space-x-4">
                         <div className="h-10 w-10 bg-red-100 rounded-lg flex items-center justify-center">
                           <Shield className="h-5 w-5 text-red-600" />
@@ -501,9 +544,7 @@ export default function SOTAdminDashboardPage() {
                             <Badge className={getSeverityColor(signal.severity)}>
                               {signal.severity}
                             </Badge>
-                            <Badge variant="outline">
-                              {signal.confidence}% confidence
-                            </Badge>
+                            <Badge variant="outline">{signal.confidence}% confidence</Badge>
                           </div>
                           <p className="text-sm text-gray-600">{signal.description}</p>
                           <p className="text-xs text-gray-500">
@@ -536,8 +577,11 @@ export default function SOTAdminDashboardPage() {
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
-                  {escalations.map((escalation) => (
-                    <div key={escalation.id} className="flex items-center justify-between p-4 border rounded-lg">
+                  {escalations.map(escalation => (
+                    <div
+                      key={escalation.id}
+                      className="flex items-center justify-between p-4 border rounded-lg"
+                    >
                       <div className="flex items-center space-x-4">
                         <div className="h-10 w-10 bg-orange-100 rounded-lg flex items-center justify-center">
                           <AlertTriangle className="h-5 w-5 text-orange-600" />
@@ -548,9 +592,7 @@ export default function SOTAdminDashboardPage() {
                             <Badge className={getPriorityColor(escalation.priority)}>
                               {escalation.priority}
                             </Badge>
-                            <Badge variant="outline">
-                              {escalation.status}
-                            </Badge>
+                            <Badge variant="outline">{escalation.status}</Badge>
                           </div>
                           <p className="text-sm text-gray-600">{escalation.reason}</p>
                           <p className="text-xs text-gray-500">
@@ -577,4 +619,4 @@ export default function SOTAdminDashboardPage() {
       </div>
     </div>
   );
-} 
+}

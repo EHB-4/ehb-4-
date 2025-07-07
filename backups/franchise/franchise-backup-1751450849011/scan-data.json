@@ -28,18 +28,12 @@
     },
     {
       "type": "similar_name",
-      "files": [
-        "app\\franchise\\education\\page.tsx",
-        "app\\franchise\\health\\page.tsx"
-      ],
+      "files": ["app\\franchise\\education\\page.tsx", "app\\franchise\\health\\page.tsx"],
       "fileName": "page.tsx"
     },
     {
       "type": "similar_name",
-      "files": [
-        "app\\franchise\\health\\page.tsx",
-        "app\\franchise\\law\\page.tsx"
-      ],
+      "files": ["app\\franchise\\health\\page.tsx", "app\\franchise\\law\\page.tsx"],
       "fileName": "page.tsx"
     }
   ],

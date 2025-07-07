@@ -10,13 +10,13 @@ const EmailNotificationSchema = z.object({
   subject: z.string().min(1, 'Subject is required'),
   message: z.string().min(1, 'Message is required'),
   template: z.string().optional(),
-  data: z.record(z.any()).optional()
+  data: z.record(z.any()).optional(),
 });
 
 const SMSNotificationSchema = z.object({
   to: z.string().min(10, 'Valid phone number is required'),
   message: z.string().min(1, 'Message is required'),
-  template: z.string().optional()
+  template: z.string().optional(),
 });
 
 const InterviewNotificationSchema = z.object({
@@ -25,7 +25,7 @@ const InterviewNotificationSchema = z.object({
   interviewDate: z.string().min(1, 'Interview date is required'),
   interviewTime: z.string().min(1, 'Interview time is required'),
   location: z.string().min(1, 'Location is required'),
-  type: z.enum(['phone', 'video', 'in-person']).default('in-person')
+  type: z.enum(['phone', 'video', 'in-person']).default('in-person'),
 });
 
 // Roman Urdu: Mock notification service
@@ -39,7 +39,7 @@ class NotificationService {
         subject: data.subject,
         message: data.message,
         template: data.template,
-        timestamp: new Date().toISOString()
+        timestamp: new Date().toISOString(),
       });
 
       // Roman Urdu: Simulate email sending delay
@@ -48,7 +48,7 @@ class NotificationService {
       return {
         success: true,
         messageId: `email_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
-        timestamp: new Date().toISOString()
+        timestamp: new Date().toISOString(),
       };
     } catch (error) {
       console.error('Email sending error:', error);
@@ -64,7 +64,7 @@ class NotificationService {
         to: data.to,
         message: data.message,
         template: data.template,
-        timestamp: new Date().toISOString()
+        timestamp: new Date().toISOString(),
       });
 
       // Roman Urdu: Simulate SMS sending delay
@@ -73,7 +73,7 @@ class NotificationService {
       return {
         success: true,
         messageId: `sms_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
-        timestamp: new Date().toISOString()
+        timestamp: new Date().toISOString(),
       };
     } catch (error) {
       console.error('SMS sending error:', error);
@@ -89,13 +89,13 @@ class NotificationService {
         id: data.candidateId,
         name: 'Ahmed Khan',
         email: 'ahmed.khan@email.com',
-        phone: '+92-300-1234567'
+        phone: '+92-300-1234567',
       };
 
       const job = {
         id: data.jobId,
         title: 'Senior React Developer',
-        company: 'TechCorp Solutions'
+        company: 'TechCorp Solutions',
       };
 
       // Roman Urdu: Generate email content
@@ -125,13 +125,13 @@ class NotificationService {
         to: candidate.email,
         subject: emailSubject,
         message: emailMessage,
-        template: 'interview-invitation'
+        template: 'interview-invitation',
       });
 
       const smsResult = await this.sendSMS({
         to: candidate.phone,
         message: smsMessage,
-        template: 'interview-reminder'
+        template: 'interview-reminder',
       });
 
       return {
@@ -140,7 +140,7 @@ class NotificationService {
         sms: smsResult,
         candidate,
         job,
-        interviewDetails: data
+        interviewDetails: data,
       };
     } catch (error) {
       console.error('Interview notification error:', error);
@@ -175,20 +175,20 @@ class NotificationService {
         to: placementData.candidateEmail,
         subject: emailSubject,
         message: emailMessage,
-        template: 'placement-confirmation'
+        template: 'placement-confirmation',
       });
 
       const smsResult = await this.sendSMS({
         to: placementData.candidatePhone,
         message: smsMessage,
-        template: 'placement-notification'
+        template: 'placement-notification',
       });
 
       return {
         success: true,
         email: emailResult,
         sms: smsResult,
-        placementData
+        placementData,
       };
     } catch (error) {
       console.error('Placement confirmation error:', error);
@@ -200,10 +200,11 @@ class NotificationService {
   static async sendApplicationStatusUpdate(applicationData: any) {
     try {
       const statusMessages = {
-        'shortlisted': 'You have been shortlisted for the next round.',
-        'rejected': 'Thank you for your interest. We regret to inform you that your application was not selected.',
-        'pending': 'Your application is under review. We will contact you soon.',
-        'interview': 'You have been selected for an interview.'
+        shortlisted: 'You have been shortlisted for the next round.',
+        rejected:
+          'Thank you for your interest. We regret to inform you that your application was not selected.',
+        pending: 'Your application is under review. We will contact you soon.',
+        interview: 'You have been selected for an interview.',
       };
 
       const emailSubject = `Application Status Update - ${applicationData.jobTitle}`;
@@ -227,20 +228,20 @@ class NotificationService {
         to: applicationData.candidateEmail,
         subject: emailSubject,
         message: emailMessage,
-        template: 'application-status'
+        template: 'application-status',
       });
 
       const smsResult = await this.sendSMS({
         to: applicationData.candidatePhone,
         message: smsMessage,
-        template: 'status-update'
+        template: 'status-update',
       });
 
       return {
         success: true,
         email: emailResult,
         sms: smsResult,
-        applicationData
+        applicationData,
       };
     } catch (error) {
       console.error('Application status update error:', error);
@@ -264,7 +265,7 @@ export async function GET(request: NextRequest) {
         recipient: 'ahmed.khan@email.com',
         subject: 'Interview Invitation - Senior React Developer',
         status: 'sent',
-        timestamp: new Date(Date.now() - 3600000).toISOString()
+        timestamp: new Date(Date.now() - 3600000).toISOString(),
       },
       {
         id: '2',
@@ -272,8 +273,8 @@ export async function GET(request: NextRequest) {
         recipient: '+92-300-1234567',
         message: 'Interview reminder for tomorrow',
         status: 'sent',
-        timestamp: new Date(Date.now() - 7200000).toISOString()
-      }
+        timestamp: new Date(Date.now() - 7200000).toISOString(),
+      },
     ];
 
     if (type) {
@@ -323,11 +324,17 @@ export async function POST(request: NextRequest) {
     }
   } catch (error) {
     if (error instanceof z.ZodError) {
-      return NextResponse.json({ error: 'Validation error', details: error.errors }, { status: 400 });
+      return NextResponse.json(
+        { error: 'Validation error', details: error.errors },
+        { status: 400 }
+      );
     }
     console.error('Notifications POST Error:', error);
-    return NextResponse.json({ 
-      error: error instanceof Error ? error.message : 'Internal server error' 
-    }, { status: 500 });
+    return NextResponse.json(
+      {
+        error: error instanceof Error ? error.message : 'Internal server error',
+      },
+      { status: 500 }
+    );
   }
-} 
+}

@@ -4,8 +4,6 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
-import { prisma } from '../lib/prisma';
-
 export type ApiKeyRole = 'admin' | 'public' | 'internal';
 
 interface ApiKeyConfig {
@@ -33,11 +31,12 @@ export function apiKeyCheck(config: ApiKeyConfig = { requireApiKey: true }) {
     }
 
     try {
+      // TODO: Replace with AWS data access
       // Validate API key from database
-      const keyData = await prisma.apiKey.findUnique({
-        where: { key: apiKey },
-        include: { user: true },
-      });
+      // const keyData = await prisma.apiKey.findUnique({
+      //   where: { key: apiKey },
+      //   include: { user: true },
+      // });
 
       if (!keyData) {
         return res.status(401).json({
@@ -78,15 +77,15 @@ export function apiKeyCheck(config: ApiKeyConfig = { requireApiKey: true }) {
       req.apiKey = keyData;
 
       // Log API access
-      await prisma.apiAccessLog.create({
-        data: {
-          apiKeyId: keyData.id,
-          endpoint: req.url || '',
-          method: req.method,
-          ip: clientIP as string,
-          userAgent: req.headers['user-agent'] || '',
-        },
-      });
+      // await prisma.apiAccessLog.create({
+      //   data: {
+      //     apiKeyId: keyData.id,
+      //     endpoint: req.url || '',
+      //     method: req.method,
+      //     ip: clientIP as string,
+      //     userAgent: req.headers['user-agent'] || '',
+      //   },
+      // });
 
       next();
     } catch (error) {

@@ -13,7 +13,7 @@ class HealthChecker {
       timestamp: new Date().toISOString(),
       overall: 'healthy',
       checks: {},
-      errors: []
+      errors: [],
     };
   }
 
@@ -24,18 +24,18 @@ class HealthChecker {
 
   // Check if the application is responding
   async checkAppHealth() {
-    return new Promise((resolve) => {
+    return new Promise(resolve => {
       const options = {
         hostname: 'localhost',
         port: process.env.PORT || 3000,
         path: '/health',
         method: 'GET',
-        timeout: 5000
+        timeout: 5000,
       };
 
-      const req = http.request(options, (res) => {
+      const req = http.request(options, res => {
         let data = '';
-        res.on('data', (chunk) => {
+        res.on('data', chunk => {
           data += chunk;
         });
         res.on('end', () => {
@@ -47,7 +47,7 @@ class HealthChecker {
         });
       });
 
-      req.on('error', (error) => {
+      req.on('error', error => {
         resolve({ status: 'unhealthy', error: error.message });
       });
 
@@ -84,7 +84,7 @@ class HealthChecker {
 
   // Check disk space
   async checkDiskSpace() {
-    return new Promise((resolve) => {
+    return new Promise(resolve => {
       exec('df -h .', (error, stdout, stderr) => {
         if (error) {
           resolve({ status: 'unhealthy', error: error.message });
@@ -106,7 +106,7 @@ class HealthChecker {
 
   // Check memory usage
   async checkMemoryUsage() {
-    return new Promise((resolve) => {
+    return new Promise(resolve => {
       exec('free -m', (error, stdout, stderr) => {
         if (error) {
           resolve({ status: 'unhealthy', error: error.message });
@@ -130,31 +130,29 @@ class HealthChecker {
 
   // Check CPU usage
   async checkCPUUsage() {
-    return new Promise((resolve) => {
-      exec('top -bn1 | grep "Cpu(s)" | awk \'{print $2}\' | awk -F\'%\' \'{print $1}\'', (error, stdout, stderr) => {
-        if (error) {
-          resolve({ status: 'unhealthy', error: error.message });
-          return;
-        }
+    return new Promise(resolve => {
+      exec(
+        "top -bn1 | grep \"Cpu(s)\" | awk '{print $2}' | awk -F'%' '{print $1}'",
+        (error, stdout, stderr) => {
+          if (error) {
+            resolve({ status: 'unhealthy', error: error.message });
+            return;
+          }
 
-        const cpuUsage = parseFloat(stdout.trim());
-        if (cpuUsage > 80) {
-          resolve({ status: 'warning', message: `CPU usage: ${cpuUsage}%` });
-        } else {
-          resolve({ status: 'healthy', message: `CPU usage: ${cpuUsage}%` });
+          const cpuUsage = parseFloat(stdout.trim());
+          if (cpuUsage > 80) {
+            resolve({ status: 'warning', message: `CPU usage: ${cpuUsage}%` });
+          } else {
+            resolve({ status: 'healthy', message: `CPU usage: ${cpuUsage}%` });
+          }
         }
-      });
+      );
     });
   }
 
   // Check if required files exist
   async checkRequiredFiles() {
-    const requiredFiles = [
-      'package.json',
-      'next.config.js',
-      'tailwind.config.js',
-      'tsconfig.json'
-    ];
+    const requiredFiles = ['package.json', 'next.config.js', 'tailwind.config.js', 'tsconfig.json'];
 
     const missingFiles = [];
     for (const file of requiredFiles) {
@@ -172,11 +170,7 @@ class HealthChecker {
 
   // Check environment variables
   async checkEnvironmentVariables() {
-    const requiredEnvVars = [
-      'NODE_ENV',
-      'DATABASE_URL',
-      'JWT_SECRET'
-    ];
+    const requiredEnvVars = ['NODE_ENV', 'DATABASE_URL', 'JWT_SECRET'];
 
     const missingEnvVars = [];
     for (const envVar of requiredEnvVars) {
@@ -186,7 +180,10 @@ class HealthChecker {
     }
 
     if (missingEnvVars.length > 0) {
-      return { status: 'unhealthy', error: `Missing environment variables: ${missingEnvVars.join(', ')}` };
+      return {
+        status: 'unhealthy',
+        error: `Missing environment variables: ${missingEnvVars.join(', ')}`,
+      };
     }
 
     return { status: 'healthy', message: 'All required environment variables set' };
@@ -229,7 +226,9 @@ class HealthChecker {
     }
 
     // Determine overall status
-    const hasUnhealthy = Object.values(this.results.checks).some(check => check.status === 'unhealthy');
+    const hasUnhealthy = Object.values(this.results.checks).some(
+      check => check.status === 'unhealthy'
+    );
     const hasWarning = Object.values(this.results.checks).some(check => check.status === 'warning');
 
     if (hasUnhealthy) {
@@ -265,7 +264,7 @@ class HealthChecker {
   exportResults() {
     return {
       status: this.results.overall === 'healthy' ? 200 : 503,
-      body: this.results
+      body: this.results,
     };
   }
 }
@@ -273,8 +272,9 @@ class HealthChecker {
 // Run health checks if this script is executed directly
 if (require.main === module) {
   const healthChecker = new HealthChecker();
-  
-  healthChecker.runChecks()
+
+  healthChecker
+    .runChecks()
     .then(() => {
       healthChecker.saveResults();
       process.exit(healthChecker.results.overall === 'healthy' ? 0 : 1);
@@ -285,4 +285,4 @@ if (require.main === module) {
     });
 }
 
-module.exports = HealthChecker; 
+module.exports = HealthChecker;

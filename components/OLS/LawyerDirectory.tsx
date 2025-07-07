@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import { useState } from 'react';
 import { FiSearch, FiFilter, FiStar, FiMapPin, FiBriefcase } from 'react-icons/fi';

@@ -293,10 +293,10 @@ function showStatus() {
           s.status === 'complete'
             ? '✅'
             : s.status === 'working'
-            ? '🔄'
-            : s.status === 'under-dev'
-            ? '🚧'
-            : '⏳';
+              ? '🔄'
+              : s.status === 'under-dev'
+                ? '🚧'
+                : '⏳';
         const autoIcon = s.autoStart ? '🚀' : '⏸️';
         console.log(`   ${statusIcon} ${s.name} (${s.fullName}) - Port: ${s.port} ${autoIcon}`);
       });

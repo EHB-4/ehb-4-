@@ -1,10 +1,10 @@
-"use client";
+'use client';
 
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { 
-  UserIcon, 
+import {
+  UserIcon,
   AcademicCapIcon,
   BriefcaseIcon,
   StarIcon,
@@ -20,7 +20,7 @@ import {
   TrashIcon,
   EyeIcon,
   DocumentTextIcon,
-  CurrencyDollarIcon
+  CurrencyDollarIcon,
 } from '@heroicons/react/24/outline';
 
 interface CandidateProfilesProps {
@@ -103,8 +103,8 @@ const CandidateProfiles: React.FC<CandidateProfilesProps> = ({ userType }) => {
             degree: 'Bachelor of Computer Science',
             institution: 'Stanford University',
             year: '2018',
-            gpa: '3.8'
-          }
+            gpa: '3.8',
+          },
         ],
         workHistory: [
           {
@@ -112,15 +112,15 @@ const CandidateProfiles: React.FC<CandidateProfilesProps> = ({ userType }) => {
             title: 'Senior Frontend Developer',
             company: 'TechCorp Inc.',
             duration: '2020 - Present',
-            description: 'Led frontend development for multiple web applications...'
+            description: 'Led frontend development for multiple web applications...',
           },
           {
             id: '2',
             title: 'Frontend Developer',
             company: 'StartupXYZ',
             duration: '2018 - 2020',
-            description: 'Developed responsive web applications using React...'
-          }
+            description: 'Developed responsive web applications using React...',
+          },
         ],
         certifications: [
           {
@@ -128,14 +128,14 @@ const CandidateProfiles: React.FC<CandidateProfilesProps> = ({ userType }) => {
             name: 'AWS Certified Developer',
             issuer: 'Amazon Web Services',
             date: '2022',
-            expiry: '2025'
-          }
+            expiry: '2025',
+          },
         ],
         matchScore: 95,
         status: 'verified',
         lastActive: '2 hours ago',
         salary: '$120,000 - $150,000',
-        availability: 'Available immediately'
+        availability: 'Available immediately',
       },
       {
         id: '2',
@@ -153,8 +153,8 @@ const CandidateProfiles: React.FC<CandidateProfilesProps> = ({ userType }) => {
             degree: 'Master of Software Engineering',
             institution: 'MIT',
             year: '2020',
-            gpa: '3.9'
-          }
+            gpa: '3.9',
+          },
         ],
         workHistory: [
           {
@@ -162,8 +162,8 @@ const CandidateProfiles: React.FC<CandidateProfilesProps> = ({ userType }) => {
             title: 'Full Stack Developer',
             company: 'AI Solutions',
             duration: '2021 - Present',
-            description: 'Built scalable web applications using modern technologies...'
-          }
+            description: 'Built scalable web applications using modern technologies...',
+          },
         ],
         certifications: [
           {
@@ -171,14 +171,14 @@ const CandidateProfiles: React.FC<CandidateProfilesProps> = ({ userType }) => {
             name: 'Google Cloud Professional Developer',
             issuer: 'Google',
             date: '2023',
-            expiry: '2026'
-          }
+            expiry: '2026',
+          },
         ],
         matchScore: 87,
         status: 'active',
         lastActive: '1 day ago',
         salary: '$90,000 - $110,000',
-        availability: 'Available in 2 weeks'
+        availability: 'Available in 2 weeks',
       },
       {
         id: '3',
@@ -196,8 +196,8 @@ const CandidateProfiles: React.FC<CandidateProfilesProps> = ({ userType }) => {
             degree: 'Bachelor of Information Technology',
             institution: 'University of Texas',
             year: '2019',
-            gpa: '3.7'
-          }
+            gpa: '3.7',
+          },
         ],
         workHistory: [
           {
@@ -205,8 +205,8 @@ const CandidateProfiles: React.FC<CandidateProfilesProps> = ({ userType }) => {
             title: 'DevOps Engineer',
             company: 'CloudTech',
             duration: '2020 - Present',
-            description: 'Managed cloud infrastructure and CI/CD pipelines...'
-          }
+            description: 'Managed cloud infrastructure and CI/CD pipelines...',
+          },
         ],
         certifications: [
           {
@@ -214,15 +214,15 @@ const CandidateProfiles: React.FC<CandidateProfilesProps> = ({ userType }) => {
             name: 'Kubernetes Administrator',
             issuer: 'CNCF',
             date: '2022',
-            expiry: '2025'
-          }
+            expiry: '2025',
+          },
         ],
         matchScore: 82,
         status: 'active',
         lastActive: '3 days ago',
         salary: '$100,000 - $130,000',
-        availability: 'Available immediately'
-      }
+        availability: 'Available immediately',
+      },
     ];
 
     setCandidates(mockCandidates);
@@ -256,13 +256,14 @@ const CandidateProfiles: React.FC<CandidateProfilesProps> = ({ userType }) => {
   };
 
   const filteredCandidates = candidates.filter(candidate => {
-    const matchesSearch = candidate.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         candidate.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         candidate.skills.some(skill => skill.toLowerCase().includes(searchTerm.toLowerCase()));
-    
-    const matchesSkills = selectedSkills.length === 0 || 
-                         selectedSkills.some(skill => candidate.skills.includes(skill));
-    
+    const matchesSearch =
+      candidate.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      candidate.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      candidate.skills.some(skill => skill.toLowerCase().includes(searchTerm.toLowerCase()));
+
+    const matchesSkills =
+      selectedSkills.length === 0 || selectedSkills.some(skill => candidate.skills.includes(skill));
+
     return matchesSearch && matchesSkills;
   });
 
@@ -281,10 +282,12 @@ const CandidateProfiles: React.FC<CandidateProfilesProps> = ({ userType }) => {
         <div>
           <h2 className="text-2xl font-bold text-gray-900">Candidate Profiles</h2>
           <p className="text-gray-600">
-            {userType === 'jobseeker' ? 'Manage your professional profile' : 'Browse and evaluate candidates'}
+            {userType === 'jobseeker'
+              ? 'Manage your professional profile'
+              : 'Browse and evaluate candidates'}
           </p>
         </div>
-        
+
         {userType === 'jobseeker' && (
           <button
             onClick={() => setShowProfileModal(true)}
@@ -305,7 +308,7 @@ const CandidateProfiles: React.FC<CandidateProfilesProps> = ({ userType }) => {
               type="text"
               placeholder="Search candidates..."
               value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
+              onChange={e => setSearchTerm(e.target.value)}
               className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             />
             <UserIcon className="h-5 w-5 absolute left-3 top-3 text-gray-400" />
@@ -314,7 +317,7 @@ const CandidateProfiles: React.FC<CandidateProfilesProps> = ({ userType }) => {
           {/* Skills Filter */}
           <select
             value={selectedSkills[0] || ''}
-            onChange={(e) => setSelectedSkills(e.target.value ? [e.target.value] : [])}
+            onChange={e => setSelectedSkills(e.target.value ? [e.target.value] : [])}
             className="px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             aria-label="Filter by skills"
           >
@@ -342,8 +345,11 @@ const CandidateProfiles: React.FC<CandidateProfilesProps> = ({ userType }) => {
 
       {/* Candidate Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {filteredCandidates.map((candidate) => (
-          <div key={candidate.id} className="bg-white rounded-lg shadow hover:shadow-md transition-shadow">
+        {filteredCandidates.map(candidate => (
+          <div
+            key={candidate.id}
+            className="bg-white rounded-lg shadow hover:shadow-md transition-shadow"
+          >
             {/* Header */}
             <div className="p-6 border-b border-gray-200">
               <div className="flex items-center space-x-4">
@@ -356,7 +362,9 @@ const CandidateProfiles: React.FC<CandidateProfilesProps> = ({ userType }) => {
                   <h3 className="text-lg font-semibold text-gray-900 truncate">{candidate.name}</h3>
                   <p className="text-sm text-gray-600 truncate">{candidate.title}</p>
                   <div className="flex items-center space-x-2 mt-1">
-                    <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(candidate.status)}`}>
+                    <span
+                      className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(candidate.status)}`}
+                    >
                       {getStatusIcon(candidate.status)}
                       <span className="ml-1">{candidate.status}</span>
                     </span>
@@ -417,10 +425,8 @@ const CandidateProfiles: React.FC<CandidateProfilesProps> = ({ userType }) => {
 
               {/* Actions */}
               <div className="flex items-center justify-between pt-4 border-t border-gray-200">
-                <span className="text-sm text-gray-600">
-                  Last active: {candidate.lastActive}
-                </span>
-                
+                <span className="text-sm text-gray-600">Last active: {candidate.lastActive}</span>
+
                 <div className="flex items-center space-x-2">
                   <button
                     onClick={() => setSelectedCandidate(candidate)}
@@ -429,7 +435,7 @@ const CandidateProfiles: React.FC<CandidateProfilesProps> = ({ userType }) => {
                     <EyeIcon className="h-4 w-4 mr-1" />
                     View Profile
                   </button>
-                  
+
                   {userType === 'employer' && (
                     <button className="px-3 py-1 text-sm bg-blue-600 text-white rounded-md hover:bg-blue-700">
                       Contact
@@ -514,7 +520,7 @@ const CandidateProfiles: React.FC<CandidateProfilesProps> = ({ userType }) => {
                 <div>
                   <h4 className="text-lg font-semibold mb-3">Work History</h4>
                   <div className="space-y-4">
-                    {selectedCandidate.workHistory.map((work) => (
+                    {selectedCandidate.workHistory.map(work => (
                       <div key={work.id} className="border-l-4 border-blue-500 pl-4">
                         <h5 className="font-medium">{work.title}</h5>
                         <p className="text-sm text-gray-600">{work.company}</p>
@@ -529,7 +535,7 @@ const CandidateProfiles: React.FC<CandidateProfilesProps> = ({ userType }) => {
                 <div>
                   <h4 className="text-lg font-semibold mb-3">Education</h4>
                   <div className="space-y-3">
-                    {selectedCandidate.education.map((edu) => (
+                    {selectedCandidate.education.map(edu => (
                       <div key={edu.id} className="flex justify-between items-start">
                         <div>
                           <h5 className="font-medium">{edu.degree}</h5>
@@ -549,7 +555,7 @@ const CandidateProfiles: React.FC<CandidateProfilesProps> = ({ userType }) => {
                   <div>
                     <h4 className="text-lg font-semibold mb-3">Certifications</h4>
                     <div className="space-y-3">
-                      {selectedCandidate.certifications.map((cert) => (
+                      {selectedCandidate.certifications.map(cert => (
                         <div key={cert.id} className="flex justify-between items-center">
                           <div>
                             <h5 className="font-medium">{cert.name}</h5>
@@ -557,7 +563,9 @@ const CandidateProfiles: React.FC<CandidateProfilesProps> = ({ userType }) => {
                           </div>
                           <div className="text-right">
                             <p className="text-sm text-gray-600">{cert.date}</p>
-                            {cert.expiry && <p className="text-sm text-gray-500">Expires: {cert.expiry}</p>}
+                            {cert.expiry && (
+                              <p className="text-sm text-gray-500">Expires: {cert.expiry}</p>
+                            )}
                           </div>
                         </div>
                       ))}
@@ -592,4 +600,4 @@ const CandidateProfiles: React.FC<CandidateProfilesProps> = ({ userType }) => {
   );
 };
 
-export default CandidateProfiles; 
+export default CandidateProfiles;

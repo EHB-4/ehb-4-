@@ -24,7 +24,7 @@ import {
   Loader2,
   Zap,
   TrendingUp,
-  Activity
+  Activity,
 } from 'lucide-react';
 
 // Roman Urdu: Lazy load components for better performance
@@ -49,18 +49,18 @@ const usePerformanceMonitor = () => {
   const [metrics, setMetrics] = useState({
     renderTime: 0,
     memoryUsage: 0,
-    componentLoads: 0
+    componentLoads: 0,
   });
 
   useEffect(() => {
     const startTime = performance.now();
-    
+
     return () => {
       const endTime = performance.now();
       setMetrics(prev => ({
         ...prev,
         renderTime: endTime - startTime,
-        componentLoads: prev.componentLoads + 1
+        componentLoads: prev.componentLoads + 1,
       }));
     };
   }, []);
@@ -97,19 +97,22 @@ export default function JPSPerformanceOptimized({ userType }: JPSPerformanceOpti
   const metrics = usePerformanceMonitor();
 
   // Roman Urdu: Memoized navigation tabs
-  const tabs = useMemo(() => [
-    { id: 'dashboard', label: 'Dashboard', icon: Home, priority: 'high' },
-    { id: 'jobs', label: 'Jobs', icon: Briefcase, priority: 'high' },
-    { id: 'candidates', label: 'Candidates', icon: Users, priority: 'high' },
-    { id: 'interviews', label: 'Interviews', icon: Calendar, priority: 'medium' },
-    { id: 'analytics', label: 'Analytics', icon: BarChart3, priority: 'medium' },
-    { id: 'payments', label: 'Payments', icon: CreditCard, priority: 'low' },
-    { id: 'notifications', label: 'Notifications', icon: Mail, priority: 'low' },
-    { id: 'language', label: 'Language', icon: Globe, priority: 'low' },
-    { id: 'security', label: 'Security', icon: Shield, priority: 'medium' },
-    { id: 'dragdrop', label: 'Drag & Drop', icon: Move, priority: 'low' },
-    { id: 'content', label: 'Content', icon: PenTool, priority: 'low' }
-  ], []);
+  const tabs = useMemo(
+    () => [
+      { id: 'dashboard', label: 'Dashboard', icon: Home, priority: 'high' },
+      { id: 'jobs', label: 'Jobs', icon: Briefcase, priority: 'high' },
+      { id: 'candidates', label: 'Candidates', icon: Users, priority: 'high' },
+      { id: 'interviews', label: 'Interviews', icon: Calendar, priority: 'medium' },
+      { id: 'analytics', label: 'Analytics', icon: BarChart3, priority: 'medium' },
+      { id: 'payments', label: 'Payments', icon: CreditCard, priority: 'low' },
+      { id: 'notifications', label: 'Notifications', icon: Mail, priority: 'low' },
+      { id: 'language', label: 'Language', icon: Globe, priority: 'low' },
+      { id: 'security', label: 'Security', icon: Shield, priority: 'medium' },
+      { id: 'dragdrop', label: 'Drag & Drop', icon: Move, priority: 'low' },
+      { id: 'content', label: 'Content', icon: PenTool, priority: 'low' },
+    ],
+    []
+  );
 
   // Roman Urdu: Optimized mobile detection
   useEffect(() => {
@@ -119,11 +122,11 @@ export default function JPSPerformanceOptimized({ userType }: JPSPerformanceOpti
         setIsMobile(isMobileView);
       }
     };
-    
+
     checkMobile();
     const debouncedCheck = debounce(checkMobile, 250);
     window.addEventListener('resize', debouncedCheck);
-    
+
     return () => window.removeEventListener('resize', debouncedCheck);
   }, [isMobile]);
 
@@ -137,15 +140,18 @@ export default function JPSPerformanceOptimized({ userType }: JPSPerformanceOpti
   }, []);
 
   // Roman Urdu: Cached data fetching
-  const fetchCachedData = useCallback(async (key: string, fetcher: () => Promise<any>) => {
-    if (cache.has(key)) {
-      return cache.get(key);
-    }
-    
-    const data = await fetcher();
-    setCache(prev => new Map(prev).set(key, data));
-    return data;
-  }, [cache]);
+  const fetchCachedData = useCallback(
+    async (key: string, fetcher: () => Promise<any>) => {
+      if (cache.has(key)) {
+        return cache.get(key);
+      }
+
+      const data = await fetcher();
+      setCache(prev => new Map(prev).set(key, data));
+      return data;
+    },
+    [cache]
+  );
 
   // Roman Urdu: Optimized notifications loading
   useEffect(() => {
@@ -156,24 +162,24 @@ export default function JPSPerformanceOptimized({ userType }: JPSPerformanceOpti
           type: 'interview',
           message: 'New interview scheduled for Senior Developer position',
           recipient: 'ahmed.khan@email.com',
-          status: 'success'
+          status: 'success',
         },
         {
           id: 2,
           type: 'placement',
           message: 'Congratulations! You have been placed at TechCorp Solutions',
           recipient: 'sarah.ahmed@email.com',
-          status: 'success'
+          status: 'success',
         },
         {
           id: 3,
           type: 'job',
           message: 'New job posting: React Developer at Digital Solutions',
           recipient: 'admin@jps.com',
-          status: 'info'
-        }
+          status: 'info',
+        },
       ]);
-      
+
       setNotifications(cachedNotifications);
     };
 
@@ -193,13 +199,13 @@ export default function JPSPerformanceOptimized({ userType }: JPSPerformanceOpti
       language: MultiLanguageSupport,
       security: AdvancedSecurity,
       dragdrop: DragAndDrop,
-      content: ContentWriting
+      content: ContentWriting,
     };
 
     const Component = componentMap[activeTab];
     return Component ? (
       <Suspense fallback={<LoadingSkeleton />}>
-        <Component 
+        <Component
           userType={userType}
           onValidation={setSecurityValid}
           currentLanguage={currentLanguage}
@@ -229,7 +235,7 @@ export default function JPSPerformanceOptimized({ userType }: JPSPerformanceOpti
           <div className="bg-white rounded-lg shadow-sm p-6">
             <h2 className="text-xl font-bold text-gray-900 mb-4">Mobile Optimized View</h2>
             <div className="space-y-4">
-              {tabs.slice(0, 6).map((tab) => (
+              {tabs.slice(0, 6).map(tab => (
                 <button
                   key={tab.id}
                   onClick={() => setActiveTab(tab.id)}
@@ -268,7 +274,7 @@ export default function JPSPerformanceOptimized({ userType }: JPSPerformanceOpti
               <span className="text-sm text-gray-600">Performance Mode</span>
             </div>
           </div>
-          
+
           <div className="flex items-center space-x-4">
             {/* Performance Metrics */}
             <div className="hidden md:flex items-center space-x-2 text-xs text-gray-500">
@@ -277,7 +283,7 @@ export default function JPSPerformanceOptimized({ userType }: JPSPerformanceOpti
               <TrendingUp className="h-3 w-3" />
               <span>{metrics.componentLoads} loads</span>
             </div>
-            
+
             <button
               onClick={togglePerformanceMode}
               className={`p-2 rounded-lg ${
@@ -287,17 +293,17 @@ export default function JPSPerformanceOptimized({ userType }: JPSPerformanceOpti
             >
               <Zap className="h-4 w-4" />
             </button>
-            
+
             <div className="relative">
               <Bell className="h-5 w-5 text-gray-600 cursor-pointer" />
               <span className="absolute -top-1 -right-1 h-3 w-3 bg-red-500 rounded-full"></span>
             </div>
-            
+
             <div className="flex items-center space-x-2">
               <User className="h-5 w-5 text-gray-600" />
               <span className="text-sm font-medium text-gray-700 capitalize">{userType}</span>
             </div>
-            
+
             <button className="p-2 text-gray-600 hover:text-gray-900">
               <LogOut className="h-5 w-5" />
             </button>
@@ -307,10 +313,12 @@ export default function JPSPerformanceOptimized({ userType }: JPSPerformanceOpti
 
       <div className="flex">
         {/* Optimized Sidebar */}
-        <aside className={`bg-white shadow-sm ${showSidebar ? 'block' : 'hidden'} lg:block lg:w-64`}>
+        <aside
+          className={`bg-white shadow-sm ${showSidebar ? 'block' : 'hidden'} lg:block lg:w-64`}
+        >
           <nav className="p-4">
             <div className="space-y-2">
-              {tabs.map((tab) => (
+              {tabs.map(tab => (
                 <motion.button
                   key={tab.id}
                   onClick={() => setActiveTab(tab.id)}
@@ -352,15 +360,15 @@ export default function JPSPerformanceOptimized({ userType }: JPSPerformanceOpti
       {/* Performance Status */}
       <div className="fixed bottom-4 right-4 bg-white rounded-lg shadow-lg p-4 border">
         <div className="flex items-center space-x-2 text-sm">
-          <div className={`h-2 w-2 rounded-full ${securityValid ? 'bg-green-500' : 'bg-yellow-500'}`}></div>
+          <div
+            className={`h-2 w-2 rounded-full ${securityValid ? 'bg-green-500' : 'bg-yellow-500'}`}
+          ></div>
           <span className="text-gray-600">
             {securityValid ? 'System Secure' : 'Security Check Required'}
           </span>
-          {performanceMode && (
-            <Zap className="h-3 w-3 text-green-500 ml-2" />
-          )}
+          {performanceMode && <Zap className="h-3 w-3 text-green-500 ml-2" />}
         </div>
       </div>
     </div>
   );
-} 
+}

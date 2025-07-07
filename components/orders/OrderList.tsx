@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import { Package, Eye } from 'lucide-react';
 import React from 'react';

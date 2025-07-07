@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import { motion } from 'framer-motion';
 import React from 'react';
@@ -29,7 +29,7 @@ const levelNames = {
   1: 'Basic',
   2: 'Normal',
   3: 'High',
-  4: 'VIP'
+  4: 'VIP',
 };
 
 const levelColors = {
@@ -37,7 +37,7 @@ const levelColors = {
   1: 'green',
   2: 'yellow',
   3: 'orange',
-  4: 'purple'
+  4: 'purple',
 };
 
 export default function SQLUserInfo({
@@ -56,7 +56,7 @@ export default function SQLUserInfo({
   activeCoinLocks,
   totalLockedAmount,
   recentSkillTests,
-  className = ''
+  className = '',
 }: SQLUserInfoProps) {
   const levelName = levelNames[currentLevel as keyof typeof levelNames];
   const levelColor = levelColors[currentLevel as keyof typeof levelColors];
@@ -103,7 +103,9 @@ export default function SQLUserInfo({
               <p className="text-sm text-gray-500">Service Quality Level</p>
             </div>
           </div>
-          <div className={`px-3 py-1 rounded-full border text-sm font-medium flex items-center space-x-1 ${getStatusColor(verificationStatus)}`}>
+          <div
+            className={`px-3 py-1 rounded-full border text-sm font-medium flex items-center space-x-1 ${getStatusColor(verificationStatus)}`}
+          >
             {getStatusIcon(verificationStatus)}
             <span className="capitalize">{verificationStatus}</span>
           </div>
@@ -204,7 +206,9 @@ export default function SQLUserInfo({
               <FiTrendingUp className="w-5 h-5 text-green-600" />
               <span className="font-medium text-green-900">Total Locked</span>
             </div>
-            <p className="text-2xl font-bold text-green-600">{totalLockedAmount.toLocaleString()}</p>
+            <p className="text-2xl font-bold text-green-600">
+              {totalLockedAmount.toLocaleString()}
+            </p>
             <p className="text-sm text-green-700">EHBGC coins locked</p>
           </div>
           <div className="bg-purple-50 rounded-lg p-4">
@@ -229,12 +233,19 @@ export default function SQLUserInfo({
           <h3 className="text-lg font-semibold text-gray-900 mb-4">Recent Skill Tests</h3>
           <div className="space-y-3">
             {recentSkillTests.map((test, index) => (
-              <div key={index} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+              <div
+                key={index}
+                className="flex items-center justify-between p-3 bg-gray-50 rounded-lg"
+              >
                 <div className="flex items-center space-x-3">
-                  <div className={`w-3 h-3 rounded-full ${test.passed ? 'bg-green-500' : 'bg-red-500'}`} />
+                  <div
+                    className={`w-3 h-3 rounded-full ${test.passed ? 'bg-green-500' : 'bg-red-500'}`}
+                  />
                   <div>
                     <p className="text-sm font-medium text-gray-900">{test.type} Test</p>
-                    <p className="text-xs text-gray-500">{new Date(test.date).toLocaleDateString()}</p>
+                    <p className="text-xs text-gray-500">
+                      {new Date(test.date).toLocaleDateString()}
+                    </p>
                   </div>
                 </div>
                 <div className="text-right">
@@ -256,22 +267,27 @@ export default function SQLUserInfo({
           className="bg-white rounded-xl shadow-sm border p-6"
         >
           <h3 className="text-lg font-semibold text-gray-900 mb-4">Upgrade Eligibility</h3>
-          <div className={`p-4 rounded-lg ${upgradeEligibility.eligible ? 'bg-green-50 border border-green-200' : 'bg-yellow-50 border border-yellow-200'}`}>
+          <div
+            className={`p-4 rounded-lg ${upgradeEligibility.eligible ? 'bg-green-50 border border-green-200' : 'bg-yellow-50 border border-yellow-200'}`}
+          >
             <div className="flex items-center space-x-2 mb-2">
               {upgradeEligibility.eligible ? (
                 <FiAward className="w-5 h-5 text-green-600" />
               ) : (
                 <FiAlertCircle className="w-5 h-5 text-yellow-600" />
               )}
-              <span className={`font-medium ${upgradeEligibility.eligible ? 'text-green-900' : 'text-yellow-900'}`}>
+              <span
+                className={`font-medium ${upgradeEligibility.eligible ? 'text-green-900' : 'text-yellow-900'}`}
+              >
                 {upgradeEligibility.eligible ? 'Eligible for Upgrade' : 'Requirements Pending'}
               </span>
             </div>
-            <p className={`text-sm ${upgradeEligibility.eligible ? 'text-green-700' : 'text-yellow-700'}`}>
-              {upgradeEligibility.eligible 
+            <p
+              className={`text-sm ${upgradeEligibility.eligible ? 'text-green-700' : 'text-yellow-700'}`}
+            >
+              {upgradeEligibility.eligible
                 ? 'You meet all requirements for the next SQL level upgrade.'
-                : 'Complete the remaining requirements to become eligible for upgrade.'
-              }
+                : 'Complete the remaining requirements to become eligible for upgrade.'}
             </p>
           </div>
         </motion.div>

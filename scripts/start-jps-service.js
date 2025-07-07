@@ -26,17 +26,17 @@ function log(message) {
 }
 
 function killProcessOnPort(port) {
-  return new Promise((resolve) => {
+  return new Promise(resolve => {
     const { exec } = require('child_process');
     const platform = process.platform;
-    
+
     let command;
     if (platform === 'win32') {
       command = `netstat -ano | findstr :${port}`;
     } else {
       command = `lsof -ti:${port}`;
     }
-    
+
     exec(command, (error, stdout) => {
       if (stdout) {
         const pids = stdout.trim().split('\n');
@@ -59,24 +59,28 @@ function killProcessOnPort(port) {
 
 async function startJPSService() {
   log(`🚀 Starting ${JPS_NAME} on port ${JPS_PORT}...`);
-  
+
   try {
     // Kill any existing process on the port
     await killProcessOnPort(JPS_PORT);
-    
+
     // Start the Next.js development server
     const child = spawn('npm', ['run', 'dev'], {
       stdio: 'pipe',
       shell: true,
-      env: { ...process.env, PORT: JPS_PORT.toString() }
+      env: { ...process.env, PORT: JPS_PORT.toString() },
     });
 
     child.stdout.on('data', data => {
       const output = data.toString().trim();
       log(`📤 ${output}`);
-      
+
       // Check if server is ready
-      if (output.includes('Ready in') || output.includes('Local:') || output.includes(`localhost:${JPS_PORT}`)) {
+      if (
+        output.includes('Ready in') ||
+        output.includes('Local:') ||
+        output.includes(`localhost:${JPS_PORT}`)
+      ) {
         log(`✅ ${JPS_NAME} is running on http://localhost:${JPS_PORT}`);
         log(`🎯 JPS Dashboard: http://localhost:${JPS_PORT}/jps`);
         log(`📊 Job Listings: http://localhost:${JPS_PORT}/jps?tab=jobs`);
@@ -111,7 +115,6 @@ async function startJPSService() {
       child.kill('SIGTERM');
       process.exit(0);
     });
-
   } catch (error) {
     log(`❌ Failed to start ${JPS_NAME}: ${error.message}`);
     process.exit(1);
@@ -119,4 +122,4 @@ async function startJPSService() {
 }
 
 // Start the service
-startJPSService(); 
+startJPSService();

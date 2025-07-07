@@ -1,4 +1,3 @@
-
 const fs = require('fs');
 const path = require('path');
 
@@ -11,7 +10,7 @@ class PerformanceMonitor {
 
   startMonitoring() {
     console.log('📊 Performance monitoring started...');
-    
+
     setInterval(() => {
       this.monitorMemory();
     }, 5000);
@@ -31,7 +30,7 @@ class PerformanceMonitor {
       heapUsed: memUsage.heapUsed,
       heapTotal: memUsage.heapTotal,
       external: memUsage.external,
-      timestamp: Date.now()
+      timestamp: Date.now(),
     });
 
     if (memUsage.heapUsed > 2 * 1024 * 1024 * 1024) {
@@ -47,7 +46,7 @@ class PerformanceMonitor {
       this.metrics.set('cpu', {
         user: endUsage.user,
         system: endUsage.system,
-        timestamp: Date.now()
+        timestamp: Date.now(),
       });
     }, 100);
   }

@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 'use client';
 
@@ -732,8 +732,8 @@ export default function SecurityMonitor() {
                         metrics.firewallStatus === 'active'
                           ? 'bg-green-500'
                           : metrics.firewallStatus === 'warning'
-                          ? 'bg-yellow-500'
-                          : 'bg-red-500'
+                            ? 'bg-yellow-500'
+                            : 'bg-red-500'
                       }`}
                     ></div>
                     <span className="text-sm font-medium text-slate-900 dark:text-white">
@@ -752,8 +752,8 @@ export default function SecurityMonitor() {
                         metrics.encryptionStatus === 'enabled'
                           ? 'bg-green-500'
                           : metrics.encryptionStatus === 'partial'
-                          ? 'bg-yellow-500'
-                          : 'bg-red-500'
+                            ? 'bg-yellow-500'
+                            : 'bg-red-500'
                       }`}
                     ></div>
                     <span className="text-sm font-medium text-slate-900 dark:text-white">
@@ -772,8 +772,8 @@ export default function SecurityMonitor() {
                         metrics.backupStatus === 'current'
                           ? 'bg-green-500'
                           : metrics.backupStatus === 'outdated'
-                          ? 'bg-yellow-500'
-                          : 'bg-red-500'
+                            ? 'bg-yellow-500'
+                            : 'bg-red-500'
                       }`}
                     ></div>
                     <span className="text-sm font-medium text-slate-900 dark:text-white">
@@ -792,8 +792,8 @@ export default function SecurityMonitor() {
                         metrics.complianceStatus === 'compliant'
                           ? 'bg-green-500'
                           : metrics.complianceStatus === 'pending'
-                          ? 'bg-yellow-500'
-                          : 'bg-red-500'
+                            ? 'bg-yellow-500'
+                            : 'bg-red-500'
                       }`}
                     ></div>
                     <span className="text-sm font-medium text-slate-900 dark:text-white">

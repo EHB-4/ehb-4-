@@ -161,11 +161,11 @@ export default function InterviewScheduler({ userType }: InterviewSchedulerProps
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     try {
       const candidate = candidates.find(c => c.id === formData.candidateId);
       const job = jobs.find(j => j.id === formData.jobId);
-      
+
       if (!candidate || !job) {
         alert('Please select valid candidate and job');
         return;
@@ -238,9 +238,9 @@ export default function InterviewScheduler({ userType }: InterviewSchedulerProps
 
   const handleStatusChange = async (interviewId: string, newStatus: string) => {
     // Note: Update method not implemented in API service yet
-    setInterviews(interviews.map(i => 
-      i.id === interviewId ? { ...i, status: newStatus as any } : i
-    ));
+    setInterviews(
+      interviews.map(i => (i.id === interviewId ? { ...i, status: newStatus as any } : i))
+    );
     alert('Interview status updated!');
   };
 
@@ -274,11 +274,11 @@ export default function InterviewScheduler({ userType }: InterviewSchedulerProps
 
   const filteredInterviews = interviews.filter(interview => {
     const matchesStatus = filterStatus === 'all' || interview.status === filterStatus;
-    const matchesSearch = 
+    const matchesSearch =
       interview.candidateName.toLowerCase().includes(searchQuery.toLowerCase()) ||
       interview.jobTitle.toLowerCase().includes(searchQuery.toLowerCase()) ||
       interview.company.toLowerCase().includes(searchQuery.toLowerCase());
-    
+
     return matchesStatus && matchesSearch;
   });
 
@@ -290,8 +290,12 @@ export default function InterviewScheduler({ userType }: InterviewSchedulerProps
       end: new Date(new Date(interview.scheduledDate).getTime() + interview.duration * 60000),
       type: 'interview',
       status: interview.status,
-      color: interview.status === 'completed' ? '#10B981' : 
-             interview.status === 'cancelled' ? '#EF4444' : '#3B82F6',
+      color:
+        interview.status === 'completed'
+          ? '#10B981'
+          : interview.status === 'cancelled'
+            ? '#EF4444'
+            : '#3B82F6',
     }));
   };
 
@@ -308,10 +312,8 @@ export default function InterviewScheduler({ userType }: InterviewSchedulerProps
     for (let i = 0; i < 42; i++) {
       const date = new Date(startDate);
       date.setDate(startDate.getDate() + i);
-      const dayEvents = events.filter(event => 
-        event.start.toDateString() === date.toDateString()
-      );
-      
+      const dayEvents = events.filter(event => event.start.toDateString() === date.toDateString());
+
       days.push({ date, events: dayEvents });
     }
 
@@ -321,7 +323,9 @@ export default function InterviewScheduler({ userType }: InterviewSchedulerProps
           <h3 className="text-lg font-semibold text-gray-900">Interview Calendar</h3>
           <div className="flex items-center space-x-2">
             <button
-              onClick={() => setCurrentDate(new Date(currentDate.getFullYear(), currentDate.getMonth() - 1))}
+              onClick={() =>
+                setCurrentDate(new Date(currentDate.getFullYear(), currentDate.getMonth() - 1))
+              }
               className="p-2 hover:bg-gray-100 rounded-lg"
             >
               <ChevronLeft className="h-4 w-4" />
@@ -330,7 +334,9 @@ export default function InterviewScheduler({ userType }: InterviewSchedulerProps
               {currentDate.toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}
             </span>
             <button
-              onClick={() => setCurrentDate(new Date(currentDate.getFullYear(), currentDate.getMonth() + 1))}
+              onClick={() =>
+                setCurrentDate(new Date(currentDate.getFullYear(), currentDate.getMonth() + 1))
+              }
               className="p-2 hover:bg-gray-100 rounded-lg"
             >
               <ChevronRight className="h-4 w-4" />
@@ -344,7 +350,7 @@ export default function InterviewScheduler({ userType }: InterviewSchedulerProps
               {day}
             </div>
           ))}
-          
+
           {days.map(({ date, events }, index) => (
             <div
               key={index}
@@ -352,9 +358,7 @@ export default function InterviewScheduler({ userType }: InterviewSchedulerProps
                 date.getMonth() === currentMonth ? 'bg-white' : 'bg-gray-50'
               }`}
             >
-              <div className="text-sm font-medium text-gray-900 mb-1">
-                {date.getDate()}
-              </div>
+              <div className="text-sm font-medium text-gray-900 mb-1">{date.getDate()}</div>
               <div className="space-y-1">
                 {events.map(event => (
                   <div
@@ -399,9 +403,7 @@ export default function InterviewScheduler({ userType }: InterviewSchedulerProps
                 <Calendar className="h-8 w-8 text-blue-600 mr-3" />
                 Interview Scheduler
               </h1>
-              <p className="text-gray-600 mt-2">
-                Manage and schedule interviews with candidates
-              </p>
+              <p className="text-gray-600 mt-2">Manage and schedule interviews with candidates</p>
             </div>
             <button
               onClick={() => setShowForm(true)}
@@ -415,9 +417,7 @@ export default function InterviewScheduler({ userType }: InterviewSchedulerProps
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           {/* Calendar View */}
-          <div className="lg:col-span-2">
-            {renderCalendar()}
-          </div>
+          <div className="lg:col-span-2">{renderCalendar()}</div>
 
           {/* Interview List */}
           <div className="lg:col-span-1">
@@ -427,7 +427,7 @@ export default function InterviewScheduler({ userType }: InterviewSchedulerProps
                 <div className="flex items-center space-x-2">
                   <select
                     value={filterStatus}
-                    onChange={(e) => setFilterStatus(e.target.value)}
+                    onChange={e => setFilterStatus(e.target.value)}
                     className="px-3 py-1 text-sm border border-gray-300 rounded-lg"
                   >
                     <option value="all">All</option>
@@ -459,7 +459,9 @@ export default function InterviewScheduler({ userType }: InterviewSchedulerProps
                         </div>
                         <div className="flex items-center space-x-1">
                           {getTypeIcon(interview.type)}
-                          <span className={`px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(interview.status)}`}>
+                          <span
+                            className={`px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(interview.status)}`}
+                          >
                             {interview.status}
                           </span>
                         </div>
@@ -468,11 +470,11 @@ export default function InterviewScheduler({ userType }: InterviewSchedulerProps
                       <div className="flex items-center text-xs text-gray-500 mb-3">
                         <Clock className="h-3 w-3 mr-1" />
                         {new Date(interview.scheduledDate).toLocaleDateString()} at{' '}
-                        {new Date(interview.scheduledDate).toLocaleTimeString([], { 
-                          hour: '2-digit', 
-                          minute: '2-digit' 
-                        })}
-                        {' '}({interview.duration} min)
+                        {new Date(interview.scheduledDate).toLocaleTimeString([], {
+                          hour: '2-digit',
+                          minute: '2-digit',
+                        })}{' '}
+                        ({interview.duration} min)
                       </div>
 
                       <div className="flex items-center space-x-2">
@@ -535,7 +537,7 @@ export default function InterviewScheduler({ userType }: InterviewSchedulerProps
                     <select
                       required
                       value={formData.candidateId}
-                      onChange={(e) => setFormData({ ...formData, candidateId: e.target.value })}
+                      onChange={e => setFormData({ ...formData, candidateId: e.target.value })}
                       className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
                     >
                       <option value="">Select Candidate</option>
@@ -554,7 +556,7 @@ export default function InterviewScheduler({ userType }: InterviewSchedulerProps
                     <select
                       required
                       value={formData.jobId}
-                      onChange={(e) => setFormData({ ...formData, jobId: e.target.value })}
+                      onChange={e => setFormData({ ...formData, jobId: e.target.value })}
                       className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
                     >
                       <option value="">Select Job</option>
@@ -574,7 +576,7 @@ export default function InterviewScheduler({ userType }: InterviewSchedulerProps
                       type="datetime-local"
                       required
                       value={formData.scheduledDate}
-                      onChange={(e) => setFormData({ ...formData, scheduledDate: e.target.value })}
+                      onChange={e => setFormData({ ...formData, scheduledDate: e.target.value })}
                       className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
                     />
                   </div>
@@ -588,7 +590,9 @@ export default function InterviewScheduler({ userType }: InterviewSchedulerProps
                       min="15"
                       max="180"
                       value={formData.duration}
-                      onChange={(e) => setFormData({ ...formData, duration: parseInt(e.target.value) })}
+                      onChange={e =>
+                        setFormData({ ...formData, duration: parseInt(e.target.value) })
+                      }
                       className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
                     />
                   </div>
@@ -599,7 +603,7 @@ export default function InterviewScheduler({ userType }: InterviewSchedulerProps
                     </label>
                     <select
                       value={formData.type}
-                      onChange={(e) => setFormData({ ...formData, type: e.target.value as any })}
+                      onChange={e => setFormData({ ...formData, type: e.target.value as any })}
                       className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
                     >
                       <option value="video">Video Call</option>
@@ -616,21 +620,19 @@ export default function InterviewScheduler({ userType }: InterviewSchedulerProps
                       type="url"
                       placeholder="https://meet.google.com/..."
                       value={formData.meetingLink || ''}
-                      onChange={(e) => setFormData({ ...formData, meetingLink: e.target.value })}
+                      onChange={e => setFormData({ ...formData, meetingLink: e.target.value })}
                       className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
                     />
                   </div>
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Notes
-                  </label>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Notes</label>
                   <textarea
                     rows={4}
                     placeholder="Interview notes, questions to ask, or special instructions..."
                     value={formData.notes}
-                    onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
+                    onChange={e => setFormData({ ...formData, notes: e.target.value })}
                     className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
                   />
                 </div>
@@ -660,4 +662,4 @@ export default function InterviewScheduler({ userType }: InterviewSchedulerProps
       </div>
     </div>
   );
-} 
+}

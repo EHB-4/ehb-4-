@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 /**
  * SOT Development Page
@@ -207,7 +207,12 @@ export default function SOTDevelopmentPage() {
           { id: '3', name: 'Muhammad Ali', role: 'Backend Developer', avatar: 'MA' },
         ],
         technologies: ['React', 'Node.js', 'MongoDB', 'AI/ML'],
-        features: ['User authentication', 'Product catalog', 'Payment integration', 'AI recommendations'],
+        features: [
+          'User authentication',
+          'Product catalog',
+          'Payment integration',
+          'AI recommendations',
+        ],
         aiAssistance: {
           codeReview: true,
           testing: true,
@@ -231,7 +236,12 @@ export default function SOTDevelopmentPage() {
           { id: '5', name: 'Hassan Ali', role: 'Security Expert', avatar: 'HA' },
         ],
         technologies: ['React Native', 'Firebase', 'Biometric SDK'],
-        features: ['Account management', 'Fund transfers', 'Biometric login', 'Transaction history'],
+        features: [
+          'Account management',
+          'Fund transfers',
+          'Biometric login',
+          'Transaction history',
+        ],
         aiAssistance: {
           codeReview: true,
           testing: true,
@@ -255,7 +265,12 @@ export default function SOTDevelopmentPage() {
           { id: '7', name: 'Omar Hassan', role: 'NLP Specialist', avatar: 'OH' },
         ],
         technologies: ['Python', 'TensorFlow', 'NLP', 'WebSocket'],
-        features: ['Natural language processing', 'Multi-language support', 'Integration APIs', 'Analytics dashboard'],
+        features: [
+          'Natural language processing',
+          'Multi-language support',
+          'Integration APIs',
+          'Analytics dashboard',
+        ],
         aiAssistance: {
           codeReview: true,
           testing: false,
@@ -275,7 +290,12 @@ export default function SOTDevelopmentPage() {
         icon: <Brain className="h-6 w-6" />,
         color: 'text-purple-600',
         bgColor: 'bg-purple-100',
-        features: ['Code completion', 'Bug detection', 'Performance optimization', 'Security scanning'],
+        features: [
+          'Code completion',
+          'Bug detection',
+          'Performance optimization',
+          'Security scanning',
+        ],
         rating: 4.8,
         usage: 85,
       },
@@ -301,7 +321,12 @@ export default function SOTDevelopmentPage() {
         icon: <GitBranch className="h-6 w-6" />,
         color: 'text-blue-600',
         bgColor: 'bg-blue-100',
-        features: ['Git integration', 'Auto deployment', 'Rollback capability', 'Environment management'],
+        features: [
+          'Git integration',
+          'Auto deployment',
+          'Rollback capability',
+          'Environment management',
+        ],
         rating: 4.7,
         usage: 78,
       },
@@ -323,29 +348,42 @@ export default function SOTDevelopmentPage() {
 
   const getStatusColor = (status: string) => {
     switch (status) {
-      case 'planning': return 'bg-gray-100 text-gray-800';
-      case 'development': return 'bg-blue-100 text-blue-800';
-      case 'testing': return 'bg-yellow-100 text-yellow-800';
-      case 'deployment': return 'bg-purple-100 text-purple-800';
-      case 'completed': return 'bg-green-100 text-green-800';
-      default: return 'bg-gray-100 text-gray-800';
+      case 'planning':
+        return 'bg-gray-100 text-gray-800';
+      case 'development':
+        return 'bg-blue-100 text-blue-800';
+      case 'testing':
+        return 'bg-yellow-100 text-yellow-800';
+      case 'deployment':
+        return 'bg-purple-100 text-purple-800';
+      case 'completed':
+        return 'bg-green-100 text-green-800';
+      default:
+        return 'bg-gray-100 text-gray-800';
     }
   };
 
   const getTypeIcon = (type: string) => {
     switch (type) {
-      case 'web': return <Globe className="h-5 w-5" />;
-      case 'mobile': return <Smartphone className="h-5 w-5" />;
-      case 'ai': return <Brain className="h-5 w-5" />;
-      case 'backend': return <Server className="h-5 w-5" />;
-      case 'fullstack': return <Code className="h-5 w-5" />;
-      default: return <Code className="h-5 w-5" />;
+      case 'web':
+        return <Globe className="h-5 w-5" />;
+      case 'mobile':
+        return <Smartphone className="h-5 w-5" />;
+      case 'ai':
+        return <Brain className="h-5 w-5" />;
+      case 'backend':
+        return <Server className="h-5 w-5" />;
+      case 'fullstack':
+        return <Code className="h-5 w-5" />;
+      default:
+        return <Code className="h-5 w-5" />;
     }
   };
 
-  const filteredProjects = projects.filter(project =>
-    project.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    project.description.toLowerCase().includes(searchQuery.toLowerCase())
+  const filteredProjects = projects.filter(
+    project =>
+      project.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      project.description.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   return (
@@ -356,7 +394,9 @@ export default function SOTDevelopmentPage() {
           <div className="flex items-center justify-between mb-6">
             <div>
               <h1 className="text-3xl font-bold text-gray-900">SOT Development Hub</h1>
-              <p className="text-gray-600">Create, manage, and deploy projects with AI assistance</p>
+              <p className="text-gray-600">
+                Create, manage, and deploy projects with AI assistance
+              </p>
             </div>
             <Link href="/sot">
               <Button variant="outline">
@@ -418,7 +458,11 @@ export default function SOTDevelopmentPage() {
                   <div>
                     <p className="text-sm text-gray-500">Avg Progress</p>
                     <p className="text-lg font-bold text-gray-900">
-                      {Math.round(projects.reduce((sum, project) => sum + project.progress, 0) / projects.length)}%
+                      {Math.round(
+                        projects.reduce((sum, project) => sum + project.progress, 0) /
+                          projects.length
+                      )}
+                      %
                     </p>
                   </div>
                 </div>
@@ -444,7 +488,7 @@ export default function SOTDevelopmentPage() {
                 <Input
                   placeholder="Search projects..."
                   value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
+                  onChange={e => setSearchQuery(e.target.value)}
                   className="w-full"
                 />
               </div>
@@ -455,7 +499,7 @@ export default function SOTDevelopmentPage() {
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-              {filteredProjects.map((project) => (
+              {filteredProjects.map(project => (
                 <Card key={project.id} className="hover:shadow-lg transition-shadow">
                   <CardHeader>
                     <div className="flex items-start justify-between">
@@ -466,12 +510,8 @@ export default function SOTDevelopmentPage() {
                         </div>
                         <p className="text-sm text-gray-600 mb-3">{project.description}</p>
                         <div className="flex items-center space-x-2 mb-3">
-                          <Badge className={getStatusColor(project.status)}>
-                            {project.status}
-                          </Badge>
-                          <Badge variant="outline">
-                            {project.type}
-                          </Badge>
+                          <Badge className={getStatusColor(project.status)}>{project.status}</Badge>
+                          <Badge variant="outline">{project.type}</Badge>
                         </div>
                       </div>
                     </div>
@@ -501,9 +541,11 @@ export default function SOTDevelopmentPage() {
 
                       {/* Team */}
                       <div>
-                        <p className="text-sm text-gray-500 mb-2">Team ({project.team.length} members)</p>
+                        <p className="text-sm text-gray-500 mb-2">
+                          Team ({project.team.length} members)
+                        </p>
                         <div className="flex space-x-2">
-                          {project.team.slice(0, 3).map((member) => (
+                          {project.team.slice(0, 3).map(member => (
                             <div
                               key={member.id}
                               className="h-8 w-8 bg-blue-100 rounded-full flex items-center justify-center text-xs font-medium text-blue-600"
@@ -548,7 +590,9 @@ export default function SOTDevelopmentPage() {
                                 <AlertTriangle className="h-3 w-3 text-gray-400" />
                               )}
                               <span className={enabled ? 'text-green-600' : 'text-gray-500'}>
-                                {key.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase())}
+                                {key
+                                  .replace(/([A-Z])/g, ' $1')
+                                  .replace(/^./, str => str.toUpperCase())}
                               </span>
                             </div>
                           ))}
@@ -578,11 +622,13 @@ export default function SOTDevelopmentPage() {
           {/* Development Tools Tab */}
           <TabsContent value="tools" className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {tools.map((tool) => (
+              {tools.map(tool => (
                 <Card key={tool.id} className="hover:shadow-lg transition-shadow">
                   <CardHeader>
                     <div className="flex items-center space-x-3">
-                      <div className={`h-12 w-12 ${tool.bgColor} rounded-lg flex items-center justify-center`}>
+                      <div
+                        className={`h-12 w-12 ${tool.bgColor} rounded-lg flex items-center justify-center`}
+                      >
                         <div className={tool.color}>{tool.icon}</div>
                       </div>
                       <div className="flex-1">
@@ -597,7 +643,7 @@ export default function SOTDevelopmentPage() {
                   <CardContent>
                     <div className="space-y-4">
                       <p className="text-sm text-gray-600">{tool.description}</p>
-                      
+
                       <div>
                         <div className="flex justify-between text-sm mb-1">
                           <span>Usage</span>
@@ -654,9 +700,10 @@ export default function SOTDevelopmentPage() {
                 </div>
                 <h2 className="text-2xl font-bold text-gray-900 mb-4">AI-Powered Development</h2>
                 <p className="text-gray-600 mb-8">
-                  Leverage advanced AI assistance for code review, testing, deployment, and monitoring
+                  Leverage advanced AI assistance for code review, testing, deployment, and
+                  monitoring
                 </p>
-                
+
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <Card>
                     <CardContent className="p-6">
@@ -737,4 +784,4 @@ export default function SOTDevelopmentPage() {
       </div>
     </div>
   );
-} 
+}

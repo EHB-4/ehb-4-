@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "create-t3-app": "^7.39.3"
+  },
+  "_npx": {
+    "packages": [
+      "create-t3-app@latest"
+    ]
+  }
+}

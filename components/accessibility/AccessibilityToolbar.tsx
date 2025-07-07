@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 'use client';
 
@@ -816,13 +816,15 @@ export default function AccessibilityToolbar() {
 
         /* Cursor */
         .large-cursor {
-          cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="black"><path d="M0 0h24v24H0z"/></svg>')
+          cursor:
+            url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="black"><path d="M0 0h24v24H0z"/></svg>')
               12 12,
             auto !important;
         }
 
         .extra-large-cursor {
-          cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="black"><path d="M0 0h32v32H0z"/></svg>')
+          cursor:
+            url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="black"><path d="M0 0h32v32H0z"/></svg>')
               16 16,
             auto !important;
         }

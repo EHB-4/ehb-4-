@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 'use client';
 
@@ -275,10 +275,10 @@ export default function AgentInstructions() {
                           service.status === 'Completed'
                             ? 'bg-green-100 text-green-800'
                             : service.status === 'Working'
-                            ? 'bg-blue-100 text-blue-800'
-                            : service.status === 'Under Development'
-                            ? 'bg-yellow-100 text-yellow-800'
-                            : 'bg-gray-100 text-gray-800'
+                              ? 'bg-blue-100 text-blue-800'
+                              : service.status === 'Under Development'
+                                ? 'bg-yellow-100 text-yellow-800'
+                                : 'bg-gray-100 text-gray-800'
                         }`}
                       >
                         {service.status}
@@ -296,10 +296,10 @@ export default function AgentInstructions() {
                             service.progress >= 80
                               ? 'bg-green-500'
                               : service.progress >= 60
-                              ? 'bg-blue-500'
-                              : service.progress >= 40
-                              ? 'bg-yellow-500'
-                              : 'bg-red-500'
+                                ? 'bg-blue-500'
+                                : service.progress >= 40
+                                  ? 'bg-yellow-500'
+                                  : 'bg-red-500'
                           }`}
                           style={{ width: `${service.progress}%` }}
                         ></div>

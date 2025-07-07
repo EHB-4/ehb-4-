@@ -20,7 +20,7 @@ export default function AdvancedSecurity({ onValidation }: SecurityValidationPro
   // Roman Urdu: Password validation rules
   const validatePassword = (pass: string) => {
     const errors: string[] = [];
-    
+
     if (pass.length < 8) {
       errors.push('Password must be at least 8 characters long');
     }
@@ -36,7 +36,7 @@ export default function AdvancedSecurity({ onValidation }: SecurityValidationPro
     if (!/[!@#$%^&*]/.test(pass)) {
       errors.push('Password must contain at least one special character (!@#$%^&*)');
     }
-    
+
     return errors;
   };
 
@@ -71,13 +71,11 @@ export default function AdvancedSecurity({ onValidation }: SecurityValidationPro
 
       {/* Email Input */}
       <div className="mb-4">
-        <label className="block text-sm font-medium text-gray-700 mb-2">
-          Email Address
-        </label>
+        <label className="block text-sm font-medium text-gray-700 mb-2">Email Address</label>
         <input
           type="email"
           value={email}
-          onChange={(e) => handleEmailChange(e.target.value)}
+          onChange={e => handleEmailChange(e.target.value)}
           className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
           placeholder="Enter your email"
         />
@@ -85,14 +83,12 @@ export default function AdvancedSecurity({ onValidation }: SecurityValidationPro
 
       {/* Password Input */}
       <div className="mb-4">
-        <label className="block text-sm font-medium text-gray-700 mb-2">
-          Password
-        </label>
+        <label className="block text-sm font-medium text-gray-700 mb-2">Password</label>
         <div className="relative">
           <input
             type={showPassword ? 'text' : 'password'}
             value={password}
-            onChange={(e) => handlePasswordChange(e.target.value)}
+            onChange={e => handlePasswordChange(e.target.value)}
             className="w-full px-3 py-2 pr-10 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
             placeholder="Enter your password"
           />
@@ -101,7 +97,11 @@ export default function AdvancedSecurity({ onValidation }: SecurityValidationPro
             onClick={() => setShowPassword(!showPassword)}
             className="absolute right-3 top-1/2 transform -translate-y-1/2"
           >
-            {showPassword ? <EyeOff className="h-4 w-4 text-gray-400" /> : <Eye className="h-4 w-4 text-gray-400" />}
+            {showPassword ? (
+              <EyeOff className="h-4 w-4 text-gray-400" />
+            ) : (
+              <Eye className="h-4 w-4 text-gray-400" />
+            )}
           </button>
         </div>
       </div>
@@ -157,4 +157,4 @@ export default function AdvancedSecurity({ onValidation }: SecurityValidationPro
       </button>
     </div>
   );
-} 
+}

@@ -272,7 +272,7 @@ function main() {
           return [4 /*yield*/, findFiles('./components/**/*.{tsx,jsx}')];
         case 2:
           _b.apply(_a, _c.concat([_d.sent()]));
-          (_i = 0), (files_1 = files);
+          ((_i = 0), (files_1 = files));
           _d.label = 3;
         case 3:
           if (!(_i < files_1.length)) return [3 /*break*/, 6];

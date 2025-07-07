@@ -1,8 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { getSession } from 'next-auth/react';
 
-import { prisma } from '../lib/prisma';
-
 interface SQLLevelConfig {
   minLevel: number;
   requireActive?: boolean;
@@ -19,6 +17,8 @@ export function sqlLevelAuth(config: SQLLevelConfig) {
           error: 'Authentication required',
         });
       }
+
+      // TODO: Replace with AWS data access
 
       const user = await prisma.user.findUnique({
         where: { id: session.user.id },

@@ -143,7 +143,6 @@ $Browser = "chrome"
 ### Permission Issues
 
 1. **Run as Administrator**:
-
    - Right-click PowerShell
    - Select "Run as Administrator"
 

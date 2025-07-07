@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 'use client';
 
@@ -696,8 +696,8 @@ export default function PerformanceMonitor() {
                               status === 'good'
                                 ? 'bg-green-500'
                                 : status === 'needs-improvement'
-                                ? 'bg-yellow-500'
-                                : 'bg-red-500'
+                                  ? 'bg-yellow-500'
+                                  : 'bg-red-500'
                             }`}
                             style={{
                               width: `${
@@ -735,8 +735,8 @@ export default function PerformanceMonitor() {
                         metrics.network < 50
                           ? 'bg-green-500'
                           : metrics.network < 80
-                          ? 'bg-yellow-500'
-                          : 'bg-red-500'
+                            ? 'bg-yellow-500'
+                            : 'bg-red-500'
                       }`}
                       style={{ width: `${metrics.network}%` }}
                     ></div>
@@ -756,8 +756,8 @@ export default function PerformanceMonitor() {
                         metrics.battery > 50
                           ? 'bg-green-500'
                           : metrics.battery > 20
-                          ? 'bg-yellow-500'
-                          : 'bg-red-500'
+                            ? 'bg-yellow-500'
+                            : 'bg-red-500'
                       }`}
                       style={{ width: `${metrics.battery}%` }}
                     ></div>
@@ -777,8 +777,8 @@ export default function PerformanceMonitor() {
                         metrics.bundleSize < 1
                           ? 'bg-green-500'
                           : metrics.bundleSize < 2
-                          ? 'bg-yellow-500'
-                          : 'bg-red-500'
+                            ? 'bg-yellow-500'
+                            : 'bg-red-500'
                       }`}
                       style={{ width: `${Math.min(100, metrics.bundleSize * 50)}%` }}
                     ></div>
@@ -879,8 +879,8 @@ export default function PerformanceMonitor() {
                         metrics.imageOptimization >= 90
                           ? 'bg-green-500'
                           : metrics.imageOptimization >= 70
-                          ? 'bg-yellow-500'
-                          : 'bg-red-500'
+                            ? 'bg-yellow-500'
+                            : 'bg-red-500'
                       }`}
                       style={{ width: `${metrics.imageOptimization}%` }}
                     ></div>
@@ -900,8 +900,8 @@ export default function PerformanceMonitor() {
                         metrics.caching >= 90
                           ? 'bg-green-500'
                           : metrics.caching >= 70
-                          ? 'bg-yellow-500'
-                          : 'bg-red-500'
+                            ? 'bg-yellow-500'
+                            : 'bg-red-500'
                       }`}
                       style={{ width: `${metrics.caching}%` }}
                     ></div>
@@ -921,8 +921,8 @@ export default function PerformanceMonitor() {
                         metrics.compression >= 90
                           ? 'bg-green-500'
                           : metrics.compression >= 70
-                          ? 'bg-yellow-500'
-                          : 'bg-red-500'
+                            ? 'bg-yellow-500'
+                            : 'bg-red-500'
                       }`}
                       style={{ width: `${metrics.compression}%` }}
                     ></div>
@@ -957,8 +957,8 @@ export default function PerformanceMonitor() {
                           issue.type === 'error'
                             ? 'bg-red-100 dark:bg-red-900/20'
                             : issue.type === 'warning'
-                            ? 'bg-yellow-100 dark:bg-yellow-900/20'
-                            : 'bg-blue-100 dark:bg-blue-900/20'
+                              ? 'bg-yellow-100 dark:bg-yellow-900/20'
+                              : 'bg-blue-100 dark:bg-blue-900/20'
                         }`}
                       >
                         {issue.type === 'error' ? (
@@ -979,8 +979,8 @@ export default function PerformanceMonitor() {
                               issue.impact === 'high'
                                 ? 'bg-red-100 text-red-700 dark:bg-red-900/20 dark:text-red-400'
                                 : issue.impact === 'medium'
-                                ? 'bg-yellow-100 text-yellow-700 dark:bg-yellow-900/20 dark:text-yellow-400'
-                                : 'bg-blue-100 text-blue-700 dark:bg-blue-900/20 dark:text-blue-400'
+                                  ? 'bg-yellow-100 text-yellow-700 dark:bg-yellow-900/20 dark:text-yellow-400'
+                                  : 'bg-blue-100 text-blue-700 dark:bg-blue-900/20 dark:text-blue-400'
                             }`}
                           >
                             {issue.impact} impact

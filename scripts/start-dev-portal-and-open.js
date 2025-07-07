@@ -20,8 +20,8 @@ const DEV_PORTAL_URL = 'http://localhost:8080';
 // Kill existing process on port 8080
 async function killPort8080() {
   console.log('🔄 Killing existing process on port 8080...');
-  
-  return new Promise((resolve) => {
+
+  return new Promise(resolve => {
     const platform = process.platform;
     let command;
 
@@ -42,12 +42,10 @@ async function killPort8080() {
           } else {
             pid = line.trim();
           }
-          
+
           if (pid) {
-            const killCommand = platform === 'win32' ? 
-              `taskkill /PID ${pid} /F` : 
-              `kill -9 ${pid}`;
-            
+            const killCommand = platform === 'win32' ? `taskkill /PID ${pid} /F` : `kill -9 ${pid}`;
+
             exec(killCommand, () => {
               console.log(`✅ Killed process on port ${DEV_PORTAL_PORT}`);
             });
@@ -62,34 +60,31 @@ async function killPort8080() {
 // Create Development Portal
 function createDevPortal() {
   console.log('📁 Creating EHB Development Portal...');
-  
+
   const devPortalDir = 'ehb-dev-portal';
   const devPortalPath = path.join(process.cwd(), devPortalDir);
-  
+
   if (!existsSync(devPortalPath)) {
     mkdirSync(devPortalPath, { recursive: true });
   }
 
   // Create package.json
   const packageJson = {
-    name: "ehb-dev-portal",
-    version: "1.0.0",
+    name: 'ehb-dev-portal',
+    version: '1.0.0',
     scripts: {
       dev: `next dev --port ${DEV_PORTAL_PORT}`,
-      build: "next build",
-      start: `next start --port ${DEV_PORTAL_PORT}`
+      build: 'next build',
+      start: `next start --port ${DEV_PORTAL_PORT}`,
     },
     dependencies: {
-      "next": "^14.0.0",
-      "react": "^18.0.0",
-      "react-dom": "^18.0.0"
-    }
+      next: '^14.0.0',
+      react: '^18.0.0',
+      'react-dom': '^18.0.0',
+    },
   };
-  
-  writeFileSync(
-    path.join(devPortalPath, 'package.json'), 
-    JSON.stringify(packageJson, null, 2)
-  );
+
+  writeFileSync(path.join(devPortalPath, 'package.json'), JSON.stringify(packageJson, null, 2));
 
   // Create pages directory
   const pagesDir = path.join(devPortalPath, 'pages');
@@ -153,16 +148,16 @@ export default function DevelopmentPortal() {
 
 // Start Development Portal service
 function startDevPortal(devPortalPath) {
-  return new Promise((resolve) => {
+  return new Promise(resolve => {
     console.log('🚀 Starting EHB Development Portal service...');
-    
+
     const originalCwd = process.cwd();
     process.chdir(devPortalPath);
 
     // Install dependencies if needed
     if (!existsSync(path.join(devPortalPath, 'node_modules'))) {
       console.log('📦 Installing dependencies...');
-      exec('npm install', (error) => {
+      exec('npm install', error => {
         if (error) {
           console.log('⚠️  Dependencies already installed');
         } else {
@@ -180,24 +175,24 @@ function startDevPortal(devPortalPath) {
 function startServer(devPortalPath, originalCwd, resolve) {
   const child = spawn('npm', ['run', 'dev'], {
     stdio: 'pipe',
-    shell: true
+    shell: true,
   });
 
   // Wait for service to start
   let attempts = 0;
   const maxAttempts = 60;
-  
+
   const checkPort = () => {
     const net = require('net');
     const client = new net.Socket();
-    
+
     client.connect(DEV_PORTAL_PORT, 'localhost', () => {
       client.destroy();
       console.log(`✅ EHB Development Portal is ready on port ${DEV_PORTAL_PORT}`);
       process.chdir(originalCwd);
       resolve(child);
     });
-    
+
     client.on('error', () => {
       attempts++;
       if (attempts < maxAttempts) {
@@ -209,11 +204,11 @@ function startServer(devPortalPath, originalCwd, resolve) {
       }
     });
   };
-  
+
   checkPort();
 
   // Handle process output
-  child.stdout.on('data', (data) => {
+  child.stdout.on('data', data => {
     const output = data.toString().trim();
     if (output.includes('ready') || output.includes('started')) {
       console.log(`[Development Portal] ${output}`);
@@ -224,7 +219,7 @@ function startServer(devPortalPath, originalCwd, resolve) {
 // Open in browser
 function openInBrowser() {
   console.log('🌐 Opening EHB Development Portal in browser...');
-  
+
   const platform = process.platform;
   let command;
 
@@ -239,7 +234,7 @@ function openInBrowser() {
       command = `xdg-open ${DEV_PORTAL_URL}`;
   }
 
-  exec(command, (error) => {
+  exec(command, error => {
     if (error) {
       console.log(`❌ Failed to open browser: ${error.message}`);
       console.log(`💡 Please manually open: ${DEV_PORTAL_URL}`);
@@ -256,19 +251,19 @@ async function main() {
     // Kill existing process
     await killPort8080();
     await new Promise(resolve => setTimeout(resolve, 2000));
-    
+
     // Create Development Portal
     const devPortalPath = createDevPortal();
-    
+
     // Start Development Portal service
     const child = await startDevPortal(devPortalPath);
-    
+
     if (child) {
       // Open in browser after 3 seconds
       setTimeout(() => {
         openInBrowser();
       }, 3000);
-      
+
       console.log('');
       console.log('🎉 EHB Development Portal is now running!');
       console.log('');
@@ -280,7 +275,7 @@ async function main() {
       console.log('');
       console.log('💡 The Development Portal should be open in your browser now!');
       console.log('🛑 Press Ctrl+C to stop the Development Portal');
-      
+
       // Keep running
       process.on('SIGINT', () => {
         console.log('\n🛑 Stopping Development Portal...');
@@ -290,7 +285,6 @@ async function main() {
     } else {
       console.log('❌ Failed to start Development Portal');
     }
-    
   } catch (error) {
     console.error('❌ Error:', error.message);
   }
@@ -301,4 +295,4 @@ if (require.main === module) {
   main();
 }
 
-module.exports = { main }; 
+module.exports = { main };

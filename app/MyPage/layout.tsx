@@ -5,9 +5,5 @@ interface MyPageLayoutProps {
 }
 
 export default function MyPageLayout({ children }: MyPageLayoutProps) {
-  return (
-    <div>
-      {children}
-    </div>
-  );
+  return <div>{children}</div>;
 }

@@ -75,6 +75,7 @@ REDIS_URL="redis://localhost:6379"
 ### PostgreSQL Installation
 
 #### Ubuntu/Debian
+
 ```bash
 sudo apt update
 sudo apt install postgresql postgresql-contrib
@@ -83,6 +84,7 @@ sudo systemctl enable postgresql
 ```
 
 #### CentOS/RHEL
+
 ```bash
 sudo yum install postgresql-server postgresql-contrib
 sudo postgresql-setup initdb
@@ -93,6 +95,7 @@ sudo systemctl enable postgresql
 ### Database Configuration
 
 1. **Create Database User**
+
 ```bash
 sudo -u postgres psql
 CREATE USER ehb_user WITH PASSWORD 'secure_password';
@@ -102,12 +105,14 @@ GRANT ALL PRIVILEGES ON DATABASE ehb_platform TO ehb_user;
 ```
 
 2. **Run Migrations**
+
 ```bash
 npx prisma generate
 npx prisma db push
 ```
 
 3. **Seed Database (Optional)**
+
 ```bash
 npm run db:seed
 ```
@@ -117,6 +122,7 @@ npm run db:seed
 ### Method 1: Docker Deployment (Recommended)
 
 #### 1. Build and Deploy
+
 ```bash
 # Build the application
 npm run build
@@ -126,6 +132,7 @@ docker-compose up -d
 ```
 
 #### 2. Verify Deployment
+
 ```bash
 # Check container status
 docker-compose ps
@@ -135,6 +142,7 @@ docker-compose logs -f app
 ```
 
 #### 3. Health Check
+
 ```bash
 curl http://localhost:3000/health
 ```
@@ -142,16 +150,19 @@ curl http://localhost:3000/health
 ### Method 2: PM2 Deployment
 
 #### 1. Install PM2
+
 ```bash
 npm install -g pm2
 ```
 
 #### 2. Build Application
+
 ```bash
 npm run build
 ```
 
 #### 3. Deploy with PM2
+
 ```bash
 pm2 start ecosystem.config.js --env production
 pm2 save
@@ -159,6 +170,7 @@ pm2 startup
 ```
 
 #### 4. Monitor Application
+
 ```bash
 pm2 status
 pm2 logs ehb-platform
@@ -167,16 +179,19 @@ pm2 logs ehb-platform
 ### Method 3: Manual Deployment
 
 #### 1. Build Application
+
 ```bash
 npm run build
 ```
 
 #### 2. Start Application
+
 ```bash
 npm start
 ```
 
 #### 3. Use Process Manager (Optional)
+
 ```bash
 # Using systemd
 sudo systemctl start ehb-platform
@@ -196,11 +211,13 @@ node scripts/health-check.js
 ### Monitoring Setup
 
 #### 1. PM2 Monitoring
+
 ```bash
 pm2 monit
 ```
 
 #### 2. Application Metrics
+
 ```bash
 # View application metrics
 curl http://localhost:3000/api/health
@@ -210,6 +227,7 @@ curl http://localhost:3000/api/metrics
 ```
 
 #### 3. Log Monitoring
+
 ```bash
 # View application logs
 tail -f logs/app.log
@@ -461,4 +479,4 @@ For additional support:
 ---
 
 **Last Updated**: December 2024
-**Version**: 1.0.0 
+**Version**: 1.0.0

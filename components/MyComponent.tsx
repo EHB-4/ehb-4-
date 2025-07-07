@@ -6,15 +6,8 @@ interface MyComponentProps {
   children?: React.ReactNode;
 }
 
-export const MyComponent: React.FC<MyComponentProps> = ({ 
-  className, 
-  children 
-}) => {
-  return (
-    <div className={cn('', className)}>
-      {children}
-    </div>
-  );
+export const MyComponent: React.FC<MyComponentProps> = ({ className, children }) => {
+  return <div className={cn('', className)}>{children}</div>;
 };
 
 export default MyComponent;

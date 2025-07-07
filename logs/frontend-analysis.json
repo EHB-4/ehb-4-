@@ -1,12 +1,12 @@
 {
-  "timestamp": "2025-07-01T08:18:09.912Z",
+  "timestamp": "2025-07-07T11:46:32.783Z",
   "mode": "frontend-only",
   "files": {
-    "components": 396,
-    "hooks": 6,
+    "components": 438,
+    "hooks": 10,
     "styles": 1,
-    "types": 11,
-    "tests": 15
+    "types": 10,
+    "tests": 22
   },
   "frontendSuggestions": [
     "Create more reusable components",

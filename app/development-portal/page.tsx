@@ -182,8 +182,8 @@ export default function DevelopmentPortalPage() {
                 <h1 className="text-5xl font-bold">EHB Development Portal</h1>
               </div>
               <p className="text-xl text-blue-100 max-w-3xl mx-auto mb-8">
-                Your gateway to world-class software development services. From concept to deployment,
-                we build solutions that drive success.
+                Your gateway to world-class software development services. From concept to
+                deployment, we build solutions that drive success.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link
@@ -246,48 +246,49 @@ export default function DevelopmentPortalPage() {
           )}
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {isClient && services.map((service, index) => (
-              <motion.div
-                key={`${service.title}-${index}`}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.1 * index }}
-                className="group"
-              >
-                <Link href={service.href}>
-                  <div
-                    className={`${service.bgColor} p-6 rounded-xl hover:shadow-xl transition-all duration-300 group-hover:scale-105 h-full flex flex-col relative`}
-                  >
-                    {service.new && (
-                      <div className="absolute top-4 right-4">
-                        <span className="bg-red-500 text-white px-2 py-1 rounded-full text-xs font-semibold">
-                          NEW
-                        </span>
+            {isClient &&
+              services.map((service, index) => (
+                <motion.div
+                  key={`${service.title}-${index}`}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.1 * index }}
+                  className="group"
+                >
+                  <Link href={service.href}>
+                    <div
+                      className={`${service.bgColor} p-6 rounded-xl hover:shadow-xl transition-all duration-300 group-hover:scale-105 h-full flex flex-col relative`}
+                    >
+                      {service.new && (
+                        <div className="absolute top-4 right-4">
+                          <span className="bg-red-500 text-white px-2 py-1 rounded-full text-xs font-semibold">
+                            NEW
+                          </span>
+                        </div>
+                      )}
+                      <div className={`${service.color} mb-4`}>
+                        <service.icon className="w-12 h-12" />
                       </div>
-                    )}
-                    <div className={`${service.color} mb-4`}>
-                      <service.icon className="w-12 h-12" />
+                      <h3 className="text-xl font-semibold text-gray-900 mb-3">{service.title}</h3>
+                      <p className="text-gray-600 flex-grow">{service.description}</p>
+                      {service.progress !== undefined && (
+                        <div className="mt-4">
+                          <div className="flex justify-between text-sm font-medium text-gray-700 mb-1">
+                            <span>Progress</span>
+                            <span>{service.progress}%</span>
+                          </div>
+                          <div className="w-full bg-gray-200 rounded-full h-2.5">
+                            <div
+                              className="bg-green-500 h-2.5 rounded-full"
+                              style={{ width: `${service.progress}%` }}
+                            ></div>
+                          </div>
+                        </div>
+                      )}
                     </div>
-                    <h3 className="text-xl font-semibold text-gray-900 mb-3">{service.title}</h3>
-                    <p className="text-gray-600 flex-grow">{service.description}</p>
-                    {service.progress !== undefined && (
-                      <div className="mt-4">
-                        <div className="flex justify-between text-sm font-medium text-gray-700 mb-1">
-                          <span>Progress</span>
-                          <span>{service.progress}%</span>
-                        </div>
-                        <div className="w-full bg-gray-200 rounded-full h-2.5">
-                          <div
-                            className="bg-green-500 h-2.5 rounded-full"
-                            style={{ width: `${service.progress}%` }}
-                          ></div>
-                        </div>
-                      </div>
-                    )}
-                  </div>
-                </Link>
-              </motion.div>
-            ))}
+                  </Link>
+                </motion.div>
+              ))}
           </div>
         </div>
       </div>
@@ -310,21 +311,22 @@ export default function DevelopmentPortalPage() {
           )}
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {isClient && features.map((feature, index) => (
-              <motion.div
-                key={`${feature.title}-${index}`}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.1 * index }}
-                className="text-center"
-              >
-                <div className="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <feature.icon className="w-8 h-8 text-blue-600" />
-                </div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">{feature.title}</h3>
-                <p className="text-gray-600">{feature.description}</p>
-              </motion.div>
-            ))}
+            {isClient &&
+              features.map((feature, index) => (
+                <motion.div
+                  key={`${feature.title}-${index}`}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.1 * index }}
+                  className="text-center"
+                >
+                  <div className="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <feature.icon className="w-8 h-8 text-blue-600" />
+                  </div>
+                  <h3 className="text-lg font-semibold text-gray-900 mb-2">{feature.title}</h3>
+                  <p className="text-gray-600">{feature.description}</p>
+                </motion.div>
+              ))}
           </div>
         </div>
       </div>

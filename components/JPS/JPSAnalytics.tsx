@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { 
+import {
   ChartBarIcon,
   TrendingUpIcon,
   UserGroupIcon,
@@ -15,7 +15,7 @@ import {
   MapPinIcon,
   StarIcon,
   CalendarIcon,
-  CogIcon
+  CogIcon,
 } from '@heroicons/react/24/outline';
 
 interface JPSAnalyticsProps {
@@ -56,7 +56,7 @@ const JPSAnalytics: React.FC<JPSAnalyticsProps> = ({ userType }) => {
     averageTimeToHire: 0,
     averageSalary: 0,
     placementRate: 0,
-    satisfactionScore: 0
+    satisfactionScore: 0,
   });
   const [timeSeriesData, setTimeSeriesData] = useState<TimeSeriesData[]>([]);
   const [topSkills, setTopSkills] = useState<TopSkills[]>([]);
@@ -77,7 +77,7 @@ const JPSAnalytics: React.FC<JPSAnalyticsProps> = ({ userType }) => {
       averageTimeToHire: 23,
       averageSalary: 85000,
       placementRate: 78.5,
-      satisfactionScore: 4.6
+      satisfactionScore: 4.6,
     });
 
     // Mock time series data
@@ -88,7 +88,7 @@ const JPSAnalytics: React.FC<JPSAnalyticsProps> = ({ userType }) => {
       { date: '2024-01-04', applications: 67, placements: 22, activeJobs: 175 },
       { date: '2024-01-05', applications: 43, placements: 11, activeJobs: 168 },
       { date: '2024-01-06', applications: 29, placements: 7, activeJobs: 155 },
-      { date: '2024-01-07', applications: 34, placements: 9, activeJobs: 160 }
+      { date: '2024-01-07', applications: 34, placements: 9, activeJobs: 160 },
     ];
     setTimeSeriesData(mockTimeSeries);
 
@@ -98,7 +98,7 @@ const JPSAnalytics: React.FC<JPSAnalyticsProps> = ({ userType }) => {
       { skill: 'Python', demand: 78, supply: 65, gap: 13 },
       { skill: 'AWS', demand: 92, supply: 58, gap: 34 },
       { skill: 'TypeScript', demand: 76, supply: 68, gap: 8 },
-      { skill: 'Docker', demand: 88, supply: 45, gap: 43 }
+      { skill: 'Docker', demand: 88, supply: 45, gap: 43 },
     ];
     setTopSkills(mockTopSkills);
 
@@ -169,10 +169,10 @@ const JPSAnalytics: React.FC<JPSAnalyticsProps> = ({ userType }) => {
             Comprehensive insights and performance metrics for the job placement system
           </p>
         </div>
-        
+
         <select
           value={selectedPeriod}
-          onChange={(e) => setSelectedPeriod(e.target.value)}
+          onChange={e => setSelectedPeriod(e.target.value)}
           className="px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
           aria-label="Select time period"
         >
@@ -192,7 +192,9 @@ const JPSAnalytics: React.FC<JPSAnalyticsProps> = ({ userType }) => {
             </div>
             <div className="ml-4">
               <p className="text-sm font-medium text-gray-600">Total Jobs</p>
-              <p className="text-2xl font-bold text-gray-900">{analyticsData.totalJobs.toLocaleString()}</p>
+              <p className="text-2xl font-bold text-gray-900">
+                {analyticsData.totalJobs.toLocaleString()}
+              </p>
             </div>
           </div>
         </div>
@@ -204,7 +206,9 @@ const JPSAnalytics: React.FC<JPSAnalyticsProps> = ({ userType }) => {
             </div>
             <div className="ml-4">
               <p className="text-sm font-medium text-gray-600">Total Candidates</p>
-              <p className="text-2xl font-bold text-gray-900">{analyticsData.totalCandidates.toLocaleString()}</p>
+              <p className="text-2xl font-bold text-gray-900">
+                {analyticsData.totalCandidates.toLocaleString()}
+              </p>
             </div>
           </div>
         </div>
@@ -216,7 +220,9 @@ const JPSAnalytics: React.FC<JPSAnalyticsProps> = ({ userType }) => {
             </div>
             <div className="ml-4">
               <p className="text-sm font-medium text-gray-600">Applications</p>
-              <p className="text-2xl font-bold text-gray-900">{analyticsData.totalApplications.toLocaleString()}</p>
+              <p className="text-2xl font-bold text-gray-900">
+                {analyticsData.totalApplications.toLocaleString()}
+              </p>
             </div>
           </div>
         </div>
@@ -228,7 +234,9 @@ const JPSAnalytics: React.FC<JPSAnalyticsProps> = ({ userType }) => {
             </div>
             <div className="ml-4">
               <p className="text-sm font-medium text-gray-600">Placements</p>
-              <p className="text-2xl font-bold text-gray-900">{analyticsData.successfulPlacements.toLocaleString()}</p>
+              <p className="text-2xl font-bold text-gray-900">
+                {analyticsData.successfulPlacements.toLocaleString()}
+              </p>
             </div>
           </div>
         </div>
@@ -243,7 +251,9 @@ const JPSAnalytics: React.FC<JPSAnalyticsProps> = ({ userType }) => {
             </div>
             <div className="ml-4">
               <p className="text-sm font-medium text-gray-600">Avg Time to Hire</p>
-              <p className="text-2xl font-bold text-gray-900">{analyticsData.averageTimeToHire} days</p>
+              <p className="text-2xl font-bold text-gray-900">
+                {analyticsData.averageTimeToHire} days
+              </p>
             </div>
           </div>
         </div>
@@ -255,7 +265,9 @@ const JPSAnalytics: React.FC<JPSAnalyticsProps> = ({ userType }) => {
             </div>
             <div className="ml-4">
               <p className="text-sm font-medium text-gray-600">Avg Salary</p>
-              <p className="text-2xl font-bold text-gray-900">${analyticsData.averageSalary.toLocaleString()}</p>
+              <p className="text-2xl font-bold text-gray-900">
+                ${analyticsData.averageSalary.toLocaleString()}
+              </p>
             </div>
           </div>
         </div>
@@ -279,7 +291,9 @@ const JPSAnalytics: React.FC<JPSAnalyticsProps> = ({ userType }) => {
             </div>
             <div className="ml-4">
               <p className="text-sm font-medium text-gray-600">Satisfaction Score</p>
-              <p className="text-2xl font-bold text-gray-900">{analyticsData.satisfactionScore}/5</p>
+              <p className="text-2xl font-bold text-gray-900">
+                {analyticsData.satisfactionScore}/5
+              </p>
             </div>
           </div>
         </div>
@@ -292,7 +306,10 @@ const JPSAnalytics: React.FC<JPSAnalyticsProps> = ({ userType }) => {
           <h3 className="text-lg font-semibold text-gray-900 mb-4">Activity Over Time</h3>
           <div className="space-y-4">
             {timeSeriesData.map((data, index) => (
-              <div key={index} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+              <div
+                key={index}
+                className="flex items-center justify-between p-3 bg-gray-50 rounded-lg"
+              >
                 <div className="flex items-center space-x-4">
                   <CalendarIcon className="h-5 w-5 text-gray-400" />
                   <span className="text-sm font-medium text-gray-900">{data.date}</span>
@@ -328,13 +345,13 @@ const JPSAnalytics: React.FC<JPSAnalyticsProps> = ({ userType }) => {
                 </div>
                 <div className="flex space-x-2">
                   <div className="flex-1 bg-gray-200 rounded-full h-2">
-                    <div 
+                    <div
                       className="bg-blue-600 h-2 rounded-full"
                       style={{ width: `${skill.demand}%` }}
                     ></div>
                   </div>
                   <div className="flex-1 bg-gray-200 rounded-full h-2">
-                    <div 
+                    <div
                       className="bg-green-600 h-2 rounded-full"
                       style={{ width: `${skill.supply}%` }}
                     ></div>
@@ -425,7 +442,8 @@ const JPSAnalytics: React.FC<JPSAnalyticsProps> = ({ userType }) => {
             <div>
               <h4 className="font-medium text-gray-900 mb-1">Optimize Job Postings</h4>
               <p className="text-sm text-gray-700">
-                Jobs with detailed skill requirements and clear salary ranges receive 35% more qualified applications.
+                Jobs with detailed skill requirements and clear salary ranges receive 35% more
+                qualified applications.
               </p>
             </div>
           </div>
@@ -435,7 +453,8 @@ const JPSAnalytics: React.FC<JPSAnalyticsProps> = ({ userType }) => {
             <div>
               <h4 className="font-medium text-gray-900 mb-1">Focus on High-Demand Skills</h4>
               <p className="text-sm text-gray-700">
-                Prioritize candidates with AWS, Docker, and TypeScript skills as they have the highest placement rates.
+                Prioritize candidates with AWS, Docker, and TypeScript skills as they have the
+                highest placement rates.
               </p>
             </div>
           </div>
@@ -455,4 +474,4 @@ const JPSAnalytics: React.FC<JPSAnalyticsProps> = ({ userType }) => {
   );
 };
 
-export default JPSAnalytics; 
+export default JPSAnalytics;

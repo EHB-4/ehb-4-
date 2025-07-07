@@ -108,9 +108,12 @@ function startAll() {
   log('Starting all EHB services...');
 
   Object.keys(PORT_CONFIG).forEach(serviceName => {
-    setTimeout(() => {
-      startService(serviceName);
-    }, 1000 * Object.keys(PORT_CONFIG).indexOf(serviceName));
+    setTimeout(
+      () => {
+        startService(serviceName);
+      },
+      1000 * Object.keys(PORT_CONFIG).indexOf(serviceName)
+    );
   });
 
   log('All services started. Opening browsers...');

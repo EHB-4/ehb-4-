@@ -43,9 +43,7 @@ describe('JPS AI Matching API Tests', () => {
     });
 
     test('Should return 400 for missing jobId', async () => {
-      const request = createMockRequest(
-        'http://localhost:3000/api/jps/ai-matching?candidateId=1'
-      );
+      const request = createMockRequest('http://localhost:3000/api/jps/ai-matching?candidateId=1');
       const response = await GET(request);
       const data = await response.json();
 
@@ -54,9 +52,7 @@ describe('JPS AI Matching API Tests', () => {
     });
 
     test('Should return 400 for missing candidateId', async () => {
-      const request = createMockRequest(
-        'http://localhost:3000/api/jps/ai-matching?jobId=1'
-      );
+      const request = createMockRequest('http://localhost:3000/api/jps/ai-matching?jobId=1');
       const response = await GET(request);
       const data = await response.json();
 
@@ -90,11 +86,10 @@ describe('JPS AI Matching API Tests', () => {
   // Roman Urdu: POST Top Matches Tests
   describe('POST Top Matches', () => {
     test('Should return top matches for valid jobId', async () => {
-      const request = createMockRequest(
-        'http://localhost:3000/api/jps/ai-matching',
-        'POST',
-        { jobId: '1', limit: 3 }
-      );
+      const request = createMockRequest('http://localhost:3000/api/jps/ai-matching', 'POST', {
+        jobId: '1',
+        limit: 3,
+      });
       const response = await POST(request);
       const data = await response.json();
 
@@ -107,11 +102,9 @@ describe('JPS AI Matching API Tests', () => {
     });
 
     test('Should return top matches with default limit', async () => {
-      const request = createMockRequest(
-        'http://localhost:3000/api/jps/ai-matching',
-        'POST',
-        { jobId: '1' }
-      );
+      const request = createMockRequest('http://localhost:3000/api/jps/ai-matching', 'POST', {
+        jobId: '1',
+      });
       const response = await POST(request);
       const data = await response.json();
 
@@ -120,11 +113,9 @@ describe('JPS AI Matching API Tests', () => {
     });
 
     test('Should return 400 for missing jobId', async () => {
-      const request = createMockRequest(
-        'http://localhost:3000/api/jps/ai-matching',
-        'POST',
-        { limit: 5 }
-      );
+      const request = createMockRequest('http://localhost:3000/api/jps/ai-matching', 'POST', {
+        limit: 5,
+      });
       const response = await POST(request);
       const data = await response.json();
 
@@ -133,11 +124,10 @@ describe('JPS AI Matching API Tests', () => {
     });
 
     test('Should return 500 for non-existent jobId', async () => {
-      const request = createMockRequest(
-        'http://localhost:3000/api/jps/ai-matching',
-        'POST',
-        { jobId: '999', limit: 5 }
-      );
+      const request = createMockRequest('http://localhost:3000/api/jps/ai-matching', 'POST', {
+        jobId: '999',
+        limit: 5,
+      });
       const response = await POST(request);
       const data = await response.json();
 
@@ -215,14 +205,14 @@ describe('JPS AI Matching API Tests', () => {
       const data = await response.json();
 
       const { breakdown, overallScore } = data;
-      
+
       // Roman Urdu: Calculate expected weighted score
-      const expectedScore = 
+      const expectedScore =
         breakdown.skills * 0.35 +
         breakdown.experience * 0.25 +
         breakdown.location * 0.15 +
         breakdown.salary * 0.15 +
-        breakdown.sqlLevel * 0.10;
+        breakdown.sqlLevel * 0.1;
 
       expect(overallScore).toBeCloseTo(expectedScore, 0);
     });
@@ -235,7 +225,7 @@ describe('JPS AI Matching API Tests', () => {
       const data = await response.json();
 
       const { breakdown } = data;
-      
+
       Object.values(breakdown).forEach(score => {
         expect(score).toBeGreaterThanOrEqual(0);
         expect(score).toBeLessThanOrEqual(100);
@@ -265,10 +255,12 @@ describe('JPS AI Matching API Tests', () => {
       const data = await response.json();
 
       if (data.overallScore >= 80) {
-        expect(data.details.recommendations.some(rec => 
-          rec.toLowerCase().includes('recommend') || 
-          rec.toLowerCase().includes('excellent')
-        )).toBe(true);
+        expect(
+          data.details.recommendations.some(
+            rec =>
+              rec.toLowerCase().includes('recommend') || rec.toLowerCase().includes('excellent')
+          )
+        ).toBe(true);
       }
     });
 
@@ -280,10 +272,11 @@ describe('JPS AI Matching API Tests', () => {
       const data = await response.json();
 
       if (data.overallScore < 70) {
-        expect(data.details.recommendations.some(rec => 
-          rec.toLowerCase().includes('training') || 
-          rec.toLowerCase().includes('improve')
-        )).toBe(true);
+        expect(
+          data.details.recommendations.some(
+            rec => rec.toLowerCase().includes('training') || rec.toLowerCase().includes('improve')
+          )
+        ).toBe(true);
       }
     });
   });
@@ -320,11 +313,9 @@ describe('JPS AI Matching API Tests', () => {
       const data = await response.json();
 
       const { matchingSkills, missingSkills } = data.details;
-      
-      const intersection = matchingSkills.filter(skill => 
-        missingSkills.includes(skill)
-      );
-      
+
+      const intersection = matchingSkills.filter(skill => missingSkills.includes(skill));
+
       expect(intersection.length).toBe(0);
     });
   });
@@ -391,17 +382,15 @@ describe('JPS AI Matching API Tests', () => {
     });
 
     test('Multiple requests should work correctly', async () => {
-      const requests = Array.from({ length: 5 }, (_, i) => 
-        createMockRequest(
-          `http://localhost:3000/api/jps/ai-matching?jobId=1&candidateId=${i + 1}`
-        )
+      const requests = Array.from({ length: 5 }, (_, i) =>
+        createMockRequest(`http://localhost:3000/api/jps/ai-matching?jobId=1&candidateId=${i + 1}`)
       );
 
       const responses = await Promise.all(requests.map(req => GET(req)));
-      
+
       responses.forEach(response => {
         expect(response.status).toBe(200);
       });
     });
   });
-}); 
+});

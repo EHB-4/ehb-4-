@@ -339,7 +339,8 @@ export default function EMOPage() {
   const [searchTerm, setSearchTerm] = useState('');
   const [statusFilter, setStatusFilter] = useState('all');
   const [departmentFilter, setDepartmentFilter] = useState('all');
-  const [verificationSessions, setVerificationSessions] = useState<VerificationSession[]>(mockVerificationSessions);
+  const [verificationSessions, setVerificationSessions] =
+    useState<VerificationSession[]>(mockVerificationSessions);
   const [selectedStatus, setSelectedStatus] = useState<string>('all');
   const [selectedType, setSelectedType] = useState<string>('all');
   const [currentSQLLevel, setCurrentSQLLevel] = useState(2);
@@ -401,8 +402,8 @@ export default function EMOPage() {
   };
 
   const handleSessionComplete = (sessionId: string) => {
-    setVerificationSessions(prev => 
-      prev.map(s => s.id === sessionId ? { ...s, status: 'completed' as const } : s)
+    setVerificationSessions(prev =>
+      prev.map(s => (s.id === sessionId ? { ...s, status: 'completed' as const } : s))
     );
     toast.success('Live verification successfully complete ho gaya hai!');
   };
@@ -429,13 +430,18 @@ export default function EMOPage() {
               <div>
                 <h1 className="text-3xl font-bold text-gray-900">EMO</h1>
                 <p className="text-green-600 font-medium">Emotional & Mental Operations</p>
-                <p className="text-sm text-gray-500">SQL Level {currentSQLLevel} - {sqlLevelConfig[currentSQLLevel as keyof typeof sqlLevelConfig]?.name}</p>
+                <p className="text-sm text-gray-500">
+                  SQL Level {currentSQLLevel} -{' '}
+                  {sqlLevelConfig[currentSQLLevel as keyof typeof sqlLevelConfig]?.name}
+                </p>
               </div>
             </div>
             <div className="flex items-center space-x-4">
               <div className="flex items-center space-x-2">
                 <Clock className="h-5 w-5 text-green-500" />
-                <span className="text-green-600 font-medium">{emoCompletionPercentage}% Complete</span>
+                <span className="text-green-600 font-medium">
+                  {emoCompletionPercentage}% Complete
+                </span>
               </div>
               <div className="bg-green-100 px-3 py-1 rounded-full">
                 <span className="text-green-800 text-sm font-medium">Live Verification</span>
@@ -450,37 +456,49 @@ export default function EMOPage() {
         <div className="bg-white rounded-lg shadow-md p-6 mb-6">
           <div className="flex items-center justify-between mb-4">
             <h2 className="text-xl font-semibold text-gray-900">SQL Level Live Verification</h2>
-            <Link href="/sql" className="flex items-center space-x-2 text-green-600 hover:text-green-700">
+            <Link
+              href="/sql"
+              className="flex items-center space-x-2 text-green-600 hover:text-green-700"
+            >
               <span>View SQL Dashboard</span>
               <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div className="bg-green-50 p-4 rounded-lg">
               <div className="flex items-center space-x-2 mb-2">
                 <UserCheck className="w-5 h-5 text-green-600" />
                 <span className="font-medium text-green-900">Current Level</span>
               </div>
-              <p className="text-2xl font-bold text-green-600">{sqlLevelConfig[currentSQLLevel as keyof typeof sqlLevelConfig]?.name}</p>
-              <p className="text-sm text-green-700">{sqlLevelConfig[currentSQLLevel as keyof typeof sqlLevelConfig]?.description}</p>
+              <p className="text-2xl font-bold text-green-600">
+                {sqlLevelConfig[currentSQLLevel as keyof typeof sqlLevelConfig]?.name}
+              </p>
+              <p className="text-sm text-green-700">
+                {sqlLevelConfig[currentSQLLevel as keyof typeof sqlLevelConfig]?.description}
+              </p>
             </div>
-            
+
             <div className="bg-blue-50 p-4 rounded-lg">
               <div className="flex items-center space-x-2 mb-2">
                 <CheckCircle className="w-5 h-5 text-blue-600" />
                 <span className="font-medium text-blue-900">EMO Completion</span>
               </div>
               <p className="text-2xl font-bold text-blue-600">{emoCompletionPercentage}%</p>
-              <p className="text-sm text-blue-700">{stats.completedSessions} of {stats.totalSessions} sessions complete</p>
+              <p className="text-sm text-blue-700">
+                {stats.completedSessions} of {stats.totalSessions} sessions complete
+              </p>
             </div>
-            
+
             <div className="bg-purple-50 p-4 rounded-lg">
               <div className="flex items-center space-x-2 mb-2">
                 <ArrowRight className="w-5 h-5 text-purple-600" />
                 <span className="font-medium text-purple-900">Next Level</span>
               </div>
-              <p className="text-2xl font-bold text-purple-600">{sqlLevelConfig[(currentSQLLevel + 1) as keyof typeof sqlLevelConfig]?.name || 'Max Level'}</p>
+              <p className="text-2xl font-bold text-purple-600">
+                {sqlLevelConfig[(currentSQLLevel + 1) as keyof typeof sqlLevelConfig]?.name ||
+                  'Max Level'}
+              </p>
               <p className="text-sm text-purple-700">Complete all verifications for VIP</p>
             </div>
           </div>

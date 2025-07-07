@@ -1,4 +1,4 @@
-export const runtime = "nodejs";
+export const runtime = 'nodejs';
 import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { getServerSession } from 'next-auth';
@@ -7,7 +7,7 @@ import { authOptions } from '@/lib/auth';
 export async function GET(request: NextRequest) {
   try {
     const session = await getServerSession(authOptions);
-    
+
     if (!session?.user?.email) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
@@ -18,13 +18,13 @@ export async function GET(request: NextRequest) {
         sqlProfile: true,
         coinLocks: {
           where: { status: 'ACTIVE' },
-          orderBy: { createdAt: 'desc' }
+          orderBy: { createdAt: 'desc' },
         },
         skillTests: {
           orderBy: { createdAt: 'desc' },
-          take: 5
-        }
-      }
+          take: 5,
+        },
+      },
     });
 
     if (!user) {
@@ -33,10 +33,10 @@ export async function GET(request: NextRequest) {
 
     // Calculate AI score based on various factors
     const aiScore = calculateAIScore(user);
-    
+
     // Get current level benefits and restrictions
     const levelConfig = getLevelConfig(user.sqlLevel);
-    
+
     // Check if user is eligible for upgrade
     const upgradeEligibility = checkUpgradeEligibility(user, aiScore);
 
@@ -59,42 +59,39 @@ export async function GET(request: NextRequest) {
         type: test.testType,
         score: test.score,
         passed: test.passed,
-        date: test.createdAt.toISOString()
-      }))
+        date: test.createdAt.toISOString(),
+      })),
     };
 
     return NextResponse.json(response);
   } catch (error) {
     console.error('SQL Get Level Error:', error);
-    return NextResponse.json(
-      { error: 'Internal server error' },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
   }
 }
 
 function calculateAIScore(user: any): number {
   let score = 0;
-  
+
   // Base score from referrals (if any)
   score += 25; // Placeholder for referral system
-  
+
   // Score from skill tests
   const passedTests = user.skillTests.filter((test: any) => test.passed).length;
   score += passedTests * 20;
-  
+
   // Score from coin locks
   const totalLocked = user.coinLocks.reduce((sum: number, lock: any) => sum + lock.amount, 0);
   score += Math.min(totalLocked / 100, 15); // Max 15 points from coin locks
-  
+
   // Penalty from complaints
   score -= user.complaintCount * 10;
-  
+
   // Penalty from fraud score
   if (user.fraudScore > 0.7) {
     score *= 0.5;
   }
-  
+
   return Math.max(0, Math.min(500, Math.round(score)));
 }
 
@@ -102,26 +99,26 @@ function getLevelConfig(level: number) {
   const configs = {
     0: {
       benefits: ['Basic marketplace access', 'Standard transaction limits'],
-      restrictions: ['No franchise access', 'Limited features']
+      restrictions: ['No franchise access', 'Limited features'],
     },
     1: {
       benefits: ['Enhanced marketplace access', 'Franchise eligibility', 'Basic AI tools'],
-      restrictions: ['No validator access', 'Limited earning potential']
+      restrictions: ['No validator access', 'Limited earning potential'],
     },
     2: {
       benefits: ['Full marketplace access', 'Advanced AI tools', 'Higher earning potential'],
-      restrictions: ['No validator access']
+      restrictions: ['No validator access'],
     },
     3: {
       benefits: ['Validator eligibility', 'Premium features', 'Maximum earning potential'],
-      restrictions: []
+      restrictions: [],
     },
     4: {
       benefits: ['All features unlocked', 'Elite status', 'Maximum benefits'],
-      restrictions: []
-    }
+      restrictions: [],
+    },
   };
-  
+
   return configs[level as keyof typeof configs] || configs[0];
 }
 
@@ -134,25 +131,25 @@ function getVerificationStatus(user: any): 'verified' | 'pending' | 'expired' {
 function checkUpgradeEligibility(user: any, aiScore: number) {
   const nextLevel = user.sqlLevel + 1;
   if (nextLevel > 4) return null;
-  
+
   const requirements = {
     1: { minScore: 50, minCoins: 100 },
     2: { minScore: 150, minCoins: 500 },
     3: { minScore: 300, minCoins: 1500 },
-    4: { minScore: 500, minCoins: 5000 }
+    4: { minScore: 500, minCoins: 5000 },
   };
-  
+
   const req = requirements[nextLevel as keyof typeof requirements];
   if (!req) return null;
-  
+
   const totalLocked = user.coinLocks.reduce((sum: number, lock: any) => sum + lock.amount, 0);
-  
+
   return {
     eligible: aiScore >= req.minScore && totalLocked >= req.minCoins,
     requirements: {
       aiScore: { current: aiScore, required: req.minScore },
-      coinLock: { current: totalLocked, required: req.minCoins }
+      coinLock: { current: totalLocked, required: req.minCoins },
     },
-    missingRequirements: []
+    missingRequirements: [],
   };
 }

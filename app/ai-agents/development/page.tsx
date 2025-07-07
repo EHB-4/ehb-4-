@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 'use client';
 
@@ -44,7 +44,7 @@ import {
   BarChart3,
   Activity,
   Star,
-  Plus
+  Plus,
 } from 'lucide-react';
 import Link from 'next/link';
 
@@ -518,4 +518,3 @@ export default function AIAgentDevelopmentPage() {
     </div>
   );
 }
- 

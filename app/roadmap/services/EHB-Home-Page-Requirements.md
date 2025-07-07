@@ -191,7 +191,6 @@ npm install @openai/speech-to-text
 ## 🎯 **Next Steps**
 
 1. **Additional Information Needed**:
-
    - Specific color scheme preferences
    - Logo and branding guidelines
    - Content for hero carousel slides
@@ -201,7 +200,6 @@ npm install @openai/speech-to-text
    - API endpoints for data integration
 
 2. **Technical Requirements**:
-
    - Database schema for services
    - Authentication system integration
    - Payment gateway setup

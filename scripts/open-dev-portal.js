@@ -33,7 +33,7 @@ function openBrowser() {
   console.log(`🚀 Opening Development Portal...`);
   console.log(`📍 ${DEV_PORTAL_URL}`);
 
-  exec(command, (error) => {
+  exec(command, error => {
     if (error) {
       console.log(`❌ Failed to open browser: ${error.message}`);
       console.log(`💡 Please manually open: ${DEV_PORTAL_URL}`);
@@ -51,4 +51,4 @@ console.log('');
 console.log('💡 If the page shows an error, the service is not running.');
 console.log('   Start the service first, then run this script again.');
 console.log('');
-console.log('🛑 Press Ctrl+C to exit'); 
+console.log('🛑 Press Ctrl+C to exit');

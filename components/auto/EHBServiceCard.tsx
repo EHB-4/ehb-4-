@@ -4,7 +4,7 @@ interface EHBServiceCardProps {
   // Add props here
 }
 
-export const EHBServiceCard: React.FC<EHBServiceCardProps> = (props) => {
+export const EHBServiceCard: React.FC<EHBServiceCardProps> = props => {
   return (
     <div className="ehbservicecard-container">
       <h3>EHBServiceCard</h3>

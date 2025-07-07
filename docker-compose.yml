@@ -4,21 +4,20 @@ services:
   app:
     build: .
     ports:
-      - "3000:3000"
-    environment:
-      - NODE_ENV=production
-      - DATABASE_URL=mongodb://mongo:27017/ehb
+      - "80:3000"
+    env_file:
+      - .env.production
     depends_on:
       - mongo
-    restart: unless-stopped
+    restart: always
 
   mongo:
-    image: mongo:latest
-    ports:
-      - "27017:27017"
+    image: mongo:6
+    restart: always
+    environment:
+      MONGO_INITDB_DATABASE: ehb
     volumes:
       - mongo_data:/data/db
-    restart: unless-stopped
 
 volumes:
   mongo_data:

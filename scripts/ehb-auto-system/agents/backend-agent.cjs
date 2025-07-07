@@ -1,4 +1,3 @@
-
 const fs = require('fs');
 const path = require('path');
 
@@ -10,17 +9,17 @@ class BackendAgent {
 
   async initialize() {
     console.log('🤖 backend Agent Initializing...');
-    
+
     // Auto-accept all suggestions
     setInterval(() => {
       this.autoAcceptSuggestions();
     }, 2000);
-    
+
     // Auto-run tasks
     setInterval(() => {
       this.autoRunTasks();
     }, 5000);
-    
+
     console.log('✅ backend Agent Ready');
   }
 

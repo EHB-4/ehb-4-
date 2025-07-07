@@ -3,7 +3,7 @@
 /**
  * EHB Franchise Auto Manager
  * Coordinates franchise scanning, merging, and system integration
- * 
+ *
  * Features:
  * - Auto-starts franchise scanner
  * - Manages system integration
@@ -25,14 +25,14 @@ class FranchiseAutoManager {
     this.app = express();
     this.server = null;
     this.port = process.env.FRANCHISE_MANAGER_PORT || 3001;
-    
+
     this.config = {
       autoStart: true,
       autoRecovery: true,
       recoveryInterval: 60000, // 1 minute
       maxRetries: 3,
       healthCheckInterval: 30000, // 30 seconds
-      logFile: './logs/franchise-manager.log'
+      logFile: './logs/franchise-manager.log',
     };
 
     this.status = {
@@ -45,8 +45,8 @@ class FranchiseAutoManager {
         uptime: 0,
         scansCompleted: 0,
         mergesCompleted: 0,
-        backupsCompleted: 0
-      }
+        backupsCompleted: 0,
+      },
     };
 
     this.recoveryTimer = null;
@@ -58,33 +58,32 @@ class FranchiseAutoManager {
    */
   async initialize() {
     console.log('🚀 Initializing EHB Franchise Auto Manager...');
-    
+
     try {
       // Setup logging
       await this.setupLogging();
-      
+
       // Setup Express server
       await this.setupServer();
-      
+
       // Initialize scanner
       await this.scanner.initialize();
-      
+
       // Start auto management
       if (this.config.autoStart) {
         await this.start();
       }
-      
+
       // Start health monitoring
       this.startHealthMonitoring();
-      
+
       // Start auto recovery
       if (this.config.autoRecovery) {
         this.startAutoRecovery();
       }
-      
+
       console.log('✅ Franchise Auto Manager initialized successfully');
       this.log('INFO', 'Franchise Auto Manager initialized successfully');
-      
     } catch (error) {
       console.error('❌ Failed to initialize Franchise Auto Manager:', error);
       this.log('ERROR', `Initialization failed: ${error.message}`);
@@ -112,9 +111,9 @@ class FranchiseAutoManager {
   log(level, message) {
     const timestamp = new Date().toISOString();
     const logEntry = `[${timestamp}] [${level}] ${message}\n`;
-    
+
     fs.appendFileSync(this.config.logFile, logEntry);
-    
+
     if (process.env.NODE_ENV === 'development') {
       console.log(`[${level}] ${message}`);
     }
@@ -126,14 +125,14 @@ class FranchiseAutoManager {
   async setupServer() {
     this.app.use(cors());
     this.app.use(express.json());
-    
+
     // Health check endpoint
     this.app.get('/health', (req, res) => {
       res.json({
         status: 'healthy',
         timestamp: new Date().toISOString(),
         uptime: this.status.uptime,
-        scanner: this.scanner.getStatus()
+        scanner: this.scanner.getStatus(),
       });
     });
 
@@ -141,7 +140,7 @@ class FranchiseAutoManager {
     this.app.get('/status', (req, res) => {
       res.json({
         manager: this.status,
-        scanner: this.scanner.getStatus()
+        scanner: this.scanner.getStatus(),
       });
     });
 
@@ -198,13 +197,14 @@ class FranchiseAutoManager {
       try {
         const reportsDir = './reports/franchise';
         if (fs.existsSync(reportsDir)) {
-          const reports = fs.readdirSync(reportsDir)
+          const reports = fs
+            .readdirSync(reportsDir)
             .filter(file => file.endsWith('.json'))
             .map(file => ({
               name: file,
               path: `/reports/franchise/${file}`,
               size: fs.statSync(path.join(reportsDir, file)).size,
-              modified: fs.statSync(path.join(reportsDir, file)).mtime
+              modified: fs.statSync(path.join(reportsDir, file)).mtime,
             }));
           res.json(reports);
         } else {
@@ -236,7 +236,7 @@ class FranchiseAutoManager {
 
     try {
       this.log('INFO', 'Starting Franchise Auto Manager...');
-      
+
       // Start Express server
       this.server = this.app.listen(this.port, () => {
         console.log(`🌐 Franchise Auto Manager API running on port ${this.port}`);
@@ -246,9 +246,8 @@ class FranchiseAutoManager {
       this.status.isRunning = true;
       this.status.startTime = new Date().toISOString();
       this.status.retryCount = 0;
-      
+
       this.log('INFO', 'Franchise Auto Manager started successfully');
-      
     } catch (error) {
       this.log('ERROR', `Failed to start manager: ${error.message}`);
       throw error;
@@ -266,29 +265,28 @@ class FranchiseAutoManager {
 
     try {
       this.log('INFO', 'Stopping Franchise Auto Manager...');
-      
+
       // Stop Express server
       if (this.server) {
         this.server.close();
       }
-      
+
       // Stop scanner
       await this.scanner.stop();
-      
+
       // Clear timers
       if (this.recoveryTimer) {
         clearInterval(this.recoveryTimer);
       }
-      
+
       if (this.healthTimer) {
         clearInterval(this.healthTimer);
       }
-      
+
       this.status.isRunning = false;
       this.status.uptime = 0;
-      
+
       this.log('INFO', 'Franchise Auto Manager stopped successfully');
-      
     } catch (error) {
       this.log('ERROR', `Failed to stop manager: ${error.message}`);
       throw error;
@@ -300,11 +298,11 @@ class FranchiseAutoManager {
    */
   async restart() {
     this.log('INFO', 'Restarting Franchise Auto Manager...');
-    
+
     await this.stop();
     await new Promise(resolve => setTimeout(resolve, 1000)); // Wait 1 second
     await this.start();
-    
+
     this.log('INFO', 'Franchise Auto Manager restarted successfully');
   }
 
@@ -315,7 +313,7 @@ class FranchiseAutoManager {
     this.healthTimer = setInterval(() => {
       this.performHealthCheck();
     }, this.config.healthCheckInterval);
-    
+
     this.log('INFO', `Health monitoring started (${this.config.healthCheckInterval}ms interval)`);
   }
 
@@ -325,26 +323,25 @@ class FranchiseAutoManager {
   async performHealthCheck() {
     try {
       const scannerStatus = this.scanner.getStatus();
-      
+
       // Check if scanner is running
       if (!scannerStatus.isRunning) {
         this.log('WARN', 'Scanner is not running, attempting recovery...');
         await this.recoverScanner();
       }
-      
+
       // Update uptime
       if (this.status.startTime) {
         this.status.uptime = Date.now() - new Date(this.status.startTime).getTime();
       }
-      
+
       this.status.lastHealthCheck = new Date().toISOString();
-      
     } catch (error) {
       this.log('ERROR', `Health check failed: ${error.message}`);
       this.status.errors.push({
         timestamp: new Date().toISOString(),
         type: 'health_check_error',
-        error: error.message
+        error: error.message,
       });
     }
   }
@@ -356,7 +353,7 @@ class FranchiseAutoManager {
     this.recoveryTimer = setInterval(() => {
       this.performAutoRecovery();
     }, this.config.recoveryInterval);
-    
+
     this.log('INFO', `Auto recovery started (${this.config.recoveryInterval}ms interval)`);
   }
 
@@ -366,19 +363,21 @@ class FranchiseAutoManager {
   async performAutoRecovery() {
     try {
       const scannerStatus = this.scanner.getStatus();
-      
+
       // Check for errors
       if (scannerStatus.errors.length > 0) {
-        this.log('WARN', `Found ${scannerStatus.errors.length} scanner errors, attempting recovery...`);
+        this.log(
+          'WARN',
+          `Found ${scannerStatus.errors.length} scanner errors, attempting recovery...`
+        );
         await this.recoverScanner();
       }
-      
+
       // Check for high error count
       if (this.status.errors.length > 10) {
         this.log('WARN', 'High error count detected, restarting manager...');
         await this.restart();
       }
-      
     } catch (error) {
       this.log('ERROR', `Auto recovery failed: ${error.message}`);
     }
@@ -396,15 +395,14 @@ class FranchiseAutoManager {
     try {
       this.status.retryCount++;
       this.log('INFO', `Attempting scanner recovery (attempt ${this.status.retryCount})`);
-      
+
       // Restart scanner
       await this.scanner.stop();
       await new Promise(resolve => setTimeout(resolve, 2000)); // Wait 2 seconds
       await this.scanner.initialize();
-      
+
       this.log('INFO', 'Scanner recovery successful');
       this.status.retryCount = 0;
-      
     } catch (error) {
       this.log('ERROR', `Scanner recovery failed: ${error.message}`);
     }
@@ -417,7 +415,7 @@ class FranchiseAutoManager {
     return {
       ...this.status,
       scanner: this.scanner.getStatus(),
-      config: this.config
+      config: this.config,
     };
   }
 
@@ -433,13 +431,13 @@ class FranchiseAutoManager {
         nodeVersion: process.version,
         platform: process.platform,
         memory: process.memoryUsage(),
-        uptime: process.uptime()
-      }
+        uptime: process.uptime(),
+      },
     };
 
     const reportPath = `./reports/franchise/system-report-${Date.now()}.json`;
     fs.writeFileSync(reportPath, JSON.stringify(report, null, 2));
-    
+
     this.log('INFO', `System report generated: ${reportPath}`);
     return reportPath;
   }
@@ -462,7 +460,7 @@ process.on('SIGTERM', async () => {
 });
 
 // Handle uncaught exceptions
-process.on('uncaughtException', async (error) => {
+process.on('uncaughtException', async error => {
   console.error('❌ Uncaught Exception:', error);
   manager.log('ERROR', `Uncaught Exception: ${error.message}`);
   await manager.stop();
@@ -481,4 +479,4 @@ manager.initialize().catch(error => {
 });
 
 // Export for use in other modules
-module.exports = FranchiseAutoManager; 
+module.exports = FranchiseAutoManager;

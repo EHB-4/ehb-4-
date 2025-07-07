@@ -14,7 +14,7 @@ class AutoErrorChecker {
     this.baseUrl = 'http://localhost:3000';
     this.logFile = './logs/error-log.json';
     this.alertFile = './logs/alert-log.json';
-    
+
     this.ensureDirectories();
   }
 
@@ -30,9 +30,9 @@ class AutoErrorChecker {
   log(message, type = 'info') {
     const timestamp = new Date().toISOString();
     const logEntry = { timestamp, type, message };
-    
+
     console.log(`[${timestamp}] [${type.toUpperCase()}] ${message}`);
-    
+
     // Save to log file
     const logs = this.loadLogs();
     logs.push(logEntry);
@@ -53,7 +53,7 @@ class AutoErrorChecker {
   async initialize() {
     try {
       this.log('🚀 Initializing Auto Error Checker...');
-      
+
       this.browser = await puppeteer.launch({
         headless: true, // Run in background
         defaultViewport: { width: 1920, height: 1080 },
@@ -64,15 +64,15 @@ class AutoErrorChecker {
           '--disable-accelerated-2d-canvas',
           '--no-first-run',
           '--no-zygote',
-          '--disable-gpu'
-        ]
+          '--disable-gpu',
+        ],
       });
 
       this.page = await this.browser.newPage();
-      
+
       // Set up error listeners
       this.setupErrorListeners();
-      
+
       this.log('✅ Error checker initialized successfully');
       return true;
     } catch (error) {
@@ -96,7 +96,8 @@ class AutoErrorChecker {
 
     // Request failures
     this.page.on('requestfailed', request => {
-      this.handleError('requestfailed', 
+      this.handleError(
+        'requestfailed',
         `Request failed: ${request.url()} - ${request.failure().errorText}`,
         this.page.url()
       );
@@ -105,10 +106,7 @@ class AutoErrorChecker {
     // Response errors
     this.page.on('response', response => {
       if (response.status() >= 400) {
-        this.handleError('http', 
-          `HTTP ${response.status()}: ${response.url()}`,
-          this.page.url()
-        );
+        this.handleError('http', `HTTP ${response.status()}: ${response.url()}`, this.page.url());
       }
     });
   }
@@ -121,7 +119,7 @@ class AutoErrorChecker {
       message,
       url,
       stack,
-      severity: this.calculateSeverity(type, message)
+      severity: this.calculateSeverity(type, message),
     };
 
     this.errorHistory.push(error);
@@ -144,7 +142,7 @@ class AutoErrorChecker {
     const mediumKeywords = ['warning', 'deprecated', 'console'];
 
     const lowerMessage = message.toLowerCase();
-    
+
     if (criticalKeywords.some(keyword => lowerMessage.includes(keyword))) {
       return 'critical';
     } else if (highKeywords.some(keyword => lowerMessage.includes(keyword))) {
@@ -152,13 +150,13 @@ class AutoErrorChecker {
     } else if (mediumKeywords.some(keyword => lowerMessage.includes(keyword))) {
       return 'medium';
     }
-    
+
     return 'low';
   }
 
   shouldSendAlert() {
-    const recentErrors = this.errorHistory.filter(error => 
-      Date.now() - new Date(error.timestamp).getTime() < 5 * 60 * 1000 // Last 5 minutes
+    const recentErrors = this.errorHistory.filter(
+      error => Date.now() - new Date(error.timestamp).getTime() < 5 * 60 * 1000 // Last 5 minutes
     );
 
     const criticalErrors = recentErrors.filter(error => error.severity === 'critical');
@@ -172,12 +170,12 @@ class AutoErrorChecker {
       const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
       const filename = `error-${error.type}-${timestamp}.png`;
       const filepath = path.join('./error-screenshots', filename);
-      
-      await this.page.screenshot({ 
-        path: filepath, 
-        fullPage: true 
+
+      await this.page.screenshot({
+        path: filepath,
+        fullPage: true,
       });
-      
+
       error.screenshot = filepath;
       this.log(`📸 Error screenshot saved: ${filepath}`);
     } catch (screenshotError) {
@@ -188,10 +186,10 @@ class AutoErrorChecker {
   async checkPageForErrors(url, pageName) {
     try {
       this.log(`🔍 Checking ${pageName} for errors...`);
-      
-      await this.page.goto(url, { 
+
+      await this.page.goto(url, {
         waitUntil: 'networkidle2',
-        timeout: 30000 
+        timeout: 30000,
       });
 
       // Wait for page to load
@@ -200,7 +198,7 @@ class AutoErrorChecker {
       // Check for DOM errors
       const domErrors = await this.page.evaluate(() => {
         const errors = [];
-        
+
         // Check for broken images
         const images = document.querySelectorAll('img');
         images.forEach(img => {
@@ -243,7 +241,6 @@ class AutoErrorChecker {
       });
 
       this.log(`✅ ${pageName} check completed`);
-      
     } catch (error) {
       this.handleError('navigation', `Failed to check ${pageName}: ${error.message}`, url);
     }
@@ -253,7 +250,7 @@ class AutoErrorChecker {
     try {
       const issues = await this.page.evaluate(() => {
         const problems = [];
-        
+
         // Check for missing alt attributes
         const images = document.querySelectorAll('img');
         images.forEach(img => {
@@ -276,7 +273,7 @@ class AutoErrorChecker {
           const style = window.getComputedStyle(el);
           const color = style.color;
           const backgroundColor = style.backgroundColor;
-          
+
           if (color === backgroundColor) {
             problems.push(`Potential color contrast issue: ${el.tagName}`);
           }
@@ -299,7 +296,7 @@ class AutoErrorChecker {
       { url: '/auth/register', name: 'Registration Page' },
       { url: '/admin/dashboard', name: 'Admin Dashboard' },
       { url: '/profile', name: 'User Profile' },
-      { url: '/unauthorized', name: 'Unauthorized Page' }
+      { url: '/unauthorized', name: 'Unauthorized Page' },
     ];
 
     for (const page of pagesToCheck) {
@@ -310,13 +307,13 @@ class AutoErrorChecker {
 
   async sendAlert() {
     const recentErrors = this.errorHistory.slice(-10); // Last 10 errors
-    
+
     const alertData = {
       timestamp: new Date().toISOString(),
       errorCount: recentErrors.length,
       criticalErrors: recentErrors.filter(e => e.severity === 'critical').length,
       highErrors: recentErrors.filter(e => e.severity === 'high').length,
-      errors: recentErrors
+      errors: recentErrors,
     };
 
     // Save alert to file
@@ -329,7 +326,10 @@ class AutoErrorChecker {
 
     // Send console alert
     this.log('🚨 ALERT: Multiple errors detected!', 'alert');
-    console.log('Recent errors:', recentErrors.map(e => `${e.type}: ${e.message}`));
+    console.log(
+      'Recent errors:',
+      recentErrors.map(e => `${e.type}: ${e.message}`)
+    );
   }
 
   loadAlerts() {
@@ -354,8 +354,8 @@ class AutoErrorChecker {
         service: 'gmail',
         auth: {
           user: process.env.EMAIL_USER,
-          pass: process.env.EMAIL_PASS
-        }
+          pass: process.env.EMAIL_PASS,
+        },
       });
 
       const mailOptions = {
@@ -371,13 +371,13 @@ class AutoErrorChecker {
           
           <h3>Recent Errors:</h3>
           <ul>
-            ${alertData.errors.map(error => 
-              `<li><strong>${error.type}</strong>: ${error.message}</li>`
-            ).join('')}
+            ${alertData.errors
+              .map(error => `<li><strong>${error.type}</strong>: ${error.message}</li>`)
+              .join('')}
           </ul>
           
           <p>Please check the application immediately.</p>
-        `
+        `,
       };
 
       await transporter.sendMail(mailOptions);
@@ -399,13 +399,12 @@ class AutoErrorChecker {
     while (this.isRunning) {
       try {
         await this.runErrorCheck();
-        
+
         // Generate error report
         this.generateErrorReport();
-        
+
         // Wait for next check
         await new Promise(resolve => setTimeout(resolve, this.checkInterval));
-        
       } catch (error) {
         this.log(`❌ Error check cycle failed: ${error.message}`, 'error');
         await new Promise(resolve => setTimeout(resolve, 60000)); // Wait 1 minute before retry
@@ -428,13 +427,13 @@ class AutoErrorChecker {
       recentErrors: this.errorHistory.slice(-20),
       systemStatus: {
         checking: this.isRunning,
-        lastCheck: new Date().toISOString()
-      }
+        lastCheck: new Date().toISOString(),
+      },
     };
 
     const reportFile = `./error-reports/error-report-${new Date().toISOString().split('T')[0]}.json`;
     fs.writeFileSync(reportFile, JSON.stringify(report, null, 2));
-    
+
     this.log(`📊 Error report generated: ${reportFile}`);
     return report;
   }
@@ -442,15 +441,15 @@ class AutoErrorChecker {
   async stopChecking() {
     this.isRunning = false;
     this.log('🛑 Stopping error checking...');
-    
+
     if (this.browser) {
       await this.browser.close();
     }
   }
 
   getErrorSummary() {
-    const recentErrors = this.errorHistory.filter(error => 
-      Date.now() - new Date(error.timestamp).getTime() < 60 * 60 * 1000 // Last hour
+    const recentErrors = this.errorHistory.filter(
+      error => Date.now() - new Date(error.timestamp).getTime() < 60 * 60 * 1000 // Last hour
     );
 
     return {
@@ -458,7 +457,7 @@ class AutoErrorChecker {
       critical: recentErrors.filter(e => e.severity === 'critical').length,
       high: recentErrors.filter(e => e.severity === 'high').length,
       medium: recentErrors.filter(e => e.severity === 'medium').length,
-      low: recentErrors.filter(e => e.severity === 'low').length
+      low: recentErrors.filter(e => e.severity === 'low').length,
     };
   }
 }
@@ -466,7 +465,7 @@ class AutoErrorChecker {
 // CLI Interface
 async function main() {
   const errorChecker = new AutoErrorChecker();
-  
+
   // Handle graceful shutdown
   process.on('SIGINT', async () => {
     console.log('\n🛑 Received SIGINT, shutting down gracefully...');
@@ -481,7 +480,7 @@ async function main() {
   });
 
   const args = process.argv.slice(2);
-  
+
   if (args.includes('--init')) {
     const initialized = await errorChecker.initialize();
     if (initialized) {
@@ -533,4 +532,4 @@ if (require.main === module) {
   main().catch(console.error);
 }
 
-module.exports = AutoErrorChecker; 
+module.exports = AutoErrorChecker;

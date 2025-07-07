@@ -77,34 +77,30 @@ export default function UploadProgress({
         <div className="flex items-center space-x-3">
           {getStatusIcon()}
           <div className="flex-1 min-w-0">
-            <p className="text-sm font-medium text-gray-900 dark:text-white truncate">
-              {fileName}
-            </p>
-            <p className="text-xs text-gray-500 dark:text-gray-400">
-              {getStatusText()}
-            </p>
+            <p className="text-sm font-medium text-gray-900 dark:text-white truncate">{fileName}</p>
+            <p className="text-xs text-gray-500 dark:text-gray-400">{getStatusText()}</p>
           </div>
         </div>
-        
+
         <div className="flex items-center space-x-2">
           {status === 'uploading' && onPause && (
             <Button variant="ghost" size="sm" onClick={onPause}>
               <Pause className="w-4 h-4" />
             </Button>
           )}
-          
+
           {status === 'paused' && onResume && (
             <Button variant="ghost" size="sm" onClick={onResume}>
               <Play className="w-4 h-4" />
             </Button>
           )}
-          
+
           {status === 'error' && onRetry && (
             <Button variant="ghost" size="sm" onClick={onRetry}>
               <Play className="w-4 h-4" />
             </Button>
           )}
-          
+
           {(status === 'pending' || status === 'uploading' || status === 'paused') && onCancel && (
             <Button variant="ghost" size="sm" onClick={onCancel}>
               <X className="w-4 h-4" />
@@ -117,17 +113,26 @@ export default function UploadProgress({
       <div className="space-y-2">
         <div className="flex justify-between text-xs text-gray-500 dark:text-gray-400">
           <span>{Math.round(progress)}%</span>
-          <span>{status === 'success' ? 'Complete' : status === 'error' ? 'Failed' : 'In Progress'}</span>
+          <span>
+            {status === 'success' ? 'Complete' : status === 'error' ? 'Failed' : 'In Progress'}
+          </span>
         </div>
-        
-        <Progress 
-          value={progress} 
+
+        <Progress
+          value={progress}
           className="h-2"
-          style={{
-            '--progress-color': status === 'success' ? '#10b981' : 
-                               status === 'error' ? '#ef4444' : 
-                               status === 'paused' ? '#f59e0b' : '#3b82f6'
-          } as React.CSSProperties}
+          style={
+            {
+              '--progress-color':
+                status === 'success'
+                  ? '#10b981'
+                  : status === 'error'
+                    ? '#ef4444'
+                    : status === 'paused'
+                      ? '#f59e0b'
+                      : '#3b82f6',
+            } as React.CSSProperties
+          }
         />
       </div>
 
@@ -139,4 +144,4 @@ export default function UploadProgress({
       )}
     </div>
   );
-} 
+}

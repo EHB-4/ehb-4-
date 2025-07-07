@@ -2,13 +2,13 @@
   "folders": [
     {
       "name": "ehb next.js 04",
-      "path": ".",
-    },
+      "path": "."
+    }
   ],
   "settings": {
     "editor.formatOnSave": true,
     "editor.codeActionsOnSave": {
-      "source.fixAll.eslint": "explicit",
+      "source.fixAll.eslint": "explicit"
     },
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     "liveServer.settings.donotShowInfoMsg": true,
@@ -17,21 +17,21 @@
       "enable": false,
       "cert": "",
       "key": "",
-      "passphrase": "",
+      "passphrase": ""
     },
     "liveServer.settings.proxy": {
       "enable": true,
       "baseUri": "/",
-      "proxyUri": "http://localhost:3000",
+      "proxyUri": "http://localhost:3000"
     },
     "typescript.tsdk": "node_modules/typescript/lib",
     "typescript.enablePromptUseWorkspaceTsdk": true,
     "files.associations": {
-      "*.css": "tailwindcss",
+      "*.css": "tailwindcss"
     },
     "tailwindCSS.includeLanguages": {
       "typescript": "javascript",
-      "typescriptreact": "javascript",
+      "typescriptreact": "javascript"
     },
     "javascript.updateImportsOnFileMove.enabled": "always",
     "typescript.updateImportsOnFileMove.enabled": "always",
@@ -47,21 +47,21 @@
       "**/CVS": true,
       "**/.DS_Store": true,
       "**/Thumbs.db": true,
-      "**/node_modules": false,
+      "**/node_modules": false
     },
     "search.exclude": {
       "**/node_modules": true,
       "**/bower_components": true,
       "**/*.code-search": true,
       ".next": true,
-      "out": true,
+      "out": true
     },
     "files.watcherExclude": {
       "**/.git/objects/**": true,
       "**/.git/subtree-cache/**": true,
       "**/node_modules/**": true,
       "**/.hg/store/**": true,
-      ".next/**": true,
+      ".next/**": true
     },
     "npm.packageManager": "npm",
     "terminal.integrated.defaultProfile.windows": "PowerShell",
@@ -69,9 +69,10 @@
       "PowerShell": {
         "source": "PowerShell",
         "icon": "terminal-powershell",
-        "args": ["-NoLogo"],
-      },
+        "args": ["-NoLogo"]
+      }
     },
+    "json.schemaDownload.enable": true
   },
   "extensions": {
     "recommendations": [
@@ -82,8 +83,8 @@
       "mikestead.dotenv",
       "github.copilot",
       "github.copilot-chat",
-      "ms-vscode.vscode-typescript-next",
-    ],
+      "ms-vscode.vscode-typescript-next"
+    ]
   },
   "launch": {
     "configurations": [
@@ -96,9 +97,9 @@
         "cwd": "${workspaceFolder}",
         "console": "integratedTerminal",
         "env": {
-          "NODE_ENV": "development",
-        },
-      },
-    ],
-  },
+          "NODE_ENV": "development"
+        }
+      }
+    ]
+  }
 }

@@ -14,7 +14,7 @@ console.log('========================');
 
 // Check if MongoDB is available
 function checkMongoDB() {
-  return new Promise((resolve) => {
+  return new Promise(resolve => {
     exec('mongod --version', (error, stdout, stderr) => {
       if (error) {
         console.log('⚠️  MongoDB not found locally');
@@ -29,22 +29,25 @@ function checkMongoDB() {
 
 // Check Docker MongoDB
 function checkDockerMongo() {
-  return new Promise((resolve) => {
-    exec('docker ps --filter "name=mongo" --format "table {{.Names}}\t{{.Status}}"', (error, stdout, stderr) => {
-      if (error || !stdout.includes('mongo')) {
-        console.log('⚠️  Docker MongoDB not running');
-        resolve(false);
-      } else {
-        console.log('✅ Docker MongoDB running');
-        resolve(true);
+  return new Promise(resolve => {
+    exec(
+      'docker ps --filter "name=mongo" --format "table {{.Names}}\t{{.Status}}"',
+      (error, stdout, stderr) => {
+        if (error || !stdout.includes('mongo')) {
+          console.log('⚠️  Docker MongoDB not running');
+          resolve(false);
+        } else {
+          console.log('✅ Docker MongoDB running');
+          resolve(true);
+        }
       }
-    });
+    );
   });
 }
 
 // Test database connection
 function testConnection() {
-  return new Promise((resolve) => {
+  return new Promise(resolve => {
     // Try to connect to MongoDB
     const testScript = `
       const { MongoClient } = require('mongodb');
@@ -61,9 +64,9 @@ function testConnection() {
           process.exit(1);
         });
     `;
-    
+
     fs.writeFileSync(path.join(__dirname, 'temp-mongo-test.js'), testScript);
-    
+
     exec('node temp-mongo-test.js', (error, stdout, stderr) => {
       fs.unlinkSync(path.join(__dirname, 'temp-mongo-test.js'));
       if (error) {
@@ -82,13 +85,13 @@ async function main() {
   try {
     console.log('1️⃣ Checking MongoDB installation...');
     const mongoInstalled = await checkMongoDB();
-    
+
     console.log('2️⃣ Checking Docker MongoDB...');
     const dockerMongo = await checkDockerMongo();
-    
+
     console.log('3️⃣ Testing connection...');
     const connectionOk = await testConnection();
-    
+
     if (connectionOk) {
       console.log('\n🎉 MongoDB Fast Setup: SUCCESS');
       console.log('==============================');
@@ -101,7 +104,6 @@ async function main() {
       console.log('💡 Try: docker-compose up -d (if using Docker)');
       console.log('💡 Or install MongoDB locally');
     }
-    
   } catch (error) {
     console.log('❌ MongoDB Fast Setup: FAILED');
     console.log('=============================');
@@ -109,4 +111,4 @@ async function main() {
   }
 }
 
-main(); 
+main();

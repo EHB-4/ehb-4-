@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 'use client';
 
@@ -935,8 +935,8 @@ export default function TestingDashboard() {
                                   suite.coverage >= 90
                                     ? 'bg-green-500'
                                     : suite.coverage >= 70
-                                    ? 'bg-yellow-500'
-                                    : 'bg-red-500'
+                                      ? 'bg-yellow-500'
+                                      : 'bg-red-500'
                                 }`}
                                 style={{ width: `${suite.coverage}%` }}
                               ></div>
@@ -1073,8 +1073,8 @@ export default function TestingDashboard() {
                           item.value >= 90
                             ? 'bg-green-500'
                             : item.value >= 70
-                            ? 'bg-yellow-500'
-                            : 'bg-red-500'
+                              ? 'bg-yellow-500'
+                              : 'bg-red-500'
                         }`}
                         style={{ width: `${item.value}%` }}
                       ></div>

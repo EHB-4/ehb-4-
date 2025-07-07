@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 'use client';
 
@@ -140,10 +140,10 @@ function EnhancedDashboardContent() {
             value === 'completed'
               ? 'success'
               : value === 'pending'
-              ? 'warning'
-              : value === 'processing'
-              ? 'info'
-              : 'default'
+                ? 'warning'
+                : value === 'processing'
+                  ? 'info'
+                  : 'default'
           }
         >
           {value}

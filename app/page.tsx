@@ -27,6 +27,7 @@ import {
   Menu,
   X,
 } from 'lucide-react';
+import TailwindTestCard from '@/components/ui/TailwindTestCard';
 
 /**
  * EHB Home Page - Comprehensive landing page showcasing all EHB services
@@ -157,6 +158,9 @@ export default function HomePage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
+      {/* Tailwind CSS Test Card - Auto Rendered */}
+      <TailwindTestCard />
+
       {/* Navigation */}
       <nav className="bg-white shadow-lg sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

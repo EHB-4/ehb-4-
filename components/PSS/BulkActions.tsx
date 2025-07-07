@@ -4,15 +4,7 @@ import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Checkbox } from '@/components/ui/checkbox';
-import { 
-  CheckCircle, 
-  XCircle, 
-  Download, 
-  Trash2, 
-  AlertTriangle,
-  Users,
-  Eye
-} from 'lucide-react';
+import { CheckCircle, XCircle, Download, Trash2, AlertTriangle, Users, Eye } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 
 interface BulkActionsProps {
@@ -36,7 +28,7 @@ export default function BulkActions({
   onBulkExport,
   onBulkDelete,
   onViewSelected,
-  loading = false
+  loading = false,
 }: BulkActionsProps) {
   const { t } = useLanguage();
   const [showConfirm, setShowConfirm] = useState(false);
@@ -98,39 +90,30 @@ export default function BulkActions({
               disabled={loading}
             />
             <span className="text-sm text-gray-600 dark:text-gray-400">
-              {selectedItems.length > 0 
+              {selectedItems.length > 0
                 ? `${selectedItems.length} of ${totalItems} selected`
-                : `${totalItems} total items`
-              }
+                : `${totalItems} total items`}
             </span>
           </div>
 
           {selectedItems.length > 0 && (
             <Badge variant="secondary" className="flex items-center space-x-1">
               <Users className="w-3 h-3" />
-              <span>{selectedItems.length} {t('common.selected')}</span>
+              <span>
+                {selectedItems.length} {t('common.selected')}
+              </span>
             </Badge>
           )}
         </div>
 
         {selectedItems.length > 0 && (
           <div className="flex items-center space-x-2">
-            <Button
-              size="sm"
-              variant="outline"
-              onClick={handleViewSelected}
-              disabled={loading}
-            >
+            <Button size="sm" variant="outline" onClick={handleViewSelected} disabled={loading}>
               <Eye className="w-4 h-4 mr-2" />
               {t('common.view')}
             </Button>
 
-            <Button
-              size="sm"
-              variant="outline"
-              onClick={handleBulkExport}
-              disabled={loading}
-            >
+            <Button size="sm" variant="outline" onClick={handleBulkExport} disabled={loading}>
               <Download className="w-4 h-4 mr-2" />
               {t('common.export')}
             </Button>
@@ -181,22 +164,16 @@ export default function BulkActions({
                 {t('common.confirmBulkReject')}
               </h3>
             </div>
-            
+
             <p className="text-gray-600 dark:text-gray-400 mb-6">
               {t('common.bulkRejectWarning', { count: selectedItems.length })}
             </p>
 
             <div className="flex justify-end space-x-3">
-              <Button
-                variant="outline"
-                onClick={() => setShowConfirm(false)}
-              >
+              <Button variant="outline" onClick={() => setShowConfirm(false)}>
                 {t('common.cancel')}
               </Button>
-              <Button
-                variant="destructive"
-                onClick={confirmBulkReject}
-              >
+              <Button variant="destructive" onClick={confirmBulkReject}>
                 {t('pss.dashboard.actions.reject')} {selectedItems.length}
               </Button>
             </div>
@@ -205,4 +182,4 @@ export default function BulkActions({
       )}
     </div>
   );
-} 
+}

@@ -3,7 +3,7 @@
 /**
  * EHB Franchise Auto Scanner & Merger
  * Real-time franchise data monitoring and intelligent merging system
- * 
+ *
  * Features:
  * - Continuous file system monitoring
  * - Intelligent duplicate detection
@@ -28,20 +28,14 @@ class FranchiseAutoScanner {
       backupDir: './backups/franchise',
       mergeStrategy: 'intelligent', // intelligent, conservative, aggressive
       maxFileSize: 10 * 1024 * 1024, // 10MB
-      excludedPatterns: [
-        'node_modules/**',
-        '.git/**',
-        '*.log',
-        '*.tmp',
-        '*.cache'
-      ],
+      excludedPatterns: ['node_modules/**', '.git/**', '*.log', '*.tmp', '*.cache'],
       franchisePaths: [
         './app/franchise',
         './components/EHB-Franchise',
         './temp-backup/ehb-franchise',
         './types',
-        './lib/utils'
-      ]
+        './lib/utils',
+      ],
     };
 
     this.scanResults = {
@@ -53,8 +47,8 @@ class FranchiseAutoScanner {
       performance: {
         scanTime: 0,
         mergeTime: 0,
-        backupTime: 0
-      }
+        backupTime: 0,
+      },
     };
 
     this.isRunning = false;
@@ -68,23 +62,22 @@ class FranchiseAutoScanner {
    */
   async initialize() {
     console.log('🚀 Initializing EHB Franchise Auto Scanner...');
-    
+
     try {
       // Create necessary directories
       await this.createDirectories();
-      
+
       // Initialize logging
       await this.initializeLogging();
-      
+
       // Load existing scan data
       await this.loadScanData();
-      
+
       // Start monitoring
       await this.startMonitoring();
-      
+
       console.log('✅ Franchise Auto Scanner initialized successfully');
       this.log('INFO', 'Franchise Auto Scanner initialized successfully');
-      
     } catch (error) {
       console.error('❌ Failed to initialize Franchise Auto Scanner:', error);
       this.log('ERROR', `Initialization failed: ${error.message}`);
@@ -95,12 +88,7 @@ class FranchiseAutoScanner {
    * Create necessary directories
    */
   async createDirectories() {
-    const dirs = [
-      './logs',
-      this.config.backupDir,
-      './temp/franchise-scan',
-      './reports/franchise'
-    ];
+    const dirs = ['./logs', this.config.backupDir, './temp/franchise-scan', './reports/franchise'];
 
     for (const dir of dirs) {
       if (!fs.existsSync(dir)) {
@@ -131,9 +119,9 @@ class FranchiseAutoScanner {
   log(level, message) {
     const timestamp = new Date().toISOString();
     const logEntry = `[${timestamp}] [${level}] ${message}\n`;
-    
+
     fs.appendFileSync(this.config.logFile, logEntry);
-    
+
     // Also log to console for development
     if (process.env.NODE_ENV === 'development') {
       console.log(`[${level}] ${message}`);
@@ -145,7 +133,7 @@ class FranchiseAutoScanner {
    */
   async loadScanData() {
     const dataFile = './temp/franchise-scan/scan-data.json';
-    
+
     if (fs.existsSync(dataFile)) {
       try {
         const data = JSON.parse(fs.readFileSync(dataFile, 'utf8'));
@@ -162,7 +150,7 @@ class FranchiseAutoScanner {
    */
   async saveScanData() {
     const dataFile = './temp/franchise-scan/scan-data.json';
-    
+
     try {
       fs.writeFileSync(dataFile, JSON.stringify(this.scanResults, null, 2));
     } catch (error) {
@@ -175,7 +163,7 @@ class FranchiseAutoScanner {
    */
   async startMonitoring() {
     console.log('👀 Starting file system monitoring...');
-    
+
     // Start file watcher
     this.watcher = chokidar.watch(this.config.franchisePaths, {
       ignored: this.config.excludedPatterns,
@@ -183,23 +171,23 @@ class FranchiseAutoScanner {
       ignoreInitial: false,
       awaitWriteFinish: {
         stabilityThreshold: 2000,
-        pollInterval: 100
-      }
+        pollInterval: 100,
+      },
     });
 
     // Watch for file changes
     this.watcher
-      .on('add', (filePath) => this.handleFileChange('add', filePath))
-      .on('change', (filePath) => this.handleFileChange('change', filePath))
-      .on('unlink', (filePath) => this.handleFileChange('unlink', filePath))
-      .on('error', (error) => this.log('ERROR', `Watcher error: ${error.message}`));
+      .on('add', filePath => this.handleFileChange('add', filePath))
+      .on('change', filePath => this.handleFileChange('change', filePath))
+      .on('unlink', filePath => this.handleFileChange('unlink', filePath))
+      .on('error', error => this.log('ERROR', `Watcher error: ${error.message}`));
 
     // Start periodic scanning
     this.startPeriodicScanning();
-    
+
     // Start periodic backup
     this.startPeriodicBackup();
-    
+
     this.isRunning = true;
     this.log('INFO', 'File system monitoring started');
   }
@@ -209,7 +197,7 @@ class FranchiseAutoScanner {
    */
   async handleFileChange(event, filePath) {
     this.log('INFO', `File ${event}: ${filePath}`);
-    
+
     // Debounce rapid changes
     clearTimeout(this.changeTimer);
     this.changeTimer = setTimeout(() => {
@@ -224,7 +212,7 @@ class FranchiseAutoScanner {
     this.scanTimer = setInterval(() => {
       this.performFullScan();
     }, this.config.scanInterval);
-    
+
     this.log('INFO', `Periodic scanning started (${this.config.scanInterval}ms interval)`);
   }
 
@@ -235,7 +223,7 @@ class FranchiseAutoScanner {
     this.backupTimer = setInterval(() => {
       this.performBackup();
     }, this.config.backupInterval);
-    
+
     this.log('INFO', `Periodic backup started (${this.config.backupInterval}ms interval)`);
   }
 
@@ -244,22 +232,21 @@ class FranchiseAutoScanner {
    */
   async performQuickScan() {
     const startTime = Date.now();
-    
+
     try {
       this.log('INFO', 'Performing quick scan...');
-      
+
       // Scan only recently modified files
       const recentFiles = await this.getRecentFiles();
       const duplicates = await this.findDuplicates(recentFiles);
-      
+
       if (duplicates.length > 0) {
         this.log('INFO', `Found ${duplicates.length} potential duplicates in quick scan`);
         await this.mergeDuplicates(duplicates);
       }
-      
+
       this.scanResults.performance.scanTime = Date.now() - startTime;
       this.log('INFO', `Quick scan completed in ${this.scanResults.performance.scanTime}ms`);
-      
     } catch (error) {
       this.log('ERROR', `Quick scan failed: ${error.message}`);
     }
@@ -270,36 +257,35 @@ class FranchiseAutoScanner {
    */
   async performFullScan() {
     const startTime = Date.now();
-    
+
     try {
       this.log('INFO', 'Performing full system scan...');
-      
+
       // Get all franchise-related files
       const allFiles = await this.getAllFranchiseFiles();
       this.scanResults.totalFiles = allFiles.length;
-      
+
       // Find duplicates
       const duplicates = await this.findDuplicates(allFiles);
       this.scanResults.duplicates = duplicates;
-      
+
       // Merge duplicates if found
       if (duplicates.length > 0) {
         this.log('INFO', `Found ${duplicates.length} duplicate groups`);
         await this.mergeDuplicates(duplicates);
       }
-      
+
       // Update scan results
       this.scanResults.lastScan = new Date().toISOString();
       this.scanResults.performance.scanTime = Date.now() - startTime;
-      
+
       // Save scan data
       await this.saveScanData();
-      
+
       // Generate report
       await this.generateReport();
-      
+
       this.log('INFO', `Full scan completed in ${this.scanResults.performance.scanTime}ms`);
-      
     } catch (error) {
       this.log('ERROR', `Full scan failed: ${error.message}`);
     }
@@ -310,14 +296,14 @@ class FranchiseAutoScanner {
    */
   async getAllFranchiseFiles() {
     const files = [];
-    
+
     for (const basePath of this.config.franchisePaths) {
       if (fs.existsSync(basePath)) {
         const foundFiles = await this.walkDirectory(basePath);
         files.push(...foundFiles);
       }
     }
-    
+
     return files.filter(file => {
       const ext = path.extname(file).toLowerCase();
       return ['.js', '.jsx', '.ts', '.tsx', '.json', '.md'].includes(ext);
@@ -329,13 +315,13 @@ class FranchiseAutoScanner {
    */
   async walkDirectory(dir) {
     const files = [];
-    
+
     const items = fs.readdirSync(dir);
-    
+
     for (const item of items) {
       const fullPath = path.join(dir, item);
       const stat = fs.statSync(fullPath);
-      
+
       if (stat.isDirectory()) {
         const subFiles = await this.walkDirectory(fullPath);
         files.push(...subFiles);
@@ -343,7 +329,7 @@ class FranchiseAutoScanner {
         files.push(fullPath);
       }
     }
-    
+
     return files;
   }
 
@@ -353,8 +339,8 @@ class FranchiseAutoScanner {
   async getRecentFiles() {
     const allFiles = await this.getAllFranchiseFiles();
     const now = Date.now();
-    const fiveMinutesAgo = now - (5 * 60 * 1000);
-    
+    const fiveMinutesAgo = now - 5 * 60 * 1000;
+
     return allFiles.filter(file => {
       try {
         const stats = fs.statSync(file);
@@ -372,25 +358,25 @@ class FranchiseAutoScanner {
     const duplicates = [];
     const fileHashes = new Map();
     const contentHashes = new Map();
-    
+
     for (const file of files) {
       try {
         const content = fs.readFileSync(file, 'utf8');
         const contentHash = crypto.createHash('md5').update(content).digest('hex');
         const fileName = path.basename(file);
-        
+
         // Check for exact content duplicates
         if (contentHashes.has(contentHash)) {
           const existingFile = contentHashes.get(contentHash);
           duplicates.push({
             type: 'exact',
             files: [existingFile, file],
-            hash: contentHash
+            hash: contentHash,
           });
         } else {
           contentHashes.set(contentHash, file);
         }
-        
+
         // Check for similar file names
         if (fileHashes.has(fileName)) {
           const existingFiles = fileHashes.get(fileName);
@@ -398,23 +384,22 @@ class FranchiseAutoScanner {
         } else {
           fileHashes.set(fileName, [file]);
         }
-        
       } catch (error) {
         this.log('WARN', `Failed to process file ${file}: ${error.message}`);
       }
     }
-    
+
     // Add similar named files to duplicates
     for (const [fileName, fileList] of fileHashes) {
       if (fileList.length > 1) {
         duplicates.push({
           type: 'similar_name',
           files: fileList,
-          fileName: fileName
+          fileName: fileName,
         });
       }
     }
-    
+
     return duplicates;
   }
 
@@ -423,7 +408,7 @@ class FranchiseAutoScanner {
    */
   async mergeDuplicates(duplicates) {
     const startTime = Date.now();
-    
+
     for (const duplicate of duplicates) {
       try {
         await this.mergeDuplicateGroup(duplicate);
@@ -433,13 +418,16 @@ class FranchiseAutoScanner {
         this.scanResults.errors.push({
           type: 'merge_error',
           duplicate: duplicate,
-          error: error.message
+          error: error.message,
         });
       }
     }
-    
+
     this.scanResults.performance.mergeTime = Date.now() - startTime;
-    this.log('INFO', `Merged ${duplicates.length} duplicate groups in ${this.scanResults.performance.mergeTime}ms`);
+    this.log(
+      'INFO',
+      `Merged ${duplicates.length} duplicate groups in ${this.scanResults.performance.mergeTime}ms`
+    );
   }
 
   /**
@@ -447,7 +435,7 @@ class FranchiseAutoScanner {
    */
   async mergeDuplicateGroup(duplicate) {
     this.log('INFO', `Merging duplicate group: ${duplicate.type}`);
-    
+
     if (duplicate.type === 'exact') {
       await this.mergeExactDuplicates(duplicate);
     } else if (duplicate.type === 'similar_name') {
@@ -460,7 +448,7 @@ class FranchiseAutoScanner {
    */
   async mergeExactDuplicates(duplicate) {
     const [primaryFile, ...duplicateFiles] = duplicate.files;
-    
+
     // Keep the primary file, remove others
     for (const duplicateFile of duplicateFiles) {
       await this.safeDeleteFile(duplicateFile);
@@ -473,10 +461,10 @@ class FranchiseAutoScanner {
    */
   async mergeSimilarNamedFiles(duplicate) {
     const files = duplicate.files;
-    
+
     // Analyze content to determine best merge strategy
     const fileContents = await Promise.all(
-      files.map(async (file) => {
+      files.map(async file => {
         try {
           const content = fs.readFileSync(file, 'utf8');
           return { file, content, size: content.length };
@@ -485,18 +473,18 @@ class FranchiseAutoScanner {
         }
       })
     );
-    
+
     // Find the most complete file (largest size)
-    const bestFile = fileContents.reduce((best, current) => 
+    const bestFile = fileContents.reduce((best, current) =>
       current.size > best.size ? current : best
     );
-    
+
     // Merge content from other files if they have unique information
     const mergedContent = await this.mergeFileContents(fileContents, bestFile);
-    
+
     // Write merged content to best file
     fs.writeFileSync(bestFile.file, mergedContent);
-    
+
     // Remove other files
     for (const fileContent of fileContents) {
       if (fileContent.file !== bestFile.file) {
@@ -511,19 +499,19 @@ class FranchiseAutoScanner {
    */
   async mergeFileContents(fileContents, bestFile) {
     let mergedContent = bestFile.content;
-    
+
     for (const fileContent of fileContents) {
       if (fileContent.file === bestFile.file) continue;
-      
+
       // Extract unique functions, components, or sections
       const uniqueParts = this.extractUniqueContent(fileContent.content, mergedContent);
-      
+
       if (uniqueParts.length > 0) {
         mergedContent += '\n\n' + uniqueParts.join('\n\n');
         this.log('INFO', `Added unique content from ${fileContent.file}`);
       }
     }
-    
+
     return mergedContent;
   }
 
@@ -532,17 +520,17 @@ class FranchiseAutoScanner {
    */
   extractUniqueContent(newContent, existingContent) {
     const uniqueParts = [];
-    
+
     // Split content into logical sections
     const newSections = this.splitIntoSections(newContent);
     const existingSections = this.splitIntoSections(existingContent);
-    
+
     for (const section of newSections) {
       if (!this.sectionExists(section, existingSections)) {
         uniqueParts.push(section);
       }
     }
-    
+
     return uniqueParts;
   }
 
@@ -554,15 +542,16 @@ class FranchiseAutoScanner {
     const sections = [];
     const lines = content.split('\n');
     let currentSection = '';
-    
+
     for (const line of lines) {
-      if (line.trim().startsWith('function ') || 
-          line.trim().startsWith('const ') ||
-          line.trim().startsWith('export ') ||
-          line.trim().startsWith('import ') ||
-          line.trim().startsWith('interface ') ||
-          line.trim().startsWith('type ')) {
-        
+      if (
+        line.trim().startsWith('function ') ||
+        line.trim().startsWith('const ') ||
+        line.trim().startsWith('export ') ||
+        line.trim().startsWith('import ') ||
+        line.trim().startsWith('interface ') ||
+        line.trim().startsWith('type ')
+      ) {
         if (currentSection.trim()) {
           sections.push(currentSection.trim());
         }
@@ -571,11 +560,11 @@ class FranchiseAutoScanner {
         currentSection += '\n' + line;
       }
     }
-    
+
     if (currentSection.trim()) {
       sections.push(currentSection.trim());
     }
-    
+
     return sections;
   }
 
@@ -584,7 +573,7 @@ class FranchiseAutoScanner {
    */
   sectionExists(section, existingSections) {
     const sectionHash = crypto.createHash('md5').update(section).digest('hex');
-    
+
     return existingSections.some(existing => {
       const existingHash = crypto.createHash('md5').update(existing).digest('hex');
       return sectionHash === existingHash;
@@ -599,10 +588,10 @@ class FranchiseAutoScanner {
       // Create backup before deletion
       const backupPath = path.join(this.config.backupDir, path.basename(filePath) + '.backup');
       fs.copyFileSync(filePath, backupPath);
-      
+
       // Delete the file
       fs.unlinkSync(filePath);
-      
+
       this.log('INFO', `Safely deleted ${filePath} (backup: ${backupPath})`);
     } catch (error) {
       this.log('ERROR', `Failed to safely delete ${filePath}: ${error.message}`);
@@ -615,13 +604,13 @@ class FranchiseAutoScanner {
    */
   async performBackup() {
     const startTime = Date.now();
-    
+
     try {
       this.log('INFO', 'Performing backup...');
-      
+
       const backupPath = path.join(this.config.backupDir, `franchise-backup-${Date.now()}`);
       fs.mkdirSync(backupPath, { recursive: true });
-      
+
       // Backup all franchise files
       for (const basePath of this.config.franchisePaths) {
         if (fs.existsSync(basePath)) {
@@ -629,14 +618,16 @@ class FranchiseAutoScanner {
           await this.copyDirectory(basePath, targetPath);
         }
       }
-      
+
       // Backup scan data
       const scanDataPath = path.join(backupPath, 'scan-data.json');
       fs.writeFileSync(scanDataPath, JSON.stringify(this.scanResults, null, 2));
-      
+
       this.scanResults.performance.backupTime = Date.now() - startTime;
-      this.log('INFO', `Backup completed in ${this.scanResults.performance.backupTime}ms: ${backupPath}`);
-      
+      this.log(
+        'INFO',
+        `Backup completed in ${this.scanResults.performance.backupTime}ms: ${backupPath}`
+      );
     } catch (error) {
       this.log('ERROR', `Backup failed: ${error.message}`);
     }
@@ -649,15 +640,15 @@ class FranchiseAutoScanner {
     if (!fs.existsSync(dest)) {
       fs.mkdirSync(dest, { recursive: true });
     }
-    
+
     const items = fs.readdirSync(src);
-    
+
     for (const item of items) {
       const srcPath = path.join(src, item);
       const destPath = path.join(dest, item);
-      
+
       const stat = fs.statSync(srcPath);
-      
+
       if (stat.isDirectory()) {
         await this.copyDirectory(srcPath, destPath);
       } else {
@@ -677,16 +668,16 @@ class FranchiseAutoScanner {
         totalFiles: this.scanResults.totalFiles,
         duplicatesFound: this.scanResults.duplicates.length,
         filesMerged: this.scanResults.merged.length,
-        errors: this.scanResults.errors.length
+        errors: this.scanResults.errors.length,
       },
       performance: this.scanResults.performance,
       details: {
         duplicates: this.scanResults.duplicates,
         merged: this.scanResults.merged,
-        errors: this.scanResults.errors
-      }
+        errors: this.scanResults.errors,
+      },
     };
-    
+
     fs.writeFileSync(reportPath, JSON.stringify(report, null, 2));
     this.log('INFO', `Report generated: ${reportPath}`);
   }
@@ -696,21 +687,21 @@ class FranchiseAutoScanner {
    */
   async stop() {
     console.log('🛑 Stopping Franchise Auto Scanner...');
-    
+
     this.isRunning = false;
-    
+
     if (this.watcher) {
       await this.watcher.close();
     }
-    
+
     if (this.scanTimer) {
       clearInterval(this.scanTimer);
     }
-    
+
     if (this.backupTimer) {
       clearInterval(this.backupTimer);
     }
-    
+
     await this.saveScanData();
     this.log('INFO', 'Franchise Auto Scanner stopped');
   }
@@ -726,7 +717,7 @@ class FranchiseAutoScanner {
       duplicates: this.scanResults.duplicates.length,
       merged: this.scanResults.merged.length,
       errors: this.scanResults.errors.length,
-      performance: this.scanResults.performance
+      performance: this.scanResults.performance,
     };
   }
 }
@@ -754,4 +745,4 @@ scanner.initialize().catch(error => {
 });
 
 // Export for use in other modules
-module.exports = FranchiseAutoScanner; 
+module.exports = FranchiseAutoScanner;

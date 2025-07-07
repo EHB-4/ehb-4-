@@ -22,8 +22,8 @@ urls.forEach((url, index) => {
       platform === 'win32'
         ? `start ${url}`
         : platform === 'darwin'
-        ? `open ${url}`
-        : `xdg-open ${url}`;
+          ? `open ${url}`
+          : `xdg-open ${url}`;
 
     exec(command, error => {
       if (error) {

@@ -1,7 +1,5 @@
 // PSS API Service Layer
 
-import { PSSDatabaseService } from './prisma';
-
 export interface VerificationRequest {
   id: string;
   applicant: string;

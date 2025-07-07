@@ -93,7 +93,6 @@ A --> B --> C --> D --> E --> F --> G --> H
 ## 🪙 Coin Lock + Validator Rewards
 
 - Users can **lock coins** for:
-
   - SQL upgrade access
   - Monthly loyalty bonus (0.5%–1.1%)
   - Validator reward eligibility

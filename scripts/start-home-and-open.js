@@ -20,8 +20,8 @@ const HOME_URL = 'http://localhost:3000';
 // Kill existing process on port 3000
 async function killPort3000() {
   console.log('🔄 Killing existing process on port 3000...');
-  
-  return new Promise((resolve) => {
+
+  return new Promise(resolve => {
     const platform = process.platform;
     let command;
 
@@ -42,12 +42,10 @@ async function killPort3000() {
           } else {
             pid = line.trim();
           }
-          
+
           if (pid) {
-            const killCommand = platform === 'win32' ? 
-              `taskkill /PID ${pid} /F` : 
-              `kill -9 ${pid}`;
-            
+            const killCommand = platform === 'win32' ? `taskkill /PID ${pid} /F` : `kill -9 ${pid}`;
+
             exec(killCommand, () => {
               console.log(`✅ Killed process on port ${HOME_PORT}`);
             });
@@ -62,34 +60,31 @@ async function killPort3000() {
 // Create home page
 function createHomePage() {
   console.log('📁 Creating EHB home page...');
-  
+
   const homeDir = 'ehb-home';
   const homePath = path.join(process.cwd(), homeDir);
-  
+
   if (!existsSync(homePath)) {
     mkdirSync(homePath, { recursive: true });
   }
 
   // Create package.json
   const packageJson = {
-    name: "ehb-home",
-    version: "1.0.0",
+    name: 'ehb-home',
+    version: '1.0.0',
     scripts: {
       dev: `next dev --port ${HOME_PORT}`,
-      build: "next build",
-      start: `next start --port ${HOME_PORT}`
+      build: 'next build',
+      start: `next start --port ${HOME_PORT}`,
     },
     dependencies: {
-      "next": "^14.0.0",
-      "react": "^18.0.0",
-      "react-dom": "^18.0.0"
-    }
+      next: '^14.0.0',
+      react: '^18.0.0',
+      'react-dom': '^18.0.0',
+    },
   };
-  
-  writeFileSync(
-    path.join(homePath, 'package.json'), 
-    JSON.stringify(packageJson, null, 2)
-  );
+
+  writeFileSync(path.join(homePath, 'package.json'), JSON.stringify(packageJson, null, 2));
 
   // Create pages directory
   const pagesDir = path.join(homePath, 'pages');
@@ -153,16 +148,16 @@ export default function Home() {
 
 // Start home page service
 function startHomePage(homePath) {
-  return new Promise((resolve) => {
+  return new Promise(resolve => {
     console.log('🚀 Starting EHB home page service...');
-    
+
     const originalCwd = process.cwd();
     process.chdir(homePath);
 
     // Install dependencies if needed
     if (!existsSync(path.join(homePath, 'node_modules'))) {
       console.log('📦 Installing dependencies...');
-      exec('npm install', (error) => {
+      exec('npm install', error => {
         if (error) {
           console.log('⚠️  Dependencies already installed');
         } else {
@@ -180,24 +175,24 @@ function startHomePage(homePath) {
 function startServer(homePath, originalCwd, resolve) {
   const child = spawn('npm', ['run', 'dev'], {
     stdio: 'pipe',
-    shell: true
+    shell: true,
   });
 
   // Wait for service to start
   let attempts = 0;
   const maxAttempts = 60;
-  
+
   const checkPort = () => {
     const net = require('net');
     const client = new net.Socket();
-    
+
     client.connect(HOME_PORT, 'localhost', () => {
       client.destroy();
       console.log(`✅ EHB home page is ready on port ${HOME_PORT}`);
       process.chdir(originalCwd);
       resolve(child);
     });
-    
+
     client.on('error', () => {
       attempts++;
       if (attempts < maxAttempts) {
@@ -209,11 +204,11 @@ function startServer(homePath, originalCwd, resolve) {
       }
     });
   };
-  
+
   checkPort();
 
   // Handle process output
-  child.stdout.on('data', (data) => {
+  child.stdout.on('data', data => {
     const output = data.toString().trim();
     if (output.includes('ready') || output.includes('started')) {
       console.log(`[Home Page] ${output}`);
@@ -224,7 +219,7 @@ function startServer(homePath, originalCwd, resolve) {
 // Open in browser
 function openInBrowser() {
   console.log('🌐 Opening EHB home page in browser...');
-  
+
   const platform = process.platform;
   let command;
 
@@ -239,7 +234,7 @@ function openInBrowser() {
       command = `xdg-open ${HOME_URL}`;
   }
 
-  exec(command, (error) => {
+  exec(command, error => {
     if (error) {
       console.log(`❌ Failed to open browser: ${error.message}`);
       console.log(`💡 Please manually open: ${HOME_URL}`);
@@ -256,19 +251,19 @@ async function main() {
     // Kill existing process
     await killPort3000();
     await new Promise(resolve => setTimeout(resolve, 2000));
-    
+
     // Create home page
     const homePath = createHomePage();
-    
+
     // Start home page service
     const child = await startHomePage(homePath);
-    
+
     if (child) {
       // Open in browser after 3 seconds
       setTimeout(() => {
         openInBrowser();
       }, 3000);
-      
+
       console.log('');
       console.log('🎉 EHB Home Page is now running!');
       console.log('');
@@ -280,7 +275,7 @@ async function main() {
       console.log('');
       console.log('💡 The home page should be open in your browser now!');
       console.log('🛑 Press Ctrl+C to stop the home page');
-      
+
       // Keep running
       process.on('SIGINT', () => {
         console.log('\n🛑 Stopping home page...');
@@ -290,7 +285,6 @@ async function main() {
     } else {
       console.log('❌ Failed to start home page');
     }
-    
   } catch (error) {
     console.error('❌ Error:', error.message);
   }
@@ -301,4 +295,4 @@ if (require.main === module) {
   main();
 }
 
-module.exports = { main }; 
+module.exports = { main };

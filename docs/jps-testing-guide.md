@@ -1,15 +1,17 @@
 # JPS System Testing Guide
 
 ## Roman Urdu: Overview
+
 JPS (Job Placement System) ke liye comprehensive testing guide jo unit tests, integration tests, E2E tests, aur testing best practices cover karta hai.
 
 ## Roman Urdu: Testing Strategy
 
 ### Roman Urdu: Testing Pyramid
+
 ```
     /\
    /  \     E2E Tests (Few)
-  /____\    
+  /____\
  /      \   Integration Tests (Some)
 /________\  Unit Tests (Many)
 ```
@@ -17,17 +19,20 @@ JPS (Job Placement System) ke liye comprehensive testing guide jo unit tests, in
 ### Roman Urdu: Test Types
 
 #### 1. **Unit Tests** (70%)
+
 - Individual functions aur components test karte hain
 - Fast execution
 - High coverage
 - Isolated testing
 
 #### 2. **Integration Tests** (20%)
+
 - API endpoints aur component interactions test karte hain
 - Database integration
 - External service integration
 
 #### 3. **E2E Tests** (10%)
+
 - Complete user workflows test karte hain
 - Real browser testing
 - User experience validation
@@ -35,6 +40,7 @@ JPS (Job Placement System) ke liye comprehensive testing guide jo unit tests, in
 ## Roman Urdu: Testing Tools
 
 ### Roman Urdu: Primary Tools
+
 - **Jest**: Unit aur integration testing
 - **React Testing Library**: Component testing
 - **Cypress**: E2E testing
@@ -42,6 +48,7 @@ JPS (Job Placement System) ke liye comprehensive testing guide jo unit tests, in
 - **TypeScript**: Type checking
 
 ### Roman Urdu: Additional Tools
+
 - **Lighthouse CI**: Performance testing
 - **npm audit**: Security testing
 - **Coverage**: Code coverage reporting
@@ -49,6 +56,7 @@ JPS (Job Placement System) ke liye comprehensive testing guide jo unit tests, in
 ## Roman Urdu: Test Structure
 
 ### Roman Urdu: Directory Structure
+
 ```
 __tests__/
 ├── api/                    # API tests
@@ -75,6 +83,7 @@ cypress/
 ## Roman Urdu: Unit Testing
 
 ### Roman Urdu: API Tests Example
+
 ```typescript
 // Roman Urdu: Test API endpoints
 describe('Jobs API', () => {
@@ -86,13 +95,13 @@ describe('Jobs API', () => {
       salary: 100000,
       description: 'Test description',
       requirements: ['JavaScript', 'React'],
-      status: 'active'
+      status: 'active',
     };
 
     const response = await fetch('/api/jps?type=jobs', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(jobData)
+      body: JSON.stringify(jobData),
     });
 
     expect(response.status).toBe(201);
@@ -103,12 +112,13 @@ describe('Jobs API', () => {
 ```
 
 ### Roman Urdu: Component Tests Example
+
 ```typescript
 // Roman Urdu: Test React components
 describe('JPS Dashboard', () => {
   test('Should render dashboard with stats', () => {
     render(<JPSDashboard />);
-    
+
     expect(screen.getByText('Total Jobs')).toBeInTheDocument();
     expect(screen.getByText('Total Candidates')).toBeInTheDocument();
     expect(screen.getByText('Total Placements')).toBeInTheDocument();
@@ -116,19 +126,20 @@ describe('JPS Dashboard', () => {
 
   test('Should handle loading state', () => {
     render(<JPSDashboard />);
-    
+
     expect(screen.getByText('Loading...')).toBeInTheDocument();
   });
 });
 ```
 
 ### Roman Urdu: Hook Tests Example
+
 ```typescript
 // Roman Urdu: Test custom hooks
 describe('useJobsManagement', () => {
   test('Should fetch jobs on mount', async () => {
     const { result } = renderHook(() => useJobsManagement());
-    
+
     await waitFor(() => {
       expect(result.current.jobs).toHaveLength(2);
     });
@@ -136,11 +147,11 @@ describe('useJobsManagement', () => {
 
   test('Should create new job', async () => {
     const { result } = renderHook(() => useJobsManagement());
-    
+
     await act(async () => {
       await result.current.createJob(mockJob);
     });
-    
+
     expect(result.current.jobs).toHaveLength(3);
   });
 });
@@ -149,33 +160,34 @@ describe('useJobsManagement', () => {
 ## Roman Urdu: Integration Testing
 
 ### Roman Urdu: API Integration Tests
+
 ```typescript
 // Roman Urdu: Test complete API workflows
 describe('Job Placement Workflow', () => {
   test('Should complete full placement process', async () => {
     // Roman Urdu: 1. Create job
     const job = await createJob(mockJob);
-    
+
     // Roman Urdu: 2. Create candidate
     const candidate = await createCandidate(mockCandidate);
-    
+
     // Roman Urdu: 3. Check compatibility
     const compatibility = await getCompatibilityScore(job.id, candidate.id);
-    
+
     // Roman Urdu: 4. Create placement
     const placement = await createPlacement({
       jobId: job.id,
       candidateId: candidate.id,
       // ... other data
     });
-    
+
     // Roman Urdu: 5. Send notification
     await sendInterviewNotification({
       candidateId: candidate.id,
       jobId: job.id,
       // ... interview details
     });
-    
+
     // Roman Urdu: Verify all steps completed
     expect(job).toBeDefined();
     expect(candidate).toBeDefined();
@@ -188,29 +200,30 @@ describe('Job Placement Workflow', () => {
 ## Roman Urdu: E2E Testing
 
 ### Roman Urdu: Cypress Tests Example
+
 ```typescript
 // Roman Urdu: Test complete user workflows
 describe('JPS System E2E', () => {
   it('Should complete job placement workflow', () => {
     // Roman Urdu: Visit application
     cy.visit('/jps');
-    
+
     // Roman Urdu: Create job
     cy.get('[data-testid="add-job-btn"]').click();
     cy.get('[data-testid="job-title-input"]').type('Test Developer');
     cy.get('[data-testid="job-company-input"]').type('Test Company');
     cy.get('[data-testid="save-job-btn"]').click();
-    
+
     // Roman Urdu: Create candidate
     cy.get('[data-testid="add-candidate-btn"]').click();
     cy.get('[data-testid="candidate-name-input"]').type('Test Candidate');
     cy.get('[data-testid="save-candidate-btn"]').click();
-    
+
     // Roman Urdu: Check compatibility
     cy.get('[data-testid="job-select"]').select('1');
     cy.get('[data-testid="candidate-select"]').select('1');
     cy.get('[data-testid="check-compatibility-btn"]').click();
-    
+
     // Roman Urdu: Verify results
     cy.get('[data-testid="compatibility-score"]').should('be.visible');
   });
@@ -220,6 +233,7 @@ describe('JPS System E2E', () => {
 ## Roman Urdu: Test Data Management
 
 ### Roman Urdu: Mock Data
+
 ```typescript
 // Roman Urdu: Centralized mock data
 export const mockJobs = [
@@ -233,8 +247,8 @@ export const mockJobs = [
     requirements: ['React', 'TypeScript', 'Node.js', '5+ years experience'],
     status: 'active',
     createdAt: '2024-01-15T10:30:00.000Z',
-    updatedAt: '2024-01-15T10:30:00.000Z'
-  }
+    updatedAt: '2024-01-15T10:30:00.000Z',
+  },
 ];
 
 export const mockCandidates = [
@@ -248,12 +262,13 @@ export const mockCandidates = [
     skills: ['React', 'TypeScript', 'Node.js', 'MongoDB'],
     status: 'active',
     createdAt: '2024-01-15T10:30:00.000Z',
-    updatedAt: '2024-01-15T10:30:00.000Z'
-  }
+    updatedAt: '2024-01-15T10:30:00.000Z',
+  },
 ];
 ```
 
 ### Roman Urdu: Test Utilities
+
 ```typescript
 // Roman Urdu: Helper functions for testing
 export const createMockRequest = (url: string, method: string = 'GET', body?: any) => {
@@ -264,7 +279,7 @@ export const createMockRequest = (url: string, method: string = 'GET', body?: an
 };
 
 export const waitForApiCall = (url: string, timeout: number = 5000) => {
-  return new Promise((resolve) => {
+  return new Promise(resolve => {
     const check = () => {
       if (fetch.mock.calls.some(call => call[0].includes(url))) {
         resolve(true);
@@ -280,11 +295,13 @@ export const waitForApiCall = (url: string, timeout: number = 5000) => {
 ## Roman Urdu: Testing Best Practices
 
 ### Roman Urdu: Test Organization
+
 1. **Arrange**: Test data setup
 2. **Act**: Execute the function/component
 3. **Assert**: Verify results
 
 ### Roman Urdu: Naming Conventions
+
 ```typescript
 // Roman Urdu: Descriptive test names
 describe('Jobs API', () => {
@@ -296,12 +313,13 @@ describe('Jobs API', () => {
 ```
 
 ### Roman Urdu: Test Isolation
+
 ```typescript
 // Roman Urdu: Each test should be independent
 beforeEach(() => {
   // Roman Urdu: Reset mock data
   jest.clearAllMocks();
-  
+
   // Roman Urdu: Reset database state
   resetTestDatabase();
 });
@@ -313,14 +331,15 @@ afterEach(() => {
 ```
 
 ### Roman Urdu: Error Testing
+
 ```typescript
 // Roman Urdu: Test error scenarios
 test('Should handle API errors gracefully', async () => {
   // Roman Urdu: Mock API failure
   fetch.mockRejectedValueOnce(new Error('Network Error'));
-  
+
   render(<JPSDashboard />);
-  
+
   await waitFor(() => {
     expect(screen.getByText('Error loading data')).toBeInTheDocument();
   });
@@ -330,16 +349,15 @@ test('Should handle API errors gracefully', async () => {
 ## Roman Urdu: Performance Testing
 
 ### Roman Urdu: Load Testing
+
 ```typescript
 // Roman Urdu: Test API performance
 describe('API Performance', () => {
   test('Should handle multiple concurrent requests', async () => {
-    const requests = Array.from({ length: 10 }, () => 
-      fetch('/api/jps?type=jobs')
-    );
-    
+    const requests = Array.from({ length: 10 }, () => fetch('/api/jps?type=jobs'));
+
     const responses = await Promise.all(requests);
-    
+
     responses.forEach(response => {
       expect(response.status).toBe(200);
     });
@@ -348,6 +366,7 @@ describe('API Performance', () => {
 ```
 
 ### Roman Urdu: Component Performance
+
 ```typescript
 // Roman Urdu: Test component rendering performance
 test('Should render large lists efficiently', () => {
@@ -357,11 +376,11 @@ test('Should render large lists efficiently', () => {
     company: `Company ${i}`,
     // ... other properties
   }));
-  
+
   const startTime = performance.now();
   render(<JobsList jobs={largeJobList} />);
   const endTime = performance.now();
-  
+
   expect(endTime - startTime).toBeLessThan(100); // Should render within 100ms
 });
 ```
@@ -369,11 +388,12 @@ test('Should render large lists efficiently', () => {
 ## Roman Urdu: Security Testing
 
 ### Roman Urdu: Input Validation
+
 ```typescript
 // Roman Urdu: Test input sanitization
 test('Should sanitize user inputs', async () => {
   const maliciousInput = '<script>alert("xss")</script>';
-  
+
   const response = await fetch('/api/jps?type=jobs', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -381,24 +401,25 @@ test('Should sanitize user inputs', async () => {
       title: maliciousInput,
       company: 'Test Company',
       // ... other fields
-    })
+    }),
   });
-  
+
   const result = await response.json();
   expect(result.title).not.toContain('<script>');
 });
 ```
 
 ### Roman Urdu: Authentication Testing
+
 ```typescript
 // Roman Urdu: Test protected endpoints
 test('Should require authentication for sensitive operations', async () => {
   const response = await fetch('/api/jps/payments', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ action: 'process-payment' })
+    body: JSON.stringify({ action: 'process-payment' }),
   });
-  
+
   expect(response.status).toBe(401);
 });
 ```
@@ -406,11 +427,12 @@ test('Should require authentication for sensitive operations', async () => {
 ## Roman Urdu: Accessibility Testing
 
 ### Roman Urdu: ARIA Testing
+
 ```typescript
 // Roman Urdu: Test accessibility features
 test('Should have proper ARIA labels', () => {
   render(<JPSDashboard />);
-  
+
   expect(screen.getByLabelText('Search jobs')).toBeInTheDocument();
   expect(screen.getByRole('button', { name: 'Add Job' })).toBeInTheDocument();
   expect(screen.getByRole('table')).toBeInTheDocument();
@@ -418,15 +440,16 @@ test('Should have proper ARIA labels', () => {
 ```
 
 ### Roman Urdu: Keyboard Navigation
+
 ```typescript
 // Roman Urdu: Test keyboard accessibility
 test('Should be navigable with keyboard', () => {
   render(<JPSDashboard />);
-  
+
   // Roman Urdu: Tab through interactive elements
   cy.get('body').tab();
   cy.focused().should('exist');
-  
+
   // Roman Urdu: Test Enter key functionality
   cy.focused().type('{enter}');
 });
@@ -435,6 +458,7 @@ test('Should be navigable with keyboard', () => {
 ## Roman Urdu: Continuous Integration
 
 ### Roman Urdu: GitHub Actions
+
 ```yaml
 # Roman Urdu: CI/CD pipeline
 name: JPS System Tests
@@ -444,37 +468,38 @@ on: [push, pull_request]
 jobs:
   test:
     runs-on: ubuntu-latest
-    
+
     steps:
-    - uses: actions/checkout@v2
-    
-    - name: Setup Node.js
-      uses: actions/setup-node@v2
-      with:
-        node-version: '18'
-        
-    - name: Install dependencies
-      run: npm install
-      
-    - name: Run linting
-      run: npm run lint
-      
-    - name: Run type checking
-      run: npm run type-check
-      
-    - name: Run unit tests
-      run: npm test -- --coverage
-      
-    - name: Run E2E tests
-      run: npm run test:e2e
-      
-    - name: Upload coverage
-      uses: codecov/codecov-action@v2
+      - uses: actions/checkout@v2
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '18'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run linting
+        run: npm run lint
+
+      - name: Run type checking
+        run: npm run type-check
+
+      - name: Run unit tests
+        run: npm test -- --coverage
+
+      - name: Run E2E tests
+        run: npm run test:e2e
+
+      - name: Upload coverage
+        uses: codecov/codecov-action@v2
 ```
 
 ## Roman Urdu: Test Reporting
 
 ### Roman Urdu: Coverage Reports
+
 ```typescript
 // Roman Urdu: Jest configuration for coverage
 module.exports = {
@@ -483,20 +508,21 @@ module.exports = {
     'components/**/*.{js,jsx,ts,tsx}',
     'lib/**/*.{js,jsx,ts,tsx}',
     '!**/*.d.ts',
-    '!**/node_modules/**'
+    '!**/node_modules/**',
   ],
   coverageThreshold: {
     global: {
       branches: 80,
       functions: 80,
       lines: 80,
-      statements: 80
-    }
-  }
+      statements: 80,
+    },
+  },
 };
 ```
 
 ### Roman Urdu: Test Results Dashboard
+
 ```typescript
 // Roman Urdu: Generate test summary
 const generateTestReport = () => {
@@ -507,9 +533,9 @@ const generateTestReport = () => {
     failedTests: 0,
     coverage: 0,
     performance: {},
-    security: {}
+    security: {},
   };
-  
+
   return report;
 };
 ```
@@ -517,6 +543,7 @@ const generateTestReport = () => {
 ## Roman Urdu: Running Tests
 
 ### Roman Urdu: Manual Testing Commands
+
 ```bash
 # Roman Urdu: Run all tests
 npm test
@@ -540,6 +567,7 @@ npm run test:security
 ```
 
 ### Roman Urdu: Automated Testing Script
+
 ```bash
 # Roman Urdu: Run complete test suite
 ./scripts/test-jps-system.sh
@@ -553,21 +581,23 @@ npm run test:security
 ## Roman Urdu: Troubleshooting
 
 ### Roman Urdu: Common Issues
+
 1. **Test Timeouts**: Increase timeout values for slow operations
 2. **Mock Data Issues**: Ensure mock data is properly reset between tests
 3. **Async Testing**: Use proper async/await patterns
 4. **Component Rendering**: Wait for components to fully render before assertions
 
 ### Roman Urdu: Debug Tips
+
 ```typescript
 // Roman Urdu: Debug test failures
 test('Debug failing test', async () => {
   // Roman Urdu: Add console logs
   console.log('Test data:', testData);
-  
+
   // Roman Urdu: Use debugger
   debugger;
-  
+
   // Roman Urdu: Check component state
   screen.debug();
 });
@@ -576,6 +606,7 @@ test('Debug failing test', async () => {
 ## Roman Urdu: Conclusion
 
 JPS system ke liye comprehensive testing ensure karta hai ke:
+
 - ✅ All features work correctly
 - ✅ Code quality is maintained
 - ✅ Performance is optimal
@@ -583,4 +614,4 @@ JPS system ke liye comprehensive testing ensure karta hai ke:
 - ✅ Accessibility is provided
 - ✅ User experience is smooth
 
-Regular testing aur continuous integration maintain karein taki system reliable aur maintainable rahe. 
+Regular testing aur continuous integration maintain karein taki system reliable aur maintainable rahe.

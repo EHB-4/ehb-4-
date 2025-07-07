@@ -39,22 +39,18 @@
 ### 🖼️ Hero Carousel Slides (x5)
 
 1. **Title**: "Explore Verified Services Across the Globe"
-
    - **CTA**: `Start Now` → `/marketplace`
    - **Background**: Global city skyline + AI circuit overlay
 
 2. **Title**: "Become a Franchise & Start Earning"
-
    - **CTA**: `Join Now` → `/franchise`
    - **Background**: Animated wallet with dollar coins flying out
 
 3. **Title**: "SQL Level = Trust Level"
-
    - **CTA**: `Get Verified` → `/pss`
    - **Background**: Ranking badge system with rocket boost effect
 
 4. **Title**: "AI Marketplace is Live"
-
    - **CTA**: `Discover Services` → `/marketplace`
    - **Background**: AI chip image + holographic icons
 

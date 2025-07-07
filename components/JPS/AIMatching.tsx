@@ -1,10 +1,10 @@
-"use client";
+'use client';
 
 'use client';
 
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { 
+import {
   Brain,
   Target,
   Users,
@@ -121,7 +121,9 @@ export default function AIMatching({ userType }: AIMatchingProps) {
   const [selectedCandidate, setSelectedCandidate] = useState<JPSCandidate | null>(null);
   const [filters, setFilters] = useState<MatchingFilters>({});
   const [searchQuery, setSearchQuery] = useState('');
-  const [matchMode, setMatchMode] = useState<'job-to-candidate' | 'candidate-to-job'>('job-to-candidate');
+  const [matchMode, setMatchMode] = useState<'job-to-candidate' | 'candidate-to-job'>(
+    'job-to-candidate'
+  );
   const [showAdvancedFilters, setShowAdvancedFilters] = useState(false);
   const [matchingInProgress, setMatchingInProgress] = useState(false);
 
@@ -155,7 +157,7 @@ export default function AIMatching({ userType }: AIMatchingProps) {
     if (!selectedJob && !selectedCandidate) return;
 
     setMatchingInProgress(true);
-    
+
     try {
       let matchResults: MatchResult[] = [];
 
@@ -183,10 +185,10 @@ export default function AIMatching({ userType }: AIMatchingProps) {
 
       // Apply filters
       matchResults = applyFilters(matchResults);
-      
+
       // Sort by match score
       matchResults.sort((a, b) => b.matchScore - a.matchScore);
-      
+
       setMatches(matchResults);
     } catch (error) {
       console.error('Error performing matching:', error);
@@ -197,30 +199,32 @@ export default function AIMatching({ userType }: AIMatchingProps) {
 
   const generateMatchReasons = (job: JPSJob, candidate: JPSCandidate): string[] => {
     const reasons: string[] = [];
-    
+
     // Skills match
     const skillMatches = candidate.skills.filter(skill => job.skills.includes(skill));
     if (skillMatches.length > 0) {
       reasons.push(`${skillMatches.length} matching skills: ${skillMatches.join(', ')}`);
     }
-    
+
     // SQL Level match
     if (candidate.sqlLevel >= (job.sqlLevelRequired || 0)) {
-      reasons.push(`SQL Level ${candidate.sqlLevel} meets requirement (${job.sqlLevelRequired || 0})`);
+      reasons.push(
+        `SQL Level ${candidate.sqlLevel} meets requirement (${job.sqlLevelRequired || 0})`
+      );
     }
-    
+
     // Experience match
     const candidateExp = candidate.experience;
     const jobExp = parseInt(job.experience.match(/\d+/)?.[0] || '0');
     if (candidateExp >= jobExp) {
       reasons.push(`Experience level matches (${candidateExp} years)`);
     }
-    
+
     // Location match
     if (candidate.location.includes(job.location.split(',')[0])) {
       reasons.push('Location compatibility');
     }
-    
+
     return reasons;
   };
 
@@ -228,21 +232,22 @@ export default function AIMatching({ userType }: AIMatchingProps) {
     // Skills compatibility (0-100)
     const skillMatches = candidate.skills.filter(skill => job.skills.includes(skill));
     const skillsScore = Math.round((skillMatches.length / job.skills.length) * 100);
-    
+
     // Experience compatibility
     const candidateExp = candidate.experience;
     const jobExp = parseInt(job.experience.match(/\d+/)?.[0] || '0');
-    const experienceScore = candidateExp >= jobExp ? 100 : Math.round((candidateExp / jobExp) * 100);
-    
+    const experienceScore =
+      candidateExp >= jobExp ? 100 : Math.round((candidateExp / jobExp) * 100);
+
     // Location compatibility
     const locationScore = candidate.location.includes(job.location.split(',')[0]) ? 100 : 50;
-    
+
     // Salary compatibility (candidate's expected vs job salary)
     const salaryScore = 80; // Mock score
-    
+
     // SQL Level compatibility
     const sqlLevelScore = candidate.sqlLevel >= (job.sqlLevelRequired || 0) ? 100 : 0;
-    
+
     return {
       skills: skillsScore,
       experience: experienceScore,
@@ -258,26 +263,28 @@ export default function AIMatching({ userType }: AIMatchingProps) {
         const job = result.data as JPSJob;
         if (job.salary.max < filters.minSalary) return false;
       }
-      
+
       if (filters.maxSalary && result.type === 'job') {
         const job = result.data as JPSJob;
         if (job.salary.min > filters.maxSalary) return false;
       }
-      
+
       if (filters.location) {
-        const location = result.type === 'job' 
-          ? (result.data as JPSJob).location 
-          : (result.data as JPSCandidate).location;
+        const location =
+          result.type === 'job'
+            ? (result.data as JPSJob).location
+            : (result.data as JPSCandidate).location;
         if (!location.toLowerCase().includes(filters.location!.toLowerCase())) return false;
       }
-      
+
       if (filters.sqlLevel) {
-        const sqlLevel = result.type === 'job' 
-          ? (result.data as JPSJob).sqlLevelRequired || 0
-          : (result.data as JPSCandidate).sqlLevel;
+        const sqlLevel =
+          result.type === 'job'
+            ? (result.data as JPSJob).sqlLevelRequired || 0
+            : (result.data as JPSCandidate).sqlLevel;
         if (sqlLevel < filters.sqlLevel) return false;
       }
-      
+
       return true;
     });
   };
@@ -286,9 +293,9 @@ export default function AIMatching({ userType }: AIMatchingProps) {
     try {
       const candidate = candidates.find(c => c.id === candidateId);
       const job = jobs.find(j => j.id === jobId);
-      
+
       if (!candidate || !job) return;
-      
+
       const interview = await JPSApiService.scheduleInterview({
         candidateId,
         jobId,
@@ -301,7 +308,7 @@ export default function AIMatching({ userType }: AIMatchingProps) {
         status: 'scheduled',
         notes: 'AI-suggested interview based on high match score',
       });
-      
+
       // Show success message
       alert('Interview scheduled successfully!');
     } catch (error) {
@@ -314,9 +321,9 @@ export default function AIMatching({ userType }: AIMatchingProps) {
     try {
       const candidate = candidates.find(c => c.id === candidateId);
       const job = jobs.find(j => j.id === jobId);
-      
+
       if (!candidate || !job) return;
-      
+
       const placement = await JPSApiService.createPlacement({
         candidateId,
         jobId,
@@ -328,7 +335,7 @@ export default function AIMatching({ userType }: AIMatchingProps) {
         successRate: 90,
         feedback: 'AI-recommended placement based on high compatibility',
       });
-      
+
       // Show success message
       alert('Placement created successfully!');
     } catch (error) {
@@ -365,18 +372,18 @@ export default function AIMatching({ userType }: AIMatchingProps) {
   return (
     <div className="min-h-screen bg-gray-50 p-6">
       <div className="max-w-7xl mx-auto">
-      {/* Header */}
+        {/* Header */}
         <div className="bg-white rounded-lg shadow-sm p-6 mb-6">
           <div className="flex items-center justify-between">
-        <div>
+            <div>
               <h1 className="text-3xl font-bold text-gray-900 flex items-center">
                 <Brain className="h-8 w-8 text-blue-600 mr-3" />
                 AI-Powered Job Matching
               </h1>
               <p className="text-gray-600 mt-2">
                 Advanced matching algorithm with real-time compatibility analysis
-          </p>
-        </div>
+              </p>
+            </div>
             <div className="flex items-center space-x-4">
               <button
                 onClick={loadData}
@@ -386,13 +393,13 @@ export default function AIMatching({ userType }: AIMatchingProps) {
                 <RefreshCw className={`h-4 w-4 mr-2 ${matchingInProgress ? 'animate-spin' : ''}`} />
                 Refresh
               </button>
-        <button
+              <button
                 onClick={() => setShowAdvancedFilters(!showAdvancedFilters)}
                 className="flex items-center px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700"
-        >
+              >
                 <Settings className="h-4 w-4 mr-2" />
                 Filters
-        </button>
+              </button>
             </div>
           </div>
         </div>
@@ -402,7 +409,7 @@ export default function AIMatching({ userType }: AIMatchingProps) {
           <div className="lg:col-span-1">
             <div className="bg-white rounded-lg shadow-sm p-6">
               <h2 className="text-xl font-semibold text-gray-900 mb-4">Selection</h2>
-              
+
               {/* Mode Toggle */}
               <div className="mb-6">
                 <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -429,78 +436,76 @@ export default function AIMatching({ userType }: AIMatchingProps) {
                   >
                     Candidate → Jobs
                   </button>
-          </div>
-        </div>
+                </div>
+              </div>
 
               {/* Search */}
               <div className="mb-6">
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Search
-                </label>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Search</label>
                 <div className="relative">
                   <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
                   <input
                     type="text"
                     placeholder="Search jobs or candidates..."
                     value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
+                    onChange={e => setSearchQuery(e.target.value)}
                     className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   />
-        </div>
-      </div>
+                </div>
+              </div>
 
               {/* Selection List */}
               <div className="space-y-3 max-h-96 overflow-y-auto">
-                {matchMode === 'job-to-candidate' ? (
-                  jobs
-                    .filter(job => 
-                      job.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                      job.company.toLowerCase().includes(searchQuery.toLowerCase())
-                    )
-                    .map(job => (
-                      <div
-                        key={job.id}
-                        onClick={() => setSelectedJob(job)}
-                        className={`p-4 border rounded-lg cursor-pointer transition-colors ${
-                          selectedJob?.id === job.id
-                            ? 'border-blue-500 bg-blue-50'
-                            : 'border-gray-200 hover:border-gray-300'
-                        }`}
-                      >
-                        <h3 className="font-medium text-gray-900">{job.title}</h3>
-                        <p className="text-sm text-gray-600">{job.company}</p>
-                        <div className="flex items-center mt-2 text-xs text-gray-500">
-                          <MapPin className="h-3 w-3 mr-1" />
-                          {job.location}
-        </div>
-                      </div>
-                    ))
-                ) : (
-                  candidates
-                    .filter(candidate => 
-                      candidate.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                      candidate.title.toLowerCase().includes(searchQuery.toLowerCase())
-                    )
-                    .map(candidate => (
-                      <div
-                        key={candidate.id}
-                        onClick={() => setSelectedCandidate(candidate)}
-                        className={`p-4 border rounded-lg cursor-pointer transition-colors ${
-                          selectedCandidate?.id === candidate.id
-                            ? 'border-blue-500 bg-blue-50'
-                            : 'border-gray-200 hover:border-gray-300'
-                        }`}
-                      >
-                        <h3 className="font-medium text-gray-900">{candidate.name}</h3>
-                        <p className="text-sm text-gray-600">{candidate.title}</p>
-                        <div className="flex items-center mt-2 text-xs text-gray-500">
-                          <MapPin className="h-3 w-3 mr-1" />
-                          {candidate.location}
+                {matchMode === 'job-to-candidate'
+                  ? jobs
+                      .filter(
+                        job =>
+                          job.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                          job.company.toLowerCase().includes(searchQuery.toLowerCase())
+                      )
+                      .map(job => (
+                        <div
+                          key={job.id}
+                          onClick={() => setSelectedJob(job)}
+                          className={`p-4 border rounded-lg cursor-pointer transition-colors ${
+                            selectedJob?.id === job.id
+                              ? 'border-blue-500 bg-blue-50'
+                              : 'border-gray-200 hover:border-gray-300'
+                          }`}
+                        >
+                          <h3 className="font-medium text-gray-900">{job.title}</h3>
+                          <p className="text-sm text-gray-600">{job.company}</p>
+                          <div className="flex items-center mt-2 text-xs text-gray-500">
+                            <MapPin className="h-3 w-3 mr-1" />
+                            {job.location}
+                          </div>
                         </div>
-                      </div>
-                    ))
-                        )}
-                      </div>
+                      ))
+                  : candidates
+                      .filter(
+                        candidate =>
+                          candidate.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                          candidate.title.toLowerCase().includes(searchQuery.toLowerCase())
+                      )
+                      .map(candidate => (
+                        <div
+                          key={candidate.id}
+                          onClick={() => setSelectedCandidate(candidate)}
+                          className={`p-4 border rounded-lg cursor-pointer transition-colors ${
+                            selectedCandidate?.id === candidate.id
+                              ? 'border-blue-500 bg-blue-50'
+                              : 'border-gray-200 hover:border-gray-300'
+                          }`}
+                        >
+                          <h3 className="font-medium text-gray-900">{candidate.name}</h3>
+                          <p className="text-sm text-gray-600">{candidate.title}</p>
+                          <div className="flex items-center mt-2 text-xs text-gray-500">
+                            <MapPin className="h-3 w-3 mr-1" />
+                            {candidate.location}
+                          </div>
+                        </div>
+                      ))}
+              </div>
             </div>
 
             {/* Advanced Filters */}
@@ -517,39 +522,43 @@ export default function AIMatching({ userType }: AIMatchingProps) {
                         type="number"
                         placeholder="Min"
                         value={filters.minSalary || ''}
-                        onChange={(e) => setFilters({ ...filters, minSalary: Number(e.target.value) || undefined })}
+                        onChange={e =>
+                          setFilters({ ...filters, minSalary: Number(e.target.value) || undefined })
+                        }
                         className="px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
                       />
                       <input
                         type="number"
                         placeholder="Max"
                         value={filters.maxSalary || ''}
-                        onChange={(e) => setFilters({ ...filters, maxSalary: Number(e.target.value) || undefined })}
+                        onChange={e =>
+                          setFilters({ ...filters, maxSalary: Number(e.target.value) || undefined })
+                        }
                         className="px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
                       />
                     </div>
-            </div>
+                  </div>
 
-              <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">
-                      Location
-                    </label>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">Location</label>
                     <input
                       type="text"
                       placeholder="Enter location"
                       value={filters.location || ''}
-                      onChange={(e) => setFilters({ ...filters, location: e.target.value })}
+                      onChange={e => setFilters({ ...filters, location: e.target.value })}
                       className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
                     />
                   </div>
-                  
+
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-1">
                       SQL Level
                     </label>
                     <select
                       value={filters.sqlLevel || ''}
-                      onChange={(e) => setFilters({ ...filters, sqlLevel: Number(e.target.value) || undefined })}
+                      onChange={e =>
+                        setFilters({ ...filters, sqlLevel: Number(e.target.value) || undefined })
+                      }
                       className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
                     >
                       <option value="">Any Level</option>
@@ -563,7 +572,7 @@ export default function AIMatching({ userType }: AIMatchingProps) {
                 </div>
               </div>
             )}
-                  </div>
+          </div>
 
           {/* Results Panel */}
           <div className="lg:col-span-2">
@@ -576,22 +585,26 @@ export default function AIMatching({ userType }: AIMatchingProps) {
                     Analyzing...
                   </div>
                 )}
-                  </div>
+              </div>
 
               {!selectedJob && !selectedCandidate ? (
                 <div className="text-center py-12">
                   <Target className="h-16 w-16 text-gray-400 mx-auto mb-4" />
-                  <h3 className="text-lg font-medium text-gray-900 mb-2">Select a {matchMode === 'job-to-candidate' ? 'Job' : 'Candidate'}</h3>
+                  <h3 className="text-lg font-medium text-gray-900 mb-2">
+                    Select a {matchMode === 'job-to-candidate' ? 'Job' : 'Candidate'}
+                  </h3>
                   <p className="text-gray-600">
-                    Choose a {matchMode === 'job-to-candidate' ? 'job' : 'candidate'} from the left panel to see AI-powered matches
+                    Choose a {matchMode === 'job-to-candidate' ? 'job' : 'candidate'} from the left
+                    panel to see AI-powered matches
                   </p>
-                  </div>
+                </div>
               ) : matches.length === 0 ? (
                 <div className="text-center py-12">
                   <Users className="h-16 w-16 text-gray-400 mx-auto mb-4" />
                   <h3 className="text-lg font-medium text-gray-900 mb-2">No Matches Found</h3>
                   <p className="text-gray-600">
-                    Try adjusting your filters or selecting a different {matchMode === 'job-to-candidate' ? 'job' : 'candidate'}
+                    Try adjusting your filters or selecting a different{' '}
+                    {matchMode === 'job-to-candidate' ? 'job' : 'candidate'}
                   </p>
                 </div>
               ) : (
@@ -608,57 +621,72 @@ export default function AIMatching({ userType }: AIMatchingProps) {
                         <div className="flex-1">
                           <div className="flex items-center mb-2">
                             <h3 className="text-xl font-semibold text-gray-900">
-                              {match.type === 'job' ? (match.data as JPSJob).title : (match.data as JPSCandidate).name}
+                              {match.type === 'job'
+                                ? (match.data as JPSJob).title
+                                : (match.data as JPSCandidate).name}
                             </h3>
-                            <span className={`ml-3 px-3 py-1 rounded-full text-sm font-medium ${getMatchScoreColor(match.matchScore)}`}>
+                            <span
+                              className={`ml-3 px-3 py-1 rounded-full text-sm font-medium ${getMatchScoreColor(match.matchScore)}`}
+                            >
                               {match.matchScore}% Match
                             </span>
-              </div>
+                          </div>
 
                           <p className="text-gray-600 mb-3">
-                            {match.type === 'job' 
+                            {match.type === 'job'
                               ? `${(match.data as JPSJob).company} • ${(match.data as JPSJob).location}`
-                              : `${(match.data as JPSCandidate).title} • ${(match.data as JPSCandidate).location}`
-                            }
+                              : `${(match.data as JPSCandidate).title} • ${(match.data as JPSCandidate).location}`}
                           </p>
 
                           {/* Compatibility Breakdown */}
                           <div className="grid grid-cols-5 gap-4 mb-4">
                             <div className="text-center">
-                              <div className={`text-lg font-semibold ${getCompatibilityColor(match.compatibility.skills)}`}>
+                              <div
+                                className={`text-lg font-semibold ${getCompatibilityColor(match.compatibility.skills)}`}
+                              >
                                 {match.compatibility.skills}%
                               </div>
                               <div className="text-xs text-gray-500">Skills</div>
                             </div>
                             <div className="text-center">
-                              <div className={`text-lg font-semibold ${getCompatibilityColor(match.compatibility.experience)}`}>
+                              <div
+                                className={`text-lg font-semibold ${getCompatibilityColor(match.compatibility.experience)}`}
+                              >
                                 {match.compatibility.experience}%
                               </div>
                               <div className="text-xs text-gray-500">Experience</div>
-                    </div>
+                            </div>
                             <div className="text-center">
-                              <div className={`text-lg font-semibold ${getCompatibilityColor(match.compatibility.location)}`}>
+                              <div
+                                className={`text-lg font-semibold ${getCompatibilityColor(match.compatibility.location)}`}
+                              >
                                 {match.compatibility.location}%
-                  </div>
+                              </div>
                               <div className="text-xs text-gray-500">Location</div>
-                    </div>
+                            </div>
                             <div className="text-center">
-                              <div className={`text-lg font-semibold ${getCompatibilityColor(match.compatibility.salary)}`}>
+                              <div
+                                className={`text-lg font-semibold ${getCompatibilityColor(match.compatibility.salary)}`}
+                              >
                                 {match.compatibility.salary}%
-                  </div>
+                              </div>
                               <div className="text-xs text-gray-500">Salary</div>
-                    </div>
+                            </div>
                             <div className="text-center">
-                              <div className={`text-lg font-semibold ${getCompatibilityColor(match.compatibility.sqlLevel)}`}>
+                              <div
+                                className={`text-lg font-semibold ${getCompatibilityColor(match.compatibility.sqlLevel)}`}
+                              >
                                 {match.compatibility.sqlLevel}%
-                  </div>
+                              </div>
                               <div className="text-xs text-gray-500">SQL Level</div>
-                    </div>
-                  </div>
+                            </div>
+                          </div>
 
                           {/* Match Reasons */}
                           <div className="mb-4">
-                            <h4 className="text-sm font-medium text-gray-700 mb-2">Why this match?</h4>
+                            <h4 className="text-sm font-medium text-gray-700 mb-2">
+                              Why this match?
+                            </h4>
                             <div className="space-y-1">
                               {match.reasons.map((reason, idx) => (
                                 <div key={idx} className="flex items-center text-sm text-gray-600">
@@ -666,9 +694,9 @@ export default function AIMatching({ userType }: AIMatchingProps) {
                                   {reason}
                                 </div>
                               ))}
-                </div>
-              </div>
-            </div>
+                            </div>
+                          </div>
+                        </div>
 
                         <div className="flex flex-col space-y-2 ml-4">
                           <button
@@ -682,8 +710,8 @@ export default function AIMatching({ userType }: AIMatchingProps) {
                             <Calendar className="h-4 w-4 mr-2" />
                             Schedule Interview
                           </button>
-                          
-              <button
+
+                          <button
                             onClick={() => {
                               if (match.type === 'candidate' && selectedJob) {
                                 handleCreatePlacement(match.id, selectedJob.id);
@@ -694,11 +722,11 @@ export default function AIMatching({ userType }: AIMatchingProps) {
                             <Award className="h-4 w-4 mr-2" />
                             Create Placement
                           </button>
-                          
+
                           <button className="flex items-center px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors">
                             <Eye className="h-4 w-4 mr-2" />
                             View Details
-              </button>
+                          </button>
                         </div>
                       </div>
                     </motion.div>
@@ -711,4 +739,4 @@ export default function AIMatching({ userType }: AIMatchingProps) {
       </div>
     </div>
   );
-} 
+}

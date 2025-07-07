@@ -361,7 +361,9 @@ export default function JPSPage() {
   const [selectedType, setSelectedType] = useState<string>('all');
   const [searchQuery, setSearchQuery] = useState('');
   const [currentSQLLevel, setCurrentSQLLevel] = useState(2); // Mock current SQL level
-  const [activeTab, setActiveTab] = useState<'jobs' | 'candidates' | 'placements' | 'analytics'>('jobs');
+  const [activeTab, setActiveTab] = useState<'jobs' | 'candidates' | 'placements' | 'analytics'>(
+    'jobs'
+  );
 
   // Roman Urdu: Statistics calculation
   const stats = {
@@ -377,7 +379,9 @@ export default function JPSPage() {
   };
 
   // Roman Urdu: JPS completion percentage for SQL upgrade
-  const jpsCompletionPercentage = Math.round((stats.activePlacements / stats.totalPlacements) * 100);
+  const jpsCompletionPercentage = Math.round(
+    (stats.activePlacements / stats.totalPlacements) * 100
+  );
 
   const filteredJobs = jobs.filter(job => {
     const matchesStatus = selectedStatus === 'all' || job.status === selectedStatus;
@@ -404,11 +408,9 @@ export default function JPSPage() {
   const handleApplyJob = (jobId: string) => {
     toast.success('Job application submit ho gayi hai!');
     // Update job applications count
-    setJobs(prev => prev.map(job => 
-      job.id === jobId 
-        ? { ...job, applications: job.applications + 1 }
-        : job
-    ));
+    setJobs(prev =>
+      prev.map(job => (job.id === jobId ? { ...job, applications: job.applications + 1 } : job))
+    );
   };
 
   // Roman Urdu: Candidate selection handler
@@ -419,11 +421,9 @@ export default function JPSPage() {
   // Roman Urdu: Placement completion handler
   const handleCompletePlacement = (placementId: string) => {
     toast.success('Placement complete ho gayi hai!');
-    setPlacements(prev => prev.map(p => 
-      p.id === placementId 
-        ? { ...p, status: 'completed' as const }
-        : p
-    ));
+    setPlacements(prev =>
+      prev.map(p => (p.id === placementId ? { ...p, status: 'completed' as const } : p))
+    );
   };
 
   return (
@@ -457,7 +457,7 @@ export default function JPSPage() {
       {/* Main Content */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Hero Section */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           className="bg-white rounded-xl shadow-lg p-8 mb-8"
@@ -489,7 +489,7 @@ export default function JPSPage() {
         </motion.div>
 
         {/* SQL Level Integration */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
@@ -499,32 +499,39 @@ export default function JPSPage() {
             <h3 className="text-xl font-bold text-gray-900">SQL Level Integration</h3>
             <div className="flex items-center space-x-2">
               <Shield className="h-5 w-5 text-blue-500" />
-              <span className="text-blue-600 font-medium">Current Level: {sqlLevelConfig[currentSQLLevel as keyof typeof sqlLevelConfig]?.name}</span>
+              <span className="text-blue-600 font-medium">
+                Current Level:{' '}
+                {sqlLevelConfig[currentSQLLevel as keyof typeof sqlLevelConfig]?.name}
+              </span>
             </div>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
             {Object.entries(sqlLevelConfig).map(([level, config]) => (
-              <div 
+              <div
                 key={level}
                 className={`p-4 rounded-lg border-2 ${
-                  parseInt(level) <= currentSQLLevel 
-                    ? 'border-green-500 bg-green-50' 
+                  parseInt(level) <= currentSQLLevel
+                    ? 'border-green-500 bg-green-50'
                     : 'border-gray-200 bg-gray-50'
                 }`}
               >
                 <div className="flex items-center justify-between mb-2">
-                  <span className={`font-semibold ${
-                    parseInt(level) <= currentSQLLevel ? 'text-green-700' : 'text-gray-500'
-                  }`}>
+                  <span
+                    className={`font-semibold ${
+                      parseInt(level) <= currentSQLLevel ? 'text-green-700' : 'text-gray-500'
+                    }`}
+                  >
                     {config.name}
                   </span>
                   {parseInt(level) <= currentSQLLevel && (
                     <CheckCircle className="h-4 w-4 text-green-500" />
                   )}
                 </div>
-                <p className={`text-sm ${
-                  parseInt(level) <= currentSQLLevel ? 'text-green-600' : 'text-gray-400'
-                }`}>
+                <p
+                  className={`text-sm ${
+                    parseInt(level) <= currentSQLLevel ? 'text-green-600' : 'text-gray-400'
+                  }`}
+                >
                   {config.description}
                 </p>
               </div>
@@ -533,7 +540,7 @@ export default function JPSPage() {
         </motion.div>
 
         {/* Navigation Tabs */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
@@ -545,7 +552,7 @@ export default function JPSPage() {
               { id: 'candidates', label: 'Candidates', icon: Users, count: stats.totalCandidates },
               { id: 'placements', label: 'Placements', icon: Award, count: stats.totalPlacements },
               { id: 'analytics', label: 'Analytics', icon: ChartBar, count: null },
-            ].map((tab) => (
+            ].map(tab => (
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id as any)}
@@ -568,7 +575,7 @@ export default function JPSPage() {
         </motion.div>
 
         {/* Tab Content */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3 }}
@@ -585,13 +592,13 @@ export default function JPSPage() {
                       type="text"
                       placeholder="Search jobs..."
                       value={searchQuery}
-                      onChange={(e) => setSearchQuery(e.target.value)}
+                      onChange={e => setSearchQuery(e.target.value)}
                       className="pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     />
                   </div>
                   <select
                     value={selectedStatus}
-                    onChange={(e) => setSelectedStatus(e.target.value)}
+                    onChange={e => setSelectedStatus(e.target.value)}
                     className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   >
                     <option value="all">All Status</option>
@@ -601,7 +608,7 @@ export default function JPSPage() {
                   </select>
                   <select
                     value={selectedType}
-                    onChange={(e) => setSelectedType(e.target.value)}
+                    onChange={e => setSelectedType(e.target.value)}
                     className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   >
                     <option value="all">All Types</option>
@@ -614,7 +621,7 @@ export default function JPSPage() {
               </div>
 
               <div className="grid gap-6">
-                {filteredJobs.map((job) => (
+                {filteredJobs.map(job => (
                   <motion.div
                     key={job.id}
                     initial={{ opacity: 0, y: 20 }}
@@ -632,7 +639,10 @@ export default function JPSPage() {
                           </div>
                           <div className="flex items-center space-x-1">
                             <DollarSign className="h-4 w-4" />
-                            <span>{job.salary.min.toLocaleString()} - {job.salary.max.toLocaleString()} {job.salary.currency}</span>
+                            <span>
+                              {job.salary.min.toLocaleString()} - {job.salary.max.toLocaleString()}{' '}
+                              {job.salary.currency}
+                            </span>
                           </div>
                           <div className="flex items-center space-x-1">
                             <Calendar className="h-4 w-4" />
@@ -641,10 +651,14 @@ export default function JPSPage() {
                         </div>
                       </div>
                       <div className="flex items-center space-x-2">
-                        <span className={`px-3 py-1 rounded-full text-sm font-medium ${getStatusColor(job.status)}`}>
+                        <span
+                          className={`px-3 py-1 rounded-full text-sm font-medium ${getStatusColor(job.status)}`}
+                        >
                           {job.status}
                         </span>
-                        <span className={`px-3 py-1 rounded-full text-sm font-medium ${getTypeColor(job.type)}`}>
+                        <span
+                          className={`px-3 py-1 rounded-full text-sm font-medium ${getTypeColor(job.type)}`}
+                        >
                           {job.type}
                         </span>
                       </div>
@@ -653,8 +667,11 @@ export default function JPSPage() {
                     <p className="text-gray-600 mb-4">{job.description}</p>
 
                     <div className="flex flex-wrap gap-2 mb-4">
-                      {job.skills.slice(0, 5).map((skill) => (
-                        <span key={skill} className="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">
+                      {job.skills.slice(0, 5).map(skill => (
+                        <span
+                          key={skill}
+                          className="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm"
+                        >
                           {skill}
                         </span>
                       ))}
@@ -699,13 +716,13 @@ export default function JPSPage() {
                       type="text"
                       placeholder="Search candidates..."
                       value={searchQuery}
-                      onChange={(e) => setSearchQuery(e.target.value)}
+                      onChange={e => setSearchQuery(e.target.value)}
                       className="pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     />
                   </div>
                   <select
                     value={selectedStatus}
-                    onChange={(e) => setSelectedStatus(e.target.value)}
+                    onChange={e => setSelectedStatus(e.target.value)}
                     className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   >
                     <option value="all">All Status</option>
@@ -718,7 +735,7 @@ export default function JPSPage() {
               </div>
 
               <div className="grid gap-6">
-                {filteredCandidates.map((candidate) => (
+                {filteredCandidates.map(candidate => (
                   <motion.div
                     key={candidate.id}
                     initial={{ opacity: 0, y: 20 }}
@@ -733,7 +750,9 @@ export default function JPSPage() {
                           className="w-12 h-12 rounded-full"
                         />
                         <div>
-                          <h4 className="text-xl font-semibold text-gray-900 mb-1">{candidate.name}</h4>
+                          <h4 className="text-xl font-semibold text-gray-900 mb-1">
+                            {candidate.name}
+                          </h4>
                           <p className="text-gray-600 mb-2">{candidate.title}</p>
                           <div className="flex items-center space-x-4 text-sm text-gray-500">
                             <div className="flex items-center space-x-1">
@@ -752,11 +771,15 @@ export default function JPSPage() {
                         </div>
                       </div>
                       <div className="flex items-center space-x-2">
-                        <span className={`px-3 py-1 rounded-full text-sm font-medium ${getStatusColor(candidate.status)}`}>
+                        <span
+                          className={`px-3 py-1 rounded-full text-sm font-medium ${getStatusColor(candidate.status)}`}
+                        >
                           {candidate.status}
                         </span>
                         {candidate.matchScore && (
-                          <span className={`px-3 py-1 rounded-full text-sm font-medium ${getMatchScoreColor(candidate.matchScore)}`}>
+                          <span
+                            className={`px-3 py-1 rounded-full text-sm font-medium ${getMatchScoreColor(candidate.matchScore)}`}
+                          >
                             {candidate.matchScore}% match
                           </span>
                         )}
@@ -764,8 +787,11 @@ export default function JPSPage() {
                     </div>
 
                     <div className="flex flex-wrap gap-2 mb-4">
-                      {candidate.skills.slice(0, 5).map((skill) => (
-                        <span key={skill} className="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm">
+                      {candidate.skills.slice(0, 5).map(skill => (
+                        <span
+                          key={skill}
+                          className="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm"
+                        >
                           {skill}
                         </span>
                       ))}
@@ -778,7 +804,9 @@ export default function JPSPage() {
 
                     <div className="flex justify-between items-center">
                       <div className="flex items-center space-x-4 text-sm text-gray-500">
-                        <span>Last active: {new Date(candidate.lastActive).toLocaleDateString()}</span>
+                        <span>
+                          Last active: {new Date(candidate.lastActive).toLocaleDateString()}
+                        </span>
                         <span>Education: {candidate.education}</span>
                       </div>
                       <div className="flex space-x-2">
@@ -806,7 +834,7 @@ export default function JPSPage() {
                 <div className="flex space-x-4">
                   <select
                     value={selectedStatus}
-                    onChange={(e) => setSelectedStatus(e.target.value)}
+                    onChange={e => setSelectedStatus(e.target.value)}
                     className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   >
                     <option value="all">All Status</option>
@@ -818,7 +846,7 @@ export default function JPSPage() {
               </div>
 
               <div className="grid gap-6">
-                {placements.map((placement) => (
+                {placements.map(placement => (
                   <motion.div
                     key={placement.id}
                     initial={{ opacity: 0, y: 20 }}
@@ -834,7 +862,9 @@ export default function JPSPage() {
                         <div className="flex items-center space-x-4 text-sm text-gray-500">
                           <div className="flex items-center space-x-1">
                             <Calendar className="h-4 w-4" />
-                            <span>Placed: {new Date(placement.placementDate).toLocaleDateString()}</span>
+                            <span>
+                              Placed: {new Date(placement.placementDate).toLocaleDateString()}
+                            </span>
                           </div>
                           <div className="flex items-center space-x-1">
                             <DollarSign className="h-4 w-4" />
@@ -846,7 +876,9 @@ export default function JPSPage() {
                           </div>
                         </div>
                       </div>
-                      <span className={`px-3 py-1 rounded-full text-sm font-medium ${getStatusColor(placement.status)}`}>
+                      <span
+                        className={`px-3 py-1 rounded-full text-sm font-medium ${getStatusColor(placement.status)}`}
+                      >
                         {placement.status}
                       </span>
                     </div>
@@ -875,7 +907,7 @@ export default function JPSPage() {
           {activeTab === 'analytics' && (
             <div>
               <h3 className="text-2xl font-bold text-gray-900 mb-6">Analytics & Insights</h3>
-              
+
               {/* Quick Stats */}
               <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
                 <div className="bg-blue-50 p-6 rounded-lg">
@@ -891,7 +923,9 @@ export default function JPSPage() {
                   <div className="flex items-center justify-between">
                     <div>
                       <p className="text-green-600 text-sm font-medium">Active Candidates</p>
-                      <p className="text-2xl font-bold text-green-900">{stats.availableCandidates}</p>
+                      <p className="text-2xl font-bold text-green-900">
+                        {stats.availableCandidates}
+                      </p>
                     </div>
                     <Users className="h-8 w-8 text-green-600" />
                   </div>
@@ -909,7 +943,9 @@ export default function JPSPage() {
                   <div className="flex items-center justify-between">
                     <div>
                       <p className="text-orange-600 text-sm font-medium">Success Rate</p>
-                      <p className="text-2xl font-bold text-orange-900">{stats.averageSuccessRate}%</p>
+                      <p className="text-2xl font-bold text-orange-900">
+                        {stats.averageSuccessRate}%
+                      </p>
                     </div>
                     <TrendingUp className="h-8 w-8 text-orange-600" />
                   </div>
@@ -938,11 +974,12 @@ export default function JPSPage() {
               <div className="bg-white border border-gray-200 rounded-lg p-6">
                 <h4 className="text-lg font-semibold text-gray-900 mb-4">Recent Activity</h4>
                 <div className="space-y-4">
-                  {placements.slice(0, 5).map((placement) => (
+                  {placements.slice(0, 5).map(placement => (
                     <div key={placement.id} className="flex items-center space-x-3">
                       <div className="w-2 h-2 bg-green-500 rounded-full"></div>
                       <span className="text-gray-600">
-                        <strong>{placement.candidateName}</strong> placed at <strong>{placement.company}</strong>
+                        <strong>{placement.candidateName}</strong> placed at{' '}
+                        <strong>{placement.company}</strong>
                       </span>
                       <span className="text-gray-400 text-sm">
                         {new Date(placement.placementDate).toLocaleDateString()}

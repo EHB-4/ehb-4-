@@ -20,7 +20,7 @@ import {
   Search,
   Bell,
   User,
-  LogOut
+  LogOut,
 } from 'lucide-react';
 
 // Roman Urdu: Import all JPS components
@@ -71,22 +71,22 @@ export default function JPSCompleteSystem({ userType }: JPSCompleteSystemProps) 
         type: 'interview',
         message: 'New interview scheduled for Senior Developer position',
         recipient: 'ahmed.khan@email.com',
-        status: 'success'
+        status: 'success',
       },
       {
         id: 2,
         type: 'placement',
         message: 'Congratulations! You have been placed at TechCorp Solutions',
         recipient: 'sarah.ahmed@email.com',
-        status: 'success'
+        status: 'success',
       },
       {
         id: 3,
         type: 'job',
         message: 'New job posting: React Developer at Digital Solutions',
         recipient: 'admin@jps.com',
-        status: 'info'
-      }
+        status: 'info',
+      },
     ];
     setNotifications(mockNotifications);
   }, []);
@@ -103,7 +103,7 @@ export default function JPSCompleteSystem({ userType }: JPSCompleteSystemProps) 
     { id: 'language', label: 'Language', icon: Globe },
     { id: 'security', label: 'Security', icon: Shield },
     { id: 'dragdrop', label: 'Drag & Drop', icon: Move },
-    { id: 'content', label: 'Content', icon: PenTool }
+    { id: 'content', label: 'Content', icon: PenTool },
   ];
 
   // Roman Urdu: Render active component
@@ -179,7 +179,7 @@ export default function JPSCompleteSystem({ userType }: JPSCompleteSystemProps) 
           <div className="p-6">
             <h2 className="text-2xl font-bold text-gray-900 mb-6">Email Notifications</h2>
             <div className="space-y-4">
-              {notifications.map((notification) => (
+              {notifications.map(notification => (
                 <div key={notification.id} className="bg-white p-4 rounded-lg shadow-sm">
                   <h4 className="font-medium">{notification.type}</h4>
                   <p className="text-gray-600">{notification.message}</p>
@@ -262,7 +262,7 @@ export default function JPSCompleteSystem({ userType }: JPSCompleteSystemProps) 
             </button>
             <h1 className="text-2xl font-bold text-gray-900">JPS System</h1>
           </div>
-          
+
           <div className="flex items-center space-x-4">
             <div className="relative">
               <Bell className="h-5 w-5 text-gray-600 cursor-pointer" />
@@ -281,10 +281,12 @@ export default function JPSCompleteSystem({ userType }: JPSCompleteSystemProps) 
 
       <div className="flex">
         {/* Sidebar */}
-        <aside className={`bg-white shadow-sm ${showSidebar ? 'block' : 'hidden'} lg:block lg:w-64`}>
+        <aside
+          className={`bg-white shadow-sm ${showSidebar ? 'block' : 'hidden'} lg:block lg:w-64`}
+        >
           <nav className="p-4">
             <div className="space-y-2">
-              {tabs.map((tab) => (
+              {tabs.map(tab => (
                 <button
                   key={tab.id}
                   onClick={() => setActiveTab(tab.id)}
@@ -318,7 +320,9 @@ export default function JPSCompleteSystem({ userType }: JPSCompleteSystemProps) 
       {/* System Status */}
       <div className="fixed bottom-4 right-4 bg-white rounded-lg shadow-lg p-4 border">
         <div className="flex items-center space-x-2 text-sm">
-          <div className={`h-2 w-2 rounded-full ${securityValid ? 'bg-green-500' : 'bg-yellow-500'}`}></div>
+          <div
+            className={`h-2 w-2 rounded-full ${securityValid ? 'bg-green-500' : 'bg-yellow-500'}`}
+          ></div>
           <span className="text-gray-600">
             {securityValid ? 'System Secure' : 'Security Check Required'}
           </span>
@@ -326,4 +330,4 @@ export default function JPSCompleteSystem({ userType }: JPSCompleteSystemProps) 
       </div>
     </div>
   );
-} 
+}

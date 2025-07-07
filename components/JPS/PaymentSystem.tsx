@@ -171,7 +171,7 @@ export default function PaymentSystem({ userType }: PaymentSystemProps) {
   const loadPaymentData = async () => {
     try {
       setLoading(true);
-      
+
       // Load placements data
       const placementsData = await JPSApiService.getPlacements();
       setPlacements(placementsData);
@@ -208,7 +208,6 @@ export default function PaymentSystem({ userType }: PaymentSystemProps) {
         paymentMethod: 'bank_transfer',
         autoPay: true,
       });
-
     } catch (error) {
       console.error('Error loading payment data:', error);
     } finally {
@@ -217,9 +216,11 @@ export default function PaymentSystem({ userType }: PaymentSystemProps) {
   };
 
   const handlePaymentStatusChange = async (paymentId: string, newStatus: string) => {
-    setPayments(payments.map(payment => 
-      payment.id === paymentId ? { ...payment, status: newStatus as any } : payment
-    ));
+    setPayments(
+      payments.map(payment =>
+        payment.id === paymentId ? { ...payment, status: newStatus as any } : payment
+      )
+    );
     alert('Payment status updated successfully!');
   };
 
@@ -227,11 +228,9 @@ export default function PaymentSystem({ userType }: PaymentSystemProps) {
     try {
       // Simulate payment processing
       await new Promise(resolve => setTimeout(resolve, 2000));
-      
-      setPayments(payments.map(p => 
-        p.id === payment.id ? { ...p, status: 'completed' } : p
-      ));
-      
+
+      setPayments(payments.map(p => (p.id === payment.id ? { ...p, status: 'completed' } : p)));
+
       alert('Payment processed successfully!');
     } catch (error) {
       console.error('Error processing payment:', error);
@@ -240,21 +239,15 @@ export default function PaymentSystem({ userType }: PaymentSystemProps) {
   };
 
   const calculateTotalEarnings = () => {
-    return payments
-      .filter(p => p.status === 'completed')
-      .reduce((acc, p) => acc + p.amount, 0);
+    return payments.filter(p => p.status === 'completed').reduce((acc, p) => acc + p.amount, 0);
   };
 
   const calculateTotalCommissions = () => {
-    return payments
-      .filter(p => p.status === 'completed')
-      .reduce((acc, p) => acc + p.commission, 0);
+    return payments.filter(p => p.status === 'completed').reduce((acc, p) => acc + p.commission, 0);
   };
 
   const calculatePendingPayments = () => {
-    return payments
-      .filter(p => p.status === 'pending')
-      .reduce((acc, p) => acc + p.amount, 0);
+    return payments.filter(p => p.status === 'pending').reduce((acc, p) => acc + p.amount, 0);
   };
 
   const getStatusColor = (status: string) => {
@@ -289,11 +282,11 @@ export default function PaymentSystem({ userType }: PaymentSystemProps) {
 
   const filteredPayments = payments.filter(payment => {
     const matchesStatus = filterStatus === 'all' || payment.status === filterStatus;
-    const matchesSearch = 
+    const matchesSearch =
       payment.candidateName.toLowerCase().includes(searchQuery.toLowerCase()) ||
       payment.jobTitle.toLowerCase().includes(searchQuery.toLowerCase()) ||
       payment.company.toLowerCase().includes(searchQuery.toLowerCase());
-    
+
     return matchesStatus && matchesSearch;
   });
 
@@ -326,7 +319,7 @@ export default function PaymentSystem({ userType }: PaymentSystemProps) {
             <div className="flex items-center space-x-4">
               <select
                 value={selectedTimeframe}
-                onChange={(e) => setSelectedTimeframe(e.target.value as any)}
+                onChange={e => setSelectedTimeframe(e.target.value as any)}
                 className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
               >
                 <option value="7d">Last 7 days</option>
@@ -417,8 +410,11 @@ export default function PaymentSystem({ userType }: PaymentSystemProps) {
             <div className="bg-white rounded-lg shadow-sm p-6">
               <h3 className="text-lg font-semibold text-gray-900 mb-4">Commission Rates</h3>
               <div className="space-y-4">
-                {commissionRates.map((rate) => (
-                  <div key={rate.level} className="flex items-center justify-between p-3 border border-gray-200 rounded-lg">
+                {commissionRates.map(rate => (
+                  <div
+                    key={rate.level}
+                    className="flex items-center justify-between p-3 border border-gray-200 rounded-lg"
+                  >
                     <div>
                       <div className="font-medium text-gray-900">SQL Level {rate.level}</div>
                       <div className="text-sm text-gray-600">{rate.description}</div>
@@ -456,7 +452,9 @@ export default function PaymentSystem({ userType }: PaymentSystemProps) {
                   </div>
                   <div>
                     <label className="text-sm font-medium text-gray-700">Payment Method</label>
-                    <p className="text-gray-900 capitalize">{billingInfo.paymentMethod.replace('_', ' ')}</p>
+                    <p className="text-gray-900 capitalize">
+                      {billingInfo.paymentMethod.replace('_', ' ')}
+                    </p>
                   </div>
                   {billingInfo.autoPay && (
                     <div className="flex items-center text-green-600">
@@ -479,12 +477,12 @@ export default function PaymentSystem({ userType }: PaymentSystemProps) {
                     type="text"
                     placeholder="Search payments..."
                     value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
+                    onChange={e => setSearchQuery(e.target.value)}
                     className="px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
                   />
                   <select
                     value={filterStatus}
-                    onChange={(e) => setFilterStatus(e.target.value)}
+                    onChange={e => setFilterStatus(e.target.value)}
                     className="px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
                   >
                     <option value="all">All Status</option>
@@ -503,7 +501,7 @@ export default function PaymentSystem({ userType }: PaymentSystemProps) {
                     <p className="text-gray-600">No payments found</p>
                   </div>
                 ) : (
-                  filteredPayments.map((payment) => (
+                  filteredPayments.map(payment => (
                     <motion.div
                       key={payment.id}
                       initial={{ opacity: 0, x: -20 }}
@@ -514,17 +512,23 @@ export default function PaymentSystem({ userType }: PaymentSystemProps) {
                         <div className="flex-1">
                           <div className="flex items-center space-x-3 mb-2">
                             <h4 className="font-medium text-gray-900">{payment.candidateName}</h4>
-                            <span className={`px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(payment.status)}`}>
+                            <span
+                              className={`px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(payment.status)}`}
+                            >
                               {payment.status}
                             </span>
                           </div>
-                          <p className="text-sm text-gray-600">{payment.jobTitle} at {payment.company}</p>
+                          <p className="text-sm text-gray-600">
+                            {payment.jobTitle} at {payment.company}
+                          </p>
                           <div className="flex items-center text-xs text-gray-500 mt-1">
                             <Calendar className="h-3 w-3 mr-1" />
                             {new Date(payment.paymentDate).toLocaleDateString()}
                             <span className="mx-2">•</span>
                             {getPaymentMethodIcon(payment.paymentMethod)}
-                            <span className="ml-1 capitalize">{payment.paymentMethod.replace('_', ' ')}</span>
+                            <span className="ml-1 capitalize">
+                              {payment.paymentMethod.replace('_', ' ')}
+                            </span>
                           </div>
                         </div>
                         <div className="text-right">
@@ -571,4 +575,4 @@ export default function PaymentSystem({ userType }: PaymentSystemProps) {
       </div>
     </div>
   );
-} 
+}

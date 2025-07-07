@@ -25,19 +25,16 @@ Coins can be locked for different durations to earn monthly bonuses:
 The wallet is used for various purposes across the EHB ecosystem:
 
 1. **Franchise Checks**
-
    - Verification of franchise ownership
    - Payment of franchise fees
    - Revenue distribution
 
 2. **SQL Levels**
-
    - Access to premium SQL features
    - Advanced query capabilities
    - Custom report generation
 
 3. **PSS (Public Safety Services)**
-
    - Payment of fines
    - Service fees
    - Emergency response charges

@@ -21,7 +21,7 @@ const mockJob = {
   salary: 100000,
   description: 'Test job description',
   requirements: ['JavaScript', 'React'],
-  status: 'active' as const
+  status: 'active' as const,
 };
 
 const mockCandidate = {
@@ -31,7 +31,7 @@ const mockCandidate = {
   sqlLevel: 2,
   experience: 3,
   skills: ['JavaScript', 'React', 'Node.js'],
-  status: 'active' as const
+  status: 'active' as const,
 };
 
 const mockPlacement = {
@@ -41,7 +41,7 @@ const mockPlacement = {
   candidateName: 'Test Candidate',
   company: 'Test Company',
   salary: 100000,
-  status: 'pending' as const
+  status: 'pending' as const,
 };
 
 describe('JPS API Tests', () => {
@@ -61,11 +61,7 @@ describe('JPS API Tests', () => {
     });
 
     test('POST /api/jps?type=jobs should create new job', async () => {
-      const request = createMockRequest(
-        'http://localhost:3000/api/jps?type=jobs',
-        'POST',
-        mockJob
-      );
+      const request = createMockRequest('http://localhost:3000/api/jps?type=jobs', 'POST', mockJob);
       const response = await POST(request);
       const data = await response.json();
 
@@ -90,10 +86,7 @@ describe('JPS API Tests', () => {
     });
 
     test('DELETE /api/jps?type=jobs&id=1 should delete job', async () => {
-      const request = createMockRequest(
-        'http://localhost:3000/api/jps?type=jobs&id=1',
-        'DELETE'
-      );
+      const request = createMockRequest('http://localhost:3000/api/jps?type=jobs&id=1', 'DELETE');
       const response = await DELETE(request);
       const data = await response.json();
 
@@ -260,7 +253,7 @@ describe('JPS API Tests', () => {
     test('Invalid email format should return 400', async () => {
       const invalidCandidate = {
         ...mockCandidate,
-        email: 'invalid-email'
+        email: 'invalid-email',
       };
       const request = createMockRequest(
         'http://localhost:3000/api/jps?type=candidates',
@@ -277,7 +270,7 @@ describe('JPS API Tests', () => {
     test('Invalid SQL Level should return 400', async () => {
       const invalidCandidate = {
         ...mockCandidate,
-        sqlLevel: 10 // Invalid SQL Level
+        sqlLevel: 10, // Invalid SQL Level
       };
       const request = createMockRequest(
         'http://localhost:3000/api/jps?type=candidates',
@@ -297,7 +290,7 @@ describe('JPS API Tests', () => {
     test('Job salary should be positive number', async () => {
       const invalidJob = {
         ...mockJob,
-        salary: -1000
+        salary: -1000,
       };
       const request = createMockRequest(
         'http://localhost:3000/api/jps?type=jobs',
@@ -314,7 +307,7 @@ describe('JPS API Tests', () => {
     test('Candidate experience should be positive number', async () => {
       const invalidCandidate = {
         ...mockCandidate,
-        experience: -1
+        experience: -1,
       };
       const request = createMockRequest(
         'http://localhost:3000/api/jps?type=candidates',
@@ -331,7 +324,7 @@ describe('JPS API Tests', () => {
     test('Job status should be valid enum value', async () => {
       const invalidJob = {
         ...mockJob,
-        status: 'invalid-status'
+        status: 'invalid-status',
       };
       const request = createMockRequest(
         'http://localhost:3000/api/jps?type=jobs',
@@ -351,7 +344,7 @@ describe('JPS API Tests', () => {
     test('Empty arrays should be handled correctly', async () => {
       const jobWithEmptyRequirements = {
         ...mockJob,
-        requirements: []
+        requirements: [],
       };
       const request = createMockRequest(
         'http://localhost:3000/api/jps?type=jobs',
@@ -368,7 +361,7 @@ describe('JPS API Tests', () => {
     test('Very long strings should be handled', async () => {
       const jobWithLongDescription = {
         ...mockJob,
-        description: 'a'.repeat(10000)
+        description: 'a'.repeat(10000),
       };
       const request = createMockRequest(
         'http://localhost:3000/api/jps?type=jobs',
@@ -387,7 +380,7 @@ describe('JPS API Tests', () => {
         ...mockJob,
         title: 'Developer & Designer (Full-Stack)',
         company: 'Tech Corp. Ltd.',
-        description: 'HTML/CSS, JavaScript, React.js, Node.js'
+        description: 'HTML/CSS, JavaScript, React.js, Node.js',
       };
       const request = createMockRequest(
         'http://localhost:3000/api/jps?type=jobs',
@@ -402,4 +395,4 @@ describe('JPS API Tests', () => {
       expect(data.company).toBe(jobWithSpecialChars.company);
     });
   });
-}); 
+});

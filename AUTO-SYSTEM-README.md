@@ -222,7 +222,6 @@ The system uses these demo credentials for testing:
    ```
 
 2. **Email alerts not working**
-
    - Check email credentials in `.env`
    - Enable 2FA and use app password for Gmail
 
@@ -292,7 +291,6 @@ tail -f logs/master-log.json
    ```
 
 3. **Check Reports Regularly**
-
    - Review daily reports in `./reports/`
    - Monitor error trends
    - Address critical issues immediately

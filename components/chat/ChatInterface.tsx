@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 'use client';
 
@@ -204,8 +204,8 @@ export default function ChatInterface({
                 {chatRecipient.status === 'online'
                   ? 'Online'
                   : chatRecipient.status === 'away'
-                  ? 'Away'
-                  : `Last seen ${chatRecipient.lastSeen?.toLocaleTimeString()}`}
+                    ? 'Away'
+                    : `Last seen ${chatRecipient.lastSeen?.toLocaleTimeString()}`}
               </p>
             </div>
           </div>

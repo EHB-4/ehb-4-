@@ -29,7 +29,7 @@ const mockJobs = [
     requirements: ['React', 'TypeScript', 'Node.js', '5+ years experience'],
     status: 'active',
     createdAt: '2024-01-15T10:30:00.000Z',
-    updatedAt: '2024-01-15T10:30:00.000Z'
+    updatedAt: '2024-01-15T10:30:00.000Z',
   },
   {
     id: '2',
@@ -41,8 +41,8 @@ const mockJobs = [
     requirements: ['JavaScript', 'Python', 'Django', '3+ years experience'],
     status: 'active',
     createdAt: '2024-01-15T10:30:00.000Z',
-    updatedAt: '2024-01-15T10:30:00.000Z'
-  }
+    updatedAt: '2024-01-15T10:30:00.000Z',
+  },
 ];
 
 const mockCandidates = [
@@ -56,7 +56,7 @@ const mockCandidates = [
     skills: ['React', 'TypeScript', 'Node.js', 'MongoDB'],
     status: 'active',
     createdAt: '2024-01-15T10:30:00.000Z',
-    updatedAt: '2024-01-15T10:30:00.000Z'
+    updatedAt: '2024-01-15T10:30:00.000Z',
   },
   {
     id: '2',
@@ -68,8 +68,8 @@ const mockCandidates = [
     skills: ['JavaScript', 'Python', 'Django', 'PostgreSQL'],
     status: 'active',
     createdAt: '2024-01-15T10:30:00.000Z',
-    updatedAt: '2024-01-15T10:30:00.000Z'
-  }
+    updatedAt: '2024-01-15T10:30:00.000Z',
+  },
 ];
 
 const mockCompatibilityScore = {
@@ -81,16 +81,16 @@ const mockCompatibilityScore = {
     experience: 100,
     location: 100,
     salary: 80,
-    sqlLevel: 95
+    sqlLevel: 95,
   },
   details: {
     matchingSkills: ['React', 'TypeScript', 'Node.js'],
     missingSkills: ['MongoDB'],
     recommendations: [
       'Excellent match! Strongly recommend for immediate interview.',
-      'Consider additional training in required skills.'
-    ]
-  }
+      'Consider additional training in required skills.',
+    ],
+  },
 };
 
 describe('JPS Backend Integration Component', () => {
@@ -102,14 +102,14 @@ describe('JPS Backend Integration Component', () => {
   describe('Component Rendering', () => {
     test('Should render main heading', () => {
       render(<JPSBackendIntegration />);
-      
+
       expect(screen.getByText('JPS Backend Integration')).toBeInTheDocument();
       expect(screen.getByText('API calls aur data management system')).toBeInTheDocument();
     });
 
     test('Should render jobs and candidates sections', () => {
       render(<JPSBackendIntegration />);
-      
+
       expect(screen.getByText('Jobs Management')).toBeInTheDocument();
       expect(screen.getByText('Candidates Management')).toBeInTheDocument();
       expect(screen.getByText('AI Matching System')).toBeInTheDocument();
@@ -118,14 +118,14 @@ describe('JPS Backend Integration Component', () => {
 
     test('Should render select dropdowns', () => {
       render(<JPSBackendIntegration />);
-      
+
       expect(screen.getByLabelText('Select Job')).toBeInTheDocument();
       expect(screen.getByLabelText('Select Candidate')).toBeInTheDocument();
     });
 
     test('Should render action buttons', () => {
       render(<JPSBackendIntegration />);
-      
+
       expect(screen.getByText('Check Compatibility')).toBeInTheDocument();
       expect(screen.getByText('Send Interview Notification')).toBeInTheDocument();
       expect(screen.getByText('Get Payment Report')).toBeInTheDocument();
@@ -137,7 +137,7 @@ describe('JPS Backend Integration Component', () => {
     test('Should load jobs on component mount', async () => {
       (fetch as jest.Mock).mockResolvedValueOnce({
         ok: true,
-        json: async () => mockJobs
+        json: async () => mockJobs,
       });
 
       render(<JPSBackendIntegration />);
@@ -150,7 +150,7 @@ describe('JPS Backend Integration Component', () => {
     test('Should load candidates on component mount', async () => {
       (fetch as jest.Mock).mockResolvedValueOnce({
         ok: true,
-        json: async () => mockCandidates
+        json: async () => mockCandidates,
       });
 
       render(<JPSBackendIntegration />);
@@ -161,11 +161,18 @@ describe('JPS Backend Integration Component', () => {
     });
 
     test('Should handle loading state', async () => {
-      (fetch as jest.Mock).mockImplementation(() => 
-        new Promise(resolve => setTimeout(() => resolve({
-          ok: true,
-          json: async () => mockJobs
-        }), 100))
+      (fetch as jest.Mock).mockImplementation(
+        () =>
+          new Promise(resolve =>
+            setTimeout(
+              () =>
+                resolve({
+                  ok: true,
+                  json: async () => mockJobs,
+                }),
+              100
+            )
+          )
       );
 
       render(<JPSBackendIntegration />);
@@ -181,11 +188,11 @@ describe('JPS Backend Integration Component', () => {
       (fetch as jest.Mock)
         .mockResolvedValueOnce({
           ok: true,
-          json: async () => mockJobs
+          json: async () => mockJobs,
         })
         .mockResolvedValueOnce({
           ok: true,
-          json: async () => mockCandidates
+          json: async () => mockCandidates,
         });
     });
 
@@ -247,11 +254,11 @@ describe('JPS Backend Integration Component', () => {
       (fetch as jest.Mock)
         .mockResolvedValueOnce({
           ok: true,
-          json: async () => mockJobs
+          json: async () => mockJobs,
         })
         .mockResolvedValueOnce({
           ok: true,
-          json: async () => mockCandidates
+          json: async () => mockCandidates,
         });
     });
 
@@ -282,7 +289,7 @@ describe('JPS Backend Integration Component', () => {
     test('Should call AI matching API when Check Compatibility is clicked', async () => {
       (fetch as jest.Mock).mockResolvedValueOnce({
         ok: true,
-        json: async () => mockCompatibilityScore
+        json: async () => mockCompatibilityScore,
       });
 
       render(<JPSBackendIntegration />);
@@ -305,7 +312,7 @@ describe('JPS Backend Integration Component', () => {
     test('Should display compatibility score when received', async () => {
       (fetch as jest.Mock).mockResolvedValueOnce({
         ok: true,
-        json: async () => mockCompatibilityScore
+        json: async () => mockCompatibilityScore,
       });
 
       render(<JPSBackendIntegration />);
@@ -332,7 +339,7 @@ describe('JPS Backend Integration Component', () => {
     test('Should display recommendations when compatibility score is shown', async () => {
       (fetch as jest.Mock).mockResolvedValueOnce({
         ok: true,
-        json: async () => mockCompatibilityScore
+        json: async () => mockCompatibilityScore,
       });
 
       render(<JPSBackendIntegration />);
@@ -349,8 +356,12 @@ describe('JPS Backend Integration Component', () => {
 
       await waitFor(() => {
         expect(screen.getByText('Recommendations:')).toBeInTheDocument();
-        expect(screen.getByText('Excellent match! Strongly recommend for immediate interview.')).toBeInTheDocument();
-        expect(screen.getByText('Consider additional training in required skills.')).toBeInTheDocument();
+        expect(
+          screen.getByText('Excellent match! Strongly recommend for immediate interview.')
+        ).toBeInTheDocument();
+        expect(
+          screen.getByText('Consider additional training in required skills.')
+        ).toBeInTheDocument();
       });
     });
   });
@@ -395,11 +406,11 @@ describe('JPS Backend Integration Component', () => {
       (fetch as jest.Mock)
         .mockResolvedValueOnce({
           ok: true,
-          json: async () => mockJobs
+          json: async () => mockJobs,
         })
         .mockResolvedValueOnce({
           ok: true,
-          json: async () => mockCandidates
+          json: async () => mockCandidates,
         });
     });
 
@@ -421,7 +432,7 @@ describe('JPS Backend Integration Component', () => {
     test('Should call notification API when Send Interview Notification is clicked', async () => {
       (fetch as jest.Mock).mockResolvedValueOnce({
         ok: true,
-        json: async () => ({ success: true })
+        json: async () => ({ success: true }),
       });
 
       render(<JPSBackendIntegration />);
@@ -444,7 +455,7 @@ describe('JPS Backend Integration Component', () => {
     test('Should call payment report API when Get Payment Report is clicked', async () => {
       (fetch as jest.Mock).mockResolvedValueOnce({
         ok: true,
-        json: async () => ({ payments: [], summary: {} })
+        json: async () => ({ payments: [], summary: {} }),
       });
 
       render(<JPSBackendIntegration />);
@@ -464,11 +475,11 @@ describe('JPS Backend Integration Component', () => {
       (fetch as jest.Mock)
         .mockResolvedValueOnce({
           ok: true,
-          json: async () => mockJobs
+          json: async () => mockJobs,
         })
         .mockResolvedValueOnce({
           ok: true,
-          json: async () => mockCandidates
+          json: async () => mockCandidates,
         });
 
       render(<JPSBackendIntegration />);
@@ -493,7 +504,9 @@ describe('JPS Backend Integration Component', () => {
       render(<JPSBackendIntegration />);
 
       expect(screen.getByRole('button', { name: 'Check Compatibility' })).toBeInTheDocument();
-      expect(screen.getByRole('button', { name: 'Send Interview Notification' })).toBeInTheDocument();
+      expect(
+        screen.getByRole('button', { name: 'Send Interview Notification' })
+      ).toBeInTheDocument();
       expect(screen.getByRole('button', { name: 'Get Payment Report' })).toBeInTheDocument();
     });
 
@@ -525,4 +538,4 @@ describe('JPS Backend Integration Component', () => {
       expect(mainHeading).toHaveClass('text-4xl');
     });
   });
-}); 
+});

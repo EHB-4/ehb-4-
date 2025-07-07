@@ -38,8 +38,8 @@ export default function SQLLevelPage() {
           <h3 className="font-semibold mb-2">Error</h3>
           <p>{error}</p>
         </div>
-        <button 
-          onClick={() => window.location.reload()} 
+        <button
+          onClick={() => window.location.reload()}
           className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
         >
           Try Again
@@ -64,9 +64,7 @@ export default function SQLLevelPage() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">
-            EHB SQL Level System
-          </h1>
+          <h1 className="text-3xl font-bold text-gray-900 mb-2">EHB SQL Level System</h1>
           <p className="text-gray-600">
             Service Quality Level - Trust, Performance, aur Commitment ka system
           </p>
@@ -96,9 +94,7 @@ export default function SQLLevelPage() {
 
             {/* Progress Section */}
             <div className="bg-white rounded-xl shadow-sm border p-6">
-              <h2 className="text-xl font-semibold text-gray-900 mb-6">
-                Progress to Next Level
-              </h2>
+              <h2 className="text-xl font-semibold text-gray-900 mb-6">Progress to Next Level</h2>
               <SQLProgress
                 currentLevel={data.progress.currentLevel as SQLLevel}
                 progress={data.progress.progress}
@@ -108,14 +104,12 @@ export default function SQLLevelPage() {
 
             {/* Upgrade Steps */}
             <div className="bg-white rounded-xl shadow-sm border p-6">
-              <h2 className="text-xl font-semibold text-gray-900 mb-6">
-                Upgrade Steps
-              </h2>
+              <h2 className="text-xl font-semibold text-gray-900 mb-6">Upgrade Steps</h2>
               <SQLUpgradeSteps
                 currentLevel={data.progress.currentLevel as SQLLevel}
                 targetLevel={(data.progress.currentLevel + 1) as SQLLevel}
                 steps={data.upgradeSteps}
-                onStepClick={(stepId) => {
+                onStepClick={stepId => {
                   // Handle step click - navigate to specific page
                   console.log('Step clicked:', stepId);
                 }}
@@ -131,9 +125,7 @@ export default function SQLLevelPage() {
               <div className="space-y-4">
                 <div className="flex items-center justify-between">
                   <span className="text-sm text-gray-600">AI Score</span>
-                  <span className="text-sm font-medium text-gray-900">
-                    {data.user.aiScore}/500
-                  </span>
+                  <span className="text-sm font-medium text-gray-900">{data.user.aiScore}/500</span>
                 </div>
                 <div className="flex items-center justify-between">
                   <span className="text-sm text-gray-600">Coin Locks</span>
@@ -209,4 +201,4 @@ export default function SQLLevelPage() {
       )}
     </div>
   );
-} 
+}

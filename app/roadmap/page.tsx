@@ -150,10 +150,10 @@ export default function RoadmapPage() {
                         module.status === 'Completed'
                           ? 'bg-green-100 text-green-800'
                           : module.status === 'Working'
-                          ? 'bg-blue-100 text-blue-800'
-                          : module.status === 'Under Development'
-                          ? 'bg-yellow-100 text-yellow-800'
-                          : 'bg-gray-100 text-gray-800'
+                            ? 'bg-blue-100 text-blue-800'
+                            : module.status === 'Under Development'
+                              ? 'bg-yellow-100 text-yellow-800'
+                              : 'bg-gray-100 text-gray-800'
                       }`}
                     >
                       {t(module.status.toLowerCase())}
@@ -173,10 +173,10 @@ export default function RoadmapPage() {
                           module.progress >= 80
                             ? 'bg-green-500'
                             : module.progress >= 60
-                            ? 'bg-blue-500'
-                            : module.progress >= 40
-                            ? 'bg-yellow-500'
-                            : 'bg-red-500'
+                              ? 'bg-blue-500'
+                              : module.progress >= 40
+                                ? 'bg-yellow-500'
+                                : 'bg-red-500'
                         }`}
                         style={{ width: `${module.progress}%` }}
                       ></div>
