@@ -74,7 +74,12 @@
     "sql-migrate": "npx prisma migrate dev --name sql-level-update",
     "sql-generate": "npx prisma generate",
     "sql-seed": "node scripts/sql-level-setup.js --seed-only",
-    "sql-test": "npm run sql-setup -- --test-only"
+    "sql-test": "npm run sql-setup -- --test-only",
+    "auto-sync": "node scripts/auto-sync.js",
+    "auto-sync:start": "node scripts/auto-sync.js start",
+    "auto-sync:stop": "node scripts/auto-sync.js stop",
+    "auto-sync:sync": "node scripts/auto-sync.js sync",
+    "auto-sync:status": "node scripts/auto-sync.js status"
   },
   "dependencies": {
     "@alloc/quick-lru": "^5.2.0",

@@ -1,0 +1,67 @@
+{
+  "autoSync": {
+    "enabled": true,
+    "interval": 30000,
+    "autoStart": true,
+    "notifications": true,
+    "backup": true,
+    "conflictResolution": "auto",
+    "branches": ["main", "develop"],
+    "excludeFiles": [
+      "node_modules/**",
+      ".next/**",
+      "dist/**",
+      "build/**",
+      "*.log",
+      ".env*",
+      "temp/**",
+      "backups/**"
+    ],
+    "includeFiles": [
+      "app/**",
+      "components/**",
+      "lib/**",
+      "hooks/**",
+      "types/**",
+      "scripts/**",
+      "config/**",
+      "public/**",
+      "*.json",
+      "*.ts",
+      "*.tsx",
+      "*.js",
+      "*.jsx",
+      "*.md"
+    ],
+    "commitMessage": "Auto sync: {timestamp}",
+    "pushOnSave": true,
+    "pullOnStart": true,
+    "mergeStrategy": "rebase",
+    "errorHandling": {
+      "retryAttempts": 3,
+      "retryDelay": 5000,
+      "continueOnError": true
+    },
+    "logging": {
+      "enabled": true,
+      "level": "info",
+      "file": "logs/auto-sync.log"
+    }
+  },
+  "cursor": {
+    "autoSave": true,
+    "syncOnSave": true,
+    "notifications": true,
+    "hotkeys": {
+      "sync": "Ctrl+Shift+S",
+      "status": "Ctrl+Shift+G"
+    }
+  },
+  "github": {
+    "remote": "origin",
+    "branch": "main",
+    "autoMerge": true,
+    "prCreation": false,
+    "issueCreation": false
+  }
+} 
