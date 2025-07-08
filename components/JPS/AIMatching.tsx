@@ -77,7 +77,7 @@ import {
   AtSign,
   Percent,
 } from 'lucide-react';
-import JPSApiService, { JPSJob, JPSCandidate, JPSPlacement } from '../../lib/api/jps-api';
+import api/jps-api from '@/lib/api/jps-api';
 
 interface AIMatchingProps {
   userType: 'jobseeker' | 'employer' | 'admin';

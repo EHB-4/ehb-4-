@@ -3,8 +3,8 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
-import LanguageSelector from '../../components/ui/LanguageSelector';
-import { getAggregatedEHBData } from '../../lib/utils/ehbDataPage';
+import ui/LanguageSelector from '@/components/ui/LanguageSelector';
+import utils/ehbDataPage from '@/lib/utils/ehbDataPage';
 
 export default function RoadmapPage() {
   const { t } = useTranslation();

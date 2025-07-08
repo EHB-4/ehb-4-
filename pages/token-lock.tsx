@@ -2,8 +2,8 @@ import { useRouter } from 'next/router';
 import { useSession } from 'next-auth/react';
 import { useState } from 'react';
 
-import TokenLockCard from '../components/token/TokenLockCard';
-import TokenLockForm from '../components/token/TokenLockForm';
+import token/TokenLockCard from '@/components/token/TokenLockCard';
+import token/TokenLockForm from '@/components/token/TokenLockForm';
 
 export default function TokenLockPage() {
   const { data: session, status } = useSession();

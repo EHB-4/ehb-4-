@@ -2,12 +2,12 @@
 'use client';
 
 import React, { useState } from 'react';
-import SQLUserInfo from '../../components/SQL/SQLUserInfo';
-import SQLProgress from '../../components/SQL/SQLProgress';
-import SQLUpgradeSteps from '../../components/SQL/SQLUpgradeSteps';
-import SQLApplyDialog from '../../components/SQL/SQLApplyDialog';
-import { SQLLevel } from '../../components/SQL/SQLLevelBadge';
-import useSQLLevelData from '../../hooks/useSQLLevelData';
+import SQL/SQLUserInfo from '@/components/SQL/SQLUserInfo';
+import SQL/SQLProgress from '@/components/SQL/SQLProgress';
+import SQL/SQLUpgradeSteps from '@/components/SQL/SQLUpgradeSteps';
+import SQL/SQLApplyDialog from '@/components/SQL/SQLApplyDialog';
+import SQL/SQLLevelBadge from '@/components/SQL/SQLLevelBadge';
+import useSQLLevelData from '@/hooks/useSQLLevelData';
 import { toast } from 'sonner';
 
 export default function SQLLevelPage() {

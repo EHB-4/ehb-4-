@@ -3,7 +3,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { useJPSRole } from '../../../components/JPS/JPSRoleContext';
+import JPS/JPSRoleContext from '@/components/JPS/JPSRoleContext';
 import {
   ChartBarIcon,
   TrendingUpIcon,

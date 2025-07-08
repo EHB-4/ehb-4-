@@ -1,8 +1,8 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { urlManager, type PageInfo } from '../lib/utils/urlManager';
-import { autoBrowser, type DevelopmentAgent } from '../lib/utils/autoBrowser';
+import utils/urlManager from '@/lib/utils/urlManager';
+import utils/autoBrowser from '@/lib/utils/autoBrowser';
 
 interface URLManagementDashboardProps {
   className?: string;

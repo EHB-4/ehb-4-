@@ -1,4 +1,4 @@
-import { PackageTest } from '../../components/PackageTest';
+import PackageTest from '@/components/PackageTest';
 
 export default function PackageTestPage() {
   return (

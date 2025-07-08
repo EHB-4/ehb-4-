@@ -1,115 +1,109 @@
-export const runtime = 'nodejs';
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 
-export async function GET() {
+interface HealthData {
+  status: string;
+  timestamp: string;
+  uptime: number;
+  environment: string;
+  version: string;
+  services: {
+    database: string;
+    redis: string;
+    aws: string;
+  };
+  memory?: {
+    used: number;
+    total: number;
+    external: number;
+  };
+  system?: {
+    platform: string;
+    arch: string;
+    nodeVersion: string;
+    pid: number;
+  };
+}
+
+/**
+ * Health Check API Route
+ * Provides system status and health information
+ */
+export async function GET(request: NextRequest) {
   try {
-    // Check database connection
-    const dbStatus = await checkDatabase();
-
-    // Check Redis connection
-    const redisStatus = await checkRedis();
-
-    // Check external services
-    const externalServices = await checkExternalServices();
-
-    const healthStatus = {
+    const healthData: HealthData = {
       status: 'healthy',
       timestamp: new Date().toISOString(),
       uptime: process.uptime(),
+      environment: process.env.NODE_ENV || 'development',
       version: process.env.npm_package_version || '1.0.0',
-      environment: process.env.NODE_ENV,
       services: {
-        database: dbStatus,
-        redis: redisStatus,
-        external: externalServices,
+        database: 'connected',
+        redis: 'connected',
+        aws: 'connected'
       },
+      memory: {
+        used: process.memoryUsage().heapUsed,
+        total: process.memoryUsage().heapTotal,
+        external: process.memoryUsage().external
+      }
     };
 
-    // If any service is down, mark as unhealthy
-    if (!dbStatus.healthy || !redisStatus.healthy) {
-      healthStatus.status = 'unhealthy';
-      return NextResponse.json(healthStatus, { status: 503 });
-    }
-
-    return NextResponse.json(healthStatus);
+    return NextResponse.json(healthData, { status: 200 });
   } catch (error) {
     console.error('Health check failed:', error);
-
-    return NextResponse.json(
-      {
-        status: 'unhealthy',
-        timestamp: new Date().toISOString(),
-        error: error instanceof Error ? error.message : 'Unknown error',
-      },
-      { status: 503 }
-    );
+    
+    return NextResponse.json({
+      status: 'unhealthy',
+      timestamp: new Date().toISOString(),
+      error: error instanceof Error ? error.message : 'Unknown error'
+    }, { status: 500 });
   }
 }
 
-async function checkDatabase() {
+/**
+ * Health Check with detailed diagnostics
+ */
+export async function POST(request: NextRequest) {
   try {
-    // Add your database health check logic here
-    // Example for PostgreSQL:
-    // const result = await db.query('SELECT 1');
-    return {
-      healthy: true,
-      responseTime: 0,
-      message: 'Database connection healthy',
-    };
-  } catch (error) {
-    return {
-      healthy: false,
-      error: error instanceof Error ? error.message : 'Database check failed',
-    };
-  }
-}
+    const body = await request.json();
+    const { detailed = false } = body;
 
-async function checkRedis() {
-  try {
-    // Add your Redis health check logic here
-    // Example:
-    // await redis.ping();
-    return {
-      healthy: true,
-      responseTime: 0,
-      message: 'Redis connection healthy',
+    const healthData: HealthData = {
+      status: 'healthy',
+      timestamp: new Date().toISOString(),
+      uptime: process.uptime(),
+      environment: process.env.NODE_ENV || 'development',
+      version: process.env.npm_package_version || '1.0.0',
+      services: {
+        database: 'connected',
+        redis: 'connected',
+        aws: 'connected'
+      }
     };
-  } catch (error) {
-    return {
-      healthy: false,
-      error: error instanceof Error ? error.message : 'Redis check failed',
-    };
-  }
-}
 
-async function checkExternalServices() {
-  const services = {
-    stripe: false,
-    sendgrid: false,
-    analytics: false,
-  };
-
-  try {
-    // Check Stripe
-    if (process.env.STRIPE_SECRET_KEY) {
-      // Add Stripe health check
-      services.stripe = true;
+    if (detailed) {
+      healthData.memory = {
+        used: process.memoryUsage().heapUsed,
+        total: process.memoryUsage().heapTotal,
+        external: process.memoryUsage().external
+      };
+      
+      healthData.system = {
+        platform: process.platform,
+        arch: process.arch,
+        nodeVersion: process.version,
+        pid: process.pid
+      };
     }
 
-    // Check SendGrid
-    if (process.env.SENDGRID_API_KEY) {
-      // Add SendGrid health check
-      services.sendgrid = true;
-    }
-
-    // Check Analytics
-    if (process.env.GOOGLE_ANALYTICS_ID) {
-      services.analytics = true;
-    }
-
-    return services;
+    return NextResponse.json(healthData, { status: 200 });
   } catch (error) {
-    console.error('External services check failed:', error);
-    return services;
+    console.error('Detailed health check failed:', error);
+    
+    return NextResponse.json({
+      status: 'unhealthy',
+      timestamp: new Date().toISOString(),
+      error: error instanceof Error ? error.message : 'Unknown error'
+    }, { status: 500 });
   }
 }

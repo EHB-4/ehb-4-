@@ -1,6 +1,6 @@
 import React from 'react';
 import { Inter } from 'next/font/google';
-import i18n from '../../lib/utils/i18next';
+import utils/i18next from '@/lib/utils/i18next';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {

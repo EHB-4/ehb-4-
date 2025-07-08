@@ -85,7 +85,7 @@ import {
   Target,
   Brain,
 } from 'lucide-react';
-import JPSApiService, { JPSInterview, JPSJob, JPSCandidate } from '../../lib/api/jps-api';
+import api/jps-api from '@/lib/api/jps-api';
 
 interface InterviewSchedulerProps {
   userType: 'jobseeker' | 'employer' | 'admin';

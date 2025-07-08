@@ -8,15 +8,15 @@ function setupAWSCredentials() {
     if (!fs.existsSync(envPath)) {
       const envContent =
         `# AWS Configuration\n` +
-        `AWS_ACCESS_KEY_ID=your_access_key_id\n` +
-        `AWS_SECRET_ACCESS_KEY=your_secret_access_key\n` +
-        `AWS_REGION=us-east-1\n\n` +
+        `AWS_ACCESS_KEY_ID=AKIA3SMX5DWFY6LLZL\n` +
+        `AWS_SECRET_ACCESS_KEY=QwWcHcL7lLhK2hKpQnyZzILkP2yWecCQ0Q\n` +
+        `AWS_REGION=ap-south-1\n\n` +
         `# S3 Configuration\n` +
-        `AWS_S3_BUCKET=ehb-dev-files\n\n` +
+        `AWS_S3_BUCKET=ehb-main-pro\n\n` +
         `# SQS Configuration\n` +
-        `AWS_SQS_QUEUE_URL=https://sqs.us-east-1.amazonaws.com/123456789012/ehb-test-queue\n\n` +
+        `AWS_SQS_QUEUE_URL=https://sqs.ap-south-1.amazonaws.com/123456789012/ehb-test-queue\n\n` +
         `# SNS Configuration\n` +
-        `AWS_SNS_TOPIC_ARN=arn:aws:sns:us-east-1:123456789012:ehb-test-topic\n\n` +
+        `AWS_SNS_TOPIC_ARN=arn:aws:sns:ap-south-1:123456789012:ehb-test-topic\n\n` +
         `# Lambda Configuration\n` +
         `AWS_LAMBDA_FUNCTION=ehb-test-lambda\n\n` +
         `# DynamoDB Configuration\n` +
@@ -35,10 +35,10 @@ function setupAWSCredentials() {
     if (!fs.existsSync(credPath)) {
       const credContent = {
         aws: {
-          apiKey: 'your_api_key',
-          accessKeyId: 'your_access_key_id',
-          secretAccessKey: 'your_secret_access_key',
-          region: 'us-east-1',
+          apiKey: '',
+          accessKeyId: 'AKIA3SMX5DWFY6LLZL',
+          secretAccessKey: 'QwWcHcL7lLhK2hKpQnyZzILkP2yWecCQ0Q',
+          region: 'ap-south-1',
         },
       };
 

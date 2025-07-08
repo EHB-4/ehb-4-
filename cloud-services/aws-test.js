@@ -12,7 +12,8 @@ const awsCredentials = credentials.aws;
 
 // Create S3 client
 const s3 = new S3Client({
-  region: awsCredentials.region || 'us-east-1',
+  region: awsCredentials.region,
+  endpoint: `https://s3.${awsCredentials.region}.amazonaws.com`,
   credentials: {
     accessKeyId: awsCredentials.accessKeyId,
     secretAccessKey: awsCredentials.secretAccessKey,
@@ -32,7 +33,7 @@ async function testAWSConnection() {
 
     // Test file upload
     const uploadCommand = new PutObjectCommand({
-      Bucket: 'ehb-dev-files',
+      Bucket: 'ehb-main-data',
       Key: 'test-file.txt',
       Body: 'Hello from AWS SDK v3!',
       ContentType: 'text/plain',
@@ -43,7 +44,7 @@ async function testAWSConnection() {
 
     // Test file download
     const downloadCommand = new GetObjectCommand({
-      Bucket: 'ehb-dev-files',
+      Bucket: 'ehb-main-data',
       Key: 'test-file.txt',
     });
 

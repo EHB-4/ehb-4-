@@ -3,11 +3,11 @@ import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import { FiArrowRight, FiAlertCircle } from 'react-icons/fi';
 
-import SQLApplyDialog from '../../components/SQL/SQLApplyDialog';
-import SQLLevelBadge, { SQLLevel } from '../../components/SQL/SQLLevelBadge';
-import SQLProgress from '../../components/SQL/SQLProgress';
-import SQLUpgradeSteps from '../../components/SQL/SQLUpgradeSteps';
-import SQLUserInfo from '../../components/SQL/SQLUserInfo';
+import SQL/SQLApplyDialog from '@/components/SQL/SQLApplyDialog';
+import SQL/SQLLevelBadge from '@/components/SQL/SQLLevelBadge';
+import SQL/SQLProgress from '@/components/SQL/SQLProgress';
+import SQL/SQLUpgradeSteps from '@/components/SQL/SQLUpgradeSteps';
+import SQL/SQLUserInfo from '@/components/SQL/SQLUserInfo';
 
 // Mock data - replace with actual data from your backend
 const mockUserData = {

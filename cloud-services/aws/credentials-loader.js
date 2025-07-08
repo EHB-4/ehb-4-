@@ -9,7 +9,7 @@ function loadCredentials() {
     // Use AWS SDK v3's default credential provider chain
     const credentials = defaultProvider({
       profile: process.env.AWS_PROFILE,
-      region: process.env.AWS_REGION || 'ap-south-1',
+      region: process.env.AWS_REGION,
     })();
 
     // Also check for environment variables
@@ -19,7 +19,7 @@ function loadCredentials() {
         aws: {
           accessKeyId: envCreds.accessKeyId,
           secretAccessKey: envCreds.secretAccessKey,
-          region: process.env.AWS_REGION || 'ap-south-1',
+          region: process.env.AWS_REGION,
         },
       };
     }
@@ -31,7 +31,7 @@ function loadCredentials() {
         aws: {
           accessKeyId: iniCreds.accessKeyId,
           secretAccessKey: iniCreds.secretAccessKey,
-          region: process.env.AWS_REGION || 'ap-south-1',
+          region: process.env.AWS_REGION,
         },
       };
     }

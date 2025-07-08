@@ -23,13 +23,13 @@ function loadCredentialsFromEnv() {
     google: {
       apiKey: process.env.GCP_API_KEY,
       projectId: process.env.GCP_PROJECT_ID,
-      region: process.env.GCP_REGION || 'us-central1',
+      region: process.env.GCP_REGION,
     },
     aws: {
       apiKey: process.env.AWS_API_KEY,
       accessKeyId: process.env.AWS_ACCESS_KEY_ID,
       secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
-      region: process.env.AWS_REGION || 'us-east-1',
+      region: process.env.AWS_REGION,
     },
   };
 }

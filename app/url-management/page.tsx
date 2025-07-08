@@ -1,5 +1,5 @@
 import React from 'react';
-import URLManagementDashboard from '../../components/URLManagementDashboard';
+import URLManagementDashboard from '@/components/URLManagementDashboard';
 
 export default function URLManagementPage() {
   return (

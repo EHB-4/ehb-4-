@@ -98,7 +98,7 @@ import {
   AlertCircle,
   Info,
 } from 'lucide-react';
-import JPSApiService, { JPSPlacement, JPSJob, JPSCandidate } from '../../lib/api/jps-api';
+import api/jps-api from '@/lib/api/jps-api';
 
 interface PaymentSystemProps {
   userType: 'jobseeker' | 'employer' | 'admin';

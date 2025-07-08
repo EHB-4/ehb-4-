@@ -1,5 +1,5 @@
 import React from 'react';
-import { useJPSRole } from '../../../components/JPS/JPSRoleContext';
+import JPS/JPSRoleContext from '@/components/JPS/JPSRoleContext';
 
 const JobListingsPage: React.FC = () => {
   const { role } = useJPSRole();
