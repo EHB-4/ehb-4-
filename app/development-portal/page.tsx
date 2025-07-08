@@ -1,376 +1,250 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import {
-  FaCode,
-  FaRocket,
-  FaUsers,
-  FaChartLine,
-  FaTools,
-  FaBook,
-  FaLaptopCode,
-  FaDatabase,
-  FaCloud,
-  FaMobile,
-  FaShieldAlt,
-  FaLightbulb,
-  FaHome,
-  FaTachometerAlt,
-  FaRoute,
-  FaCrown,
-  FaFlag,
-  FaCalendar,
-  FaBrain,
-} from 'react-icons/fa';
-import { useEffect, useState } from 'react';
 
 export default function DevelopmentPortalPage() {
   const [isClient, setIsClient] = useState(false);
+
   useEffect(() => {
     setIsClient(true);
   }, []);
 
   const services = [
     {
-      icon: FaHome,
-      title: 'EHB Home Page',
-      description: 'The main landing page with a Microsoft Store-like design.',
-      color: 'text-teal-600',
-      bgColor: 'bg-teal-50',
-      href: '/ehb-home-page',
-    },
-    {
-      icon: FaTachometerAlt,
       title: 'EHB Dashboard',
-      description: 'The central dashboard for analytics and management.',
-      color: 'text-cyan-600',
-      bgColor: 'bg-cyan-50',
+      description: 'Central dashboard for analytics and management',
       href: '/ehb-dashboard',
+      status: 'Working (85%)',
     },
     {
-      icon: FaLaptopCode,
-      title: 'Web Development',
-      description: 'Modern web applications with React, Next.js, and TypeScript.',
-      color: 'text-blue-600',
-      bgColor: 'bg-blue-50',
-      href: '/development/web',
+      title: 'GoSellr Platform',
+      description: 'Global e-commerce platform for product listing and sales',
+      href: '/gosellr',
+      status: 'Development (40%)',
     },
     {
-      icon: FaRoute,
-      title: 'Project Roadmap',
-      description: 'Track the progress of ongoing and future projects.',
-      color: 'text-yellow-600',
-      bgColor: 'bg-yellow-50',
-      href: '/roadmap',
-      progress: 75,
+      title: 'AI Marketplace',
+      description: 'AI service listing and agent management',
+      href: '/ai-marketplace',
+      status: 'Development (50%)',
     },
     {
-      icon: FaLaptopCode,
-      title: 'Roadmap Agent',
-      description: 'AI-powered roadmap management and real-time project tracking.',
-      color: 'text-emerald-600',
-      bgColor: 'bg-emerald-50',
-      href: '/roadmap-agent',
-      progress: 60,
+      title: 'PSS (Personal Security System)',
+      description: 'KYC, identity verification, and fraud prevention',
+      href: '/pss',
+      status: 'Working (75%)',
     },
     {
-      icon: FaMobile,
-      title: 'Mobile Development',
-      description: 'Cross-platform mobile apps with React Native.',
-      color: 'text-green-600',
-      bgColor: 'bg-green-50',
-      href: '/development/mobile',
-    },
-    {
-      icon: FaDatabase,
-      title: 'Database Design',
-      description: 'MongoDB, PostgreSQL, and cloud database solutions.',
-      color: 'text-purple-600',
-      bgColor: 'bg-purple-50',
-      href: '/development/database',
-    },
-    {
-      icon: FaCloud,
-      title: 'Cloud Services',
-      description: 'AWS, Azure, and Google Cloud deployment.',
-      color: 'text-orange-600',
-      bgColor: 'bg-orange-50',
-      href: '/development/cloud',
-    },
-    {
-      icon: FaShieldAlt,
-      title: 'EDR Emergency Response',
-      description:
-        'Emergency Decision Registration system for police, fire, and ambulance services.',
-      color: 'text-red-600',
-      bgColor: 'bg-red-50',
+      title: 'EDR (Exam Decision Registration)',
+      description: 'Skill assessment and certification system',
       href: '/edr',
-      progress: 85,
+      status: 'Working (60%)',
     },
     {
-      icon: FaLightbulb,
-      title: 'AI & ML Integration',
-      description: 'Machine learning and AI-powered solutions.',
-      color: 'text-indigo-600',
-      bgColor: 'bg-indigo-50',
-      href: '/development/ai',
+      title: 'Project Roadmap',
+      description: 'Track progress of ongoing and future projects',
+      href: '/roadmap',
+      status: 'Working (75%)',
     },
     {
-      icon: FaCrown,
-      title: 'SCO Management',
-      description: 'Service Level Agreement management with progress tracking.',
-      color: 'text-pink-600',
-      bgColor: 'bg-pink-50',
-      href: '/development/sco',
-      new: true,
+      title: 'Franchise System',
+      description: 'Global franchise network management',
+      href: '/franchise',
+      status: 'Not Started',
     },
     {
-      icon: FaFlag,
-      title: 'Project Tracker',
-      description: 'Real-time project monitoring and milestone tracking.',
-      color: 'text-violet-600',
-      bgColor: 'bg-violet-50',
-      href: '/development/project-tracker',
-      new: true,
+      title: 'JPS (Job Placement System)',
+      description: 'Job posting and candidate matching',
+      href: '/jps',
+      status: 'Not Started',
     },
   ];
 
   const stats = [
-    { label: 'Projects Completed', value: '150+', icon: FaTools },
-    { label: 'Happy Clients', value: '50+', icon: FaUsers },
-    { label: 'Success Rate', value: '98%', icon: FaRocket },
-    { label: 'Team Members', value: '25+', icon: FaUsers },
+    { label: 'Total Services', value: '14+' },
+    { label: 'Completed', value: '1' },
+    { label: 'In Progress', value: '8' },
+    { label: 'Overall Progress', value: '70%' },
   ];
 
-  const features = [
-    {
-      title: 'Modern Tech Stack',
-      description: 'Latest technologies and frameworks for optimal performance',
-      icon: FaCode,
-    },
-    {
-      title: 'Scalable Architecture',
-      description: 'Design systems that grow with your business needs',
-      icon: FaRocket,
-    },
-    {
-      title: '24/7 Support',
-      description: 'Round-the-clock technical support and maintenance',
-      icon: FaUsers,
-    },
-    {
-      title: 'Documentation',
-      description: 'Comprehensive documentation and training materials',
-      icon: FaBook,
-    },
-  ];
+  if (!isClient) {
+    return <div>Loading...</div>;
+  }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50">
-      {/* Hero Section */}
-      <div className="bg-gradient-to-r from-blue-600 to-indigo-700 text-white">
-        <div className="max-w-7xl mx-auto px-4 py-16">
-          {isClient && (
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="text-center"
-            >
-              <div className="flex items-center justify-center space-x-3 mb-6">
-                <FaRocket className="w-12 h-12" />
-                <h1 className="text-5xl font-bold">EHB Development Portal</h1>
-              </div>
-              <p className="text-xl text-blue-100 max-w-3xl mx-auto mb-8">
-                Your gateway to world-class software development services. From concept to
-                deployment, we build solutions that drive success.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Link
-                  href="/development/contact"
-                  className="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-blue-50 transition-colors"
-                >
-                  Start Your Project
-                </Link>
-                <Link
-                  href="/development/portfolio"
-                  className="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-blue-600 transition-colors"
-                >
-                  View Portfolio
-                </Link>
-              </div>
-            </motion.div>
-          )}
+    <div style={{ minHeight: '100vh', backgroundColor: '#f8fafc', padding: '20px' }}>
+      {/* Header */}
+      <div style={{ 
+        backgroundColor: '#1e40af', 
+        color: 'white', 
+        padding: '60px 20px',
+        textAlign: 'center',
+        borderRadius: '8px',
+        marginBottom: '40px'
+      }}>
+        <h1 style={{ fontSize: '48px', fontWeight: 'bold', marginBottom: '16px' }}>
+          🚀 EHB Development Portal
+        </h1>
+        <p style={{ fontSize: '20px', marginBottom: '30px', opacity: 0.9 }}>
+          Your gateway to world-class software development services
+        </p>
+        <div style={{ display: 'flex', gap: '20px', justifyContent: 'center', flexWrap: 'wrap' }}>
+          <Link href="/development/contact" style={{
+            backgroundColor: 'white',
+            color: '#1e40af',
+            padding: '12px 24px',
+            borderRadius: '6px',
+            textDecoration: 'none',
+            fontWeight: 'bold'
+          }}>
+            Start Your Project
+          </Link>
+          <Link href="/development/portfolio" style={{
+            border: '2px solid white',
+            color: 'white',
+            padding: '12px 24px',
+            borderRadius: '6px',
+            textDecoration: 'none',
+            fontWeight: 'bold'
+          }}>
+            View Portfolio
+          </Link>
         </div>
       </div>
 
-      {/* Stats Section */}
-      <div className="py-16 bg-white">
-        <div className="max-w-7xl mx-auto px-4">
-          {isClient && (
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
-              className="grid grid-cols-2 md:grid-cols-4 gap-8"
-            >
-              {stats.map((stat, index) => (
-                <div key={`${stat.label}-${index}`} className="text-center">
-                  <div className="flex justify-center mb-4">
-                    <stat.icon className="w-8 h-8 text-blue-600" />
-                  </div>
-                  <div className="text-3xl font-bold text-gray-900 mb-2">{stat.value}</div>
-                  <div className="text-gray-600">{stat.label}</div>
+      {/* Stats */}
+      <div style={{
+        backgroundColor: 'white',
+        padding: '40px 20px',
+        borderRadius: '8px',
+        marginBottom: '40px',
+        boxShadow: '0 2px 10px rgba(0,0,0,0.1)'
+      }}>
+        <div style={{ 
+          display: 'grid', 
+          gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+          gap: '30px',
+          textAlign: 'center'
+        }}>
+          {stats.map((stat, index) => (
+            <div key={index}>
+              <div style={{ fontSize: '32px', fontWeight: 'bold', color: '#1e40af', marginBottom: '8px' }}>
+                {stat.value}
+              </div>
+              <div style={{ color: '#666', fontSize: '16px' }}>{stat.label}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Services */}
+      <div style={{ marginBottom: '40px' }}>
+        <h2 style={{ 
+          fontSize: '36px', 
+          fontWeight: 'bold', 
+          textAlign: 'center',
+          marginBottom: '40px',
+          color: '#1f2937'
+        }}>
+          Our Services
+        </h2>
+        
+        <div style={{ 
+          display: 'grid', 
+          gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+          gap: '24px'
+        }}>
+          {services.map((service, index) => (
+            <Link key={index} href={service.href} style={{ textDecoration: 'none' }}>
+              <div style={{
+                backgroundColor: 'white',
+                padding: '24px',
+                borderRadius: '8px',
+                boxShadow: '0 2px 10px rgba(0,0,0,0.1)',
+                transition: 'transform 0.2s',
+                cursor: 'pointer',
+                border: '1px solid #e5e7eb'
+              }}>
+                <h3 style={{ 
+                  fontSize: '20px', 
+                  fontWeight: 'bold',
+                  marginBottom: '12px',
+                  color: '#1f2937'
+                }}>
+                  {service.title}
+                </h3>
+                <p style={{ 
+                  color: '#6b7280',
+                  marginBottom: '16px',
+                  lineHeight: '1.6'
+                }}>
+                  {service.description}
+                </p>
+                <div style={{
+                  display: 'inline-block',
+                  backgroundColor: service.status.includes('Working') ? '#10b981' : 
+                                 service.status.includes('Development') ? '#f59e0b' : '#6b7280',
+                  color: 'white',
+                  padding: '4px 12px',
+                  borderRadius: '20px',
+                  fontSize: '12px',
+                  fontWeight: 'bold'
+                }}>
+                  {service.status}
                 </div>
-              ))}
-            </motion.div>
-          )}
-        </div>
-      </div>
-
-      {/* Services Section */}
-      <div className="py-16">
-        <div className="max-w-7xl mx-auto px-4">
-          {isClient && (
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3 }}
-              className="text-center mb-12"
-            >
-              <h2 className="text-4xl font-bold text-gray-900 mb-4">Our Services</h2>
-              <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-                Comprehensive development solutions tailored to your business needs
-              </p>
-            </motion.div>
-          )}
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {isClient &&
-              services.map((service, index) => (
-                <motion.div
-                  key={`${service.title}-${index}`}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.1 * index }}
-                  className="group"
-                >
-                  <Link href={service.href}>
-                    <div
-                      className={`${service.bgColor} p-6 rounded-xl hover:shadow-xl transition-all duration-300 group-hover:scale-105 h-full flex flex-col relative`}
-                    >
-                      {service.new && (
-                        <div className="absolute top-4 right-4">
-                          <span className="bg-red-500 text-white px-2 py-1 rounded-full text-xs font-semibold">
-                            NEW
-                          </span>
-                        </div>
-                      )}
-                      <div className={`${service.color} mb-4`}>
-                        <service.icon className="w-12 h-12" />
-                      </div>
-                      <h3 className="text-xl font-semibold text-gray-900 mb-3">{service.title}</h3>
-                      <p className="text-gray-600 flex-grow">{service.description}</p>
-                      {service.progress !== undefined && (
-                        <div className="mt-4">
-                          <div className="flex justify-between text-sm font-medium text-gray-700 mb-1">
-                            <span>Progress</span>
-                            <span>{service.progress}%</span>
-                          </div>
-                          <div className="w-full bg-gray-200 rounded-full h-2.5">
-                            <div
-                              className="bg-green-500 h-2.5 rounded-full"
-                              style={{ width: `${service.progress}%` }}
-                            ></div>
-                          </div>
-                        </div>
-                      )}
-                    </div>
-                  </Link>
-                </motion.div>
-              ))}
-          </div>
-        </div>
-      </div>
-
-      {/* Features Section */}
-      <div className="py-16 bg-white">
-        <div className="max-w-7xl mx-auto px-4">
-          {isClient && (
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4 }}
-              className="text-center mb-12"
-            >
-              <h2 className="text-4xl font-bold text-gray-900 mb-4">Why Choose EHB Development?</h2>
-              <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-                We deliver excellence through innovation, expertise, and dedication
-              </p>
-            </motion.div>
-          )}
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {isClient &&
-              features.map((feature, index) => (
-                <motion.div
-                  key={`${feature.title}-${index}`}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.1 * index }}
-                  className="text-center"
-                >
-                  <div className="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <feature.icon className="w-8 h-8 text-blue-600" />
-                  </div>
-                  <h3 className="text-lg font-semibold text-gray-900 mb-2">{feature.title}</h3>
-                  <p className="text-gray-600">{feature.description}</p>
-                </motion.div>
-              ))}
-          </div>
-        </div>
-      </div>
-
-      {/* CTA Section */}
-      <div className="py-16 bg-gradient-to-r from-blue-600 to-indigo-700">
-        <div className="max-w-4xl mx-auto px-4 text-center">
-          {isClient && (
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5 }}
-            >
-              <h2 className="text-3xl font-bold text-white mb-4">
-                Ready to Build Something Amazing?
-              </h2>
-              <p className="text-xl text-blue-100 mb-8">
-                Let's discuss your project and turn your vision into reality
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Link
-                  href="/development/contact"
-                  className="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-blue-50 transition-colors"
-                >
-                  Get Started Today
-                </Link>
-                <Link
-                  href="/development/consultation"
-                  className="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-blue-600 transition-colors"
-                >
-                  Free Consultation
-                </Link>
               </div>
-            </motion.div>
-          )}
+            </Link>
+          ))}
         </div>
       </div>
 
       {/* Footer */}
-      <div className="py-8 bg-gray-900 text-white">
-        <div className="max-w-7xl mx-auto px-4 text-center">
-          <p>&copy; 2024 EHB Development Portal. All rights reserved.</p>
-          <p className="mt-2 text-gray-400">Building the future, one project at a time</p>
+      <div style={{
+        backgroundColor: '#1f2937',
+        color: 'white',
+        padding: '40px 20px',
+        textAlign: 'center',
+        borderRadius: '8px'
+      }}>
+        <h2 style={{ fontSize: '24px', fontWeight: 'bold', marginBottom: '16px' }}>
+          Ready to Build Something Amazing?
+        </h2>
+        <p style={{ fontSize: '18px', marginBottom: '24px', opacity: 0.9 }}>
+          Let's discuss your project and turn your vision into reality
+        </p>
+        <div style={{ display: 'flex', gap: '20px', justifyContent: 'center', flexWrap: 'wrap' }}>
+          <Link href="/development/contact" style={{
+            backgroundColor: 'white',
+            color: '#1f2937',
+            padding: '12px 24px',
+            borderRadius: '6px',
+            textDecoration: 'none',
+            fontWeight: 'bold'
+          }}>
+            Get Started Today
+          </Link>
+          <Link href="/development/consultation" style={{
+            border: '2px solid white',
+            color: 'white',
+            padding: '12px 24px',
+            borderRadius: '6px',
+            textDecoration: 'none',
+            fontWeight: 'bold'
+          }}>
+            Free Consultation
+          </Link>
         </div>
+      </div>
+
+      {/* Copyright */}
+      <div style={{
+        textAlign: 'center',
+        padding: '20px 0',
+        color: '#6b7280'
+      }}>
+        <p>&copy; 2024 EHB Development Portal. All rights reserved.</p>
+        <p style={{ marginTop: '8px' }}>Building the future, one project at a time</p>
       </div>
     </div>
   );
