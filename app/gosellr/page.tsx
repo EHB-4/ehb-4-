@@ -1,7 +1,5 @@
 'use client';
 
-'use client';
-
 import React, { useState, useEffect, useMemo } from 'react';
 import { motion } from 'framer-motion';
 import {
@@ -189,6 +187,7 @@ export default function GoSellrMarketplace() {
           riskScore: 8,
           recommendationScore: 95,
         },
+        createdAt: new Date().toISOString(),
         trending: true,
       },
       {
@@ -232,6 +231,7 @@ export default function GoSellrMarketplace() {
           riskScore: 12,
           recommendationScore: 87,
         },
+        createdAt: new Date().toISOString(),
         trending: false,
       },
       {
@@ -275,6 +275,7 @@ export default function GoSellrMarketplace() {
           riskScore: 15,
           recommendationScore: 82,
         },
+        createdAt: new Date().toISOString(),
         trending: false,
       },
     ];
