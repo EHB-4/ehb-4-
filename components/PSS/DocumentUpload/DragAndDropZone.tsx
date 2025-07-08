@@ -53,7 +53,7 @@ export default function DragAndDropZone({
       setErrors(newErrors);
 
       // Process accepted files
-      const newFiles: FileWithPreview[] = acceptedFiles.map((file) => ({
+      const newFiles: FileWithPreview[] = acceptedFiles.map(file => ({
         ...file,
         id: Math.random().toString(36).substr(2, 9),
         status: 'pending' as const,
@@ -71,14 +71,17 @@ export default function DragAndDropZone({
     onDrop,
     maxFiles,
     maxSize,
-    accept: acceptedTypes.reduce((acc, type) => {
-      acc[type] = [];
-      return acc;
-    }, {} as Record<string, string[]>),
+    accept: acceptedTypes.reduce(
+      (acc, type) => {
+        acc[type] = [];
+        return acc;
+      },
+      {} as Record<string, string[]>
+    ),
   });
 
   const removeFile = (fileId: string) => {
-    const updatedFiles = files.filter((file) => file.id !== fileId);
+    const updatedFiles = files.filter(file => file.id !== fileId);
     setFiles(updatedFiles);
     onFilesSelected(updatedFiles);
   };
@@ -100,7 +103,9 @@ export default function DragAndDropZone({
       case 'error':
         return <AlertCircle className="w-4 h-4 text-red-500" />;
       case 'uploading':
-        return <div className="w-4 h-4 border-2 border-blue-500 border-t-transparent rounded-full animate-spin" />;
+        return (
+          <div className="w-4 h-4 border-2 border-blue-500 border-t-transparent rounded-full animate-spin" />
+        );
       default:
         return null;
     }
@@ -144,15 +149,15 @@ export default function DragAndDropZone({
       {files.length > 0 && (
         <div className="space-y-3">
           <h4 className="text-sm font-medium text-gray-900 dark:text-white">Selected Files:</h4>
-          {files.map((file) => (
+          {files.map(file => (
             <div
               key={file.id}
               className="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-800 rounded-lg"
             >
               <div className="flex items-center space-x-3">
                 {file.preview ? (
-                  <img 
-                    src={file.preview} 
+                  <img
+                    src={file.preview}
                     alt={`Preview of ${file.name}`}
                     className="w-8 h-8 object-cover rounded"
                   />
@@ -169,7 +174,7 @@ export default function DragAndDropZone({
                 </div>
                 {getFileStatusIcon(file.status)}
               </div>
-              
+
               {/* Upload Progress */}
               {file.status === 'uploading' && file.uploadProgress !== undefined && (
                 <div className="w-24">
@@ -191,4 +196,4 @@ export default function DragAndDropZone({
       )}
     </div>
   );
-} 
+}

@@ -12,7 +12,7 @@ class EHBMonitoring {
     const metric = {
       timestamp,
       type,
-      data
+      data,
     };
 
     let metrics = [];
@@ -27,20 +27,20 @@ class EHBMonitoring {
   logError(error) {
     this.logMetric('error', {
       message: error.message,
-      stack: error.stack
+      stack: error.stack,
     });
   }
 
   logPerformance(operation, duration) {
     this.logMetric('performance', {
       operation,
-      duration
+      duration,
     });
   }
 
   logUsage(feature) {
     this.logMetric('usage', {
-      feature
+      feature,
     });
   }
 }

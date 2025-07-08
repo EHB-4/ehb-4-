@@ -1,9 +1,11 @@
 # JPS (Job Placement System) - Complete System Overview
 
 ## Roman Urdu: JPS System Complete Overview
+
 Comprehensive overview of the Job Placement System including all features, architecture, and implementation details.
 
 ## Table of Contents
+
 1. [System Overview](#system-overview)
 2. [Core Features](#core-features)
 3. [Architecture](#architecture)
@@ -22,9 +24,11 @@ Comprehensive overview of the Job Placement System including all features, archi
 ## System Overview
 
 ### What is JPS?
+
 JPS (Job Placement System) is a comprehensive web application designed to streamline the job placement process. It connects job seekers with employers through an intelligent matching system, automated interview scheduling, and complete placement management.
 
 ### Key Objectives
+
 - **Efficient Job Matching**: AI-powered matching between candidates and job requirements
 - **Automated Workflow**: Streamlined process from application to placement
 - **Payment Management**: Automated commission calculation and payment processing
@@ -32,6 +36,7 @@ JPS (Job Placement System) is a comprehensive web application designed to stream
 - **Analytics**: Comprehensive reporting and analytics dashboard
 
 ### Target Users
+
 - **Job Seekers**: SQL professionals looking for opportunities
 - **Employers**: Companies seeking SQL talent
 - **Recruiters**: Placement agencies managing the process
@@ -40,12 +45,14 @@ JPS (Job Placement System) is a comprehensive web application designed to stream
 ## Core Features
 
 ### 1. Job Management
+
 - **Job Posting**: Create and manage job listings
 - **Requirements Management**: Define skills, experience, and qualifications
 - **Status Tracking**: Active, inactive, filled, expired statuses
 - **Company Information**: Complete company profiles and details
 
 ### 2. Candidate Management
+
 - **Profile Creation**: Comprehensive candidate profiles
 - **SQL Level Assessment**: 0-4 proficiency level tracking
 - **Skills Management**: Technical and soft skills tracking
@@ -53,6 +60,7 @@ JPS (Job Placement System) is a comprehensive web application designed to stream
 - **Status Management**: Active, inactive, placed, blacklisted
 
 ### 3. AI-Powered Matching
+
 - **Intelligent Matching**: Algorithm-based candidate-job matching
 - **Skill Analysis**: Automatic skill requirement matching
 - **Experience Evaluation**: Experience level assessment
@@ -61,6 +69,7 @@ JPS (Job Placement System) is a comprehensive web application designed to stream
 - **SQL Level Matching**: Proficiency level assessment
 
 ### 4. Interview Management
+
 - **Automated Scheduling**: AI-powered interview scheduling
 - **Multiple Types**: Phone, video, in-person, technical, HR interviews
 - **Status Tracking**: Scheduled, confirmed, completed, cancelled
@@ -68,12 +77,14 @@ JPS (Job Placement System) is a comprehensive web application designed to stream
 - **Calendar Integration**: Automated calendar management
 
 ### 5. Placement Management
+
 - **Process Tracking**: Complete placement lifecycle
 - **Status Updates**: Pending, in-progress, completed, cancelled
 - **Timeline Management**: Start date, end date tracking
 - **Success Metrics**: Placement success rates and analytics
 
 ### 6. Payment System
+
 - **Commission Calculation**: Automated commission computation
 - **Payment Processing**: Multiple payment methods support
 - **Transaction Tracking**: Complete payment history
@@ -81,6 +92,7 @@ JPS (Job Placement System) is a comprehensive web application designed to stream
 - **Invoice Generation**: Automated invoice creation
 
 ### 7. Communication System
+
 - **Email Notifications**: Automated email communications
 - **SMS Alerts**: Text message notifications
 - **Interview Invitations**: Automated interview scheduling
@@ -88,6 +100,7 @@ JPS (Job Placement System) is a comprehensive web application designed to stream
 - **Payment Confirmations**: Payment receipt notifications
 
 ### 8. Analytics Dashboard
+
 - **Real-time Metrics**: Live system statistics
 - **Performance Analytics**: Placement success rates
 - **Revenue Tracking**: Commission and payment analytics
@@ -97,6 +110,7 @@ JPS (Job Placement System) is a comprehensive web application designed to stream
 ## Architecture
 
 ### System Architecture
+
 ```
 ┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
 │   Frontend      │    │   Backend API   │    │   Database      │
@@ -111,6 +125,7 @@ JPS (Job Placement System) is a comprehensive web application designed to stream
 ```
 
 ### Frontend Architecture
+
 - **Next.js 14+**: App Router with server components
 - **TypeScript**: Type-safe development
 - **Tailwind CSS**: Utility-first styling
@@ -118,6 +133,7 @@ JPS (Job Placement System) is a comprehensive web application designed to stream
 - **Context API**: Global state management
 
 ### Backend Architecture
+
 - **Node.js**: Server-side runtime
 - **Express.js**: API framework
 - **Prisma**: Database ORM
@@ -125,6 +141,7 @@ JPS (Job Placement System) is a comprehensive web application designed to stream
 - **Rate Limiting**: API protection
 
 ### Database Architecture
+
 - **PostgreSQL**: Primary database
 - **Prisma**: Database ORM
 - **Migrations**: Version control
@@ -134,6 +151,7 @@ JPS (Job Placement System) is a comprehensive web application designed to stream
 ## Technology Stack
 
 ### Frontend Technologies
+
 ```typescript
 // Core Framework
 - Next.js 14+ (App Router)
@@ -157,6 +175,7 @@ JPS (Job Placement System) is a comprehensive web application designed to stream
 ```
 
 ### Backend Technologies
+
 ```typescript
 // Runtime
 - Node.js 18+
@@ -179,6 +198,7 @@ JPS (Job Placement System) is a comprehensive web application designed to stream
 ```
 
 ### AI & External Services
+
 ```typescript
 // AI Services
 - Anthropic Claude
@@ -204,6 +224,7 @@ JPS (Job Placement System) is a comprehensive web application designed to stream
 ## Database Design
 
 ### Core Tables
+
 ```sql
 -- Users table
 users (
@@ -258,6 +279,7 @@ notifications (
 ```
 
 ### Relationships
+
 ```sql
 -- One-to-Many Relationships
 users -> jobs
@@ -283,15 +305,17 @@ jobs <-> candidates (through applications)
 ## API Endpoints
 
 ### Authentication
+
 ```typescript
-POST /api/auth/login
-POST /api/auth/register
-POST /api/auth/logout
-GET  /api/auth/me
-POST /api/auth/refresh
+POST / api / auth / login;
+POST / api / auth / register;
+POST / api / auth / logout;
+GET / api / auth / me;
+POST / api / auth / refresh;
 ```
 
 ### Jobs
+
 ```typescript
 GET    /api/jobs              // List all jobs
 POST   /api/jobs              // Create new job
@@ -302,6 +326,7 @@ GET    /api/jobs/search       // Search jobs
 ```
 
 ### Candidates
+
 ```typescript
 GET    /api/candidates              // List all candidates
 POST   /api/candidates              // Create new candidate
@@ -312,6 +337,7 @@ GET    /api/candidates/search       // Search candidates
 ```
 
 ### AI Matching
+
 ```typescript
 POST   /api/ai/match                // Match candidate with job
 GET    /api/ai/matches              // Get all matches
@@ -320,6 +346,7 @@ POST   /api/ai/analyze              // Analyze candidate skills
 ```
 
 ### Interviews
+
 ```typescript
 GET    /api/interviews              // List all interviews
 POST   /api/interviews              // Schedule interview
@@ -330,6 +357,7 @@ POST   /api/interviews/:id/feedback // Add feedback
 ```
 
 ### Placements
+
 ```typescript
 GET    /api/placements              // List all placements
 POST   /api/placements              // Create placement
@@ -339,6 +367,7 @@ DELETE /api/placements/:id          // Cancel placement
 ```
 
 ### Payments
+
 ```typescript
 GET    /api/payments                // List all payments
 POST   /api/payments                // Create payment
@@ -348,6 +377,7 @@ POST   /api/payments/:id/process    // Process payment
 ```
 
 ### Notifications
+
 ```typescript
 GET    /api/notifications           // List notifications
 POST   /api/notifications           // Send notification
@@ -359,6 +389,7 @@ DELETE /api/notifications/:id       // Delete notification
 ## Frontend Components
 
 ### Core Components
+
 ```typescript
 // Layout Components
 - Header
@@ -390,6 +421,7 @@ DELETE /api/notifications/:id       // Delete notification
 ```
 
 ### Page Components
+
 ```typescript
 // Main Pages
 - Dashboard
@@ -413,13 +445,14 @@ DELETE /api/notifications/:id       // Delete notification
 ## AI Integration
 
 ### Matching Algorithm
+
 ```typescript
 interface MatchingCriteria {
-  skills: number;           // 0-100 score
-  experience: number;       // 0-100 score
-  location: number;         // 0-100 score
-  salary: number;          // 0-100 score
-  sqlLevel: number;        // 0-100 score
+  skills: number; // 0-100 score
+  experience: number; // 0-100 score
+  location: number; // 0-100 score
+  salary: number; // 0-100 score
+  sqlLevel: number; // 0-100 score
 }
 
 interface MatchResult {
@@ -436,6 +469,7 @@ interface MatchResult {
 ```
 
 ### AI Services Integration
+
 ```typescript
 // Anthropic Claude Integration
 - Skill analysis
@@ -459,6 +493,7 @@ interface MatchResult {
 ## Security Features
 
 ### Authentication & Authorization
+
 ```typescript
 // JWT Token Management
 - Secure token generation
@@ -474,6 +509,7 @@ interface MatchResult {
 ```
 
 ### API Security
+
 ```typescript
 // Rate Limiting
 - Request rate limiting
@@ -488,6 +524,7 @@ interface MatchResult {
 ```
 
 ### Data Protection
+
 ```typescript
 // Data Encryption
 - Sensitive data encryption
@@ -504,6 +541,7 @@ interface MatchResult {
 ## Performance Optimization
 
 ### Frontend Optimization
+
 ```typescript
 // Code Splitting
 - Dynamic imports
@@ -524,6 +562,7 @@ interface MatchResult {
 ```
 
 ### Backend Optimization
+
 ```typescript
 // Database Optimization
 - Query optimization
@@ -539,6 +578,7 @@ interface MatchResult {
 ```
 
 ### Monitoring & Analytics
+
 ```typescript
 // Performance Monitoring
 - Core Web Vitals
@@ -556,6 +596,7 @@ interface MatchResult {
 ## Testing Strategy
 
 ### Unit Testing
+
 ```typescript
 // Component Testing
 - React component tests
@@ -569,6 +610,7 @@ interface MatchResult {
 ```
 
 ### Integration Testing
+
 ```typescript
 // Database Testing
 - Database operations
@@ -582,6 +624,7 @@ interface MatchResult {
 ```
 
 ### End-to-End Testing
+
 ```typescript
 // User Workflow Testing
 - Complete user journeys
@@ -597,6 +640,7 @@ interface MatchResult {
 ## Deployment
 
 ### Deployment Platforms
+
 ```typescript
 // Primary Platform
 - Vercel (Frontend & API)
@@ -609,6 +653,7 @@ interface MatchResult {
 ```
 
 ### Environment Configuration
+
 ```typescript
 // Environment Variables
 - Database configuration
@@ -623,6 +668,7 @@ interface MatchResult {
 ```
 
 ### CI/CD Pipeline
+
 ```typescript
 // Automated Testing
 - Pre-deployment testing
@@ -638,6 +684,7 @@ interface MatchResult {
 ## Monitoring
 
 ### Error Tracking
+
 ```typescript
 // Sentry Integration
 - Error capturing
@@ -647,6 +694,7 @@ interface MatchResult {
 ```
 
 ### Logging
+
 ```typescript
 // Logtail Integration
 - Application logging
@@ -656,6 +704,7 @@ interface MatchResult {
 ```
 
 ### Health Monitoring
+
 ```typescript
 // Health Checks
 - Database connectivity
@@ -667,6 +716,7 @@ interface MatchResult {
 ## Maintenance
 
 ### Regular Maintenance
+
 ```typescript
 // Database Maintenance
 - Regular backups
@@ -682,6 +732,7 @@ interface MatchResult {
 ```
 
 ### Backup Strategy
+
 ```typescript
 // Data Backup
 - Automated daily backups
@@ -691,6 +742,7 @@ interface MatchResult {
 ```
 
 ### Update Strategy
+
 ```typescript
 // Application Updates
 - Feature updates
@@ -707,4 +759,4 @@ JPS (Job Placement System) is a comprehensive, modern web application designed t
 
 The system's modular architecture, comprehensive testing strategy, and production-ready deployment configuration ensure reliability, scalability, and maintainability for long-term success.
 
-For more detailed information about specific components, please refer to the individual documentation files in the `docs/` directory. 
+For more detailed information about specific components, please refer to the individual documentation files in the `docs/` directory.

@@ -210,9 +210,11 @@ npx prisma db push
    - Run: `Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser`
 
 4. **Prisma not installed**
+
    ```
    Error: npx prisma generate failed
    ```
+
    - Install Prisma: `npm install prisma @prisma/client`
 
 ### Manual Cleanup

@@ -70,21 +70,27 @@ export default function DocumentUpload({
       // Simulate upload process
       for (let i = 0; i < files.length; i++) {
         const file = files[i];
-        
+
         // Update status to uploading
-        setFiles(prev => prev.map(f => 
-          f.id === file.id ? { ...f, status: 'uploading' as const } : f
-        ));
+        setFiles(prev =>
+          prev.map(f => (f.id === file.id ? { ...f, status: 'uploading' as const } : f))
+        );
 
         // Simulate upload progress
         for (let progress = 0; progress <= 100; progress += 10) {
           await new Promise(resolve => setTimeout(resolve, 100));
-          
-          setFiles(prev => prev.map(f => 
-            f.id === file.id 
-              ? { ...f, uploadProgress: progress, status: progress === 100 ? 'success' as const : 'uploading' as const }
-              : f
-          ));
+
+          setFiles(prev =>
+            prev.map(f =>
+              f.id === file.id
+                ? {
+                    ...f,
+                    uploadProgress: progress,
+                    status: progress === 100 ? ('success' as const) : ('uploading' as const),
+                  }
+                : f
+            )
+          );
         }
       }
 
@@ -92,7 +98,6 @@ export default function DocumentUpload({
       if (onUploadComplete) {
         onUploadComplete(files);
       }
-
     } catch (error) {
       setErrors(['Upload failed. Please try again.']);
       setFiles(prev => prev.map(f => ({ ...f, status: 'error' as const, error: 'Upload failed' })));
@@ -102,15 +107,11 @@ export default function DocumentUpload({
   };
 
   const handlePauseUpload = (fileId: string) => {
-    setFiles(prev => prev.map(f => 
-      f.id === fileId ? { ...f, status: 'paused' as const } : f
-    ));
+    setFiles(prev => prev.map(f => (f.id === fileId ? { ...f, status: 'paused' as const } : f)));
   };
 
   const handleResumeUpload = (fileId: string) => {
-    setFiles(prev => prev.map(f => 
-      f.id === fileId ? { ...f, status: 'uploading' as const } : f
-    ));
+    setFiles(prev => prev.map(f => (f.id === fileId ? { ...f, status: 'uploading' as const } : f)));
   };
 
   const handleCancelUpload = (fileId: string) => {
@@ -118,9 +119,9 @@ export default function DocumentUpload({
   };
 
   const handleRetryUpload = (fileId: string) => {
-    setFiles(prev => prev.map(f => 
-      f.id === fileId ? { ...f, status: 'pending' as const, error: undefined } : f
-    ));
+    setFiles(prev =>
+      prev.map(f => (f.id === fileId ? { ...f, status: 'pending' as const, error: undefined } : f))
+    );
   };
 
   const getUploadStatus = () => {
@@ -147,7 +148,7 @@ export default function DocumentUpload({
         </CardHeader>
         <CardContent className="space-y-4">
           <p className="text-gray-600 dark:text-gray-400">{description}</p>
-          
+
           <DragAndDropZone
             onFilesSelected={handleFilesSelected}
             maxFiles={maxFiles}
@@ -160,11 +161,9 @@ export default function DocumentUpload({
           {/* Upload Status */}
           {files.length > 0 && (
             <div className="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-800 rounded-lg">
-              <span className="text-sm text-gray-600 dark:text-gray-400">
-                {getUploadStatus()}
-              </span>
-              <Button 
-                onClick={handleUpload} 
+              <span className="text-sm text-gray-600 dark:text-gray-400">{getUploadStatus()}</span>
+              <Button
+                onClick={handleUpload}
                 disabled={uploading || files.length === 0}
                 className="ml-4"
               >
@@ -193,7 +192,7 @@ export default function DocumentUpload({
               <h4 className="text-sm font-medium text-gray-900 dark:text-white">
                 Upload Progress:
               </h4>
-              {files.map((file) => (
+              {files.map(file => (
                 <div key={file.id} className="space-y-2">
                   <UploadProgress
                     fileId={file.id}
@@ -206,7 +205,7 @@ export default function DocumentUpload({
                     onRetry={() => handleRetryUpload(file.id)}
                     error={file.error}
                   />
-                  
+
                   {showPreview && file.preview && (
                     <Button
                       variant="outline"
@@ -232,4 +231,4 @@ export default function DocumentUpload({
       />
     </div>
   );
-} 
+}

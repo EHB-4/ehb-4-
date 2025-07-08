@@ -1,11 +1,11 @@
-"use client";
+'use client';
 
 /**
  * SOT Marketplace - Enhanced Version
- * 
+ *
  * Real-time marketplace with products, AI agents, and services
  * Integrated with EHBMainAgent for live status updates
- * 
+ *
  * @author EHB AI System
  * @version 2.0.0
  */
@@ -15,7 +15,13 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import {
   Search,
@@ -47,7 +53,7 @@ import {
   Settings,
   BarChart3,
   MessageSquare,
-  Star as StarIcon
+  Star as StarIcon,
 } from 'lucide-react';
 import { ehbMainAgent, AgentStatus } from '@/lib/ai/EHBMainAgent';
 
@@ -83,7 +89,8 @@ export default function SOTMarketplace() {
     {
       id: 'monitoring-agent',
       name: 'EHB Monitoring Agent',
-      description: 'Advanced 24/7 system monitoring with real-time alerts and performance optimization',
+      description:
+        'Advanced 24/7 system monitoring with real-time alerts and performance optimization',
       category: 'ai-agent',
       price: 99.99,
       currency: 'USD',
@@ -94,7 +101,7 @@ export default function SOTMarketplace() {
       features: ['Real-time monitoring', 'Performance alerts', 'Auto-scaling', 'Health checks'],
       tags: ['monitoring', 'performance', 'automation'],
       downloads: 1247,
-      lastUpdated: new Date('2024-01-15')
+      lastUpdated: new Date('2024-01-15'),
     },
     {
       id: 'deployment-agent',
@@ -107,10 +114,15 @@ export default function SOTMarketplace() {
       reviews: 89,
       status: 'available',
       agentId: 'deployment',
-      features: ['Auto-deployment', 'Rollback support', 'Environment management', 'Version control'],
+      features: [
+        'Auto-deployment',
+        'Rollback support',
+        'Environment management',
+        'Version control',
+      ],
       tags: ['deployment', 'ci-cd', 'automation'],
       downloads: 892,
-      lastUpdated: new Date('2024-01-10')
+      lastUpdated: new Date('2024-01-10'),
     },
     {
       id: 'fixer-agent',
@@ -126,7 +138,7 @@ export default function SOTMarketplace() {
       features: ['Bug detection', 'Auto-fixing', 'Code optimization', 'Security scanning'],
       tags: ['bug-fixing', 'optimization', 'security'],
       downloads: 1567,
-      lastUpdated: new Date('2024-01-12')
+      lastUpdated: new Date('2024-01-12'),
     },
     {
       id: 'franchise-agent',
@@ -142,7 +154,7 @@ export default function SOTMarketplace() {
       features: ['Location analysis', 'Growth planning', 'Market research', 'Performance tracking'],
       tags: ['franchise', 'business', 'analytics'],
       downloads: 445,
-      lastUpdated: new Date('2024-01-08')
+      lastUpdated: new Date('2024-01-08'),
     },
     {
       id: 'seo-agent',
@@ -155,10 +167,15 @@ export default function SOTMarketplace() {
       reviews: 134,
       status: 'available',
       agentId: 'seo',
-      features: ['Keyword research', 'Content optimization', 'Ranking tracking', 'Competitor analysis'],
+      features: [
+        'Keyword research',
+        'Content optimization',
+        'Ranking tracking',
+        'Competitor analysis',
+      ],
       tags: ['seo', 'marketing', 'content'],
       downloads: 1123,
-      lastUpdated: new Date('2024-01-14')
+      lastUpdated: new Date('2024-01-14'),
     },
     {
       id: 'development-agent',
@@ -174,7 +191,7 @@ export default function SOTMarketplace() {
       features: ['Real-time coding', 'Project management', 'Code review', 'Testing automation'],
       tags: ['development', 'coding', 'project-management'],
       downloads: 2034,
-      lastUpdated: new Date('2024-01-16')
+      lastUpdated: new Date('2024-01-16'),
     },
     {
       id: 'web-template',
@@ -189,7 +206,7 @@ export default function SOTMarketplace() {
       features: ['Responsive design', 'Modern UI', 'SEO optimized', 'Fast loading'],
       tags: ['template', 'web', 'ui-ux'],
       downloads: 567,
-      lastUpdated: new Date('2024-01-05')
+      lastUpdated: new Date('2024-01-05'),
     },
     {
       id: 'api-service',
@@ -204,8 +221,8 @@ export default function SOTMarketplace() {
       features: ['Authentication', 'Rate limiting', 'Documentation', 'Analytics'],
       tags: ['api', 'service', 'backend'],
       downloads: 789,
-      lastUpdated: new Date('2024-01-11')
-    }
+      lastUpdated: new Date('2024-01-11'),
+    },
   ]);
 
   // Load agent status
@@ -225,32 +242,43 @@ export default function SOTMarketplace() {
 
   const getStatusIcon = (status: string) => {
     switch (status) {
-      case 'running': return <CheckCircle2 className="w-4 h-4 text-green-500" />;
-      case 'stopped': return <XCircle className="w-4 h-4 text-red-500" />;
-      case 'error': return <AlertCircle className="w-4 h-4 text-yellow-500" />;
-      case 'idle': return <Clock className="w-4 h-4 text-gray-500" />;
-      default: return <Clock className="w-4 h-4 text-gray-500" />;
+      case 'running':
+        return <CheckCircle2 className="w-4 h-4 text-green-500" />;
+      case 'stopped':
+        return <XCircle className="w-4 h-4 text-red-500" />;
+      case 'error':
+        return <AlertCircle className="w-4 h-4 text-yellow-500" />;
+      case 'idle':
+        return <Clock className="w-4 h-4 text-gray-500" />;
+      default:
+        return <Clock className="w-4 h-4 text-gray-500" />;
     }
   };
 
   const getCategoryIcon = (category: string) => {
     switch (category) {
-      case 'ai-agent': return <Brain className="w-5 h-5" />;
-      case 'service': return <Server className="w-5 h-5" />;
-      case 'product': return <Smartphone className="w-5 h-5" />;
-      case 'template': return <Code className="w-5 h-5" />;
-      default: return <Globe className="w-5 h-5" />;
+      case 'ai-agent':
+        return <Brain className="w-5 h-5" />;
+      case 'service':
+        return <Server className="w-5 h-5" />;
+      case 'product':
+        return <Smartphone className="w-5 h-5" />;
+      case 'template':
+        return <Code className="w-5 h-5" />;
+      default:
+        return <Globe className="w-5 h-5" />;
     }
   };
 
   const filteredItems = marketplaceItems.filter(item => {
-    const matchesSearch = item.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                         item.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                         item.tags.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase()));
-    
+    const matchesSearch =
+      item.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      item.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      item.tags.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase()));
+
     const matchesCategory = selectedCategory === 'all' || item.category === selectedCategory;
     const matchesStatus = selectedStatus === 'all' || item.status === selectedStatus;
-    
+
     return matchesSearch && matchesCategory && matchesStatus;
   });
 
@@ -302,11 +330,9 @@ export default function SOTMarketplace() {
                 <Globe className="w-8 h-8 text-blue-600" />
                 <h1 className="text-2xl font-bold text-gray-900">SOT Marketplace</h1>
               </div>
-              <Badge variant="default">
-                {filteredItems.length} items available
-              </Badge>
+              <Badge variant="default">{filteredItems.length} items available</Badge>
             </div>
-            
+
             <div className="flex items-center space-x-4">
               <Button variant="outline" onClick={loadAgentStatus}>
                 <RefreshCw className="w-4 h-4 mr-2" />
@@ -335,11 +361,11 @@ export default function SOTMarketplace() {
                 <Input
                   placeholder="Search items..."
                   value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
+                  onChange={e => setSearchQuery(e.target.value)}
                   className="pl-10"
                 />
               </div>
-              
+
               <Select value={selectedCategory} onValueChange={setSelectedCategory}>
                 <SelectTrigger>
                   <SelectValue placeholder="Category" />
@@ -352,7 +378,7 @@ export default function SOTMarketplace() {
                   <SelectItem value="template">Templates</SelectItem>
                 </SelectContent>
               </Select>
-              
+
               <Select value={selectedStatus} onValueChange={setSelectedStatus}>
                 <SelectTrigger>
                   <SelectValue placeholder="Status" />
@@ -364,7 +390,7 @@ export default function SOTMarketplace() {
                   <SelectItem value="maintenance">Maintenance</SelectItem>
                 </SelectContent>
               </Select>
-              
+
               <Select value={sortBy} onValueChange={setSortBy}>
                 <SelectTrigger>
                   <SelectValue placeholder="Sort by" />
@@ -383,9 +409,9 @@ export default function SOTMarketplace() {
 
           {/* Items Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {sortedItems.map((item) => {
+            {sortedItems.map(item => {
               const agentStatus = item.agentId ? getAgentStatus(item.agentId) : null;
-              
+
               return (
                 <Card key={item.id} className="hover:shadow-lg transition-shadow">
                   <CardHeader>
@@ -407,51 +433,54 @@ export default function SOTMarketplace() {
                       </Badge>
                     </div>
                   </CardHeader>
-                  
+
                   <CardContent>
                     <p className="text-gray-600 text-sm mb-4">{item.description}</p>
-                    
+
                     <div className="space-y-3">
                       <div className="flex justify-between items-center">
                         <span className="text-lg font-bold">
                           {item.currency} {item.price}
                         </span>
                         {item.downloads && (
-                          <span className="text-sm text-gray-500">
-                            {item.downloads} downloads
-                          </span>
+                          <span className="text-sm text-gray-500">{item.downloads} downloads</span>
                         )}
                       </div>
-                      
+
                       <div className="flex flex-wrap gap-1">
-                        {item.tags.slice(0, 3).map((tag) => (
+                        {item.tags.slice(0, 3).map(tag => (
                           <Badge key={tag} variant="outline" className="text-xs">
                             {tag}
                           </Badge>
                         ))}
                       </div>
-                      
+
                       {agentStatus && (
                         <div className="bg-gray-50 rounded p-2 text-xs">
                           <div className="flex items-center justify-between">
                             <span>Agent Status:</span>
-                            <span className={`font-medium ${
-                              agentStatus.status === 'running' ? 'text-green-600' :
-                              agentStatus.status === 'stopped' ? 'text-red-600' :
-                              'text-gray-600'
-                            }`}>
+                            <span
+                              className={`font-medium ${
+                                agentStatus.status === 'running'
+                                  ? 'text-green-600'
+                                  : agentStatus.status === 'stopped'
+                                    ? 'text-red-600'
+                                    : 'text-gray-600'
+                              }`}
+                            >
                               {agentStatus.status}
                             </span>
                           </div>
                           <div className="flex items-center justify-between mt-1">
                             <span>Tasks:</span>
                             <span className="font-medium">
-                              {agentStatus.tasks.completed} completed, {agentStatus.tasks.pending} pending
+                              {agentStatus.tasks.completed} completed, {agentStatus.tasks.pending}{' '}
+                              pending
                             </span>
                           </div>
                         </div>
                       )}
-                      
+
                       <div className="flex space-x-2">
                         <Button
                           onClick={() => handlePurchase(item)}
@@ -490,4 +519,4 @@ export default function SOTMarketplace() {
       </div>
     </div>
   );
-} 
+}

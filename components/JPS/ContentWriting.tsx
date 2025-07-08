@@ -46,7 +46,7 @@ export default function ContentWriting({ onContentGenerated }: ContentWritingPro
 - Competitive salary package
 - Health insurance
 - Professional development opportunities
-- Flexible working hours`
+- Flexible working hours`,
     },
     {
       id: 'email-1',
@@ -71,7 +71,7 @@ Please confirm your attendance by replying to this email.
 
 Best regards,
 [Your Name]
-[Company Name]`
+[Company Name]`,
     },
     {
       id: 'feedback-1',
@@ -100,7 +100,7 @@ Best regards,
 [Summary of candidate's performance]
 
 **Recommendation:**
-[Recommend next steps]`
+[Recommend next steps]`,
     },
     {
       id: 'report-1',
@@ -127,23 +127,23 @@ Best regards,
 - [Achievement 3]
 
 **Commission Earned:** [Amount]
-**Success Rate:** [Percentage]`
-    }
+**Success Rate:** [Percentage]`,
+    },
   ];
 
   const generateContent = async (templateId: string) => {
     setIsGenerating(true);
-    
+
     // Simulate AI content generation
     await new Promise(resolve => setTimeout(resolve, 2000));
-    
+
     const template = templates.find(t => t.id === templateId);
     if (template) {
       const content = template.content;
       setGeneratedContent(content);
       onContentGenerated(content, template.type);
     }
-    
+
     setIsGenerating(false);
   };
 
@@ -173,9 +173,9 @@ Best regards,
         {/* Template Selection */}
         <div className="bg-white rounded-lg shadow-sm p-6">
           <h3 className="text-lg font-semibold text-gray-900 mb-4">Content Templates</h3>
-          
+
           <div className="space-y-3">
-            {templates.map((template) => (
+            {templates.map(template => (
               <div
                 key={template.id}
                 className={`p-4 border rounded-lg cursor-pointer transition-colors ${
@@ -276,4 +276,4 @@ Best regards,
       </div>
     </div>
   );
-} 
+}

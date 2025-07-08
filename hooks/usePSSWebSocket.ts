@@ -61,7 +61,7 @@ export function usePSSWebSocket(options: PSSWebSocketOptions = {}) {
         reconnectAttemptsRef.current = 0;
       };
 
-      ws.onmessage = (event) => {
+      ws.onmessage = event => {
         try {
           const message: PSSWebSocketMessage = JSON.parse(event.data);
           setState(prev => ({
@@ -91,7 +91,7 @@ export function usePSSWebSocket(options: PSSWebSocketOptions = {}) {
         }
       };
 
-      ws.onclose = (event) => {
+      ws.onclose = event => {
         console.log('PSS WebSocket disconnected:', event.code, event.reason);
         setState(prev => ({
           ...prev,
@@ -102,8 +102,10 @@ export function usePSSWebSocket(options: PSSWebSocketOptions = {}) {
         // Auto-reconnect logic
         if (autoReconnect && reconnectAttemptsRef.current < maxReconnectAttempts) {
           reconnectAttemptsRef.current += 1;
-          console.log(`Attempting to reconnect (${reconnectAttemptsRef.current}/${maxReconnectAttempts})...`);
-          
+          console.log(
+            `Attempting to reconnect (${reconnectAttemptsRef.current}/${maxReconnectAttempts})...`
+          );
+
           reconnectTimeoutRef.current = setTimeout(() => {
             connect();
           }, reconnectInterval);
@@ -115,7 +117,7 @@ export function usePSSWebSocket(options: PSSWebSocketOptions = {}) {
         }
       };
 
-      ws.onerror = (error) => {
+      ws.onerror = error => {
         console.error('PSS WebSocket error:', error);
         setState(prev => ({
           ...prev,
@@ -123,7 +125,6 @@ export function usePSSWebSocket(options: PSSWebSocketOptions = {}) {
           isConnecting: false,
         }));
       };
-
     } catch (error) {
       console.error('Error creating WebSocket connection:', error);
       setState(prev => ({
@@ -160,19 +161,25 @@ export function usePSSWebSocket(options: PSSWebSocketOptions = {}) {
     }
   }, []);
 
-  const subscribeToUpdates = useCallback((verificationId: string) => {
-    sendMessage({
-      type: 'subscribe',
-      verificationId,
-    });
-  }, [sendMessage]);
+  const subscribeToUpdates = useCallback(
+    (verificationId: string) => {
+      sendMessage({
+        type: 'subscribe',
+        verificationId,
+      });
+    },
+    [sendMessage]
+  );
 
-  const unsubscribeFromUpdates = useCallback((verificationId: string) => {
-    sendMessage({
-      type: 'unsubscribe',
-      verificationId,
-    });
-  }, [sendMessage]);
+  const unsubscribeFromUpdates = useCallback(
+    (verificationId: string) => {
+      sendMessage({
+        type: 'unsubscribe',
+        verificationId,
+      });
+    },
+    [sendMessage]
+  );
 
   // Auto-connect on mount
   useEffect(() => {
@@ -198,4 +205,4 @@ export function usePSSWebSocket(options: PSSWebSocketOptions = {}) {
     subscribeToUpdates,
     unsubscribeFromUpdates,
   };
-} 
+}

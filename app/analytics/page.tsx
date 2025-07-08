@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 'use client';
 
@@ -270,7 +270,7 @@ export default function AnalyticsPage() {
     icon: React.ReactNode;
     color: string;
   }> = ({ title, value, change, icon, color }) => (
-        <div className="bg-white rounded-lg shadow p-6">
+    <div className="bg-white rounded-lg shadow p-6">
       <div className="flex items-center justify-between">
         <div>
           <p className="text-sm font-medium text-gray-600">{title}</p>
@@ -293,8 +293,8 @@ export default function AnalyticsPage() {
           </div>
         </div>
         <div className={color}>{icon}</div>
-        </div>
-        </div>
+      </div>
+    </div>
   );
 
   const ProgressRing: React.FC<{

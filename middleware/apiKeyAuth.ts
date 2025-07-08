@@ -1,7 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 
-import { prisma } from '../lib/prisma';
-
 export type ApiKeyRole = 'admin' | 'public' | 'internal';
 
 interface ApiKeyConfig {
@@ -27,11 +25,12 @@ export function apiKeyAuth(config: ApiKeyConfig = { requireApiKey: true }) {
     }
 
     try {
+      // TODO: Replace with AWS data access
       // Validate API key from database
-      const keyData = await prisma.apiKey.findUnique({
-        where: { key: apiKey },
-        include: { user: true },
-      });
+      // const keyData = await prisma.apiKey.findUnique({
+      //   where: { key: apiKey },
+      //   include: { user: true },
+      // });
 
       if (!keyData) {
         return res.status(401).json({

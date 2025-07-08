@@ -1,9 +1,11 @@
 # JPS System Production Deployment Guide
 
 ## Roman Urdu: JPS System Production Deployment Guide
+
 Complete guide for deploying JPS (Job Placement System) to production environment.
 
 ## Table of Contents
+
 1. [Prerequisites](#prerequisites)
 2. [Environment Setup](#environment-setup)
 3. [Database Configuration](#database-configuration)
@@ -18,7 +20,8 @@ Complete guide for deploying JPS (Job Placement System) to production environmen
 ## Prerequisites
 
 ### Required Tools
-- Node.js 18+ 
+
+- Node.js 18+
 - npm 9+
 - Git
 - Vercel CLI
@@ -26,6 +29,7 @@ Complete guide for deploying JPS (Job Placement System) to production environmen
 - Domain name (optional)
 
 ### Required Accounts
+
 - Vercel account
 - Database provider (Supabase, PlanetScale, etc.)
 - Email service (SendGrid, AWS SES)
@@ -36,17 +40,20 @@ Complete guide for deploying JPS (Job Placement System) to production environmen
 ## Environment Setup
 
 ### 1. Clone Repository
+
 ```bash
 git clone <repository-url>
 cd jps-system
 ```
 
 ### 2. Install Dependencies
+
 ```bash
 npm install
 ```
 
 ### 3. Environment Variables
+
 Create `.env.production` file:
 
 ```env
@@ -93,6 +100,7 @@ UPSTASH_REDIS_URL="your-upstash-redis-url"
 ## Database Configuration
 
 ### 1. Database Setup
+
 ```bash
 # Generate Prisma client
 npx prisma generate
@@ -105,6 +113,7 @@ npx prisma db seed
 ```
 
 ### 2. Database Backup
+
 ```bash
 # Create backup
 npx prisma db pull --print > backup_$(date +%Y%m%d).sql
@@ -114,31 +123,33 @@ npx prisma db push --force-reset
 ```
 
 ### 3. Database Monitoring
+
 ```sql
 -- Check database health
-SELECT 
+SELECT
   schemaname,
   tablename,
   attname,
   n_distinct,
   correlation
-FROM pg_stats 
+FROM pg_stats
 WHERE schemaname = 'public';
 
 -- Check slow queries
-SELECT 
+SELECT
   query,
   calls,
   total_time,
   mean_time
-FROM pg_stat_statements 
-ORDER BY mean_time DESC 
+FROM pg_stat_statements
+ORDER BY mean_time DESC
 LIMIT 10;
 ```
 
 ## Application Deployment
 
 ### 1. Build Application
+
 ```bash
 # Type checking
 npm run type-check
@@ -154,6 +165,7 @@ npm run build
 ```
 
 ### 2. Deploy to Vercel
+
 ```bash
 # Login to Vercel
 vercel login
@@ -163,6 +175,7 @@ vercel --prod --confirm
 ```
 
 ### 3. Custom Domain Setup
+
 1. Go to Vercel Dashboard
 2. Select your project
 3. Go to Settings > Domains
@@ -170,42 +183,47 @@ vercel --prod --confirm
 5. Configure DNS records
 
 ### 4. SSL Configuration
+
 Vercel automatically provides SSL certificates for all domains.
 
 ## Security Configuration
 
 ### 1. Environment Variables Security
+
 - Never commit `.env` files to Git
 - Use Vercel's environment variable management
 - Rotate secrets regularly
 - Use strong, unique passwords
 
 ### 2. API Security
+
 ```typescript
 // Rate limiting middleware
 import rateLimit from 'express-rate-limit';
 
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 100 // limit each IP to 100 requests per windowMs
+  max: 100, // limit each IP to 100 requests per windowMs
 });
 
 app.use('/api/', limiter);
 ```
 
 ### 3. CORS Configuration
+
 ```typescript
 // CORS setup
 const corsOptions = {
   origin: process.env.ALLOWED_ORIGINS?.split(',') || ['https://your-domain.com'],
   credentials: true,
-  optionsSuccessStatus: 200
+  optionsSuccessStatus: 200,
 };
 
 app.use(cors(corsOptions));
 ```
 
 ### 4. Content Security Policy
+
 ```typescript
 // CSP headers
 app.use((req, res, next) => {
@@ -220,6 +238,7 @@ app.use((req, res, next) => {
 ## Monitoring Setup
 
 ### 1. Error Tracking (Sentry)
+
 ```typescript
 // Sentry configuration
 import * as Sentry from '@sentry/nextjs';
@@ -232,6 +251,7 @@ Sentry.init({
 ```
 
 ### 2. Logging (Logtail)
+
 ```typescript
 // Logtail configuration
 import { Logtail } from '@logtail/node';
@@ -246,20 +266,21 @@ export const logger = {
 ```
 
 ### 3. Health Check Endpoint
+
 ```typescript
 // Health check API
 export async function GET() {
   try {
     // Database check
     await prisma.$queryRaw`SELECT 1`;
-    
+
     // Get stats
     const stats = await prisma.$transaction([
       prisma.job.count(),
       prisma.candidate.count(),
-      prisma.placement.count()
+      prisma.placement.count(),
     ]);
-    
+
     return NextResponse.json({
       status: 'healthy',
       timestamp: new Date().toISOString(),
@@ -267,19 +288,23 @@ export async function GET() {
       stats: {
         jobs: stats[0],
         candidates: stats[1],
-        placements: stats[2]
-      }
+        placements: stats[2],
+      },
     });
   } catch (error) {
-    return NextResponse.json({
-      status: 'unhealthy',
-      error: error instanceof Error ? error.message : 'Unknown error'
-    }, { status: 500 });
+    return NextResponse.json(
+      {
+        status: 'unhealthy',
+        error: error instanceof Error ? error.message : 'Unknown error',
+      },
+      { status: 500 }
+    );
   }
 }
 ```
 
 ### 4. Performance Monitoring
+
 ```typescript
 // Performance monitoring
 import { performance } from 'perf_hooks';
@@ -287,28 +312,28 @@ import { performance } from 'perf_hooks';
 export function withPerformanceMonitoring(handler: Function) {
   return async (req: Request, res: Response) => {
     const start = performance.now();
-    
+
     try {
       const result = await handler(req, res);
       const duration = performance.now() - start;
-      
+
       logger.info('API Performance', {
         endpoint: req.url,
         method: req.method,
-        duration: `${duration.toFixed(2)}ms`
+        duration: `${duration.toFixed(2)}ms`,
       });
-      
+
       return result;
     } catch (error) {
       const duration = performance.now() - start;
-      
+
       logger.error('API Error', {
         endpoint: req.url,
         method: req.method,
         duration: `${duration.toFixed(2)}ms`,
-        error: error instanceof Error ? error.message : 'Unknown error'
+        error: error instanceof Error ? error.message : 'Unknown error',
       });
-      
+
       throw error;
     }
   };
@@ -318,6 +343,7 @@ export function withPerformanceMonitoring(handler: Function) {
 ## Performance Optimization
 
 ### 1. Image Optimization
+
 ```typescript
 // Next.js Image optimization
 import Image from 'next/image';
@@ -338,6 +364,7 @@ export function OptimizedImage({ src, alt, ...props }) {
 ```
 
 ### 2. Code Splitting
+
 ```typescript
 // Dynamic imports for code splitting
 import dynamic from 'next/dynamic';
@@ -349,24 +376,26 @@ const DynamicComponent = dynamic(() => import('./HeavyComponent'), {
 ```
 
 ### 3. Caching Strategy
+
 ```typescript
 // API response caching
 export async function GET() {
   const cacheKey = 'jobs-list';
   const cached = await redis.get(cacheKey);
-  
+
   if (cached) {
     return NextResponse.json(JSON.parse(cached));
   }
-  
+
   const jobs = await prisma.job.findMany();
   await redis.setex(cacheKey, 300, JSON.stringify(jobs)); // 5 minutes cache
-  
+
   return NextResponse.json(jobs);
 }
 ```
 
 ### 4. Bundle Analysis
+
 ```bash
 # Analyze bundle size
 npm run build:analyze
@@ -378,6 +407,7 @@ npm run build:size
 ## Backup Strategy
 
 ### 1. Database Backup
+
 ```bash
 #!/bin/bash
 # backup-database.sh
@@ -395,12 +425,14 @@ echo "Backup created: $BACKUP_FILE"
 ```
 
 ### 2. Automated Backups
+
 ```bash
 # Setup daily backup cron job
 (crontab -l 2>/dev/null; echo "0 2 * * * cd /path/to/jps && ./scripts/backup-database.sh") | crontab -
 ```
 
 ### 3. Backup Verification
+
 ```bash
 # Verify backup integrity
 npx prisma validate --schema=backup_schema.prisma
@@ -411,6 +443,7 @@ npx prisma validate --schema=backup_schema.prisma
 ### Common Issues
 
 #### 1. Database Connection Issues
+
 ```bash
 # Check database connection
 npx prisma db pull
@@ -423,6 +456,7 @@ docker logs postgres-container
 ```
 
 #### 2. Build Failures
+
 ```bash
 # Clear cache
 rm -rf .next
@@ -434,6 +468,7 @@ npm install
 ```
 
 #### 3. Environment Variables
+
 ```bash
 # Check environment variables
 vercel env ls
@@ -443,6 +478,7 @@ vercel env add DATABASE_URL
 ```
 
 #### 4. Performance Issues
+
 ```bash
 # Check bundle size
 npm run build:analyze
@@ -455,6 +491,7 @@ node --inspect npm run dev
 ```
 
 ### Debug Mode
+
 ```bash
 # Enable debug logging
 DEBUG=* npm run dev
@@ -466,6 +503,7 @@ DEBUG=prisma:* npm run dev
 ## Maintenance
 
 ### 1. Regular Updates
+
 ```bash
 # Update dependencies
 npm update
@@ -478,12 +516,13 @@ npx prisma update
 ```
 
 ### 2. Database Maintenance
+
 ```sql
 -- Vacuum database
 VACUUM ANALYZE;
 
 -- Check for dead tuples
-SELECT schemaname, tablename, n_dead_tup, n_live_tup 
+SELECT schemaname, tablename, n_dead_tup, n_live_tup
 FROM pg_stat_user_tables;
 
 -- Reindex tables
@@ -493,12 +532,14 @@ REINDEX TABLE placements;
 ```
 
 ### 3. Log Rotation
+
 ```bash
 # Rotate logs
 logrotate /etc/logrotate.d/jps-system
 ```
 
 ### 4. Performance Monitoring
+
 ```bash
 # Monitor system resources
 htop
@@ -512,6 +553,7 @@ pm2 monit
 ## Deployment Checklist
 
 ### Pre-Deployment
+
 - [ ] All tests passing
 - [ ] Security audit completed
 - [ ] Performance benchmarks met
@@ -521,6 +563,7 @@ pm2 monit
 - [ ] Domain DNS configured
 
 ### Post-Deployment
+
 - [ ] Health check endpoint responding
 - [ ] Database connection working
 - [ ] Email/SMS services tested
@@ -530,6 +573,7 @@ pm2 monit
 - [ ] Performance metrics normal
 
 ### Ongoing Maintenance
+
 - [ ] Weekly security updates
 - [ ] Monthly performance review
 - [ ] Quarterly backup verification
@@ -539,21 +583,24 @@ pm2 monit
 ## Support and Resources
 
 ### Documentation
+
 - [Next.js Documentation](https://nextjs.org/docs)
 - [Prisma Documentation](https://www.prisma.io/docs)
 - [Vercel Documentation](https://vercel.com/docs)
 - [PostgreSQL Documentation](https://www.postgresql.org/docs)
 
 ### Monitoring Tools
+
 - [Sentry](https://sentry.io) - Error tracking
 - [Logtail](https://logtail.com) - Log management
 - [Vercel Analytics](https://vercel.com/analytics) - Performance monitoring
 
 ### Security Tools
+
 - [npm audit](https://docs.npmjs.com/cli/v8/commands/npm-audit) - Security vulnerabilities
 - [OWASP ZAP](https://owasp.org/www-project-zap/) - Security testing
 - [Snyk](https://snyk.io) - Dependency scanning
 
 ---
 
-**Note**: This guide assumes you have basic knowledge of Node.js, Next.js, and database management. For production deployments, always follow security best practices and consult with your DevOps team. 
+**Note**: This guide assumes you have basic knowledge of Node.js, Next.js, and database management. For production deployments, always follow security best practices and consult with your DevOps team.

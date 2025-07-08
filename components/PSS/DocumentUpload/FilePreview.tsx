@@ -3,12 +3,7 @@
 import React from 'react';
 import { X, Download, ZoomIn, ZoomOut, RotateCw } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-} from '@/components/ui/dialog';
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 
 interface FileWithPreview {
   id: string;
@@ -172,4 +167,4 @@ export default function FilePreview({ file, isOpen, onClose }: FilePreviewProps)
       </DialogContent>
     </Dialog>
   );
-} 
+}

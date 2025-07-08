@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { supportedLanguages } from '../../lib/utils/i18n';
+import utils/i18n from '@/lib/utils/i18n';
 
 const languageNames: Record<string, string> = {
   en: 'English',

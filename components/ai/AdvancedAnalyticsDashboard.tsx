@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 'use client';
 
@@ -527,8 +527,8 @@ export default function AdvancedAnalyticsDashboard() {
                   insight.type === 'positive'
                     ? 'bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800'
                     : insight.type === 'warning'
-                    ? 'bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800'
-                    : 'bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800'
+                      ? 'bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800'
+                      : 'bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800'
                 }`}
               >
                 <Icon
@@ -536,8 +536,8 @@ export default function AdvancedAnalyticsDashboard() {
                     insight.type === 'positive'
                       ? 'text-green-600'
                       : insight.type === 'warning'
-                      ? 'text-yellow-600'
-                      : 'text-red-600'
+                        ? 'text-yellow-600'
+                        : 'text-red-600'
                   }`}
                 />
                 <div className="flex-1">
@@ -550,8 +550,8 @@ export default function AdvancedAnalyticsDashboard() {
                         insight.type === 'positive'
                           ? 'text-green-600'
                           : insight.type === 'warning'
-                          ? 'text-yellow-600'
-                          : 'text-red-600'
+                            ? 'text-yellow-600'
+                            : 'text-red-600'
                       }`}
                     >
                       {insight.value}

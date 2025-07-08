@@ -2,7 +2,16 @@
 'use client';
 
 import React from 'react';
-import { Mail, CheckCircle, Info, AlertTriangle, XCircle, Calendar, Briefcase, UserCheck } from 'lucide-react';
+import {
+  Mail,
+  CheckCircle,
+  Info,
+  AlertTriangle,
+  XCircle,
+  Calendar,
+  Briefcase,
+  UserCheck,
+} from 'lucide-react';
 
 interface EmailNotificationProps {
   type: 'interview' | 'placement' | 'job';
@@ -60,12 +69,19 @@ const getTypeIcon = (type: string) => {
  * Roman Urdu: JPS Email Notification UI Component
  * Interview, placement, ya job update par user ko notification dikhata hai
  */
-const EmailNotification: React.FC<EmailNotificationProps> = ({ type, message, recipient, status }) => {
+const EmailNotification: React.FC<EmailNotificationProps> = ({
+  type,
+  message,
+  recipient,
+  status,
+}) => {
   const statusStyles = getStatusStyles(status);
   const typeIcon = getTypeIcon(type);
 
   return (
-    <div className={`flex items-start p-4 rounded-lg shadow-md mb-4 ${statusStyles.color} transition-all`}>  
+    <div
+      className={`flex items-start p-4 rounded-lg shadow-md mb-4 ${statusStyles.color} transition-all`}
+    >
       <div className="mr-3">{statusStyles.icon}</div>
       <div className="flex-1">
         <div className="flex items-center mb-1">
@@ -84,4 +100,4 @@ const EmailNotification: React.FC<EmailNotificationProps> = ({ type, message, re
   );
 };
 
-export default EmailNotification; 
+export default EmailNotification;

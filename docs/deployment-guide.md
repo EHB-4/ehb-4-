@@ -114,12 +114,10 @@ docker run -p 3000:3000 ehb-app
 ### Common Issues
 
 1. **Database connection failed**
-
    - Check DATABASE_URL
    - Verify MongoDB is running
 
 2. **Authentication errors**
-
    - Verify NEXTAUTH_SECRET
    - Check NEXTAUTH_URL
 

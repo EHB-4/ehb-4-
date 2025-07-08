@@ -1,15 +1,15 @@
-"use client";
+'use client';
 
 'use client';
 
 import React, { useState } from 'react';
-import { useJPSRole } from '../../../components/JPS/JPSRoleContext';
+import JPS/JPSRoleContext from '@/components/JPS/JPSRoleContext';
 import {
   // @ts-ignore
   SparklesIcon,
   AdjustmentsHorizontalIcon,
 } from '@heroicons/react/24/outline';
-import AIMatching from '../../../components/JPS/AIMatching';
+import JPS/AIMatching from '@/components/JPS/AIMatching';
 
 const MatchingPage: React.FC = () => {
   const { role } = useJPSRole();

@@ -335,7 +335,6 @@ const HealthFranchisePage = () => {
 
 export default HealthFranchisePage;
 
-
 import {
   Building,
   MapPin,
@@ -363,8 +362,7 @@ import {
 } from '@heroicons/react/24/outline';
 
 const FranchisePage = () => {
-
-const franchiseCategories = [
+  const franchiseCategories = [
     {
       id: 'health',
       name: 'Health & Wellness',
@@ -417,7 +415,7 @@ const franchiseCategories = [
     },
   ];
 
-const franchiseLevels = [
+  const franchiseLevels = [
     {
       level: 'Corporate',
       investment: '$1M - $5M',
@@ -447,7 +445,7 @@ const franchiseLevels = [
     },
   ];
 
-const benefits = [
+  const benefits = [
     {
       icon: <ShieldCheckIcon className="h-8 w-8 text-green-600" />,
       title: 'Proven Business Model',
@@ -679,8 +677,7 @@ import {
 } from '@heroicons/react/24/outline';
 
 const EducationFranchisePage = () => {
-
-const educationServices = [
+  const educationServices = [
     {
       name: 'K-12 Schools',
       description: 'Primary and secondary education institutions',
@@ -725,7 +722,7 @@ const educationServices = [
     },
   ];
 
-const requirements = [
+  const requirements = [
     'Education background or teaching experience preferred',
     'Minimum investment of $80K',
     'Commitment to educational excellence',
@@ -734,7 +731,7 @@ const requirements = [
     'Passion for learning and teaching',
   ];
 
-const support = [
+  const support = [
     'Curriculum development and training',
     'Marketing and student recruitment',
     'Technology and learning management systems',

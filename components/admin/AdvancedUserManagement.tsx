@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 'use client';
 
@@ -150,10 +150,10 @@ export function AdvancedUserManagement({
             value === 'admin'
               ? 'destructive'
               : value === 'manager'
-              ? 'warning'
-              : value === 'moderator'
-              ? 'info'
-              : 'default'
+                ? 'warning'
+                : value === 'moderator'
+                  ? 'info'
+                  : 'default'
           }
         >
           {value.charAt(0).toUpperCase() + value.slice(1)}
@@ -171,12 +171,12 @@ export function AdvancedUserManagement({
             value === 'active'
               ? 'success'
               : value === 'inactive'
-              ? 'secondary'
-              : value === 'suspended'
-              ? 'destructive'
-              : value === 'pending'
-              ? 'warning'
-              : 'default'
+                ? 'secondary'
+                : value === 'suspended'
+                  ? 'destructive'
+                  : value === 'pending'
+                    ? 'warning'
+                    : 'default'
           }
         >
           {value.charAt(0).toUpperCase() + value.slice(1)}

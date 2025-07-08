@@ -39,10 +39,7 @@
     "merged": [
       {
         "type": "similar_name",
-        "files": [
-          "app\\franchise\\apply\\page.tsx",
-          "app\\franchise\\status\\page.tsx"
-        ],
+        "files": ["app\\franchise\\apply\\page.tsx", "app\\franchise\\status\\page.tsx"],
         "fileName": "page.tsx"
       },
       {

@@ -294,25 +294,21 @@ interface FranchiseInfo {
 ### **AI Assistant Capabilities:**
 
 1. **Natural Language Processing**
-
    - Voice commands and chat interactions
    - Multi-language support
    - Context-aware responses
 
 2. **Document Processing**
-
    - OCR for document scanning
    - Automated form filling
    - Data extraction and validation
 
 3. **Predictive Analytics**
-
    - User behavior analysis
    - Performance predictions
    - Risk assessment
 
 4. **Automated Workflows**
-
    - Task automation
    - Process optimization
    - Smart routing
@@ -490,14 +486,12 @@ interface FranchiseInfo {
 ## 🎯 **Next Steps**
 
 1. **Immediate Actions:**
-
    - Set up development environment
    - Create project structure
    - Design database schema
    - Implement basic UI components
 
 2. **Short-term Goals:**
-
    - Complete core dashboard
    - Implement AI agent
    - Integrate with existing modules

@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { urlManager } from '../../../lib/utils/urlManager';
-import { autoBrowser } from '../../../lib/utils/autoBrowser';
+import utils/urlManager from '@/lib/utils/urlManager';
+import utils/autoBrowser from '@/lib/utils/autoBrowser';
 
 export async function GET(request: NextRequest) {
   try {

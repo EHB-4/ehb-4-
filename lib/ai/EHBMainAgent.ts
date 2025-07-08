@@ -1,9 +1,9 @@
 /**
  * EHB Main Agent - Master Orchestrator
- * 
+ *
  * Manages all EHB agents and provides centralized control
  * Integrates with EHB AI DEV for real-time development
- * 
+ *
  * @author EHB AI System
  * @version 2.0.0
  */
@@ -55,37 +55,37 @@ export class EHBMainAgent {
     this.registerAgent('monitoring', {
       name: 'Monitoring Agent',
       description: '24/7 system monitoring and health checks',
-      capabilities: ['health_check', 'performance_monitoring', 'alert_system']
+      capabilities: ['health_check', 'performance_monitoring', 'alert_system'],
     });
 
     this.registerAgent('deployment', {
       name: 'Deployment Agent',
       description: 'Automated deployment and CI/CD management',
-      capabilities: ['auto_deploy', 'rollback', 'environment_management']
+      capabilities: ['auto_deploy', 'rollback', 'environment_management'],
     });
 
     this.registerAgent('fixer', {
       name: 'Fixer Agent',
       description: 'Automatic bug fixing and error resolution',
-      capabilities: ['error_detection', 'auto_fix', 'code_optimization']
+      capabilities: ['error_detection', 'auto_fix', 'code_optimization'],
     });
 
     this.registerAgent('franchise', {
       name: 'Franchise Agent',
       description: 'Franchise management and expansion',
-      capabilities: ['franchise_management', 'location_optimization', 'growth_analysis']
+      capabilities: ['franchise_management', 'location_optimization', 'growth_analysis'],
     });
 
     this.registerAgent('seo', {
       name: 'SEO Agent',
       description: 'Search engine optimization and content management',
-      capabilities: ['seo_analysis', 'content_optimization', 'keyword_research']
+      capabilities: ['seo_analysis', 'content_optimization', 'keyword_research'],
     });
 
     this.registerAgent('development', {
       name: 'EHB AI DEV Agent',
       description: 'Real-time coding and project management',
-      capabilities: ['real_time_coding', 'project_management', 'code_review', 'testing']
+      capabilities: ['real_time_coding', 'project_management', 'code_review', 'testing'],
     });
   }
 
@@ -99,7 +99,7 @@ export class EHBMainAgent {
       status: 'idle',
       lastActivity: new Date(),
       performance: { cpu: 0, memory: 0, responseTime: 0 },
-      tasks: { completed: 0, pending: 0, failed: 0 }
+      tasks: { completed: 0, pending: 0, failed: 0 },
     });
 
     this.emit('agent_registered', { id, config });
@@ -112,7 +112,7 @@ export class EHBMainAgent {
   async start() {
     this.status = 'running';
     console.log('EHB Main Agent started');
-    
+
     // Start all registered agents
     for (const [id, agent] of this.agents) {
       await this.startAgent(id);
@@ -128,7 +128,7 @@ export class EHBMainAgent {
   async stop() {
     this.status = 'stopped';
     console.log('EHB Main Agent stopped');
-    
+
     // Stop all registered agents
     for (const [id, agent] of this.agents) {
       await this.stopAgent(id);
@@ -149,10 +149,10 @@ export class EHBMainAgent {
 
     agent.status = 'running';
     agent.lastActivity = new Date();
-    
+
     this.emit('agent_started', { agentId, agentName: agent.config.name });
     console.log(`Agent started: ${agent.config.name}`);
-    
+
     return true;
   }
 
@@ -167,17 +167,20 @@ export class EHBMainAgent {
 
     agent.status = 'stopped';
     agent.lastActivity = new Date();
-    
+
     this.emit('agent_stopped', { agentId, agentName: agent.config.name });
     console.log(`Agent stopped: ${agent.config.name}`);
-    
+
     return true;
   }
 
   /**
    * Assign task to an agent
    */
-  async assignTask(agentId: string, task: Omit<AgentTask, 'id' | 'agentId' | 'status' | 'createdAt'>) {
+  async assignTask(
+    agentId: string,
+    task: Omit<AgentTask, 'id' | 'agentId' | 'status' | 'createdAt'>
+  ) {
     const agent = this.agents.get(agentId);
     if (!agent) {
       throw new Error(`Agent not found: ${agentId}`);
@@ -189,7 +192,7 @@ export class EHBMainAgent {
       id: taskId,
       agentId,
       status: 'pending',
-      createdAt: new Date()
+      createdAt: new Date(),
     };
 
     this.tasks.set(taskId, newTask);
@@ -222,21 +225,20 @@ export class EHBMainAgent {
     try {
       // Simulate task execution based on agent type
       const result = await this.simulateTaskExecution(task);
-      
+
       task.status = 'completed';
       task.completedAt = new Date();
       task.result = result;
-      
+
       agent.tasks.completed++;
       agent.tasks.pending--;
 
       this.emit('task_completed', { taskId, result });
       console.log(`Task completed: ${task.description}`);
-
     } catch (error: any) {
       task.status = 'failed';
       task.result = { error: error.message };
-      
+
       agent.tasks.failed++;
       agent.tasks.pending--;
 
@@ -251,7 +253,7 @@ export class EHBMainAgent {
   private async simulateTaskExecution(task: AgentTask): Promise<any> {
     // Simulate different execution times based on task type
     const executionTime = Math.random() * 5000 + 1000; // 1-6 seconds
-    
+
     await new Promise(resolve => setTimeout(resolve, executionTime));
 
     // Return mock results based on task type
@@ -261,49 +263,49 @@ export class EHBMainAgent {
           systemHealth: 'good',
           uptime: '99.9%',
           alerts: 0,
-          recommendations: ['System performing optimally']
+          recommendations: ['System performing optimally'],
         };
-      
+
       case 'deployment':
         return {
           deploymentStatus: 'success',
           environment: 'production',
           version: '2.1.0',
-          rollbackAvailable: true
+          rollbackAvailable: true,
         };
-      
+
       case 'fixing':
         return {
           bugsFixed: 3,
           codeOptimized: true,
           performanceImproved: '15%',
-          securityIssues: 0
+          securityIssues: 0,
         };
-      
+
       case 'franchise':
         return {
           locationsAnalyzed: 5,
           growthOpportunities: 2,
           marketAnalysis: 'positive',
-          recommendations: ['Expand to new markets']
+          recommendations: ['Expand to new markets'],
         };
-      
+
       case 'seo':
         return {
           keywordsOptimized: 10,
           contentImproved: true,
           rankingImproved: '25%',
-          trafficIncrease: '30%'
+          trafficIncrease: '30%',
         };
-      
+
       case 'development':
         return {
           codeWritten: '500 lines',
           testsPassed: 15,
           bugsFound: 2,
-          deploymentReady: true
+          deploymentReady: true,
         };
-      
+
       default:
         return { status: 'completed', message: 'Task executed successfully' };
     }
@@ -319,7 +321,7 @@ export class EHBMainAgent {
       status: agent.status,
       lastActivity: agent.lastActivity,
       performance: agent.performance,
-      tasks: agent.tasks
+      tasks: agent.tasks,
     }));
   }
 
@@ -336,7 +338,7 @@ export class EHBMainAgent {
       status: agent.status,
       lastActivity: agent.lastActivity,
       performance: agent.performance,
-      tasks: agent.tasks
+      tasks: agent.tasks,
     };
   }
 
@@ -386,14 +388,14 @@ export class EHBMainAgent {
       status: this.status,
       agentsCount: this.agents.size,
       tasksCount: this.tasks.size,
-      runningAgents: Array.from(this.agents.values()).filter(a => a.status === 'running').length
+      runningAgents: Array.from(this.agents.values()).filter(a => a.status === 'running').length,
     };
   }
 
   /**
    * EHB AI DEV Integration Methods
    */
-  
+
   /**
    * Get development capabilities for EHB AI DEV
    */
@@ -403,9 +405,9 @@ export class EHBMainAgent {
       agentCapabilities: Array.from(this.agents.values()).map(agent => ({
         id: agent.id,
         name: agent.config.name,
-        capabilities: agent.config.capabilities
+        capabilities: agent.config.capabilities,
       })),
-      systemStatus: this.getStatus()
+      systemStatus: this.getStatus(),
     };
   }
 
@@ -417,7 +419,7 @@ export class EHBMainAgent {
     const taskId = await this.assignTask('development', {
       type: 'development',
       priority: task.priority || 'medium',
-      description: task.description
+      description: task.description,
     });
 
     return { taskId, status: 'assigned' };
@@ -434,7 +436,7 @@ export class EHBMainAgent {
       agentStatus: devAgent ? this.getAgentStatus('development') : null,
       activeTasks: devTasks.filter(t => t.status === 'running'),
       completedTasks: devTasks.filter(t => t.status === 'completed'),
-      pendingTasks: devTasks.filter(t => t.status === 'pending')
+      pendingTasks: devTasks.filter(t => t.status === 'pending'),
     };
   }
 }

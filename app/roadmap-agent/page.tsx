@@ -1,12 +1,12 @@
-"use client";
+'use client';
 
 'use client';
 
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
-import LanguageSelector from '../../components/ui/LanguageSelector';
-import { getAggregatedEHBData } from '../../lib/utils/ehbDataPage';
+import ui/LanguageSelector from '@/components/ui/LanguageSelector';
+import utils/ehbDataPage from '@/lib/utils/ehbDataPage';
 
 export default function RoadmapAgentPage() {
   const { t } = useTranslation();
@@ -263,10 +263,10 @@ export default function RoadmapAgentPage() {
                       module.status === 'Completed'
                         ? 'bg-green-100 text-green-800'
                         : module.status === 'Working'
-                        ? 'bg-blue-100 text-blue-800'
-                        : module.status === 'Under Development'
-                        ? 'bg-yellow-100 text-yellow-800'
-                        : 'bg-gray-100 text-gray-800'
+                          ? 'bg-blue-100 text-blue-800'
+                          : module.status === 'Under Development'
+                            ? 'bg-yellow-100 text-yellow-800'
+                            : 'bg-gray-100 text-gray-800'
                     }`}
                   >
                     {t(module.status.toLowerCase())}
@@ -288,10 +288,10 @@ export default function RoadmapAgentPage() {
                         module.progress >= 80
                           ? 'bg-green-500'
                           : module.progress >= 60
-                          ? 'bg-blue-500'
-                          : module.progress >= 40
-                          ? 'bg-yellow-500'
-                          : 'bg-red-500'
+                            ? 'bg-blue-500'
+                            : module.progress >= 40
+                              ? 'bg-yellow-500'
+                              : 'bg-red-500'
                       }`}
                       style={{ width: `${module.progress}%` }}
                     ></div>

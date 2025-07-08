@@ -12,7 +12,7 @@ const JobSchema = z.object({
   salary: z.number().min(0, 'Salary must be positive'),
   description: z.string().min(10, 'Description must be at least 10 characters'),
   requirements: z.array(z.string()).min(1, 'At least one requirement is needed'),
-  status: z.enum(['active', 'inactive', 'filled']).default('active')
+  status: z.enum(['active', 'inactive', 'filled']).default('active'),
 });
 
 const CandidateSchema = z.object({
@@ -22,7 +22,7 @@ const CandidateSchema = z.object({
   sqlLevel: z.number().min(0).max(4, 'SQL Level must be between 0-4'),
   experience: z.number().min(0, 'Experience must be positive'),
   skills: z.array(z.string()).min(1, 'At least one skill is required'),
-  status: z.enum(['active', 'inactive', 'placed']).default('active')
+  status: z.enum(['active', 'inactive', 'placed']).default('active'),
 });
 
 const PlacementSchema = z.object({
@@ -32,7 +32,7 @@ const PlacementSchema = z.object({
   candidateName: z.string().min(1, 'Candidate name is required'),
   company: z.string().min(1, 'Company name is required'),
   salary: z.number().min(0, 'Salary must be positive'),
-  status: z.enum(['pending', 'completed', 'cancelled']).default('pending')
+  status: z.enum(['pending', 'completed', 'cancelled']).default('pending'),
 });
 
 // Roman Urdu: Mock database (replace with real database)
@@ -47,7 +47,7 @@ const jobs: any[] = [
     requirements: ['React', 'TypeScript', 'Node.js', '5+ years experience'],
     status: 'active',
     createdAt: new Date().toISOString(),
-    updatedAt: new Date().toISOString()
+    updatedAt: new Date().toISOString(),
   },
   {
     id: '2',
@@ -59,8 +59,8 @@ const jobs: any[] = [
     requirements: ['JavaScript', 'Python', 'Django', '3+ years experience'],
     status: 'active',
     createdAt: new Date().toISOString(),
-    updatedAt: new Date().toISOString()
-  }
+    updatedAt: new Date().toISOString(),
+  },
 ];
 
 const candidates: any[] = [
@@ -74,7 +74,7 @@ const candidates: any[] = [
     skills: ['React', 'TypeScript', 'Node.js', 'MongoDB'],
     status: 'active',
     createdAt: new Date().toISOString(),
-    updatedAt: new Date().toISOString()
+    updatedAt: new Date().toISOString(),
   },
   {
     id: '2',
@@ -86,8 +86,8 @@ const candidates: any[] = [
     skills: ['JavaScript', 'Python', 'Django', 'PostgreSQL'],
     status: 'active',
     createdAt: new Date().toISOString(),
-    updatedAt: new Date().toISOString()
-  }
+    updatedAt: new Date().toISOString(),
+  },
 ];
 
 const placements: any[] = [
@@ -102,8 +102,8 @@ const placements: any[] = [
     status: 'completed',
     placementDate: new Date().toISOString(),
     createdAt: new Date().toISOString(),
-    updatedAt: new Date().toISOString()
-  }
+    updatedAt: new Date().toISOString(),
+  },
 ];
 
 // Roman Urdu: Utility functions
@@ -170,8 +170,9 @@ export async function GET(request: NextRequest) {
             totalPlacements: placements.length,
             activeJobs: jobs.filter(job => job.status === 'active').length,
             activeCandidates: candidates.filter(candidate => candidate.status === 'active').length,
-            completedPlacements: placements.filter(placement => placement.status === 'completed').length
-          }
+            completedPlacements: placements.filter(placement => placement.status === 'completed')
+              .length,
+          },
         });
 
       default:
@@ -197,7 +198,7 @@ export async function POST(request: NextRequest) {
           id: generateId(),
           ...jobData,
           createdAt: new Date().toISOString(),
-          updatedAt: new Date().toISOString()
+          updatedAt: new Date().toISOString(),
         };
         jobs.push(newJob);
         return NextResponse.json(newJob, { status: 201 });
@@ -208,18 +209,18 @@ export async function POST(request: NextRequest) {
           id: generateId(),
           ...candidateData,
           createdAt: new Date().toISOString(),
-          updatedAt: new Date().toISOString()
+          updatedAt: new Date().toISOString(),
         };
         candidates.push(newCandidate);
         return NextResponse.json(newCandidate, { status: 201 });
 
       case 'placement':
         const placementData = PlacementSchema.parse(body);
-        
+
         // Roman Urdu: Validate job and candidate exist
         const job = findJob(placementData.jobId);
         const candidate = findCandidate(placementData.candidateId);
-        
+
         if (!job) {
           return NextResponse.json({ error: 'Job not found' }, { status: 404 });
         }
@@ -232,7 +233,7 @@ export async function POST(request: NextRequest) {
           ...placementData,
           placementDate: new Date().toISOString(),
           createdAt: new Date().toISOString(),
-          updatedAt: new Date().toISOString()
+          updatedAt: new Date().toISOString(),
         };
         placements.push(newPlacement);
         return NextResponse.json(newPlacement, { status: 201 });
@@ -242,7 +243,10 @@ export async function POST(request: NextRequest) {
     }
   } catch (error) {
     if (error instanceof z.ZodError) {
-      return NextResponse.json({ error: 'Validation error', details: error.errors }, { status: 400 });
+      return NextResponse.json(
+        { error: 'Validation error', details: error.errors },
+        { status: 400 }
+      );
     }
     console.error('POST Error:', error);
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
@@ -271,7 +275,7 @@ export async function PUT(request: NextRequest) {
         jobs[jobIndex] = {
           ...jobs[jobIndex],
           ...jobData,
-          updatedAt: new Date().toISOString()
+          updatedAt: new Date().toISOString(),
         };
         return NextResponse.json(jobs[jobIndex]);
 
@@ -284,7 +288,7 @@ export async function PUT(request: NextRequest) {
         candidates[candidateIndex] = {
           ...candidates[candidateIndex],
           ...candidateData,
-          updatedAt: new Date().toISOString()
+          updatedAt: new Date().toISOString(),
         };
         return NextResponse.json(candidates[candidateIndex]);
 
@@ -297,7 +301,7 @@ export async function PUT(request: NextRequest) {
         placements[placementIndex] = {
           ...placements[placementIndex],
           ...placementData,
-          updatedAt: new Date().toISOString()
+          updatedAt: new Date().toISOString(),
         };
         return NextResponse.json(placements[placementIndex]);
 
@@ -306,7 +310,10 @@ export async function PUT(request: NextRequest) {
     }
   } catch (error) {
     if (error instanceof z.ZodError) {
-      return NextResponse.json({ error: 'Validation error', details: error.errors }, { status: 400 });
+      return NextResponse.json(
+        { error: 'Validation error', details: error.errors },
+        { status: 400 }
+      );
     }
     console.error('PUT Error:', error);
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
@@ -356,4 +363,4 @@ export async function DELETE(request: NextRequest) {
     console.error('DELETE Error:', error);
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
   }
-} 
+}

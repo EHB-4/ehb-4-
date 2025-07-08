@@ -1,8 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { getSession } from 'next-auth/react';
 
-import { prisma } from '@/lib/prisma';
-
 declare module 'next' {
   interface NextApiRequest {
     user?: {
@@ -32,6 +30,8 @@ export default async function checkSQLLevel(
     if (!session) {
       return res.status(401).json({ error: 'Unauthorized' });
     }
+
+    // TODO: Replace with AWS data access
 
     const user = await prisma.user.findUnique({
       where: { id: session.user.id },

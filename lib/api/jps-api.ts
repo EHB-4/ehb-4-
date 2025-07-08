@@ -361,9 +361,9 @@ export class JPSApiService {
   }): Promise<JPSJob[]> {
     // Simulate API delay
     await new Promise(resolve => setTimeout(resolve, 500));
-    
+
     let filteredJobs = [...mockJobs];
-    
+
     if (filters) {
       if (filters.status && filters.status !== 'all') {
         filteredJobs = filteredJobs.filter(job => job.status === filters.status);
@@ -372,17 +372,15 @@ export class JPSApiService {
         filteredJobs = filteredJobs.filter(job => job.type === filters.type);
       }
       if (filters.location) {
-        filteredJobs = filteredJobs.filter(job => 
+        filteredJobs = filteredJobs.filter(job =>
           job.location.toLowerCase().includes(filters.location!.toLowerCase())
         );
       }
       if (filters.sqlLevel) {
-        filteredJobs = filteredJobs.filter(job => 
-          job.sqlLevelRequired === filters.sqlLevel
-        );
+        filteredJobs = filteredJobs.filter(job => job.sqlLevelRequired === filters.sqlLevel);
       }
     }
-    
+
     return filteredJobs;
   }
 
@@ -391,36 +389,38 @@ export class JPSApiService {
     return mockJobs.find(job => job.id === id) || null;
   }
 
-  static async createJob(jobData: Omit<JPSJob, 'id' | 'postedDate' | 'applications'>): Promise<JPSJob> {
+  static async createJob(
+    jobData: Omit<JPSJob, 'id' | 'postedDate' | 'applications'>
+  ): Promise<JPSJob> {
     await new Promise(resolve => setTimeout(resolve, 800));
-    
+
     const newJob: JPSJob = {
       ...jobData,
       id: Date.now().toString(),
       postedDate: new Date().toISOString().split('T')[0],
       applications: 0,
     };
-    
+
     mockJobs.push(newJob);
     return newJob;
   }
 
   static async updateJob(id: string, jobData: Partial<JPSJob>): Promise<JPSJob | null> {
     await new Promise(resolve => setTimeout(resolve, 600));
-    
+
     const jobIndex = mockJobs.findIndex(job => job.id === id);
     if (jobIndex === -1) return null;
-    
+
     mockJobs[jobIndex] = { ...mockJobs[jobIndex], ...jobData };
     return mockJobs[jobIndex];
   }
 
   static async deleteJob(id: string): Promise<boolean> {
     await new Promise(resolve => setTimeout(resolve, 400));
-    
+
     const jobIndex = mockJobs.findIndex(job => job.id === id);
     if (jobIndex === -1) return false;
-    
+
     mockJobs.splice(jobIndex, 1);
     return true;
   }
@@ -432,23 +432,27 @@ export class JPSApiService {
     sqlLevel?: number;
   }): Promise<JPSCandidate[]> {
     await new Promise(resolve => setTimeout(resolve, 500));
-    
+
     let filteredCandidates = [...mockCandidates];
-    
+
     if (filters) {
       if (filters.status && filters.status !== 'all') {
-        filteredCandidates = filteredCandidates.filter(candidate => candidate.status === filters.status);
+        filteredCandidates = filteredCandidates.filter(
+          candidate => candidate.status === filters.status
+        );
       }
       if (filters.location) {
-        filteredCandidates = filteredCandidates.filter(candidate => 
+        filteredCandidates = filteredCandidates.filter(candidate =>
           candidate.location.toLowerCase().includes(filters.location!.toLowerCase())
         );
       }
       if (filters.sqlLevel) {
-        filteredCandidates = filteredCandidates.filter(candidate => candidate.sqlLevel === filters.sqlLevel);
+        filteredCandidates = filteredCandidates.filter(
+          candidate => candidate.sqlLevel === filters.sqlLevel
+        );
       }
     }
-    
+
     return filteredCandidates;
   }
 
@@ -457,25 +461,30 @@ export class JPSApiService {
     return mockCandidates.find(candidate => candidate.id === id) || null;
   }
 
-  static async createCandidate(candidateData: Omit<JPSCandidate, 'id' | 'lastActive'>): Promise<JPSCandidate> {
+  static async createCandidate(
+    candidateData: Omit<JPSCandidate, 'id' | 'lastActive'>
+  ): Promise<JPSCandidate> {
     await new Promise(resolve => setTimeout(resolve, 800));
-    
+
     const newCandidate: JPSCandidate = {
       ...candidateData,
       id: Date.now().toString(),
       lastActive: new Date().toISOString().split('T')[0],
     };
-    
+
     mockCandidates.push(newCandidate);
     return newCandidate;
   }
 
-  static async updateCandidate(id: string, candidateData: Partial<JPSCandidate>): Promise<JPSCandidate | null> {
+  static async updateCandidate(
+    id: string,
+    candidateData: Partial<JPSCandidate>
+  ): Promise<JPSCandidate | null> {
     await new Promise(resolve => setTimeout(resolve, 600));
-    
+
     const candidateIndex = mockCandidates.findIndex(candidate => candidate.id === id);
     if (candidateIndex === -1) return null;
-    
+
     mockCandidates[candidateIndex] = { ...mockCandidates[candidateIndex], ...candidateData };
     return mockCandidates[candidateIndex];
   }
@@ -486,32 +495,36 @@ export class JPSApiService {
     company?: string;
   }): Promise<JPSPlacement[]> {
     await new Promise(resolve => setTimeout(resolve, 500));
-    
+
     let filteredPlacements = [...mockPlacements];
-    
+
     if (filters) {
       if (filters.status && filters.status !== 'all') {
-        filteredPlacements = filteredPlacements.filter(placement => placement.status === filters.status);
+        filteredPlacements = filteredPlacements.filter(
+          placement => placement.status === filters.status
+        );
       }
       if (filters.company) {
-        filteredPlacements = filteredPlacements.filter(placement => 
+        filteredPlacements = filteredPlacements.filter(placement =>
           placement.company.toLowerCase().includes(filters.company!.toLowerCase())
         );
       }
     }
-    
+
     return filteredPlacements;
   }
 
-  static async createPlacement(placementData: Omit<JPSPlacement, 'id' | 'placementDate'>): Promise<JPSPlacement> {
+  static async createPlacement(
+    placementData: Omit<JPSPlacement, 'id' | 'placementDate'>
+  ): Promise<JPSPlacement> {
     await new Promise(resolve => setTimeout(resolve, 800));
-    
+
     const newPlacement: JPSPlacement = {
       ...placementData,
       id: Date.now().toString(),
       placementDate: new Date().toISOString().split('T')[0],
     };
-    
+
     mockPlacements.push(newPlacement);
     return newPlacement;
   }
@@ -522,29 +535,33 @@ export class JPSApiService {
     type?: string;
   }): Promise<JPSInterview[]> {
     await new Promise(resolve => setTimeout(resolve, 500));
-    
+
     let filteredInterviews = [...mockInterviews];
-    
+
     if (filters) {
       if (filters.status && filters.status !== 'all') {
-        filteredInterviews = filteredInterviews.filter(interview => interview.status === filters.status);
+        filteredInterviews = filteredInterviews.filter(
+          interview => interview.status === filters.status
+        );
       }
       if (filters.type) {
-        filteredInterviews = filteredInterviews.filter(interview => interview.type === filters.type);
+        filteredInterviews = filteredInterviews.filter(
+          interview => interview.type === filters.type
+        );
       }
     }
-    
+
     return filteredInterviews;
   }
 
   static async scheduleInterview(interviewData: Omit<JPSInterview, 'id'>): Promise<JPSInterview> {
     await new Promise(resolve => setTimeout(resolve, 800));
-    
+
     const newInterview: JPSInterview = {
       ...interviewData,
       id: Date.now().toString(),
     };
-    
+
     mockInterviews.push(newInterview);
     return newInterview;
   }
@@ -552,7 +569,7 @@ export class JPSApiService {
   // Analytics API
   static async getAnalytics(): Promise<JPSAnalytics> {
     await new Promise(resolve => setTimeout(resolve, 700));
-    
+
     const sqlLevelDistribution = {
       0: mockCandidates.filter(c => c.sqlLevel === 0).length,
       1: mockCandidates.filter(c => c.sqlLevel === 1).length,
@@ -562,10 +579,13 @@ export class JPSApiService {
     };
 
     const allSkills = mockCandidates.flatMap(c => c.skills);
-    const skillCounts = allSkills.reduce((acc, skill) => {
-      acc[skill] = (acc[skill] || 0) + 1;
-      return acc;
-    }, {} as Record<string, number>);
+    const skillCounts = allSkills.reduce(
+      (acc, skill) => {
+        acc[skill] = (acc[skill] || 0) + 1;
+        return acc;
+      },
+      {} as Record<string, number>
+    );
 
     const topSkills = Object.entries(skillCounts)
       .map(([skill, count]) => ({ skill, count }))
@@ -598,22 +618,20 @@ export class JPSApiService {
   // AI Matching API
   static async getJobMatches(jobId: string): Promise<JPSCandidate[]> {
     await new Promise(resolve => setTimeout(resolve, 1000));
-    
+
     const job = mockJobs.find(j => j.id === jobId);
     if (!job) return [];
-    
+
     // Simple matching algorithm based on skills and SQL level
     return mockCandidates
-      .filter(candidate => 
-        candidate.status === 'available' && 
-        candidate.sqlLevel >= (job.sqlLevelRequired || 0)
+      .filter(
+        candidate =>
+          candidate.status === 'available' && candidate.sqlLevel >= (job.sqlLevelRequired || 0)
       )
       .map(candidate => {
-        const skillMatch = candidate.skills.filter(skill => 
-          job.skills.includes(skill)
-        ).length;
+        const skillMatch = candidate.skills.filter(skill => job.skills.includes(skill)).length;
         const matchScore = Math.round((skillMatch / job.skills.length) * 100);
-        
+
         return {
           ...candidate,
           matchScore: Math.min(matchScore, 100),
@@ -625,22 +643,17 @@ export class JPSApiService {
 
   static async getCandidateMatches(candidateId: string): Promise<JPSJob[]> {
     await new Promise(resolve => setTimeout(resolve, 1000));
-    
+
     const candidate = mockCandidates.find(c => c.id === candidateId);
     if (!candidate) return [];
-    
+
     // Simple matching algorithm based on skills and SQL level
     return mockJobs
-      .filter(job => 
-        job.status === 'active' && 
-        candidate.sqlLevel >= (job.sqlLevelRequired || 0)
-      )
+      .filter(job => job.status === 'active' && candidate.sqlLevel >= (job.sqlLevelRequired || 0))
       .map(job => {
-        const skillMatch = candidate.skills.filter(skill => 
-          job.skills.includes(skill)
-        ).length;
+        const skillMatch = candidate.skills.filter(skill => job.skills.includes(skill)).length;
         const matchScore = Math.round((skillMatch / candidate.skills.length) * 100);
-        
+
         return {
           ...job,
           matchScore: Math.min(matchScore, 100),
@@ -651,4 +664,4 @@ export class JPSApiService {
   }
 }
 
-export default JPSApiService; 
+export default JPSApiService;

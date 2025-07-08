@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import { Search, Filter } from 'lucide-react';
 import React from 'react';

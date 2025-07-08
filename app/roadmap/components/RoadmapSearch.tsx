@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
 import React, { useState, useEffect } from 'react';
 
-import { SearchFilters, SearchResult } from '../services/searchService';
+import searchService from '@/services/searchService';
 
 interface RoadmapSearchProps {
   onSearch: (query: string, filters: SearchFilters) => void;

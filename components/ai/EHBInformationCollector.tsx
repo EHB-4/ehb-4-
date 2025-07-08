@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 'use client';
 
@@ -376,8 +376,8 @@ export default function EHBInformationCollector() {
                         {update.type === 'service'
                           ? 'Service Update'
                           : update.type === 'company'
-                          ? 'Company Update'
-                          : 'New Service'}
+                            ? 'Company Update'
+                            : 'New Service'}
                       </span>
                       <span className="text-xs text-gray-500">
                         {new Date(update.timestamp).toLocaleString()}

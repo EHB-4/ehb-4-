@@ -1,11 +1,13 @@
 # GoSellr Module — EHB Technologies
 
 ## Overview
+
 GoSellr is a global e-commerce and services platform for verified sellers, buyers, and service providers. It is fully integrated with EHB's wallet, franchise, complaint, and AI agent systems.
 
 ---
 
 ## Key Features
+
 - Coupon & Discount System
 - Multi-Currency Support
 - AI Auto-Pricing Advisor
@@ -30,18 +32,20 @@ GoSellr is a global e-commerce and services platform for verified sellers, buyer
 ---
 
 ## Agent Assignments
-| Feature                        | Agent(s)            |
-|-------------------------------|---------------------|
-| UI/UX, Filters, Badges         | UI Agent            |
-| API Routes, Discount, Tax      | API Agent           |
-| Coupon, Lock, Refund           | Wallet Agent        |
-| Delivery, Area Score           | Franchise Agent     |
-| Price Suggestion, Buyer Rec.   | AI Agent            |
-| Complaint, Order Lock          | Complaint Agent     |
+
+| Feature                      | Agent(s)        |
+| ---------------------------- | --------------- |
+| UI/UX, Filters, Badges       | UI Agent        |
+| API Routes, Discount, Tax    | API Agent       |
+| Coupon, Lock, Refund         | Wallet Agent    |
+| Delivery, Area Score         | Franchise Agent |
+| Price Suggestion, Buyer Rec. | AI Agent        |
+| Complaint, Order Lock        | Complaint Agent |
 
 ---
 
 ## Folder Structure
+
 ```plaintext
 /app/gosellr/
   /api/           # API routes (discount, coupon, bulk-upload, tax-report, etc.)
@@ -58,6 +62,7 @@ GoSellr is a global e-commerce and services platform for verified sellers, buyer
 ---
 
 ## Dev Flow Summary
+
 1. **UI Agent**: Build advanced filter, verification badges, micro-store tabs
 2. **API Agent**: Implement new API endpoints, connect to AI/SQL tagging
 3. **Wallet Agent**: Sync discounts, refunds, post-order lock
@@ -67,4 +72,4 @@ GoSellr is a global e-commerce and services platform for verified sellers, buyer
 
 ---
 
-*This module is ready for agent-based, automation-driven development in Cursor/GitHub.* 
+_This module is ready for agent-based, automation-driven development in Cursor/GitHub._

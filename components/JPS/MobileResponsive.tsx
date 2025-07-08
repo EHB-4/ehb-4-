@@ -17,10 +17,7 @@ export default function MobileResponsive() {
       <header className="bg-white shadow-sm border-b">
         <div className="px-4 py-3 flex items-center justify-between">
           <h1 className="text-xl font-bold text-gray-900">JPS</h1>
-          <button
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="p-2 rounded-lg bg-gray-100"
-          >
+          <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="p-2 rounded-lg bg-gray-100">
             {isMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </button>
         </div>
@@ -66,8 +63,8 @@ export default function MobileResponsive() {
             { id: 'jobs', icon: Briefcase, label: 'Jobs' },
             { id: 'candidates', icon: User, label: 'Candidates' },
             { id: 'interviews', icon: Calendar, label: 'Interviews' },
-            { id: 'analytics', icon: BarChart3, label: 'Analytics' }
-          ].map((tab) => (
+            { id: 'analytics', icon: BarChart3, label: 'Analytics' },
+          ].map(tab => (
             <button
               key={tab.id}
               onClick={() => setActiveTab(tab.id)}
@@ -85,7 +82,7 @@ export default function MobileResponsive() {
 
         {/* Mobile Cards */}
         <div className="space-y-4">
-          {[1, 2, 3].map((item) => (
+          {[1, 2, 3].map(item => (
             <div key={item} className="bg-white rounded-lg p-4 shadow-sm">
               <div className="flex items-start justify-between mb-2">
                 <h3 className="font-semibold text-gray-900">
@@ -118,4 +115,4 @@ export default function MobileResponsive() {
       </main>
     </div>
   );
-} 
+}

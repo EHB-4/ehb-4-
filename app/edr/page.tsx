@@ -200,9 +200,7 @@ export default function EDRPage() {
     activeExams: exams.filter(e => e.status === 'active').length,
     completedExams: exams.filter(e => e.status === 'completed').length,
     totalParticipants: exams.reduce((acc, e) => acc + e.participants, 0),
-    averagePassRate: Math.round(
-      exams.reduce((acc, e) => acc + e.passRate, 0) / exams.length
-    ),
+    averagePassRate: Math.round(exams.reduce((acc, e) => acc + e.passRate, 0) / exams.length),
   };
 
   // Roman Urdu: EDR completion percentage for SQL upgrade
@@ -226,9 +224,7 @@ export default function EDRPage() {
   // Roman Urdu: Exam completion handler
   const handleExamComplete = (examId: string) => {
     toast.success('Exam complete ho gaya hai! Results check karein.');
-    setExams(prev => prev.map(e => 
-      e.id === examId ? { ...e, status: 'completed' as const } : e
-    ));
+    setExams(prev => prev.map(e => (e.id === examId ? { ...e, status: 'completed' as const } : e)));
   };
 
   // Roman Urdu: SQL level upgrade handler
@@ -259,7 +255,9 @@ export default function EDRPage() {
             <div className="flex items-center space-x-4">
               <div className="flex items-center space-x-2">
                 <CheckCircle className="h-5 w-5 text-green-500" />
-                <span className="text-green-600 font-medium">{edrCompletionPercentage}% Complete</span>
+                <span className="text-green-600 font-medium">
+                  {edrCompletionPercentage}% Complete
+                </span>
               </div>
               <div className="bg-blue-100 px-3 py-1 rounded-full">
                 <span className="text-blue-800 text-sm font-medium">Active</span>
@@ -272,7 +270,7 @@ export default function EDRPage() {
       {/* Main Content */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Hero Section */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           className="bg-white rounded-xl shadow-lg p-8 mb-8"
@@ -282,8 +280,8 @@ export default function EDRPage() {
               AI-Powered Skill Verification & Examination System
             </h2>
             <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
-              Advanced skill assessment platform with AI-generated exams, proctoring system, and automated certification.
-              SQL Level System ke sath integrated examination platform.
+              Advanced skill assessment platform with AI-generated exams, proctoring system, and
+              automated certification. SQL Level System ke sath integrated examination platform.
             </p>
             <div className="flex justify-center space-x-4">
               <div className="flex items-center space-x-2 text-green-600">
@@ -303,7 +301,7 @@ export default function EDRPage() {
         </motion.div>
 
         {/* SQL Level Integration */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
@@ -313,32 +311,39 @@ export default function EDRPage() {
             <h3 className="text-xl font-bold text-gray-900">SQL Level Integration</h3>
             <div className="flex items-center space-x-2">
               <Shield className="h-5 w-5 text-blue-500" />
-              <span className="text-blue-600 font-medium">Current Level: {sqlLevelConfig[currentSQLLevel as keyof typeof sqlLevelConfig]?.name}</span>
+              <span className="text-blue-600 font-medium">
+                Current Level:{' '}
+                {sqlLevelConfig[currentSQLLevel as keyof typeof sqlLevelConfig]?.name}
+              </span>
             </div>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
             {Object.entries(sqlLevelConfig).map(([level, config]) => (
-              <div 
+              <div
                 key={level}
                 className={`p-4 rounded-lg border-2 ${
-                  parseInt(level) <= currentSQLLevel 
-                    ? 'border-green-500 bg-green-50' 
+                  parseInt(level) <= currentSQLLevel
+                    ? 'border-green-500 bg-green-50'
                     : 'border-gray-200 bg-gray-50'
                 }`}
               >
                 <div className="flex items-center justify-between mb-2">
-                  <span className={`font-semibold ${
-                    parseInt(level) <= currentSQLLevel ? 'text-green-700' : 'text-gray-500'
-                  }`}>
+                  <span
+                    className={`font-semibold ${
+                      parseInt(level) <= currentSQLLevel ? 'text-green-700' : 'text-gray-500'
+                    }`}
+                  >
                     {config.name}
                   </span>
                   {parseInt(level) <= currentSQLLevel && (
                     <CheckCircle className="h-4 w-4 text-green-500" />
                   )}
                 </div>
-                <p className={`text-sm ${
-                  parseInt(level) <= currentSQLLevel ? 'text-green-600' : 'text-gray-400'
-                }`}>
+                <p
+                  className={`text-sm ${
+                    parseInt(level) <= currentSQLLevel ? 'text-green-600' : 'text-gray-400'
+                  }`}
+                >
                   {config.description}
                 </p>
               </div>
@@ -357,7 +362,7 @@ export default function EDRPage() {
         </motion.div>
 
         {/* Statistics Cards */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
@@ -410,7 +415,7 @@ export default function EDRPage() {
         </motion.div>
 
         {/* Filters and Search */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3 }}
@@ -424,7 +429,7 @@ export default function EDRPage() {
                   type="text"
                   placeholder="Search exams..."
                   value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
+                  onChange={e => setSearchQuery(e.target.value)}
                   className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 />
               </div>
@@ -432,7 +437,7 @@ export default function EDRPage() {
             <div className="flex space-x-4">
               <select
                 value={selectedStatus}
-                onChange={(e) => setSelectedStatus(e.target.value)}
+                onChange={e => setSelectedStatus(e.target.value)}
                 className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 aria-label="Filter by status"
               >
@@ -444,7 +449,7 @@ export default function EDRPage() {
               </select>
               <select
                 value={selectedType}
-                onChange={(e) => setSelectedType(e.target.value)}
+                onChange={e => setSelectedType(e.target.value)}
                 className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 aria-label="Filter by type"
               >
@@ -463,16 +468,16 @@ export default function EDRPage() {
         </motion.div>
 
         {/* Exams List */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4 }}
           className="bg-white rounded-xl shadow-lg p-6"
         >
           <h3 className="text-2xl font-bold text-gray-900 mb-6">Available Exams</h3>
-          
+
           <div className="grid gap-6">
-            {filteredExams.map((exam) => (
+            {filteredExams.map(exam => (
               <motion.div
                 key={exam.id}
                 initial={{ opacity: 0, y: 20 }}
@@ -481,9 +486,7 @@ export default function EDRPage() {
               >
                 <div className="flex justify-between items-start mb-4">
                   <div className="flex items-start space-x-4">
-                    <div className="p-2 bg-blue-100 rounded-lg">
-                      {getTypeIcon(exam.type)}
-                    </div>
+                    <div className="p-2 bg-blue-100 rounded-lg">{getTypeIcon(exam.type)}</div>
                     <div>
                       <h4 className="text-xl font-semibold text-gray-900 mb-2">{exam.title}</h4>
                       <p className="text-gray-600 mb-2">{exam.description}</p>
@@ -510,10 +513,14 @@ export default function EDRPage() {
                     </div>
                   </div>
                   <div className="flex items-center space-x-2">
-                    <span className={`px-3 py-1 rounded-full text-sm font-medium ${getStatusColor(exam.status)}`}>
+                    <span
+                      className={`px-3 py-1 rounded-full text-sm font-medium ${getStatusColor(exam.status)}`}
+                    >
                       {exam.status}
                     </span>
-                    <span className={`px-3 py-1 rounded-full text-sm font-medium ${getDifficultyColor(exam.difficulty)}`}>
+                    <span
+                      className={`px-3 py-1 rounded-full text-sm font-medium ${getDifficultyColor(exam.difficulty)}`}
+                    >
                       {exam.difficulty}
                     </span>
                   </div>
@@ -585,7 +592,7 @@ export default function EDRPage() {
         </motion.div>
 
         {/* AI Features Section */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5 }}

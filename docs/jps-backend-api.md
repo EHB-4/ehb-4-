@@ -1,14 +1,17 @@
 # JPS Backend API Documentation
 
 ## Roman Urdu: Overview
+
 JPS (Job Placement System) backend API documentation jo tamam endpoints, data structures, aur usage examples provide karta hai.
 
 ## Roman Urdu: Base URL
+
 ```
 http://localhost:3000/api/jps
 ```
 
 ## Roman Urdu: Authentication
+
 Currently, API authentication is not implemented. Future versions mein JWT tokens ya API keys add kiye jayenge.
 
 ## Roman Urdu: Main API Endpoints
@@ -16,11 +19,13 @@ Currently, API authentication is not implemented. Future versions mein JWT token
 ### 1. Jobs Management
 
 #### Roman Urdu: Get All Jobs
+
 ```http
 GET /api/jps?type=jobs
 ```
 
 **Response:**
+
 ```json
 [
   {
@@ -39,6 +44,7 @@ GET /api/jps?type=jobs
 ```
 
 #### Roman Urdu: Create New Job
+
 ```http
 POST /api/jps?type=jobs
 Content-Type: application/json
@@ -55,6 +61,7 @@ Content-Type: application/json
 ```
 
 #### Roman Urdu: Update Job
+
 ```http
 PUT /api/jps?type=jobs&id=1
 Content-Type: application/json
@@ -66,6 +73,7 @@ Content-Type: application/json
 ```
 
 #### Roman Urdu: Delete Job
+
 ```http
 DELETE /api/jps?type=jobs&id=1
 ```
@@ -73,11 +81,13 @@ DELETE /api/jps?type=jobs&id=1
 ### 2. Candidates Management
 
 #### Roman Urdu: Get All Candidates
+
 ```http
 GET /api/jps?type=candidates
 ```
 
 **Response:**
+
 ```json
 [
   {
@@ -96,6 +106,7 @@ GET /api/jps?type=candidates
 ```
 
 #### Roman Urdu: Create New Candidate
+
 ```http
 POST /api/jps?type=candidates
 Content-Type: application/json
@@ -114,11 +125,13 @@ Content-Type: application/json
 ### 3. Placements Management
 
 #### Roman Urdu: Get All Placements
+
 ```http
 GET /api/jps?type=placements
 ```
 
 **Response:**
+
 ```json
 [
   {
@@ -138,6 +151,7 @@ GET /api/jps?type=placements
 ```
 
 #### Roman Urdu: Create New Placement
+
 ```http
 POST /api/jps?type=placements
 Content-Type: application/json
@@ -156,11 +170,13 @@ Content-Type: application/json
 ### 4. System Statistics
 
 #### Roman Urdu: Get All Data with Statistics
+
 ```http
 GET /api/jps?type=all
 ```
 
 **Response:**
+
 ```json
 {
   "jobs": [...],
@@ -180,11 +196,13 @@ GET /api/jps?type=all
 ## Roman Urdu: AI Matching API
 
 ### Roman Urdu: Get Compatibility Score
+
 ```http
 GET /api/jps/ai-matching?jobId=1&candidateId=1
 ```
 
 **Response:**
+
 ```json
 {
   "jobId": "1",
@@ -209,6 +227,7 @@ GET /api/jps/ai-matching?jobId=1&candidateId=1
 ```
 
 ### Roman Urdu: Get Top Matches for Job
+
 ```http
 POST /api/jps/ai-matching
 Content-Type: application/json
@@ -220,6 +239,7 @@ Content-Type: application/json
 ```
 
 **Response:**
+
 ```json
 {
   "jobId": "1",
@@ -238,6 +258,7 @@ Content-Type: application/json
 ## Roman Urdu: Notifications API
 
 ### Roman Urdu: Send Email Notification
+
 ```http
 POST /api/jps/notifications
 Content-Type: application/json
@@ -252,6 +273,7 @@ Content-Type: application/json
 ```
 
 ### Roman Urdu: Send SMS Notification
+
 ```http
 POST /api/jps/notifications
 Content-Type: application/json
@@ -265,6 +287,7 @@ Content-Type: application/json
 ```
 
 ### Roman Urdu: Send Interview Notification
+
 ```http
 POST /api/jps/notifications
 Content-Type: application/json
@@ -281,6 +304,7 @@ Content-Type: application/json
 ```
 
 ### Roman Urdu: Get Notification History
+
 ```http
 GET /api/jps/notifications?type=email&limit=10
 ```
@@ -288,11 +312,13 @@ GET /api/jps/notifications?type=email&limit=10
 ## Roman Urdu: Payments API
 
 ### Roman Urdu: Get Payment Report
+
 ```http
 GET /api/jps/payments?type=payments&status=completed&startDate=2024-01-01&endDate=2024-01-31
 ```
 
 **Response:**
+
 ```json
 {
   "payments": [
@@ -323,6 +349,7 @@ GET /api/jps/payments?type=payments&status=completed&startDate=2024-01-01&endDat
 ```
 
 ### Roman Urdu: Calculate Commission
+
 ```http
 POST /api/jps/payments
 Content-Type: application/json
@@ -337,6 +364,7 @@ Content-Type: application/json
 ```
 
 **Response:**
+
 ```json
 {
   "placementId": "1",
@@ -350,6 +378,7 @@ Content-Type: application/json
 ```
 
 ### Roman Urdu: Process Payment
+
 ```http
 POST /api/jps/payments
 Content-Type: application/json
@@ -369,6 +398,7 @@ Content-Type: application/json
 ## Roman Urdu: Data Models
 
 ### Roman Urdu: Job Model
+
 ```typescript
 interface Job {
   id: string;
@@ -385,6 +415,7 @@ interface Job {
 ```
 
 ### Roman Urdu: Candidate Model
+
 ```typescript
 interface Candidate {
   id: string;
@@ -401,6 +432,7 @@ interface Candidate {
 ```
 
 ### Roman Urdu: Placement Model
+
 ```typescript
 interface Placement {
   id: string;
@@ -420,6 +452,7 @@ interface Placement {
 ## Roman Urdu: Error Handling
 
 ### Roman Urdu: Error Response Format
+
 ```json
 {
   "error": "Error message",
@@ -433,6 +466,7 @@ interface Placement {
 ```
 
 ### Roman Urdu: Common HTTP Status Codes
+
 - `200` - Success
 - `201` - Created
 - `400` - Bad Request (validation error)
@@ -444,16 +478,17 @@ interface Placement {
 SQL Level ke hisab se commission rates:
 
 | SQL Level | Commission Rate |
-|-----------|----------------|
-| 0         | 15%            |
-| 1         | 12%            |
-| 2         | 10%            |
-| 3         | 8%             |
-| 4         | 5%             |
+| --------- | --------------- |
+| 0         | 15%             |
+| 1         | 12%             |
+| 2         | 10%             |
+| 3         | 8%              |
+| 4         | 5%              |
 
 ## Roman Urdu: AI Matching Algorithm
 
 ### Roman Urdu: Scoring Weights
+
 - Skills: 35%
 - Experience: 25%
 - Location: 15%
@@ -461,6 +496,7 @@ SQL Level ke hisab se commission rates:
 - SQL Level: 10%
 
 ### Roman Urdu: Score Ranges
+
 - 90-100%: Excellent match
 - 80-89%: Good match
 - 70-79%: Moderate match
@@ -469,6 +505,7 @@ SQL Level ke hisab se commission rates:
 ## Roman Urdu: Usage Examples
 
 ### Roman Urdu: Frontend Integration Example
+
 ```typescript
 // Roman Urdu: Fetch jobs
 const fetchJobs = async () => {
@@ -478,7 +515,7 @@ const fetchJobs = async () => {
 };
 
 // Roman Urdu: Create candidate
-const createCandidate = async (candidateData) => {
+const createCandidate = async candidateData => {
   const response = await fetch('/api/jps?type=candidates', {
     method: 'POST',
     headers: {
@@ -518,4 +555,4 @@ Currently, rate limiting is not implemented. Production environment mein rate li
 
 ## Roman Urdu: Support
 
-Koi bhi questions ya issues ke liye, please contact development team. 
+Koi bhi questions ya issues ke liye, please contact development team.

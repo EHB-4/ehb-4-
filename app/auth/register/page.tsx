@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 'use client';
 
@@ -305,10 +305,10 @@ export default function RegisterPage() {
                         passwordStrength.score <= 2
                           ? 'text-red-600'
                           : passwordStrength.score <= 3
-                          ? 'text-yellow-600'
-                          : passwordStrength.score <= 4
-                          ? 'text-blue-600'
-                          : 'text-green-600'
+                            ? 'text-yellow-600'
+                            : passwordStrength.score <= 4
+                              ? 'text-blue-600'
+                              : 'text-green-600'
                       }`}
                     >
                       {getPasswordStrengthText(passwordStrength.score)}

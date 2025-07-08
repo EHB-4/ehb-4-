@@ -1,6 +1,7 @@
 # JPS (Job Placement System) - Complete Documentation
 
 ## Roman Urdu: JPS System Documentation
+
 ### Job Placement System ke liye complete guide
 
 ---
@@ -24,6 +25,7 @@
 JPS (Job Placement System) ek comprehensive job placement platform hai jo employers, job seekers, aur administrators ke liye banaya gaya hai.
 
 ### **Main Features:**
+
 - Job listings management
 - Candidate profile management
 - AI-powered matching system
@@ -38,66 +40,77 @@ JPS (Job Placement System) ek comprehensive job placement platform hai jo employ
 ## ✨ Features
 
 ### **1. Dashboard System**
+
 - Real-time statistics
 - Quick access to all features
 - User-specific views
 - Performance metrics
 
 ### **2. Job Management**
+
 - Create and edit job postings
 - Job search and filtering
 - Application tracking
 - Status management
 
 ### **3. Candidate Management**
+
 - Profile creation and editing
 - Skill assessment
 - SQL Level integration
 - Application history
 
 ### **4. AI Matching System**
+
 - Smart candidate-job matching
 - Compatibility scoring
 - Recommendation engine
 - Performance optimization
 
 ### **5. Interview Scheduling**
+
 - Calendar integration
 - Automated scheduling
 - Reminder notifications
 - Video call integration
 
 ### **6. Payment System**
+
 - Commission tracking
 - Payment processing
 - Billing management
 - Financial reporting
 
 ### **7. Email Notifications**
+
 - Automated notifications
 - Custom templates
 - Multi-language support
 - Delivery tracking
 
 ### **8. Multi-language Support**
+
 - English, Urdu, Arabic
 - Dynamic translation
 - RTL support
 - Cultural adaptation
 
 ### **9. Security Features**
+
 - Input validation
 - Password strength checking
 - XSS protection
 - CSRF protection
 
 ### **10. Drag & Drop Interface**
+
 - Visual job management
 - Status updates
 - Kanban board style
 - Intuitive workflow
 
 ### **11. Content Generation**
+
 - Auto job descriptions
 - Email templates
 - Interview feedback
@@ -108,6 +121,7 @@ JPS (Job Placement System) ek comprehensive job placement platform hai jo employ
 ## 🚀 Installation & Setup
 
 ### **Prerequisites:**
+
 ```bash
 Node.js 18+
 npm or yarn
@@ -119,28 +133,33 @@ Tailwind CSS
 ### **Installation Steps:**
 
 1. **Clone Repository:**
+
 ```bash
 git clone <repository-url>
 cd jps-system
 ```
 
 2. **Install Dependencies:**
+
 ```bash
 npm install
 ```
 
 3. **Environment Setup:**
+
 ```bash
 cp .env.example .env.local
 # Edit .env.local with your configuration
 ```
 
 4. **Start Development Server:**
+
 ```bash
 npm run dev
 ```
 
 ### **Required Environment Variables:**
+
 ```env
 # API Configuration
 NEXT_PUBLIC_API_URL=http://localhost:3000/api
@@ -161,18 +180,21 @@ PAYMENT_GATEWAY_KEY=your_payment_key
 ## 👥 User Types
 
 ### **1. Job Seeker**
+
 - Profile management
 - Job search and applications
 - Interview scheduling
 - Application tracking
 
 ### **2. Employer**
+
 - Job posting management
 - Candidate search
 - Interview coordination
 - Payment processing
 
 ### **3. Administrator**
+
 - System management
 - User management
 - Analytics and reporting
@@ -185,17 +207,20 @@ PAYMENT_GATEWAY_KEY=your_payment_key
 ### **Core Components:**
 
 #### **1. JPSCompleteSystem**
+
 ```typescript
 interface JPSCompleteSystemProps {
   userType: 'jobseeker' | 'employer' | 'admin';
 }
 ```
+
 - Main system component
 - Navigation and routing
 - User type management
 - Mobile responsiveness
 
 #### **2. JPSDashboard**
+
 ```typescript
 // Displays overview statistics
 // Real-time data updates
@@ -203,6 +228,7 @@ interface JPSCompleteSystemProps {
 ```
 
 #### **3. JobListings**
+
 ```typescript
 // Job search and filtering
 // CRUD operations
@@ -211,6 +237,7 @@ interface JPSCompleteSystemProps {
 ```
 
 #### **4. CandidateProfiles**
+
 ```typescript
 // Profile management
 // Skill assessment
@@ -219,6 +246,7 @@ interface JPSCompleteSystemProps {
 ```
 
 #### **5. InterviewScheduler**
+
 ```typescript
 // Calendar integration
 // Automated scheduling
@@ -227,17 +255,20 @@ interface JPSCompleteSystemProps {
 ```
 
 #### **6. PaymentSystem**
+
 ```typescript
 interface PaymentSystemProps {
   userType: 'jobseeker' | 'employer' | 'admin';
 }
 ```
+
 - Commission tracking
 - Payment processing
 - Billing management
 - Financial reporting
 
 #### **7. EmailNotification**
+
 ```typescript
 interface EmailNotificationProps {
   type: 'interview' | 'placement' | 'job';
@@ -248,6 +279,7 @@ interface EmailNotificationProps {
 ```
 
 #### **8. MultiLanguageSupport**
+
 ```typescript
 interface MultiLanguageSupportProps {
   currentLanguage: string;
@@ -256,6 +288,7 @@ interface MultiLanguageSupportProps {
 ```
 
 #### **9. AdvancedSecurity**
+
 ```typescript
 interface SecurityValidationProps {
   onValidation: (isValid: boolean) => void;
@@ -263,6 +296,7 @@ interface SecurityValidationProps {
 ```
 
 #### **10. DragAndDrop**
+
 ```typescript
 interface DragAndDropProps {
   items: DragItem[];
@@ -271,6 +305,7 @@ interface DragAndDropProps {
 ```
 
 #### **11. ContentWriting**
+
 ```typescript
 interface ContentWritingProps {
   onContentGenerated: (content: string, type: string) => void;
@@ -282,34 +317,36 @@ interface ContentWritingProps {
 ## 🔌 API Integration
 
 ### **API Service Structure:**
+
 ```typescript
 // lib/api/jps-api.ts
 export class JPSApiService {
   // Jobs
-  static async getJobs(): Promise<JPSJob[]>
-  static async createJob(job: JPSJob): Promise<JPSJob>
-  static async updateJob(id: string, job: JPSJob): Promise<JPSJob>
-  static async deleteJob(id: string): Promise<void>
+  static async getJobs(): Promise<JPSJob[]>;
+  static async createJob(job: JPSJob): Promise<JPSJob>;
+  static async updateJob(id: string, job: JPSJob): Promise<JPSJob>;
+  static async deleteJob(id: string): Promise<void>;
 
   // Candidates
-  static async getCandidates(): Promise<JPSCandidate[]>
-  static async createCandidate(candidate: JPSCandidate): Promise<JPSCandidate>
-  static async updateCandidate(id: string, candidate: JPSCandidate): Promise<JPSCandidate>
-  static async deleteCandidate(id: string): Promise<void>
+  static async getCandidates(): Promise<JPSCandidate[]>;
+  static async createCandidate(candidate: JPSCandidate): Promise<JPSCandidate>;
+  static async updateCandidate(id: string, candidate: JPSCandidate): Promise<JPSCandidate>;
+  static async deleteCandidate(id: string): Promise<void>;
 
   // Placements
-  static async getPlacements(): Promise<JPSPlacement[]>
-  static async createPlacement(placement: JPSPlacement): Promise<JPSPlacement>
-  static async updatePlacement(id: string, placement: JPSPlacement): Promise<JPSPlacement>
-  static async deletePlacement(id: string): Promise<void>
+  static async getPlacements(): Promise<JPSPlacement[]>;
+  static async createPlacement(placement: JPSPlacement): Promise<JPSPlacement>;
+  static async updatePlacement(id: string, placement: JPSPlacement): Promise<JPSPlacement>;
+  static async deletePlacement(id: string): Promise<void>;
 
   // AI Matching
-  static async getMatches(jobId: string): Promise<JPSCandidate[]>
-  static async getCompatibilityScore(jobId: string, candidateId: string): Promise<number>
+  static async getMatches(jobId: string): Promise<JPSCandidate[]>;
+  static async getCompatibilityScore(jobId: string, candidateId: string): Promise<number>;
 }
 ```
 
 ### **Data Models:**
+
 ```typescript
 interface JPSJob {
   id: string;
@@ -357,6 +394,7 @@ interface JPSPlacement {
 ## 🧪 Testing
 
 ### **Test Structure:**
+
 ```
 __tests__/
 ├── components/
@@ -379,6 +417,7 @@ __tests__/
 ```
 
 ### **Running Tests:**
+
 ```bash
 # Run all tests
 npm test
@@ -394,6 +433,7 @@ npm test -- JPSCompleteSystem.test.tsx
 ```
 
 ### **Test Coverage Goals:**
+
 - Components: 90%+
 - API Services: 95%+
 - Utilities: 100%
@@ -404,6 +444,7 @@ npm test -- JPSCompleteSystem.test.tsx
 ## 🚀 Deployment
 
 ### **Production Build:**
+
 ```bash
 # Build for production
 npm run build
@@ -416,6 +457,7 @@ npm run export
 ```
 
 ### **Environment Configuration:**
+
 ```bash
 # Production environment
 NODE_ENV=production
@@ -426,6 +468,7 @@ NEXT_PUBLIC_JPS_API_KEY=your_production_api_key
 ### **Deployment Platforms:**
 
 #### **Vercel:**
+
 ```bash
 # Install Vercel CLI
 npm i -g vercel
@@ -435,6 +478,7 @@ vercel --prod
 ```
 
 #### **Netlify:**
+
 ```bash
 # Build command
 npm run build
@@ -444,6 +488,7 @@ out/
 ```
 
 #### **Docker:**
+
 ```dockerfile
 FROM node:18-alpine
 WORKDIR /app
@@ -462,6 +507,7 @@ CMD ["npm", "start"]
 ### **Common Issues:**
 
 #### **1. Component Not Rendering**
+
 ```bash
 # Check console for errors
 # Verify props are correct
@@ -469,6 +515,7 @@ CMD ["npm", "start"]
 ```
 
 #### **2. API Calls Failing**
+
 ```bash
 # Verify API URL in environment
 # Check API key configuration
@@ -476,6 +523,7 @@ CMD ["npm", "start"]
 ```
 
 #### **3. Mobile Responsiveness Issues**
+
 ```bash
 # Check Tailwind CSS classes
 # Verify viewport meta tag
@@ -483,6 +531,7 @@ CMD ["npm", "start"]
 ```
 
 #### **4. Language Switching Not Working**
+
 ```bash
 # Check translation files
 # Verify language codes
@@ -490,6 +539,7 @@ CMD ["npm", "start"]
 ```
 
 ### **Debug Mode:**
+
 ```bash
 # Enable debug logging
 DEBUG=jps:* npm run dev
@@ -500,6 +550,7 @@ DEBUG=jps:* npm run dev
 ```
 
 ### **Performance Optimization:**
+
 ```bash
 # Bundle analysis
 npm run analyze
@@ -516,12 +567,14 @@ npm run perf
 ## 📞 Support
 
 ### **Contact Information:**
+
 - **Email:** support@jps-system.com
 - **Documentation:** https://docs.jps-system.com
 - **GitHub:** https://github.com/jps-system
 - **Issues:** https://github.com/jps-system/issues
 
 ### **Community:**
+
 - **Discord:** https://discord.gg/jps-system
 - **Forum:** https://forum.jps-system.com
 - **Blog:** https://blog.jps-system.com
@@ -542,4 +595,4 @@ Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduc
 
 **Last Updated:** December 2024  
 **Version:** 1.0.0  
-**Author:** JPS Development Team 
+**Author:** JPS Development Team

@@ -4,7 +4,7 @@ interface EHBPortMonitorProps {
   // Add props here
 }
 
-export const EHBPortMonitor: React.FC<EHBPortMonitorProps> = (props) => {
+export const EHBPortMonitor: React.FC<EHBPortMonitorProps> = props => {
   return (
     <div className="ehbportmonitor-container">
       <h3>EHBPortMonitor</h3>

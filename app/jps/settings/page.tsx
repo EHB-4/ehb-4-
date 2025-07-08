@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
 import React, { useState } from 'react';
-import { useJPSRole } from '../../../components/JPS/JPSRoleContext';
+import JPS/JPSRoleContext from '@/components/JPS/JPSRoleContext';
 import {
   CogIcon,
   BellIcon,

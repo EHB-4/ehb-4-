@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import { ethers } from 'ethers';
 import React, { useState } from 'react';

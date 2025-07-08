@@ -1,24 +1,30 @@
 version: '3.8'
-
 services:
-  app:
-    build: .
+  frontend:
+    build: ./frontend
     ports:
       - "3000:3000"
-    environment:
-      - NODE_ENV=production
-      - DATABASE_URL=mongodb://mongo:27017/ehb
-    depends_on:
-      - mongo
+    env_file:
+      - ./frontend/.env.example
     restart: unless-stopped
-
-  mongo:
-    image: mongo:latest
+  backend:
+    build: ./backend
     ports:
-      - "27017:27017"
-    volumes:
-      - mongo_data:/data/db
+      - "5000:5000"
+    env_file:
+      - ./backend/.env.example
     restart: unless-stopped
-
-volumes:
-  mongo_data:
+  admin-panel:
+    build: ./admin-panel
+    ports:
+      - "8000:8000"
+    env_file:
+      - ./admin-panel/.env.example
+    restart: unless-stopped
+  portal:
+    build: ./portal
+    ports:
+      - "8080:8080"
+    env_file:
+      - ./portal/.env.example
+    restart: unless-stopped

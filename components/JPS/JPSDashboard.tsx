@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 'use client';
 
@@ -92,7 +92,13 @@ import {
   Send,
 } from '@heroicons/react/24/outline';
 import { useJPSRole } from './JPSRoleContext';
-import JPSApiService, { JPSJob, JPSCandidate, JPSPlacement, JPSInterview, JPSAnalytics } from '../../lib/api/jps-api';
+import JPSApiService, {
+  JPSJob,
+  JPSCandidate,
+  JPSPlacement,
+  JPSInterview,
+  JPSAnalytics,
+} from '../../lib/api/jps-api';
 
 interface JPSDashboardProps {
   userType: 'jobseeker' | 'employer' | 'admin';
@@ -112,7 +118,12 @@ interface DashboardStats {
 
 interface RecentActivity {
   id: string;
-  type: 'job_application' | 'interview_scheduled' | 'placement_completed' | 'skill_assessment' | 'sql_level_upgrade';
+  type:
+    | 'job_application'
+    | 'interview_scheduled'
+    | 'placement_completed'
+    | 'skill_assessment'
+    | 'sql_level_upgrade';
   title: string;
   description: string;
   timestamp: string;
@@ -160,15 +171,16 @@ const JPSDashboard: React.FC = () => {
   const loadDashboardData = async () => {
     try {
       setLoading(true);
-      
+
       // Load all data in parallel
-      const [jobsData, candidatesData, placementsData, interviewsData, analyticsData] = await Promise.all([
-        JPSApiService.getJobs(),
-        JPSApiService.getCandidates(),
-        JPSApiService.getPlacements(),
-        JPSApiService.getInterviews(),
-        JPSApiService.getAnalytics(),
-      ]);
+      const [jobsData, candidatesData, placementsData, interviewsData, analyticsData] =
+        await Promise.all([
+          JPSApiService.getJobs(),
+          JPSApiService.getCandidates(),
+          JPSApiService.getPlacements(),
+          JPSApiService.getInterviews(),
+          JPSApiService.getAnalytics(),
+        ]);
 
       setJobs(jobsData);
       setCandidates(candidatesData);
@@ -177,13 +189,23 @@ const JPSDashboard: React.FC = () => {
       setAnalytics(analyticsData);
 
       // Calculate stats based on user role
-      const calculatedStats = calculateStats(jobsData, candidatesData, placementsData, interviewsData, analyticsData);
+      const calculatedStats = calculateStats(
+        jobsData,
+        candidatesData,
+        placementsData,
+        interviewsData,
+        analyticsData
+      );
       setStats(calculatedStats);
 
       // Generate recent activity
-      const activity = generateRecentActivity(jobsData, candidatesData, placementsData, interviewsData);
+      const activity = generateRecentActivity(
+        jobsData,
+        candidatesData,
+        placementsData,
+        interviewsData
+      );
       setRecentActivity(activity);
-
     } catch (error) {
       console.error('Error loading dashboard data:', error);
     } finally {
@@ -204,7 +226,11 @@ const JPSDashboard: React.FC = () => {
         activeApplications: Math.floor(Math.random() * 10) + 5, // Mock data
         completedPlacements: placements.filter(p => p.status === 'completed').length,
         pendingInterviews: interviews.filter(i => i.status === 'scheduled').length,
-        successRate: Math.round((placements.filter(p => p.status === 'completed').length / Math.max(placements.length, 1)) * 100),
+        successRate: Math.round(
+          (placements.filter(p => p.status === 'completed').length /
+            Math.max(placements.length, 1)) *
+            100
+        ),
         earnings: placements.reduce((acc, p) => acc + (p.status === 'completed' ? p.salary : 0), 0),
         sqlLevelDistribution: analytics?.sqlLevelDistribution || {},
         monthlyPlacements: analytics?.monthlyPlacements || [],
@@ -216,7 +242,11 @@ const JPSDashboard: React.FC = () => {
         activeApplications: candidates.filter(c => c.status === 'available').length,
         completedPlacements: placements.filter(p => p.status === 'completed').length,
         pendingInterviews: interviews.filter(i => i.status === 'scheduled').length,
-        successRate: Math.round((placements.filter(p => p.status === 'completed').length / Math.max(placements.length, 1)) * 100),
+        successRate: Math.round(
+          (placements.filter(p => p.status === 'completed').length /
+            Math.max(placements.length, 1)) *
+            100
+        ),
         earnings: 0, // Employers don't earn from placements
         sqlLevelDistribution: analytics?.sqlLevelDistribution || {},
         monthlyPlacements: analytics?.monthlyPlacements || [],
@@ -229,8 +259,15 @@ const JPSDashboard: React.FC = () => {
         activeApplications: candidates.filter(c => c.status === 'available').length,
         completedPlacements: placements.filter(p => p.status === 'completed').length,
         pendingInterviews: interviews.filter(i => i.status === 'scheduled').length,
-        successRate: Math.round((placements.filter(p => p.status === 'completed').length / Math.max(placements.length, 1)) * 100),
-        earnings: placements.reduce((acc, p) => acc + (p.status === 'completed' ? p.salary * 0.1 : 0), 0), // 10% commission
+        successRate: Math.round(
+          (placements.filter(p => p.status === 'completed').length /
+            Math.max(placements.length, 1)) *
+            100
+        ),
+        earnings: placements.reduce(
+          (acc, p) => acc + (p.status === 'completed' ? p.salary * 0.1 : 0),
+          0
+        ), // 10% commission
         sqlLevelDistribution: analytics?.sqlLevelDistribution || {},
         monthlyPlacements: analytics?.monthlyPlacements || [],
         topSkills: analytics?.topSkills || [],
@@ -291,7 +328,9 @@ const JPSDashboard: React.FC = () => {
       }
     });
 
-    return activities.sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime());
+    return activities.sort(
+      (a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime()
+    );
   };
 
   const getStatusIcon = (status: string) => {
@@ -354,7 +393,7 @@ const JPSDashboard: React.FC = () => {
             <div className="flex items-center space-x-4">
               <select
                 value={selectedTimeframe}
-                onChange={(e) => setSelectedTimeframe(e.target.value as any)}
+                onChange={e => setSelectedTimeframe(e.target.value as any)}
                 className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
               >
                 <option value="7d">Last 7 days</option>
@@ -458,10 +497,13 @@ const JPSDashboard: React.FC = () => {
               <h3 className="text-lg font-semibold text-gray-900 mb-4">SQL Level Distribution</h3>
               <div className="space-y-4">
                 {Object.entries(stats.sqlLevelDistribution).map(([level, count]) => {
-                  const total = Object.values(stats.sqlLevelDistribution).reduce((a, b) => a + b, 0);
+                  const total = Object.values(stats.sqlLevelDistribution).reduce(
+                    (a, b) => a + b,
+                    0
+                  );
                   const percentage = total > 0 ? Math.round((count / total) * 100) : 0;
                   const levelNames = ['Free', 'Basic', 'Normal', 'High', 'VIP'];
-                  
+
                   return (
                     <div key={level} className="flex items-center justify-between">
                       <div className="flex items-center">
@@ -508,7 +550,9 @@ const JPSDashboard: React.FC = () => {
                       transition={{ delay: index * 0.1 }}
                       className="flex items-start space-x-4 p-4 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors"
                     >
-                      <div className={`p-2 rounded-lg ${activity.color.replace('text-', 'bg-').replace('-500', '-100')}`}>
+                      <div
+                        className={`p-2 rounded-lg ${activity.color.replace('text-', 'bg-').replace('-500', '-100')}`}
+                      >
                         {activity.icon}
                       </div>
                       <div className="flex-1">
@@ -516,9 +560,7 @@ const JPSDashboard: React.FC = () => {
                         <p className="text-sm text-gray-600">{activity.description}</p>
                         <p className="text-xs text-gray-500 mt-1">{activity.timestamp}</p>
                       </div>
-                      <div className="flex items-center">
-                        {getStatusIcon(activity.status)}
-                      </div>
+                      <div className="flex items-center">{getStatusIcon(activity.status)}</div>
                     </motion.div>
                   ))
                 )}

@@ -1,0 +1,59 @@
+{
+  "projectName": "EHB Next.js 04",
+  "version": "1.0.0",
+  "stabilitySettings": {
+    "maxNodeProcesses": 2,
+    "allowedProcesses": [
+      "agent",
+      "dev-server"
+    ],
+    "autoStartDisabled": true,
+    "backgroundProcessesDisabled": true,
+    "autoRestartDisabled": true
+  },
+  "portConfiguration": {
+    "frontend": 3000,
+    "backend": 8000,
+    "admin": 5000,
+    "portal": 8080,
+    "fixedPorts": true,
+    "noAutoSwitch": true
+  },
+  "processManagement": {
+    "killStaleProcesses": true,
+    "preventMultipleInstances": true,
+    "cleanupBeforeStart": true,
+    "maxRestartAttempts": 0
+  },
+  "developmentSettings": {
+    "environment": "development",
+    "nodeEnv": "development",
+    "autoCleanup": true,
+    "simpleMode": true
+  },
+  "disabledFeatures": [
+    "auto-runner",
+    "background-monitor",
+    "auto-restart",
+    "file-watcher",
+    "health-monitor",
+    "browser-auto-open",
+    "process-monitor"
+  ],
+  "allowedCommands": [
+    "npm run dev",
+    "npm run build",
+    "npm run lint",
+    "npm run test"
+  ],
+  "blockedCommands": [
+    "auto-*",
+    "monitor",
+    "runner",
+    "background",
+    "forever",
+    "24-7",
+    "ultra-fast",
+    "super-agent"
+  ]
+} 

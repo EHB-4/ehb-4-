@@ -1,11 +1,11 @@
-"use client";
+'use client';
 
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { 
-  BriefcaseIcon, 
-  MapPinIcon, 
+import {
+  BriefcaseIcon,
+  MapPinIcon,
   CurrencyDollarIcon,
   ClockIcon,
   StarIcon,
@@ -14,7 +14,7 @@ import {
   PlusIcon,
   MagnifyingGlassIcon,
   FunnelIcon,
-  BuildingOfficeIcon
+  BuildingOfficeIcon,
 } from '@heroicons/react/24/outline';
 
 interface JobListingsProps {
@@ -73,7 +73,7 @@ const JobListings: React.FC<JobListingsProps> = ({ userType }) => {
         applications: 45,
         matchScore: 95,
         isSaved: false,
-        status: 'active'
+        status: 'active',
       },
       {
         id: '2',
@@ -89,7 +89,7 @@ const JobListings: React.FC<JobListingsProps> = ({ userType }) => {
         applications: 32,
         matchScore: 87,
         isSaved: true,
-        status: 'active'
+        status: 'active',
       },
       {
         id: '3',
@@ -105,7 +105,7 @@ const JobListings: React.FC<JobListingsProps> = ({ userType }) => {
         applications: 28,
         matchScore: 78,
         isSaved: false,
-        status: 'active'
+        status: 'active',
       },
       {
         id: '4',
@@ -121,8 +121,8 @@ const JobListings: React.FC<JobListingsProps> = ({ userType }) => {
         applications: 19,
         matchScore: 82,
         isSaved: false,
-        status: 'active'
-      }
+        status: 'active',
+      },
     ];
 
     setJobs(mockJobs);
@@ -134,10 +134,11 @@ const JobListings: React.FC<JobListingsProps> = ({ userType }) => {
 
     // Search filter
     if (searchTerm) {
-      filtered = filtered.filter(job =>
-        job.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        job.company.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        job.skills.some(skill => skill.toLowerCase().includes(searchTerm.toLowerCase()))
+      filtered = filtered.filter(
+        job =>
+          job.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          job.company.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          job.skills.some(skill => skill.toLowerCase().includes(searchTerm.toLowerCase()))
       );
     }
 
@@ -155,9 +156,7 @@ const JobListings: React.FC<JobListingsProps> = ({ userType }) => {
   };
 
   const toggleSaveJob = (jobId: string) => {
-    setJobs(jobs.map(job =>
-      job.id === jobId ? { ...job, isSaved: !job.isSaved } : job
-    ));
+    setJobs(jobs.map(job => (job.id === jobId ? { ...job, isSaved: !job.isSaved } : job)));
   };
 
   const applyToJob = (job: Job) => {
@@ -198,7 +197,7 @@ const JobListings: React.FC<JobListingsProps> = ({ userType }) => {
             {userType === 'jobseeker' ? 'Find your next opportunity' : 'Manage your job postings'}
           </p>
         </div>
-        
+
         {userType === 'employer' && (
           <button
             onClick={() => setShowPostJobModal(true)}
@@ -220,7 +219,7 @@ const JobListings: React.FC<JobListingsProps> = ({ userType }) => {
               type="text"
               placeholder="Search jobs..."
               value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
+              onChange={e => setSearchTerm(e.target.value)}
               className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             />
           </div>
@@ -228,7 +227,7 @@ const JobListings: React.FC<JobListingsProps> = ({ userType }) => {
           {/* Job Type Filter */}
           <select
             value={selectedType}
-            onChange={(e) => setSelectedType(e.target.value)}
+            onChange={e => setSelectedType(e.target.value)}
             className="px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
           >
             <option value="all">All Types</option>
@@ -241,7 +240,7 @@ const JobListings: React.FC<JobListingsProps> = ({ userType }) => {
           {/* Experience Filter */}
           <select
             value={selectedExperience}
-            onChange={(e) => setSelectedExperience(e.target.value)}
+            onChange={e => setSelectedExperience(e.target.value)}
             className="px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
           >
             <option value="all">All Experience</option>
@@ -274,8 +273,11 @@ const JobListings: React.FC<JobListingsProps> = ({ userType }) => {
             <p className="text-gray-600">Try adjusting your search criteria</p>
           </div>
         ) : (
-          filteredJobs.map((job) => (
-            <div key={job.id} className="bg-white rounded-lg shadow p-6 hover:shadow-md transition-shadow">
+          filteredJobs.map(job => (
+            <div
+              key={job.id}
+              className="bg-white rounded-lg shadow p-6 hover:shadow-md transition-shadow"
+            >
               <div className="flex justify-between items-start">
                 <div className="flex-1">
                   <div className="flex items-center space-x-3 mb-2">
@@ -287,7 +289,7 @@ const JobListings: React.FC<JobListingsProps> = ({ userType }) => {
                       </span>
                     )}
                   </div>
-                  
+
                   <div className="flex items-center space-x-4 text-sm text-gray-600 mb-3">
                     <div className="flex items-center">
                       <BuildingOfficeIcon className="h-4 w-4 mr-1" />
@@ -308,7 +310,9 @@ const JobListings: React.FC<JobListingsProps> = ({ userType }) => {
                   </div>
 
                   <div className="flex items-center space-x-2 mb-3">
-                    <span className={`px-2 py-1 text-xs font-medium rounded-full ${getJobTypeColor(job.type)}`}>
+                    <span
+                      className={`px-2 py-1 text-xs font-medium rounded-full ${getJobTypeColor(job.type)}`}
+                    >
                       {job.type.replace('-', ' ')}
                     </span>
                     <span className="text-sm text-gray-600">{job.experience}</span>
@@ -335,18 +339,16 @@ const JobListings: React.FC<JobListingsProps> = ({ userType }) => {
                   </div>
 
                   <div className="flex items-center justify-between">
-                    <span className="text-sm text-gray-600">
-                      {job.applications} applications
-                    </span>
-                    
+                    <span className="text-sm text-gray-600">{job.applications} applications</span>
+
                     <div className="flex items-center space-x-2">
                       {userType === 'jobseeker' && (
                         <>
                           <button
                             onClick={() => toggleSaveJob(job.id)}
                             className={`p-2 rounded-md ${
-                              job.isSaved 
-                                ? 'text-red-500 hover:text-red-600' 
+                              job.isSaved
+                                ? 'text-red-500 hover:text-red-600'
                                 : 'text-gray-400 hover:text-gray-500'
                             }`}
                           >
@@ -360,7 +362,7 @@ const JobListings: React.FC<JobListingsProps> = ({ userType }) => {
                           </button>
                         </>
                       )}
-                      
+
                       {userType === 'employer' && (
                         <>
                           <button className="px-3 py-1 text-sm border border-gray-300 rounded-md hover:bg-gray-50">
@@ -431,4 +433,4 @@ const JobListings: React.FC<JobListingsProps> = ({ userType }) => {
   );
 };
 
-export default JobListings; 
+export default JobListings;

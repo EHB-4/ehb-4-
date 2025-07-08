@@ -6,14 +6,20 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Badge } from '@/components/ui/badge';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { Calendar } from '@/components/ui/calendar';
-import { 
-  Search, 
-  Filter, 
-  Download, 
+import {
+  Search,
+  Filter,
+  Download,
   Calendar as CalendarIcon,
   X,
   RefreshCw,
@@ -21,7 +27,7 @@ import {
   Users,
   AlertTriangle,
   CheckCircle,
-  Clock
+  Clock,
 } from 'lucide-react';
 import { format } from 'date-fns';
 import { useLanguage } from '@/contexts/LanguageContext';
@@ -55,7 +61,7 @@ export default function AdvancedSearch({
   onFiltersChange,
   onExport,
   totalResults,
-  loading = false
+  loading = false,
 }: AdvancedSearchProps) {
   const { t } = useLanguage();
   const [filters, setFilters] = useState<SearchFilters>({
@@ -66,14 +72,14 @@ export default function AdvancedSearch({
     riskLevel: [],
     dateRange: {
       from: undefined,
-      to: undefined
+      to: undefined,
     },
     hasDocuments: false,
     hasNotes: false,
     amountRange: {
       min: 0,
-      max: 10000
-    }
+      max: 10000,
+    },
   });
 
   const [isExpanded, setIsExpanded] = useState(false);
@@ -102,16 +108,16 @@ export default function AdvancedSearch({
   const handleFilterChange = (key: keyof SearchFilters, value: any) => {
     setFilters(prev => ({
       ...prev,
-      [key]: value
+      [key]: value,
     }));
   };
 
   const handleArrayFilterChange = (key: keyof SearchFilters, value: string, checked: boolean) => {
     setFilters(prev => ({
       ...prev,
-      [key]: checked 
+      [key]: checked
         ? [...(prev[key] as string[]), value]
-        : (prev[key] as string[]).filter(item => item !== value)
+        : (prev[key] as string[]).filter(item => item !== value),
     }));
   };
 
@@ -124,41 +130,53 @@ export default function AdvancedSearch({
       riskLevel: [],
       dateRange: {
         from: undefined,
-        to: undefined
+        to: undefined,
       },
       hasDocuments: false,
       hasNotes: false,
       amountRange: {
         min: 0,
-        max: 10000
-      }
+        max: 10000,
+      },
     });
   };
 
   const getStatusIcon = (status: string) => {
     switch (status) {
-      case 'pending': return <Clock className="w-4 h-4" />;
-      case 'approved': return <CheckCircle className="w-4 h-4" />;
-      case 'rejected': return <X className="w-4 h-4" />;
-      default: return <Clock className="w-4 h-4" />;
+      case 'pending':
+        return <Clock className="w-4 h-4" />;
+      case 'approved':
+        return <CheckCircle className="w-4 h-4" />;
+      case 'rejected':
+        return <X className="w-4 h-4" />;
+      default:
+        return <Clock className="w-4 h-4" />;
     }
   };
 
   const getPriorityColor = (priority: string) => {
     switch (priority) {
-      case 'high': return 'bg-red-100 text-red-800';
-      case 'medium': return 'bg-yellow-100 text-yellow-800';
-      case 'low': return 'bg-green-100 text-green-800';
-      default: return 'bg-gray-100 text-gray-800';
+      case 'high':
+        return 'bg-red-100 text-red-800';
+      case 'medium':
+        return 'bg-yellow-100 text-yellow-800';
+      case 'low':
+        return 'bg-green-100 text-green-800';
+      default:
+        return 'bg-gray-100 text-gray-800';
     }
   };
 
   const getRiskColor = (risk: string) => {
     switch (risk) {
-      case 'high': return 'bg-red-100 text-red-800';
-      case 'medium': return 'bg-yellow-100 text-yellow-800';
-      case 'low': return 'bg-green-100 text-green-800';
-      default: return 'bg-gray-100 text-gray-800';
+      case 'high':
+        return 'bg-red-100 text-red-800';
+      case 'medium':
+        return 'bg-yellow-100 text-yellow-800';
+      case 'low':
+        return 'bg-green-100 text-green-800';
+      default:
+        return 'bg-gray-100 text-gray-800';
     }
   };
 
@@ -176,11 +194,7 @@ export default function AdvancedSearch({
             )}
           </CardTitle>
           <div className="flex items-center space-x-2">
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={() => setIsExpanded(!isExpanded)}
-            >
+            <Button variant="outline" size="sm" onClick={() => setIsExpanded(!isExpanded)}>
               <Filter className="w-4 h-4 mr-2" />
               {isExpanded ? t('common.hideFilters') : t('common.showFilters')}
             </Button>
@@ -235,7 +249,7 @@ export default function AdvancedSearch({
             <Input
               placeholder={t('common.searchPlaceholder')}
               value={filters.searchTerm}
-              onChange={(e) => handleFilterChange('searchTerm', e.target.value)}
+              onChange={e => handleFilterChange('searchTerm', e.target.value)}
               className="pl-10"
             />
           </div>
@@ -280,16 +294,19 @@ export default function AdvancedSearch({
                   {t('pss.dashboard.filters.status')}
                 </Label>
                 <div className="space-y-2">
-                  {['pending', 'approved', 'rejected', 'in-progress'].map((status) => (
+                  {['pending', 'approved', 'rejected', 'in-progress'].map(status => (
                     <div key={status} className="flex items-center space-x-2">
                       <Checkbox
                         id={`status-${status}`}
                         checked={filters.status.includes(status)}
-                        onCheckedChange={(checked) => 
+                        onCheckedChange={checked =>
                           handleArrayFilterChange('status', status, checked as boolean)
                         }
                       />
-                      <Label htmlFor={`status-${status}`} className="flex items-center space-x-1 text-sm">
+                      <Label
+                        htmlFor={`status-${status}`}
+                        className="flex items-center space-x-1 text-sm"
+                      >
                         {getStatusIcon(status)}
                         <span>{t(`pss.status.${status}`)}</span>
                       </Label>
@@ -304,12 +321,12 @@ export default function AdvancedSearch({
                   {t('pss.dashboard.filters.role')}
                 </Label>
                 <div className="space-y-2">
-                  {['patient', 'doctor', 'business', 'franchise'].map((role) => (
+                  {['patient', 'doctor', 'business', 'franchise'].map(role => (
                     <div key={role} className="flex items-center space-x-2">
                       <Checkbox
                         id={`role-${role}`}
                         checked={filters.role.includes(role)}
-                        onCheckedChange={(checked) => 
+                        onCheckedChange={checked =>
                           handleArrayFilterChange('role', role, checked as boolean)
                         }
                       />
@@ -323,16 +340,14 @@ export default function AdvancedSearch({
 
               {/* Priority Filter */}
               <div>
-                <Label className="text-sm font-medium mb-2 block">
-                  {t('common.priority')}
-                </Label>
+                <Label className="text-sm font-medium mb-2 block">{t('common.priority')}</Label>
                 <div className="space-y-2">
-                  {['high', 'medium', 'low'].map((priority) => (
+                  {['high', 'medium', 'low'].map(priority => (
                     <div key={priority} className="flex items-center space-x-2">
                       <Checkbox
                         id={`priority-${priority}`}
                         checked={filters.priority.includes(priority)}
-                        onCheckedChange={(checked) => 
+                        onCheckedChange={checked =>
                           handleArrayFilterChange('priority', priority, checked as boolean)
                         }
                       />
@@ -348,23 +363,19 @@ export default function AdvancedSearch({
 
               {/* Risk Level Filter */}
               <div>
-                <Label className="text-sm font-medium mb-2 block">
-                  {t('common.riskLevel')}
-                </Label>
+                <Label className="text-sm font-medium mb-2 block">{t('common.riskLevel')}</Label>
                 <div className="space-y-2">
-                  {['high', 'medium', 'low'].map((risk) => (
+                  {['high', 'medium', 'low'].map(risk => (
                     <div key={risk} className="flex items-center space-x-2">
                       <Checkbox
                         id={`risk-${risk}`}
                         checked={filters.riskLevel.includes(risk)}
-                        onCheckedChange={(checked) => 
+                        onCheckedChange={checked =>
                           handleArrayFilterChange('riskLevel', risk, checked as boolean)
                         }
                       />
                       <Label htmlFor={`risk-${risk}`} className="text-sm">
-                        <Badge className={getRiskColor(risk)}>
-                          {t(`pss.risk.${risk}`)}
-                        </Badge>
+                        <Badge className={getRiskColor(risk)}>{t(`pss.risk.${risk}`)}</Badge>
                       </Label>
                     </div>
                   ))}
@@ -382,10 +393,13 @@ export default function AdvancedSearch({
                 <div className="flex space-x-2">
                   <Popover>
                     <PopoverTrigger asChild>
-                      <Button variant="outline" className="w-full justify-start text-left font-normal">
+                      <Button
+                        variant="outline"
+                        className="w-full justify-start text-left font-normal"
+                      >
                         <CalendarIcon className="mr-2 h-4 w-4" />
                         {filters.dateRange.from ? (
-                          format(filters.dateRange.from, "PPP")
+                          format(filters.dateRange.from, 'PPP')
                         ) : (
                           <span>{t('common.selectDate')}</span>
                         )}
@@ -395,17 +409,22 @@ export default function AdvancedSearch({
                       <Calendar
                         mode="single"
                         selected={filters.dateRange.from}
-                        onSelect={(date) => handleFilterChange('dateRange', { ...filters.dateRange, from: date })}
+                        onSelect={date =>
+                          handleFilterChange('dateRange', { ...filters.dateRange, from: date })
+                        }
                         initialFocus
                       />
                     </PopoverContent>
                   </Popover>
                   <Popover>
                     <PopoverTrigger asChild>
-                      <Button variant="outline" className="w-full justify-start text-left font-normal">
+                      <Button
+                        variant="outline"
+                        className="w-full justify-start text-left font-normal"
+                      >
                         <CalendarIcon className="mr-2 h-4 w-4" />
                         {filters.dateRange.to ? (
-                          format(filters.dateRange.to, "PPP")
+                          format(filters.dateRange.to, 'PPP')
                         ) : (
                           <span>{t('common.selectDate')}</span>
                         )}
@@ -415,7 +434,9 @@ export default function AdvancedSearch({
                       <Calendar
                         mode="single"
                         selected={filters.dateRange.to}
-                        onSelect={(date) => handleFilterChange('dateRange', { ...filters.dateRange, to: date })}
+                        onSelect={date =>
+                          handleFilterChange('dateRange', { ...filters.dateRange, to: date })
+                        }
                         initialFocus
                       />
                     </PopoverContent>
@@ -425,28 +446,30 @@ export default function AdvancedSearch({
 
               {/* Amount Range */}
               <div>
-                <Label className="text-sm font-medium mb-2 block">
-                  {t('common.amountRange')}
-                </Label>
+                <Label className="text-sm font-medium mb-2 block">{t('common.amountRange')}</Label>
                 <div className="flex space-x-2">
                   <Input
                     type="number"
                     placeholder={t('common.min')}
                     value={filters.amountRange.min}
-                    onChange={(e) => handleFilterChange('amountRange', {
-                      ...filters.amountRange,
-                      min: Number(e.target.value)
-                    })}
+                    onChange={e =>
+                      handleFilterChange('amountRange', {
+                        ...filters.amountRange,
+                        min: Number(e.target.value),
+                      })
+                    }
                     className="w-full"
                   />
                   <Input
                     type="number"
                     placeholder={t('common.max')}
                     value={filters.amountRange.max}
-                    onChange={(e) => handleFilterChange('amountRange', {
-                      ...filters.amountRange,
-                      max: Number(e.target.value)
-                    })}
+                    onChange={e =>
+                      handleFilterChange('amountRange', {
+                        ...filters.amountRange,
+                        max: Number(e.target.value),
+                      })
+                    }
                     className="w-full"
                   />
                 </div>
@@ -462,7 +485,7 @@ export default function AdvancedSearch({
                     <Checkbox
                       id="hasDocuments"
                       checked={filters.hasDocuments}
-                      onCheckedChange={(checked) => handleFilterChange('hasDocuments', checked)}
+                      onCheckedChange={checked => handleFilterChange('hasDocuments', checked)}
                     />
                     <Label htmlFor="hasDocuments" className="text-sm">
                       {t('common.hasDocuments')}
@@ -472,7 +495,7 @@ export default function AdvancedSearch({
                     <Checkbox
                       id="hasNotes"
                       checked={filters.hasNotes}
-                      onCheckedChange={(checked) => handleFilterChange('hasNotes', checked)}
+                      onCheckedChange={checked => handleFilterChange('hasNotes', checked)}
                     />
                     <Label htmlFor="hasNotes" className="text-sm">
                       {t('common.hasNotes')}
@@ -486,4 +509,4 @@ export default function AdvancedSearch({
       </CardContent>
     </Card>
   );
-} 
+}

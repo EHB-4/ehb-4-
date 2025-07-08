@@ -43,7 +43,7 @@ export default function ValidatorDashboard() {
   return (
     <div className="container mx-auto px-4 py-8">
       <h1 className="text-3xl font-bold mb-8">Validator Dashboard</h1>
-      
+
       {/* Validator Status Card */}
       <div className="bg-white rounded-lg shadow-lg p-6 mb-8">
         <h2 className="text-xl font-semibold mb-4">Validator Status</h2>
@@ -57,9 +57,7 @@ export default function ValidatorDashboard() {
             </div>
             <div className="p-4 bg-gray-50 rounded">
               <p className="text-gray-600">Loyalty Bonus</p>
-              <p className="text-2xl font-bold">
-                {validatorData.loyaltyBonus}%
-              </p>
+              <p className="text-2xl font-bold">{validatorData.loyaltyBonus}%</p>
             </div>
             <div className="p-4 bg-gray-50 rounded">
               <p className="text-gray-600">Current Reward</p>
@@ -86,12 +84,7 @@ export default function ValidatorDashboard() {
             <YAxis />
             <Tooltip />
             <Legend />
-            <Line
-              type="monotone"
-              dataKey="reward"
-              stroke="#8884d8"
-              name="Reward (EHBGC)"
-            />
+            <Line type="monotone" dataKey="reward" stroke="#8884d8" name="Reward (EHBGC)" />
           </LineChart>
         </div>
       </div>
@@ -118,9 +111,13 @@ export default function ValidatorDashboard() {
             <div>
               <p className="text-gray-600">Validator Status</p>
               <p className="font-semibold">
-                <span className={`px-2 py-1 rounded ${
-                  validatorData.isActive ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'
-                }`}>
+                <span
+                  className={`px-2 py-1 rounded ${
+                    validatorData.isActive
+                      ? 'bg-green-100 text-green-800'
+                      : 'bg-red-100 text-red-800'
+                  }`}
+                >
                   {validatorData.isActive ? 'Active' : 'Inactive'}
                 </span>
               </p>
@@ -130,4 +127,4 @@ export default function ValidatorDashboard() {
       </div>
     </div>
   );
-} 
+}

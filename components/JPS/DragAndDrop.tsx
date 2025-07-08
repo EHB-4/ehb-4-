@@ -26,7 +26,7 @@ export default function DragAndDrop({ items, onStatusChange }: DragAndDropProps)
     { id: 'pending', title: 'Pending', color: 'bg-yellow-100' },
     { id: 'in-progress', title: 'In Progress', color: 'bg-blue-100' },
     { id: 'completed', title: 'Completed', color: 'bg-green-100' },
-    { id: 'rejected', title: 'Rejected', color: 'bg-red-100' }
+    { id: 'rejected', title: 'Rejected', color: 'bg-red-100' },
   ]);
 
   const handleDragStart = (e: React.DragEvent, item: DragItem) => {
@@ -67,39 +67,37 @@ export default function DragAndDrop({ items, onStatusChange }: DragAndDropProps)
   return (
     <div className="p-6">
       <h2 className="text-2xl font-bold text-gray-900 mb-6">Drag & Drop Management</h2>
-      
+
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-        {columns.map((column) => (
+        {columns.map(column => (
           <div
             key={column.id}
             className={`${column.color} rounded-lg p-4 min-h-96`}
             onDragOver={handleDragOver}
-            onDrop={(e) => handleDrop(e, column.id)}
+            onDrop={e => handleDrop(e, column.id)}
           >
             <h3 className="font-semibold text-gray-900 mb-4">{column.title}</h3>
-            
+
             <div className="space-y-3">
               {items
                 .filter(item => item.status === column.id)
-                .map((item) => (
+                .map(item => (
                   <div
                     key={item.id}
                     draggable
-                    onDragStart={(e) => handleDragStart(e, item)}
+                    onDragStart={e => handleDragStart(e, item)}
                     className="bg-white p-3 rounded-lg shadow-sm cursor-move hover:shadow-md transition-shadow"
                   >
                     <div className="flex items-start justify-between mb-2">
                       <div className="flex items-center space-x-2">
                         {getTypeIcon(item.type)}
-                        <span className="text-sm font-medium text-gray-900">
-                          {item.title}
-                        </span>
+                        <span className="text-sm font-medium text-gray-900">{item.title}</span>
                       </div>
                       <Move className="h-4 w-4 text-gray-400" />
                     </div>
-                    
+
                     <p className="text-xs text-gray-600 mb-2">{item.description}</p>
-                    
+
                     <div className="flex items-center justify-between">
                       <span className="text-xs px-2 py-1 rounded-full bg-gray-100 text-gray-700 capitalize">
                         {item.type}
@@ -124,4 +122,4 @@ export default function DragAndDrop({ items, onStatusChange }: DragAndDropProps)
       </div>
     </div>
   );
-} 
+}

@@ -1,4 +1,4 @@
-export const runtime = "nodejs";
+export const runtime = 'nodejs';
 import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { getServerSession } from 'next-auth';
@@ -6,7 +6,7 @@ import { getServerSession } from 'next-auth';
 export async function POST(request: NextRequest) {
   try {
     const session = await getServerSession();
-    
+
     if (!session?.user?.email) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
@@ -15,7 +15,7 @@ export async function POST(request: NextRequest) {
     const { testType, answers, projectData } = body;
 
     const user = await prisma.user.findUnique({
-      where: { email: session.user.email }
+      where: { email: session.user.email },
     });
 
     if (!user) {
@@ -36,9 +36,9 @@ export async function POST(request: NextRequest) {
         testData: {
           answers,
           projectData,
-          timestamp: new Date().toISOString()
-        }
-      }
+          timestamp: new Date().toISOString(),
+        },
+      },
     });
 
     // Update user's AI score if passed
@@ -47,9 +47,9 @@ export async function POST(request: NextRequest) {
         where: { id: user.id },
         data: {
           aiScore: {
-            increment: 20
-          }
-        }
+            increment: 20,
+          },
+        },
       });
     }
 
@@ -58,22 +58,18 @@ export async function POST(request: NextRequest) {
       score,
       passed,
       testId: skillTest.id,
-      feedback: getTestFeedback(testType, score, passed)
+      feedback: getTestFeedback(testType, score, passed),
     });
-
   } catch (error) {
     console.error('Skill Test Error:', error);
-    return NextResponse.json(
-      { error: 'Internal server error' },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
   }
 }
 
 export async function GET(request: NextRequest) {
   try {
     const session = await getServerSession();
-    
+
     if (!session?.user?.email) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
@@ -83,9 +79,9 @@ export async function GET(request: NextRequest) {
       include: {
         skillTests: {
           orderBy: { createdAt: 'desc' },
-          take: 10
-        }
-      }
+          take: 10,
+        },
+      },
     });
 
     if (!user) {
@@ -98,21 +94,20 @@ export async function GET(request: NextRequest) {
         type: test.testType,
         score: test.score,
         passed: test.passed,
-        date: test.createdAt.toISOString()
+        date: test.createdAt.toISOString(),
       })),
       totalTests: user.skillTests.length,
       passedTests: user.skillTests.filter(test => test.passed).length,
-      averageScore: user.skillTests.length > 0 
-        ? Math.round(user.skillTests.reduce((sum, test) => sum + test.score, 0) / user.skillTests.length)
-        : 0
+      averageScore:
+        user.skillTests.length > 0
+          ? Math.round(
+              user.skillTests.reduce((sum, test) => sum + test.score, 0) / user.skillTests.length
+            )
+          : 0,
     });
-
   } catch (error) {
     console.error('Skill Test History Error:', error);
-    return NextResponse.json(
-      { error: 'Internal server error' },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
   }
 }
 
@@ -132,41 +127,42 @@ function calculateTestScore(testType: string, answers: any, projectData: any): n
 function calculateMCQScore(answers: any): number {
   // Mock MCQ scoring - in real implementation, compare with correct answers
   const totalQuestions = Object.keys(answers).length;
-  const correctAnswers = Math.floor(Math.random() * totalQuestions) + Math.floor(totalQuestions * 0.6);
+  const correctAnswers =
+    Math.floor(Math.random() * totalQuestions) + Math.floor(totalQuestions * 0.6);
   return Math.round((correctAnswers / totalQuestions) * 100);
 }
 
 function calculatePracticalScore(projectData: any): number {
   // Mock practical scoring based on project completion
   let score = 0;
-  
+
   if (projectData.completed) score += 40;
   if (projectData.quality === 'high') score += 30;
   if (projectData.onTime) score += 20;
   if (projectData.documentation) score += 10;
-  
+
   return Math.min(100, score);
 }
 
 function calculateVideoScore(projectData: any): number {
   // Mock video interview scoring
   let score = 0;
-  
+
   if (projectData.communication) score += 30;
   if (projectData.knowledge) score += 40;
   if (projectData.confidence) score += 20;
   if (projectData.professionalism) score += 10;
-  
+
   return Math.min(100, score);
 }
 
 function getPassingScore(testType: string): number {
   const passingScores = {
-    'MCQ': 70,
-    'PRACTICAL': 75,
-    'VIDEO_INTERVIEW': 80
+    MCQ: 70,
+    PRACTICAL: 75,
+    VIDEO_INTERVIEW: 80,
   };
-  
+
   return passingScores[testType as keyof typeof passingScores] || 70;
 }
 
@@ -176,4 +172,4 @@ function getTestFeedback(testType: string, score: number, passed: boolean): stri
   } else {
     return `You scored ${score}% on the ${testType.toLowerCase()} test. The passing score is ${getPassingScore(testType)}%. Please try again.`;
   }
-} 
+}

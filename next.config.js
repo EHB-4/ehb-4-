@@ -4,14 +4,14 @@ const nextConfig = {
     optimizeCss: true,
     optimizePackageImports: ['@mui/material', '@mui/icons-material'],
   },
-  
+
   images: {
     domains: ['localhost', 'your-domain.com'],
     formats: ['image/webp', 'image/avif'],
   },
-  
+
   compress: true,
-  
+
   async headers() {
     return [
       {

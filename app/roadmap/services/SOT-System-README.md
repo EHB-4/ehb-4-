@@ -146,21 +146,18 @@ The **SOT (Services of Technology)** system is a comprehensive AI-powered market
 ### Multi-Layer Protection
 
 1. **Profile Verification**
-
    - KYC integration
    - Document verification
    - Face recognition
    - Voice pattern analysis
 
 2. **Behavioral Analysis**
-
    - Login pattern monitoring
    - Activity consistency checks
    - Location tracking
    - Device fingerprinting
 
 3. **Code Security**
-
    - Plagiarism detection
    - Stolen code identification
    - Quality assessment
@@ -177,25 +174,21 @@ The **SOT (Services of Technology)** system is a comprehensive AI-powered market
 ### Task Processing Pipeline
 
 1. **Task Submission**
-
    - Client submits task with requirements
    - SchedulerAgent creates timeline
    - FraudWatchAgent checks client
 
 2. **Developer Matching**
-
    - DevMatchAgent finds best matches
    - SQLScoreAgent verifies eligibility
    - SchedulerAgent checks availability
 
 3. **Development Phase**
-
    - SchedulerAgent tracks progress
    - FraudWatchAgent monitors activity
    - ComplaintBot handles issues
 
 4. **Code Submission**
-
    - CodeCheckAgent reviews code
    - FraudWatchAgent checks for plagiarism
    - SQLScoreAgent updates scores

@@ -1,10 +1,23 @@
-# EHB Next.js 04 - Frontend Development Rules
+# EHB Next.js 04 - Continuous Agent Configuration
 
-## Auto-Activation Configuration
+## Agent Stability Configuration
 autoActivate: true
 autoRun: true
 autoAccept: true
 projectId: "ehb-next-js-04-frontend"
+maxExecutionTime: 300000
+memoryLimit: "2GB"
+timeout: 300000
+retryAttempts: 3
+keepAlive: true
+
+## Agent Performance Settings
+- Disable infinite loops
+- Set memory limits
+- Enable timeout protection
+- Implement error recovery
+- Use non-blocking operations
+- Enable process monitoring
 
 ## Frontend Development Focus
 - Use TypeScript for all components
@@ -35,6 +48,10 @@ projectId: "ehb-next-js-04-frontend"
 4. Create frontend tests
 5. Improve styling and layout
 6. Ensure responsive design
+7. NEVER use infinite loops
+8. ALWAYS set timeouts for operations
+9. Use async/await properly
+10. Implement error handling
 
 ## Performance Guidelines
 - Use Next.js Image optimization
@@ -56,3 +73,11 @@ projectId: "ehb-next-js-04-frontend"
 - Auto-Setup: Automatically configures frontend features
 - Auto-Test: Automatically generates frontend tests
 - Auto-Optimize: Automatically optimizes UI/UX
+
+## Agent Stability Rules
+- Maximum execution time: 5 minutes per operation
+- Memory limit: 2GB
+- Retry attempts: 3
+- Keep alive: true
+- Non-blocking operations only
+- Proper error handling required

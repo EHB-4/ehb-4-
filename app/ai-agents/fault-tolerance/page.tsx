@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 'use client';
 
@@ -579,8 +579,8 @@ export default function AIAgentFaultTolerancePage() {
                                 agent.healthChecks.cpu > 80
                                   ? 'bg-red-600'
                                   : agent.healthChecks.cpu > 60
-                                  ? 'bg-yellow-600'
-                                  : 'bg-green-600'
+                                    ? 'bg-yellow-600'
+                                    : 'bg-green-600'
                               }`}
                               style={{ width: `${agent.healthChecks.cpu}%` }}
                             />
@@ -599,8 +599,8 @@ export default function AIAgentFaultTolerancePage() {
                                 agent.healthChecks.memory > 80
                                   ? 'bg-red-600'
                                   : agent.healthChecks.memory > 60
-                                  ? 'bg-yellow-600'
-                                  : 'bg-green-600'
+                                    ? 'bg-yellow-600'
+                                    : 'bg-green-600'
                               }`}
                               style={{ width: `${agent.healthChecks.memory}%` }}
                             />

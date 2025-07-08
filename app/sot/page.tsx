@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 /**
  * SOT (Services of Technology) - Main Page
@@ -43,7 +43,7 @@ import {
   AlertCircle,
   CheckCircle2,
   XCircle,
-  Loader2
+  Loader2,
 } from 'lucide-react';
 import { ehbMainAgent, AgentStatus, AgentTask } from '@/lib/ai/EHBMainAgent';
 
@@ -58,10 +58,10 @@ export default function SOTMainPage() {
   // Load initial data
   useEffect(() => {
     loadAgentData();
-    
+
     // Set up real-time updates
     const interval = setInterval(loadAgentData, 5000); // Update every 5 seconds
-    
+
     return () => clearInterval(interval);
   }, []);
 
@@ -113,21 +113,31 @@ export default function SOTMainPage() {
 
   const getStatusColor = (status: string) => {
     switch (status) {
-      case 'running': return 'bg-green-500';
-      case 'stopped': return 'bg-red-500';
-      case 'error': return 'bg-yellow-500';
-      case 'idle': return 'bg-gray-500';
-      default: return 'bg-gray-500';
+      case 'running':
+        return 'bg-green-500';
+      case 'stopped':
+        return 'bg-red-500';
+      case 'error':
+        return 'bg-yellow-500';
+      case 'idle':
+        return 'bg-gray-500';
+      default:
+        return 'bg-gray-500';
     }
   };
 
   const getStatusIcon = (status: string) => {
     switch (status) {
-      case 'running': return <CheckCircle2 className="w-4 h-4 text-green-500" />;
-      case 'stopped': return <XCircle className="w-4 h-4 text-red-500" />;
-      case 'error': return <AlertCircle className="w-4 h-4 text-yellow-500" />;
-      case 'idle': return <Clock className="w-4 h-4 text-gray-500" />;
-      default: return <Clock className="w-4 h-4 text-gray-500" />;
+      case 'running':
+        return <CheckCircle2 className="w-4 h-4 text-green-500" />;
+      case 'stopped':
+        return <XCircle className="w-4 h-4 text-red-500" />;
+      case 'error':
+        return <AlertCircle className="w-4 h-4 text-yellow-500" />;
+      case 'idle':
+        return <Clock className="w-4 h-4 text-gray-500" />;
+      default:
+        return <Clock className="w-4 h-4 text-gray-500" />;
     }
   };
 
@@ -152,7 +162,7 @@ export default function SOTMainPage() {
                 {mainAgentStatus?.status === 'running' ? 'Active' : 'Inactive'}
               </Badge>
             </div>
-            
+
             <div className="flex items-center space-x-4">
               <div className="flex items-center space-x-2">
                 <span className="text-sm text-gray-600">Main Agent:</span>
@@ -163,7 +173,11 @@ export default function SOTMainPage() {
                     onClick={handleStopMainAgent}
                     disabled={isLoading}
                   >
-                    {isLoading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Pause className="w-4 h-4" />}
+                    {isLoading ? (
+                      <Loader2 className="w-4 h-4 animate-spin" />
+                    ) : (
+                      <Pause className="w-4 h-4" />
+                    )}
                     Stop
                   </Button>
                 ) : (
@@ -173,12 +187,16 @@ export default function SOTMainPage() {
                     onClick={handleStartMainAgent}
                     disabled={isLoading}
                   >
-                    {isLoading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Play className="w-4 h-4" />}
+                    {isLoading ? (
+                      <Loader2 className="w-4 h-4 animate-spin" />
+                    ) : (
+                      <Play className="w-4 h-4" />
+                    )}
                     Start
                   </Button>
                 )}
               </div>
-              
+
               <Button onClick={loadAgentData} variant="outline" size="sm">
                 <RefreshCw className="w-4 h-4" />
               </Button>
@@ -220,7 +238,9 @@ export default function SOTMainPage() {
                   <Activity className="h-4 w-4 text-muted-foreground" />
                 </CardHeader>
                 <CardContent>
-                  <div className="text-2xl font-bold">{tasks.filter(t => t.status === 'running').length}</div>
+                  <div className="text-2xl font-bold">
+                    {tasks.filter(t => t.status === 'running').length}
+                  </div>
                   <p className="text-xs text-muted-foreground">
                     {tasks.filter(t => t.status === 'pending').length} pending
                   </p>
@@ -233,7 +253,9 @@ export default function SOTMainPage() {
                   <CheckCircle className="h-4 w-4 text-muted-foreground" />
                 </CardHeader>
                 <CardContent>
-                  <div className="text-2xl font-bold">{tasks.filter(t => t.status === 'completed').length}</div>
+                  <div className="text-2xl font-bold">
+                    {tasks.filter(t => t.status === 'completed').length}
+                  </div>
                   <p className="text-xs text-muted-foreground">
                     {tasks.filter(t => t.status === 'failed').length} failed
                   </p>
@@ -247,9 +269,7 @@ export default function SOTMainPage() {
                 </CardHeader>
                 <CardContent>
                   <div className="text-2xl font-bold text-green-600">99.9%</div>
-                  <p className="text-xs text-muted-foreground">
-                    All systems operational
-                  </p>
+                  <p className="text-xs text-muted-foreground">All systems operational</p>
                 </CardContent>
               </Card>
             </div>
@@ -262,28 +282,40 @@ export default function SOTMainPage() {
               <CardContent>
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                   <Link href="/sot/marketplace">
-                    <Button variant="outline" className="w-full h-20 flex flex-col items-center justify-center">
+                    <Button
+                      variant="outline"
+                      className="w-full h-20 flex flex-col items-center justify-center"
+                    >
                       <Globe className="w-6 h-6 mb-2" />
                       <span className="text-sm">Marketplace</span>
                     </Button>
                   </Link>
-                  
+
                   <Link href="/sot/development">
-                    <Button variant="outline" className="w-full h-20 flex flex-col items-center justify-center">
+                    <Button
+                      variant="outline"
+                      className="w-full h-20 flex flex-col items-center justify-center"
+                    >
                       <Code className="w-6 h-6 mb-2" />
                       <span className="text-sm">Development</span>
                     </Button>
                   </Link>
-                  
+
                   <Link href="/sot/agents">
-                    <Button variant="outline" className="w-full h-20 flex flex-col items-center justify-center">
+                    <Button
+                      variant="outline"
+                      className="w-full h-20 flex flex-col items-center justify-center"
+                    >
                       <Brain className="w-6 h-6 mb-2" />
                       <span className="text-sm">AI Agents</span>
                     </Button>
                   </Link>
-                  
+
                   <Link href="/sot/analytics">
-                    <Button variant="outline" className="w-full h-20 flex flex-col items-center justify-center">
+                    <Button
+                      variant="outline"
+                      className="w-full h-20 flex flex-col items-center justify-center"
+                    >
                       <BarChart3 className="w-6 h-6 mb-2" />
                       <span className="text-sm">Analytics</span>
                     </Button>
@@ -301,14 +333,14 @@ export default function SOTMainPage() {
                 <Input
                   placeholder="Search agents..."
                   value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
+                  onChange={e => setSearchQuery(e.target.value)}
                   className="w-64"
                 />
               </div>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {filteredAgents.map((agent) => (
+              {filteredAgents.map(agent => (
                 <Card key={agent.id} className="hover:shadow-lg transition-shadow">
                   <CardHeader>
                     <div className="flex items-center justify-between">
@@ -340,7 +372,7 @@ export default function SOTMainPage() {
                           {new Date(agent.lastActivity).toLocaleTimeString()}
                         </span>
                       </div>
-                      
+
                       <div className="flex space-x-2 pt-2">
                         {agent.status === 'running' ? (
                           <Button
@@ -382,7 +414,7 @@ export default function SOTMainPage() {
             </div>
 
             <div className="space-y-4">
-              {recentTasks.map((task) => (
+              {recentTasks.map(task => (
                 <Card key={task.id}>
                   <CardContent className="pt-6">
                     <div className="flex items-center justify-between">
@@ -391,7 +423,8 @@ export default function SOTMainPage() {
                         <div>
                           <h3 className="font-medium">{task.description}</h3>
                           <p className="text-sm text-gray-600">
-                            Assigned to: {agentsStatus.find(a => a.id === task.agentId)?.name || task.agentId}
+                            Assigned to:{' '}
+                            {agentsStatus.find(a => a.id === task.agentId)?.name || task.agentId}
                           </p>
                         </div>
                       </div>
@@ -422,7 +455,9 @@ export default function SOTMainPage() {
                     </CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <p className="text-gray-600">Browse and purchase technology services, AI agents, and products.</p>
+                    <p className="text-gray-600">
+                      Browse and purchase technology services, AI agents, and products.
+                    </p>
                   </CardContent>
                 </Card>
               </Link>
@@ -436,7 +471,9 @@ export default function SOTMainPage() {
                     </CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <p className="text-gray-600">Real-time coding environment with AI assistance and project management.</p>
+                    <p className="text-gray-600">
+                      Real-time coding environment with AI assistance and project management.
+                    </p>
                   </CardContent>
                 </Card>
               </Link>
@@ -450,7 +487,9 @@ export default function SOTMainPage() {
                     </CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <p className="text-gray-600">Manage and monitor all AI agents in the SOT ecosystem.</p>
+                    <p className="text-gray-600">
+                      Manage and monitor all AI agents in the SOT ecosystem.
+                    </p>
                   </CardContent>
                 </Card>
               </Link>
@@ -464,7 +503,9 @@ export default function SOTMainPage() {
                     </CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <p className="text-gray-600">Advanced security monitoring and threat detection systems.</p>
+                    <p className="text-gray-600">
+                      Advanced security monitoring and threat detection systems.
+                    </p>
                   </CardContent>
                 </Card>
               </Link>
@@ -478,7 +519,9 @@ export default function SOTMainPage() {
                     </CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <p className="text-gray-600">Comprehensive analytics and performance monitoring dashboard.</p>
+                    <p className="text-gray-600">
+                      Comprehensive analytics and performance monitoring dashboard.
+                    </p>
                   </CardContent>
                 </Card>
               </Link>
@@ -492,7 +535,9 @@ export default function SOTMainPage() {
                     </CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <p className="text-gray-600">Administrative controls and system configuration management.</p>
+                    <p className="text-gray-600">
+                      Administrative controls and system configuration management.
+                    </p>
                   </CardContent>
                 </Card>
               </Link>

@@ -271,7 +271,9 @@ export default function SOTAnalyticsPage() {
           <div className="flex items-center justify-between mb-6">
             <div>
               <h1 className="text-3xl font-bold text-gray-900">SOT Analytics</h1>
-              <p className="text-gray-600">Comprehensive system analytics and performance metrics</p>
+              <p className="text-gray-600">
+                Comprehensive system analytics and performance metrics
+              </p>
             </div>
             <Link href="/sot">
               <Button variant="outline">
@@ -291,7 +293,9 @@ export default function SOTAnalyticsPage() {
                   </div>
                   <div>
                     <p className="text-sm text-gray-500">Total Users</p>
-                    <p className="text-lg font-bold text-gray-900">{formatNumber(analyticsData.totalUsers)}</p>
+                    <p className="text-lg font-bold text-gray-900">
+                      {formatNumber(analyticsData.totalUsers)}
+                    </p>
                   </div>
                 </div>
               </CardContent>
@@ -304,7 +308,9 @@ export default function SOTAnalyticsPage() {
                   </div>
                   <div>
                     <p className="text-sm text-gray-500">Total Tasks</p>
-                    <p className="text-lg font-bold text-gray-900">{formatNumber(analyticsData.totalTasks)}</p>
+                    <p className="text-lg font-bold text-gray-900">
+                      {formatNumber(analyticsData.totalTasks)}
+                    </p>
                   </div>
                 </div>
               </CardContent>
@@ -317,7 +323,9 @@ export default function SOTAnalyticsPage() {
                   </div>
                   <div>
                     <p className="text-sm text-gray-500">Total Revenue</p>
-                    <p className="text-lg font-bold text-gray-900">{formatCurrency(analyticsData.totalRevenue)}</p>
+                    <p className="text-lg font-bold text-gray-900">
+                      {formatCurrency(analyticsData.totalRevenue)}
+                    </p>
                   </div>
                 </div>
               </CardContent>
@@ -360,7 +368,9 @@ export default function SOTAnalyticsPage() {
                       <CheckCircle className="h-6 w-6 text-green-600" />
                     </div>
                     <div>
-                      <p className="text-2xl font-bold text-gray-900">{analyticsData.completedTasks.toLocaleString()}</p>
+                      <p className="text-2xl font-bold text-gray-900">
+                        {analyticsData.completedTasks.toLocaleString()}
+                      </p>
                       <p className="text-sm text-gray-500">Completed Tasks</p>
                     </div>
                   </div>
@@ -373,7 +383,9 @@ export default function SOTAnalyticsPage() {
                       <Clock className="h-6 w-6 text-blue-600" />
                     </div>
                     <div>
-                      <p className="text-2xl font-bold text-gray-900">{analyticsData.averageResponseTime}s</p>
+                      <p className="text-2xl font-bold text-gray-900">
+                        {analyticsData.averageResponseTime}s
+                      </p>
                       <p className="text-sm text-gray-500">Avg Response Time</p>
                     </div>
                   </div>
@@ -386,7 +398,9 @@ export default function SOTAnalyticsPage() {
                       <Star className="h-6 w-6 text-purple-600" />
                     </div>
                     <div>
-                      <p className="text-2xl font-bold text-gray-900">{analyticsData.userSatisfaction}/5</p>
+                      <p className="text-2xl font-bold text-gray-900">
+                        {analyticsData.userSatisfaction}/5
+                      </p>
                       <p className="text-sm text-gray-500">User Satisfaction</p>
                     </div>
                   </div>
@@ -399,7 +413,9 @@ export default function SOTAnalyticsPage() {
                       <Target className="h-6 w-6 text-orange-600" />
                     </div>
                     <div>
-                      <p className="text-2xl font-bold text-gray-900">{formatCurrency(analyticsData.averageTaskValue)}</p>
+                      <p className="text-2xl font-bold text-gray-900">
+                        {formatCurrency(analyticsData.averageTaskValue)}
+                      </p>
                       <p className="text-sm text-gray-500">Avg Task Value</p>
                     </div>
                   </div>
@@ -451,20 +467,26 @@ export default function SOTAnalyticsPage() {
               <CardContent>
                 <div className="space-y-4">
                   {analyticsData.topCategories.map((category, index) => (
-                    <div key={index} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                    <div
+                      key={index}
+                      className="flex items-center justify-between p-3 bg-gray-50 rounded-lg"
+                    >
                       <div className="flex items-center space-x-3">
                         <div className="h-8 w-8 bg-blue-100 rounded-lg flex items-center justify-center">
                           <span className="text-sm font-medium text-blue-600">{index + 1}</span>
                         </div>
                         <div>
                           <h4 className="font-medium">{category.name}</h4>
-                          <p className="text-sm text-gray-500">{formatNumber(category.tasks)} tasks</p>
+                          <p className="text-sm text-gray-500">
+                            {formatNumber(category.tasks)} tasks
+                          </p>
                         </div>
                       </div>
                       <div className="text-right">
                         <p className="font-medium">{formatCurrency(category.revenue)}</p>
                         <p className="text-sm text-gray-500">
-                          {((category.revenue / analyticsData.totalRevenue) * 100).toFixed(1)}% of total
+                          {((category.revenue / analyticsData.totalRevenue) * 100).toFixed(1)}% of
+                          total
                         </p>
                       </div>
                     </div>
@@ -494,23 +516,38 @@ export default function SOTAnalyticsPage() {
                     <div>
                       <div className="flex justify-between text-sm mb-1">
                         <span>Task Completion Rate</span>
-                        <span>{((analyticsData.completedTasks / analyticsData.totalTasks) * 100).toFixed(1)}%</span>
+                        <span>
+                          {(
+                            (analyticsData.completedTasks / analyticsData.totalTasks) *
+                            100
+                          ).toFixed(1)}
+                          %
+                        </span>
                       </div>
-                      <Progress value={(analyticsData.completedTasks / analyticsData.totalTasks) * 100} className="h-3" />
+                      <Progress
+                        value={(analyticsData.completedTasks / analyticsData.totalTasks) * 100}
+                        className="h-3"
+                      />
                     </div>
                     <div>
                       <div className="flex justify-between text-sm mb-1">
                         <span>User Satisfaction</span>
                         <span>{(analyticsData.userSatisfaction / 5) * 100}%</span>
                       </div>
-                      <Progress value={(analyticsData.userSatisfaction / 5) * 100} className="h-3" />
+                      <Progress
+                        value={(analyticsData.userSatisfaction / 5) * 100}
+                        className="h-3"
+                      />
                     </div>
                     <div>
                       <div className="flex justify-between text-sm mb-1">
                         <span>Response Time Efficiency</span>
                         <span>{((2 - analyticsData.averageResponseTime) / 2) * 100}%</span>
                       </div>
-                      <Progress value={((2 - analyticsData.averageResponseTime) / 2) * 100} className="h-3" />
+                      <Progress
+                        value={((2 - analyticsData.averageResponseTime) / 2) * 100}
+                        className="h-3"
+                      />
                     </div>
                   </div>
                 </CardContent>
@@ -568,16 +605,22 @@ export default function SOTAnalyticsPage() {
                 <CardContent>
                   <div className="space-y-6">
                     <div className="text-center">
-                      <p className="text-3xl font-bold text-gray-900">{formatCurrency(analyticsData.totalRevenue)}</p>
+                      <p className="text-3xl font-bold text-gray-900">
+                        {formatCurrency(analyticsData.totalRevenue)}
+                      </p>
                       <p className="text-gray-500">Total Revenue</p>
                     </div>
                     <div className="grid grid-cols-2 gap-4">
                       <div className="text-center p-4 bg-green-50 rounded-lg">
-                        <p className="text-lg font-bold text-green-600">{formatCurrency(analyticsData.averageTaskValue)}</p>
+                        <p className="text-lg font-bold text-green-600">
+                          {formatCurrency(analyticsData.averageTaskValue)}
+                        </p>
                         <p className="text-sm text-green-600">Avg Task Value</p>
                       </div>
                       <div className="text-center p-4 bg-blue-50 rounded-lg">
-                        <p className="text-lg font-bold text-blue-600">{formatNumber(analyticsData.totalTasks)}</p>
+                        <p className="text-lg font-bold text-blue-600">
+                          {formatNumber(analyticsData.totalTasks)}
+                        </p>
                         <p className="text-sm text-blue-600">Total Tasks</p>
                       </div>
                     </div>
@@ -623,7 +666,10 @@ export default function SOTAnalyticsPage() {
               <CardContent>
                 <div className="space-y-6">
                   {analyticsData.monthlyGrowth.map((month, index) => (
-                    <div key={index} className="flex items-center justify-between p-4 border rounded-lg">
+                    <div
+                      key={index}
+                      className="flex items-center justify-between p-4 border rounded-lg"
+                    >
                       <div className="flex items-center space-x-4">
                         <div className="h-10 w-10 bg-blue-100 rounded-lg flex items-center justify-center">
                           <Calendar className="h-5 w-5 text-blue-600" />
@@ -657,4 +703,4 @@ export default function SOTAnalyticsPage() {
       </div>
     </div>
   );
-} 
+}

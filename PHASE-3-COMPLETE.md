@@ -9,7 +9,6 @@ Your EHB development portal now includes **complete user authentication and prof
 ### 1. **🔐 User Authentication System**
 
 - **Login Page** (`/auth/login`) - Professional login interface with:
-
   - Email and password authentication
   - Form validation and error handling
   - Password visibility toggle
@@ -29,7 +28,6 @@ Your EHB development portal now includes **complete user authentication and prof
 ### 2. **👤 User Profile Management** (`/profile`)
 
 - **Comprehensive Profile Dashboard** with:
-
   - Personal information management
   - Profile picture upload capability
   - Real-time editing with save/cancel functionality

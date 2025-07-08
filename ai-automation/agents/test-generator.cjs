@@ -9,7 +9,7 @@ class AITestGenerator {
 
   async generateTests() {
     console.log('🤖 AI Test Generator Starting...');
-    
+
     const componentTest = `import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 
@@ -33,15 +33,9 @@ describe('API Tests', () => {
       fs.mkdirSync(this.aiTestDir, { recursive: true });
     }
 
-    fs.writeFileSync(
-      path.join(this.aiTestDir, 'ai-component.test.js'),
-      componentTest
-    );
+    fs.writeFileSync(path.join(this.aiTestDir, 'ai-component.test.js'), componentTest);
 
-    fs.writeFileSync(
-      path.join(this.aiTestDir, 'ai-api.test.js'),
-      apiTest
-    );
+    fs.writeFileSync(path.join(this.aiTestDir, 'ai-api.test.js'), apiTest);
 
     console.log('✅ AI Test Generation completed!');
   }

@@ -20,12 +20,8 @@
             ],
             "url": {
               "raw": "{{baseUrl}}/admin",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "admin"
-              ]
+              "host": ["{{baseUrl}}"],
+              "path": ["admin"]
             }
           }
         },
@@ -41,12 +37,8 @@
             ],
             "url": {
               "raw": "{{baseUrl}}/admin",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "admin"
-              ]
+              "host": ["{{baseUrl}}"],
+              "path": ["admin"]
             },
             "body": {
               "mode": "raw",
@@ -73,13 +65,8 @@
         ],
         "url": {
           "raw": "{{baseUrl}}/affiliate/register",
-          "host": [
-            "{{baseUrl}}"
-          ],
-          "path": [
-            "affiliate",
-            "register"
-          ]
+          "host": ["{{baseUrl}}"],
+          "path": ["affiliate", "register"]
         }
       }
     },
@@ -95,12 +82,8 @@
         ],
         "url": {
           "raw": "{{baseUrl}}/ai-router",
-          "host": [
-            "{{baseUrl}}"
-          ],
-          "path": [
-            "ai-router"
-          ]
+          "host": ["{{baseUrl}}"],
+          "path": ["ai-router"]
         }
       }
     },
@@ -116,13 +99,8 @@
         ],
         "url": {
           "raw": "{{baseUrl}}/am/coin-lock-bonus",
-          "host": [
-            "{{baseUrl}}"
-          ],
-          "path": [
-            "am",
-            "coin-lock-bonus"
-          ]
+          "host": ["{{baseUrl}}"],
+          "path": ["am", "coin-lock-bonus"]
         }
       }
     },
@@ -138,13 +116,8 @@
         ],
         "url": {
           "raw": "{{baseUrl}}/am/income-summary",
-          "host": [
-            "{{baseUrl}}"
-          ],
-          "path": [
-            "am",
-            "income-summary"
-          ]
+          "host": ["{{baseUrl}}"],
+          "path": ["am", "income-summary"]
         }
       }
     },
@@ -160,13 +133,8 @@
         ],
         "url": {
           "raw": "{{baseUrl}}/am/referral-tree",
-          "host": [
-            "{{baseUrl}}"
-          ],
-          "path": [
-            "am",
-            "referral-tree"
-          ]
+          "host": ["{{baseUrl}}"],
+          "path": ["am", "referral-tree"]
         }
       }
     },
@@ -182,13 +150,8 @@
         ],
         "url": {
           "raw": "{{baseUrl}}/am/upgrade-sql-check",
-          "host": [
-            "{{baseUrl}}"
-          ],
-          "path": [
-            "am",
-            "upgrade-sql-check"
-          ]
+          "host": ["{{baseUrl}}"],
+          "path": ["am", "upgrade-sql-check"]
         }
       }
     },
@@ -204,13 +167,8 @@
         ],
         "url": {
           "raw": "{{baseUrl}}/am/user-stats",
-          "host": [
-            "{{baseUrl}}"
-          ],
-          "path": [
-            "am",
-            "user-stats"
-          ]
+          "host": ["{{baseUrl}}"],
+          "path": ["am", "user-stats"]
         }
       }
     },
@@ -226,12 +184,8 @@
         ],
         "url": {
           "raw": "{{baseUrl}}/analytics",
-          "host": [
-            "{{baseUrl}}"
-          ],
-          "path": [
-            "analytics"
-          ]
+          "host": ["{{baseUrl}}"],
+          "path": ["analytics"]
         }
       }
     },
@@ -250,12 +204,8 @@
             ],
             "url": {
               "raw": "{{baseUrl}}/appointments",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "appointments"
-              ]
+              "host": ["{{baseUrl}}"],
+              "path": ["appointments"]
             }
           }
         },
@@ -271,12 +221,8 @@
             ],
             "url": {
               "raw": "{{baseUrl}}/appointments",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "appointments"
-              ]
+              "host": ["{{baseUrl}}"],
+              "path": ["appointments"]
             },
             "body": {
               "mode": "raw",
@@ -301,12 +247,8 @@
             ],
             "url": {
               "raw": "{{baseUrl}}/appointments",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "appointments"
-              ]
+              "host": ["{{baseUrl}}"],
+              "path": ["appointments"]
             }
           }
         },
@@ -322,12 +264,8 @@
             ],
             "url": {
               "raw": "{{baseUrl}}/appointments",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "appointments"
-              ]
+              "host": ["{{baseUrl}}"],
+              "path": ["appointments"]
             },
             "body": {
               "mode": "raw",
@@ -357,12 +295,8 @@
             ],
             "url": {
               "raw": "{{baseUrl}}/assignments",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "assignments"
-              ]
+              "host": ["{{baseUrl}}"],
+              "path": ["assignments"]
             }
           }
         },
@@ -378,12 +312,8 @@
             ],
             "url": {
               "raw": "{{baseUrl}}/assignments",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "assignments"
-              ]
+              "host": ["{{baseUrl}}"],
+              "path": ["assignments"]
             },
             "body": {
               "mode": "raw",
@@ -408,12 +338,8 @@
             ],
             "url": {
               "raw": "{{baseUrl}}/assignments",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "assignments"
-              ]
+              "host": ["{{baseUrl}}"],
+              "path": ["assignments"]
             },
             "body": {
               "mode": "raw",
@@ -440,13 +366,8 @@
         ],
         "url": {
           "raw": "{{baseUrl}}/auth/register",
-          "host": [
-            "{{baseUrl}}"
-          ],
-          "path": [
-            "auth",
-            "register"
-          ]
+          "host": ["{{baseUrl}}"],
+          "path": ["auth", "register"]
         }
       }
     },
@@ -462,13 +383,8 @@
         ],
         "url": {
           "raw": "{{baseUrl}}/auth/status",
-          "host": [
-            "{{baseUrl}}"
-          ],
-          "path": [
-            "auth",
-            "status"
-          ]
+          "host": ["{{baseUrl}}"],
+          "path": ["auth", "status"]
         }
       }
     },
@@ -484,13 +400,8 @@
         ],
         "url": {
           "raw": "{{baseUrl}}/auth/test",
-          "host": [
-            "{{baseUrl}}"
-          ],
-          "path": [
-            "auth",
-            "test"
-          ]
+          "host": ["{{baseUrl}}"],
+          "path": ["auth", "test"]
         }
       }
     },
@@ -509,12 +420,8 @@
             ],
             "url": {
               "raw": "{{baseUrl}}/availability",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "availability"
-              ]
+              "host": ["{{baseUrl}}"],
+              "path": ["availability"]
             }
           }
         },
@@ -530,12 +437,8 @@
             ],
             "url": {
               "raw": "{{baseUrl}}/availability",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "availability"
-              ]
+              "host": ["{{baseUrl}}"],
+              "path": ["availability"]
             },
             "body": {
               "mode": "raw",
@@ -565,12 +468,8 @@
             ],
             "url": {
               "raw": "{{baseUrl}}/cart",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "cart"
-              ]
+              "host": ["{{baseUrl}}"],
+              "path": ["cart"]
             }
           }
         },
@@ -586,12 +485,8 @@
             ],
             "url": {
               "raw": "{{baseUrl}}/cart",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "cart"
-              ]
+              "host": ["{{baseUrl}}"],
+              "path": ["cart"]
             },
             "body": {
               "mode": "raw",
@@ -616,12 +511,8 @@
             ],
             "url": {
               "raw": "{{baseUrl}}/cart",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "cart"
-              ]
+              "host": ["{{baseUrl}}"],
+              "path": ["cart"]
             },
             "body": {
               "mode": "raw",
@@ -646,12 +537,8 @@
             ],
             "url": {
               "raw": "{{baseUrl}}/cart",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "cart"
-              ]
+              "host": ["{{baseUrl}}"],
+              "path": ["cart"]
             }
           }
         }
@@ -669,12 +556,8 @@
         ],
         "url": {
           "raw": "{{baseUrl}}/chat",
-          "host": [
-            "{{baseUrl}}"
-          ],
-          "path": [
-            "chat"
-          ]
+          "host": ["{{baseUrl}}"],
+          "path": ["chat"]
         }
       }
     },
@@ -690,12 +573,8 @@
         ],
         "url": {
           "raw": "{{baseUrl}}/checkout",
-          "host": [
-            "{{baseUrl}}"
-          ],
-          "path": [
-            "checkout"
-          ]
+          "host": ["{{baseUrl}}"],
+          "path": ["checkout"]
         }
       }
     },
@@ -714,12 +593,8 @@
             ],
             "url": {
               "raw": "{{baseUrl}}/courses",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "courses"
-              ]
+              "host": ["{{baseUrl}}"],
+              "path": ["courses"]
             }
           }
         },
@@ -735,12 +610,8 @@
             ],
             "url": {
               "raw": "{{baseUrl}}/courses",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "courses"
-              ]
+              "host": ["{{baseUrl}}"],
+              "path": ["courses"]
             },
             "body": {
               "mode": "raw",
@@ -765,12 +636,8 @@
             ],
             "url": {
               "raw": "{{baseUrl}}/courses",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "courses"
-              ]
+              "host": ["{{baseUrl}}"],
+              "path": ["courses"]
             }
           }
         },
@@ -786,12 +653,8 @@
             ],
             "url": {
               "raw": "{{baseUrl}}/courses",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "courses"
-              ]
+              "host": ["{{baseUrl}}"],
+              "path": ["courses"]
             },
             "body": {
               "mode": "raw",
@@ -821,12 +684,8 @@
             ],
             "url": {
               "raw": "{{baseUrl}}/doctors",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "doctors"
-              ]
+              "host": ["{{baseUrl}}"],
+              "path": ["doctors"]
             }
           }
         },
@@ -842,12 +701,8 @@
             ],
             "url": {
               "raw": "{{baseUrl}}/doctors",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "doctors"
-              ]
+              "host": ["{{baseUrl}}"],
+              "path": ["doctors"]
             },
             "body": {
               "mode": "raw",
@@ -872,12 +727,8 @@
             ],
             "url": {
               "raw": "{{baseUrl}}/doctors",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "doctors"
-              ]
+              "host": ["{{baseUrl}}"],
+              "path": ["doctors"]
             }
           }
         },
@@ -893,12 +744,8 @@
             ],
             "url": {
               "raw": "{{baseUrl}}/doctors",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "doctors"
-              ]
+              "host": ["{{baseUrl}}"],
+              "path": ["doctors"]
             },
             "body": {
               "mode": "raw",
@@ -925,13 +772,8 @@
         ],
         "url": {
           "raw": "{{baseUrl}}/ehb-ads/list",
-          "host": [
-            "{{baseUrl}}"
-          ],
-          "path": [
-            "ehb-ads",
-            "list"
-          ]
+          "host": ["{{baseUrl}}"],
+          "path": ["ehb-ads", "list"]
         }
       }
     },
@@ -947,13 +789,8 @@
         ],
         "url": {
           "raw": "{{baseUrl}}/ehb-ads/post",
-          "host": [
-            "{{baseUrl}}"
-          ],
-          "path": [
-            "ehb-ads",
-            "post"
-          ]
+          "host": ["{{baseUrl}}"],
+          "path": ["ehb-ads", "post"]
         }
       }
     },
@@ -969,13 +806,8 @@
         ],
         "url": {
           "raw": "{{baseUrl}}/ehb-ads/report",
-          "host": [
-            "{{baseUrl}}"
-          ],
-          "path": [
-            "ehb-ads",
-            "report"
-          ]
+          "host": ["{{baseUrl}}"],
+          "path": ["ehb-ads", "report"]
         }
       }
     },
@@ -991,13 +823,8 @@
         ],
         "url": {
           "raw": "{{baseUrl}}/ehb-ads/verify",
-          "host": [
-            "{{baseUrl}}"
-          ],
-          "path": [
-            "ehb-ads",
-            "verify"
-          ]
+          "host": ["{{baseUrl}}"],
+          "path": ["ehb-ads", "verify"]
         }
       }
     },
@@ -1013,13 +840,8 @@
         ],
         "url": {
           "raw": "{{baseUrl}}/ehb-tube/list-videos",
-          "host": [
-            "{{baseUrl}}"
-          ],
-          "path": [
-            "ehb-tube",
-            "list-videos"
-          ]
+          "host": ["{{baseUrl}}"],
+          "path": ["ehb-tube", "list-videos"]
         }
       }
     },
@@ -1035,13 +857,8 @@
         ],
         "url": {
           "raw": "{{baseUrl}}/ehb-tube/profile",
-          "host": [
-            "{{baseUrl}}"
-          ],
-          "path": [
-            "ehb-tube",
-            "profile"
-          ]
+          "host": ["{{baseUrl}}"],
+          "path": ["ehb-tube", "profile"]
         }
       }
     },
@@ -1057,13 +874,8 @@
         ],
         "url": {
           "raw": "{{baseUrl}}/ehb-tube/report",
-          "host": [
-            "{{baseUrl}}"
-          ],
-          "path": [
-            "ehb-tube",
-            "report"
-          ]
+          "host": ["{{baseUrl}}"],
+          "path": ["ehb-tube", "report"]
         }
       }
     },
@@ -1082,12 +894,8 @@
             ],
             "url": {
               "raw": "{{baseUrl}}/enrollments",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "enrollments"
-              ]
+              "host": ["{{baseUrl}}"],
+              "path": ["enrollments"]
             }
           }
         },
@@ -1103,12 +911,8 @@
             ],
             "url": {
               "raw": "{{baseUrl}}/enrollments",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "enrollments"
-              ]
+              "host": ["{{baseUrl}}"],
+              "path": ["enrollments"]
             },
             "body": {
               "mode": "raw",
@@ -1133,12 +937,8 @@
             ],
             "url": {
               "raw": "{{baseUrl}}/enrollments",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "enrollments"
-              ]
+              "host": ["{{baseUrl}}"],
+              "path": ["enrollments"]
             }
           }
         },
@@ -1154,12 +954,8 @@
             ],
             "url": {
               "raw": "{{baseUrl}}/enrollments",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "enrollments"
-              ]
+              "host": ["{{baseUrl}}"],
+              "path": ["enrollments"]
             },
             "body": {
               "mode": "raw",
@@ -1186,12 +982,8 @@
         ],
         "url": {
           "raw": "{{baseUrl}}/feedback",
-          "host": [
-            "{{baseUrl}}"
-          ],
-          "path": [
-            "feedback"
-          ]
+          "host": ["{{baseUrl}}"],
+          "path": ["feedback"]
         }
       }
     },
@@ -1207,13 +999,8 @@
         ],
         "url": {
           "raw": "{{baseUrl}}/franchise/area-check",
-          "host": [
-            "{{baseUrl}}"
-          ],
-          "path": [
-            "franchise",
-            "area-check"
-          ]
+          "host": ["{{baseUrl}}"],
+          "path": ["franchise", "area-check"]
         }
       }
     },
@@ -1229,13 +1016,8 @@
         ],
         "url": {
           "raw": "{{baseUrl}}/gosellr/store-setup",
-          "host": [
-            "{{baseUrl}}"
-          ],
-          "path": [
-            "gosellr",
-            "store-setup"
-          ]
+          "host": ["{{baseUrl}}"],
+          "path": ["gosellr", "store-setup"]
         }
       }
     },
@@ -1254,12 +1036,8 @@
             ],
             "url": {
               "raw": "{{baseUrl}}/grades",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "grades"
-              ]
+              "host": ["{{baseUrl}}"],
+              "path": ["grades"]
             }
           }
         },
@@ -1275,12 +1053,8 @@
             ],
             "url": {
               "raw": "{{baseUrl}}/grades",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "grades"
-              ]
+              "host": ["{{baseUrl}}"],
+              "path": ["grades"]
             },
             "body": {
               "mode": "raw",
@@ -1305,12 +1079,8 @@
             ],
             "url": {
               "raw": "{{baseUrl}}/grades",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "grades"
-              ]
+              "host": ["{{baseUrl}}"],
+              "path": ["grades"]
             },
             "body": {
               "mode": "raw",
@@ -1337,13 +1107,8 @@
         ],
         "url": {
           "raw": "{{baseUrl}}/health/db",
-          "host": [
-            "{{baseUrl}}"
-          ],
-          "path": [
-            "health",
-            "db"
-          ]
+          "host": ["{{baseUrl}}"],
+          "path": ["health", "db"]
         }
       }
     },
@@ -1359,12 +1124,8 @@
         ],
         "url": {
           "raw": "{{baseUrl}}/health",
-          "host": [
-            "{{baseUrl}}"
-          ],
-          "path": [
-            "health"
-          ]
+          "host": ["{{baseUrl}}"],
+          "path": ["health"]
         }
       }
     },
@@ -1380,12 +1141,8 @@
         ],
         "url": {
           "raw": "{{baseUrl}}/health-check",
-          "host": [
-            "{{baseUrl}}"
-          ],
-          "path": [
-            "health-check"
-          ]
+          "host": ["{{baseUrl}}"],
+          "path": ["health-check"]
         }
       }
     },
@@ -1404,12 +1161,8 @@
             ],
             "url": {
               "raw": "{{baseUrl}}/inventory",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "inventory"
-              ]
+              "host": ["{{baseUrl}}"],
+              "path": ["inventory"]
             }
           }
         },
@@ -1425,12 +1178,8 @@
             ],
             "url": {
               "raw": "{{baseUrl}}/inventory",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "inventory"
-              ]
+              "host": ["{{baseUrl}}"],
+              "path": ["inventory"]
             },
             "body": {
               "mode": "raw",
@@ -1455,12 +1204,8 @@
             ],
             "url": {
               "raw": "{{baseUrl}}/inventory",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "inventory"
-              ]
+              "host": ["{{baseUrl}}"],
+              "path": ["inventory"]
             },
             "body": {
               "mode": "raw",
@@ -1485,12 +1230,8 @@
             ],
             "url": {
               "raw": "{{baseUrl}}/inventory",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "inventory"
-              ]
+              "host": ["{{baseUrl}}"],
+              "path": ["inventory"]
             }
           }
         }
@@ -1508,13 +1249,8 @@
         ],
         "url": {
           "raw": "{{baseUrl}}/kyc/create-applicant",
-          "host": [
-            "{{baseUrl}}"
-          ],
-          "path": [
-            "kyc",
-            "create-applicant"
-          ]
+          "host": ["{{baseUrl}}"],
+          "path": ["kyc", "create-applicant"]
         }
       }
     },
@@ -1530,13 +1266,8 @@
         ],
         "url": {
           "raw": "{{baseUrl}}/kyc/upload-document",
-          "host": [
-            "{{baseUrl}}"
-          ],
-          "path": [
-            "kyc",
-            "upload-document"
-          ]
+          "host": ["{{baseUrl}}"],
+          "path": ["kyc", "upload-document"]
         }
       }
     },
@@ -1555,12 +1286,8 @@
             ],
             "url": {
               "raw": "{{baseUrl}}/medical-records",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "medical-records"
-              ]
+              "host": ["{{baseUrl}}"],
+              "path": ["medical-records"]
             }
           }
         },
@@ -1576,12 +1303,8 @@
             ],
             "url": {
               "raw": "{{baseUrl}}/medical-records",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "medical-records"
-              ]
+              "host": ["{{baseUrl}}"],
+              "path": ["medical-records"]
             },
             "body": {
               "mode": "raw",
@@ -1611,12 +1334,8 @@
             ],
             "url": {
               "raw": "{{baseUrl}}/moonbeam",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "moonbeam"
-              ]
+              "host": ["{{baseUrl}}"],
+              "path": ["moonbeam"]
             }
           }
         },
@@ -1632,12 +1351,8 @@
             ],
             "url": {
               "raw": "{{baseUrl}}/moonbeam",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "moonbeam"
-              ]
+              "host": ["{{baseUrl}}"],
+              "path": ["moonbeam"]
             },
             "body": {
               "mode": "raw",
@@ -1667,12 +1382,8 @@
             ],
             "url": {
               "raw": "{{baseUrl}}/notifications",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "notifications"
-              ]
+              "host": ["{{baseUrl}}"],
+              "path": ["notifications"]
             }
           }
         },
@@ -1688,12 +1399,8 @@
             ],
             "url": {
               "raw": "{{baseUrl}}/notifications",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "notifications"
-              ]
+              "host": ["{{baseUrl}}"],
+              "path": ["notifications"]
             },
             "body": {
               "mode": "raw",
@@ -1720,13 +1427,8 @@
         ],
         "url": {
           "raw": "{{baseUrl}}/obs/certificate-log",
-          "host": [
-            "{{baseUrl}}"
-          ],
-          "path": [
-            "obs",
-            "certificate-log"
-          ]
+          "host": ["{{baseUrl}}"],
+          "path": ["obs", "certificate-log"]
         }
       }
     },
@@ -1742,13 +1444,8 @@
         ],
         "url": {
           "raw": "{{baseUrl}}/obs/list-categories",
-          "host": [
-            "{{baseUrl}}"
-          ],
-          "path": [
-            "obs",
-            "list-categories"
-          ]
+          "host": ["{{baseUrl}}"],
+          "path": ["obs", "list-categories"]
         }
       }
     },
@@ -1764,13 +1461,8 @@
         ],
         "url": {
           "raw": "{{baseUrl}}/obs/study-pool",
-          "host": [
-            "{{baseUrl}}"
-          ],
-          "path": [
-            "obs",
-            "study-pool"
-          ]
+          "host": ["{{baseUrl}}"],
+          "path": ["obs", "study-pool"]
         }
       }
     },
@@ -1786,13 +1478,8 @@
         ],
         "url": {
           "raw": "{{baseUrl}}/obs/upload-book",
-          "host": [
-            "{{baseUrl}}"
-          ],
-          "path": [
-            "obs",
-            "upload-book"
-          ]
+          "host": ["{{baseUrl}}"],
+          "path": ["obs", "upload-book"]
         }
       }
     },
@@ -1811,12 +1498,8 @@
             ],
             "url": {
               "raw": "{{baseUrl}}/orders",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "orders"
-              ]
+              "host": ["{{baseUrl}}"],
+              "path": ["orders"]
             }
           }
         },
@@ -1832,12 +1515,8 @@
             ],
             "url": {
               "raw": "{{baseUrl}}/orders",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "orders"
-              ]
+              "host": ["{{baseUrl}}"],
+              "path": ["orders"]
             },
             "body": {
               "mode": "raw",
@@ -1862,12 +1541,8 @@
             ],
             "url": {
               "raw": "{{baseUrl}}/orders",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "orders"
-              ]
+              "host": ["{{baseUrl}}"],
+              "path": ["orders"]
             },
             "body": {
               "mode": "raw",
@@ -1897,13 +1572,8 @@
             ],
             "url": {
               "raw": "{{baseUrl}}/orders/{orderId}",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "orders",
-                "{orderId}"
-              ]
+              "host": ["{{baseUrl}}"],
+              "path": ["orders", "{orderId}"]
             }
           }
         },
@@ -1919,13 +1589,8 @@
             ],
             "url": {
               "raw": "{{baseUrl}}/orders/{orderId}",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "orders",
-                "{orderId}"
-              ]
+              "host": ["{{baseUrl}}"],
+              "path": ["orders", "{orderId}"]
             },
             "body": {
               "mode": "raw",
@@ -1952,13 +1617,8 @@
         ],
         "url": {
           "raw": "{{baseUrl}}/payments/bank",
-          "host": [
-            "{{baseUrl}}"
-          ],
-          "path": [
-            "payments",
-            "bank"
-          ]
+          "host": ["{{baseUrl}}"],
+          "path": ["payments", "bank"]
         }
       }
     },
@@ -1974,13 +1634,8 @@
         ],
         "url": {
           "raw": "{{baseUrl}}/payments/cod",
-          "host": [
-            "{{baseUrl}}"
-          ],
-          "path": [
-            "payments",
-            "cod"
-          ]
+          "host": ["{{baseUrl}}"],
+          "path": ["payments", "cod"]
         }
       }
     },
@@ -1996,13 +1651,8 @@
         ],
         "url": {
           "raw": "{{baseUrl}}/payments/crypto",
-          "host": [
-            "{{baseUrl}}"
-          ],
-          "path": [
-            "payments",
-            "crypto"
-          ]
+          "host": ["{{baseUrl}}"],
+          "path": ["payments", "crypto"]
         }
       }
     },
@@ -2018,13 +1668,8 @@
         ],
         "url": {
           "raw": "{{baseUrl}}/payments/paypal",
-          "host": [
-            "{{baseUrl}}"
-          ],
-          "path": [
-            "payments",
-            "paypal"
-          ]
+          "host": ["{{baseUrl}}"],
+          "path": ["payments", "paypal"]
         }
       }
     },
@@ -2040,13 +1685,8 @@
         ],
         "url": {
           "raw": "{{baseUrl}}/payments/process",
-          "host": [
-            "{{baseUrl}}"
-          ],
-          "path": [
-            "payments",
-            "process"
-          ]
+          "host": ["{{baseUrl}}"],
+          "path": ["payments", "process"]
         }
       }
     },
@@ -2062,13 +1702,8 @@
         ],
         "url": {
           "raw": "{{baseUrl}}/payments/stripe",
-          "host": [
-            "{{baseUrl}}"
-          ],
-          "path": [
-            "payments",
-            "stripe"
-          ]
+          "host": ["{{baseUrl}}"],
+          "path": ["payments", "stripe"]
         }
       }
     },
@@ -2084,13 +1719,8 @@
         ],
         "url": {
           "raw": "{{baseUrl}}/payoneer/balance",
-          "host": [
-            "{{baseUrl}}"
-          ],
-          "path": [
-            "payoneer",
-            "balance"
-          ]
+          "host": ["{{baseUrl}}"],
+          "path": ["payoneer", "balance"]
         }
       }
     },
@@ -2109,12 +1739,8 @@
             ],
             "url": {
               "raw": "{{baseUrl}}/payoneer",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "payoneer"
-              ]
+              "host": ["{{baseUrl}}"],
+              "path": ["payoneer"]
             }
           }
         },
@@ -2130,12 +1756,8 @@
             ],
             "url": {
               "raw": "{{baseUrl}}/payoneer",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "payoneer"
-              ]
+              "host": ["{{baseUrl}}"],
+              "path": ["payoneer"]
             },
             "body": {
               "mode": "raw",
@@ -2162,13 +1784,8 @@
         ],
         "url": {
           "raw": "{{baseUrl}}/polkadot/governance",
-          "host": [
-            "{{baseUrl}}"
-          ],
-          "path": [
-            "polkadot",
-            "governance"
-          ]
+          "host": ["{{baseUrl}}"],
+          "path": ["polkadot", "governance"]
         }
       }
     },
@@ -2184,12 +1801,8 @@
         ],
         "url": {
           "raw": "{{baseUrl}}/polkadot",
-          "host": [
-            "{{baseUrl}}"
-          ],
-          "path": [
-            "polkadot"
-          ]
+          "host": ["{{baseUrl}}"],
+          "path": ["polkadot"]
         }
       }
     },
@@ -2205,13 +1818,8 @@
         ],
         "url": {
           "raw": "{{baseUrl}}/polkadot/staking",
-          "host": [
-            "{{baseUrl}}"
-          ],
-          "path": [
-            "polkadot",
-            "staking"
-          ]
+          "host": ["{{baseUrl}}"],
+          "path": ["polkadot", "staking"]
         }
       }
     },
@@ -2230,12 +1838,8 @@
             ],
             "url": {
               "raw": "{{baseUrl}}/prescriptions",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "prescriptions"
-              ]
+              "host": ["{{baseUrl}}"],
+              "path": ["prescriptions"]
             }
           }
         },
@@ -2251,12 +1855,8 @@
             ],
             "url": {
               "raw": "{{baseUrl}}/prescriptions",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "prescriptions"
-              ]
+              "host": ["{{baseUrl}}"],
+              "path": ["prescriptions"]
             },
             "body": {
               "mode": "raw",
@@ -2283,13 +1883,8 @@
         ],
         "url": {
           "raw": "{{baseUrl}}/products/my-products",
-          "host": [
-            "{{baseUrl}}"
-          ],
-          "path": [
-            "products",
-            "my-products"
-          ]
+          "host": ["{{baseUrl}}"],
+          "path": ["products", "my-products"]
         }
       }
     },
@@ -2308,12 +1903,8 @@
             ],
             "url": {
               "raw": "{{baseUrl}}/products",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "products"
-              ]
+              "host": ["{{baseUrl}}"],
+              "path": ["products"]
             }
           }
         },
@@ -2329,12 +1920,8 @@
             ],
             "url": {
               "raw": "{{baseUrl}}/products",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "products"
-              ]
+              "host": ["{{baseUrl}}"],
+              "path": ["products"]
             },
             "body": {
               "mode": "raw",
@@ -2359,12 +1946,8 @@
             ],
             "url": {
               "raw": "{{baseUrl}}/products",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "products"
-              ]
+              "host": ["{{baseUrl}}"],
+              "path": ["products"]
             },
             "body": {
               "mode": "raw",
@@ -2389,12 +1972,8 @@
             ],
             "url": {
               "raw": "{{baseUrl}}/products",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "products"
-              ]
+              "host": ["{{baseUrl}}"],
+              "path": ["products"]
             }
           }
         }
@@ -2415,13 +1994,8 @@
             ],
             "url": {
               "raw": "{{baseUrl}}/products/{id}",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "products",
-                "{id}"
-              ]
+              "host": ["{{baseUrl}}"],
+              "path": ["products", "{id}"]
             }
           }
         },
@@ -2437,13 +2011,8 @@
             ],
             "url": {
               "raw": "{{baseUrl}}/products/{id}",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "products",
-                "{id}"
-              ]
+              "host": ["{{baseUrl}}"],
+              "path": ["products", "{id}"]
             },
             "body": {
               "mode": "raw",
@@ -2468,13 +2037,8 @@
             ],
             "url": {
               "raw": "{{baseUrl}}/products/{id}",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "products",
-                "{id}"
-              ]
+              "host": ["{{baseUrl}}"],
+              "path": ["products", "{id}"]
             }
           }
         }
@@ -2495,12 +2059,8 @@
             ],
             "url": {
               "raw": "{{baseUrl}}/profile",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "profile"
-              ]
+              "host": ["{{baseUrl}}"],
+              "path": ["profile"]
             }
           }
         },
@@ -2516,12 +2076,8 @@
             ],
             "url": {
               "raw": "{{baseUrl}}/profile",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "profile"
-              ]
+              "host": ["{{baseUrl}}"],
+              "path": ["profile"]
             },
             "body": {
               "mode": "raw",
@@ -2546,12 +2102,8 @@
             ],
             "url": {
               "raw": "{{baseUrl}}/profile",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "profile"
-              ]
+              "host": ["{{baseUrl}}"],
+              "path": ["profile"]
             },
             "body": {
               "mode": "raw",
@@ -2578,14 +2130,8 @@
         ],
         "url": {
           "raw": "{{baseUrl}}/pss/sql/assign",
-          "host": [
-            "{{baseUrl}}"
-          ],
-          "path": [
-            "pss",
-            "sql",
-            "assign"
-          ]
+          "host": ["{{baseUrl}}"],
+          "path": ["pss", "sql", "assign"]
         }
       }
     },
@@ -2601,14 +2147,8 @@
         ],
         "url": {
           "raw": "{{baseUrl}}/pss/sql/downgrade",
-          "host": [
-            "{{baseUrl}}"
-          ],
-          "path": [
-            "pss",
-            "sql",
-            "downgrade"
-          ]
+          "host": ["{{baseUrl}}"],
+          "path": ["pss", "sql", "downgrade"]
         }
       }
     },
@@ -2624,14 +2164,8 @@
         ],
         "url": {
           "raw": "{{baseUrl}}/pss/sql/log",
-          "host": [
-            "{{baseUrl}}"
-          ],
-          "path": [
-            "pss",
-            "sql",
-            "log"
-          ]
+          "host": ["{{baseUrl}}"],
+          "path": ["pss", "sql", "log"]
         }
       }
     },
@@ -2647,13 +2181,8 @@
         ],
         "url": {
           "raw": "{{baseUrl}}/rewards/calculate",
-          "host": [
-            "{{baseUrl}}"
-          ],
-          "path": [
-            "rewards",
-            "calculate"
-          ]
+          "host": ["{{baseUrl}}"],
+          "path": ["rewards", "calculate"]
         }
       }
     },
@@ -2669,12 +2198,8 @@
         ],
         "url": {
           "raw": "{{baseUrl}}/search",
-          "host": [
-            "{{baseUrl}}"
-          ],
-          "path": [
-            "search"
-          ]
+          "host": ["{{baseUrl}}"],
+          "path": ["search"]
         }
       }
     },
@@ -2690,13 +2215,8 @@
         ],
         "url": {
           "raw": "{{baseUrl}}/shopify/products",
-          "host": [
-            "{{baseUrl}}"
-          ],
-          "path": [
-            "shopify",
-            "products"
-          ]
+          "host": ["{{baseUrl}}"],
+          "path": ["shopify", "products"]
         }
       }
     },
@@ -2715,12 +2235,8 @@
             ],
             "url": {
               "raw": "{{baseUrl}}/shopify",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "shopify"
-              ]
+              "host": ["{{baseUrl}}"],
+              "path": ["shopify"]
             }
           }
         },
@@ -2736,12 +2252,8 @@
             ],
             "url": {
               "raw": "{{baseUrl}}/shopify",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "shopify"
-              ]
+              "host": ["{{baseUrl}}"],
+              "path": ["shopify"]
             },
             "body": {
               "mode": "raw",
@@ -2768,13 +2280,8 @@
         ],
         "url": {
           "raw": "{{baseUrl}}/shops/my-shop",
-          "host": [
-            "{{baseUrl}}"
-          ],
-          "path": [
-            "shops",
-            "my-shop"
-          ]
+          "host": ["{{baseUrl}}"],
+          "path": ["shops", "my-shop"]
         }
       }
     },
@@ -2793,12 +2300,8 @@
             ],
             "url": {
               "raw": "{{baseUrl}}/shops",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "shops"
-              ]
+              "host": ["{{baseUrl}}"],
+              "path": ["shops"]
             }
           }
         },
@@ -2814,12 +2317,8 @@
             ],
             "url": {
               "raw": "{{baseUrl}}/shops",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "shops"
-              ]
+              "host": ["{{baseUrl}}"],
+              "path": ["shops"]
             },
             "body": {
               "mode": "raw",
@@ -2844,12 +2343,8 @@
             ],
             "url": {
               "raw": "{{baseUrl}}/shops",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "shops"
-              ]
+              "host": ["{{baseUrl}}"],
+              "path": ["shops"]
             },
             "body": {
               "mode": "raw",
@@ -2876,13 +2371,8 @@
         ],
         "url": {
           "raw": "{{baseUrl}}/sql/admin-review",
-          "host": [
-            "{{baseUrl}}"
-          ],
-          "path": [
-            "sql",
-            "admin-review"
-          ]
+          "host": ["{{baseUrl}}"],
+          "path": ["sql", "admin-review"]
         }
       }
     },
@@ -2898,13 +2388,8 @@
         ],
         "url": {
           "raw": "{{baseUrl}}/sql/cross-system-update",
-          "host": [
-            "{{baseUrl}}"
-          ],
-          "path": [
-            "sql",
-            "cross-system-update"
-          ]
+          "host": ["{{baseUrl}}"],
+          "path": ["sql", "cross-system-update"]
         }
       }
     },
@@ -2920,13 +2405,8 @@
         ],
         "url": {
           "raw": "{{baseUrl}}/sql/get-level",
-          "host": [
-            "{{baseUrl}}"
-          ],
-          "path": [
-            "sql",
-            "get-level"
-          ]
+          "host": ["{{baseUrl}}"],
+          "path": ["sql", "get-level"]
         }
       }
     },
@@ -2942,13 +2422,8 @@
         ],
         "url": {
           "raw": "{{baseUrl}}/sql/pending-requests",
-          "host": [
-            "{{baseUrl}}"
-          ],
-          "path": [
-            "sql",
-            "pending-requests"
-          ]
+          "host": ["{{baseUrl}}"],
+          "path": ["sql", "pending-requests"]
         }
       }
     },
@@ -2964,13 +2439,8 @@
         ],
         "url": {
           "raw": "{{baseUrl}}/sql/progress",
-          "host": [
-            "{{baseUrl}}"
-          ],
-          "path": [
-            "sql",
-            "progress"
-          ]
+          "host": ["{{baseUrl}}"],
+          "path": ["sql", "progress"]
         }
       }
     },
@@ -2986,13 +2456,8 @@
         ],
         "url": {
           "raw": "{{baseUrl}}/sql/upgrade",
-          "host": [
-            "{{baseUrl}}"
-          ],
-          "path": [
-            "sql",
-            "upgrade"
-          ]
+          "host": ["{{baseUrl}}"],
+          "path": ["sql", "upgrade"]
         }
       }
     },
@@ -3008,13 +2473,8 @@
         ],
         "url": {
           "raw": "{{baseUrl}}/sql/upgrade-request",
-          "host": [
-            "{{baseUrl}}"
-          ],
-          "path": [
-            "sql",
-            "upgrade-request"
-          ]
+          "host": ["{{baseUrl}}"],
+          "path": ["sql", "upgrade-request"]
         }
       }
     },
@@ -3030,13 +2490,8 @@
         ],
         "url": {
           "raw": "{{baseUrl}}/sql/verify",
-          "host": [
-            "{{baseUrl}}"
-          ],
-          "path": [
-            "sql",
-            "verify"
-          ]
+          "host": ["{{baseUrl}}"],
+          "path": ["sql", "verify"]
         }
       }
     },
@@ -3052,12 +2507,8 @@
         ],
         "url": {
           "raw": "{{baseUrl}}/status",
-          "host": [
-            "{{baseUrl}}"
-          ],
-          "path": [
-            "status"
-          ]
+          "host": ["{{baseUrl}}"],
+          "path": ["status"]
         }
       }
     },
@@ -3073,13 +2524,8 @@
         ],
         "url": {
           "raw": "{{baseUrl}}/sync/global-summary",
-          "host": [
-            "{{baseUrl}}"
-          ],
-          "path": [
-            "sync",
-            "global-summary"
-          ]
+          "host": ["{{baseUrl}}"],
+          "path": ["sync", "global-summary"]
         }
       }
     },
@@ -3098,12 +2544,8 @@
             ],
             "url": {
               "raw": "{{baseUrl}}/sync",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "sync"
-              ]
+              "host": ["{{baseUrl}}"],
+              "path": ["sync"]
             }
           }
         },
@@ -3119,12 +2561,8 @@
             ],
             "url": {
               "raw": "{{baseUrl}}/sync",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "sync"
-              ]
+              "host": ["{{baseUrl}}"],
+              "path": ["sync"]
             },
             "body": {
               "mode": "raw",
@@ -3151,12 +2589,8 @@
         ],
         "url": {
           "raw": "{{baseUrl}}/test",
-          "host": [
-            "{{baseUrl}}"
-          ],
-          "path": [
-            "test"
-          ]
+          "host": ["{{baseUrl}}"],
+          "path": ["test"]
         }
       }
     },
@@ -3172,13 +2606,8 @@
         ],
         "url": {
           "raw": "{{baseUrl}}/token/claim-reward",
-          "host": [
-            "{{baseUrl}}"
-          ],
-          "path": [
-            "token",
-            "claim-reward"
-          ]
+          "host": ["{{baseUrl}}"],
+          "path": ["token", "claim-reward"]
         }
       }
     },
@@ -3194,13 +2623,8 @@
         ],
         "url": {
           "raw": "{{baseUrl}}/token/lock",
-          "host": [
-            "{{baseUrl}}"
-          ],
-          "path": [
-            "token",
-            "lock"
-          ]
+          "host": ["{{baseUrl}}"],
+          "path": ["token", "lock"]
         }
       }
     },
@@ -3216,13 +2640,8 @@
         ],
         "url": {
           "raw": "{{baseUrl}}/token/unlock",
-          "host": [
-            "{{baseUrl}}"
-          ],
-          "path": [
-            "token",
-            "unlock"
-          ]
+          "host": ["{{baseUrl}}"],
+          "path": ["token", "unlock"]
         }
       }
     },
@@ -3241,12 +2660,8 @@
             ],
             "url": {
               "raw": "{{baseUrl}}/tutors",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "tutors"
-              ]
+              "host": ["{{baseUrl}}"],
+              "path": ["tutors"]
             }
           }
         },
@@ -3262,12 +2677,8 @@
             ],
             "url": {
               "raw": "{{baseUrl}}/tutors",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "tutors"
-              ]
+              "host": ["{{baseUrl}}"],
+              "path": ["tutors"]
             },
             "body": {
               "mode": "raw",
@@ -3292,12 +2703,8 @@
             ],
             "url": {
               "raw": "{{baseUrl}}/tutors",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "tutors"
-              ]
+              "host": ["{{baseUrl}}"],
+              "path": ["tutors"]
             }
           }
         },
@@ -3313,12 +2720,8 @@
             ],
             "url": {
               "raw": "{{baseUrl}}/tutors",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "tutors"
-              ]
+              "host": ["{{baseUrl}}"],
+              "path": ["tutors"]
             },
             "body": {
               "mode": "raw",
@@ -3348,13 +2751,8 @@
             ],
             "url": {
               "raw": "{{baseUrl}}/user/profile",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "user",
-                "profile"
-              ]
+              "host": ["{{baseUrl}}"],
+              "path": ["user", "profile"]
             }
           }
         },
@@ -3370,13 +2768,8 @@
             ],
             "url": {
               "raw": "{{baseUrl}}/user/profile",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "user",
-                "profile"
-              ]
+              "host": ["{{baseUrl}}"],
+              "path": ["user", "profile"]
             },
             "body": {
               "mode": "raw",
@@ -3406,13 +2799,8 @@
             ],
             "url": {
               "raw": "{{baseUrl}}/user/settings",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "user",
-                "settings"
-              ]
+              "host": ["{{baseUrl}}"],
+              "path": ["user", "settings"]
             }
           }
         },
@@ -3428,13 +2816,8 @@
             ],
             "url": {
               "raw": "{{baseUrl}}/user/settings",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "user",
-                "settings"
-              ]
+              "host": ["{{baseUrl}}"],
+              "path": ["user", "settings"]
             },
             "body": {
               "mode": "raw",
@@ -3464,12 +2847,8 @@
             ],
             "url": {
               "raw": "{{baseUrl}}/users",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "users"
-              ]
+              "host": ["{{baseUrl}}"],
+              "path": ["users"]
             }
           }
         },
@@ -3485,12 +2864,8 @@
             ],
             "url": {
               "raw": "{{baseUrl}}/users",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "users"
-              ]
+              "host": ["{{baseUrl}}"],
+              "path": ["users"]
             },
             "body": {
               "mode": "raw",
@@ -3517,13 +2892,8 @@
         ],
         "url": {
           "raw": "{{baseUrl}}/wallet/balance",
-          "host": [
-            "{{baseUrl}}"
-          ],
-          "path": [
-            "wallet",
-            "balance"
-          ]
+          "host": ["{{baseUrl}}"],
+          "path": ["wallet", "balance"]
         }
       }
     },
@@ -3539,13 +2909,8 @@
         ],
         "url": {
           "raw": "{{baseUrl}}/wallet/history",
-          "host": [
-            "{{baseUrl}}"
-          ],
-          "path": [
-            "wallet",
-            "history"
-          ]
+          "host": ["{{baseUrl}}"],
+          "path": ["wallet", "history"]
         }
       }
     },
@@ -3561,13 +2926,8 @@
         ],
         "url": {
           "raw": "{{baseUrl}}/wallet/lock",
-          "host": [
-            "{{baseUrl}}"
-          ],
-          "path": [
-            "wallet",
-            "lock"
-          ]
+          "host": ["{{baseUrl}}"],
+          "path": ["wallet", "lock"]
         }
       }
     },
@@ -3586,12 +2946,8 @@
             ],
             "url": {
               "raw": "{{baseUrl}}/wallet",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "wallet"
-              ]
+              "host": ["{{baseUrl}}"],
+              "path": ["wallet"]
             }
           }
         },
@@ -3607,12 +2963,8 @@
             ],
             "url": {
               "raw": "{{baseUrl}}/wallet",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "wallet"
-              ]
+              "host": ["{{baseUrl}}"],
+              "path": ["wallet"]
             },
             "body": {
               "mode": "raw",
@@ -3637,12 +2989,8 @@
             ],
             "url": {
               "raw": "{{baseUrl}}/wallet",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "wallet"
-              ]
+              "host": ["{{baseUrl}}"],
+              "path": ["wallet"]
             },
             "body": {
               "mode": "raw",
@@ -3669,13 +3017,8 @@
         ],
         "url": {
           "raw": "{{baseUrl}}/wallet/sync",
-          "host": [
-            "{{baseUrl}}"
-          ],
-          "path": [
-            "wallet",
-            "sync"
-          ]
+          "host": ["{{baseUrl}}"],
+          "path": ["wallet", "sync"]
         }
       }
     },
@@ -3691,13 +3034,8 @@
         ],
         "url": {
           "raw": "{{baseUrl}}/wallet/transaction",
-          "host": [
-            "{{baseUrl}}"
-          ],
-          "path": [
-            "wallet",
-            "transaction"
-          ]
+          "host": ["{{baseUrl}}"],
+          "path": ["wallet", "transaction"]
         }
       }
     },
@@ -3716,13 +3054,8 @@
             ],
             "url": {
               "raw": "{{baseUrl}}/wallet/transactions",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "wallet",
-                "transactions"
-              ]
+              "host": ["{{baseUrl}}"],
+              "path": ["wallet", "transactions"]
             }
           }
         },
@@ -3738,13 +3071,8 @@
             ],
             "url": {
               "raw": "{{baseUrl}}/wallet/transactions",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "wallet",
-                "transactions"
-              ]
+              "host": ["{{baseUrl}}"],
+              "path": ["wallet", "transactions"]
             },
             "body": {
               "mode": "raw",

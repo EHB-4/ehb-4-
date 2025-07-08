@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import { Heart, ShoppingCart, Star, Edit, Trash } from 'lucide-react';
 import React from 'react';

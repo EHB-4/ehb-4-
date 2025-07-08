@@ -178,7 +178,12 @@ export default function SOTAgentsPage() {
         icon: <Users className="h-6 w-6" />,
         color: 'text-blue-600',
         bgColor: 'bg-blue-100',
-        features: ['Skill-based matching', 'Availability checking', 'Performance analysis', 'Real-time updates'],
+        features: [
+          'Skill-based matching',
+          'Availability checking',
+          'Performance analysis',
+          'Real-time updates',
+        ],
         config: {
           autoRestart: true,
           maxConcurrentTasks: 50,
@@ -201,7 +206,12 @@ export default function SOTAgentsPage() {
         icon: <Code className="h-6 w-6" />,
         color: 'text-green-600',
         bgColor: 'bg-green-100',
-        features: ['Static analysis', 'Security scanning', 'Performance optimization', 'Plagiarism detection'],
+        features: [
+          'Static analysis',
+          'Security scanning',
+          'Performance optimization',
+          'Plagiarism detection',
+        ],
         config: {
           autoRestart: true,
           maxConcurrentTasks: 25,
@@ -224,7 +234,12 @@ export default function SOTAgentsPage() {
         icon: <Clock className="h-6 w-6" />,
         color: 'text-purple-600',
         bgColor: 'bg-purple-100',
-        features: ['Deadline tracking', 'Timezone management', 'Escalation handling', 'Milestone monitoring'],
+        features: [
+          'Deadline tracking',
+          'Timezone management',
+          'Escalation handling',
+          'Milestone monitoring',
+        ],
         config: {
           autoRestart: true,
           maxConcurrentTasks: 100,
@@ -247,7 +262,12 @@ export default function SOTAgentsPage() {
         icon: <Shield className="h-6 w-6" />,
         color: 'text-red-600',
         bgColor: 'bg-red-100',
-        features: ['Behavioral analysis', 'Pattern recognition', 'Real-time monitoring', 'Risk scoring'],
+        features: [
+          'Behavioral analysis',
+          'Pattern recognition',
+          'Real-time monitoring',
+          'Risk scoring',
+        ],
         config: {
           autoRestart: true,
           maxConcurrentTasks: 200,
@@ -293,7 +313,12 @@ export default function SOTAgentsPage() {
         icon: <Star className="h-6 w-6" />,
         color: 'text-yellow-600',
         bgColor: 'bg-yellow-100',
-        features: ['Score calculation', 'Level management', 'Bonus/penalty system', 'Blockchain verification'],
+        features: [
+          'Score calculation',
+          'Level management',
+          'Bonus/penalty system',
+          'Blockchain verification',
+        ],
         config: {
           autoRestart: true,
           maxConcurrentTasks: 150,
@@ -306,21 +331,31 @@ export default function SOTAgentsPage() {
 
   const getStatusColor = (status: string) => {
     switch (status) {
-      case 'online': return 'text-green-600';
-      case 'offline': return 'text-red-600';
-      case 'error': return 'text-orange-600';
-      case 'maintenance': return 'text-yellow-600';
-      default: return 'text-gray-600';
+      case 'online':
+        return 'text-green-600';
+      case 'offline':
+        return 'text-red-600';
+      case 'error':
+        return 'text-orange-600';
+      case 'maintenance':
+        return 'text-yellow-600';
+      default:
+        return 'text-gray-600';
     }
   };
 
   const getStatusBadgeColor = (status: string) => {
     switch (status) {
-      case 'online': return 'bg-green-100 text-green-800';
-      case 'offline': return 'bg-red-100 text-red-800';
-      case 'error': return 'bg-orange-100 text-orange-800';
-      case 'maintenance': return 'bg-yellow-100 text-yellow-800';
-      default: return 'bg-gray-100 text-gray-800';
+      case 'online':
+        return 'bg-green-100 text-green-800';
+      case 'offline':
+        return 'bg-red-100 text-red-800';
+      case 'error':
+        return 'bg-orange-100 text-orange-800';
+      case 'maintenance':
+        return 'bg-yellow-100 text-yellow-800';
+      default:
+        return 'bg-gray-100 text-gray-800';
     }
   };
 
@@ -373,7 +408,9 @@ export default function SOTAgentsPage() {
                   <div>
                     <p className="text-sm text-gray-500">Total Tasks</p>
                     <p className="text-lg font-bold text-gray-900">
-                      {agents.reduce((sum, agent) => sum + agent.tasksProcessed, 0).toLocaleString()}
+                      {agents
+                        .reduce((sum, agent) => sum + agent.tasksProcessed, 0)
+                        .toLocaleString()}
                     </p>
                   </div>
                 </div>
@@ -388,7 +425,10 @@ export default function SOTAgentsPage() {
                   <div>
                     <p className="text-sm text-gray-500">Avg Success Rate</p>
                     <p className="text-lg font-bold text-gray-900">
-                      {(agents.reduce((sum, agent) => sum + agent.successRate, 0) / agents.length).toFixed(1)}%
+                      {(
+                        agents.reduce((sum, agent) => sum + agent.successRate, 0) / agents.length
+                      ).toFixed(1)}
+                      %
                     </p>
                   </div>
                 </div>
@@ -425,12 +465,18 @@ export default function SOTAgentsPage() {
           {/* Overview Tab */}
           <TabsContent value="overview" className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {agents.map((agent) => (
-                <Card key={agent.id} className="hover:shadow-lg transition-shadow cursor-pointer" onClick={() => setSelectedAgent(agent)}>
+              {agents.map(agent => (
+                <Card
+                  key={agent.id}
+                  className="hover:shadow-lg transition-shadow cursor-pointer"
+                  onClick={() => setSelectedAgent(agent)}
+                >
                   <CardHeader>
                     <div className="flex items-center justify-between">
                       <div className="flex items-center space-x-3">
-                        <div className={`h-12 w-12 ${agent.bgColor} rounded-lg flex items-center justify-center`}>
+                        <div
+                          className={`h-12 w-12 ${agent.bgColor} rounded-lg flex items-center justify-center`}
+                        >
                           <div className={agent.color}>{agent.icon}</div>
                         </div>
                         <div>
@@ -438,9 +484,7 @@ export default function SOTAgentsPage() {
                           <p className="text-sm text-gray-500">{agent.type}</p>
                         </div>
                       </div>
-                      <Badge className={getStatusBadgeColor(agent.status)}>
-                        {agent.status}
-                      </Badge>
+                      <Badge className={getStatusBadgeColor(agent.status)}>{agent.status}</Badge>
                     </div>
                   </CardHeader>
                   <CardContent>
@@ -481,12 +525,14 @@ export default function SOTAgentsPage() {
           {/* All Agents Tab */}
           <TabsContent value="agents" className="space-y-6">
             <div className="space-y-6">
-              {agents.map((agent) => (
+              {agents.map(agent => (
                 <Card key={agent.id} className="hover:shadow-lg transition-shadow">
                   <CardHeader>
                     <div className="flex items-center justify-between">
                       <div className="flex items-center space-x-4">
-                        <div className={`h-16 w-16 ${agent.bgColor} rounded-lg flex items-center justify-center`}>
+                        <div
+                          className={`h-16 w-16 ${agent.bgColor} rounded-lg flex items-center justify-center`}
+                        >
                           <div className={`${agent.color} h-8 w-8`}>{agent.icon}</div>
                         </div>
                         <div>
@@ -496,9 +542,7 @@ export default function SOTAgentsPage() {
                             <Badge className={getStatusBadgeColor(agent.status)}>
                               {agent.status}
                             </Badge>
-                            <Badge variant="outline">
-                              {agent.accuracy}% accuracy
-                            </Badge>
+                            <Badge variant="outline">{agent.accuracy}% accuracy</Badge>
                           </div>
                         </div>
                       </div>
@@ -506,7 +550,12 @@ export default function SOTAgentsPage() {
                         <Button
                           size="sm"
                           variant={agent.status === 'online' ? 'outline' : 'default'}
-                          onClick={() => handleAgentAction(agent.id, agent.status === 'online' ? 'stop' : 'start')}
+                          onClick={() =>
+                            handleAgentAction(
+                              agent.id,
+                              agent.status === 'online' ? 'stop' : 'start'
+                            )
+                          }
                         >
                           {agent.status === 'online' ? (
                             <>
@@ -541,7 +590,9 @@ export default function SOTAgentsPage() {
                         <div className="space-y-2 text-sm">
                           <div className="flex justify-between">
                             <span>Tasks Processed:</span>
-                            <span className="font-medium">{agent.tasksProcessed.toLocaleString()}</span>
+                            <span className="font-medium">
+                              {agent.tasksProcessed.toLocaleString()}
+                            </span>
                           </div>
                           <div className="flex justify-between">
                             <span>Success Rate:</span>
@@ -562,7 +613,9 @@ export default function SOTAgentsPage() {
                         <div className="space-y-2 text-sm">
                           <div className="flex justify-between">
                             <span>Auto Restart:</span>
-                            <span className="font-medium">{agent.config.autoRestart ? 'Yes' : 'No'}</span>
+                            <span className="font-medium">
+                              {agent.config.autoRestart ? 'Yes' : 'No'}
+                            </span>
                           </div>
                           <div className="flex justify-between">
                             <span>Max Tasks:</span>
@@ -616,11 +669,18 @@ export default function SOTAgentsPage() {
               </CardHeader>
               <CardContent>
                 <div className="space-y-6">
-                  {agents.map((agent) => (
-                    <div key={agent.id} className="flex items-center justify-between p-4 border rounded-lg">
+                  {agents.map(agent => (
+                    <div
+                      key={agent.id}
+                      className="flex items-center justify-between p-4 border rounded-lg"
+                    >
                       <div className="flex items-center space-x-4">
-                        <div className={`h-3 w-3 rounded-full ${agent.status === 'online' ? 'bg-green-500' : 'bg-red-500'}`}></div>
-                        <div className={`h-10 w-10 ${agent.bgColor} rounded-lg flex items-center justify-center`}>
+                        <div
+                          className={`h-3 w-3 rounded-full ${agent.status === 'online' ? 'bg-green-500' : 'bg-red-500'}`}
+                        ></div>
+                        <div
+                          className={`h-10 w-10 ${agent.bgColor} rounded-lg flex items-center justify-center`}
+                        >
                           <div className={agent.color}>{agent.icon}</div>
                         </div>
                         <div>
@@ -653,4 +713,4 @@ export default function SOTAgentsPage() {
       </div>
     </div>
   );
-} 
+}

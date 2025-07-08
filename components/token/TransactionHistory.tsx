@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
 import { ethers } from 'ethers';
 import React, { useState, useEffect } from 'react';
 
-import { TokenLocker } from '../../lib/token-locker';
+import token-locker from '@/lib/token-locker';
 
 import TransactionCharts from './TransactionCharts';
 import TransactionStats from './TransactionStats';

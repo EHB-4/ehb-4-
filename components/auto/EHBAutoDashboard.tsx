@@ -4,7 +4,7 @@ interface EHBAutoDashboardProps {
   // Add props here
 }
 
-export const EHBAutoDashboard: React.FC<EHBAutoDashboardProps> = (props) => {
+export const EHBAutoDashboard: React.FC<EHBAutoDashboardProps> = props => {
   return (
     <div className="ehbautodashboard-container">
       <h3>EHBAutoDashboard</h3>

@@ -1,11 +1,11 @@
 import React from 'react';
 import { FiUsers, FiTrendingUp, FiDollarSign, FiLock, FiAward } from 'react-icons/fi';
 
-import AffiliateDashboard from '../../components/am/AffiliateDashboard';
-import CoinLockBonus from '../../components/am/CoinLockBonus';
-import IncomeSummary from '../../components/am/IncomeSummary';
-import ReferralTree from '../../components/am/ReferralTree';
-import SQLCommissionBreakdown from '../../components/am/SQLCommissionBreakdown';
+import am/AffiliateDashboard from '@/components/am/AffiliateDashboard';
+import am/CoinLockBonus from '@/components/am/CoinLockBonus';
+import am/IncomeSummary from '@/components/am/IncomeSummary';
+import am/ReferralTree from '@/components/am/ReferralTree';
+import am/SQLCommissionBreakdown from '@/components/am/SQLCommissionBreakdown';
 
 interface ServiceCard {
   title: string;

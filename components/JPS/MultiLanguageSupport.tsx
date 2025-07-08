@@ -23,7 +23,7 @@ const translations = {
     success: 'Success',
     error: 'Error',
     warning: 'Warning',
-    info: 'Information'
+    info: 'Information',
   },
   ur: {
     jobs: 'نوکریاں',
@@ -43,7 +43,7 @@ const translations = {
     success: 'کامیاب',
     error: 'غلطی',
     warning: 'انتباہ',
-    info: 'معلومات'
+    info: 'معلومات',
   },
   ar: {
     jobs: 'الوظائف',
@@ -63,8 +63,8 @@ const translations = {
     success: 'نجح',
     error: 'خطأ',
     warning: 'تحذير',
-    info: 'معلومات'
-  }
+    info: 'معلومات',
+  },
 };
 
 interface MultiLanguageSupportProps {
@@ -76,13 +76,16 @@ interface MultiLanguageSupportProps {
  * Roman Urdu: Multi-language Support Component
  * Urdu aur Arabic translations support karta hai
  */
-export default function MultiLanguageSupport({ currentLanguage, onLanguageChange }: MultiLanguageSupportProps) {
+export default function MultiLanguageSupport({
+  currentLanguage,
+  onLanguageChange,
+}: MultiLanguageSupportProps) {
   const [isOpen, setIsOpen] = useState(false);
 
   const languages = [
     { code: 'en', name: 'English', flag: '🇺🇸' },
     { code: 'ur', name: 'اردو', flag: '🇵🇰' },
-    { code: 'ar', name: 'العربية', flag: '🇸🇦' }
+    { code: 'ar', name: 'العربية', flag: '🇸🇦' },
   ];
 
   const t = translations[currentLanguage as keyof typeof translations] || translations.en;
@@ -104,7 +107,7 @@ export default function MultiLanguageSupport({ currentLanguage, onLanguageChange
       {/* Language Dropdown */}
       {isOpen && (
         <div className="absolute top-full mt-1 w-48 bg-white border border-gray-300 rounded-lg shadow-lg z-50">
-          {languages.map((language) => (
+          {languages.map(language => (
             <button
               key={language.code}
               onClick={() => {
@@ -117,9 +120,7 @@ export default function MultiLanguageSupport({ currentLanguage, onLanguageChange
             >
               <span className="text-lg">{language.flag}</span>
               <span className="flex-1">{language.name}</span>
-              {currentLanguage === language.code && (
-                <Check className="h-4 w-4 text-blue-600" />
-              )}
+              {currentLanguage === language.code && <Check className="h-4 w-4 text-blue-600" />}
             </button>
           ))}
         </div>
@@ -129,14 +130,26 @@ export default function MultiLanguageSupport({ currentLanguage, onLanguageChange
       <div className="mt-4 p-4 bg-gray-50 rounded-lg">
         <h3 className="text-sm font-medium text-gray-700 mb-2">Translation Preview:</h3>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-2 text-sm">
-          <div><strong>Jobs:</strong> {t.jobs}</div>
-          <div><strong>Candidates:</strong> {t.candidates}</div>
-          <div><strong>Interviews:</strong> {t.interviews}</div>
-          <div><strong>Analytics:</strong> {t.analytics}</div>
-          <div><strong>Dashboard:</strong> {t.dashboard}</div>
-          <div><strong>Search:</strong> {t.search}</div>
+          <div>
+            <strong>Jobs:</strong> {t.jobs}
+          </div>
+          <div>
+            <strong>Candidates:</strong> {t.candidates}
+          </div>
+          <div>
+            <strong>Interviews:</strong> {t.interviews}
+          </div>
+          <div>
+            <strong>Analytics:</strong> {t.analytics}
+          </div>
+          <div>
+            <strong>Dashboard:</strong> {t.dashboard}
+          </div>
+          <div>
+            <strong>Search:</strong> {t.search}
+          </div>
         </div>
       </div>
     </div>
   );
-} 
+}

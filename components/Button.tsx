@@ -6,15 +6,8 @@ interface ButtonProps {
   children?: React.ReactNode;
 }
 
-export const Button: React.FC<ButtonProps> = ({ 
-  className, 
-  children 
-}) => {
-  return (
-    <div className={cn('', className)}>
-      {children}
-    </div>
-  );
+export const Button: React.FC<ButtonProps> = ({ className, children }) => {
+  return <div className={cn('', className)}>{children}</div>;
 };
 
 export default Button;

@@ -278,41 +278,61 @@ export default function SOTSecurityPage() {
 
   const getSeverityColor = (severity: string) => {
     switch (severity) {
-      case 'low': return 'bg-green-100 text-green-800';
-      case 'medium': return 'bg-yellow-100 text-yellow-800';
-      case 'high': return 'bg-orange-100 text-orange-800';
-      case 'critical': return 'bg-red-100 text-red-800';
-      default: return 'bg-gray-100 text-gray-800';
+      case 'low':
+        return 'bg-green-100 text-green-800';
+      case 'medium':
+        return 'bg-yellow-100 text-yellow-800';
+      case 'high':
+        return 'bg-orange-100 text-orange-800';
+      case 'critical':
+        return 'bg-red-100 text-red-800';
+      default:
+        return 'bg-gray-100 text-gray-800';
     }
   };
 
   const getStatusColor = (status: string) => {
     switch (status) {
-      case 'active': return 'bg-red-100 text-red-800';
-      case 'investigating': return 'bg-yellow-100 text-yellow-800';
-      case 'resolved': return 'bg-green-100 text-green-800';
-      case 'false_positive': return 'bg-gray-100 text-gray-800';
-      default: return 'bg-gray-100 text-gray-800';
+      case 'active':
+        return 'bg-red-100 text-red-800';
+      case 'investigating':
+        return 'bg-yellow-100 text-yellow-800';
+      case 'resolved':
+        return 'bg-green-100 text-green-800';
+      case 'false_positive':
+        return 'bg-gray-100 text-gray-800';
+      default:
+        return 'bg-gray-100 text-gray-800';
     }
   };
 
   const getThreatLevelColor = (level: string) => {
     switch (level) {
-      case 'low': return 'text-green-600';
-      case 'medium': return 'text-yellow-600';
-      case 'high': return 'text-orange-600';
-      case 'critical': return 'text-red-600';
-      default: return 'text-gray-600';
+      case 'low':
+        return 'text-green-600';
+      case 'medium':
+        return 'text-yellow-600';
+      case 'high':
+        return 'text-orange-600';
+      case 'critical':
+        return 'text-red-600';
+      default:
+        return 'text-gray-600';
     }
   };
 
   const getSystemHealthColor = (health: string) => {
     switch (health) {
-      case 'excellent': return 'text-green-600';
-      case 'good': return 'text-blue-600';
-      case 'fair': return 'text-yellow-600';
-      case 'poor': return 'text-red-600';
-      default: return 'text-gray-600';
+      case 'excellent':
+        return 'text-green-600';
+      case 'good':
+        return 'text-blue-600';
+      case 'fair':
+        return 'text-yellow-600';
+      case 'poor':
+        return 'text-red-600';
+      default:
+        return 'text-gray-600';
     }
   };
 
@@ -372,7 +392,9 @@ export default function SOTSecurityPage() {
                   </div>
                   <div>
                     <p className="text-sm text-gray-500">System Health</p>
-                    <p className={`text-lg font-bold ${getSystemHealthColor(metrics.systemHealth)}`}>
+                    <p
+                      className={`text-lg font-bold ${getSystemHealthColor(metrics.systemHealth)}`}
+                    >
                       {metrics.systemHealth}
                     </p>
                   </div>
@@ -471,19 +493,22 @@ export default function SOTSecurityPage() {
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
-                  {alerts.slice(0, 5).map((alert) => (
-                    <div key={alert.id} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                  {alerts.slice(0, 5).map(alert => (
+                    <div
+                      key={alert.id}
+                      className="flex items-center justify-between p-3 bg-gray-50 rounded-lg"
+                    >
                       <div className="flex items-center space-x-3">
-                        <div className={`h-3 w-3 rounded-full ${alert.severity === 'critical' ? 'bg-red-500' : alert.severity === 'high' ? 'bg-orange-500' : 'bg-yellow-500'}`}></div>
+                        <div
+                          className={`h-3 w-3 rounded-full ${alert.severity === 'critical' ? 'bg-red-500' : alert.severity === 'high' ? 'bg-orange-500' : 'bg-yellow-500'}`}
+                        ></div>
                         <div>
                           <span className="font-medium">{alert.title}</span>
                           <p className="text-sm text-gray-500">{alert.description}</p>
                         </div>
                       </div>
                       <div className="flex items-center space-x-2">
-                        <Badge className={getSeverityColor(alert.severity)}>
-                          {alert.severity}
-                        </Badge>
+                        <Badge className={getSeverityColor(alert.severity)}>{alert.severity}</Badge>
                         <span className="text-sm text-gray-500">
                           {alert.detectedAt.toLocaleTimeString()}
                         </span>
@@ -498,7 +523,7 @@ export default function SOTSecurityPage() {
           {/* Security Alerts Tab */}
           <TabsContent value="alerts" className="space-y-6">
             <div className="space-y-6">
-              {alerts.map((alert) => (
+              {alerts.map(alert => (
                 <Card key={alert.id} className="hover:shadow-lg transition-shadow">
                   <CardHeader>
                     <div className="flex items-start justify-between">
@@ -508,9 +533,7 @@ export default function SOTSecurityPage() {
                           <Badge className={getSeverityColor(alert.severity)}>
                             {alert.severity}
                           </Badge>
-                          <Badge className={getStatusColor(alert.status)}>
-                            {alert.status}
-                          </Badge>
+                          <Badge className={getStatusColor(alert.status)}>{alert.status}</Badge>
                         </div>
                         <p className="text-gray-600 mb-3">{alert.description}</p>
                         <div className="flex items-center space-x-4 text-sm text-gray-500">
@@ -545,7 +568,7 @@ export default function SOTSecurityPage() {
           {/* Fraud Cases Tab */}
           <TabsContent value="fraud" className="space-y-6">
             <div className="space-y-6">
-              {fraudCases.map((case_) => (
+              {fraudCases.map(case_ => (
                 <Card key={case_.id} className="hover:shadow-lg transition-shadow">
                   <CardHeader>
                     <div className="flex items-start justify-between">
@@ -555,9 +578,7 @@ export default function SOTSecurityPage() {
                           <Badge className={getSeverityColor(case_.severity)}>
                             {case_.severity}
                           </Badge>
-                          <Badge className={getStatusColor(case_.status)}>
-                            {case_.status}
-                          </Badge>
+                          <Badge className={getStatusColor(case_.status)}>{case_.status}</Badge>
                         </div>
                         <p className="text-gray-600 mb-3">
                           User: {case_.userName} ({case_.userId}) - {case_.type.replace(/_/g, ' ')}
@@ -694,4 +715,4 @@ export default function SOTSecurityPage() {
       </div>
     </div>
   );
-} 
+}

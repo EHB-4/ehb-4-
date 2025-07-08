@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 'use client';
 
@@ -340,10 +340,10 @@ export default function SearchPage() {
                     key === 'category'
                       ? 'Category'
                       : key === 'type'
-                      ? 'Type'
-                      : key === 'rating'
-                      ? 'Rating'
-                      : 'Price';
+                        ? 'Type'
+                        : key === 'rating'
+                          ? 'Rating'
+                          : 'Price';
                   return (
                     <span
                       key={key}

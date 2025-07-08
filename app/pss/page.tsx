@@ -202,9 +202,11 @@ export default function PSSPage() {
 
   // Roman Urdu: Status update handler
   const handleStatusUpdate = (id: string, newStatus: VerificationItem['status']) => {
-    setVerifications(prev => prev.map(v => 
-      v.id === id ? { ...v, status: newStatus, updatedAt: new Date().toISOString() } : v
-    ));
+    setVerifications(prev =>
+      prev.map(v =>
+        v.id === id ? { ...v, status: newStatus, updatedAt: new Date().toISOString() } : v
+      )
+    );
     toast.success('Status update ho gaya hai!');
   };
 
@@ -231,13 +233,18 @@ export default function PSSPage() {
               <div>
                 <h1 className="text-3xl font-bold text-gray-900">PSS</h1>
                 <p className="text-purple-600 font-medium">Personal Security System</p>
-                <p className="text-sm text-gray-500">SQL Level {currentSQLLevel} - {sqlLevelConfig[currentSQLLevel as keyof typeof sqlLevelConfig]?.name}</p>
+                <p className="text-sm text-gray-500">
+                  SQL Level {currentSQLLevel} -{' '}
+                  {sqlLevelConfig[currentSQLLevel as keyof typeof sqlLevelConfig]?.name}
+                </p>
               </div>
             </div>
             <div className="flex items-center space-x-4">
               <div className="flex items-center space-x-2">
                 <CheckCircle className="h-5 w-5 text-green-500" />
-                <span className="text-green-600 font-medium">{pssCompletionPercentage}% Complete</span>
+                <span className="text-green-600 font-medium">
+                  {pssCompletionPercentage}% Complete
+                </span>
               </div>
               <div className="bg-purple-100 px-3 py-1 rounded-full">
                 <span className="text-purple-800 text-sm font-medium">Active</span>
@@ -252,37 +259,49 @@ export default function PSSPage() {
         <div className="bg-white rounded-lg shadow-md p-6 mb-6">
           <div className="flex items-center justify-between mb-4">
             <h2 className="text-xl font-semibold text-gray-900">SQL Level Progress</h2>
-            <Link href="/sql" className="flex items-center space-x-2 text-blue-600 hover:text-blue-700">
+            <Link
+              href="/sql"
+              className="flex items-center space-x-2 text-blue-600 hover:text-blue-700"
+            >
               <span>View SQL Dashboard</span>
               <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div className="bg-blue-50 p-4 rounded-lg">
               <div className="flex items-center space-x-2 mb-2">
                 <Star className="w-5 h-5 text-blue-600" />
                 <span className="font-medium text-blue-900">Current Level</span>
               </div>
-              <p className="text-2xl font-bold text-blue-600">{sqlLevelConfig[currentSQLLevel as keyof typeof sqlLevelConfig]?.name}</p>
-              <p className="text-sm text-blue-700">{sqlLevelConfig[currentSQLLevel as keyof typeof sqlLevelConfig]?.description}</p>
+              <p className="text-2xl font-bold text-blue-600">
+                {sqlLevelConfig[currentSQLLevel as keyof typeof sqlLevelConfig]?.name}
+              </p>
+              <p className="text-sm text-blue-700">
+                {sqlLevelConfig[currentSQLLevel as keyof typeof sqlLevelConfig]?.description}
+              </p>
             </div>
-            
+
             <div className="bg-green-50 p-4 rounded-lg">
               <div className="flex items-center space-x-2 mb-2">
                 <CheckCircle className="w-5 h-5 text-green-600" />
                 <span className="font-medium text-green-900">PSS Completion</span>
               </div>
               <p className="text-2xl font-bold text-green-600">{pssCompletionPercentage}%</p>
-              <p className="text-sm text-green-700">{stats.approved} of {stats.total} verifications complete</p>
+              <p className="text-sm text-green-700">
+                {stats.approved} of {stats.total} verifications complete
+              </p>
             </div>
-            
+
             <div className="bg-purple-50 p-4 rounded-lg">
               <div className="flex items-center space-x-2 mb-2">
                 <ArrowRight className="w-5 h-5 text-purple-600" />
                 <span className="font-medium text-purple-900">Next Level</span>
               </div>
-              <p className="text-2xl font-bold text-purple-600">{sqlLevelConfig[(currentSQLLevel + 1) as keyof typeof sqlLevelConfig]?.name || 'Max Level'}</p>
+              <p className="text-2xl font-bold text-purple-600">
+                {sqlLevelConfig[(currentSQLLevel + 1) as keyof typeof sqlLevelConfig]?.name ||
+                  'Max Level'}
+              </p>
               <p className="text-sm text-purple-700">Complete EDR for upgrade</p>
             </div>
           </div>
@@ -292,7 +311,7 @@ export default function PSSPage() {
       {/* Main Content */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Hero Section */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           className="bg-white rounded-xl shadow-lg p-8 mb-8"
@@ -302,8 +321,8 @@ export default function PSSPage() {
               Identity Verification & Security Management
             </h2>
             <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
-              Comprehensive KYC verification, document validation, fraud prevention, and trust scoring system.
-              SQL Level System ke sath integrated security platform.
+              Comprehensive KYC verification, document validation, fraud prevention, and trust
+              scoring system. SQL Level System ke sath integrated security platform.
             </p>
             <div className="flex justify-center space-x-4">
               <div className="flex items-center space-x-2 text-green-600">
@@ -323,7 +342,7 @@ export default function PSSPage() {
         </motion.div>
 
         {/* SQL Level Integration */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
@@ -333,32 +352,39 @@ export default function PSSPage() {
             <h3 className="text-xl font-bold text-gray-900">SQL Level Integration</h3>
             <div className="flex items-center space-x-2">
               <Shield className="h-5 w-5 text-purple-500" />
-              <span className="text-purple-600 font-medium">Current Level: {sqlLevelConfig[currentSQLLevel as keyof typeof sqlLevelConfig]?.name}</span>
+              <span className="text-purple-600 font-medium">
+                Current Level:{' '}
+                {sqlLevelConfig[currentSQLLevel as keyof typeof sqlLevelConfig]?.name}
+              </span>
             </div>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
             {Object.entries(sqlLevelConfig).map(([level, config]) => (
-              <div 
+              <div
                 key={level}
                 className={`p-4 rounded-lg border-2 ${
-                  parseInt(level) <= currentSQLLevel 
-                    ? 'border-green-500 bg-green-50' 
+                  parseInt(level) <= currentSQLLevel
+                    ? 'border-green-500 bg-green-50'
                     : 'border-gray-200 bg-gray-50'
                 }`}
               >
                 <div className="flex items-center justify-between mb-2">
-                  <span className={`font-semibold ${
-                    parseInt(level) <= currentSQLLevel ? 'text-green-700' : 'text-gray-500'
-                  }`}>
+                  <span
+                    className={`font-semibold ${
+                      parseInt(level) <= currentSQLLevel ? 'text-green-700' : 'text-gray-500'
+                    }`}
+                  >
                     {config.name}
                   </span>
                   {parseInt(level) <= currentSQLLevel && (
                     <CheckCircle className="h-4 w-4 text-green-500" />
                   )}
                 </div>
-                <p className={`text-sm ${
-                  parseInt(level) <= currentSQLLevel ? 'text-green-600' : 'text-gray-400'
-                }`}>
+                <p
+                  className={`text-sm ${
+                    parseInt(level) <= currentSQLLevel ? 'text-green-600' : 'text-gray-400'
+                  }`}
+                >
                   {config.description}
                 </p>
               </div>
@@ -377,7 +403,7 @@ export default function PSSPage() {
         </motion.div>
 
         {/* Statistics Cards */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
@@ -430,7 +456,7 @@ export default function PSSPage() {
         </motion.div>
 
         {/* Filters and Search */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3 }}
@@ -444,7 +470,7 @@ export default function PSSPage() {
                   type="text"
                   placeholder="Search verifications..."
                   value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
+                  onChange={e => setSearchQuery(e.target.value)}
                   className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
                 />
               </div>
@@ -452,7 +478,7 @@ export default function PSSPage() {
             <div className="flex space-x-4">
               <select
                 value={selectedStatus}
-                onChange={(e) => setSelectedStatus(e.target.value)}
+                onChange={e => setSelectedStatus(e.target.value)}
                 className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
                 aria-label="Filter by status"
               >
@@ -464,7 +490,7 @@ export default function PSSPage() {
               </select>
               <select
                 value={selectedType}
-                onChange={(e) => setSelectedType(e.target.value)}
+                onChange={e => setSelectedType(e.target.value)}
                 className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
                 aria-label="Filter by type"
               >
@@ -486,16 +512,16 @@ export default function PSSPage() {
         </motion.div>
 
         {/* Verifications List */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4 }}
           className="bg-white rounded-xl shadow-lg p-6"
         >
           <h3 className="text-2xl font-bold text-gray-900 mb-6">Verification Requests</h3>
-          
+
           <div className="grid gap-6">
-            {filteredVerifications.map((verification) => (
+            {filteredVerifications.map(verification => (
               <motion.div
                 key={verification.id}
                 initial={{ opacity: 0, y: 20 }}
@@ -508,16 +534,22 @@ export default function PSSPage() {
                       {getTypeIcon(verification.type)}
                     </div>
                     <div>
-                      <h4 className="text-xl font-semibold text-gray-900 mb-2">{verification.title}</h4>
+                      <h4 className="text-xl font-semibold text-gray-900 mb-2">
+                        {verification.title}
+                      </h4>
                       <p className="text-gray-600 mb-2">{verification.description}</p>
                       <div className="flex items-center space-x-4 text-sm text-gray-500">
                         <div className="flex items-center space-x-1">
                           <Calendar className="h-4 w-4" />
-                          <span>Created: {new Date(verification.createdAt).toLocaleDateString()}</span>
+                          <span>
+                            Created: {new Date(verification.createdAt).toLocaleDateString()}
+                          </span>
                         </div>
                         <div className="flex items-center space-x-1">
                           <Clock className="h-4 w-4" />
-                          <span>Updated: {new Date(verification.updatedAt).toLocaleDateString()}</span>
+                          <span>
+                            Updated: {new Date(verification.updatedAt).toLocaleDateString()}
+                          </span>
                         </div>
                         {verification.sqlLevelRequired && (
                           <div className="flex items-center space-x-1">
@@ -529,10 +561,14 @@ export default function PSSPage() {
                     </div>
                   </div>
                   <div className="flex items-center space-x-2">
-                    <span className={`px-3 py-1 rounded-full text-sm font-medium ${getStatusColor(verification.status)}`}>
+                    <span
+                      className={`px-3 py-1 rounded-full text-sm font-medium ${getStatusColor(verification.status)}`}
+                    >
                       {verification.status}
                     </span>
-                    <span className={`px-3 py-1 rounded-full text-sm font-medium ${getPriorityColor(verification.priority)}`}>
+                    <span
+                      className={`px-3 py-1 rounded-full text-sm font-medium ${getPriorityColor(verification.priority)}`}
+                    >
                       {verification.priority}
                     </span>
                   </div>
@@ -542,10 +578,12 @@ export default function PSSPage() {
                   <div className="mb-4">
                     <div className="flex items-center justify-between mb-2">
                       <span className="text-sm font-medium text-gray-700">Verification Score</span>
-                      <span className="text-sm font-medium text-gray-900">{verification.score}%</span>
+                      <span className="text-sm font-medium text-gray-900">
+                        {verification.score}%
+                      </span>
                     </div>
                     <div className="w-full bg-gray-200 rounded-full h-2">
-                      <div 
+                      <div
                         className="bg-green-600 h-2 rounded-full transition-all duration-300"
                         style={{ width: `${verification.score}%` }}
                       ></div>
@@ -622,9 +660,7 @@ export default function PSSPage() {
                 </select>
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Upload File
-                </label>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Upload File</label>
                 <div className="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center">
                   <Upload className="h-8 w-8 text-gray-400 mx-auto mb-2" />
                   <p className="text-gray-600">Click to upload or drag and drop</p>
