@@ -1,16 +1,20 @@
 // Roman Urdu: JPS AI Matching API Tests
-// AI matching algorithm ke liye comprehensive testing
+// AI matching functionality ke liye comprehensive testing
 
 import { NextRequest } from 'next/server';
 import { GET, POST } from '@/app/api/jps/ai-matching/route';
 
 // Roman Urdu: Mock NextRequest
-const createMockRequest = (url: string, method: string = 'GET', body?: any): NextRequest => {
-  const request = new NextRequest(new URL(url, 'http://localhost:3000'), {
+const createMockRequest = (url: string, method: string = 'GET', body?: any): any => {
+  const urlObj = new URL(url, 'http://localhost:3000');
+  return {
+    url: urlObj.toString(),
     method,
     body: body ? JSON.stringify(body) : undefined,
-  });
-  return request;
+    json: jest.fn().mockResolvedValue(body || {}),
+    nextUrl: urlObj,
+    headers: new Map(),
+  };
 };
 
 describe('JPS AI Matching API Tests', () => {

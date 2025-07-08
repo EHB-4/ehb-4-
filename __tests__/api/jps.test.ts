@@ -5,12 +5,16 @@ import { NextRequest } from 'next/server';
 import { GET, POST, PUT, DELETE } from '@/app/api/jps/route';
 
 // Roman Urdu: Mock NextRequest
-const createMockRequest = (url: string, method: string = 'GET', body?: any): NextRequest => {
-  const request = new NextRequest(new URL(url, 'http://localhost:3000'), {
+const createMockRequest = (url: string, method: string = 'GET', body?: any): any => {
+  const urlObj = new URL(url, 'http://localhost:3000');
+  return {
+    url: urlObj.toString(),
     method,
     body: body ? JSON.stringify(body) : undefined,
-  });
-  return request;
+    json: jest.fn().mockResolvedValue(body || {}),
+    nextUrl: urlObj,
+    headers: new Map(),
+  };
 };
 
 // Roman Urdu: Test data
