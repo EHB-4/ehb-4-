@@ -1,7 +1,5 @@
 'use client';
 
-'use client';
-
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Grid3X3, List, ArrowRight, Filter, Brain } from 'lucide-react';
