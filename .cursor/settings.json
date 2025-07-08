@@ -1,0 +1,81 @@
+{
+  "github": {
+    "enabled": true,
+    "autoSync": true,
+    "autoCommit": true,
+    "autoPush": true,
+    "autoPull": true,
+    "syncInterval": 30000,
+    "branch": "main",
+    "remote": "origin"
+  },
+  "editor": {
+    "autoSave": true,
+    "formatOnSave": true,
+    "formatOnPaste": true,
+    "wordWrap": "on",
+    "tabSize": 2,
+    "insertSpaces": true,
+    "detectIndentation": true
+  },
+  "files": {
+    "autoSave": "afterDelay",
+    "autoSaveDelay": 1000,
+    "exclude": {
+      "**/node_modules": true,
+      "**/.next": true,
+      "**/dist": true,
+      "**/build": true,
+      "**/*.log": true,
+      "**/.env*": true,
+      "**/temp": true,
+      "**/backups": true
+    },
+    "include": {
+      "**/app/**": true,
+      "**/components/**": true,
+      "**/lib/**": true,
+      "**/hooks/**": true,
+      "**/types/**": true,
+      "**/scripts/**": true,
+      "**/config/**": true,
+      "**/public/**": true,
+      "**/*.json": true,
+      "**/*.ts": true,
+      "**/*.tsx": true,
+      "**/*.js": true,
+      "**/*.jsx": true,
+      "**/*.md": true
+    }
+  },
+  "sync": {
+    "enabled": true,
+    "interval": 30000,
+    "commitMessage": "Auto sync: {timestamp}",
+    "pushOnSave": true,
+    "pullOnStart": true,
+    "mergeStrategy": "rebase",
+    "conflictResolution": "auto",
+    "retryAttempts": 3,
+    "retryDelay": 5000,
+    "continueOnError": true
+  },
+  "notifications": {
+    "enabled": true,
+    "sync": true,
+    "errors": true,
+    "warnings": true,
+    "success": true
+  },
+  "hotkeys": {
+    "sync": "Ctrl+Shift+S",
+    "status": "Ctrl+Shift+G",
+    "pull": "Ctrl+Shift+P",
+    "push": "Ctrl+Shift+U"
+  },
+  "logging": {
+    "enabled": true,
+    "level": "info",
+    "file": "logs/cursor-sync.log"
+  }
+} 

@@ -1,83 +1,47 @@
-# EHB Next.js 04 - Continuous Agent Configuration
+# EHB Cursor Rules - GitHub Integration
 
-## Agent Stability Configuration
-autoActivate: true
-autoRun: true
-autoAccept: true
-projectId: "ehb-next-js-04-frontend"
-maxExecutionTime: 300000
-memoryLimit: "2GB"
-timeout: 300000
-retryAttempts: 3
-keepAlive: true
+## GitHub Auto Sync Configuration
+- Auto sync enabled between Cursor and GitHub
+- Sync interval: 30 seconds
+- Auto commit on save
+- Auto push to GitHub
+- Auto pull from GitHub
 
-## Agent Performance Settings
-- Disable infinite loops
-- Set memory limits
-- Enable timeout protection
-- Implement error recovery
-- Use non-blocking operations
-- Enable process monitoring
+## File Sync Rules
+- Include: app/, components/, lib/, hooks/, types/, scripts/, config/, public/
+- Exclude: node_modules/, .next/, dist/, build/, *.log, .env*, temp/, backups/
 
-## Frontend Development Focus
-- Use TypeScript for all components
-- Follow Next.js 14+ App Router patterns
-- Use Tailwind CSS for styling
-- Implement proper component structure
-- Add comprehensive JSDoc comments
-- Use React hooks effectively
+## Commit Rules
+- Auto commit message: "Auto sync: {timestamp}"
+- Include all staged changes
+- Push immediately after commit
 
-## Backend Features (DISABLED)
-- MongoDB setup disabled
-- Database operations disabled
-- Backend API development disabled
-- Docker services disabled
+## Branch Management
+- Main branch: main
+- Auto merge strategy: rebase
+- Conflict resolution: auto
 
-## Frontend Guidelines
-- Create reusable components
-- Implement proper TypeScript types
-- Use modern React patterns
-- Optimize for performance
-- Ensure accessibility
-- Write comprehensive tests
-
-## AI Agent Instructions
-1. Focus on frontend development only
-2. Generate components and hooks
-3. Optimize UI/UX
-4. Create frontend tests
-5. Improve styling and layout
-6. Ensure responsive design
-7. NEVER use infinite loops
-8. ALWAYS set timeouts for operations
-9. Use async/await properly
-10. Implement error handling
-
-## Performance Guidelines
-- Use Next.js Image optimization
-- Implement lazy loading
-- Optimize bundle size
-- Use proper caching
-- Monitor Core Web Vitals
-
-## Accessibility Guidelines
-- Use semantic HTML
-- Implement ARIA labels
-- Ensure keyboard navigation
-- Maintain color contrast
-- Test with screen readers
-
-## Auto-Activation Features
-- Auto-Run: Automatically runs frontend scripts
-- Auto-Accept: Automatically accepts frontend suggestions
-- Auto-Setup: Automatically configures frontend features
-- Auto-Test: Automatically generates frontend tests
-- Auto-Optimize: Automatically optimizes UI/UX
-
-## Agent Stability Rules
-- Maximum execution time: 5 minutes per operation
-- Memory limit: 2GB
+## Error Handling
 - Retry attempts: 3
-- Keep alive: true
-- Non-blocking operations only
-- Proper error handling required
+- Retry delay: 5 seconds
+- Continue on error: true
+
+## Cursor Specific Rules
+- Auto save enabled
+- Sync on save enabled
+- Notifications enabled
+- Hotkeys: Ctrl+Shift+S (sync), Ctrl+Shift+G (status)
+
+## Development Workflow
+1. Make changes in Cursor
+2. Auto save triggers
+3. Auto sync detects changes
+4. Auto commit with timestamp
+5. Auto push to GitHub
+6. Auto pull from GitHub if remote changes exist
+
+## Monitoring
+- Log file: logs/auto-sync.log
+- Status check: npm run auto-sync:status
+- Manual sync: npm run auto-sync:sync
+- Stop service: npm run auto-sync:stop
