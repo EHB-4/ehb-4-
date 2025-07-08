@@ -28,23 +28,34 @@ async function testAPIs() {
 // Run the tests
 testAPIs();
 
-const response = await fetch('/api/polkadot?address=YOUR_ADDRESS&action=staking');
-const data = await response.json();
+async function testPolkadotAPIs() {
+  try {
+    const response = await fetch('/api/polkadot?address=YOUR_ADDRESS&action=staking');
+    const data = await response.json();
 
-const responseValidator = await fetch('/api/polkadot?address=YOUR_ADDRESS&action=validator');
-const dataValidator = await responseValidator.json();
+    const responseValidator = await fetch('/api/polkadot?address=YOUR_ADDRESS&action=validator');
+    const dataValidator = await responseValidator.json();
 
-const responseMoonbeam = await fetch('/api/moonbeam?action=network');
-const dataMoonbeam = await responseMoonbeam.json();
+    const responseMoonbeam = await fetch('/api/moonbeam?action=network');
+    const dataMoonbeam = await responseMoonbeam.json();
 
-const responseBalance = await fetch('/api/moonbeam?action=balance&address=YOUR_ADDRESS');
-const dataBalance = await responseBalance.json();
+    const responseBalance = await fetch('/api/moonbeam?action=balance&address=YOUR_ADDRESS');
+    const dataBalance = await responseBalance.json();
 
-const response = await fetch('/api/moonbeam?action=gas');
-const data = await response.json();
+    const responseGas = await fetch('/api/moonbeam?action=gas');
+    const dataGas = await responseGas.json();
 
-const response = await fetch('/api/moonbeam?action=transaction&txHash=YOUR_TX_HASH');
-const data = await response.json();
+    const responseTx = await fetch('/api/moonbeam?action=transaction&txHash=YOUR_TX_HASH');
+    const dataTx = await responseTx.json();
 
-const response = await fetch('/api/moonbeam?action=block&blockNumber=BLOCK_NUMBER');
-const data = await response.json();
+    const responseBlock = await fetch('/api/moonbeam?action=block&blockNumber=BLOCK_NUMBER');
+    const dataBlock = await responseBlock.json();
+
+    console.log('All Polkadot/Moonbeam API tests completed!');
+  } catch (error) {
+    console.error('Polkadot/Moonbeam API Test Error:', error);
+  }
+}
+
+// Run the Polkadot tests
+testPolkadotAPIs();

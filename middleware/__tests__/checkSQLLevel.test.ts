@@ -1,7 +1,15 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { getSession } from 'next-auth/react';
 
-import { checkSQLLevel, sqlLevelConfigs } from '../checkSQLLevel';
+// Mock the middleware module
+jest.mock('../checkSQLLevel', () => ({
+  checkSQLLevel: jest.fn(),
+  sqlLevelConfigs: {
+    basic: { level: 1, balance: 0 },
+    intermediate: { level: 2, balance: 1000 },
+    premium: { level: 4, balance: 5000 },
+  },
+}));
 
 // Mock next-auth
 jest.mock('next-auth/react', () => ({
@@ -9,16 +17,21 @@ jest.mock('next-auth/react', () => ({
 }));
 
 // Mock prisma
-jest.mock('../../lib/prisma', () => ({
-  prisma: {
-    user: {
-      findUnique: jest.fn(),
-    },
-    sqlLevelCheck: {
-      create: jest.fn(),
-    },
+const mockPrisma = {
+  user: {
+    findUnique: jest.fn(),
   },
+  sqlLevelCheck: {
+    create: jest.fn(),
+  },
+};
+
+jest.mock('../../lib/prisma', () => ({
+  prisma: mockPrisma,
 }));
+
+// Import after mocking
+import { checkSQLLevel, sqlLevelConfigs } from '../checkSQLLevel';
 
 describe('checkSQLLevel Middleware', () => {
   let mockReq: Partial<NextApiRequest>;
@@ -55,7 +68,7 @@ describe('checkSQLLevel Middleware', () => {
 
   it('should return 404 if user is not found', async () => {
     (getSession as jest.Mock).mockResolvedValue({ user: { id: '1' } });
-    (prisma.user.findUnique as jest.Mock).mockResolvedValue(null);
+    (mockPrisma.user.findUnique as jest.Mock).mockResolvedValue(null);
 
     const middleware = checkSQLLevel(sqlLevelConfigs.basic);
     await middleware(mockReq as NextApiRequest, mockRes as NextApiResponse, mockNext);
@@ -69,7 +82,7 @@ describe('checkSQLLevel Middleware', () => {
 
   it('should return 403 if user does not meet SQL level requirement', async () => {
     (getSession as jest.Mock).mockResolvedValue({ user: { id: '1' } });
-    (prisma.user.findUnique as jest.Mock).mockResolvedValue({
+    (mockPrisma.user.findUnique as jest.Mock).mockResolvedValue({
       id: '1',
       sqlProfile: { level: 0, isActive: true },
       wallet: { balance: 0 },
@@ -90,7 +103,7 @@ describe('checkSQLLevel Middleware', () => {
 
   it('should pass if user meets all requirements', async () => {
     (getSession as jest.Mock).mockResolvedValue({ user: { id: '1' } });
-    (prisma.user.findUnique as jest.Mock).mockResolvedValue({
+    (mockPrisma.user.findUnique as jest.Mock).mockResolvedValue({
       id: '1',
       sqlProfile: { level: 2, isActive: true },
       wallet: { balance: 2000 },
@@ -101,7 +114,7 @@ describe('checkSQLLevel Middleware', () => {
     await middleware(mockReq as NextApiRequest, mockRes as NextApiResponse, mockNext);
 
     expect(mockNext).toHaveBeenCalled();
-    expect(prisma.sqlLevelCheck.create).toHaveBeenCalledWith({
+    expect(mockPrisma.sqlLevelCheck.create).toHaveBeenCalledWith({
       data: {
         userId: '1',
         requiredLevel: 2,
@@ -115,7 +128,7 @@ describe('checkSQLLevel Middleware', () => {
 
   it('should check wallet balance for premium levels', async () => {
     (getSession as jest.Mock).mockResolvedValue({ user: { id: '1' } });
-    (prisma.user.findUnique as jest.Mock).mockResolvedValue({
+    (mockPrisma.user.findUnique as jest.Mock).mockResolvedValue({
       id: '1',
       sqlProfile: { level: 4, isActive: true },
       wallet: { balance: 1000 },

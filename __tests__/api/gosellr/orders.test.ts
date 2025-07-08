@@ -725,10 +725,10 @@ describe('GoSellr Orders API', () => {
         updateData
       );
       const updateResponse = await PUT(updateRequest);
-      const updateData = await updateResponse.json();
+      const updateResponseData = await updateResponse.json();
 
       expect(updateResponse.status).toBe(200);
-      expect(updateData.success).toBe(true);
+      expect(updateResponseData.success).toBe(true);
 
       // Verify the updated status appears in GET response
       const getRequest = createMockRequest(

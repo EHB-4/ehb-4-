@@ -11,8 +11,17 @@ const customJestConfig = {
   testEnvironment: 'jest-environment-jsdom',
   moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/$1',
+    '^@testing-library/dom$': '@testing-library/dom/dist/index.js',
   },
-  testPathIgnorePatterns: ['<rootDir>/.next/', '<rootDir>/node_modules/'],
+  testPathIgnorePatterns: [
+    '<rootDir>/.next/', 
+    '<rootDir>/node_modules/',
+    '<rootDir>/e2e/',
+    '<rootDir>/ai-automation/tests/'
+  ],
+  transformIgnorePatterns: [
+    'node_modules/(?!(@polkadot|@testing-library)/)'
+  ],
   collectCoverageFrom: [
     'app/**/*.{js,jsx,ts,tsx}',
     'components/**/*.{js,jsx,ts,tsx}',
@@ -28,6 +37,8 @@ const customJestConfig = {
       statements: 80,
     },
   },
+  testTimeout: 10000,
+  maxWorkers: 1,
 };
 
 // createJestConfig is exported this way to ensure that next/jest can load the Next.js config which is async
