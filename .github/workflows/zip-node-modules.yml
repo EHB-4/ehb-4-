@@ -22,8 +22,8 @@ jobs:
       - name: 🗜️ Create ZIP
         run: zip -r node_modules.zip node_modules
 
-      - name: 📤 Upload node_modules.zip
-        uses: actions/upload-artifact@v3
+      - name: 📤 Upload ZIP
+        uses: actions/upload-artifact@v4
         with:
           name: node_modules
           path: node_modules.zip
