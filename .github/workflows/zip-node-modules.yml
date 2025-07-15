@@ -1,14 +1,14 @@
-name: 📦 Build & ZIP node_modules
+name: 📦 ZIP node_modules Only
 
 on:
-  workflow_dispatch: # Manual trigger from GitHub
+  workflow_dispatch:
 
 jobs:
-  install-and-zip:
+  zip-node-modules:
     runs-on: ubuntu-latest
 
     steps:
-      - name: 🧾 Checkout Repository
+      - name: 🔁 Checkout Repository
         uses: actions/checkout@v3
 
       - name: ⚙️ Setup Node.js
@@ -16,13 +16,13 @@ jobs:
         with:
           node-version: '20.19.0'
 
-      - name: 📦 Install Dependencies (forcefully)
+      - name: 📦 Install Dependencies
         run: npm install --legacy-peer-deps --force
 
-      - name: 🗜️ Compress node_modules
+      - name: 🗜️ Create ZIP
         run: zip -r node_modules.zip node_modules
 
-      - name: 📤 Upload node_modules.zip as Artifact
+      - name: 📤 Upload node_modules.zip
         uses: actions/upload-artifact@v3
         with:
           name: node_modules
